@@ -29,6 +29,9 @@ target_link_libraries(mc3d_metropolis_tests PRIVATE mc3d_core)
 add_executable(mc3d_network_tests tests/test_network.cpp)
 target_link_libraries(mc3d_network_tests PRIVATE mc3d_core)
 
+add_executable(mc3d_dlca_ensemble examples/dlca_ensemble.cpp)
+target_link_libraries(mc3d_dlca_ensemble PRIVATE mc3d_core)
+
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     target_compile_options(mc3d_geometry_tests PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(mc3d_interaction_tests PRIVATE -Wall -Wextra -Wpedantic)
