@@ -34,6 +34,26 @@ class ConsolidationTests(unittest.TestCase):
         value = average_degree_of_consolidation(1e-4, 1.0, 1.0, terms=1000)
         self.assertAlmostEqual(value, reference, places=12)
 
+    def test_short_time_asymptotic_is_term_independent(self):
+        # At Tv << 1, the Poisson-transformed solution is
+        # U ~ 2*sqrt(Tv/pi), with exponentially small corrections.
+        tv = 1e-6
+        expected = 2.0 * (tv / 3.141592653589793) ** 0.5
+        a = average_degree_of_consolidation(tv, 1.0, 1.0, terms=1)
+        b = average_degree_of_consolidation(tv, 1.0, 1.0, terms=1000)
+        self.assertAlmostEqual(a, expected, places=14)
+        self.assertEqual(a, b)
+
+    def test_short_time_square_root_scaling(self):
+        u1 = average_degree_of_consolidation(1e-6, 1.0, 1.0)
+        u2 = average_degree_of_consolidation(4e-6, 1.0, 1.0)
+        self.assertAlmostEqual(u2 / u1, 2.0, places=12)
+
+    def test_short_time_to_series_transition_is_continuous(self):
+        below = average_degree_of_consolidation(0.01 * (1.0 - 1e-8), 1.0, 1.0)
+        above = average_degree_of_consolidation(0.01 * (1.0 + 1e-8), 1.0, 1.0)
+        self.assertLess(abs(above - below), 1e-7)
+
     def test_dimensionless_scaling(self):
         # Equal cv*t/Hd^2 must produce the same average consolidation.
         u1 = average_degree_of_consolidation(100.0, 1e-10, 1e-3)
