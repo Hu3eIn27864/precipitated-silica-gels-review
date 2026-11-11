@@ -47,11 +47,6 @@ class EnsembleAnalysisTests(unittest.TestCase):
                 ],
             )
             self.write_csv(
-                Path(str(prefix) + "_mass_radius.csv"),
-                ["seed", "particle_count", "radius", "mean_enclosed_mass"],
-                [],
-            )
-            self.write_csv(
                 Path(str(prefix) + "_fit_windows.csv"),
                 ["seed", "fit_minimum_radius", "fit_maximum_radius",
                  "exponent", "standard_error", "r_squared", "point_count"],
@@ -95,6 +90,11 @@ class EnsembleAnalysisTests(unittest.TestCase):
                     {"seed": 1, "completed": 0, "unwrapping_consistent": 1,
                      "largest_component_size": 2, "largest_component_rg": 1},
                 ],
+            )
+            self.write_csv(
+                Path(str(prefix) + "_mass_radius.csv"),
+                ["seed", "particle_count", "radius", "mean_enclosed_mass"],
+                [],
             )
             self.write_csv(
                 Path(str(prefix) + "_fit_windows.csv"),
