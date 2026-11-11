@@ -141,3 +141,10 @@ A standalone C++17 harness using the same all-centre enclosed-mass definition an
 ## Fit-window plateau handling (2026-11-11)
 
 A standalone C++17 harness mirroring the committed fit and scan logic was compiled with GCC and AddressSanitizer/UndefinedBehaviorSanitizer. A curve with an initial plateau retained nine non-singular fit windows; a fully constant curve returned zero windows without throwing. This is an isolated logic check, not execution of the complete repository CTest target. The DLCA ensemble executable has not yet been compiled or run against the complete project.
+
+
+## End-to-end ensemble smoke test registered (2026-11-11)
+
+The CMake project now registers a fifth CTest entry, `dlca_ensemble_smoke`. It invokes the committed ensemble executable for a deterministic 12-particle, one-seed, bounded-attempt run and checks that all three CSV files are created with their expected headers. The test intentionally does not require aggregation to complete or mass-radius rows to be present; it verifies the CLI/output contract without imposing an unverified stochastic completion expectation.
+
+The existing GitHub Actions workflow builds the MC3D directory and runs CTest on relevant pushes and pull requests, so this test will be exercised by the next matching workflow run. **No result is claimed yet:** the complete current CMake build, five-test suite and smoke run remain pending until the hosted workflow reports a result.
