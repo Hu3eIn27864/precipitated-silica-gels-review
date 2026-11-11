@@ -107,6 +107,8 @@ int main(int argc, char** argv) {
         curves << "seed,particle_count,radius,mean_enclosed_mass\n";
         fits << "seed,fit_minimum_radius,fit_maximum_radius,exponent,"
                 "standard_error,r_squared,point_count\n";
+        mobility << "seed,selected_cluster_size,selection_count,"
+                    "cumulative_squared_translation,cumulative_translation_path_length\n";
         runs << std::setprecision(17);
         curves << std::setprecision(17);
         fits << std::setprecision(17);
