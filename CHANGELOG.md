@@ -26,3 +26,12 @@
 - Extracted six centrifugal data points at 20 °C and initial sample height 20 mm into `LITERATURE/quantitative_extraction_syneresis.csv`; preserved the reported non-monotonic acid-gel characteristic time.
 - Added `LITERATURE/quantitative_overlap_audit_wilhelm.md` and refined PSG-008 research-family notes.
 - CSV validation: 19 records, 18 columns per record; no malformed rows.
+
+
+## 2026-11-11 — Schlomach / Quarch overlap audit
+
+- Verified in Quarch (2010), §4.2.1, that the standard semi-batch measurements are reproducible repeat experiments of Schlomach (2006).
+- Confirmed that Quarch's programme adds distinct rheology, batch-fragmentation, reactor-comparison and ultrasound experiments; it is not wholly duplicative.
+- Confirmed that Schlomach (2006) cites Schlomach & Kind (2004); exact figure-level overlap between the journal article and dissertation remains to be checked.
+- Added `LITERATURE/research_family_overlap_audit_schlomach_quarch.md` and refined PSG-001, PSG-018 and PSG-019 notes.
+- CSV validation: 19 records, 18 columns per record; 0 malformed rows.
