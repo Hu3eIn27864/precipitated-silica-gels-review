@@ -2,7 +2,7 @@
 
 ## Status
 
-Verified software baseline (V1 kernel only). The C++17 core now compiles with GCC 14.2.0 and CMake 3.31.6; all three CTest targets pass in a Release build and in a Debug build with AddressSanitizer and UndefinedBehaviorSanitizer. The tests cover periodic geometry, shifted/truncated pair interactions, neighbour-list agreement including a seeded skin-displacement case, local-vs-total energy differences, deterministic Metropolis reproducibility, and a 1000-sweep hard-core regression. The neighbour list is independently verified but is not yet wired into the Metropolis sampler, which deliberately retains brute-force local energies. Initial aggregate generation, structural observables, configuration parsing, output/metadata, and a production simulation driver remain unimplemented. This is code verification, not physical validation or a calibrated silica model.
+Verified software kernel plus newly committed aggregation/analysis modules pending local execution. The existing geometry, interaction and Metropolis kernel previously passed 3/3 CTest targets in Release and sanitizer Debug builds (see TEST_RESULTS.md). This update adds a reproducible rigid-cluster Brownian aggregation generator (DLCA-style) and contact-graph observables, including graph-based periodic unwrapping of cluster coordinates for radius of gyration. A fourth CTest target has been registered, but the new modules have not yet been locally compiled or tested; do not extend the earlier 3/3 pass claim to them. The neighbour list remains independently verified but is not yet wired into Metropolis. Configuration parsing, production output/metadata and a production simulation driver remain unimplemented. No physical silica validation or calibrated interaction model is claimed.
 
 ## Scientific purpose
 
@@ -54,7 +54,7 @@ One MC sweep is not a physical second. Do not report laboratory syneresis times 
 - examples/: small smoke-test configurations.
 - analysis/: optional plotting / statistical analysis scripts.
 
-The current kernel implementation and its verification record are documented in [TEST_RESULTS.md](TEST_RESULTS.md). The remaining V1 work is aggregate generation/import, periodic cluster unwrapping, structural observables, reproducible run configuration/output, and a minimal end-to-end smoke run.
+The current kernel implementation and its verification record are documented in [TEST_RESULTS.md](TEST_RESULTS.md). The remaining V1 work is independent build/test verification of the new DLCA and observables modules, coordinate import/export, a reproducible run configuration/output driver, finite-size and sensitivity checks, and a minimal end-to-end smoke run.
 
 
 ## Detailed implementation specification
@@ -78,3 +78,11 @@ The implementable V1 contract is now defined in [TECHNICAL_SPEC.md](TECHNICAL_SP
 - `examples/README.md`: build/test instructions.
 
 **Verification status:** see [TEST_RESULTS.md](TEST_RESULTS.md) for the exact compiler/build commands and recorded results. The tested snapshot was reconstructed from the committed source contents fetched from GitHub and built locally; the repository itself was not cloned. The GitHub Actions workflow is configured, but no completed hosted CI result has been retrieved. These checks verify software behaviour only; they do not validate the model against experimental silica data.
+
+
+## New aggregation and network-analysis modules (verification pending)
+
+- `include/DLCA.hpp` / `src/DLCA.cpp`: seeded rigid-cluster Brownian aggregation in a periodic box. Cluster selection follows an explicit mass-mobility law (D\propto M^{-\alpha}); the exponent is configurable and is an algorithmic assumption, not a hydrodynamic result. Initial monomers are placed by random sequential exclusion. Aggregation stops at one cluster or a declared attempt limit; completion status and merge count are returned.
+- `include/Observables.hpp` / `src/Observables.cpp`: pair-contact graph, coordination numbers, connected components, largest-component fraction, contact counts, mean coordination, and per-component radius of gyration from graph-unwrapped coordinates. Periodic winding/inconsistency is flagged rather than silently hidden.
+- `tests/test_network.cpp`: deterministic-seed, particle-count, non-overlap, component/merge-accounting, periodic-unwrapping and empty-network checks. The new CTest target is registered but has not yet been executed locally.
+- This is a simplified DLCA-style algorithm, not a full hydrodynamic Brownian-dynamics solver. Rigid translation only; no cluster rotation, lubrication, hydrodynamic interaction, long-range electrostatics, reaction-limited sticking, or solvent chemistry. The resulting fractal dimension must be measured across multiple sizes/seeds and is not prescribed.
