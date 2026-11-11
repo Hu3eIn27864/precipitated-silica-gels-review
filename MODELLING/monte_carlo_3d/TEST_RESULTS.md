@@ -188,3 +188,6 @@ The seed-level analyser now reads the underlying mass-radius CSV rather than tru
 
  
 A local isolated regression check of the size-series runner logic and its four runner tests passed (4/4), including a fake-executable CLI integration test. This did not compile or execute the repository's C++ DLCA executable and is not a substitute for the committed GitHub Actions suite. The ensemble-analyser tests have been updated for the new mass-radius provenance checks but remain pending execution.
+
+ 
+The seed-level analyser additionally rejects impossible largest-component counts and any run marked complete whose largest component does not contain all particles. A dedicated regression case was added. The updated analyser test suite remains pending execution in a repository checkout or CI run.
