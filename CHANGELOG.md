@@ -346,6 +346,14 @@
 ## 2026-11-11 — Mass-radius numerical hardening and known-geometry check
 
 - Removed per-centre temporary distance-vector allocation from the mass-radius inner loop; the transparent estimator remains O(N² N_r).
-- Rejects radii whose squared value overflows floating-point range.
+- Earlier implementation rejected radii whose squared value overflowed; this was superseded by std::hypot-based distance comparison in the 2026-11-11 follow-up.
 - Added a finite 1001-particle straight-chain regression. The expected exponent is near, not exactly, one because finite-chain boundaries bias mean enclosed mass. The test uses an explicit 0.05 exponent tolerance and R² > 0.995.
 - An isolated C++17 GCC ASan/UBSan harness returned Df=0.964034 and R²=0.999992 for that geometry. This is not a full repository CMake/CTest result.
+
+
+## 2026-11-11 — Fit-window sensitivity and robust mass-radius distances
+
+- Added `scanMassRadiusFitWindows`, enumerating all contiguous fit windows with a configurable minimum point count. It is diagnostic only and does not select a physically valid scaling interval.
+- Replaced squared-distance comparison in the mass-radius estimator with `std::hypot` to improve numerical robustness for large finite coordinates.
+- Added test-source cases for exact power-law window stability, a constructed crossover, and large-coordinate distance evaluation. Full CMake/CTest execution remains outstanding.
+- Corrected the earlier documentation: the estimator no longer rejects radii merely because their square overflows; it uses a stable distance comparison instead.
