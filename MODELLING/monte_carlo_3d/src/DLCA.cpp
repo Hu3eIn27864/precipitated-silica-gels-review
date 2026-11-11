@@ -152,6 +152,10 @@ DLCAResult DLCA::generate() const {
         }
 
         const double travelFraction = collision ? firstContact : 1.0;
+        const Vec3 realizedShift = shift * travelFraction;
+        const double realizedDistanceSquared = normSquared(realizedShift);
+        result.cumulativeSquaredClusterTranslation += realizedDistanceSquared;
+        result.cumulativeClusterTranslationPathLength += std::sqrt(realizedDistanceSquared);
         for (auto& particle : clusters[moving]) {
             particle.position = box_.wrap(particle.position + shift * travelFraction);
         }
