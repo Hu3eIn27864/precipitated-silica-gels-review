@@ -89,6 +89,9 @@ void testDLCAReproducibilityAndNonOverlap() {
                  b.cumulativeSquaredClusterTranslation) &&
             near(a.cumulativeClusterTranslationPathLength,
                  b.cumulativeClusterTranslationPathLength) &&
+            a.displacementBudgetReached == b.displacementBudgetReached &&
+            a.attemptLimitReached == b.attemptLimitReached &&
+            near(a.displacementBudgetOvershoot, b.displacementBudgetOvershoot) &&
             a.completed == b.completed,
             "DLCA metadata not reproducible");
     require(std::isfinite(a.cumulativeSquaredClusterTranslation) &&
