@@ -97,3 +97,4 @@
 - The drying study shows substantial protocol-dependent differences in final surface area, pore volume, pore diameter, porosity and tapping density. It does not measure wet-gel syneresis.
 - Flagged an internal method-label ambiguity: Table 1 calls the surface-area method “BJH” while the paper otherwise discusses BET surface area. Avoid treating this as resolved.
 - Database now contains 31 records; structural validation pending.
+- Added a research-family note linking Sarawade et al. (2011) and Quang et al. (2012) as complementary outputs from the Hanyang/Sarawade–Quang–Kim programme, not independent external replications.
