@@ -686,3 +686,10 @@
 - Added spatial-grid and time-step refinement checks to `test_heterogeneous_1d.py`.
 - Hosted CI #328 passed; all 51 transport-model tests passed, including both new refinement tests: https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43053892073
 - Remaining numerical work: interface-location refinement and a manufactured-solution test for spatially varying coefficients. Physical calibration remains out of scope.
+
+## 2026-11-11 — Wilhelm & Kind (2014) full-text natural/enforced syneresis audit
+
+- Added `LITERATURE/wilhelm_kind_2014_natural_enforced_syneresis_evidence.md` with full extraction of natural and enforced syneresis methods, Tables 1–4, and extrapolation errors.
+- Upgraded literature record PSG-005 to full-text inspected and added natural/enforced response data to `target_system_mechanical_evidence.csv`.
+- Key result: natural endpoint shrinkage remains approximately 0.197–0.198 across 20–60 °C while τ decreases from 21.7 to 5.6 h. At 20 °C, forced shrinkage changes strongly with pressure (0.53 at 0.8 bar to 0.87 at 15.5 bar).
+- Preserved limitations: extrapolation from minimum 0.8 bar to natural Δp=0; endpoint prediction error up to 45%; no independent permeability or constrained modulus.
