@@ -49,3 +49,16 @@ radial drainage, with inverse and radius-squared scaling tests. It is not a
 full transient radial solution. A geometry-resolved transient solver should
 be added only after the drainage geometry and boundary conditions are
 sufficiently constrained.
+
+## Finite-cylinder end-drainage sensitivity
+
+The 2015 paper itself assumes radial flow when comparing the natural cylinder to pressure-cell samples and sets the characteristic length to \(R=d/2=6\) mm. To test the consequence of relaxing that assumption without claiming the real boundary is known, the finite-cylinder first-mode relation was evaluated for two perfectly drained ends and a drained curved wall:
+
+\[
+\frac{\tau_{\mathrm{finite}}}{\tau_{\mathrm{radial}}}
+=\frac{(2.4048/R)^2}{(2.4048/R)^2+(\pi/H)^2}.
+\]
+
+For \(R=6\) mm, this ratio is approximately 0.867 for \(H=20\) mm, 0.920 for the conditional \(H=26.5\) mm estimate from 3 mL and 12 mm diameter, and 0.936 for \(H=30\) mm. These are geometry-only first-mode sensitivities for constant diffusivity and perfectly drained boundaries. They show that the axial contribution is of order 6–13% over this illustrative height bracket; they do not establish that both ends are actually drained. The source's radial assumption remains the primary reproduction target until the apparatus boundary is verified.
+
+The newly transcribed pressure-cell Table 3 is available separately in LITERATURE/pressure_cell_syneresis_comparison.csv. Its fitted \(\tau\) is lower for the base gel than the acid gel at all seven reported pressure intervals, whereas natural-cylinder \(\tau\) is higher for base gel. Do not interpret that contrast as a change in intrinsic permeability alone: pressure loading, the membrane/filter plates, and mechanical resistance differ.
