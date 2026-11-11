@@ -42,8 +42,9 @@ std::optional<double> firstPeriodicSweptSphereContact(
                     continue;
                 }
                 // relative = stationary - moving, so the relative trajectory is
-                // image - displacement * t.
-                const double projection = -dot(image, displacement);
+                // image - displacement * t; the entry-root projection is
+                // therefore dot(image, displacement).
+                const double projection = dot(image, displacement);
                 if (projection <= 0.0) continue;
                 const double discriminant =
                     projection * projection - displacement2 * (r2 - contact2);
