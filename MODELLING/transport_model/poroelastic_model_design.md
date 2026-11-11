@@ -72,9 +72,9 @@ A permeability experiment on a deformable gel must correct for pressure-induced 
 
 1. Keep the existing constant-coefficient 1-D and radial solvers as independent mathematical benchmarks.
 2. Add dimensional scaling/identifiability utilities (implemented in poroelastic_scaling.py) and unit tests.
-3. Implement a 1-D variable-coefficient transport solver with prescribed κ(t) and M(t), first in one-way mode.
-4. Verify constant-coefficient recovery, grid/time convergence, mass balance, and limiting cases.
-5. Add a simple viscoelastic constitutive option only after the quasi-elastic solver is verified.
+3. Implement a 1-D finite-volume transport solver with spatially heterogeneous but time-independent κ(x) and M(x) first; retain the fixed reference domain and one-way coupling.
+4. Verify constant-coefficient recovery, grid/time convergence, discrete/global mass balance, interface behaviour and limiting cases.
+5. Only after those checks, formulate time-dependent coefficients with a conservative storage/accumulation term and add a simple viscoelastic constitutive option.
 6. Couple the structural state to κ and M only when independent data support the closures.
 7. Add feedback from pressure/compaction to the structural model only after parameter identifiability and numerical stability are demonstrated.
 
@@ -87,7 +87,7 @@ A permeability experiment on a deformable gel must correct for pressure-induced 
 - Do not fit and validate on the same Wilhelm & Kind shrinkage curves.
 - Do not call a high R² fit to AI-assisted approximate digitisation a physical validation.
 
-## 8. First heterogeneous finite-volume solver (implemented; verification pending)
+## 8. First heterogeneous finite-volume solver (implemented; limited numerical verification passed)
 
 A new fixed-coefficient 1-D finite-volume implementation is added in heterogeneous_1d.py. It solves
 
