@@ -1,0 +1,41 @@
+#pragma once
+
+#include "Particle.hpp"
+#include "Random.hpp"
+#include "SimulationBox.hpp"
+
+#include <cstddef>
+#include <vector>
+
+namespace mc3d {
+
+struct DLCAConfig {
+    std::size_t particleCount{100};
+    double contactDistance{1.0};
+    double maximumComponentStep{0.2};
+    double mobilityExponent{1.0};
+    std::size_t maximumAttempts{1000000};
+};
+
+struct DLCAResult {
+    std::vector<Particle> particles;
+    std::size_t attempts{0};
+    std::size_t successfulMerges{0};
+    bool completed{false};
+};
+
+// Rigid-cluster Brownian aggregation with periodic boundaries. Cluster
+// selection is weighted by mass^(-mobilityExponent); this is a declared
+// algorithmic mobility law, not a hydrodynamic calculation.
+class DLCA {
+public:
+    DLCA(const SimulationBox& box, DLCAConfig config, Random& random);
+    DLCAResult generate() const;
+
+private:
+    const SimulationBox& box_;
+    DLCAConfig config_;
+    Random& random_;
+};
+
+} // namespace mc3d
