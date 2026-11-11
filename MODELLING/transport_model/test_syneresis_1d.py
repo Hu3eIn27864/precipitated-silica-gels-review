@@ -34,6 +34,11 @@ class ConsolidationTests(unittest.TestCase):
         value = average_degree_of_consolidation(1e-4, 1.0, 1.0, terms=1000)
         self.assertAlmostEqual(value, reference, places=12)
 
+    def test_reference_value_checks_eigenvalue_factor(self):
+        # Independent series evaluation at Tv=0.1 for a double-drained slab.
+        value = average_degree_of_consolidation(0.1, 1.0, 1.0)
+        self.assertAlmostEqual(value, 0.3568234004524541, places=12)
+
     def test_short_time_asymptotic_is_term_independent(self):
         # At Tv << 1, the Poisson-transformed solution is
         # U ~ 2*sqrt(Tv/pi), with exponentially small corrections.
