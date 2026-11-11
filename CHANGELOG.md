@@ -445,3 +445,10 @@
 - Added `MODELLING/NEXT_STEPS_PARALLEL_PLAN.md` with independently executable workstreams for pilot artifact audit, common-displacement DLCA protocol, radial transport solver verification, literature/validation evidence, and manuscript synthesis.
 - Explicitly gated the full DLCA size matrix on completion, unwrapping, fit-window stability, and common algorithmic displacement; no physical-time or silica-calibration interpretation is permitted.
 - Plan records current hosted CI verification boundary and distinguishes the latest successful workflow from physical model validity.
+
+
+## 2026-11-11 — Parallel roadmap literature verification
+- Extended `MODELLING/NEXT_STEPS_PARALLEL_PLAN.md` with a targeted source-verification note for Scherer's silica-gel syneresis studies (1989, 1996) and an infinite-cylinder consolidation numerical-method comparator.
+- Clarified that permeability and network viscoelasticity/stiffness jointly control response; an effective consolidation coefficient must not be interpreted as permeability alone.
+- Preserved transferability limits: the Scherer studies are mechanistic comparators and are not automatically independent validation data for industrial precipitated silica.
+- No model parameters were fitted and no new physical claim was promoted to established fact.
