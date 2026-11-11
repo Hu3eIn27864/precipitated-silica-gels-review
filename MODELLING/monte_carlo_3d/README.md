@@ -2,7 +2,7 @@
 
 ## Status
 
-Verified software kernel plus committed aggregation, network-observable, mass-radius and ensemble-export modules pending complete-project execution. The original geometry, interaction and Metropolis kernel passed 3/3 CTest targets in Release and sanitizer Debug builds (see TEST_RESULTS.md). Five CTest entries are now registered, including a deterministic end-to-end DLCA ensemble smoke test that checks creation and headers of all three CSV outputs. Do not extend the earlier 3/3 pass claim to newer modules until the current full suite passes. The neighbour list remains independently verified but is not yet wired into Metropolis. No physical silica validation or calibrated interaction model is claimed.
+Software verification: the current hosted Release build, all five CTest targets, MC3D Python analysis tests, and 1-D transport tests passed in GitHub Actions run #220 (see TEST_RESULTS.md). The bounded DLCA pilot and parameter screen also executed and produced archived artifacts. This is software/algorithmic verification only; it does not establish silica-specific structural validity, calibrated interactions, or physical kinetics. The neighbour list remains independently verified but is not yet wired into Metropolis.
 
 ## Scientific purpose
 
@@ -80,11 +80,11 @@ The implementable V1 contract is now defined in [TECHNICAL_SPEC.md](TECHNICAL_SP
 **Verification status:** see [TEST_RESULTS.md](TEST_RESULTS.md) for the exact compiler/build commands and recorded results. The tested snapshot was reconstructed from the committed source contents fetched from GitHub and built locally; the repository itself was not cloned. The GitHub Actions workflow is configured, but no completed hosted CI result has been retrieved. These checks verify software behaviour only; they do not validate the model against experimental silica data.
 
 
-## New aggregation and network-analysis modules (verification pending)
+## Aggregation and network-analysis modules (hosted software verification passed)
 
 - `include/DLCA.hpp` / `src/DLCA.cpp`: seeded rigid-cluster Brownian aggregation in a periodic box. Cluster selection follows an explicit mass-mobility law (D\propto M^{-\alpha}); the exponent is configurable and is an algorithmic assumption, not a hydrodynamic result. Initial monomers are placed by random sequential exclusion. Aggregation stops at one cluster or a declared attempt limit; completion status and merge count are returned.
 - `include/Observables.hpp` / `src/Observables.cpp`: pair-contact graph, coordination numbers, connected components, largest-component fraction, contact counts, mean coordination, and per-component radius of gyration from graph-unwrapped coordinates. Periodic winding/inconsistency is flagged rather than silently hidden.
-- `tests/test_network.cpp`: deterministic-seed, particle-count, non-overlap, component/merge-accounting, periodic-unwrapping and empty-network checks. The new CTest target is registered but has not yet been executed locally.
+- `tests/test_network.cpp`: deterministic-seed, particle-count, non-overlap, component/merge-accounting, periodic-unwrapping and empty-network checks. The network CTest target passed in hosted CI run #220.
 - This is a simplified DLCA-style algorithm, not a full hydrodynamic Brownian-dynamics solver. Rigid translation only; no cluster rotation, lubrication, hydrodynamic interaction, long-range electrostatics, reaction-limited sticking, or solvent chemistry. The resulting fractal dimension must be measured across multiple sizes/seeds and is not prescribed.
 
 
@@ -95,7 +95,7 @@ The implementable V1 contract is now defined in [TECHNICAL_SPEC.md](TECHNICAL_SP
 
 A periodic uniform-cell grid now supplies conservative candidate sets for DLCA swept-contact detection and post-contact cluster identification. The cell width is chosen at least as large as the query radius, so a wrapped 3×3×3 cell neighbourhood is a superset of all possible neighbours within that radius; the caller still applies exact minimum-image/swept-distance tests. If the swept search radius approaches half the box length, DLCA falls back to the brute-force candidate scan. Initial random sequential placement is still brute force, and the cell grid is rebuilt during cluster moves, so this is not yet a fully optimised production implementation.
 
-The new regression case compares cell-list candidates against brute-force minimum-image neighbours, including periodic-face and small-grid cases. An isolated C++17 ASan/UBSan check of the cell-list module passed. Full CMake verification of the current repository remains pending.
+The new regression case compares cell-list candidates against brute-force minimum-image neighbours, including periodic-face and small-grid cases. An isolated C++17 ASan/UBSan check of the cell-list module passed. The integrated current CMake/CTest verification passed in hosted CI run #220.
 
 
 ## Mass-radius analysis (implementation and isolated checks)
@@ -104,7 +104,7 @@ The new regression case compares cell-list candidates against brute-force minimu
 - `include/FractalDimension.hpp` / `src/FractalDimension.cpp`: explicit-window log-log OLS fit returning exponent, slope standard error, R² and point count.
 - The estimator is a transparent reference implementation with O(N² N_r) cost; it is not yet optimised for large aggregates.
 - An isolated sanitizer-compiled straight-chain test returned Df=0.964034 and R²=0.999992 for a finite 1001-particle chain over radii 10–50. The small downward bias from Df=1 is expected from finite-chain boundary effects.
-- The complete repository CMake/CTest suite, generated-aggregate scaling analysis and independent-seed ensemble statistics remain pending. The fit-window scan is implemented and covered by committed test cases, but those new cases have not yet been executed in the complete repository test target. No silica-specific fractal dimension is claimed.
+- The complete repository CMake/CTest suite and fit-window tests passed in hosted CI run #220. Generated-aggregate scaling is still not established: the bounded pilot had only two eligible N=32 aggregates, none at N=64 or N=128, and strong fit-window sensitivity. No silica-specific fractal dimension is claimed.
 
 
 - A diagnostic fit-window scan now enumerates all contiguous windows with at least three points. It reports sensitivity; it does not automatically select a scaling interval or establish fractality.
@@ -114,13 +114,13 @@ The new regression case compares cell-list candidates against brute-force minimu
 - Added deterministic compact-cube and three-arm branched reference geometries to the network test source. An isolated sanitizer-compiled C++17 check returned apparent slopes 2.33099 (finite cube) and 1.07112 (branched cross), within the committed regression bounds. These are estimator sanity checks, not evidence of fractal scaling or silica-specific morphology.
 
 
-## Reproducible DLCA ensemble executable (verification pending)
+## Reproducible DLCA ensemble executable (hosted smoke test passed)
 
-`examples/dlca_ensemble.cpp` and the `mc3d_dlca_ensemble` CMake target provide a command-line driver over consecutive random seeds. It writes separate run-summary, mass-radius-curve and fit-window CSV files. Only completed aggregates with consistent periodic unwrapping are exported to the mass-radius and fit files; incomplete or winding cases remain visible in the run summary. The default radii and mobility settings are algorithmic reduced-unit choices, not calibrated silica parameters. Usage and output schemas are documented in [examples/README.md](examples/README.md). The driver and the latest fit-window scan changes have not yet been built as a complete repository snapshot.
+`examples/dlca_ensemble.cpp` and the `mc3d_dlca_ensemble` CMake target provide a command-line driver over consecutive random seeds. It writes separate run-summary, mass-radius-curve and fit-window CSV files. Only completed aggregates with consistent periodic unwrapping are exported to the mass-radius and fit files; incomplete or winding cases remain visible in the run summary. The default radii and mobility settings are algorithmic reduced-unit choices, not calibrated silica parameters. Usage and output schemas are documented in [examples/README.md](examples/README.md). The driver and fit-window scan compiled and passed the integrated CTest smoke test in hosted CI run #220.
 
 
 - The fit-window scan omits singular plateau-only windows while retaining valid intervals elsewhere; a completely constant mass curve produces no fit rows rather than aborting the ensemble export.
-- A command-line DLCA ensemble example is registered as `mc3d_dlca_ensemble`. It exports seed-level run summaries, mass-radius curves and all non-singular fit windows to three CSV files. See [examples/README.md](examples/README.md). Its full-project compilation and smoke run remain pending.
+- A command-line DLCA ensemble example is registered as `mc3d_dlca_ensemble`. It exports seed-level run summaries, mass-radius curves and all non-singular fit windows to three CSV files. See [examples/README.md](examples/README.md). Its full-project compilation and smoke run passed in hosted CI run #220.
 
 
 ## Current verification boundary
