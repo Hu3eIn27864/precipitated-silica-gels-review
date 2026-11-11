@@ -1,6 +1,8 @@
 #pragma once
 
+#include <cstddef>
 #include <cstdint>
+#include <stdexcept>
 #include <random>
 
 namespace mc3d {
@@ -20,6 +22,9 @@ public:
     }
 
     std::size_t uniformIndex(std::size_t upperExclusive) {
+        if (upperExclusive == 0) {
+            throw std::invalid_argument("uniformIndex requires a positive upper bound");
+        }
         return std::uniform_int_distribution<std::size_t>(0, upperExclusive - 1)(engine_);
     }
 
