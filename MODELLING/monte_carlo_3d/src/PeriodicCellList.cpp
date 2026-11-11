@@ -17,7 +17,7 @@ PeriodicCellList::PeriodicCellList(const SimulationBox& box,
     }
     const double requestedCells = std::floor(boxLength_ / searchRadius);
     if (!std::isfinite(requestedCells) ||
-        requestedCells > static_cast<double>(std::numeric_limits<std::size_t>::max())) {
+        requestedCells >= static_cast<double>(std::numeric_limits<std::size_t>::max())) {
         throw std::length_error("Periodic cell-list grid dimensions overflow");
     }
     cellsPerDimension_ = std::max<std::size_t>(
