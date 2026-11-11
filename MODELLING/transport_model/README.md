@@ -174,3 +174,10 @@ refinement (30, 60 and 120 cells) and time-step refinement at fixed
 were 0.01905, 0.00480 and 0.000964 for the cylinder, and 0.02649, 0.00671
 and 0.00135 for the sphere. Hosted CI [#293](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43021684276)
 passed the expanded radial suite as part of the complete workflow.
+
+
+The corrected planar reference table is now enforced by regression tests at
+seven nonzero Fourier numbers in addition to the independent (Fo_d=0.1)
+reference test. Hosted CI [#295](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43021757732)
+passed the complete integrated workflow, including all updated 1-D and
+radial transport tests.
