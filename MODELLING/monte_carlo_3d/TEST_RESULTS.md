@@ -121,3 +121,8 @@ The committed `MassRadius.cpp` implementation was compiled in an isolated C++17 
 ## Network-to-mass-radius integration test added (2026-11-11)
 
 The component-observables structure now retains graph-unwrapped coordinates, and the network regression source checks that a cluster crossing a periodic face produces the analytically expected mean enclosed mass-radius values when passed to the estimator. This connects the two committed interfaces in the test source. The assertion has **not** yet been executed in the complete repository test target; the full CMake/CTest suite remains pending.
+
+
+## Known-geometry line-scaling harness (2026-11-11)
+
+A standalone C++17 harness implementing the committed mass-radius counting and log-log regression logic was compiled with GCC using `-Wall -Wextra -Wpedantic -fsanitize=address,undefined`. For a finite straight chain of 1001 equally spaced particles and radii 10, 15, 20, 25, 30 and 40, 50, it returned (D_f=0.964034) and (R^2=0.999992); both satisfy the repository regression thresholds (|Df−1| < 0.05, R² > 0.995). The deviation from exactly one is expected from finite-chain boundary effects. The harness is an isolated executable, not the complete CMake/CTest suite, and does not independently compile the complete committed repository target.
