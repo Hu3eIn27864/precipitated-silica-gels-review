@@ -727,3 +727,12 @@
 - Compared the reported acid pressure-cell values at similar low pressures: maximum shrinkage is similar (2014: 0.53 at 0.8 bar; 2015: 0.52 at 0.63–0.77 bar), but fitted τ differs (13.0 h versus 5.9 h).
 - Identified a response-function difference: the 2014 natural-syneresis fit uses a stretched exponential (n = 1.23), while the 2015 paper uses a simple exponential (n = 1). Cross-paper τ values are therefore model-form-confounded and must not be directly interpreted as a membrane or kinetic effect.
 - Added this qualification to `LITERATURE/quantitative_overlap_audit_wilhelm.md`; a proper comparison requires refitting raw curves with a common response function.
+
+
+## 2026-11-11 — Wilhelm & Kind pressure-cell cross-study comparison
+
+- Compared the published 20 °C acid-gel forced-syneresis fit tables from Wilhelm & Kind (2014, 2015), including approximate pressure matches.
+- Confirmed that the 2015 article explicitly describes repeating the earlier acid-gel pressure-cell experiments with NP010 instead of NF270 and reports no significant membrane-related difference.
+- Documented close fitted maximum-shrinkage values but 2015 fitted characteristic times about 2.1–2.6 times shorter at approximate matched pressures; the exponent also differs (n=1.23 vs n=1), so no physical rate-change claim is made.
+- Added `LITERATURE/wilhelm_kind_pressure_cell_crossstudy_comparison.md`; marked a common raw-curve refit as pending because the inspected sources provide fitted tables and plots, not machine-readable time-series observations.
+- No permeability, diffusivity, or constitutive parameter was inferred from empirical fit values.
