@@ -446,3 +446,13 @@ drainage surfaces, droplet contact geometry, raw syneresis curves, and
 independent permeability/conductivity and constrained-modulus measurements.
 Only then decide whether a transient finite-cylinder solver and a
 state-dependent k–M coupling can be meaningfully identified.
+
+
+## Workstream D2 — source-verified data and geometry (updated 2026-11-11)
+
+- Added source-verified geometry audit and a reproducible digitisation protocol.
+- Transcribed the 14 acid/base pressure-cell fit records from the open 2015 Table 3 into a separate 15-column CSV; parser validation found 14 rows with consistent schema.
+- The natural-cylinder source explicitly assumes radial drainage length \(R=6\) mm for its comparison with pressure-cell data. Preserve that as the authors' assumption, while separately testing finite-end drainage sensitivity.
+- Conditional on a right-cylinder interpretation of \(d=12\) mm and \(V\\approx3\) mL, the implied height is 26.5 mm. This is calculated, not reported as a measured height.
+- Actual digitised marker points remain outstanding. The published Tables 1–3 are fitted parameters, and the paper's plotted markers must be extracted separately from the fitted lines before residual-based model validation can be attempted.
+- Priority next: digitise Figure 8 natural cylinder curves and Figure 10 confined-droplet curves first, preserving source/panel and point uncertainty; then pressure-cell Figure 12 / supplementary data. Avoid fitting a common \(c_v\) before boundary conditions and geometry are mapped.
