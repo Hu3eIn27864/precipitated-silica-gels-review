@@ -500,3 +500,9 @@
 - Added a finite-cylinder first-mode time-constant helper with drained-end and sealed-end limits; added tests for the infinite-cylinder limit and geometry scaling.
 - Added `poroelastic_coupling.py` for the classical `c_v = k M / gamma_w` identity and algebraic inversion, keeping permeability and constrained modulus separate and avoiding uncalibrated constitutive laws.
 - Added regression tests for both additions and documented their strict limits: code verification only, no experimental calibration or silica-specific constitutive validation.
+
+## 2026-11-11 — Dimensional correction of consolidation coefficient
+
+- Distinguished hydraulic conductivity K [m/s] from intrinsic permeability κ [m²] throughout the coupling implementation.
+- Added separate identities and inverses: cv = K M / γw and cv = κ M / μ.
+- Corrected the README parameter-identifiability explanation; no generic 'permeability' symbol is used for both quantities.
