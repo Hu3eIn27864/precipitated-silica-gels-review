@@ -589,3 +589,12 @@
 - Figure 8 und Figure 10a liefern überwiegend Amplituden in der Nähe der publizierten Tabellenwerte; Figure 10b zeigt systematisch 1.40–1.65-fach höhere Fit-Amplituden.
 - Figure 8a bei 40/60 °C ist wegen des ersten Nichtnullpunkts erst bei 22 h für die frühe Zeitkonstante schlecht aufgelöst; hohe R²-Werte werden ausdrücklich nicht als Ablesevalidierung interpretiert.
 - Keine Punktgewichtung, keine Glättung, keine Konfidenzintervalle und keine physikalische Parameteridentifikation; alle Fits bleiben explorativ und von einer unabhängigen Originalbildprüfung abhängig.
+
+
+## 2026-11-11 — Leave-one-out-Sensitivitätsanalyse (164 LOO-Fits)
+
+- Alle 164 KI-gestützten Näherungspunkte wurden reihenweise einmal ausgelassen und die Einzelexponentialfunktion neu angepasst.
+- Ergänzt: `MODELLING/transport_model/leave_one_out_wilhelm_kind.py`, 12-zeilige Übersichtsdatei, 164-zeilige Detaildatei und methodische Notiz.
+- Besonders punktempfindlich: Figure 8a/20 °C (LOO-τ-Spannweite 71.6 %; früher Punkt bei 6 h) und Figure 8b/20 °C (53.6 %; erster Nichtnullpunkt bei 25 h).
+- Figure 10b-Amplituden bleiben auch nach Entfernung einzelner Punkte deutlich oberhalb der publizierten Werte; kein einzelner Punkt erklärt den systematischen Widerspruch.
+- LOO-Spannweiten sind keine Konfidenzintervalle und können systematische Kurvenverwechslungen/Ablesefehler nicht erkennen. Keine physikalische Validierung beansprucht.
