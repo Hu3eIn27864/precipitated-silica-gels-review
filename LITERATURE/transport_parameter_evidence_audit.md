@@ -54,3 +54,42 @@ A derived Table 4 comparison is stored in `LITERATURE/ragueh_2015_relative_resis
 A second inspection of the Ragueh PDF confirms the S1/S3/S3 label pattern in Table 1 in addition to Table 2. The middle row is probably S2, but the source does not authorise silent correction. The S3 fractal dimension remains 1.8 in Table 3 versus 2.2 in adjacent prose.
 
 For Wilhelm & Kind (2015), the original publisher image assets are now accessible at 1024-pixel width for Figures 8 and 10 (URLs recorded in `MODELLING/validation_data_roadmap.md`). This removes the previous image-access blocker, although digitisation and pixel/axis uncertainty annotation have not yet been completed. The KIT repository record confirms Open Access availability; its 13 MB PDF endpoint remains beyond the retrieval limit in this environment.
+
+
+## Ergänzende Primärliteratur: direkte Kopplung von Synerese, Permeabilität und Netzwerkmechanik
+
+### Scherer (1989), *Mechanics of syneresis I: Theory* und *II: Experimental study*
+
+- **Theorie:** Die Syneresegeschwindigkeit hängt von Probengröße, Porenströmungswiderstand und viskoelastischen Netzwerkeigenschaften ab. Ein anfänglich langsamer Schrumpfungsabschnitt kann aus dem allmählichen Aufbau des Porenflüssigkeitsdrucks entstehen.
+- **Experiment:** Die Schrumpfungskurven von Silicagelen stimmen laut Abstract vernünftig mit Modellkurven überein, wenn unabhängig bestimmte Permeabilität, Modul und Viskosität eingesetzt werden.
+- **Bedeutung:** Ein direkter konzeptioneller Präzedenzfall für die Trennung von hydraulischem Transport und mechanischer Relaxation; unterstützt die Modellarchitektur, nicht die Übertragbarkeit numerischer Parameter auf gefällte Kieselsäure.
+- **Systemgrenze:** Alkoxid-abgeleitete Silicagele, nicht industriell gefällte Kieselsäure aus Silikat-Säure-Fällung. Als Mechanismen- und Modellvergleich führen, nicht als Kalibrierdatensatz des Zielsystems.
+
+Bibliographie:
+- Scherer, G. W. (1989). Mechanics of syneresis I. Theory. *Journal of Non-Crystalline Solids*, 108(1), 18–27. https://doi.org/10.1016/0022-3093(89)90328-1
+- Scherer, G. W. (1989). Mechanics of syneresis II. Experimental study. *Journal of Non-Crystalline Solids*, 108(1), 28–36. https://doi.org/10.1016/0022-3093(89)90329-3
+
+### Scherer & Swiatek (1989), *Measurement of permeability II: Silica gel*
+
+- Permeabilität wurde über einen Druckgradienten in der Porenflüssigkeit dünner (~2 mm) alkoxid-abgeleiteter Gelplatten bestimmt; die geringe Dicke sollte viskoelastische Effekte minimieren.
+- Für ein homogenes säurekatalysiertes Gel lag die Permeabilitäts-Größenordnung im Einklang mit Carman–Kozeny. Für ein inhomogenes basenkatalysiertes Gel lag sie höher als vorhergesagt, plausibel aufgrund größerer Poren.
+- Teilweises Trocknen verringerte die Permeabilität um ungefähr zwei Größenordnungen.
+- **Bedeutung:** Netzwerkheterogenität und Verdichtung können die hydraulische Leitfähigkeit stark verändern; eine einzelne Porositätskennzahl genügt nicht zur zuverlässigen Permeabilitätsbestimmung.
+- **Systemgrenze:** Alkoxid-basierte Gele; keine Werte für gefällte Kieselsäure und kein direkter Parametertransfer.
+
+Bibliographie:
+- Scherer, G. W. & Swiatek, R. M. (1989). Measurement of permeability II. Silica gel. *Journal of Non-Crystalline Solids*, 113(2–3), 119–129. https://doi.org/10.1016/0022-3093(89)90002-1
+
+### Scherer (1996), *Influence of viscoelasticity and permeability on the stress response of silica gel*
+
+Der Langmuir-Review fasst zusammen, dass die Reaktion von Silicagelen auf mechanische Lasten und Temperaturänderungen sowohl von Permeabilität als auch Modul abhängt; Synerese und Viskoelastizität treten in chemisch aggressiven Flüssigkeiten auf. Er ist ein thematisch passender Langmuir-Vorläufer, ersetzt aber keine unabhängigen Primärdaten für gefällte Kieselsäure.
+
+Bibliographie:
+- Scherer, G. W. (1996). Influence of viscoelasticity and permeability on the stress response of silica gel. *Langmuir*, 12(5), 1109–1116. https://doi.org/10.1021/la9503111
+
+### Konsequenz für die Modellstrategie
+
+1. Das 1-D/radiale Konsolidierungsmodell bleibt als Transport-Referenz nützlich, reicht aber allein nicht aus, wenn Gelmodul und Viskosität während der Synerese evolvieren.
+2. Die nächste Modellstufe sollte einen zeitabhängigen hydraulischen Parameter \(\kappa(\phi,\mathcal{S})\) und eine zeitabhängige mechanische Antwort \(M(t)\) bzw. ein viskoelastisches Relaxationsmodell getrennt führen. \(\mathcal{S}\) bezeichnet Strukturmerkmale wie Porennetzwerk, Kontaktzahl und Aggregatstruktur; es ist noch keine kalibrierte Zustandsvariable.
+3. Erst unabhängige Permeabilitäts- und Rheologie-/Modulmessungen erlauben, beide Beiträge zu identifizieren. Die Schrumpfungskurve allein bleibt eine gekoppelte Antwort.
+4. Alkoxid-Silicagel-Daten werden zunächst für qualitative Modellprüfung und dimensionslose Skalierung verwendet; Parametertransfer auf gefällte Kieselsäure ist ohne belegte Vergleichbarkeit von Prozesschemie, Partikelstruktur und Flüssigkeitszusammensetzung nicht zulässig.
