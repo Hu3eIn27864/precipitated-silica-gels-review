@@ -41,14 +41,14 @@ class FitSensitivityTests(unittest.TestCase):
     def test_rejects_fit_attached_to_incomplete_run(self):
         path = Path(str(self.prefix) + "_fit_windows.csv")
         with path.open("a") as handle:
-            handle.write("12,1.5,3.0,1.7,0.1,0.98,4\\n")
+            handle.write("12,1.5,3.0,1.7,0.1,0.98,4\n")
         with self.assertRaisesRegex(ValueError, "incomplete"):
             MODULE.analyse(self.prefix, 8)
 
     def test_rejects_duplicate_windows(self):
         path = Path(str(self.prefix) + "_fit_windows.csv")
         with path.open("a") as handle:
-            handle.write("11,1.5,3.0,1.9,0.1,0.99,4\\n")
+            handle.write("11,1.5,3.0,1.9,0.1,0.99,4\n")
         with self.assertRaisesRegex(ValueError, "Duplicate fit window"):
             MODULE.analyse(self.prefix, 8)
 
