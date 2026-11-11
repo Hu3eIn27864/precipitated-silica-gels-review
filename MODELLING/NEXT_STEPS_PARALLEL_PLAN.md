@@ -310,3 +310,22 @@ as distinct move-level events (separate from number of components merged),
 and consider a stopping design that matches both cumulative Q and a
 predeclared attempt/path-length envelope. Avoid conditioning the sample on
 only those trajectories that complete.
+
+
+### Workstream B: merge-event versus absorbed-component distinction
+
+The common-Q artifact was further inspected by selected pre-move cluster-size
+class. This exposed an ambiguity in the existing outcome count: a single
+moving cluster can contact multiple other components in one attempted move.
+The existing `successful_merges` count records the number of absorbed
+components (component-count reduction), not the number of move-level
+collision/merge events.
+
+The DLCA result and per-size diagnostics now track both quantities separately:
+`successful_merge_events` counts a move with one or more contacts once;
+`successful_merges` retains the number of absorbed components. The CSV
+schema, deterministic reproducibility checks, and conservation tests have
+been updated. Hosted CI validation is pending. This distinction will let us
+report event probability per selected move separately from component
+reduction per move; neither is a physical collision rate without a physical
+time/mobility model.
