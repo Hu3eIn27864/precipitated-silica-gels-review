@@ -409,3 +409,4 @@
 - 2026-11-11: Strengthened DLCA ensemble provenance validation by cross-checking mass-radius and fit rows against run-summary seeds and completion/unwrapping flags; added regression tests for orphaned fit rows and observations attached to unfinished runs. Full repository CI remains unverified.
 
 - 2026-11-11: Fixed a periodic DLCA swept-collision edge case by testing neighbouring periodic images in the narrow phase; added deterministic regression coverage. C++ build/CTest execution remains pending.
+- 2026-11-11: Isolated GCC C++17 compile and three-case runtime harness passed for the new periodic swept-collision helper. ASan execution was blocked by the environment's runtime-loading configuration; full CMake/CTest remains pending.
