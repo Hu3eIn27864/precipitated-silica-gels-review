@@ -56,3 +56,21 @@ Extend to nonlinear permeability, viscoelastic relaxation, or other geometry
 only when published data can constrain those terms.
 
 The test suite additionally checks rejection of NaN/infinite inputs and convergence of the 1000-term default series against a 5000-term reference at a representative dimensionless time. The convergence test is specific to that test point; very early-time cases can require more terms. The function rejects non-finite inputs rather than silently returning a bounded but meaningless result.
+
+
+## Geometry-specific first-mode scaling utility
+
+`geometry_scaling.py` provides the ideal radial first-mode relations
+`tau_1 = R^2/(alpha_01^2 D_app)` for an infinite cylinder with radial
+drainage and `tau_1 = R^2/(pi^2 D_app)` for a sphere. It can convert in either
+direction and rejects non-finite or non-positive inputs. The associated tests
+check the inverse relations and the expected radius-squared scaling.
+
+This is a **first-mode dimensional translation**, not a full transient
+cylindrical/spherical consolidation solver. It assumes an ideal drained
+surface and omits finite-cylinder end drainage, evolving sample shape,
+nonuniform boundary conditions, and coupled changes in permeability and
+skeleton stiffness. The resulting `D_app` remains a diagnostic apparent
+diffusivity, not a directly measured material property. Do not use it to claim
+that acid/base gels share a common transport coefficient without independent
+validation.
