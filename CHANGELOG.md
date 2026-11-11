@@ -563,3 +563,12 @@
 
 
 - 2026-11-11: Ergänzte exploratives (t_{50})-Screening der 12 vorläufig digitalisierten Wilhelm-&-Kind-Reihen gegen (\tau\ln 2). Keine Fit-Anpassung; Screening dient nur zur Identifikation auffälliger Zeitachsen-/Serienzuordnungen.
+
+
+## 2026-11-11 — Provenienzkorrektur der Wilhelm-&-Kind-Kurvenablesungen
+
+- Nutzerhinweis präzisiert: Die 164 ungefähren Kurvenwerte wurden durch einen anderen ChatGPT-Account aus den Abbildungen abgelesen und als Text übermittelt; sie sind keine vom Projektteam pixelkalibrierten oder unabhängig geprüften Digitalisierungsdaten.
+- Datensatz-Kennzeichnung von `measurement` auf `ai_assisted_approximation` geändert; alle Werte bleiben unverändert und ausdrücklich explorativ.
+- Qualitätsaudit, Statusnotiz und Halbzeit-Auswertung um Provenienz, Evidenzgrenze und zulässige Verwendung ergänzt.
+- Wilhelm & Kind (2015), Gleichung (3), im Volltext verifiziert: S(t)=A[1−exp(−t/τ)]; damit gilt für die publizierte Fitfunktion exakt t50=τ ln 2. Dies bestätigt die Umrechnung, nicht die ungeprüften Diagrammablesungen.
+- Keine Modellanpassung und keine physikalische Validierung beansprucht.
