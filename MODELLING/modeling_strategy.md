@@ -169,3 +169,8 @@ The initial continuum treatment should generally be Darcy flow coupled to a defo
 ## Implementation contract for the 3-D MC workstream
 
 The first C++ milestone is governed by `MODELLING/monte_carlo_3d/TECHNICAL_SPEC.md`. It deliberately starts with reversible equilibrium-style Metropolis sampling and a transparent effective pair potential. Coordination-dependent detachment, irreversible/persistent bond kinetics, and imposed compaction are separate later extensions; they must not be mixed into the V1 equilibrium sampler. V1 reports algorithmic sweeps, not physical time, and does not model pore-liquid drainage. The detailed specification defines units, periodic geometry, initial-aggregate requirements, software modules, observables, tests, verification gates, and explicit non-goals.
+
+
+## Current 3-D MC implementation status (2026-11-11)
+
+The initial C++17 foundation is committed under `MODELLING/monte_carlo_3d/`: CMake/CTest scaffold, `Vec3`, `Particle`, periodic `SimulationBox`, seeded RNG wrapper, and geometry tests. This is a partial software scaffold only. It has not been compiled or run in the present environment; pair potential, neighbour list, network, observables and Metropolis engine remain to be implemented. See the directory README and `TECHNICAL_SPEC.md` for the implementation contract.
