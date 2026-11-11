@@ -30,7 +30,14 @@ def average_degree_of_consolidation(time_s: float, cv_m2_s: float,
         raise ValueError("terms must be >= 1")
     if time_s == 0:
         return 0.0
-    factor = 4.0 * cv_m2_s * time_s / (math.pi ** 2 * drainage_length_m ** 2)
+    dimensionless_time = cv_m2_s * time_s / (drainage_length_m ** 2)
+    # The direct odd-eigenvalue series converges slowly as t -> 0. A
+    # Poisson-transformed short-time expansion gives U = 2*sqrt(Tv/pi)
+    # up to exponentially small corrections O(exp(-1/Tv)); use it below
+    # Tv=0.01 to avoid a truncation artefact at early times.
+    if dimensionless_time < 0.01:
+        return min(1.0, max(0.0, 2.0 * math.sqrt(dimensionless_time / math.pi)))
+    factor = 4.0 * dimensionless_time / (math.pi ** 2)
     remaining = 0.0
     for m in range(terms):
         odd = 2 * m + 1
