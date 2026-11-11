@@ -20,5 +20,7 @@ jobs:
         run: cmake -S MODELLING/monte_carlo_3d -B build/mc3d -DCMAKE_BUILD_TYPE=Release
       - name: Build
         run: cmake --build build/mc3d --parallel 2
-      - name: Run tests
+      - name: Run C++ tests
         run: ctest --test-dir build/mc3d --output-on-failure
+      - name: Run Python ensemble-analysis tests
+        run: python3 -m unittest discover -s MODELLING/monte_carlo_3d/analysis -p 'test_*.py' -v
