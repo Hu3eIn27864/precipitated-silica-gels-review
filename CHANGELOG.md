@@ -134,3 +134,12 @@
 - The study combines concentrated HCl-acidified waterglass gel with crystalline silica powder and sand. Weight loss, FTIR, SEM and compression tests track composite consolidation. FTIR evolution is interpreted as dissolution/precipitation and the mechanical response depends on fine-silica content.
 - Explicitly bounded the result: composite weight loss is not an isolated-gel syneresis measurement; crystalline silica/sand and alkaline waterglass differ from industrial amorphous acid-precipitated silica. Added C19 as mechanistic comparator only.
 - Added historical leads Holmes, Kaufmann & Nicholas (1919), DOI 10.1021/ja02230a002, and Ferguson & Applebey (1930), DOI 10.1039/TF9302600642, as H-001/H-002 with status V. Holmes bibliographic metadata is confirmed by ACS, but full text is paywalled. Ferguson title/authors/year/DOI are indexed, while full pagination and publisher record remain to verify. No historical mechanistic claims are made.
+
+
+## 2026-11-11 — Waterglass-mediated granular consolidation comparator
+
+- Added PSG-034 (Lucas et al., 2011), *Journal of Non-Crystalline Solids* 357(4), 1310–1318, DOI 10.1016/j.jnoncrysol.2010.12.016, using the publisher record and extended article preview.
+- The study combines quartz sand with alkaline sodium silicate and examines drying-temperature, sand-size and solution-dilution effects using thermal analysis, SEM, ICP, ATR-FTIR and compression testing.
+- Added a bounded C20: the reported 70 °C glass-like adhesive layer and 150 °C dissolution–precipitation mechanism are author interpretations for a drying granular composite, not direct evidence for wet precipitated-silica gel syneresis.
+- Added source assessment batch 12 and flagged the Tognonvi/Rossignol research-family relationship with Kouassi et al. (2011); independent dataset status remains to be checked.
+- Database now contains 36 records; structural validation to be performed.
