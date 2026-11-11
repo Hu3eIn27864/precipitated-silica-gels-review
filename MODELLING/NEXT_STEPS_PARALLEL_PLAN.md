@@ -541,3 +541,12 @@ state-dependent k–M coupling can be meaningfully identified.
 - [ ] Nach Originalbildprüfung Fehlerbalken/Ableseunsicherheit berücksichtigen und Fits erneut durchführen.
 
 **Interpretationsgrenze:** LOO-Spannweiten sind keine Konfidenzintervalle; die Analyse kann systematische Ableseverzerrung nicht erkennen.
+
+
+## Numerische Regressionstests des Syneresis-Fitters (2026-11-11)
+
+- [x] Drei synthetische Regressionstests ergänzt: Parameter-Recovery bei rauschfreien Modelldaten, Unverändertheit des Fits durch den Ursprungspunkt (0,0), sowie endliche und plausible Fitdiagnostik.
+- [ ] Hosted CI-Ergebnis dieses Testlaufs prüfen.
+- [ ] Nach erfolgreichem Testlauf die numerische Implementierung als regressionsgeprüft markieren, weiterhin strikt getrennt von der Validierung der Kurvenablesungen und der physikalischen Modellannahme.
+
+**Nächster wissenschaftlicher Schritt:** Originalgrafikprüfung und unabhängige Achsen-/Marker-Digitalisierung. Eine Monte-Carlo-Fehlerfortpflanzung ist erst sinnvoll, wenn die Ableseunsicherheit aus Pixelauflösung, Markergröße und Achsenkalibrierung begründet abgeschätzt werden kann; frei gewählte Unsicherheiten dürfen nur als Szenarien, nicht als Messfehler ausgegeben werden.
