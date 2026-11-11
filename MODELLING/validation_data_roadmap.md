@@ -12,10 +12,12 @@ This file tracks published measurements that could independently test a future m
 - Access: open full text and downloadable supplementary material are indicated on the publisher page.
 - Material: sodium-silicate / sulfuric-acid precipitated silica; acid and alkaline gel recipes.
 - Measured outputs: natural relative volume shrinkage versus time for cylinders and droplets; enforced syneresis under pressure; effects of pH, temperature, and sample size.
-- Existing project extraction: cylinder and droplet endpoint/time-scale values are in source assessment batch 01; separate centrifugation data from Wilhelm (2017) are in `LITERATURE/quantitative_extraction_syneresis.csv`.
-- Candidate use: external check of a continuum drainage/poroelastic model's trends with geometry, temperature, and gel type.
-- Limitations: fitted kinetic curves and reported endpoint/time constants are not a full independent constitutive dataset. The pressure-cell model is empirical. The dissertation repeats some 2015 data; do not count these as independent validation.
-- Status: high-priority, direct material relevance; extract figure-level time series and supplementary files before model fitting.
+- Existing project extraction: 12 published fitted natural-syneresis parameter pairs (maximum shrinkage and characteristic time constant) from Tables 1 and 2 have now been added to `LITERATURE/quantitative_extraction_syneresis.csv`; six additional centrifugal forced-syneresis points from Wilhelm (2017) remain separately recorded.
+- The natural-syneresis time-series are represented by the paper's empirical single-exponential fit, and the authors explicitly state that a physically based model remained future work. Tables 1 and 2 provide fitted parameters, not raw time-series observations. The publisher also lists supplementary material (including supplementary tables/figures for enforced syneresis); it is not raw time-series data.
+- Candidate use: test geometry-dependent transport trends and assess whether a shared effective transport parameter can describe cylinders and droplets under explicit boundary conditions.
+- Limitations: the empirical fit time constant is not automatically a pore-pressure diffusion eigen-time. The droplet shape and drainage boundary conditions are approximate; finite cylinders may have both radial and end drainage. The pressure-cell model is empirical. The dissertation repeats some 2015 data; do not count these as independent validation.
+- A first-mode conversion has been documented in `MODELLING/transport_model/geometry_scaling_note.md` strictly as an apparent diffusivity diagnostic, not a measured material property.
+- Status: high-priority, direct material relevance; tabulated fit parameters available; figure-level digitisation is still useful for residual checks and uncertainty appraisal, but should not be presented as raw data.
 
 ## Priority benchmark B — Direct precipitated-silica aggregation and fragmentation
 
