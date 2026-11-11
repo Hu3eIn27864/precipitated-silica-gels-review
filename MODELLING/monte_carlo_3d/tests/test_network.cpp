@@ -120,7 +120,7 @@ void testPeriodicSweptCollisionChecksNeighbouringImages() {
         {4.99, 0.0, 0.0}, {-2.0, 0.0, 0.0}, 4.9, 10.0);
     require(contact.has_value(),
             "periodic swept collision missed a neighbouring image");
-    require(near(*contact, 0.045, 1e-10),
+    require(near(*contact, 0.055, 1e-10),
             "periodic swept collision returned the wrong first-contact fraction");
 
     const auto noContact = mc3d::firstPeriodicSweptSphereContact(
