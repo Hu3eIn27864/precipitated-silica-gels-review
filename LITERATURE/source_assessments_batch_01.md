@@ -177,3 +177,15 @@
 - Compare Quarch’s 2010 dissertation with both Part 1 and Part 2 papers for shared experiments.
 - Inspect Wilhelm & Kind (2014) supplementary tables and 2015 supplementary tables; record replicate numbers, fit parameters and residuals in a separate quantitative extraction table.
 - Verify whether the model gel recipes and process history match those of the industrial semi-batch process closely enough for each proposed transfer claim.
+
+### Supplementary extraction note — geometry dependence in the 2015 study (11 Nov 2026)
+
+A closer re-read of the full publisher text makes the geometry effect more specific:
+
+- **Cylinders:** diameter 12 mm, gel volume approximately 3 mL; natural syneresis measured by adapted pycnometry, with three samples averaged per point. For acid-catalysed gel, maximum relative shrinkage is about 0.20 at 20–60 °C, while the fitted characteristic time falls from about 21.3 h to 5.0 h. For base-catalysed gel, maximum shrinkage rises from about 0.30 to 0.51 and the time constant falls from about 50.1 h to 27.5 h.
+- **Droplets:** diameter approximately 3 mm; shrinkage measured optically. The reported fitted maximum shrinkage for acid-catalysed droplets rises from 0.37 (20 °C) to 0.48 (60 °C), while the corresponding base-catalysed values rise from 0.30 to 0.51. The tabulated characteristic times are sub-hour (approximately 0.40–0.95 h, depending on pH and temperature).
+- The droplet protocol holds samples at 20 °C during the initial period after gelation and then changes to the target temperature. The authors themselves note that this heating transient may explain similarities between the 40 and 60 °C droplet curves early in the experiment.
+
+**Interpretive consequence:** “Sample size” is not merely a geometric correction factor. It changes the drainage length and apparent consolidation kinetics, and may change the measured maximum shrinkage. The different thermal histories of the cylinder and droplet protocols also mean that geometry effects should not be interpreted as a perfectly isolated one-variable comparison. Natural-syneresis datasets should therefore be compared only with geometry, exposed surface/drainage boundary, sample age and temperature history reported alongside the shrinkage metric.
+
+**Important boundary:** The authors describe natural and enforced syneresis as having analogous parameter dependencies, but this does not mean their absolute shrinkage, kinetics or microscopic pathways are interchangeable. The forced test imposes a mechanical pressure gradient and uses a membrane; the natural test does not.
