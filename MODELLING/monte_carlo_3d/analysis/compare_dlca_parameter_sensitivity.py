@@ -41,7 +41,10 @@ def compare_rows(baseline_rows, variant_rows, variant_name):
         )
         b_rg, v_rg = b["largest_component_rg"], v["largest_component_rg"]
         b_df, v_df = b["df"], v["df"]
-        b_rg_eligible = (b["completed"] == 1 and b["unwrapping_consistent"] == 1)\n        v_rg_eligible = (v["completed"] == 1 and v["unwrapping_consistent"] == 1)\n        rg_valid = (b_rg_eligible and v_rg_eligible\n                    and b_rg is not None and v_rg is not None)
+        b_rg_eligible = (b["completed"] == 1 and b["unwrapping_consistent"] == 1)
+        v_rg_eligible = (v["completed"] == 1 and v["unwrapping_consistent"] == 1)
+        rg_valid = (b_rg_eligible and v_rg_eligible
+                    and b_rg is not None and v_rg is not None)
         df_valid = b_df is not None and v_df is not None
         paired.append({
             "variant": variant_name,
