@@ -21,7 +21,7 @@ This is a particularly valuable bridge between the structural and transport part
 
 1. The industrial precipitated silicas have hierarchical structures: small silica beads are connected into denser aggregates, which are further organised into branched networks.
 2. Much of the SAXS-observed local/multiscale structure is retained in filtration cakes over the investigated pressure range. A notable exception is S3 at the highest pressure, where low-q scattering indicates formation of denser lumps.
-3. Osmotic compression shows three regimes: dilute dispersion, a percolation threshold, and yielding. The reported percolation volume fractions are approximately 0.06 for S3, 0.08 for S1 and 0.09 for S2.
+3. Osmotic compression shows three regimes: dilute dispersion, a percolation threshold, and yielding. The reported percolation volume fractions are approximately 0.06 for S3, 0.08 for S1 and 0.09 for S2. In the osmotic-compression comparison, changing ionic strength mainly affected the yielding regime; the higher-ionic-strength samples showed nearly threefold greater compression resistance in that regime. The reported pressure–volume-fraction power-law response in the yielding regime differed between the two ionic-strength conditions (approximately cubic versus eighth power).
 4. Above the percolation threshold, the connected network resists a substantial increase in applied osmotic pressure before yielding. In the yielding regime, the volume fraction rises and large dense regions can form.
 5. The authors use an effective-medium representation in Darcy's law, with aggregate/bead size and inter-aggregate spacing as structural length scales, to reproduce filtration-derived permeability trends.
 
