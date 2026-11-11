@@ -391,3 +391,10 @@ No mismatches were found. This verifies internal accounting consistency, not the
 For the common-Q N=32 screen, the fraction of selections involving clusters of size at least two was 8.87% for baseline, 15.53% for mobility exponent 0.5 and 11.48% for exponent 1.5. This is qualitatively consistent with the declared algorithmic weighting (m^{-\alpha}): reducing the exponent makes larger clusters relatively more selectable. The fractions are descriptive of this early incomplete stage, not estimates of physical cluster mobility. Step 0.10 had 11.31% and step 0.28 had 8.87%; step size also changes how many attempts are needed to reach Q and the trajectory sampled.
 
 The new output now allows the next analysis to stratify Q and L by selected cluster size rather than infer the whole trajectory from global totals. It still does not record cluster orientation, rotational motion, hydrodynamic interactions, or a physical clock.
+
+
+### Per-size merge attribution validated: CI #274
+
+The follow-up adds `successful_merges` to each selected pre-move size class. Hosted CI [#274](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43019534498), commit `a43eae97776fb54e31f933307dd7240e0089b84e`, passed the complete workflow, including all C++ tests and the end-to-end CLI smoke test. The artifact (ID `13855090255`) was inspected across all 51 seed/configuration records. In every record, per-size selection counts, successful merges, Q and L summed to the corresponding run-level totals (51/51 matches for each identity).
+
+This establishes that the newly exported per-size accounting is internally consistent across the size pilot, fixed-attempt sensitivity and common-Q sensitivity outputs. Merge attribution is to the cluster size immediately before the selected cluster's move; if it contacts multiple other clusters, the count added is the number of components removed from the component count (the existing run-level `successful_merges` definition). It does not resolve the full pairwise collision graph or measure physical collision rates.
