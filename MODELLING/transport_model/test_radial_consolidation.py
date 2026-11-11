@@ -28,6 +28,33 @@ class RadialConsolidationTests(unittest.TestCase):
                     geometry, fo, terms=10)
                 self.assertAlmostEqual(numerical, analytical, delta=0.012)
 
+    def test_refinement_converges_for_both_radial_geometries(self):
+        fo = 0.1
+        for geometry in ("cylinder", "sphere"):
+            exact = analytical_radial_average(geometry, fo, terms=10)
+            errors = []
+            for n_cells, dt in ((30, 0.02), (60, 0.005), (120, 0.001)):
+                value = solve_radial_average(
+                    geometry, [fo], n_cells=n_cells,
+                    max_fourier_step=dt)[0]
+                errors.append(abs(value - exact))
+            self.assertGreater(errors[0], errors[1])
+            self.assertGreater(errors[1], errors[2])
+            self.assertLess(errors[2], 0.002)
+
+    def test_time_step_refinement_at_fixed_grid(self):
+        fo = 0.1
+        for geometry in ("cylinder", "sphere"):
+            exact = analytical_radial_average(geometry, fo, terms=10)
+            errors = []
+            for dt in (0.02, 0.005, 0.001):
+                value = solve_radial_average(
+                    geometry, [fo], n_cells=120,
+                    max_fourier_step=dt)[0]
+                errors.append(abs(value - exact))
+            self.assertGreater(errors[0], errors[1])
+            self.assertGreater(errors[1], errors[2])
+
     def test_grid_and_time_refinement_reduce_error(self):
         fo = 0.1
         exact = analytical_radial_average("sphere", fo, terms=10)
