@@ -28,7 +28,6 @@ std::vector<MassRadiusPoint> calculateMassRadiusCurve(
     std::vector<MassRadiusPoint> curve;
     curve.reserve(radii.size());
     for (const double radius : radii) {
-        const double radiusSquared = radius * radius;
         double totalMass = 0.0;
         for (const auto& centre : unwrappedPositions) {
             std::size_t enclosed = 0;
@@ -36,8 +35,8 @@ std::vector<MassRadiusPoint> calculateMassRadiusCurve(
                 const double dx = particle.x - centre.x;
                 const double dy = particle.y - centre.y;
                 const double dz = particle.z - centre.z;
-                const double distanceSquared = dx * dx + dy * dy + dz * dz;
-                if (distanceSquared <= radiusSquared) {
+                const double distance = std::hypot(dx, dy, dz);
+                if (distance <= radius) {
                     ++enclosed;
                 }
             }
