@@ -201,3 +201,16 @@ formulation are unverified, full text has not been inspected, and no values
 are transferred to industrial precipitated silica. It is grouped with the
 related Scherer silica-gel mechanics/permeability research family, not counted
 as an independent external replication.
+
+
+### Workstream B result: common-Q screen completed
+
+Hosted CI run [#254](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43018481413) passed the common-Q C++/CLI tests and completed the seven-configuration N=32 paired screen at Q=450. All 21 runs reached the target, none hit the 50,000-attempt cap, and none completed aggregation. There are therefore no valid Df fits or completed-pair Rg comparisons.
+
+The screen shows that equal Q does not equalise path length L: step 0.10 produced mean L≈4,321, baseline L≈2,159, and step 0.28 L≈1,542. Largest-component fractions were similar in scale but remain incomplete-cluster descriptors with only three seeds. Thus Q is a useful common algorithmic progress coordinate, but not a complete trajectory descriptor and certainly not physical time. Full seed-level summary is recorded in MODELLING/monte_carlo_3d/TEST_RESULTS.md.
+
+**Next decision:** do not yet increase Q or system size. First inspect whether Q and L together, plus cluster-selection/mobility history, provide a defensible algorithmic comparison. Any higher-Q target must be predeclared and must retain the hard attempt cap and explicit target/cap outcomes.
+
+### Workstream C result: hosted verification
+
+The radial finite-volume cylinder/sphere solver passed the integrated transport test stage in hosted CI runs #239 and #254. This verifies the implementation against the analytical eigenfunction series and numerical refinement tests. It remains a constant-coefficient ideal-geometry benchmark; experimental validation and coupling to evolving permeability/mechanics are still pending.
