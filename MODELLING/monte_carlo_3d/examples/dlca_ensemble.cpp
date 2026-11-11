@@ -110,7 +110,12 @@ int main(int argc, char** argv) {
         config.maximumComponentStep = maximumComponentStep;
         config.mobilityExponent = mobilityExponent;
         config.maximumAttempts = maximumAttempts;
-        const std::vector<double> radii{1.5, 2.0, 2.5, 3.0, 4.0, 5.0, 6.0, 8.0};
+        // Preserve the analysis radii in units of the configured contact distance.
+        const std::vector<double> radii{
+            1.5 * contactDistance, 2.0 * contactDistance,
+            2.5 * contactDistance, 3.0 * contactDistance,
+            4.0 * contactDistance, 5.0 * contactDistance,
+            6.0 * contactDistance, 8.0 * contactDistance};
 
         for (std::size_t runIndex = 0; runIndex < seedCount; ++runIndex) {
             const std::uint64_t seed = seedStart + runIndex;
