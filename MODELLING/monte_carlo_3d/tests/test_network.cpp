@@ -1,5 +1,6 @@
 #include "DLCA.hpp"
 #include "FractalDimension.hpp"
+#include "MassRadius.hpp"
 #include "Observables.hpp"
 #include "PeriodicCellList.hpp"
 
@@ -205,6 +206,34 @@ void testMassRadiusPowerLawRegression() {
     require(rejected, "mass-radius fit accepted a non-positive mass");
 }
 
+void testMassRadiusCurveGeneration() {
+    const std::vector<mc3d::Vec3> positions{
+        {0.0, 0.0, 0.0}, {1.0, 0.0, 0.0}, {3.0, 0.0, 0.0}
+    };
+    const auto curve = mc3d::calculateMassRadiusCurve(positions, {1.0, 3.0});
+    require(curve.size() == 2, "mass-radius curve has wrong number of radii");
+    require(near(curve[0].meanEnclosedMass, 5.0 / 3.0),
+            "mean enclosed mass at radius one is incorrect");
+    require(near(curve[1].meanEnclosedMass, 3.0),
+            "large-radius mass should include the complete cluster");
+
+    const std::vector<mc3d::Vec3> translated{
+        {7.0, -2.0, 4.0}, {8.0, -2.0, 4.0}, {10.0, -2.0, 4.0}
+    };
+    const auto shifted = mc3d::calculateMassRadiusCurve(translated, {1.0, 3.0});
+    require(near(curve[0].meanEnclosedMass, shifted[0].meanEnclosedMass) &&
+            near(curve[1].meanEnclosedMass, shifted[1].meanEnclosedMass),
+            "mass-radius curve changed under rigid translation");
+
+    bool rejected = false;
+    try {
+        (void)mc3d::calculateMassRadiusCurve(positions, {1.0, 1.0});
+    } catch (const std::invalid_argument&) {
+        rejected = true;
+    }
+    require(rejected, "mass-radius curve accepted non-increasing radii");
+}
+
 void testEmptyNetwork() {
     const mc3d::SimulationBox box(10.0);
     const auto obs = mc3d::analyseNetwork({}, box, 1.0);
@@ -222,6 +251,7 @@ int main() {
         testCellListRandomizedAgainstBruteForce();
         testCellListRejectsExcessiveDenseGrid();
         testMassRadiusPowerLawRegression();
+        testMassRadiusCurveGeneration();
         testEmptyNetwork();
     } catch (const std::exception& e) {
         std::cerr << "FAILED: " << e.what() << '\n';
