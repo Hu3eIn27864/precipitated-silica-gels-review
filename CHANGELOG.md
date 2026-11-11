@@ -219,3 +219,13 @@
 - Updated `MODELLING/validation_data_roadmap.md` to distinguish tabulated fit parameters from raw curve data and supplementary forced-syneresis material.
 - Added `MODELLING/transport_model/geometry_scaling_note.md` with a first-eigenmode dimensional diagnostic for idealised radial cylinder/sphere diffusion. Apparent diffusivities are explicitly not treated as measured material properties.
 - Key model limitation recorded: the article's exponential shrinkage law is empirical; the authors state that a physically based model remained future work. A universal slab consolidation coefficient must not be fitted across cylinders and droplets without resolving geometry, boundary conditions and thermal history.
+
+
+## 2026-11-11 — 3-D C++ Monte Carlo workstream selected
+
+- Reframed the preferred microscopic candidate as a 3-D off-lattice Monte Carlo model, motivated by (but not claiming to reproduce) Schlomach & Kind (2007) and Sahabi & Kind (2011).
+- Specified a first scientific question, approximately 1000-particle starting scale, local translation/rearrangement, coordination-dependent detachment, reattachment, reversible/persistent contacts, structural observables, and verification requirements.
+- Explicitly separated equilibrium Metropolis sampling from kinetic/rate-based events and stated that MC sweeps are not physical time without independent calibration.
+- Clarified that imposed box compression is not equivalent to solvent drainage; the MC model will initially address structural reorganisation, while continuum transport remains a complementary workstream.
+- Added `MODELLING/monte_carlo_3d/README.md` as a design specification. No C++ code or simulation results are claimed yet.
+- Added a carefully bounded note on touch-screen coatings: silica aggregates and silica-sol coatings occur in anti-glare / optical surface applications, but this does not establish precipitated silica as the specific feedstock in those examples.
