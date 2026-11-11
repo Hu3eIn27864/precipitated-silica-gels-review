@@ -81,3 +81,10 @@ The first local run exposed a flawed test fixture, not an implementation failure
 - It does not validate structural predictions against precipitated-silica experiments and does not predict physical time, syneresis, pore pressure, or drainage.
 
 **Conclusion:** the current geometry–interaction–Metropolis software kernel has a locally compiled and tested V1 baseline (3/3 CTest targets in Release and sanitizer Debug builds). The broader scientific V1 model is not yet complete.
+
+
+## New DLCA/network module — preliminary isolated check (2026-11-11)
+
+The new files `DLCA.cpp`, `Observables.cpp`, and `test_network.cpp` have been added to the project and a fourth CTest target is registered. An isolated local C++17 harness was assembled for the new algorithms using interface-compatible minimal geometry/RNG headers. It compiled with GCC using `-Wall -Wextra -Wpedantic` and the test executable passed checks for periodic unwrapping/Rg, deterministic seeded output, particle count, non-overlap, empty-network behaviour, contact counts, and component/merge accounting.
+
+**Verification boundary:** this isolated harness is a preliminary algorithm check, not a full CMake build of the repository's committed source tree. The previous 3/3 Release and sanitizer results still apply only to the original geometry/interaction/Metropolis targets. The new fourth CTest target has not yet been confirmed by a complete repository build or hosted CI run. No claim of physical DLCA fidelity or silica validation is made.
