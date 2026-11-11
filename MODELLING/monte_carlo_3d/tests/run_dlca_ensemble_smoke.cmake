@@ -22,7 +22,7 @@ set(expected_headers
     "seed,completed,attempts,successful_merges,component_count,largest_component_size,largest_component_rg,unwrapping_consistent,contact_distance,maximum_component_step,mobility_exponent,cumulative_squared_cluster_translation,cumulative_cluster_translation_path_length,target_cumulative_squared_translation,displacement_budget_reached,attempt_limit_reached,displacement_budget_overshoot"
     "seed,particle_count,radius,mean_enclosed_mass"
     "seed,fit_minimum_radius,fit_maximum_radius,exponent,standard_error,r_squared,point_count"
-    "seed,selected_cluster_size,selection_count,successful_merges,cumulative_squared_translation,cumulative_translation_path_length"
+    "seed,selected_cluster_size,selection_count,successful_merge_events,successful_merges,cumulative_squared_translation,cumulative_translation_path_length"
 )
 list(LENGTH expected_files file_count)
 math(EXPR last_index "${file_count} - 1")
