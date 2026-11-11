@@ -163,3 +163,10 @@ A source-level audit of `dlca_ensemble.cpp` confirms that integer arguments are 
 ## Smoke-test run-row assertion (2026-11-11)
 
 The DLCA ensemble smoke script now checks not only that all three CSV files exist with the expected headers, but also that the one-seed invocation writes exactly one run-summary data row with the requested seed and structurally valid integer metadata fields. The strengthened CMake script passed an isolated local harness using a temporary stand-in executable that emitted the expected CSV schema. This validates the script and row assertion only, not the actual C++ ensemble executable or full project build.
+
+ 
+## Seed-level ensemble analysis utility added (2026-11-11)
+
+Added `analysis/analyze_dlca_ensembles.py` to combine independent DLCA driver outputs across explicitly supplied particle counts. The user specifies one common lower/upper radius bound; the script extracts at most one fit per seed for exactly that interval, and only from completed aggregates with consistent periodic unwrapping. It reports completion, unwrapping and valid-fit fractions, largest-component fraction, and descriptive per-seed exponent/Rg statistics. It deliberately does not pool overlapping fit windows or treat them as independent replicates.
+
+A standard-library `unittest` file covers fixed-window extraction, exclusion of incomplete and winding runs, handling of undefined Rg, and duplicate-seed rejection. The tests are committed but have not yet been executed in this environment. The script is a post-processing tool; it does not alter the DLCA generator or validate its physical assumptions.
