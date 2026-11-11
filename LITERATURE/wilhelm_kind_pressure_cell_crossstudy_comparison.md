@@ -69,3 +69,17 @@ For a harmonised re-fit, estimate A = Smax and τ from digitised or original tim
 - Wilhelm & Kind (2015), *Polymers* 7, 2504–2521, DOI 10.3390/polym7121528: §§3.2, 4.2–4.3, Figure 12, Table 3 and associated text.
 
 **Status:** published-parameter comparison complete; common raw-curve refit pending source time-series or verified figure digitisation.
+
+
+## 6. Follow-up figure access check (11 November 2026)
+
+The publisher HTML exposes Figure 12 (2015) as a high-resolution rendered image. Its caption explicitly distinguishes measured curves (solid) from model curves (dashed), and the legend labels pressure levels for acid and base panels. The 2014 HTML confirms Figure 7 shows measured curves with model fits and states that the low-pressure 0.8-bar curve has small deviations for t < 12 h. These source details strengthen the need to digitise measurement curves separately from fitted/model curves, especially at low pressure and early times.
+
+The publisher image can be viewed in the web interface, but the attempt to retrieve the PNG into the local analysis environment failed. Therefore no pixel calibration, point extraction, or common fit has been performed in this follow-up. Do not describe the figures as quantitatively digitised. The next technical route is to use the browser-visible original image in a dedicated digitisation workflow (e.g. WebPlotDigitizer) or obtain the source PNG through a working download route, recording axis calibration, selected curve, point coordinates, and digitisation uncertainty.
+
+Additional direct-source observations:
+- 2015 Table 3 reports acid-gel endpoint shrinkage/τ pairs at 20 °C over 0.23–7.76 bar; the 2014 Table 2 spans 0.8–15.5 bar. The lowest-pressure points are not exact matches, and the 2014 curve at 0.8 bar is explicitly the condition with noted early-time fit deviations.
+- 2015 explicitly says the acid experiments were repeated with NP010 and reports no significant difference from NF270, but separately warns that this statement does not apply to the base-catalysed gel. The authors attribute a thin layer forming on the membrane in the base-gel case to additional flow resistance that affects kinetics but not the endpoint appreciably.
+- Figure 12 (2015) and Figure 7 (2014) are both published as measured curve plus model curve; only measured traces should be used as data in a cross-study re-fit.
+
+Sources: Wilhelm & Kind (2014), publisher full text, §4.2 and Table 2; Wilhelm & Kind (2015), publisher full text, §4.2, Figure 12 and Table 3.
