@@ -159,3 +159,11 @@
 - Part I predicts sample-size/geometry dependence through pore-liquid flow resistance and network viscoelasticity; Part II reports reasonable agreement between shrinkage curves and calculations using independently measured permeability, modulus and viscosity.
 - Added C22 as a bounded mechanistic framework. Exact precursor chemistry, assumptions, sample geometry and uncertainty require full-text inspection; no direct industrial precipitated-silica equivalence is assumed.
 - Added source assessment batch 14. The synthesis now explicitly treats syneresis kinetics as coupled to transport and mechanical properties, not as a volume-change-only process.
+
+
+## 2026-11-11 — Soviet-era polysilicic-acid hydrogel literature mapped (batch 15)
+
+- Added PSG-039–PSG-042: Ponomareva et al. (1984) on hydrogel shrinkage kinetics; Kontorovich et al. (1988) on temperature-dependent syneresis; Kontorovich et al. (1988) on elastic modulus during syneresis; and Kontorovich et al. (1991) on electrolytes, polycondensation and syneresis.
+- Bibliographic records are based on later scholarly reference lists and accessible institutional documents. Original journal texts have not yet been located; all four entries are marked V (verification pending), with no result inferred from title.
+- Created source assessment batch 15. Flagged a pagination discrepancy for the 1991 paper (126–128 vs 126–129) and possible research-family/data overlap among the Kontorovich–Ponomareva–Sokolova group.
+- No new claim was added to the evidence matrix because the primary experimental results remain unverified. These papers are retrieval priorities, not yet evidence for the review's conclusions.
