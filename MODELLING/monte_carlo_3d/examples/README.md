@@ -176,3 +176,19 @@ time. The reported Q target may be overshot by the final complete move; the
 overshoot is exported. Runs can instead stop at the independent attempt cap,
 which is reported separately. Also inspect cumulative path length L because
 equal Q does not imply equal path length or identical structural history.
+
+
+### Per-size DLCA mobility diagnostics
+
+Every ensemble run also writes `<prefix>_mobility_by_size.csv` with one row
+per selected cluster-size class: seed, selected cluster size, number of times
+that size class was selected, cumulative squared realized translation Q, and
+cumulative realized translation path length L. Summing selection counts over
+size classes must reproduce the run's attempt count; summing Q and L must
+reproduce the global run-summary totals. These conservation identities are
+covered by the C++ tests.
+
+The statistics are indexed by the cluster's particle count immediately before
+its attempted translation. If that move causes a merge, the movement remains
+attributed to the pre-merge size class. The table is a trajectory diagnostic,
+not a hydrodynamic mobility measurement or physical-time estimator.
