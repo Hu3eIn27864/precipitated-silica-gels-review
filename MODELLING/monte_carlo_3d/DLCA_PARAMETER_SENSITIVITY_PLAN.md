@@ -97,3 +97,12 @@ These are descriptive paired differences, not inferential tests. With only
 three seeds in CI, standard deviations are unstable and no significance or
 physical robustness claim should be made. The larger preplanned matrix and
 more independent seeds are required before scientific interpretation.
+
+
+## First hosted screening result (2026-11-11)
+
+GitHub Actions run [#220](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43015008467) completed the seven-configuration N = 32 screen with three paired seeds and 50,000 attempts per run. The baseline completed 0/3; completion counts were 1/3 at contact distance 0.9, 2/3 at 1.1, 0/3 at step 0.10, 3/3 at step 0.28, 0/3 at mobility exponent 0.5, and 1/3 at 1.5.
+
+There were no pairs in which both baseline and variant runs completed, so the number of valid paired Rg and fixed-window exponent comparisons was zero for every variant. The per-seed largest-component-fraction deltas remain available, but they mix incomplete outcomes and should be read only as finite-attempt progress descriptors. They do not support conclusions about equilibrium morphology, fractal dimension, or physical kinetics. The high completion sensitivity to the maximum cluster step is a reason to investigate algorithmic time stepping and collision-detection robustness before expanding the physical interpretation.
+
+The separate size-series pilot in the same CI run completed 2/3 runs at N = 32 and 0/3 at N = 64 or 128. Its two eligible N = 32 exponents had mean 1.199 (sample SD 0.057), but the mean within-run exponent range across fit windows was 0.394 (maximum 0.587). Thus even the eligible N = 32 fit is strongly window-dependent. No finite-size scaling result is available. These observations reinforce the predeclared decision gate: do not launch or interpret the larger matrix as a scientific scaling study until completion and fit-window stability are improved.
