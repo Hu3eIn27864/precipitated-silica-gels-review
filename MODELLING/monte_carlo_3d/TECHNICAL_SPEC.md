@@ -158,9 +158,16 @@ The network-analysis result now retains the graph-unwrapped coordinates for each
 
 ## 19. Mass-radius estimator hardening and known-geometry regression
 
-The direct estimator now counts enclosed particles in the inner pair loop without allocating a temporary distance vector for every centre/radius pair. This removes avoidable O(N) scratch storage and repeated allocation, but the computational cost remains O(N² N_r). Radii whose square overflows the floating-point range are rejected explicitly.
+The direct estimator now counts enclosed particles in the inner pair loop without allocating a temporary distance vector for every centre/radius pair. This removes avoidable O(N) scratch storage and repeated allocation, but the computational cost remains O(N² N_r). Distance comparisons use std::hypot to avoid avoidable intermediate overflow.
 
 A deterministic 201-particle straight-chain fixture has been added. Its expected intermediate-scale mass-radius exponent is one; the regression requires the fitted exponent to lie within 0.08 of unity and log-log R² to exceed 0.995. This is a software/estimator sanity check on a known one-dimensional geometry, not evidence that generated DLCA clusters have a fractal scaling regime. A complete CMake/CTest execution is still required.
 
 
 The known-geometry regression uses a finite 1001-particle straight chain and radii 10–50 particle spacings. Its fitted exponent is expected to be slightly below one because finite-chain boundaries reduce the mean enclosed mass, so the test uses a tolerance of 0.05 rather than asserting an exact exponent. This makes the finite-size bias visible instead of hiding it behind an ideal infinite-line expectation.
+
+
+## 20. Fit-window sensitivity scan and robust distance evaluation
+
+`scanMassRadiusFitWindows` enumerates every contiguous interval containing at least the requested minimum number of radii (default three), returning the ordinary log-log fit diagnostics for each interval. It is deliberately descriptive: it does not choose a preferred interval, test a physical scaling law, correct for correlated observations, or account for uncertainty between independently generated aggregates. A stable exponent across overlapping windows is a useful diagnostic, but not sufficient evidence of fractality.
+
+The mass-radius distance comparison now uses three-argument `std::hypot` rather than a sum of squared coordinate differences. This avoids avoidable overflow/underflow in intermediate squared distances for widely separated finite coordinates. The radius itself still must be finite and positive. The test source includes a large-coordinate regression and two fit-window checks: an exact power law should retain its exponent across all 28 contiguous windows of a nine-point curve, while a constructed crossover should show window-dependent slopes. These newly added test assertions still require full CMake/CTest execution.
