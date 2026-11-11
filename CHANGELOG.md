@@ -557,3 +557,6 @@
 - Corrected the droplet preconditioning metadata: Methods section states 20 min at 20 °C before transfer to the thermostated cell; the later reference to the first 30 min describes similar curve courses, not the actual hold duration.
 
 - Hosted CI #314 passed after adding the digitisation utility and tests. The transport-model discovery step explicitly ran the three new digitisation tests (linear, log10 and multi-tick calibration) together with the existing transport tests. This validates coordinate-transform code paths, not extraction accuracy or physical model validity.
+
+
+- 2026-11-11: Integrierte 164 vom Nutzer übermittelte ungefähre JPEG-Messpunktablesungen für Wilhelm & Kind (2015), Figures 8 und 10. CSV und separate Qualitätsprüfung erstellt. Keine Anpassung an Tabellen-Fitparameter; erhebliche Abweichungen in Figure 10b werden als Prüfhinweise dokumentiert. Modellkurven und Fehlerbalken noch nicht digitalisiert.
