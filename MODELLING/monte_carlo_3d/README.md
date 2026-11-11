@@ -2,7 +2,7 @@
 
 ## Status
 
-Partial implementation. The C++17 scaffold now includes periodic geometry, seeded RNG, a shifted/truncated Lennard-Jones test potential with hard-core rejection, brute-force energy helpers, a Verlet-style neighbour list with a skin/rebuild validity check, and geometry/interaction tests. Network generation, observables, and a runnable simulation driver remain unimplemented. The current Metropolis kernel uses brute-force local energies as a correctness-first baseline; the neighbour list is tested independently and is not yet wired into the sampler. Compilation and CTest have not yet been verified in this environment.
+Partial implementation. The C++17 scaffold now includes periodic geometry, seeded RNG, a shifted/truncated Lennard-Jones test potential with hard-core rejection, brute-force energy helpers, a Verlet-style neighbour list with a skin/rebuild validity check, and geometry/interaction tests. Network generation, observables, and a runnable simulation driver remain unimplemented. The current Metropolis kernel uses brute-force local energies as a correctness-first baseline; the neighbour list is tested independently and is not yet wired into the sampler. Compilation and CTest have not yet been verified in this environment. A GitHub Actions workflow now runs CMake build and CTest on relevant pushes and pull requests; its first completed result is still pending.
 
 ## Scientific purpose
 
