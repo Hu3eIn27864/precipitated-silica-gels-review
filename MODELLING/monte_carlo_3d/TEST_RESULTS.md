@@ -116,3 +116,8 @@ Added a standalone log-log OLS helper with explicit fit interval, slope standard
 The committed `MassRadius.cpp` implementation was compiled in an isolated C++17 harness with GCC, `-Wall -Wextra -Wpedantic`, AddressSanitizer and UndefinedBehaviorSanitizer. A three-particle collinear fixture verified the analytically expected mean enclosed masses (5/3 at radius 1 and 3 at radius 3); the executable passed.
 
 **Verification boundary:** this isolated check exercised the committed estimator implementation, but not the full repository CMake target or the newly extended `test_network.cpp`. The complete four-target CTest suite remains unverified. Translation-invariance and invalid-radius assertions have been added to the repository test source but were not included in this isolated executable. No fractal-dimension result or physical validation is claimed.
+
+
+## Network-to-mass-radius integration test added (2026-11-11)
+
+The component-observables structure now retains graph-unwrapped coordinates, and the network regression source checks that a cluster crossing a periodic face produces the analytically expected mean enclosed mass-radius values when passed to the estimator. This connects the two committed interfaces in the test source. The assertion has **not** yet been executed in the complete repository test target; the full CMake/CTest suite remains pending.
