@@ -1,4 +1,5 @@
 #include "DLCA.hpp"
+#include "FractalDimension.hpp"
 #include "Observables.hpp"
 #include "PeriodicCellList.hpp"
 
@@ -177,6 +178,33 @@ void testCellListRejectsExcessiveDenseGrid() {
     require(rejected, "cell list did not reject an excessive dense-grid allocation");
 }
 
+void testMassRadiusPowerLawRegression() {
+    std::vector<double> radii;
+    std::vector<double> mass;
+    for (int i = 1; i <= 9; ++i) {
+        const double r = static_cast<double>(i);
+        radii.push_back(r);
+        mass.push_back(1.7 * std::pow(r, 1.65));
+    }
+    const auto fit = mc3d::fitMassRadiusPowerLaw(radii, mass, 2.0, 8.0);
+    require(near(fit.exponent, 1.65, 1e-10),
+            "mass-radius regression did not recover a known power-law exponent");
+    require(near(fit.rSquared, 1.0, 1e-12),
+            "exact power law should have unit R-squared");
+    require(fit.pointCount == 7 && fit.minimumRadius == 2.0 &&
+            fit.maximumRadius == 8.0,
+            "mass-radius fit did not preserve its declared fit window");
+
+    bool rejected = false;
+    try {
+        (void)mc3d::fitMassRadiusPowerLaw({1.0, 2.0, 3.0},
+                                          {1.0, 0.0, 3.0}, 1.0, 3.0);
+    } catch (const std::invalid_argument&) {
+        rejected = true;
+    }
+    require(rejected, "mass-radius fit accepted a non-positive mass");
+}
+
 void testEmptyNetwork() {
     const mc3d::SimulationBox box(10.0);
     const auto obs = mc3d::analyseNetwork({}, box, 1.0);
@@ -193,6 +221,7 @@ int main() {
         testPeriodicCellListIsConservative();
         testCellListRandomizedAgainstBruteForce();
         testCellListRejectsExcessiveDenseGrid();
+        testMassRadiusPowerLawRegression();
         testEmptyNetwork();
     } catch (const std::exception& e) {
         std::cerr << "FAILED: " << e.what() << '\n';
