@@ -6,6 +6,10 @@
 #include <stdexcept>
 
 namespace mc3d {
+namespace {
+// Bound dense-grid storage; DLCA falls back to exact brute-force queries above this limit.
+constexpr std::size_t kMaximumDenseCells = 1'000'000;
+}
 
 PeriodicCellList::PeriodicCellList(const SimulationBox& box,
                                    const std::vector<Vec3>& positions,
@@ -28,8 +32,12 @@ PeriodicCellList::PeriodicCellList(const SimulationBox& box,
         std::numeric_limits<std::size_t>::max() / cellsPerDimension_) {
         throw std::length_error("Periodic cell-list allocation size overflows");
     }
+    const std::size_t totalCells = cellsPerDimension_ * cellsPerDimension_ * cellsPerDimension_;
+    if (totalCells > kMaximumDenseCells) {
+        throw std::length_error("Periodic cell-list grid exceeds the dense-cell memory limit");
+    }
     cellWidth_ = boxLength_ / static_cast<double>(cellsPerDimension_);
-    cells_.resize(cellsPerDimension_ * cellsPerDimension_ * cellsPerDimension_);
+    cells_.resize(totalCells);
     for (std::size_t i = 0; i < positions.size(); ++i) {
         const Vec3 p = box.wrap(positions[i]);
         cells_[flatten(coordinate(p.x), coordinate(p.y), coordinate(p.z))].push_back(i);
