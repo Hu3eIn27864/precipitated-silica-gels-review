@@ -257,3 +257,13 @@
 - Added geometry tests for periodic wrapping, minimum-image distances and invalid box dimensions, plus build instructions.
 - Updated the MC README and technical specification to distinguish committed source from unimplemented modules.
 - Verification limitation: GitHub repository cloning was unavailable in the execution environment, so compilation and CTest could not be run. No test-pass claim, simulation, calibration, or physical validation is made.
+
+
+## 2026-11-11 — C++ interaction and neighbour-list layer
+
+- Added a generic shifted/truncated Lennard-Jones 12-6 pair potential with hard-core overlap rejection and explicit reduced-unit parameters. It is a software test potential, not a calibrated silica force field.
+- Added brute-force total and single-particle local energy evaluators.
+- Added a periodic neighbour candidate list with cutoff-plus-skin radius, minimum-image distances, and a conservative rebuild validity check at maximum displacement greater than skin/2.
+- Added interaction tests for hard-core behaviour, cutoff continuity, zero-attraction limit, local-vs-full energy differences, neighbour-list agreement and invalid list geometry.
+- Registered the new source and test target with CMake and updated the technical specification and implementation status.
+- Verification status unchanged: repository cloning/network access is unavailable in the execution environment; C++ compilation and CTest have not been run. No simulation, calibration or physical validation is claimed.
