@@ -1,3 +1,4 @@
+import argparse
 import unittest
 
 from run_dlca_size_series import nonnegative_int, positive_int, scaled_box_length
@@ -15,7 +16,7 @@ class SizeSeriesRunnerTests(unittest.TestCase):
         self.assertEqual(nonnegative_int("0"), 0)
 
     def test_sizes_must_be_positive(self):
-        with self.assertRaises(Exception):
+        with self.assertRaises(argparse.ArgumentTypeError):
             positive_int("0")
 
 
