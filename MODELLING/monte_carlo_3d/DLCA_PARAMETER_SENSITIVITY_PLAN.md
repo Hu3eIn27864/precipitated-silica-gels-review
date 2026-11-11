@@ -168,3 +168,12 @@ aggregate exists. This follow-up is intended to test algorithmic sensitivity
 at a common displacement coordinate, not to prove physical robustness.
 Hosted validation of the core/CLI/tests is tracked in CI run #254; common-Q
 screen results are pending artifact inspection.
+
+
+### Hosted common-Q screen result — run #254 (2026-11-11)
+
+The paired common-Q screen (N=32, seeds 3000–3002, Q target 450, 50,000-attempt safety cap) completed successfully in [CI run #254](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43018481413). All 21 runs reached Q; none hit the attempt cap and none completed aggregation. Thus there are no valid mass-radius fits or completed-pair Rg/Df comparisons. Partial largest-component fractions remain progress descriptors only.
+
+Mean Q was within 0.05 of target for every configuration. Mean path length L, however, differed strongly with step size: approximately 4,321 at step 0.10, 2,159 at baseline step 0.20, and 1,542 at step 0.28. Equal cumulative squared displacement therefore does not equalise cumulative path length or trajectory history. The mean largest-component fractions were 0.104, 0.135 and 0.125, respectively; with three seeds and incomplete clusters these differences do not support a structural robustness claim.
+
+Contact-distance variants also changed the initial excluded-volume scale. The common-Q screen is an algorithmic diagnostic only; neither Q nor L is physical time. Preserve both, attempt count, target overshoot and stop reason in future comparisons. The complete summary and sample standard deviations are in TEST_RESULTS.md.
