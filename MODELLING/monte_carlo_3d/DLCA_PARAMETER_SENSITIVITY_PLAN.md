@@ -7,9 +7,9 @@ explicit algorithmic choices: contact distance, maximum rigid-cluster
 translation step, and the mass-mobility exponent. This is a numerical
 robustness study, not physical calibration of precipitated silica.
 
-## Frozen comparison design
+## Full comparison design
 
-Use the existing size-series runner with:
+The full proposed study uses the existing size-series runner with:
 
 - particle counts: 32, 64, 128;
 - reference box: 15.0 at N = 32, preserving N/L^3 across sizes;
@@ -18,6 +18,17 @@ Use the existing size-series runner with:
 - maximum attempts: 200,000 per run;
 - default values for all parameters not being varied;
 - a separate output directory/prefix for every parameter value.
+
+## Bounded CI screening subset
+
+For CI runtime, `run_dlca_parameter_sensitivity.py` executes a smaller
+screening subset: N = 32, three paired seeds starting at 3000, and 50,000
+attempts per seed. It runs the six non-baseline variants in the matrix below;
+the ordinary CI size-series pilot supplies the baseline at (1.0, 0.2, 1.0).
+This is a software/integration screen, not a substitute for the full matrix.
+The script writes `parameter_manifest.csv` and keeps each variant in a
+separate directory. CI then runs the fixed 2–5 contact-distance-unit ensemble
+summary and fit-window sensitivity audit for every variant.
 
 For a paired comparison, reuse the same base seed start for each parameter
 variant. The runner then maps the same seed block to each particle count in
