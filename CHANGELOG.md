@@ -203,3 +203,9 @@
 - Explicitly separated the permeability paper's partial-drying result from wet-gel syneresis; no direct transfer to industrial precipitated silica is assumed.
 - Corrected the LAMMPS toy-network generator to include periodic nearest-neighbour bonds across all box faces, avoiding an artificial unbonded boundary in the periodic simulation cell. The simple-cubic topology remains an acknowledged idealisation.
 - No simulations were executed and no physical silica parameters were fitted.
+
+
+## 2026-11-11 — Transport-model code checks
+
+- Added `MODELLING/transport_model/test_syneresis_1d.py` with checks for the initial condition, long-time limit, monotonicity and dimensionless scaling.
+- Documented how to run the tests. These verify mathematical/code behaviour only and do not constitute validation against experimental silica-gel data.
