@@ -517,3 +517,5 @@
 
 
 - 2026-11-11: Added 14 separate pressure-cell forced-syneresis fit records from Wilhelm & Kind (2015), Table 3, preserving pressure intervals, initial height and membrane boundary metadata. Documented why these records must not be pooled with the 2017 centrifugal series.
+
+- 2026-11-11: Added conditional finite-cylinder end-drainage sensitivity ratios for the 12 mm / approximately 3 mL natural-cylinder sample. The article's radial-flow assumption is retained as the reproduction baseline; axial drainage remains a sensitivity case until boundary evidence is confirmed.
