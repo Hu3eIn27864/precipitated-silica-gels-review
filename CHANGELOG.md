@@ -693,3 +693,13 @@
 - Upgraded literature record PSG-005 to full-text inspected and added natural/enforced response data to `target_system_mechanical_evidence.csv`.
 - Key result: natural endpoint shrinkage remains approximately 0.197–0.198 across 20–60 °C while τ decreases from 21.7 to 5.6 h. At 20 °C, forced shrinkage changes strongly with pressure (0.53 at 0.8 bar to 0.87 at 15.5 bar).
 - Preserved limitations: extrapolation from minimum 0.8 bar to natural Δp=0; endpoint prediction error up to 45%; no independent permeability or constrained modulus.
+
+
+## 2026-11-11 — Wilhelm/Kind overlap evidence refined
+
+- Rechecked the 2017 dissertation figure captions and methods citations against the 2014 and 2015 article records.
+- Confirmed direct reuse attribution for 2015 natural-syneresis plots and pressure-cell curves/tables in the dissertation.
+- Narrowed the 2014 link: the dissertation cites Wilhelm & Kind (2014) for the pyknometer apparatus/method; this citation alone does not prove the same raw measurements were reused.
+- Kept the 2014 article's 18-mm/~6-mL acid-gel natural-syneresis series distinct from the later 12-mm/~3-mL series unless point-level identity is established.
+- Marked exact 2014-to-2015 numerical overlap as unresolved; shared research lineage is not sufficient evidence of duplicate observations.
+- Corrected `LITERATURE/quantitative_overlap_audit_wilhelm.md` to distinguish direct dataset reuse, method lineage and unresolved overlap.
