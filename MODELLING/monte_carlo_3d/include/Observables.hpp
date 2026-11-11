@@ -14,6 +14,9 @@ struct ClusterObservables {
     double radiusOfGyration{0.0};
     double meanCoordination{0.0};
     bool periodicUnwrappingConsistent{true};
+    // Graph-unwrapped coordinates in component traversal order. Only use for
+    // spatial scaling when periodicUnwrappingConsistent is true.
+    std::vector<Vec3> unwrappedPositions;
 };
 
 struct NetworkObservables {
