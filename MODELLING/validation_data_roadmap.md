@@ -113,3 +113,14 @@ Current literature appears promising but exact, machine-readable conditions and 
 - Treat dissertations and companion articles as one research lineage when they reuse experiments.
 - Preserve raw reported values and units; never silently convert fitted characteristic times into measured elementary rate constants.
 - Record inaccessible full texts as a limitation; do not infer numerical data from abstracts.
+
+
+## 2026-11-11 refinement — What is actually reproducible from Scherer (1989)?
+
+A further source check identified Scherer & Swiatek (1989), “Measurement of permeability II. Silica gel,” *J. Non-Cryst. Solids* 113(2–3), 119–129, DOI 10.1016/0022-3093(89)90002-1. Its abstract describes pressure-gradient measurements in approximately 2 mm alkoxide-derived silica-gel sheets. It reports order-of-magnitude Carman–Kozeny agreement for a homogeneous acid-catalysed gel, higher-than-predicted permeability for an inhomogeneous base-catalysed gel, and an approximately 100-fold permeability decrease after partial drying.
+
+This adds a permeability-measurement comparator, but does not solve the data-access problem: the abstract gives no numerical permeability values or uncertainty. The material is alkoxide-derived, and the partial-drying observation is not a direct wet-syneresis permeability trajectory.
+
+**Important downgrade in benchmark status:** Scherer (1989) Parts I–II are presently a mechanistic/conceptual benchmark, not a fully reproducible numerical benchmark using accessible abstracts alone. The Part II abstract says independently measured permeability, modulus and viscosity were used, but the numerical tables, raw shrinkage series, exact material recipe and uncertainties remain unavailable. Do not claim numerical reproduction until these are retrieved.
+
+The first transport-model tests should therefore be mathematical verification (initial/long-time limits, dimensionless curve collapse, comparison with an independent numerical solution), followed by a literature-data reproduction only when sufficient original numerical data are available. Wilhelm & Kind (2015) remains the more direct precipitated-silica target dataset, but independent target-system permeability and modulus are still the main identifiability gap.
