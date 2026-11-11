@@ -126,6 +126,52 @@ void testDLCAReproducibilityAndNonOverlap() {
             "component count inconsistent with DLCA merge accounting");
 }
 
+
+void testDLCACommonDisplacementBudgetAndAttemptCap() {
+    const mc3d::SimulationBox box(12.0);
+    mc3d::DLCAConfig targetConfig;
+    targetConfig.particleCount = 12;
+    targetConfig.contactDistance = 1.0;
+    targetConfig.maximumComponentStep = 0.2;
+    targetConfig.maximumAttempts = 30000;
+    targetConfig.targetCumulativeSquaredTranslation = 1e-8;
+    mc3d::Random targetRandom(4321);
+    const auto targetResult =
+        mc3d::DLCA(box, targetConfig, targetRandom).generate();
+    require(targetResult.displacementBudgetReached,
+            "DLCA did not stop after reaching the cumulative displacement target");
+    require(!targetResult.attemptLimitReached,
+            "DLCA incorrectly reported the attempt cap after reaching the displacement target");
+    require(targetResult.attempts == 1,
+            "DLCA should check the displacement target after the first complete move");
+    require(targetResult.displacementBudgetOvershoot >= 0.0 &&
+            near(targetResult.displacementBudgetOvershoot,
+                 targetResult.cumulativeSquaredClusterTranslation - 1e-8),
+            "DLCA displacement-budget overshoot was not recorded");
+
+    mc3d::DLCAConfig cappedConfig = targetConfig;
+    cappedConfig.maximumAttempts = 1;
+    cappedConfig.targetCumulativeSquaredTranslation = 1e9;
+    mc3d::Random cappedRandom(4321);
+    const auto cappedResult =
+        mc3d::DLCA(box, cappedConfig, cappedRandom).generate();
+    require(!cappedResult.displacementBudgetReached &&
+            cappedResult.attemptLimitReached,
+            "DLCA did not report the hard attempt safety cap");
+    require(cappedResult.displacementBudgetOvershoot == 0.0,
+            "DLCA reported overshoot when the displacement target was not reached");
+
+    mc3d::DLCAConfig legacyConfig = targetConfig;
+    legacyConfig.targetCumulativeSquaredTranslation = 0.0;
+    legacyConfig.maximumAttempts = 1;
+    mc3d::Random legacyRandom(4321);
+    const auto legacyResult =
+        mc3d::DLCA(box, legacyConfig, legacyRandom).generate();
+    require(!legacyResult.displacementBudgetReached &&
+            legacyResult.attemptLimitReached,
+            "zero displacement target should preserve legacy fixed-attempt behaviour");
+}
+
 void testPeriodicSweptCollisionChecksNeighbouringImages() {
     // A particle starts just inside the positive half-box image boundary.
     // Moving in +x takes the nearest image from +4.99 to -3.01; checking
@@ -445,6 +491,7 @@ int main() {
         testPeriodicUnwrappingAndGraph();
         testPeriodicWindingIsFlagged();
         testDLCAReproducibilityAndNonOverlap();
+        testDLCACommonDisplacementBudgetAndAttemptCap();
         testPeriodicSweptCollisionChecksNeighbouringImages();
         testPeriodicSweptCollisionAgainstSampledTrajectories();
         testPeriodicCellListIsConservative();
