@@ -27,6 +27,23 @@ jobs:
         run: python3 -m unittest discover -s MODELLING/monte_carlo_3d/analysis -p 'test_*.py' -v
       - name: Run 1-D transport model tests
         run: python3 -m unittest discover -s MODELLING/transport_model -p 'test_*.py' -v
+      - name: Run syneresis curve leave-one-out sensitivity analysis
+        run: |
+          mkdir -p build/syneresis_sensitivity
+          python3 MODELLING/transport_model/leave_one_out_wilhelm_kind.py \
+            --input LITERATURE/wilhelm_kind_approximate_measurement_points.csv \
+            --summary-output build/syneresis_sensitivity/summary.csv \
+            --detail-output build/syneresis_sensitivity/detail.csv
+          python3 - <<'PY'
+          import csv
+          from pathlib import Path
+          summary = list(csv.DictReader(Path("build/syneresis_sensitivity/summary.csv").open()))
+          detail = list(csv.DictReader(Path("build/syneresis_sensitivity/detail.csv").open()))
+          assert len(summary) == 12, len(summary)
+          assert len(detail) == 164, len(detail)
+          assert all(row["data_status"] if "data_status" in row else row["figure"] for row in summary)
+          print(f"Validated {len(summary)} series and {len(detail)} leave-one-out fits.")
+          PY
       - name: Record pilot provenance
         run: |
           mkdir -p build/mc3d/pilot
