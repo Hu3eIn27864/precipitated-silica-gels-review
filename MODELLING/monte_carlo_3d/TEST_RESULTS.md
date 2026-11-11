@@ -194,3 +194,6 @@ The seed-level analyser additionally rejects impossible largest-component counts
 
  
 The size-series runner now allocates disjoint consecutive seed blocks across particle counts and checks the combined seed range for uint64 overflow. Its CLI regression test verifies that separate system sizes receive non-overlapping seed ranges. This design supports unpaired comparisons across sizes; it does not implement paired-seed statistics.
+
+ 
+The analyser regression suite now includes an explicit mismatch test for the fit point count versus the source mass-radius grid. Its multi-window fixture also uses the actual number of radii in the broad interval. Local targeted checks of the validation logic (fixed-window extraction, completion-size invariant, and fit-point provenance) passed 3/3; this was a focused reconstructed harness, not execution of the committed repository test module. The full committed Python and C++ suites remain unverified pending CI or a repository checkout.
