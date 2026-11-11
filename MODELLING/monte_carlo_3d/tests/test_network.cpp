@@ -214,6 +214,35 @@ void testMassRadiusPowerLawRegression() {
     require(rejected, "mass-radius fit accepted a non-positive mass");
 }
 
+void testMassRadiusFitWindowSensitivityScan() {
+    const std::vector<double> radii{1, 2, 3, 4, 5, 6, 7, 8, 9};
+    std::vector<double> exactMass;
+    for (const double radius : radii)
+        exactMass.push_back(2.4 * std::pow(radius, 1.4));
+    const auto stable = mc3d::scanMassRadiusFitWindows(radii, exactMass, 3);
+    require(stable.size() == 28,
+            "fit-window scan did not enumerate every contiguous window");
+    for (const auto& fit : stable) {
+        require(std::abs(fit.exponent - 1.4) < 1e-10,
+                "exact power law changed exponent across fit windows");
+    }
+
+    std::vector<double> crossoverMass;
+    for (const double radius : radii) {
+        crossoverMass.push_back(radius <= 4.0 ? radius : 4.0 * std::pow(radius / 4.0, 2.0));
+    }
+    const auto sensitive =
+        mc3d::scanMassRadiusFitWindows(radii, crossoverMass, 3);
+    double minimumExponent = sensitive.front().exponent;
+    double maximumExponent = sensitive.front().exponent;
+    for (const auto& fit : sensitive) {
+        minimumExponent = std::min(minimumExponent, fit.exponent);
+        maximumExponent = std::max(maximumExponent, fit.exponent);
+    }
+    require(maximumExponent - minimumExponent > 0.2,
+            "fit-window scan failed to reveal a constructed crossover");
+}
+
 void testMassRadiusRecoversOneDimensionalScaling() {
     std::vector<mc3d::Vec3> line;
     line.reserve(1001);
@@ -284,6 +313,7 @@ int main() {
         testCellListRandomizedAgainstBruteForce();
         testCellListRejectsExcessiveDenseGrid();
         testMassRadiusPowerLawRegression();
+        testMassRadiusFitWindowSensitivityScan();
         testMassRadiusCurveGeneration();
         testMassRadiusRecoversOneDimensionalScaling();
         testEmptyNetwork();
