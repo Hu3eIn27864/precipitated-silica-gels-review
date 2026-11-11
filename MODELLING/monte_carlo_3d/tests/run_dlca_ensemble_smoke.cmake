@@ -3,7 +3,7 @@ if(NOT DEFINED MC3D_EXECUTABLE OR NOT DEFINED OUTPUT_PREFIX)
 endif()
 
 execute_process(
-    COMMAND "${MC3D_EXECUTABLE}" 12 12.0 12345 1 30000 "${OUTPUT_PREFIX}" 1.0 0.15 0.5
+    COMMAND "${MC3D_EXECUTABLE}" 12 12.0 12345 1 30000 "${OUTPUT_PREFIX}" 1.0 0.15 0.5 1e-8
     RESULT_VARIABLE run_result
     OUTPUT_VARIABLE run_stdout
     ERROR_VARIABLE run_stderr
@@ -43,6 +43,6 @@ if(NOT run_line_count EQUAL 2)
     message(FATAL_ERROR "Expected one run-summary data row, found ${run_line_count} total lines")
 endif()
 list(GET run_lines 1 run_row)
-if(NOT run_row MATCHES "^12345,[01],[0-9]+,[0-9]+,[0-9]+,[0-9]+,.*,[01],1,0\\.14999999999999999,0\\.5,[0-9.eE+-]+,[0-9.eE+-]+,0,0,0,0$")
+if(NOT run_row MATCHES "^12345,[01],[0-9]+,[0-9]+,[0-9]+,[0-9]+,.*,[01],1,0\\.14999999999999999,0\\.5,[0-9.eE+-]+,[0-9.eE+-]+,1e-08,1,0,[0-9.eE+-]+$")
     message(FATAL_ERROR "Malformed run-summary row: '${run_row}'")
 endif()
