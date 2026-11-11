@@ -171,3 +171,12 @@ The original 1024-pixel publisher image assets for Wilhelm & Kind (2015) Figures
 The KIT repository lists the article as Open Access, but its PDF retrieval endpoint exceeds the current 13 MB content limit. The MDPI supplementary-material endpoint was not directly readable in this pass. Marker-level digitisation remains pending: no plotted point has been added to the data tables yet. Figure 10's first 30 minutes at 20 °C before temperature adjustment must be represented explicitly in any time-series transcription.
 
 The Ragueh Table 1 initial slurry composition has also been transcribed separately to `LITERATURE/ragueh_2015_initial_slurry_data.csv`, preserving the same printed S1/S3/S3 label ambiguity (dry mass fractions 0.053/0.053/0.034 g/g solution; initial silica volume fractions 0.020/0.018/0.011). The likely S2 identity of the middle row is provisional only.
+
+
+## 2026-11-11 — Figure digitisation pipeline prepared; marker extraction pending
+
+A panel-specific pixel calibration and uncertainty-propagation utility has been added at `MODELLING/transport_model/digitise_syneresis_markers.py`, with test cases and blank CSV templates. It supports linear and log10 axes, requires separate calibration for each panel, and does not automatically identify markers. The operator records visible experimental marker centres; fitted lines remain a separate class.
+
+The KITopen full text is now available for inspection. It confirms Figure 8 on printed page 2511 and Figure 10 on page 2513. Figure 8 plotted points are averages of three samples. For Figure 10, the Methods section specifies a 20 min hold at 20 °C before transfer into the thermostated cell; the discussion's reference to the first 30 min concerns similarity of the curves and is not the hold duration.
+
+No pixel-level observations have yet been extracted. The repository PDF (13 MB) exceeds the screenshot retrieval limit in this environment and direct PNG retrieval is failing. See `LITERATURE/wilhelm_kind_figure_digitisation_status.md`. Digitisation must wait for the original figure images to be available in the working session.
