@@ -12,6 +12,7 @@ add_library(mc3d_core
     src/DLCA.cpp
     src/Observables.cpp
     src/PeriodicCellList.cpp
+    src/PeriodicSweptCollision.cpp
     src/FractalDimension.cpp
     src/MassRadius.cpp
 )
