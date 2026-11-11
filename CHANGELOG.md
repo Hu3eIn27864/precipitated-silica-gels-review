@@ -743,3 +743,10 @@
 - Added a two-layer 1-D transport test with a mobility discontinuity at x/L = 0.37, deliberately not aligned to the cell grid.
 - Compares coarse-grid mean pressure against a finer-grid numerical reference and requires decreasing error under refinement; the fine-grid reference is not an exact analytical solution.
 - This checks sensitivity to representing a material interface, not a silica-gel property or physical constitutive law. Hosted CI result is pending.
+
+
+## 2026-11-11 — Common half-shrinkage quantile added to pressure-cell comparison
+
+- Added derived t50 = τ(ln 2)^(1/n) for four approximate 2014/2015 acid pressure matches in the comparison CSV and evidence note.
+- The transformed values imply t50 ratios of about 2.20–2.75 (2014/2015), similar to or somewhat larger than the τ ratios.
+- This is algebraic standardisation of published fit summaries only; pressure is not exactly matched and no raw-curve refit, physical rate-change claim, permeability inference or membrane-effect attribution is made.
