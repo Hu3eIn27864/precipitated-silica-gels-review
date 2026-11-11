@@ -1,7 +1,7 @@
 # 3-D off-lattice Monte Carlo — technical specification (V1)
 
 ## Status and scope
-**Specification only.** No C++ implementation, production run, calibration, or experimental validation is claimed. V1 is a structural model of a pre-formed 3-D fractal-like aggregate, not a physical syneresis, pore-drainage, or chemistry-resolved silica model.
+**Specification plus partial software scaffold.** Foundational C++17 geometry/build files and geometry tests have been committed. They have not yet been compiled or executed in this environment. No production run, calibration, or experimental validation is claimed. V1 is a structural model of a pre-formed 3-D fractal-like aggregate, not a physical syneresis, pore-drainage, or chemistry-resolved silica model.
 
 ### Falsifiable V1 question
 At fixed particle number, particle diameter, thermal-energy scale, and initial aggregate, how do dimensionless attraction strength and move amplitude affect reversible compactness, coordination statistics, and aggregate structure? Kinetic detachment and persistent contacts are a separate V2 question.
