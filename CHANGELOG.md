@@ -80,3 +80,11 @@
 - Added `LITERATURE/source_assessments_batch_08.md`; the assessment is deliberately abstract-level and does not infer the direction or magnitude of property changes.
 - Extended the claim-evidence matrix with C16 as a provisional bridge from process history to final powder properties, not as direct evidence for wet-gel syneresis.
 - Database now contains 30 records; CSV row/column validation is pending an independent structural check.
+
+## 2026-11-11 — Expanded publisher-preview appraisal: Quang and Tognonvi
+
+- Reassessed PSG-030 using the expanded ScienceDirect publisher preview. The reported direction of the pilot-scale endpoint trends is now available: BET surface area and pore volume decrease with increasing pre-gel interval Δt and reaction temperature; pore size shows no clear trend. Nitrogen adsorption–desorption, FE-SEM and FE-STEM are reported. Full article remains uninspected.
+- Updated PSG-030 assessment and database record; explicitly separated measured final-powder trends from the authors' percolation/packing interpretation and from wet-gel syneresis, which was not measured.
+- Reassessed PSG-028 and PSG-029 using expanded publisher previews. Added the cation-specific qualification for lithium-silicate gel ripening and the reported SAXS/FTIR/chemical-analysis methods and Si7-type species in concentrated basic sodium silicate.
+- Updated source assessments and claim-evidence matrix; no claims transfer these basic HCl-acidified silicate systems directly to industrial sulfuric-acid precipitated silica.
+- Database remains at 30 records; structural validation to be rerun after this batch.
