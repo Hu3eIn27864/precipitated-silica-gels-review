@@ -338,3 +338,6 @@
 - Registered the new C++ source with CMake and added an analytic three-particle test, rigid-translation invariance, and invalid-radius rejection.
 - The committed estimator source passed an isolated C++17 GCC ASan/UBSan analytic harness. This is not a full CMake/CTest result; the complete network test target remains unverified.
 - Runtime is O(N² N_r); no large-system performance claim, fitted fractal dimension, or silica validation is made.
+
+
+- Follow-up integration: network observables now retain graph-unwrapped component coordinates, and the network test source passes a periodic-boundary cluster directly into the mass-radius estimator. Winding components remain explicitly flagged and must be excluded from fractal fitting. This integration assertion is committed but awaits the full CMake/CTest run.
