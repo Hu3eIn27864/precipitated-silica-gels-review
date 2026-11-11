@@ -243,6 +243,41 @@ void testMassRadiusFitWindowSensitivityScan() {
             "fit-window scan failed to reveal a constructed crossover");
 }
 
+void testMassRadiusCompactAndBranchedReferenceGeometries() {
+    // Finite, fully occupied cubic lattice: boundary effects lower the
+    // apparent exponent below three, but it should remain distinctly compact.
+    std::vector<mc3d::Vec3> cube;
+    for (int x = 0; x < 9; ++x)
+        for (int y = 0; y < 9; ++y)
+            for (int z = 0; z < 9; ++z)
+                cube.push_back({static_cast<double>(x), static_cast<double>(y),
+                                static_cast<double>(z)});
+    const std::vector<double> cubeRadii{1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5};
+    const auto cubeCurve = mc3d::calculateMassRadiusCurve(cube, cubeRadii);
+    std::vector<double> cubeMass;
+    for (const auto& point : cubeCurve) cubeMass.push_back(point.meanEnclosedMass);
+    const auto cubeFit = mc3d::fitMassRadiusPowerLaw(cubeRadii, cubeMass, 1.0, 4.5);
+    require(cubeFit.exponent > 2.0 && cubeFit.exponent < 3.0,
+            "finite compact cubic reference did not show compact scaling");
+
+    // Three intersecting one-dimensional arms form a simple branched reference.
+    // This is a geometry check, not a claim that the object is a fractal.
+    std::vector<mc3d::Vec3> branch;
+    for (int q = -100; q <= 100; ++q) {
+        branch.push_back({static_cast<double>(q), 0.0, 0.0});
+        if (q != 0) branch.push_back({0.0, static_cast<double>(q), 0.0});
+        if (q != 0) branch.push_back({0.0, 0.0, static_cast<double>(q)});
+    }
+    const std::vector<double> branchRadii{5.0, 8.0, 12.0, 16.0, 20.0};
+    const auto branchCurve = mc3d::calculateMassRadiusCurve(branch, branchRadii);
+    std::vector<double> branchMass;
+    for (const auto& point : branchCurve) branchMass.push_back(point.meanEnclosedMass);
+    const auto branchFit =
+        mc3d::fitMassRadiusPowerLaw(branchRadii, branchMass, 5.0, 20.0);
+    require(branchFit.exponent > 1.0 && branchFit.exponent < 1.3,
+            "branched reference geometry produced an unexpected mass-radius slope");
+}
+
 void testMassRadiusRecoversOneDimensionalScaling() {
     std::vector<mc3d::Vec3> line;
     line.reserve(1001);
@@ -316,6 +351,7 @@ int main() {
         testMassRadiusFitWindowSensitivityScan();
         testMassRadiusCurveGeneration();
         testMassRadiusRecoversOneDimensionalScaling();
+        testMassRadiusCompactAndBranchedReferenceGeometries();
         testEmptyNetwork();
     } catch (const std::exception& e) {
         std::cerr << "FAILED: " << e.what() << '\n';
