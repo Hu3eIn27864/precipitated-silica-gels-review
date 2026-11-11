@@ -79,9 +79,9 @@ Responsibilities: SimulationBox handles wrapping/minimum-image displacement; Pai
 
 Use a dependency-free documented key-value configuration parser initially. Do not silently add external dependencies. Large generated trajectories remain local and are not committed.
 
-### Implemented interaction-layer contract
+### Implemented V1 kernel and interaction-layer contract
 
-The current scaffold implements a shifted/truncated 12-6 Lennard-Jones potential with a hard-core overlap sentinel (+infinity), brute-force total/local energy functions, and a periodic neighbour candidate list. The list stores pairs within `cutoff + skin`; it is considered valid only while every particle has moved no more than `skin/2` from its reference position (minimum-image displacement). The list radius must be smaller than half the cubic box length. The interaction tests compare neighbour-list local energy against brute force and compare local energy differences with full-system energy differences. These tests are committed but have not yet been compiled or executed.
+The current scaffold implements a reversible single-particle Metropolis kernel: each sweep makes N attempted moves, selects a particle uniformly, proposes a symmetric component-wise uniform translation, rejects hard-core overlap, and applies the reduced-unit Boltzmann acceptance rule with kBT=1. The kernel currently evaluates local energies by brute force to provide a transparent correctness baseline. A shifted/truncated 12-6 Lennard-Jones potential with a hard-core overlap sentinel (+infinity), brute-force total/local energy functions, and a periodic neighbour candidate list. The list stores pairs within `cutoff + skin`; it is considered valid only while every particle has moved no more than `skin/2` from its reference position (minimum-image displacement). The list radius must be smaller than half the cubic box length. The interaction tests compare neighbour-list local energy against brute force and compare local energy differences with full-system energy differences. Seeded reproducibility and sweep-count tests are also included. These tests are committed but have not yet been compiled or executed.
 
 ## 11. Required tests
 1. Periodic wrapping below zero and above L. (implemented; execution pending)
