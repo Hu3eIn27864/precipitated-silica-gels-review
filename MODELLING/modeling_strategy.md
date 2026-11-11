@@ -97,3 +97,61 @@ The preferred sequence is:
 5. expand to coupled or molecular methods only if the simpler model demonstrably fails.
 
 A short, transparent sensitivity study is preferable to an elaborate but under-parameterised multiphysics simulation.
+
+
+## Level 2 — Three-dimensional off-lattice Monte Carlo (C++): network reorganisation
+
+This is now the preferred microscopic modelling candidate, motivated by the fractal-aggregate reorganisation mechanisms discussed by Schlomach & Kind (2007) and the 1000-primary-particle model system used by Sahabi & Kind (2011). It is a proposed extension, not a reproduction of either published implementation.
+
+### Target question
+
+For a pre-formed, three-dimensional fractal-like silica aggregate, how do contact coordination, effective attraction, and the probability of irreversible contact formation control structural compaction under a clearly specified consolidation protocol?
+
+The initial model addresses **structural reorganisation**, not a complete physical simulation of syneresis. It will not claim to calculate pore-liquid drainage, pore pressure, or laboratory time unless a separate transport model and defensible kinetic calibration are added.
+
+### Initial representation
+
+- Off-lattice 3-D primary-particle centres with periodic boundaries; avoid a simple-cubic lattice as the physical starting structure.
+- Generate or import a connected fractal-like aggregate and document its construction method, target fractal dimension, particle count, and radius of gyration.
+- Start with a tractable system around 10^3 particles for comparison with the published Sahabi–Kind model scale; perform finite-size checks before drawing general conclusions.
+- Use a transparent effective interaction model: a short-range attractive contact term and, only if justified, a repulsive contribution. Parameters are dimensionless or explicitly labelled assumed until independently sourced/calibrated.
+
+### Monte Carlo moves and acceptance
+
+1. Local particle translation / configurational diffusion.
+2. Contact rearrangement (including rolling-like changes represented by particle translations; do not imply resolved surface rolling).
+3. Detachment attempts with a coordination-dependent probability, following the qualitative mechanism reported by Schlomach & Kind (2007).
+4. Reattachment / contact formation, with a separately defined reversible or persistent-contact rule.
+5. Optional imposed compaction only after the statistical ensemble and protocol are stated (e.g. reduced accessible volume or an explicit external bias). A box contraction is not equivalent to solvent drainage.
+
+For equilibrium-style moves, use a stated energy function and Metropolis acceptance. For irreversible or rate-based moves, specify transition probabilities separately; do not mix arbitrary kinetic rules into an equilibrium Boltzmann sampler without explaining the resulting ensemble.
+
+### Observables
+
+- Radius of gyration and estimated fractal dimension, with the fitted length-scale interval reported.
+- Coordination-number distribution and mean coordination.
+- Number of contacts, contact persistence, and fraction of persistent contacts.
+- Aggregate compactness / occupied volume fraction and void statistics (with estimator definition).
+- Particle displacement and local rearrangement statistics.
+- Cluster connectivity and, where meaningful, pair-correlation / structure-factor measures.
+
+### Verification and validation sequence
+
+1. Unit tests for periodic distances, neighbour lists, energy changes, and acceptance probabilities.
+2. Limiting-case checks: zero attraction, no detachment, and no compaction should behave as defined by the algorithm.
+3. Reproducibility with fixed random seeds and independent-seed ensembles.
+4. Finite-size, move-size, and neighbour-cutoff sensitivity.
+5. Compare only like-for-like trends with the published Schlomach–Kind and Sahabi–Kind results; the exact original MC implementation and full details are not currently available, so do not claim a faithful reproduction.
+6. Compare structural trends with experimental fractal/aggregation evidence only where material route and length scale are compatible.
+
+### Physical-time warning
+
+A Monte Carlo sweep is an algorithmic sampling unit, not automatically a second, minute, or laboratory ageing time. Mapping MC steps to physical time requires a kinetic formulation and calibration against independent time-resolved measurements. Until then, report step number and structural observables, not predicted syneresis times.
+
+### Language and implementation
+
+Implement the first version in standard C++ (C++17 or newer), with a small dependency-free core, deterministic seed option, text/CSV output, and separate configuration file. Keep the model and analysis scripts independent. Python may be used for plotting and statistical post-processing, but not as a required runtime dependency for the simulation core.
+
+### Explicit exclusions in version 1
+
+No explicit water molecules, ionic speciation, pH-dependent surface charge, silanol condensation chemistry, hydrodynamic interactions, Darcy flow, or pore-pressure field. Those require additional evidence and a separate model layer. The existing 1-D transport benchmark remains a complementary continuum reference; it should not be artificially coupled to the MC code in the first implementation.
