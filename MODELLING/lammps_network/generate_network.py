@@ -26,8 +26,10 @@ def generate(n: int, spacing: float, jitter_fraction: float,
         for iy in range(n):
             for iz in range(n):
                 a = atom_id[(ix, iy, iz)]
-                for nb in ((ix+1, iy, iz), (ix, iy+1, iz), (ix, iy, iz+1)):
-                    if max(nb) < n and rng.random() <= bond_probability:
+                for nb in (((ix+1) % n, iy, iz),
+                           (ix, (iy+1) % n, iz),
+                           (ix, iy, (iz+1) % n)):
+                    if rng.random() <= bond_probability:
                         bonds.append((len(bonds)+1, 1, a, atom_id[nb]))
     box = n * spacing
     with output.open("w", encoding="utf-8") as h:
@@ -54,8 +56,8 @@ def main() -> None:
     p.add_argument("--seed", type=int, default=20261111)
     p.add_argument("--output", type=Path, default=Path("network.data"))
     a = p.parse_args()
-    if a.n < 2 or a.spacing <= 0 or a.jitter < 0:
-        p.error("n >= 2, spacing > 0, jitter >= 0 required")
+    if a.n < 3 or a.spacing <= 0 or a.jitter < 0:
+        p.error("n >= 3, spacing > 0, jitter >= 0 required")
     if not 0 < a.bond_probability <= 1:
         p.error("bond-probability must be in (0,1]")
     generate(a.n, a.spacing, a.jitter, a.bond_probability, a.seed, a.output)
