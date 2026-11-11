@@ -78,3 +78,7 @@ For each N report: requested seeds, completed seeds, completion fraction, attemp
 ## Decision rule
 
 If completion, unwrapping, or fit-window robustness is inadequate, do not proceed to a silica parameter fit. The next task is to diagnose the numerical/algorithmic limitation, not to increase model complexity or claim physical mechanisms.
+
+A predeclared one-factor-at-a-time bracket for contact distance, maximum
+component step and mobility exponent is documented in
+[DLCA_PARAMETER_SENSITIVITY_PLAN.md](DLCA_PARAMETER_SENSITIVITY_PLAN.md).
