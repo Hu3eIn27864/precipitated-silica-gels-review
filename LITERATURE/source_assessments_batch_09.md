@@ -26,7 +26,7 @@
 | Microwave | 437 | 10.21 | 1.27 | 84.52 | 0.294 |
 | Spray | 679 | 17.41 | 1.96 | 88.16 | 0.225 |
 
-The article states that results are based on three sets of experiments. It also reports a progressive increase in microwave-dried sample surface area and pore volume over 10–30 min (BET area 426→437 m²/g; pore volume 1.21→1.27 cm³/g).
+The article states that results are based on three sets of experiments. It also reports a progressive increase in microwave-dried sample surface area and pore volume over 10–30 min (BET area 426→437 m²/g; pore volume 1.21→1.27 cm³/g). However, the explicit RMS/replicate statement is attached to porosity, packing density and absorption measurements; uncertainty for the nitrogen-sorption values is not clearly tabulated.
 
 **Interpretation reported by the authors:** Oven drying produces greater drying shrinkage and denser aggregates; spray drying is interpreted as reducing shrinkage and preserving a more open pore structure. Capillary forces during water removal are invoked to explain the stronger shrinkage during conventional drying.
 
@@ -34,7 +34,7 @@ The article states that results are based on three sets of experiments. It also 
 
 **Does not establish:** This study does not quantify natural syneresis or wet-gel consolidation before filtration/drying. It does not compare distinct precipitation histories; it compares drying routes applied to a prepared wet-gel slurry. It therefore demonstrates a downstream confounder, not the mechanism behind Quang et al.'s gelation-time effect.
 
-**Methodological caveats:** Table 1 labels the surface-area column “BJH method”, although the text refers to BET surface area and Table 2 explicitly labels its surface-area values as BET. Treat the Table 1 area-method label as ambiguous pending confirmation from raw data or author clarification. The paper reports three experimental sets, but the accessible text does not establish that every adsorption-derived metric has the same replicate/uncertainty treatment. Drying treatments also differ in thermal history and equipment scale. The authors' capillary-shrinkage explanation is plausible but not a direct in situ measurement of pore-scale stresses.
+**Methodological caveats:** Table 1 labels both the surface-area and pore-volume columns “BJH method”. In the Methods (Section 2.4), however, the authors state that specific surface area is measured by BET, while BJH/desorption data are used for total pore volume and pore-size distributions; Table 2 also labels surface area as BET. The Table 1 surface-area label is therefore internally inconsistent and is likely a table-label error, but should be reported as such rather than silently corrected. The paper reports three experimental sets; the explicit RMS error statement covers porosity, packing density and absorption metrics, while uncertainty for the nitrogen-sorption values is not clearly reported. Drying treatments also differ in thermal history and equipment scale. The authors' capillary-shrinkage explanation is plausible but is not a direct in situ measurement of pore-scale stresses.
 
 **Review role:** Core evidence for a distinct final-processing stage: wet-gel structure → filtration/wet cake → drying-induced shrinkage/restructuring → final powder texture. **Class A for the demonstrated sensitivity of final powder texture to drying protocol; OBS+CALC.**
 
