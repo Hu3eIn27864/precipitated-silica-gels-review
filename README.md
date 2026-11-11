@@ -43,3 +43,8 @@ A/B/C/D are provisional until the source has been checked at the appropriate dep
 
 ## Current status
 The literature database and claim–evidence synthesis are under active development, with source-family overlap and access status tracked explicitly. The optional modelling workstream has been defined; first executable 1-D transport and coarse-grained LAMMPS prototypes are available as non-predictive baselines. No production simulation has been calibrated or run, and no model parameter is yet claimed to represent measured silica properties.
+
+
+## Current parallel research plan
+
+The next gated work packages for DLCA robustness, radial transport verification, literature validation, and manuscript synthesis are maintained in [MODELLING/NEXT_STEPS_PARALLEL_PLAN.md](MODELLING/NEXT_STEPS_PARALLEL_PLAN.md). This plan separates software checks from physical validation and records explicit stop rules.
