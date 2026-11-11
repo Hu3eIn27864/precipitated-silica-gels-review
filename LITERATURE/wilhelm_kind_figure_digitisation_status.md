@@ -50,3 +50,12 @@ Both original 1536-pixel-wide publisher PNGs were supplied in the working conver
 The axis-calibration CSV now contains initial pixel/value correspondences for all four panels, using multiple major ticks per axis. These coordinates are an initial image-coordinate calibration, not yet a final calibration certificate: the digitisation pass must inspect residuals against the tick marks and refine any pixel positions before accepting the calibrated marker data.
 
 No experimental marker coordinates have yet been committed. This is deliberate: the marker symbols overlap one another and, in several regions, the fitted curves; automatic colour-component detection alone merges markers with lines and would create false precision. The next extraction step must therefore use manually reviewed marker centres (with image-coordinate overlays or equivalent review) and keep error-bar extents in Figure 8/10 separate from centre-location uncertainty.
+
+
+### Panel identity and calibration correction
+
+The supplied assets establish the correct figure/time-axis mapping unambiguously:
+- Figure 8 (file ending `g008`): cylinders; 0–250 h; relative shrinkage 0–0.6.
+- Figure 10 (file ending `g010`): droplets; 0–8 h; relative shrinkage 0–1.0.
+
+The initial calibration coordinates were refined after inspecting the actual 1536 × 591/594 pixel images. The CSV now records the revised major-tick coordinates for all four panels. These are image-coordinate estimates from the raster and remain subject to residual checks in the calibration script before any point data are released.
