@@ -197,3 +197,7 @@ The size-series runner now allocates disjoint consecutive seed blocks across par
 
  
 The analyser regression suite now includes an explicit mismatch test for the fit point count versus the source mass-radius grid. Its multi-window fixture also uses the actual number of radii in the broad interval. Local targeted checks of the validation logic (fixed-window extraction, completion-size invariant, and fit-point provenance) passed 3/3; this was a focused reconstructed harness, not execution of the committed repository test module. The full committed Python and C++ suites remain unverified pending CI or a repository checkout.
+
+## Run-manifest provenance checks (2026-11-11)
+
+The ensemble analyzer cross-checks all mass-radius observations and selected fit rows against the run-summary manifest. It rejects observations for unknown seeds, mass-radius data attached to incomplete or periodically ambiguous runs, and selected fit rows without a matching completed and consistently unwrapped run. This prevents derived rows from being silently omitted from seed-level statistics. Regression tests cover orphaned fit seeds and mass-radius data attached to unfinished runs. Full repository CI remains unverified.
