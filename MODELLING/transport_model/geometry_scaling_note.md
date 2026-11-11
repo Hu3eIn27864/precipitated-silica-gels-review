@@ -42,4 +42,10 @@ Do not calibrate one universal cv to all cylinder and droplet time constants. Th
 - test whether a common material transport parameter can explain both geometries after accounting for sample preparation and temperature history;
 - report model discrepancy and parameter identifiability, rather than forcing a common coefficient.
 
-The present 1-D slab code remains a mathematical baseline only. A cylindrical or spherical implementation should be added only after the drainage geometry is sufficiently constrained.
+The present 1-D slab code remains a mathematical baseline only. A small
+standard-library helper (`geometry_scaling.py`) now implements the ideal
+first-mode conversion for infinite-cylinder radial drainage and spherical
+radial drainage, with inverse and radius-squared scaling tests. It is not a
+full transient radial solution. A geometry-resolved transient solver should
+be added only after the drainage geometry and boundary conditions are
+sufficiently constrained.
