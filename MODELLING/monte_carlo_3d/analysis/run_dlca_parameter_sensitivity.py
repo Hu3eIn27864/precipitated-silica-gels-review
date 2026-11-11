@@ -20,6 +20,11 @@ VARIANTS = (
 )
 
 
+def validate_target_q(value: float) -> None:
+    if not math.isfinite(value) or value < 0.0:
+        raise ValueError("target Q must be finite and >= 0")
+
+
 def validate_variant(contact: float, step: float, mobility: float) -> None:
     values = (contact, step, mobility)
     if not all(math.isfinite(x) for x in values):
@@ -39,6 +44,8 @@ def main() -> int:
     parser.add_argument("--max-attempts", type=int, default=50000)
     parser.add_argument("--particle-count", type=int, default=32)
     parser.add_argument("--reference-box", type=float, default=15.0)
+    parser.add_argument("--target-q", type=float, default=0.0,
+                        help="common cumulative squared realized-translation target; 0 disables it")
     args = parser.parse_args()
 
     if not args.executable.is_file():
@@ -47,6 +54,10 @@ def main() -> int:
         parser.error("seed start must be >= 0; seed count and attempts must be > 0")
     if args.particle_count <= 0 or not math.isfinite(args.reference_box) or args.reference_box <= 0:
         parser.error("particle count and reference box must be positive")
+    try:
+        validate_target_q(args.target_q)
+    except ValueError as exc:
+        parser.error(str(exc))
 
     runner = Path(__file__).with_name("run_dlca_size_series.py")
     args.output_dir.mkdir(parents=True, exist_ok=True)
@@ -55,7 +66,7 @@ def main() -> int:
         writer = csv.writer(handle)
         writer.writerow(["variant", "particle_count", "box_length", "seed_start",
                          "seed_count", "maximum_attempts", "contact_distance",
-                         "maximum_component_step", "mobility_exponent"])
+                         "maximum_component_step", "mobility_exponent", "target_q"])
         for name, contact, step, mobility in VARIANTS:
             validate_variant(contact, step, mobility)
             box = args.reference_box
@@ -76,10 +87,13 @@ def main() -> int:
                 "--maximum-component-step", str(step),
                 "--mobility-exponent", str(mobility),
             ]
+            if args.target_q > 0.0:
+                command.extend(["--target-q", str(args.target_q)])
             print(f"Variant {name}: {' '.join(command)}", flush=True)
             subprocess.run(command, check=True)
             writer.writerow([name, args.particle_count, box, args.seed_start,
-                             args.seed_count, args.max_attempts, contact, step, mobility])
+                             args.seed_count, args.max_attempts, contact, step, mobility,
+                             args.target_q])
             handle.flush()
     print(f"Completed requested matrix; manifest: {manifest}")
     print("No physical-time or silica-calibration interpretation is implied.")
