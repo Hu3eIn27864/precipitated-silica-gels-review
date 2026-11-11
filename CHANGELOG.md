@@ -329,3 +329,12 @@
 - Added synthetic exact-power-law recovery and invalid-input regression tests; registered the source in CMake.
 - Explicitly limited interpretation: the helper does not construct mass-radius data, choose a fit interval, resolve periodic unwrapping/finite-size effects, or prove a fractal scaling regime. No silica fractal dimension is claimed.
 - Full CMake/CTest execution remains pending.
+
+
+## 2026-11-11 — Mean enclosed mass-radius curve generator
+
+- Added `calculateMassRadiusCurve`, which computes the mean number of particles enclosed within each requested radius, averaging over all supplied particle centres and including the centre particle.
+- The API explicitly requires graph-unwrapped coordinates for one non-winding component; it does not silently perform periodic unwrapping or choose a scaling interval.
+- Registered the new C++ source with CMake and added an analytic three-particle test, rigid-translation invariance, and invalid-radius rejection.
+- The committed estimator source passed an isolated C++17 GCC ASan/UBSan analytic harness. This is not a full CMake/CTest result; the complete network test target remains unverified.
+- Runtime is O(N² N_r); no large-system performance claim, fitted fractal dimension, or silica validation is made.
