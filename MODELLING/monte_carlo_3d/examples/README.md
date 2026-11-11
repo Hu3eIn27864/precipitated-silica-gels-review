@@ -75,3 +75,35 @@ Run the standard-library unit tests with:
 ```bash
 python3 -m unittest discover -s analysis -p 'test_*.py' -v
 ```
+
+## Reproducible particle-number series
+
+The helper `analysis/run_dlca_size_series.py` runs the same seed range at several particle counts while scaling the cubic box as
+
+`L(N) = 15.0 × (N/32)^(1/3)`.
+
+This keeps the initial reduced number density (N/L^3) constant across sizes. For the reference case (N=32, L=15), the corresponding hard-sphere volume fraction at unit particle diameter is approximately 0.005. This is a deliberately dilute **reduced-unit numerical condition**, not a measured or calibrated silica-gel concentration.
+
+After building the executable, run:
+
+```bash
+python3 analysis/run_dlca_size_series.py \
+  --executable build/mc3d_dlca_ensemble \
+  --output-dir results/size_series \
+  --sizes 32 64 128 \
+  --seed-start 1000 --seed-count 5 \
+  --max-attempts 200000
+```
+
+Then analyse the resulting CSV files using the same fixed interval for all sizes:
+
+```bash
+python3 analysis/analyze_dlca_ensembles.py \
+  --system 32:results/size_series/n32 \
+  --system 64:results/size_series/n64 \
+  --system 128:results/size_series/n128 \
+  --fit-min 2 --fit-max 5 \
+  --output results/size_series/comparison
+```
+
+The interval 2–5 is an initial **diagnostic common interval** because it is represented in the driver's radius grid; it is not asserted to be a validated fractal scaling regime. Inspect the per-run curves and fit-window scans before interpreting it. The default five seeds are a pilot ensemble, not a basis for strong statistical inference. Increase seed count and attempt limits only after checking runtime and completion rates. The driver reports attempted cluster moves, not calibrated physical time.
