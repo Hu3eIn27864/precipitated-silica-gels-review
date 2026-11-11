@@ -57,7 +57,7 @@ class EnsembleAnalysisTests(unittest.TestCase):
                     # A second window for the same seed is deliberately ignored.
                     {"seed": 11, "fit_minimum_radius": 1.5, "fit_maximum_radius": 8,
                      "exponent": 1.9, "standard_error": 0.04,
-                     "r_squared": 0.98, "point_count": 8},
+                     "r_squared": 0.98, "point_count": 6},
                 ],
             )
             rows, summary = load_system(10, prefix, 2.0, 5.0)
@@ -94,6 +94,34 @@ class EnsembleAnalysisTests(unittest.TestCase):
             )
             with self.assertRaisesRegex(ValueError, "Completed run must contain all"):
                 load_system(4, prefix, 2.0, 5.0)
+
+    def test_fit_point_count_must_match_mass_radius_data(self):
+        with tempfile.TemporaryDirectory() as directory:
+            prefix = Path(directory) / "n4"
+            self.write_csv(
+                Path(str(prefix) + "_runs.csv"),
+                ["seed", "completed", "unwrapping_consistent",
+                 "largest_component_size", "largest_component_rg"],
+                [{"seed": 3, "completed": 1, "unwrapping_consistent": 1,
+                  "largest_component_size": 4, "largest_component_rg": 1.5}],
+            )
+            self.write_csv(
+                Path(str(prefix) + "_mass_radius.csv"),
+                ["seed", "particle_count", "radius", "mean_enclosed_mass"],
+                [{"seed": 3, "particle_count": 4, "radius": radius,
+                  "mean_enclosed_mass": mass}
+                 for radius, mass in [(2, 1.5), (3, 2.2), (4, 3.0)]],
+            )
+            self.write_csv(
+                Path(str(prefix) + "_fit_windows.csv"),
+                ["seed", "fit_minimum_radius", "fit_maximum_radius",
+                 "exponent", "r_squared", "standard_error", "point_count"],
+                [{"seed": 3, "fit_minimum_radius": 2, "fit_maximum_radius": 4,
+                  "exponent": 1.4, "r_squared": 0.98,
+                  "standard_error": 0.05, "point_count": 2}],
+            )
+            with self.assertRaisesRegex(ValueError, "Fit point count mismatch"):
+                load_system(4, prefix, 2.0, 4.0)
 
     def test_duplicate_run_seed_is_rejected(self):
         with tempfile.TemporaryDirectory() as directory:
