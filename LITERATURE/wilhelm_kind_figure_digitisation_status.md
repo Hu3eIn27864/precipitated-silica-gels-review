@@ -76,3 +76,12 @@ Die 164 Kurvenpunkte sind **KI-gestützte, ungeprüfte Näherungsablesungen**, k
 ### Verifikation der empirischen Fitfunktion
 
 Der Volltext gibt Gleichung (3) als (S(t)=A[1-\exp(-t/\tau)]) an. Für diese Funktion gilt exakt (t_{50}=\tau\ln 2). Die bisherige Umrechnung in `wilhelm_kind_t50_screening.csv` ist daher formal korrekt; die digitale Halbzeit bleibt wegen der ungeprüften Kurvenpunkte unsicher. Quelle: Wilhelm & Kind (2015), Gleichung (3), Abschnitt 4.1.
+
+
+### Original image review through publisher page (2026-11-11)
+
+The original 1024-pixel publisher PNGs for Figures 8 and 10 were opened directly through the MDPI article page. This is a visual source inspection only; the image files could not be downloaded into the code execution environment, so no new pixel-coordinate digitisation or uncertainty propagation was performed.
+
+For Figure 10b, the visible late experimental markers and plotted model curves are clearly above the base-catalysed Table 2 amplitudes (0.30/0.39/0.51). The previously supplied approximate maxima (about 0.51/0.67/0.86) are qualitatively consistent with the visible marker levels. Notably, the three base-catalysed Table 2 amplitudes repeat the Table 1 base-catalysed cylinder amplitudes exactly. This raises a plausible source-level table transcription/transfer error, but no erratum or author confirmation has been established.
+
+Preserve the table values as printed and the figure as separate evidence. Do not overwrite either. The 164 AI-assisted approximate points remain unverified; this visual check only weakens the hypothesis that the discrepancy must be caused by symbol misassignment. Figure 10b should now be flagged as a **publication-internal figure/table inconsistency candidate**, not simply as a digitisation outlier.
