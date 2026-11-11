@@ -379,3 +379,9 @@
 - Registered the smoke test as the fifth CTest entry; the existing GitHub Actions workflow will run it on the next matching push or pull request.
 - The smoke test deliberately checks the output contract rather than requiring stochastic aggregation completion or non-empty fit output.
 - Updated the MC3D overview, example instructions and test record to state the new verification boundary. No build or CI pass is claimed until the workflow completes.
+
+
+## 2026-11-11 — DLCA smoke-test row validation strengthened
+
+- Extended the end-to-end CMake smoke script to require exactly one run-summary data row for the requested seed and validate its basic metadata structure.
+- Re-ran the script locally against a temporary stand-in executable; the CMake harness passed. This does not substitute for building or running the actual C++ program.
