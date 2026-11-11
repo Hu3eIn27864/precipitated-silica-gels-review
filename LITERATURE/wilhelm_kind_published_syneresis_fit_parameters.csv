@@ -1,0 +1,13 @@
+figure,geometry,gel_type,temperature_C,maximum_relative_shrinkage,tau_h,source_table,notes
+8,cylinder,acidic,20,0.20,21.3,Table 1,Empirical single-exponential fit parameter
+8,cylinder,basic,20,0.30,50.1,Table 1,Empirical single-exponential fit parameter
+8,cylinder,acidic,40,0.20,11.7,Table 1,Empirical single-exponential fit parameter
+8,cylinder,basic,40,0.39,32.0,Table 1,Empirical single-exponential fit parameter
+8,cylinder,acidic,60,0.20,5.0,Table 1,Empirical single-exponential fit parameter
+8,cylinder,basic,60,0.51,27.5,Table 1,Empirical single-exponential fit parameter
+10,droplet,acidic,20,0.37,0.40,Table 2,Empirical single-exponential fit parameter
+10,droplet,basic,20,0.30,0.67,Table 2,Empirical single-exponential fit parameter
+10,droplet,acidic,40,0.41,0.64,Table 2,Empirical single-exponential fit parameter
+10,droplet,basic,40,0.39,0.57,Table 2,Empirical single-exponential fit parameter
+10,droplet,acidic,60,0.48,0.77,Table 2,Empirical single-exponential fit parameter
+10,droplet,basic,60,0.51,0.95,Table 2,Empirical single-exponential fit parameter
