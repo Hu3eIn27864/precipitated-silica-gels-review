@@ -146,8 +146,7 @@ These controls expose algorithmic assumptions; they do not make the DLCA
 generator a hydrodynamic or silica-calibrated model. Sensitivity comparisons
 should vary one parameter at a time initially, preserve common system sizes
 and analysis intervals, and report completion fractions as well as structural
-observables. Full compilation and execution of the updated driver remain
-pending.
+observables. The updated driver passed hosted build, CTest and bounded workflow execution in runs #220 and #234. The first sensitivity results are diagnostic only; see the plan for the displacement-clock limitation.
 
 ## Bounded DLCA parameter-sensitivity screen
 
@@ -163,3 +162,17 @@ N = 32 and 0/3 at N = 64 or 128; its N = 32 fit-window sensitivity was high.
 This bounded screen is not the full finite-size study and does not calibrate
 the model to silica. See
 [DLCA_PARAMETER_SENSITIVITY_PLAN.md](DLCA_PARAMETER_SENSITIVITY_PLAN.md).
+
+
+## Realized displacement diagnostics (hosted verification passed)
+
+The run-summary CSV now records the cumulative squared realized cluster
+translation and cumulative realized cluster-translation path length. These
+metrics passed the C++ reproducibility test and extended smoke-test contract
+in hosted CI run #234. At the same 50,000-attempt cap, the baseline step 0.2
+accumulated mean squared realized translation 2,000.71, while step 0.1
+accumulated 500.30. Step 0.28 completed all three runs in a mean 25,665
+attempts at mean accumulated squared translation 2,011.66. Fixed attempt
+counts therefore do not represent equal algorithmic progress across step
+sizes. The next step is a common-displacement stopping criterion; this
+diagnostic is not physical time or a calibrated diffusivity.
