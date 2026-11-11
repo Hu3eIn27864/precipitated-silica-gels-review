@@ -363,3 +363,11 @@
 
 - Added finite cubic-lattice and three-arm cross reference cases to the mass-radius network tests to check distinction between compact and simple branched geometries.
 - An isolated C++17 ASan/UBSan harness returned slopes 2.33099 and 1.07112, respectively. The full repository CMake/CTest suite remains unverified.
+
+
+## 2026-11-11 — DLCA ensemble export and plateau-safe fitting
+
+- Added the `mc3d_dlca_ensemble` executable with consecutive seed runs and separate run-summary, mass-radius and fit-window CSV outputs.
+- Added safeguards to omit incomplete aggregates and periodic-winding components from whole-aggregate mass-radius analysis while preserving their run metadata.
+- Fit-window scans now skip singular plateau-only intervals and return an empty result for a constant mass curve; input validation remains global.
+- Added plateau-handling tests and documented command-line arguments, default reduced-unit settings and output schemas. The complete CMake build and end-to-end ensemble run remain unverified.
