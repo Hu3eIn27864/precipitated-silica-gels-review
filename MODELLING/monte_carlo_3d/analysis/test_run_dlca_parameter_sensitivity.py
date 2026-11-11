@@ -6,11 +6,13 @@ from run_dlca_parameter_sensitivity import VARIANTS, validate_variant
 
 class ParameterSensitivityTests(unittest.TestCase):
     def test_matrix_changes_one_parameter_at_a_time(self):
-        self.assertEqual(len(VARIANTS), 6)
+        self.assertEqual(len(VARIANTS), 7)
         baseline = (1.0, 0.2, 1.0)
+        self.assertEqual(VARIANTS[0], ("baseline", *baseline))
         for name, contact, step, mobility in VARIANTS:
             values = (contact, step, mobility)
-            self.assertEqual(sum(a != b for a, b in zip(values, baseline)), 1, name)
+            self.assertEqual(sum(a != b for a, b in zip(values, baseline)),
+                             0 if name == "baseline" else 1, name)
             validate_variant(*values)
 
     def test_rejects_contact_step_violation(self):
