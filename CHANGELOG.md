@@ -229,3 +229,13 @@
 - Clarified that imposed box compression is not equivalent to solvent drainage; the MC model will initially address structural reorganisation, while continuum transport remains a complementary workstream.
 - Added `MODELLING/monte_carlo_3d/README.md` as a design specification. No C++ code or simulation results are claimed yet.
 - Added a carefully bounded note on touch-screen coatings: silica aggregates and silica-sol coatings occur in anti-glare / optical surface applications, but this does not establish precipitated silica as the specific feedstock in those examples.
+
+
+## 2026-11-11 — Multiscale MD–MC–CFD coupling architecture specified
+
+- Added `MODELLING/multiscale_coupling/README.md` describing a staged MD → 3-D MC → structural upscaling → Darcy/poroelastic continuum workflow.
+- Defined the scientific feedback hypothesis linking contact evolution, stiffness, permeability, pore pressure, drainage and compaction.
+- Distinguished direct atomistic interactions from aggregate-scale MC rearrangement and continuum pore-fluid transport; specified measurable hand-off variables.
+- Prioritised one-way coupling and representative-volume upscaling before any bidirectional staggered coupling.
+- Clarified that the appropriate first continuum model is generally porous-medium Darcy flow coupled to a deformable skeleton, not fully resolved CFD across all nanoscale pores.
+- Added validation ladders and cautions about force-field validity, MC physical-time mapping, RVE convergence and independent validation. No coupled code or simulation result is claimed.
