@@ -194,3 +194,12 @@
 - Both prototypes are explicitly non-predictive baselines: the transport model is constant-coefficient 1-D poro-consolidation; the LAMMPS network is a jittered lattice, not measured fractal silica, and has no solvent, chemistry, or dynamic bond kinetics.
 - Added execution instructions, assumptions, validation checks and model limitations. No parameter calibration or production simulation has been performed.
 - LAMMPS command choices checked against the official manual for `pair_style lj/cut`, `bond_style harmonic`, and `fix deform`.
+
+
+## 2026-11-11 — Transport benchmark refinement and LAMMPS network correction
+
+- Added PSG-043, Scherer & Swiatek (1989), on pressure-driven permeability measurement in alkoxide-derived silica gels; added detailed assessment in `LITERATURE/source_assessments_batch_16.md`.
+- Refined the validation roadmap: Scherer (1989) Parts I–II are currently a mechanistic/conceptual benchmark, not a numerically reproducible benchmark from accessible abstracts. Raw shrinkage series, independent parameter tables, exact material chemistry and uncertainty remain to be retrieved.
+- Explicitly separated the permeability paper's partial-drying result from wet-gel syneresis; no direct transfer to industrial precipitated silica is assumed.
+- Corrected the LAMMPS toy-network generator to include periodic nearest-neighbour bonds across all box faces, avoiding an artificial unbonded boundary in the periodic simulation cell. The simple-cubic topology remains an acknowledged idealisation.
+- No simulations were executed and no physical silica parameters were fitted.
