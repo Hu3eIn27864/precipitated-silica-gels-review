@@ -239,3 +239,12 @@
 - Prioritised one-way coupling and representative-volume upscaling before any bidirectional staggered coupling.
 - Clarified that the appropriate first continuum model is generally porous-medium Darcy flow coupled to a deformable skeleton, not fully resolved CFD across all nanoscale pores.
 - Added validation ladders and cautions about force-field validity, MC physical-time mapping, RVE convergence and independent validation. No coupled code or simulation result is claimed.
+
+
+## 2026-11-11 — C++ 3-D Monte Carlo technical specification
+
+- Added `MODELLING/monte_carlo_3d/TECHNICAL_SPEC.md` as the implementation contract for the first off-lattice C++17 Monte Carlo version.
+- Specified reduced units, reproducible RNG/build metadata, periodic geometry and cluster unwrapping, DLCA/import-based initial aggregate generation, a transparent effective pair potential, V1 Metropolis moves, observables, software modules, and unit/integration tests.
+- Separated reversible equilibrium sampling (V1) from coordination-dependent kinetic detachment, persistent contacts and compaction (V2) to avoid mixing irreversible kinetics into an equilibrium sampler.
+- Explicitly excluded pore-liquid drainage, pore pressure, physical syneresis time, pH-dependent chemistry and calibrated silica force fields from V1. Box contraction is not treated as solvent removal.
+- Updated the MC overview and modelling strategy to link to the technical specification. No C++ source code has been implemented and no simulation has been run, calibrated, or validated.
