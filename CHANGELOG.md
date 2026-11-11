@@ -703,3 +703,12 @@
 - Kept the 2014 article's 18-mm/~6-mL acid-gel natural-syneresis series distinct from the later 12-mm/~3-mL series unless point-level identity is established.
 - Marked exact 2014-to-2015 numerical overlap as unresolved; shared research lineage is not sufficient evidence of duplicate observations.
 - Corrected `LITERATURE/quantitative_overlap_audit_wilhelm.md` to distinguish direct dataset reuse, method lineage and unresolved overlap.
+
+
+## 2026-11-11 — 2014/2015 acid-cylinder overlap cross-check
+
+- Inspected the 2015 article's Figure 8 caption and found that its acid-catalysed natural-syneresis panel explicitly cites Wilhelm & Kind (2014).
+- The 20 °C fitted values are nearly identical across the papers (2014: 0.197 and 21.7 h; 2015: 0.20 and 21.3 h), supporting likely reuse/refitting rather than independent replication.
+- Identified an unresolved geometry discrepancy: the 2014 article reports d = 18 mm, ~6 mL cylinders, whereas the 2015 article describes the Figure 8 cylinder series as d = 12 mm, ~3 mL.
+- Revised the overlap audit: count the acid-cylinder curve as one likely shared evidence family, preserve the geometry inconsistency, and keep acid pressure-cell overlap unresolved pending point-level comparison.
+- The 2015 base-cylinder series is not attributed to the 2014 article and is treated as additional comparative evidence.
