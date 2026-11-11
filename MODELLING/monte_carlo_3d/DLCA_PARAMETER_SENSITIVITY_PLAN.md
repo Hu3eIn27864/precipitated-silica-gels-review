@@ -140,3 +140,31 @@ step-independent structural effect.
 
 
 The follow-up instrumentation was validated in hosted CI run #234. At 50,000 attempts, the three baseline seeds (s = 0.2) accumulated mean Σ|Δr|² = 2,000.71; the s = 0.1 runs accumulated 500.30, close to the expected quarter ratio. The s = 0.28 runs completed in a mean 25,665 attempts and accumulated mean Σ|Δr|² = 2,011.66 at completion. This confirms that fixed attempt count substantially changes the displacement budget across step sizes. It motivates the next implementation step: stop at a common cumulative realized squared-translation budget, with an independent maximum-attempt safety cap, and compare seed-matched structures at that common algorithmic progress coordinate.
+
+
+## Common-displacement follow-up screen (introduced 2026-11-11)
+
+The DLCA core now supports an optional cumulative squared realized-translation
+target (Q=\sum_k |\Delta\mathbf R_k|^2). A run completes each proposed move
+and then checks the target; no move is truncated. The maximum-attempt limit
+remains an independent hard safety cap. Run metadata reports target Q,
+whether the target was reached, whether the cap was reached, and target
+overshoot. Target Q = 0 preserves the legacy fixed-attempt mode.
+
+The runner accepts `--target-q`; the CI workflow adds a paired N=32 screen
+for the baseline and six one-factor variants using three common seeds,
+50,000 maximum attempts, and provisional Q target 450 reduced-length-units
+squared. This target is deliberately below the smallest-step pilot's
+observed Q values (approximately 499–502 at 50,000 attempts), so all
+step-size seeds should be able to reach it without raising the safety cap.
+The value is a screening coordinate only, not physical time or calibrated
+Brownian motion.
+
+The common-Q screen must report both Q and path length L, attempt count,
+target overshoot and completion. Equal Q does not imply equal L or equal
+trajectory history. Incomplete clusters remain progress descriptors; no
+fractal exponent is valid unless a complete, consistently unwrapped
+aggregate exists. This follow-up is intended to test algorithmic sensitivity
+at a common displacement coordinate, not to prove physical robustness.
+Hosted validation of the core/CLI/tests is tracked in CI run #254; common-Q
+screen results are pending artifact inspection.
