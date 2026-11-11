@@ -18,6 +18,8 @@ DLCA::DLCA(const SimulationBox& box, DLCAConfig config, Random& random)
         !std::isfinite(config_.maximumComponentStep) ||
         config_.maximumComponentStep <= 0.0 ||
         !std::isfinite(config_.mobilityExponent) || config_.mobilityExponent < 0.0 ||
+        !std::isfinite(config_.targetCumulativeSquaredTranslation) ||
+        config_.targetCumulativeSquaredTranslation < 0.0 ||
         config_.maximumAttempts == 0) {
         throw std::invalid_argument("Invalid DLCA configuration");
     }
@@ -68,7 +70,10 @@ DLCAResult DLCA::generate() const {
     }
 
     DLCAResult result;
-    while (clusters.size() > 1 && result.attempts < config_.maximumAttempts) {
+    while (clusters.size() > 1 && result.attempts < config_.maximumAttempts &&
+           (config_.targetCumulativeSquaredTranslation == 0.0 ||
+            result.cumulativeSquaredClusterTranslation <
+                config_.targetCumulativeSquaredTranslation)) {
         ++result.attempts;
         double weightSum = 0.0;
         for (const auto& cluster : clusters) {
@@ -226,6 +231,18 @@ DLCAResult DLCA::generate() const {
             }
         }
     }
+
+    result.displacementBudgetReached =
+        config_.targetCumulativeSquaredTranslation > 0.0 &&
+        result.cumulativeSquaredClusterTranslation >=
+            config_.targetCumulativeSquaredTranslation;
+    result.displacementBudgetOvershoot = result.displacementBudgetReached
+        ? result.cumulativeSquaredClusterTranslation -
+              config_.targetCumulativeSquaredTranslation
+        : 0.0;
+    result.attemptLimitReached =
+        clusters.size() > 1 && !result.displacementBudgetReached &&
+        result.attempts >= config_.maximumAttempts;
 
     for (const auto& cluster : clusters) {
         result.particles.insert(result.particles.end(), cluster.begin(), cluster.end());
