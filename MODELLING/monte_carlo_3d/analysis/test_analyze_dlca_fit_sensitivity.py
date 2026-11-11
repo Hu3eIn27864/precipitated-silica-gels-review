@@ -20,12 +20,17 @@ class FitSensitivityTests(unittest.TestCase):
                              "largest_component_size"])
             writer.writerow([11, 1, 1, 8])
             writer.writerow([12, 0, 1, 5])
+        with Path(str(self.prefix) + "_mass_radius.csv").open("w", newline="") as handle:
+            writer = csv.writer(handle)
+            writer.writerow(["seed", "particle_count", "radius", "mean_enclosed_mass"])
+            for radius, mass in [(1.5, 1.2), (2.0, 1.8), (2.5, 2.4), (3.0, 3.1), (4.0, 4.0)]:
+                writer.writerow([11, 8, radius, mass])
         with Path(str(self.prefix) + "_fit_windows.csv").open("w", newline="") as handle:
             writer = csv.writer(handle)
             writer.writerow(["seed", "fit_minimum_radius", "fit_maximum_radius",
                              "exponent", "standard_error", "r_squared", "point_count"])
             writer.writerow([11, 1.5, 3.0, 1.8, 0.1, 0.99, 4])
-            writer.writerow([11, 2.0, 4.0, 2.1, 0.2, 0.97, 4])
+            writer.writerow([11, 2.0, 4.0, 2.1, 0.2, 0.97, 3])
 
     def tearDown(self):
         self.temp.cleanup()
