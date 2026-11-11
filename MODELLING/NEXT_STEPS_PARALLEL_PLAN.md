@@ -500,3 +500,12 @@ state-dependent k–M coupling can be meaningfully identified.
 - Pixel extraction remains blocked in this execution environment: the 13 MB PDF exceeds screenshot retrieval limits and direct publisher PNG downloads fail. No digitised observations have been fabricated or added. The next input needed is the two original PNG files (or a locally saved copy uploaded into the working session).
 
 - Hosted CI #314 passed; its transport test discovery explicitly ran all three new digitisation utility tests (linear axis, log10 axis, and multi-tick axis fit) plus the existing transport-model tests. This is software verification only; no experimental points have been extracted.
+
+
+## Wilhelm & Kind JPEG-Digitalisierung – nächste Arbeitsschritte (2026-11-11)
+- [x] 164 vom Nutzer übermittelte Messpunkt-Näherungswerte als vorläufige CSV rekonstruiert.
+- [x] Reihenstruktur und Zeitordnung geprüft; Maxima und nichtmonotone Abschnitte dokumentiert.
+- [ ] Figure 10b (20/40/60 °C) am Original kontrollieren: alle drei digitalen Maxima liegen deutlich über den Tabellen-Fitparametern.
+- [ ] Figure 8b (40/60 °C) und Figure 10a (60 °C) wegen Rückgängen visuell prüfen.
+- [ ] Modellkurven und Fehlerbalken getrennt digitalisieren; Pixelkoordinaten und Ableseunsicherheiten ergänzen.
+- [ ] Erst danach kinetische Parametervergleichsrechnung durchführen. Vorläufige JPEG-Punkte nicht als Originaldaten oder validierte Messwerte behandeln.
