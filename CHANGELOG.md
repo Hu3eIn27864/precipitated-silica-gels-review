@@ -482,3 +482,5 @@
 - 2026-11-11: DLCA now distinguishes move-level successful merge events from the number of absorbed components. Per-size and run-level counters, CSV export, reproducibility/conservation tests and CLI smoke schema updated. Hosted CI validation pending.
 
 - 2026-11-11: Added PSG-046, Ragueh et al. (2015), full author manuscript assessment. This provides direct industrial precipitated-silica SAXS/TEM, filtration-derived cake permeability and osmotic compression/percolation evidence, with explicit caveats against direct transfer to syneresis permeability.
+
+- 2026-11-11: Added run-level `successful_merge_events` to DLCA run-summary CSV so per-size event totals can be independently reconciled in uploaded artifacts; updated CLI smoke schema and row validation. Hosted CI pending.
