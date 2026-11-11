@@ -92,8 +92,9 @@ int main(int argc, char** argv) {
         const std::string runsPath = prefix + "_runs.csv";
         const std::string curvePath = prefix + "_mass_radius.csv";
         const std::string fitsPath = prefix + "_fit_windows.csv";
-        std::ofstream runs(runsPath), curves(curvePath), fits(fitsPath);
-        if (!runs || !curves || !fits)
+        const std::string mobilityPath = prefix + "_mobility_by_size.csv";
+        std::ofstream runs(runsPath), curves(curvePath), fits(fitsPath), mobility(mobilityPath);
+        if (!runs || !curves || !fits || !mobility)
             throw std::runtime_error("Could not open one or more output CSV files");
 
         runs << "seed,completed,attempts,successful_merges,component_count,"
@@ -109,6 +110,7 @@ int main(int argc, char** argv) {
         runs << std::setprecision(17);
         curves << std::setprecision(17);
         fits << std::setprecision(17);
+        mobility << std::setprecision(17);
 
         const mc3d::SimulationBox box(boxLength);
         mc3d::DLCAConfig config;
