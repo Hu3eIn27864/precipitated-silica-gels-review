@@ -2,7 +2,7 @@
 
 ## Status
 
-Verified software kernel plus committed aggregation, network-observable and mass-radius analysis modules pending complete-project execution. The existing geometry, interaction and Metropolis kernel previously passed 3/3 CTest targets in Release and sanitizer Debug builds (see TEST_RESULTS.md). This update adds a reproducible rigid-cluster Brownian aggregation generator (DLCA-style) and contact-graph observables, including graph-based periodic unwrapping of cluster coordinates for radius of gyration. A fourth CTest target has been registered, but the new modules have not yet been locally compiled or tested; do not extend the earlier 3/3 pass claim to them. The neighbour list remains independently verified but is not yet wired into Metropolis. Configuration parsing, production output/metadata and a production simulation driver remain unimplemented. No physical silica validation or calibrated interaction model is claimed.
+Verified software kernel plus committed aggregation, network-observable and mass-radius analysis modules pending complete-project execution. The existing geometry, interaction and Metropolis kernel previously passed 3/3 CTest targets in Release and sanitizer Debug builds (see TEST_RESULTS.md). This update adds a reproducible rigid-cluster Brownian aggregation generator (DLCA-style) and contact-graph observables, including graph-based periodic unwrapping of cluster coordinates for radius of gyration. A fourth CTest target has been registered, but the new modules have not yet been locally compiled or tested; do not extend the earlier 3/3 pass claim to them. The neighbour list remains independently verified but is not yet wired into Metropolis. General configuration-file parsing and a production Metropolis simulation driver remain unimplemented. A separate small-system DLCA ensemble executable now exports run summaries, mass-radius curves and fit-window diagnostics to CSV; its complete build/run verification remains pending. No physical silica validation or calibrated interaction model is claimed.
 
 ## Scientific purpose
 
@@ -54,7 +54,7 @@ One MC sweep is not a physical second. Do not report laboratory syneresis times 
 - examples/: small smoke-test configurations.
 - analysis/: optional plotting / statistical analysis scripts.
 
-The current kernel implementation and its verification record are documented in [TEST_RESULTS.md](TEST_RESULTS.md). The remaining V1 work is independent build/test verification of the new DLCA and observables modules, coordinate import/export, a reproducible run configuration/output driver, finite-size and sensitivity checks, and a minimal end-to-end smoke run.
+The current kernel implementation and its verification record are documented in [TEST_RESULTS.md](TEST_RESULTS.md). The remaining V1 work is independent build/test verification of the new DLCA and observables modules, a general Metropolis run driver, broader finite-size and sensitivity checks, and a verified end-to-end DLCA ensemble smoke run.
 
 
 ## Detailed implementation specification
@@ -112,3 +112,8 @@ The new regression case compares cell-list candidates against brute-force minimu
 
 
 - Added deterministic compact-cube and three-arm branched reference geometries to the network test source. An isolated sanitizer-compiled C++17 check returned apparent slopes 2.33099 (finite cube) and 1.07112 (branched cross), within the committed regression bounds. These are estimator sanity checks, not evidence of fractal scaling or silica-specific morphology.
+
+
+## Reproducible DLCA ensemble executable (verification pending)
+
+`examples/dlca_ensemble.cpp` and the `mc3d_dlca_ensemble` CMake target provide a command-line driver over consecutive random seeds. It writes separate run-summary, mass-radius-curve and fit-window CSV files. Only completed aggregates with consistent periodic unwrapping are exported to the mass-radius and fit files; incomplete or winding cases remain visible in the run summary. The default radii and mobility settings are algorithmic reduced-unit choices, not calibrated silica parameters. Usage and output schemas are documented in [examples/README.md](examples/README.md). The driver and the latest fit-window scan changes have not yet been built as a complete repository snapshot.
