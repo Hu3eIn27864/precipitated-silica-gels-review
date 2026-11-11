@@ -1,8 +1,10 @@
 #include "DLCA.hpp"
+#include "PeriodicCellList.hpp"
 
 #include <algorithm>
 #include <cmath>
 #include <limits>
+#include <memory>
 #include <stdexcept>
 #include <utility>
 
@@ -88,35 +90,61 @@ DLCAResult DLCA::generate() const {
             random_.uniform(-config_.maximumComponentStep, config_.maximumComponentStep),
             random_.uniform(-config_.maximumComponentStep, config_.maximumComponentStep)};
 
-        // Continuous collision detection: find the first contact along the
-        // proposed translation, rather than allowing endpoint overlaps.
+        // Flatten the current aggregate positions and owner map. The periodic
+        // cell list is a conservative broad phase; exact swept-sphere geometry
+        // remains the narrow phase.
+        std::vector<Vec3> positions;
+        std::vector<std::size_t> owners;
+        for (std::size_t c = 0; c < clusters.size(); ++c) {
+            for (const auto& particle : clusters[c]) {
+                positions.push_back(particle.position);
+                owners.push_back(c);
+            }
+        }
+        const double shiftLength = std::sqrt(normSquared(shift));
+        const double broadRadius = config_.contactDistance + shiftLength;
+        std::unique_ptr<PeriodicCellList> broadPhase;
+        if (shiftLength > 0.0 && broadRadius < 0.5 * box_.sideLength()) {
+            broadPhase = std::make_unique<PeriodicCellList>(box_, positions, broadRadius);
+        }
+
         double firstContact = 1.0;
         bool collision = false;
-        const double shift2 = normSquared(shift);
-        if (shift2 > 0.0) {
-            for (std::size_t j = 0; j < clusters.size(); ++j) {
-                if (j == moving) continue;
-                for (const auto& a : clusters[moving]) {
-                    for (const auto& b : clusters[j]) {
-                        const Vec3 relative =
-                            box_.minimumImageDisplacement(a.position, b.position);
-                        const double r2 = normSquared(relative);
-                        if (r2 <= exclusion2) {
-                            firstContact = 0.0;
-                            collision = true;
-                            continue;
-                        }
-                        const double projection = dot(relative, shift);
-                        if (projection <= 0.0) continue;
-                        const double discriminant =
-                            projection * projection - shift2 * (r2 - exclusion2);
-                        if (discriminant < 0.0) continue;
-                        const double entry =
-                            (projection - std::sqrt(discriminant)) / shift2;
-                        if (entry >= 0.0 && entry <= firstContact) {
-                            firstContact = entry;
-                            collision = true;
-                        }
+        if (shiftLength > 0.0) {
+            std::size_t movingFlat = 0;
+            for (std::size_t c = 0; c < moving; ++c)
+                movingFlat += clusters[c].size();
+
+            for (std::size_t local = 0; local < clusters[moving].size(); ++local) {
+                const auto flat = movingFlat + local;
+                std::vector<std::size_t> candidates;
+                if (broadPhase) {
+                    candidates = broadPhase->candidates(clusters[moving][local].position);
+                } else {
+                    candidates.resize(positions.size());
+                    for (std::size_t k = 0; k < positions.size(); ++k) candidates[k] = k;
+                }
+                for (const auto candidate : candidates) {
+                    const std::size_t otherCluster = owners[candidate];
+                    if (otherCluster == moving || candidate == flat) continue;
+                    const Vec3 relative = box_.minimumImageDisplacement(
+                        clusters[moving][local].position, positions[candidate]);
+                    const double r2 = normSquared(relative);
+                    if (r2 <= exclusion2) {
+                        firstContact = 0.0;
+                        collision = true;
+                        continue;
+                    }
+                    const double projection = dot(relative, shift);
+                    if (projection <= 0.0) continue;
+                    const double discriminant =
+                        projection * projection - shift2 * (r2 - exclusion2);
+                    if (discriminant < 0.0) continue;
+                    const double entry =
+                        (projection - std::sqrt(discriminant)) / shift2;
+                    if (entry >= 0.0 && entry <= firstContact) {
+                        firstContact = entry;
+                        collision = true;
                     }
                 }
             }
@@ -126,24 +154,37 @@ DLCAResult DLCA::generate() const {
         for (auto& particle : clusters[moving]) {
             particle.position = box_.wrap(particle.position + shift * travelFraction);
         }
-
         if (collision) {
-            std::vector<std::size_t> hit;
-            const double contactTolerance = exclusion2 * (1.0 + 1e-10);
-            for (std::size_t j = 0; j < clusters.size(); ++j) {
-                if (j == moving) continue;
-                bool touching = false;
-                for (const auto& a : clusters[moving]) {
-                    for (const auto& b : clusters[j]) {
-                        if (box_.distanceSquared(a.position, b.position) <= contactTolerance) {
-                            touching = true;
-                            break;
-                        }
-                    }
-                    if (touching) break;
+            std::vector<Vec3> finalPositions;
+            std::vector<std::size_t> finalOwners;
+            for (std::size_t c = 0; c < clusters.size(); ++c) {
+                for (const auto& particle : clusters[c]) {
+                    finalPositions.push_back(particle.position);
+                    finalOwners.push_back(c);
                 }
-                if (touching) hit.push_back(j);
             }
+            const double contactTolerance = config_.contactDistance * (1.0 + 1e-10);
+            const PeriodicCellList finalCells(box_, finalPositions, contactTolerance);
+            std::vector<bool> hitFlag(clusters.size(), false);
+            std::size_t movingFlat = 0;
+            for (std::size_t c = 0; c < moving; ++c)
+                movingFlat += clusters[c].size();
+            for (std::size_t local = 0; local < clusters[moving].size(); ++local) {
+                const auto flat = movingFlat + local;
+                for (const auto candidate :
+                     finalCells.candidates(clusters[moving][local].position)) {
+                    const auto owner = finalOwners[candidate];
+                    if (owner == moving || candidate == flat || hitFlag[owner]) continue;
+                    if (box_.distanceSquared(clusters[moving][local].position,
+                                             finalPositions[candidate]) <=
+                        contactTolerance * contactTolerance) {
+                        hitFlag[owner] = true;
+                    }
+                }
+            }
+            std::vector<std::size_t> hit;
+            for (std::size_t c = 0; c < hitFlag.size(); ++c)
+                if (hitFlag[c]) hit.push_back(c);
 
             if (!hit.empty()) {
                 Cluster merged;
