@@ -109,3 +109,10 @@ The network CTest source now includes deterministic pseudo-random candidate-comp
 ## Mass-radius power-law regression utility (2026-11-11)
 
 Added a standalone log-log OLS helper with explicit fit interval, slope standard error, R² and fitted-point count. The CTest source includes recovery of a synthetic exponent (1.65) and rejection of non-positive mass input. This checks regression arithmetic only. The utility does not generate mass-radius curves or validate a physical fractal regime. The new source and updated test have **not yet been compiled or executed in a full repository build**.
+
+
+## Mean enclosed mass-radius estimator — isolated check (2026-11-11)
+
+The committed `MassRadius.cpp` implementation was compiled in an isolated C++17 harness with GCC, `-Wall -Wextra -Wpedantic`, AddressSanitizer and UndefinedBehaviorSanitizer. A three-particle collinear fixture verified the analytically expected mean enclosed masses (5/3 at radius 1 and 3 at radius 3); the executable passed.
+
+**Verification boundary:** this isolated check exercised the committed estimator implementation, but not the full repository CMake target or the newly extended `test_network.cpp`. The complete four-target CTest suite remains unverified. Translation-invariance and invalid-radius assertions have been added to the repository test source but were not included in this isolated executable. No fractal-dimension result or physical validation is claimed.
