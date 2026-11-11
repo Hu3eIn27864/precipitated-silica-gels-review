@@ -84,12 +84,27 @@ std::vector<PowerLawFit> scanMassRadiusFitWindows(
         throw std::invalid_argument("Invalid data or minimum point count for fit-window scan");
     }
 
+    // Validate the complete input once. Individual windows can still be
+    // singular (for example, a plateau in mean enclosed mass); omit those
+    // windows rather than aborting the entire diagnostic scan.
+    for (std::size_t i = 0; i < radii.size(); ++i) {
+        if (!std::isfinite(radii[i]) || radii[i] <= 0.0 ||
+            !std::isfinite(meanMass[i]) || meanMass[i] <= 0.0 ||
+            (i > 0 && radii[i] <= radii[i - 1])) {
+            throw std::invalid_argument("Fit-window scan requires increasing radii and finite positive masses");
+        }
+    }
+
     std::vector<PowerLawFit> fits;
     for (std::size_t first = 0; first + minimumPoints <= radii.size(); ++first) {
         for (std::size_t last = first + minimumPoints - 1;
              last < radii.size(); ++last) {
-            fits.push_back(fitMassRadiusPowerLaw(
-                radii, meanMass, radii[first], radii[last]));
+            try {
+                fits.push_back(fitMassRadiusPowerLaw(
+                    radii, meanMass, radii[first], radii[last]));
+            } catch (const std::invalid_argument&) {
+                // A window with no response variation cannot define a slope.
+            }
         }
     }
     return fits;
