@@ -37,6 +37,28 @@ void testReproducibilityAndSweepCount() {
     }
 }
 
+void testLongRunMaintainsHardCore() {
+    const mc3d::SimulationBox box(15.0);
+    const mc3d::PairPotential potential(1.0, 0.5, 2.5);
+    std::vector<mc3d::Particle> particles{
+        {0, {2.0, 2.0, 2.0}}, {1, {3.2, 2.0, 2.0}},
+        {2, {4.4, 2.0, 2.0}}, {3, {5.6, 2.0, 2.0}}
+    };
+    mc3d::Random random(987654321);
+    mc3d::MonteCarlo sampler(box, potential, 0.12, random);
+    for (int sweep = 0; sweep < 1000; ++sweep) sampler.sweep(particles);
+    require(sampler.statistics().attempted == 4000,
+            "1000 sweeps should make 4000 attempts");
+    require(sampler.statistics().accepted <= sampler.statistics().attempted,
+            "accepted move count exceeds attempts");
+    require(std::isfinite(mc3d::totalEnergy(particles, box, potential)),
+            "hard-core overlap or non-finite energy after MC run");
+    for (std::size_t i = 0; i < particles.size(); ++i)
+        for (std::size_t j = i + 1; j < particles.size(); ++j)
+            require(box.distance(particles[i].position, particles[j].position) >= potential.sigma(),
+                    "Metropolis accepted a hard-core overlap");
+}
+
 void testEmptySystem() {
     const mc3d::SimulationBox box(10.0);
     const mc3d::PairPotential potential(1.0, 1.0, 2.5);
@@ -61,6 +83,7 @@ void testInvalidStep() {
 int main() {
     try {
         testReproducibilityAndSweepCount();
+        testLongRunMaintainsHardCore();
         testEmptySystem();
         testInvalidStep();
     } catch (const std::exception& e) {
