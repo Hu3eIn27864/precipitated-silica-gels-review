@@ -1,12 +1,12 @@
 # Wilhelm & Kind (2015): Qualitätsprüfung der vorläufigen JPEG-Digitalisierung
 
 ## Herkunft und Status
-Aus den 164 im Chat übermittelten Datenzeilen rekonstruiert. Es handelt sich um ungefähre visuelle Pixelablesungen aus JPEG-Abbildungen, nicht um Originalmesswerte. Die internen Namen Fig1/Fig2 wurden auf Figure 8/Figure 10 abgebildet. Werte selbst wurden nicht an Fitparameter angepasst.
+Die 164 Näherungswerte wurden durch einen anderen ChatGPT-Account aus den Diagrammen abgelesen und anschließend als Text übermittelt. Es liegen keine Pixelkoordinaten, Achsenkalibrierungen oder unabhängigen Sichtprüfungen vor. Es handelt sich um KI-gestützte, ungeprüfte Diagrammablesungen, nicht um Originalmesswerte. Die internen Namen Fig1/Fig2 wurden auf Figure 8/Figure 10 abgebildet. Werte selbst wurden nicht an Fitparameter angepasst.
 
 ## Strukturprüfung
 - 164 Punkte in 12 Reihen (Figure 8: 65; Figure 10: 99).
 - Zeitpunkte sind innerhalb jeder Reihe streng aufsteigend.
-- Alle Punkte sind als `source_type=measurement` markiert.
+- Alle Punkte sind in der Datendatei als `source_type=ai_assisted_approximation` markiert.
 - Pixelkoordinaten, Digitalisierungsunsicherheiten und Fehlerbalken fehlen.
 - Keine Modellkurven sind in dieser Datei enthalten.
 
@@ -42,7 +42,7 @@ Publizierte maximale Schrumpfungsparameter:
 Die publizierten Werte stammen aus den empirischen Fits und sind nicht identisch mit unabhängig digitalisierten Einzelmesspunkten. Die systematischen Überschreitungen in Figure 10b sind dennoch zu groß, um sie ohne Bildprüfung als gewöhnliche Ableseabweichung abzutun.
 
 ## Zulässige Verwendung
-Derzeit explorative Visualisierung und Qualitätskontrolle. Nicht als hochpräzise Rohdatenbasis oder Grundlage belastbarer Parameteridentifikation verwenden. Vor Modellanpassung müssen die auffälligen Reihen anhand des Originals neu geprüft und Digitalisierungsunsicherheiten abgeschätzt werden.
+Derzeit explorative Visualisierung, grobe Plausibilitätskontrolle und Priorisierung einer späteren manuellen Prüfung. Nicht als hochpräzise Rohdatenbasis oder Grundlage belastbarer Parameteridentifikation verwenden. Vor Modellanpassung müssen die auffälligen Reihen anhand des Originals neu geprüft und Digitalisierungsunsicherheiten abgeschätzt werden.
 
 ## Nächste Arbeitsschritte
 1. Figure 10b alle drei Temperaturen visuell gegen Original prüfen (besonders 20/40/60 °C).
