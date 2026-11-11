@@ -126,3 +126,10 @@ This adds a permeability-measurement comparator, but does not solve the data-acc
 **Important downgrade in benchmark status:** Scherer (1989) Parts I–II are presently a mechanistic/conceptual benchmark, not a fully reproducible numerical benchmark using accessible abstracts alone. The Part II abstract says independently measured permeability, modulus and viscosity were used, but the numerical tables, raw shrinkage series, exact material recipe and uncertainties remain unavailable. Do not claim numerical reproduction until these are retrieved.
 
 The first transport-model tests should therefore be mathematical verification (initial/long-time limits, dimensionless curve collapse, comparison with an independent numerical solution), followed by a literature-data reproduction only when sufficient original numerical data are available. Wilhelm & Kind (2015) remains the more direct precipitated-silica target dataset, but independent target-system permeability and modulus are still the main identifiability gap.
+
+
+## Geometry audit and digitisation gate — 2026-11-11
+
+The open full text of Wilhelm & Kind (2015) confirms 12 mm cylinder diameter and approximately 3 mL volume, plus approximately 3 mm droplets observed in a sealed PMMA microscopy cell with cover glasses. Assuming a right circular cylinder, the first two values imply a **calculated** height of about 26.5 mm; this is not a directly reported measured height. The droplet cannot be presumed to be a freely drained sphere, and its early thermal history includes an initial 20 °C period. The 2015 pressure-cell table uses 16 mm initial height, while the 2017 centrifugation data use 20 mm. See LITERATURE/experimental_geometry_audit_wilhelm.md.
+
+The next data task is point-by-point figure digitisation under the rules in LITERATURE/syneresis_curve_digitisation_protocol.md. Measured markers and fitted curves must be stored separately; fit parameters in Tables 1–2 are not raw data. No diffusivity or permeability should be fitted until effective drainage lengths/boundaries and model identifiability have been addressed.
