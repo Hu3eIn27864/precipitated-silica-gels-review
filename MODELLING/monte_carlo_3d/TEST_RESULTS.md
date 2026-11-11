@@ -185,3 +185,6 @@ A companion test checks the box-scaling relation and seed/input parsing. The run
 ## Ensemble-fit provenance validation (2026-11-11)
 
 The seed-level analyser now reads the underlying mass-radius CSV rather than trusting fit-window summaries alone. It checks particle-count consistency, positive finite radius/mass values, duplicate radii, a common radius grid across seeds, fit-to-observation seed correspondence, and fit point counts for the selected common interval. Unit-test fixtures were extended accordingly. These repository tests are committed and included in CI, but have not yet been run against the repository checkout or confirmed by a GitHub Actions result.
+
+ 
+A local isolated regression check of the size-series runner logic and its four runner tests passed (4/4), including a fake-executable CLI integration test. This did not compile or execute the repository's C++ DLCA executable and is not a substitute for the committed GitHub Actions suite. The ensemble-analyser tests have been updated for the new mass-radius provenance checks but remain pending execution.
