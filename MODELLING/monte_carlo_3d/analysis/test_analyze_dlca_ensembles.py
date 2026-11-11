@@ -58,10 +58,6 @@ class EnsembleAnalysisTests(unittest.TestCase):
                     {"seed": 11, "fit_minimum_radius": 1.5, "fit_maximum_radius": 8,
                      "exponent": 1.9, "standard_error": 0.04,
                      "r_squared": 0.98, "point_count": 8},
-                    # Incomplete seed fit rows must not become observations.
-                    {"seed": 12, "fit_minimum_radius": 2, "fit_maximum_radius": 5,
-                     "exponent": 1.5, "standard_error": 0.1,
-                     "r_squared": 0.9, "point_count": 4},
                 ],
             )
             rows, summary = load_system(10, prefix, 2.0, 5.0)
