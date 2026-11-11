@@ -614,3 +614,12 @@ For base-catalysed droplets, use Table 2 values A = 0.30/0.39/0.51 and τ = 0.67
 - [x] Keep Valibeknejad et al. (2026) classified as an adjacent sodium-silicate grout system, not direct precipitated-silica validation.
 
 Detailed status: `LITERATURE/followup_research_status_2026-11-11.md`.
+
+## Workstream C extension — heterogeneous 1-D finite-volume prototype (11.11.2026)
+
+- [x] Added `heterogeneous_1d.py`: conservative fixed-coefficient equation S(x) dp/dt = d/dx(lambda(x) dp/dx), with cellwise storage and mobility, harmonic internal-face mobility, drained boundaries and backward-Euler stepping.
+- [x] Added tests for homogeneous analytical recovery, discrete mass balance, positivity/monotonicity, piecewise coefficients and invalid inputs.
+- [ ] Await hosted CI before calling the implementation numerically verified.
+- [ ] After CI, add systematic spatial/time refinement and explicit interface-location tests before any time-varying constitutive extension.
+
+No aging law, silica-specific parameter or calibration is included. Time-varying storage remains deferred until the conservative accumulation term and evolving-domain coupling are specified.
