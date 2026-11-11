@@ -1,5 +1,6 @@
 #include "Observables.hpp"
 
+#include <algorithm>
 #include <cmath>
 #include <queue>
 #include <stdexcept>
@@ -60,10 +61,9 @@ NetworkObservables analyseNetwork(const std::vector<Particle>& particles,
                     visited[j] = true;
                     unwrapped[j] = candidate;
                     queue.push(j);
-                } else {
-                    const Vec3 mismatch = candidate - unwrapped[j];
-                    if (norm(mismatch) > 1e-8 * box.sideLength())
-                        component.periodicUnwrappingConsistent = false;
+                } else if (norm(candidate - unwrapped[j]) >
+                           1e-8 * box.sideLength()) {
+                    component.periodicUnwrappingConsistent = false;
                 }
             }
         }
@@ -74,11 +74,15 @@ NetworkObservables analyseNetwork(const std::vector<Particle>& particles,
         for (const auto i : members) centre += unwrapped[i];
         centre /= static_cast<double>(members.size());
         double rg2 = 0.0;
-        for (const auto i : members) rg2 += normSquared(unwrapped[i] - centre);
-        component.radiusOfGyration = std::sqrt(rg2 / static_cast<double>(members.size()));
         double degreeSum = 0.0;
-        for (const auto i : members) degreeSum += static_cast<double>(out.coordination[i]);
-        component.meanCoordination = degreeSum / static_cast<double>(members.size());
+        for (const auto i : members) {
+            rg2 += normSquared(unwrapped[i] - centre);
+            degreeSum += static_cast<double>(out.coordination[i]);
+        }
+        component.radiusOfGyration =
+            std::sqrt(rg2 / static_cast<double>(members.size()));
+        component.meanCoordination =
+            degreeSum / static_cast<double>(members.size());
         out.largestComponentSize = std::max(out.largestComponentSize,
                                             component.particleCount);
         out.components.push_back(component);
