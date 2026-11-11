@@ -74,3 +74,30 @@ skeleton stiffness. The resulting `D_app` remains a diagnostic apparent
 diffusivity, not a directly measured material property. Do not use it to claim
 that acid/base gels share a common transport coefficient without independent
 validation.
+
+
+## Transient radial finite-volume benchmark
+
+`radial_consolidation.py` adds a cell-centred, conservative finite-volume
+solver for the dimensionless radial equation in an ideal infinite cylinder
+or sphere. It uses backward Euler, symmetry (zero flux) at the centre, and a
+perfectly drained Dirichlet boundary at the outer surface. The solver returns
+the volume-weighted mean excess-pressure ratio at requested Fourier numbers
+(Fo=c_v t/R^2); degree of consolidation is one minus that ratio.
+
+The module also provides independent eigenfunction-series references:
+`4/alpha_n^2 * exp(-alpha_n^2 Fo)` for the cylinder (alpha_n are J0 zeros)
+and `6/(n^2 pi^2) * exp(-n^2 pi^2 Fo)` for the sphere. The cylindrical
+reference currently tabulates the first ten J0 roots. The tests check
+initial/long-time limits, monotonicity, finite-volume agreement with the
+series at several times, and improvement under grid/time refinement.
+
+Run all transport tests with:
+
+    python3 -m unittest discover -s MODELLING/transport_model -p 'test_*.py' -v
+
+This is a numerical benchmark under constant-coefficient ideal boundary
+conditions. It does not yet model finite-cylinder end drainage, nonlinear
+permeability, viscoelasticity, changing geometry, pH effects, or coupled
+network reorganisation. Agreement with the series is code verification, not
+experimental validation of precipitated-silica syneresis.
