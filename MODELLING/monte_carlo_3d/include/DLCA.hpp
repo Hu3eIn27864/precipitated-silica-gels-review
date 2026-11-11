@@ -15,6 +15,8 @@ struct DLCAConfig {
     double maximumComponentStep{0.2};
     double mobilityExponent{1.0};
     std::size_t maximumAttempts{1000000};
+    // Zero disables the common cumulative squared-translation stopping rule.
+    double targetCumulativeSquaredTranslation{0.0};
 };
 
 struct DLCAResult {
@@ -23,6 +25,9 @@ struct DLCAResult {
     std::size_t successfulMerges{0};
     double cumulativeSquaredClusterTranslation{0.0};
     double cumulativeClusterTranslationPathLength{0.0};
+    bool displacementBudgetReached{false};
+    bool attemptLimitReached{false};
+    double displacementBudgetOvershoot{0.0};
     bool completed{false};
 };
 
