@@ -135,6 +135,47 @@ void testPeriodicCellListIsConservative() {
     require(rejectedNonFinite, "cell list accepted a non-finite query coordinate");
 }
 
+void testCellListRandomizedAgainstBruteForce() {
+    const mc3d::SimulationBox box(30.0);
+    constexpr std::size_t count = 240;
+    std::vector<mc3d::Vec3> positions;
+    positions.reserve(count);
+    // Deterministic pseudo-random coordinates avoid coupling this regression
+    // to the simulation RNG or platform-specific distribution implementations.
+    std::uint64_t state = 0x9e3779b97f4a7c15ULL;
+    const auto unit = [&state]() mutable {
+        state = state * 6364136223846793005ULL + 1442695040888963407ULL;
+        return static_cast<double>(state >> 11) / 9007199254740992.0;
+    };
+    for (std::size_t i = 0; i < count; ++i) {
+        positions.push_back({30.0 * unit(), 30.0 * unit(), 30.0 * unit()});
+    }
+    const double radius = 2.3;
+    const mc3d::PeriodicCellList cells(box, positions, radius);
+    for (std::size_t q = 0; q < count; ++q) {
+        const auto candidates = cells.candidates(positions[q]);
+        for (std::size_t j = 0; j < count; ++j) {
+            if (box.distanceSquared(positions[q], positions[j]) <= radius * radius) {
+                require(std::find(candidates.begin(), candidates.end(), j) !=
+                            candidates.end(),
+                        "randomized cell-list query omitted a brute-force neighbour");
+            }
+        }
+    }
+}
+
+void testCellListRejectsExcessiveDenseGrid() {
+    const mc3d::SimulationBox box(100.0);
+    const std::vector<mc3d::Vec3> positions{{1.0, 1.0, 1.0}};
+    bool rejected = false;
+    try {
+        (void)mc3d::PeriodicCellList(box, positions, 0.01);
+    } catch (const std::length_error&) {
+        rejected = true;
+    }
+    require(rejected, "cell list did not reject an excessive dense-grid allocation");
+}
+
 void testEmptyNetwork() {
     const mc3d::SimulationBox box(10.0);
     const auto obs = mc3d::analyseNetwork({}, box, 1.0);
@@ -149,6 +190,8 @@ int main() {
         testPeriodicWindingIsFlagged();
         testDLCAReproducibilityAndNonOverlap();
         testPeriodicCellListIsConservative();
+        testCellListRandomizedAgainstBruteForce();
+        testCellListRejectsExcessiveDenseGrid();
         testEmptyNetwork();
     } catch (const std::exception& e) {
         std::cerr << "FAILED: " << e.what() << '\n';
