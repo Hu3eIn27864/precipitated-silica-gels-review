@@ -30,7 +30,7 @@ class FitSensitivityTests(unittest.TestCase):
             writer.writerow(["seed", "fit_minimum_radius", "fit_maximum_radius",
                              "exponent", "standard_error", "r_squared", "point_count"])
             writer.writerow([11, 1.5, 3.0, 1.8, 0.1, 0.99, 4])
-            writer.writerow([11, 2.0, 4.0, 2.1, 0.2, 0.97, 3])
+            writer.writerow([11, 2.0, 4.0, 2.1, 0.2, 0.97, 4])
 
     def tearDown(self):
         self.temp.cleanup()
