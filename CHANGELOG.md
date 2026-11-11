@@ -755,4 +755,4 @@
 ## 2026-11-11 — Global transport balance test added
 
 - Added a heterogeneous two-layer test that integrates boundary outflow over all backward-Euler steps and compares it with the total storage-weighted pressure loss.
-- This is an independent global conservation check alongside the existing per-step balance residual test. Hosted CI result is pending.
+- This is an independent global conservation check alongside the existing per-step balance residual test. The transport-model test step in hosted workflow #331 passed, including this new test. The full workflow was still running its bounded DLCA pilot at the time of this update: https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43073997963
