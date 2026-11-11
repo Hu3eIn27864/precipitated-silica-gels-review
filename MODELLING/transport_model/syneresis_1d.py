@@ -37,7 +37,7 @@ def average_degree_of_consolidation(time_s: float, cv_m2_s: float,
     # Tv=0.01 to avoid a truncation artefact at early times.
     if dimensionless_time < 0.01:
         return min(1.0, max(0.0, 2.0 * math.sqrt(dimensionless_time / math.pi)))
-    factor = 4.0 * dimensionless_time / (math.pi ** 2)
+    factor = (math.pi ** 2) * dimensionless_time / 4.0
     remaining = 0.0
     for m in range(terms):
         odd = 2 * m + 1
