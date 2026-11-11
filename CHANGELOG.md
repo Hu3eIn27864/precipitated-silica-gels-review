@@ -480,3 +480,5 @@
 - 2026-11-11: Extended size-resolved DLCA trajectory accounting to attribute successful component merges to the selected cluster's pre-move size class. Tests verify per-size merge totals equal the run-level successful-merge count; the mobility CSV exports the new field. Hosted CI validation pending.
 
 - 2026-11-11: DLCA now distinguishes move-level successful merge events from the number of absorbed components. Per-size and run-level counters, CSV export, reproducibility/conservation tests and CLI smoke schema updated. Hosted CI validation pending.
+
+- 2026-11-11: Added PSG-046, Ragueh et al. (2015), full author manuscript assessment. This provides direct industrial precipitated-silica SAXS/TEM, filtration-derived cake permeability and osmotic compression/percolation evidence, with explicit caveats against direct transfer to syneresis permeability.
