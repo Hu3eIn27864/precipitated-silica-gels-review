@@ -1,7 +1,7 @@
 # 3-D off-lattice Monte Carlo — technical specification (V1)
 
 ## Status and scope
-**Specification plus partial software scaffold.** Foundational C++17 geometry/build files and geometry tests have been committed. They have not yet been compiled or executed in this environment. No production run, calibration, or experimental validation is claimed. V1 is a structural model of a pre-formed 3-D fractal-like aggregate, not a physical syneresis, pore-drainage, or chemistry-resolved silica model.
+**Specification plus verified V1 software kernel.** The C++17 geometry, pair-potential, neighbour-list and reversible Metropolis modules compile locally with GCC 14.2.0; all three CTest targets pass in Release and in an AddressSanitizer/UndefinedBehaviorSanitizer Debug build. See `TEST_RESULTS.md`. No production aggregate run, calibration, or experimental validation is claimed. V1 is a structural model of a pre-formed 3-D fractal-like aggregate, not a physical syneresis, pore-drainage, or chemistry-resolved silica model.
 
 ### Falsifiable V1 question
 At fixed particle number, particle diameter, thermal-energy scale, and initial aggregate, how do dimensionless attraction strength and move amplitude affect reversible compactness, coordination statistics, and aggregate structure? Kinetic detachment and persistent contacts are a separate V2 question.
@@ -81,17 +81,17 @@ Use a dependency-free documented key-value configuration parser initially. Do no
 
 ### Implemented V1 kernel and interaction-layer contract
 
-The current scaffold implements a reversible single-particle Metropolis kernel: each sweep makes N attempted moves, selects a particle uniformly, proposes a symmetric component-wise uniform translation, rejects hard-core overlap, and applies the reduced-unit Boltzmann acceptance rule with kBT=1. The kernel currently evaluates local energies by brute force to provide a transparent correctness baseline. A shifted/truncated 12-6 Lennard-Jones potential with a hard-core overlap sentinel (+infinity), brute-force total/local energy functions, and a periodic neighbour candidate list. The list stores pairs within `cutoff + skin`; it is considered valid only while every particle has moved no more than `skin/2` from its reference position (minimum-image displacement). The list radius must be smaller than half the cubic box length. The interaction tests compare neighbour-list local energy against brute force and compare local energy differences with full-system energy differences. Seeded reproducibility and sweep-count tests are also included. These tests are committed but have not yet been compiled or executed.
+The current scaffold implements a reversible single-particle Metropolis kernel: each sweep makes N attempted moves, selects a particle uniformly, proposes a symmetric component-wise uniform translation, rejects hard-core overlap, and applies the reduced-unit Boltzmann acceptance rule with kBT=1. The kernel currently evaluates local energies by brute force to provide a transparent correctness baseline. A shifted/truncated 12-6 Lennard-Jones potential with a hard-core overlap sentinel (+infinity), brute-force total/local energy functions, and a periodic neighbour candidate list. The list stores pairs within `cutoff + skin`; it is considered valid only while every particle has moved no more than `skin/2` from its reference position (minimum-image displacement). The list radius must be smaller than half the cubic box length. The interaction tests compare neighbour-list local energy against brute force and compare local energy differences with full-system energy differences; a seeded random configuration checks the skin guarantee after bounded displacements. Metropolis tests cover seeded reproducibility, exactly N attempts per sweep, empty systems, invalid step size, and a 1000-sweep run that checks finite energy and hard-core non-overlap. All currently registered tests passed in the documented local builds. The neighbour list is not yet used by the sampler.
 
 ## 11. Required tests
-1. Periodic wrapping below zero and above L. (implemented; execution pending)
+1. Periodic wrapping below zero and above L. (implemented and passed)
 2. Minimum-image distance across opposite faces.
 3. Unwrapped-cluster Rg invariant to translating a cluster across a periodic face.
 4. Hard-core overlap proposals rejected.
-5. Potential gives expected values and zero beyond cutoff; shifted cutoff is continuous. (implemented; execution pending)
-6. Local Delta U equals full-system energy difference in a small system. (implemented for brute-force local energy; execution pending)
+5. Potential gives expected values and zero beyond cutoff; shifted cutoff is continuous. (implemented and passed)
+6. Local Delta U equals full-system energy difference in a small system. (implemented for brute-force local energy; passed)
 7. Metropolis accepts Delta U<=0 and gives the correct probability for positive Delta U in a seeded statistical test.
-8. Neighbour list agrees with brute-force enumeration for random small systems. (basic deterministic configuration implemented; randomized coverage pending)
+8. Neighbour list agrees with brute-force enumeration for a deterministic periodic case and a seeded random configuration after bounded displacements. (passed; broader property-based coverage remains desirable)
 9. Connectivity and coordination match known test graphs.
 10. Same seed/configuration reproduces identical output on the same build.
 11. Zero-attraction limit has no attraction-driven compaction; algorithm check only, not material prediction.
