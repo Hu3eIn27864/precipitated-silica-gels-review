@@ -23,6 +23,30 @@ class HeterogeneousPressureTests(unittest.TestCase):
             dt*steps, cv, thickness/2.0)
         self.assertAlmostEqual(result["mean_pressure_pa"][-1], expected, delta=0.012)
 
+    def test_grid_refinement_reduces_analytical_error(self):
+        exact = 1.0 - average_degree_of_consolidation(0.025, 1.0, 0.5)
+        errors = []
+        for n in (20, 40, 80):
+            dx = 1.0 / n
+            dt = 0.02 * dx * dx
+            steps = round(0.025 / dt)
+            result = solve_1d_pressure_diffusion([1.0]*n, [1.0]*n,
+                                                 1.0, dt, steps)
+            errors.append(abs(result["mean_pressure_pa"][-1] - exact))
+        self.assertLess(errors[1], errors[0])
+        self.assertLess(errors[2], errors[1])
+
+    def test_time_refinement_reduces_analytical_error(self):
+        exact = 1.0 - average_degree_of_consolidation(0.025, 1.0, 0.5)
+        errors = []
+        for dt in (1e-4, 5e-5, 2.5e-5):
+            steps = round(0.025 / dt)
+            result = solve_1d_pressure_diffusion([1.0]*40, [1.0]*40,
+                                                 1.0, dt, steps)
+            errors.append(abs(result["mean_pressure_pa"][-1] - exact))
+        self.assertLess(errors[1], errors[0])
+        self.assertLess(errors[2], errors[1])
+
     def test_mass_balance_each_step(self):
         result = solve_1d_pressure_diffusion([1e-5]*30, [1e-12]*30, 1e-3, 0.5, 40)
         for residual in result["balance_residual_m"][1:]:
