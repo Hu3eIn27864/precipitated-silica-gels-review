@@ -133,6 +133,16 @@ def load_system(particle_count: int, prefix: Path,
         if completed not in (0, 1) or unwrapped not in (0, 1):
             raise ValueError(f"Boolean fields must be 0 or 1 in {runs_path}: {row}")
         largest = as_int(row, "largest_component_size", runs_path)
+        if largest < 0 or largest > particle_count:
+            raise ValueError(
+                f"largest_component_size must lie in [0, {particle_count}] "
+                f"in {runs_path}: {row}"
+            )
+        if completed == 1 and largest != particle_count:
+            raise ValueError(
+                f"Completed run must contain all {particle_count} particles "
+                f"in its largest component in {runs_path}: {row}"
+            )
         rg = as_float(row, "largest_component_rg", runs_path, allow_blank=True)
         fit = by_seed.get(seed) if completed == 1 and unwrapped == 1 else None
         output_rows.append({
