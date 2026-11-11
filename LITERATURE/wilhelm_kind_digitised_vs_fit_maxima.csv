@@ -1,0 +1,13 @@
+figure,panel,condition,temperature_C,digitised_series_max,reported_fit_max_shrinkage,absolute_difference,relative_difference_percent,n_points,time_of_digitised_max_h,interpretation
+Figure 8,a,acidic,20,0.200,0.200,0.000,0.0,13,245,"within_10_percent_of_fit_parameter"
+Figure 8,a,acidic,40,0.200,0.200,0.000,0.0,11,50,"within_10_percent_of_fit_parameter"
+Figure 8,a,acidic,60,0.210,0.200,0.010,5.0,11,125,"within_10_percent_of_fit_parameter"
+Figure 8,b,basic,20,0.310,0.300,0.010,3.3,11,195,"within_10_percent_of_fit_parameter"
+Figure 8,b,basic,40,0.380,0.390,-0.010,-2.6,9,145,"within_10_percent_of_fit_parameter"
+Figure 8,b,basic,60,0.540,0.510,0.030,5.9,10,220,"within_10_percent_of_fit_parameter"
+Figure 10,a,acidic,20,0.370,0.370,0.000,0.0,15,4,"within_10_percent_of_fit_parameter"
+Figure 10,a,acidic,40,0.490,0.410,0.080,19.5,19,6.8,"requires_visual_recheck; digitised maximum differs from empirical-fit parameter"
+Figure 10,a,acidic,60,0.510,0.480,0.030,6.3,21,6.6,"within_10_percent_of_fit_parameter"
+Figure 10,b,basic,20,0.510,0.300,0.210,70.0,15,5.3,"requires_visual_recheck; digitised maximum differs from empirical-fit parameter"
+Figure 10,b,basic,40,0.670,0.390,0.280,71.8,16,5.4,"requires_visual_recheck; digitised maximum differs from empirical-fit parameter"
+Figure 10,b,basic,60,0.860,0.510,0.350,68.6,13,4.4,"requires_visual_recheck; digitised maximum differs from empirical-fit parameter"
