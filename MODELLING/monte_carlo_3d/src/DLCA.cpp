@@ -106,7 +106,11 @@ DLCAResult DLCA::generate() const {
         const double broadRadius = config_.contactDistance + shiftLength;
         std::unique_ptr<PeriodicCellList> broadPhase;
         if (shiftLength > 0.0 && broadRadius < 0.5 * box_.sideLength()) {
-            broadPhase = std::make_unique<PeriodicCellList>(box_, positions, broadRadius);
+            try {
+                broadPhase = std::make_unique<PeriodicCellList>(box_, positions, broadRadius);
+            } catch (const std::length_error&) {
+                // A dense grid would be wasteful for this geometry; exact scans remain the fallback.
+            }
         }
 
         double firstContact = 1.0;
@@ -167,8 +171,12 @@ DLCAResult DLCA::generate() const {
             const double contactTolerance = config_.contactDistance * (1.0 + 1e-10);
             std::unique_ptr<PeriodicCellList> finalCells;
             if (contactTolerance < 0.5 * box_.sideLength()) {
-                finalCells = std::make_unique<PeriodicCellList>(
-                    box_, finalPositions, contactTolerance);
+                try {
+                    finalCells = std::make_unique<PeriodicCellList>(
+                        box_, finalPositions, contactTolerance);
+                } catch (const std::length_error&) {
+                    // Preserve exact contact identification when the dense grid is too large.
+                }
             }
             std::vector<bool> hitFlag(clusters.size(), false);
             std::size_t movingFlat = 0;
