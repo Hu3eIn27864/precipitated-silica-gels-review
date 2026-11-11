@@ -120,3 +120,10 @@
 - Added the droplet protocol's initial 20 °C period and subsequent temperature change as a thermal-history caveat.
 - Refined C06/C07: geometry and drainage length are part of the measured response; “analogous” parameter dependencies between natural and enforced syneresis must not be read as quantitative or mechanistic equivalence.
 - This reinforces the comparison rule: report geometry, drainage boundary, sample age and thermal history with every syneresis number.
+
+## 2026-11-11 — Independent alkaline waterglass syneresis comparator (PSG-032)
+
+- Added Hamouda & Akhlaghi Amiri (2014), *Energies* 7, 568–590, DOI 10.3390/en7020568, after inspecting the complete publisher text.
+- Added assessment batch 10 and database record PSG-032. The study measures expelled-liquid mass from sealed alkaline sodium-silicate gels (3–6 wt%, HCl-adjusted pH 8.6–10.7), varying concentration, pH, temperature, divalent ions, pressure and container material.
+- Key caution: the authors infer shrinkage from expelled-liquid mass under an equal-density assumption; this is not geometric ΔV/V0. Glass versus polypropylene changes the measured one-week shrinkage strongly (~2.3 vs ~12 wt% in one comparison).
+- Added bounded claim C18 as an independent mechanistic comparator only. The system is dilute, alkaline and HCl-acidified, not industrial sulfuric-acid precipitated silica. Do not pool its numerical data with the Wilhelm geometric shrinkage series.
