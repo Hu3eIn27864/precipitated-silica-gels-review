@@ -406,3 +406,4 @@
 - Changed the DLCA size-series runner to allocate non-overlapping pseudorandom seed blocks across particle counts, avoiding accidental reuse of identical initial random streams in unpaired size comparisons.
 
 - Added a regression test that rejects a DLCA fit summary when its point count disagrees with the underlying mass-radius observations; corrected the broad-window fixture to reflect its actual six source radii.
+- 2026-11-11: Strengthened DLCA ensemble provenance validation by cross-checking mass-radius and fit rows against run-summary seeds and completion/unwrapping flags; added regression tests for orphaned fit rows and observations attached to unfinished runs. Full repository CI remains unverified.
