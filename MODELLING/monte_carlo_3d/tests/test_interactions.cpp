@@ -3,6 +3,7 @@
 #include <cmath>
 #include <exception>
 #include <iostream>
+#include <algorithm>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -60,6 +61,50 @@ void testNeighborList() {
     require(!list.validFor(p, box), "neighbor list should invalidate after skin/2 displacement");
 }
 
+void testNeighborListSkinGuarantee() {
+    const mc3d::SimulationBox box(30.0);
+    const mc3d::PairPotential potential(0.8, 0.6, 2.0);
+    mc3d::Random rng(20261111);
+    std::vector<mc3d::Particle> particles;
+    for (std::size_t i = 0; i < 60; ++i) {
+        particles.push_back({i, {rng.uniform(0.0, 30.0),
+                                 rng.uniform(0.0, 30.0),
+                                 rng.uniform(0.0, 30.0)}});
+    }
+
+    mc3d::NeighborList list(2.0, 0.8);
+    list.rebuild(particles, box);
+
+    // Move every particle by at most skin/2 in Euclidean distance.
+    for (auto& particle : particles) {
+        const double dx = rng.uniform(-0.15, 0.15);
+        const double dy = rng.uniform(-0.15, 0.15);
+        const double dz = rng.uniform(-0.15, 0.15);
+        particle.position = box.wrap(particle.position + mc3d::Vec3{dx, dy, dz});
+    }
+    require(list.validFor(particles, box),
+            "list should remain valid when all displacements are below skin/2");
+
+    // Every pair currently inside the interaction cutoff must be in the
+    // candidate list built before the bounded displacements.
+    for (std::size_t i = 0; i < particles.size(); ++i) {
+        for (std::size_t j = i + 1; j < particles.size(); ++j) {
+            if (box.distanceSquared(particles[i].position, particles[j].position)
+                < potential.cutoff() * potential.cutoff()) {
+                const auto& neighbours = list.neighborsOf(i);
+                require(std::find(neighbours.begin(), neighbours.end(), j) != neighbours.end(),
+                        "valid neighbour list omitted a pair inside the interaction cutoff");
+            }
+        }
+        const double listed = list.localEnergy(i, particles[i].position,
+                                               particles, box, potential);
+        const double brute = mc3d::localEnergy(i, particles[i].position,
+                                               particles, box, potential);
+        require(near(listed, brute, 1e-9),
+                "skin-valid neighbour-list energy differs from brute force");
+    }
+}
+
 void testInvalidNeighborList() {
     bool threw = false;
     try { mc3d::NeighborList list(2.5, 0.5); list.rebuild({}, mc3d::SimulationBox(6.0)); }
@@ -73,6 +118,7 @@ int main() {
         testPotential();
         testBruteForceLocalEnergy();
         testNeighborList();
+        testNeighborListSkinGuarantee();
         testInvalidNeighborList();
     } catch (const std::exception& e) {
         std::cerr << "FAILED: " << e.what() << '\n';
