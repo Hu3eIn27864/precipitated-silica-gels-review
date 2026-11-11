@@ -528,3 +528,11 @@
 - Explicitly labelled all generated rows as fit reconstructions, not digitised experimental points; actual marker digitisation remains outstanding.
 - Added a parameter-evidence audit distinguishing direct precipitated-silica filter-cake consolidation from free-gel syneresis and alkoxide-derived silica-gel comparators.
 - No intrinsic permeability or modulus values were inferred from empirical syneresis time constants.
+
+
+## 2026-11-11 — Ragueh structural and filtration data extraction
+
+- Added structured transcription of Ragueh et al. (2015) Tables 2–4, covering primary-particle and aggregate length scales, fractal dimensions, relative specific resistance, and cake volume fractions.
+- Added a source note documenting transferability limits: filter-cake data are not direct natural-syneresis gel parameters, and specific resistance is normalised by an undisclosed reference.
+- Flagged two source inconsistencies: S1/S3/S3 labels in Table 2 versus S1/S2/S3 elsewhere; S3 fractal dimension 1.8 in Table 3 versus 2.2 in adjacent prose. A missing reference symbol in one Table 4 entry is also flagged.
+- Audited original-figure access for Wilhelm & Kind: HTML figure references are present, but direct image/PDF retrieval failed in this pass. No raw curve digitisation is claimed.
