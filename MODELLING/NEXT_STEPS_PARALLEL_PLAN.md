@@ -348,3 +348,10 @@ pending.
 
 
 The run-level event count and expanded CSV schema passed hosted CI [#284](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43020332694). Artifact-level reconciliation across 51 seed/configuration records matched size-class and run-level totals for attempts, merge events, absorbed components, Q and L in every record. In the seven common-Q configurations, merge-event totals equalled absorbed-component totals (25–36 per configuration), i.e. no move absorbed multiple other components in this screen. The distinction remains in the schema for correct general accounting, but the current pilot does not yet demonstrate a multi-contact move. Larger-size event ratios are too sparse for inference.
+
+
+### Quantitative structure benchmark from PSG-046
+
+Ragueh et al. report dense-aggregate radii of 82, 125 and 175 nm for S1, S2 and S3. Table 3 lists branch mass-fractal dimensions 1.8, 2.2 and 1.8; the prose immediately below lists 1.8, 2.2 and 2.2. The S3 value is therefore internally inconsistent and is flagged rather than silently resolved. The reported cake solid volume fractions are 0.070–0.108 across 400–600 kPa; absolute specific-resistance values are normalised to a withheld reference, so they cannot be converted to absolute permeability from the table alone.
+
+These values provide a useful **external scale benchmark**, not a calibration target: the SAXS-derived branch exponent is measured on industrial aggregates over a selected scattering window, whereas our Monte Carlo mass-radius exponent is calculated from finite simulated clusters and a chosen real-space radius interval. Before comparing numerical Df values, we must establish equivalent scale windows and structural objects. The present DLCA pilot has insufficient completed aggregates at N=64/128 and therefore no valid size-trend comparison.
