@@ -36,6 +36,8 @@ def as_float(row: dict, key: str, path: Path, allow_blank: bool = False):
     raw = row.get(key, "")
     if allow_blank and raw == "":
         return None
+    if allow_blank and raw.strip().lower() == "nan":
+        return None
     try:
         value = float(raw)
     except (TypeError, ValueError) as exc:
