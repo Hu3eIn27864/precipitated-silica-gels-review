@@ -101,3 +101,15 @@ conditions. It does not yet model finite-cylinder end drainage, nonlinear
 permeability, viscoelasticity, changing geometry, pH effects, or coupled
 network reorganisation. Agreement with the series is code verification, not
 experimental validation of precipitated-silica syneresis.
+
+
+### Early-time numerical stability of the planar solution
+
+The direct odd-eigenvalue series converges slowly as (Fo_d=c_v t/H_d^2\to0).
+For (Fo_d<0.01), the implementation now uses the Poisson-transformed
+short-time asymptotic (U\simeq2\sqrt{Fo_d/\pi}), whose omitted corrections
+are exponentially small in (1/Fo_d). This avoids a spurious dependence on
+the arbitrary number of retained eigenmodes at very early times. Tests check
+term-count independence in the short-time branch, square-root scaling and
+continuity at the branch threshold. This is a numerical evaluation improvement,
+not a change to the physical assumptions of the linear slab model.
