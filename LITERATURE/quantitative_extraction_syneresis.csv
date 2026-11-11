@@ -1,0 +1,7 @@
+study_family,source,experiment_type,gel_type,temperature_C,initial_height_mm,equivalent_pressure_bar,max_relative_volume_decrease,tau_h,data_status,notes
+Wilhelm-Kind,Wilhelm_2017_dissertation,centrifugal_forced_syneresis,acid,20,20,0.10,0.27,9.7,additional_dissertation_experiment,"Equivalent pressure is height-averaged; not uniform applied pressure"
+Wilhelm-Kind,Wilhelm_2017_dissertation,centrifugal_forced_syneresis,acid,20,20,0.26,0.34,3.8,additional_dissertation_experiment,"Equivalent pressure is height-averaged; not uniform applied pressure"
+Wilhelm-Kind,Wilhelm_2017_dissertation,centrifugal_forced_syneresis,acid,20,20,0.39,0.41,4.2,additional_dissertation_experiment,"Non-monotonic tau relative to 0.26 bar; retain as reported"
+Wilhelm-Kind,Wilhelm_2017_dissertation,centrifugal_forced_syneresis,base,20,20,0.10,0.64,12.4,additional_dissertation_experiment,"Equivalent pressure is height-averaged; not uniform applied pressure"
+Wilhelm-Kind,Wilhelm_2017_dissertation,centrifugal_forced_syneresis,base,20,20,0.26,0.68,5.3,additional_dissertation_experiment,"Equivalent pressure is height-averaged; not uniform applied pressure"
+Wilhelm-Kind,Wilhelm_2017_dissertation,centrifugal_forced_syneresis,base,20,20,0.39,0.74,3.8,additional_dissertation_experiment,"Equivalent pressure is height-averaged; not uniform applied pressure"
