@@ -54,3 +54,12 @@
 - Completed volume/pages metadata (183, 626–638) from the publisher record.
 - Kept the source in class B: directly relevant to post-manufacture precipitated-silica ageing, but not direct evidence for wet-fragment consolidation or syneresis.
 - CSV validation: 22 records; 18 columns per record; no malformed rows.
+
+
+## 2026-11-11 — Claim–evidence synthesis and historical literature
+
+- Created SYNTHESIS/claim_evidence_matrix_v01.md with 12 bounded claims, source-family dependencies, confidence levels, limitations and priority evidence gaps.
+- Added explicit LAMMPS go/no-go criteria: defer implementation until a specific coarse-grained question is justified; distinguish sensitivity modelling from predictive/reactive silica chemistry.
+- Added PSG-023 (Sing & Madeley, 1953), PSG-024 (Shapiro & Kolthoff, 1950), PSG-025 (Merrill & Spencer, 1950) and PSG-026 (Madeley & Sing, 1962).
+- Added LITERATURE/source_assessments_batch_06.md; paywalled/abstract-unavailable papers remain provisional and no substantive claims are inferred from titles alone.
+- Database validation: 26 records; 18 columns per record; no malformed rows.
