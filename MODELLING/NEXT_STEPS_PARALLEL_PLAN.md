@@ -605,3 +605,12 @@ The literature gap is now more precise: direct sodium-silicate/sulfuric-acid rhe
 - [x] Preserve the visible Figure 10b/Table 2 discrepancy as unresolved without asserting a table error or graph error.
 
 For base-catalysed droplets, use Table 2 values A = 0.30/0.39/0.51 and τ = 0.67/0.57/0.95 h at 20/40/60 °C in literature comparisons. These are published empirical fit parameters, not direct measurements of permeability, diffusivity, or a physical consolidation time.
+
+## Follow-up source checks — 11.11.2026
+
+- [x] Cross-check Wilhelm & Kind (2015) Table 2 against the KITopen full-text copy and adopt its printed values as the literature reference.
+- [x] Run targeted correction/erratum searches; no correction notice was located. This is not proof that none exists.
+- [ ] Obtain and inspect the actual V9OPAT Dataverse replication files. The landing page currently presents an Anubis JavaScript challenge, and the API metadata endpoint could not be retrieved through the available route. No raw dataset has been inspected.
+- [x] Keep Valibeknejad et al. (2026) classified as an adjacent sodium-silicate grout system, not direct precipitated-silica validation.
+
+Detailed status: `LITERATURE/followup_research_status_2026-11-11.md`.
