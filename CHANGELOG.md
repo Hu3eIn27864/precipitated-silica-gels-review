@@ -421,3 +421,4 @@
 - Extended the DLCA ensemble CLI with optional contact distance, maximum component displacement and mobility exponent; retained the original six-argument invocation through defaults.
 - Recorded these three parameter values in each run-summary row and added them to the size-series runner so controlled sensitivity ensembles can be launched and traced.
 - Updated the CMake smoke test to exercise non-default parameters and check the expanded output schema. Source and test changes are committed; full C++ build, CTest and Python repository test execution remain unverified in this environment.
+- 2026-11-11: Normalised the DLCA mass-radius grid to multiples of the configured contact distance, keeping fit-window coordinates comparable in dimensionless contact units across contact-distance sensitivity runs. Updated the pilot protocol and usage notes; full C++/CI execution remains pending.
