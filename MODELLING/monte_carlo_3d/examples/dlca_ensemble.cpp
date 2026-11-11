@@ -60,9 +60,10 @@ double parseNonnegativeDouble(const char* value, const char* name) {
 
 int main(int argc, char** argv) {
     try {
-        if (argc != 7) {
+        if (argc < 7 || argc > 10) {
             std::cerr << "Usage: mc3d_dlca_ensemble <particle_count> <box_length> "
-                         "<seed_start> <seed_count> <maximum_attempts> <output_prefix>\n";
+                         "<seed_start> <seed_count> <maximum_attempts> <output_prefix> "
+                         "[contact_distance [maximum_component_step [mobility_exponent]]]\n";
             return 2;
         }
 
@@ -93,7 +94,8 @@ int main(int argc, char** argv) {
             throw std::runtime_error("Could not open one or more output CSV files");
 
         runs << "seed,completed,attempts,successful_merges,component_count,"
-                "largest_component_size,largest_component_rg,unwrapping_consistent\n";
+                "largest_component_size,largest_component_rg,unwrapping_consistent,"
+                "contact_distance,maximum_component_step,mobility_exponent\n";
         curves << "seed,particle_count,radius,mean_enclosed_mass\n";
         fits << "seed,fit_minimum_radius,fit_maximum_radius,exponent,"
                 "standard_error,r_squared,point_count\n";
@@ -132,7 +134,9 @@ int main(int argc, char** argv) {
                  << generated.attempts << ',' << generated.successfulMerges << ','
                  << network.componentCount << ','
                  << (hasLargest ? largest->particleCount : 0) << ','
-                 << rg << ',' << (unwrapped ? 1 : 0) << '\n';
+                 << rg << ',' << (unwrapped ? 1 : 0) << ','
+                 << config.contactDistance << ',' << config.maximumComponentStep << ','
+                 << config.mobilityExponent << '\n';
 
             // Only a completed, consistently unwrapped aggregate is suitable
             // for this whole-aggregate mass-radius export.
