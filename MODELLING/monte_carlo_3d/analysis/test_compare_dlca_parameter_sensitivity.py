@@ -42,7 +42,7 @@ class PairedSensitivityTests(unittest.TestCase):
         per_seed, summary = compare_rows(baseline, variant, "unfinished")
         self.assertAlmostEqual(per_seed[0]["delta_largest_fraction"], 0.2)
         self.assertEqual(summary["both_completed"], 0)
-        self.assertEqual(summary["valid_df_pairs"], 0)
+        self.assertEqual(summary["valid_df_pairs"], 0)\n        self.assertEqual(summary["valid_rg_pairs"], 0)
 
 
 if __name__ == "__main__":
