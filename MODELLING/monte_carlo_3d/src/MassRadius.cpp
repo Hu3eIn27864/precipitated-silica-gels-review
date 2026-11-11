@@ -19,29 +19,29 @@ std::vector<MassRadiusPoint> calculateMassRadiusCurve(
     }
     for (std::size_t i = 0; i < radii.size(); ++i) {
         if (!std::isfinite(radii[i]) || radii[i] <= 0.0 ||
+            !std::isfinite(radii[i] * radii[i]) ||
             (i > 0 && radii[i] <= radii[i - 1])) {
-            throw std::invalid_argument("Mass-radius radii must be finite, positive and strictly increasing");
+            throw std::invalid_argument("Mass-radius radii must be finite, positive, square safely and strictly increase");
         }
     }
 
     std::vector<MassRadiusPoint> curve;
     curve.reserve(radii.size());
-    std::vector<double> distances;
-    distances.reserve(unwrappedPositions.size());
     for (const double radius : radii) {
         const double radiusSquared = radius * radius;
         double totalMass = 0.0;
         for (const auto& centre : unwrappedPositions) {
-            distances.clear();
+            std::size_t enclosed = 0;
             for (const auto& particle : unwrappedPositions) {
                 const double dx = particle.x - centre.x;
                 const double dy = particle.y - centre.y;
                 const double dz = particle.z - centre.z;
-                distances.push_back(dx * dx + dy * dy + dz * dz);
+                const double distanceSquared = dx * dx + dy * dy + dz * dz;
+                if (distanceSquared <= radiusSquared) {
+                    ++enclosed;
+                }
             }
-            totalMass += static_cast<double>(std::count_if(
-                distances.begin(), distances.end(),
-                [radiusSquared](double d2) { return d2 <= radiusSquared; }));
+            totalMass += static_cast<double>(enclosed);
         }
         curve.push_back({radius, totalMass /
             static_cast<double>(unwrappedPositions.size())});
