@@ -148,3 +148,15 @@ should vary one parameter at a time initially, preserve common system sizes
 and analysis intervals, and report completion fractions as well as structural
 observables. Full compilation and execution of the updated driver remain
 pending.
+
+## Bounded DLCA parameter-sensitivity screen
+
+The CI workflow now runs a paired-seed one-factor-at-a-time screening matrix
+for contact distance, maximum cluster step and mobility exponent using
+N = 32, three seeds per variant and a 50,000-attempt cap. It preserves the
+raw per-variant CSV files, writes a parameter manifest, and runs both the
+fixed-window ensemble summary and fit-window sensitivity audit. The six
+non-baseline variants are compared with the baseline configuration from the
+separate CI pilot. This bounded screen is not the full finite-size study and
+does not calibrate the model to silica. See
+[DLCA_PARAMETER_SENSITIVITY_PLAN.md](DLCA_PARAMETER_SENSITIVITY_PLAN.md).
