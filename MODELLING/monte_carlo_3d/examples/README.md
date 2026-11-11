@@ -113,3 +113,5 @@ The ensemble analyser also validates the underlying `_mass_radius.csv` files bef
 The ensemble analyser also checks that the largest-component count is physically consistent with the declared system size, and that a run labelled complete has all particles in its sole aggregate. These are integrity checks on the simulation output, not physical validation of the aggregation model.
 
 The runner assigns **non-overlapping seed blocks** to different particle counts (for the defaults: 1000–1004, 1005–1009, and 1010–1014). This avoids reusing the same pseudorandom stream across system sizes. Each system still has its own independent replicate ensemble; the resulting size comparison is not a paired-seed analysis.
+
+The analyser's tests include deliberately corrupted fit metadata to ensure a derived exponent is rejected when its declared number of points does not match the source radius grid.
