@@ -134,6 +134,58 @@ void testPeriodicSweptCollisionChecksNeighbouringImages() {
             "periodic swept collision did not detect initial overlap");
 }
 
+void testPeriodicSweptCollisionAgainstSampledTrajectories() {
+    constexpr double boxLength = 10.0;
+    constexpr double contactDistance = 1.0;
+    std::uint64_t state = 0x6a09e667f3bcc909ULL;
+    const auto unit = [&state]() {
+        state = state * 2862933555777941757ULL + 3037000493ULL;
+        return static_cast<double>(state >> 11) / 9007199254740992.0;
+    };
+    const auto signedUnit = [&unit]() { return 2.0 * unit() - 1.0; };
+    for (int sample = 0; sample < 500; ++sample) {
+        const mc3d::Vec3 relative{
+            0.5 * boxLength * signedUnit(), 0.5 * boxLength * signedUnit(),
+            0.5 * boxLength * signedUnit()};
+        const mc3d::Vec3 displacement{
+            0.24 * signedUnit(), 0.24 * signedUnit(), 0.24 * signedUnit()};
+        const auto contact = mc3d::firstPeriodicSweptSphereContact(
+            relative, displacement, contactDistance, boxLength);
+        bool sampledContact = false;
+        double firstSample = 1.0;
+        for (int step = 0; step <= 2000; ++step) {
+            const double fraction = static_cast<double>(step) / 2000.0;
+            const mc3d::Vec3 point = relative + displacement * fraction;
+            const mc3d::Vec3 minimumImage{
+                point.x - boxLength * std::nearbyint(point.x / boxLength),
+                point.y - boxLength * std::nearbyint(point.y / boxLength),
+                point.z - boxLength * std::nearbyint(point.z / boxLength)};
+            if (mc3d::normSquared(minimumImage) <=
+                contactDistance * contactDistance) {
+                sampledContact = true;
+                firstSample = fraction;
+                break;
+            }
+        }
+        if (sampledContact) {
+            require(contact.has_value(),
+                    "analytic periodic sweep missed a sampled trajectory contact");
+            require(*contact <= firstSample + 1e-12,
+                    "analytic periodic sweep reported contact after sampled contact");
+        }
+        if (contact) {
+            const mc3d::Vec3 point = relative + displacement * *contact;
+            const mc3d::Vec3 minimumImage{
+                point.x - boxLength * std::nearbyint(point.x / boxLength),
+                point.y - boxLength * std::nearbyint(point.y / boxLength),
+                point.z - boxLength * std::nearbyint(point.z / boxLength)};
+            require(mc3d::normSquared(minimumImage) <=
+                        contactDistance * contactDistance + 1e-10,
+                    "analytic periodic sweep returned a non-contacting fraction");
+        }
+    }
+}
+
 void testPeriodicCellListIsConservative() {
     const mc3d::SimulationBox box(12.0);
     const std::vector<mc3d::Vec3> positions{
@@ -380,6 +432,7 @@ int main() {
         testPeriodicWindingIsFlagged();
         testDLCAReproducibilityAndNonOverlap();
         testPeriodicSweptCollisionChecksNeighbouringImages();
+        testPeriodicSweptCollisionAgainstSampledTrajectories();
         testPeriodicCellListIsConservative();
         testCellListRandomizedAgainstBruteForce();
         testCellListRejectsExcessiveDenseGrid();
