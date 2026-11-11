@@ -45,3 +45,8 @@ ctest --test-dir build --output-on-failure
 ```
 
 The complete CMake/CTest suite for the current repository snapshot has not yet been verified. See [../TEST_RESULTS.md](../TEST_RESULTS.md) for the exact validation boundary.
+
+
+## Automated smoke test
+
+CTest includes a deterministic end-to-end smoke test of the ensemble executable. It verifies successful execution and the three CSV headers, but does not require a completed aggregate or non-empty mass-radius output. The current five-test suite has not yet been executed; see [../TEST_RESULTS.md](../TEST_RESULTS.md) for the verification boundary.
