@@ -461,3 +461,7 @@
 
 
 - 2026-11-11: Downloaded and independently audited the raw artifact from hosted CI run #237 (artifact 13851749184). Added seed-level size-series outcomes, per-variant completion/Q/L summaries, fixed-window fit eligibility, fit-window sensitivity, and paired-comparison eligibility to `MODELLING/monte_carlo_3d/TEST_RESULTS.md`. Reconfirmed no valid completed baseline/variant Rg or Df pairs and no basis for finite-size scaling; full matrix remains gated. Common-Q stopping is the next DLCA implementation task, with Q and L both retained as algorithmic (not physical-time) progress diagnostics.
+
+
+- 2026-11-11: Added a transient radial finite-volume benchmark for ideal infinite-cylinder and sphere consolidation, with backward-Euler time integration, conservative radial volume weighting, and independent eigenfunction-series references. Five isolated local unit tests passed, including series agreement and grid/time refinement. Added the transport-model path to CI triggers; hosted validation is pending. This is numerical verification work, not experimental validation or a silica-specific model.
+- 2026-11-11: Completed seed-level audit of run #237 artifact and documented raw completion outcomes, per-variant movement diagnostics, fit eligibility, fit-window sensitivity, and the no-go decision for the full size matrix pending common-displacement stopping.
