@@ -101,7 +101,8 @@ DLCAResult DLCA::generate() const {
                 owners.push_back(c);
             }
         }
-        const double shiftLength = std::sqrt(normSquared(shift));
+        const double shift2 = normSquared(shift);
+        const double shiftLength = std::sqrt(shift2);
         const double broadRadius = config_.contactDistance + shiftLength;
         std::unique_ptr<PeriodicCellList> broadPhase;
         if (shiftLength > 0.0 && broadRadius < 0.5 * box_.sideLength()) {
