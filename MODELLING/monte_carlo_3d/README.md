@@ -2,7 +2,7 @@
 
 ## Status
 
-Partial implementation. The C++17 scaffold now includes periodic geometry, seeded RNG, a shifted/truncated Lennard-Jones test potential with hard-core rejection, brute-force energy helpers, a Verlet-style neighbour list with a skin/rebuild validity check, and geometry/interaction tests. Network generation, Metropolis moves, observables, and a runnable simulation driver remain unimplemented. Compilation and CTest have not yet been verified in this environment.
+Partial implementation. The C++17 scaffold now includes periodic geometry, seeded RNG, a shifted/truncated Lennard-Jones test potential with hard-core rejection, brute-force energy helpers, a Verlet-style neighbour list with a skin/rebuild validity check, and geometry/interaction tests. Network generation, observables, and a runnable simulation driver remain unimplemented. The current Metropolis kernel uses brute-force local energies as a correctness-first baseline; the neighbour list is tested independently and is not yet wired into the sampler. Compilation and CTest have not yet been verified in this environment.
 
 ## Scientific purpose
 
@@ -73,6 +73,8 @@ The implementable V1 contract is now defined in [TECHNICAL_SPEC.md](TECHNICAL_SP
 - `include/Energy.hpp`: brute-force total and single-particle local energy calculations.
 - `include/NeighborList.hpp` and `src/NeighborList.cpp`: periodic candidate list with cutoff + skin and a conservative skin/2 rebuild criterion.
 - `tests/test_interactions.cpp`: cutoff continuity, hard-core, zero-attraction, local-vs-total energy difference, neighbour-list agreement and invalid-box checks.
+- `include/MonteCarlo.hpp` and `src/MonteCarlo.cpp`: reversible single-particle Metropolis moves with symmetric uniform displacement, hard-overlap rejection, reduced-unit acceptance, sweep and acceptance diagnostics. Uses brute-force local energies pending neighbour-list integration.
+- `tests/test_metropolis.cpp`: seeded reproducibility, sweep-count and empty-system checks.
 - `examples/README.md`: build/test instructions.
 
 **Verification status:** source files are committed, but compilation and CTest execution have not been verified here because the repository could not be cloned into the execution environment. Do not treat the tests as passed until they are run locally or in CI.
