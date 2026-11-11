@@ -20,3 +20,15 @@ Publisher article: https://www.sciencedirect.com/science/article/pii/S0950061826
 - Do not claim an erratum exists or that a typographical error has been established.
 - Do not claim the V9OPAT replication data have been inspected or analysed until the actual files are obtained.
 - Keep the 2026 sodium-silicate grout study in an adjacent-system evidence class unless transferability to precipitated silica is independently justified.
+
+
+## Pressure-cell digitisation source-access update (11 November 2026)
+
+The publisher's original image assets have been opened in the web interface for Wilhelm & Kind (2014) Figure 7 and Wilhelm & Kind (2015) Figure 12. Direct image downloads into the execution environment still fail, so no pixel-calibrated points or common raw-data refit are available yet.
+
+Added:
+- syneresis_pressure_cell_axis_calibration_template.csv — 36 preliminary axis tick correspondences, each marked as needing verification against the downloaded image.
+- wilhelm_kind_pressure_cell_marker_pixels_template.csv — 21 pressure-series metadata rows for measured curves only, preserving 2015 pressure ranges and distinguishing acid/base panels.
+- Updated syneresis_curve_digitisation_protocol.md with direct figure URLs and rules separating solid measured traces from dashed model fits.
+
+Next dependency: acquire the two original PNG files locally (or as attachments), then calibrate each panel independently, digitise only measured traces, record uncertainty, and only then run a common-form refit. No digitisation or refit is claimed in this update.
