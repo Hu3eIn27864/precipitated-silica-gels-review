@@ -673,3 +673,10 @@
 - The 1-D transport-model test suite ran 51 tests successfully; explicit spatial-grid and time-step refinement tests both passed.
 - The homogeneous analytical slab limit and discrete per-step mass balance remain covered. Next numerical gate is a layered-medium/interface benchmark.
 - No target-material constitutive law or physical prediction has been validated.
+
+## 2026-11-11 — Full-text audit of Sahabi & Kind (2011) MD consolidation model
+
+- Completed full-text inspection of PSG-004, DOI 10.3390/polym3042156; upgraded its literature-database status.
+- Added source assessment batch 22 and claim C26, documenting the 1,000-particle fractal cluster, LJ/Hamaker-based interactions, and comparisons with earlier KIT experimental datasets.
+- Recorded the empirical time rescaling factors (100 for the single-fragment comparison; 10 for network consolidation) and the authors' explicit statement that pore-fluid flow was omitted and must be coupled in future work.
+- Updated the poroelastic model design: this is a direct modelling precedent, not physical-time validation or a transferable parameter source; the experimental comparators are from the same KIT/Kind research lineage.
