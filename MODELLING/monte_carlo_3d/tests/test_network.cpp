@@ -231,14 +231,12 @@ void testMassRadiusRecoversOneDimensionalScaling() {
     require(fit.rSquared > 0.995,
             "line-like mass-radius scaling should be strongly linear in log-log space");
 
-    bool rejectedOverflowingRadius = false;
-    try {
-        (void)mc3d::calculateMassRadiusCurve(line, {1.0e200});
-    } catch (const std::invalid_argument&) {
-        rejectedOverflowingRadius = true;
-    }
-    require(rejectedOverflowingRadius,
-            "mass-radius estimator accepted a radius whose square overflows");
+    const std::vector<mc3d::Vec3> widelySeparated{
+        {0.0, 0.0, 0.0}, {1.0e200, 0.0, 0.0}
+    };
+    const auto largeScale = mc3d::calculateMassRadiusCurve(widelySeparated, {1.0e199});
+    require(near(largeScale[0].meanEnclosedMass, 1.0),
+            "overflow-resistant distance calculation failed at large coordinate scales");
 }
 
 void testMassRadiusCurveGeneration() {
