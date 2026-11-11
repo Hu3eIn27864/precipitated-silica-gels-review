@@ -229,3 +229,9 @@ The CI pilot step now writes `build/mc3d/pilot/provenance.txt` before running th
 ### Parallel 1-D transport benchmark hardening (2026-11-11)
 
 The slab consolidation function now rejects non-finite time, diffusivity, and drainage-length inputs. Added tests for NaN/infinity rejection and for agreement of the default 1000-term series with a 5000-term reference at a representative dimensionless time. The hosted MC3D workflow now also runs the independent `MODELLING/transport_model` Python unit tests. These changes are committed; hosted test results remain unverified.
+
+### Radial scaling and DLCA parameter-control additions (2026-11-11)
+
+Added `MODELLING/transport_model/geometry_scaling.py` with ideal first-mode time-constant and inverse apparent-diffusivity functions for radially drained infinite cylinders and spheres. Added tests for inverse consistency, radius-squared scaling and invalid inputs. This utility does not solve the full transient radial field and does not identify permeability.
+
+The DLCA CLI now accepts optional `contact_distance`, `maximum_component_step` and `mobility_exponent` arguments, while preserving prior calls through the original defaults. The run-summary CSV records all three parameters. The size-series runner forwards the parameters and validates their ranges. The smoke test was updated to check a non-default parameter set and the expanded CSV schema. These changes are committed, but no full-project C++ build, CTest, or repository Python test pass is claimed here.
