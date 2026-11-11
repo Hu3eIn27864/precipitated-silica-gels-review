@@ -216,17 +216,17 @@ void testMassRadiusPowerLawRegression() {
 
 void testMassRadiusRecoversOneDimensionalScaling() {
     std::vector<mc3d::Vec3> line;
-    line.reserve(201);
-    for (int i = 0; i <= 200; ++i) {
+    line.reserve(1001);
+    for (int i = 0; i <= 1000; ++i) {
         line.push_back({static_cast<double>(i), 0.0, 0.0});
     }
-    const std::vector<double> radii{2, 3, 4, 5, 6, 8, 10, 12, 15};
+    const std::vector<double> radii{10, 15, 20, 25, 30, 40, 50};
     const auto curve = mc3d::calculateMassRadiusCurve(line, radii);
     std::vector<double> masses;
     masses.reserve(curve.size());
     for (const auto& point : curve) masses.push_back(point.meanEnclosedMass);
-    const auto fit = mc3d::fitMassRadiusPowerLaw(radii, masses, 2.0, 15.0);
-    require(std::abs(fit.exponent - 1.0) < 0.08,
+    const auto fit = mc3d::fitMassRadiusPowerLaw(radii, masses, 10.0, 50.0);
+    require(std::abs(fit.exponent - 1.0) < 0.05,
             "mass-radius estimator did not recover line-like Df near one");
     require(fit.rSquared > 0.995,
             "line-like mass-radius scaling should be strongly linear in log-log space");
