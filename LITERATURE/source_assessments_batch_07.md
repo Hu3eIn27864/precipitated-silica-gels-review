@@ -82,3 +82,20 @@ The independent evidence base now supports three distinct points more strongly:
 3. **Chemical maturation:** Tognonvi et al. (2019) distinguish reversible physical gels from stable silica compounds associated with dissolution/precipitation in basic sodium-silicate systems.
 
 These papers materially improve mechanistic breadth but do **not** remove the principal gap: independently replicated quantitative syneresis measurements on industrially relevant, acid-precipitated silica fragments remain scarce.
+
+
+## Full publisher-preview reassessment — PSG-028 and PSG-029 (11 November 2026)
+
+A richer ScienceDirect article preview was inspected after the initial abstract-only assessment. This improves the evidential detail but does **not** amount to full-text inspection.
+
+### PSG-028 — Tognonvi et al. (2011)
+
+The preview reports commercial lithium, sodium and potassium silicate solutions adjusted to a common silicon concentration of approximately 3.7 mol/L for comparison, followed by acidification with dilute HCl. ATR-FTIR was used to characterise the initial solutions and follow gelation/ripening-related vibrational changes. The abstract states that syneresis increases with alkali-cation size and that ripening is interpreted through dissolution/precipitation. The preview's discussion/conclusion adds an important qualification: sodium and potassium gels show similar ripening behaviour and form a consolidated silica-based solid, whereas the lithium gel showed no measurable contraction during the first three months; whitening increased and incipient syneresis was reported after about two months. Thus the general abstract trend should not be paraphrased as identical time courses for all three cations. The source remains a basic alkali-silicate/HCl system, not direct industrial sulfuric-acid precipitated silica evidence.
+
+### PSG-029 — Tognonvi et al. (2019)
+
+The publisher preview provides substantially more detail than the highlights alone. The starting commercial sodium-silicate solution is reported at [Si] about 7.01 mol/L, Si/Na atomic ratio 1.71 and pH 11.56. It is progressively acidified/diluted with 0.5–2 mol/L HCl under stirring. Characterisation includes SAXS, FTIR, specific surface area and elemental chemical analysis. The initial concentrated solution contains coexisting neutral and charged Si7-type species; these are proposed to dissociate, aggregate and/or condense as pH and silicon concentration change. The preview distinguishes clear stable solutions, reversible transparent physical gels, soluble white gels, and irreversible white gels over different pH–[Si] domains. It also describes supernatant formation and distinct soluble/insoluble solid phases in the more evolved systems.
+
+This supports a chemically complex maturation pathway in concentrated basic sodium silicate. It does not establish that Si7 species or the same phase sequence occur in acid-precipitated industrial silica. The dissolution/precipitation interpretation is grounded in a combination of structural and chemical measurements, but specific causal contributions to macroscopic syneresis still require careful full-text appraisal.
+
+**Status change:** PSG-028 and PSG-029 remain class B comparators. Their evidential basis is now publisher-preview/abstract level with methods and selected results visible, not full-text critical appraisal.
