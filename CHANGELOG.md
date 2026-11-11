@@ -278,3 +278,14 @@
 - No compilation or CTest execution has been possible in the current network-restricted environment. No physical time, silica-specific force field, calibrated parameter, or syneresis prediction is claimed.
 
 - Added GitHub Actions workflow `.github/workflows/mc3d-ci.yml` to configure, compile and run CTest on changes to the MC3D project. The workflow has been committed; no completed CI result is yet available, so build/test success remains unverified.
+
+
+## 2026-11-11 — V1 kernel compiled and regression-tested
+
+- Corrected an overlap in the original neighbour-list test fixture: the periodic separation of the selected pair was below the hard-core diameter, so both local-energy implementations correctly returned infinity and the test's finite-only comparison failed. The fixture now uses a non-overlapping periodic separation, and the comparison helper handles matching infinities explicitly.
+- Added a seeded 60-particle neighbour-list skin test. After bounded particle displacements, every pair within the interaction cutoff must remain in the candidate list and list energies must agree with brute force.
+- Added a 1000-sweep Metropolis regression test (4000 attempted moves) checking finite total energy and no hard-core overlap.
+- Built the committed C++17 source snapshot with GCC 14.2.0 and CMake 3.31.6. Release build completed and CTest passed 3/3 targets (geometry, interactions, metropolis).
+- Repeated the build in Debug with AddressSanitizer and UndefinedBehaviorSanitizer; CTest passed 3/3 targets.
+- Verification is limited to the tested software kernel. The neighbour list is not yet integrated into Metropolis; aggregate generation, observables, physical parameter calibration, and experimental validation remain open. Hosted GitHub Actions status has not been confirmed.
+- Detailed commands and environment are recorded in `MODELLING/monte_carlo_3d/TEST_RESULTS.md`.
