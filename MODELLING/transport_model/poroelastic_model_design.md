@@ -102,7 +102,7 @@ This is deliberately not yet a time-dependent aging model. If storage changes wi
 
 ### Verification status after hosted CI #325 (11 November 2026)
 
-The fixed-coefficient solver passed hosted workflow #325. The transport-model test discovery executed 51 tests, including homogeneous analytical recovery, discrete per-step mass balance, nonnegative/monotonic pressure response, piecewise coefficient handling, and explicit spatial-grid and time-step refinement checks. This establishes numerical consistency for the implemented fixed-coefficient PDE within the tested cases. It does not validate the PDE as a complete physical model of silica-gel syneresis, nor any silica-specific parameter or closure. A layered-medium/interface benchmark and global integrated-flux/storage-loss check remain next before introducing time-dependent material coefficients.
+The fixed-coefficient solver passed hosted workflow #325. The transport-model test discovery executed 51 tests, including homogeneous analytical recovery, discrete per-step mass balance, nonnegative/monotonic pressure response, piecewise coefficient handling, and explicit spatial-grid and time-step refinement checks. This establishes numerical consistency for the implemented fixed-coefficient PDE within the tested cases. It does not validate the PDE as a complete physical model of silica-gel syneresis, nor any silica-specific parameter or closure. A non-grid-aligned two-layer interface-location refinement test has now been added; hosted CI must confirm it. A global integrated-flux/storage-loss check remains before introducing time-dependent material coefficients.
 
 ## 9. Direct precedent for particle-scale consolidation and missing transport
 
