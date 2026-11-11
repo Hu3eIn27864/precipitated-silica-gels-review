@@ -12,7 +12,7 @@ cmake --build build --target mc3d_dlca_ensemble
 Run a small ensemble:
 
 ```bash
-./build/mc3d_dlca_ensemble 32 15.0 1000 5 200000 results/dlca
+./build/mc3d_dlca_ensemble 32 15.0 1000 5 200000 dlca_example
 ```
 
 Arguments are:
