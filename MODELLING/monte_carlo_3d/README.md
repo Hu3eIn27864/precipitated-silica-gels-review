@@ -117,3 +117,7 @@ The new regression case compares cell-list candidates against brute-force minimu
 ## Reproducible DLCA ensemble executable (verification pending)
 
 `examples/dlca_ensemble.cpp` and the `mc3d_dlca_ensemble` CMake target provide a command-line driver over consecutive random seeds. It writes separate run-summary, mass-radius-curve and fit-window CSV files. Only completed aggregates with consistent periodic unwrapping are exported to the mass-radius and fit files; incomplete or winding cases remain visible in the run summary. The default radii and mobility settings are algorithmic reduced-unit choices, not calibrated silica parameters. Usage and output schemas are documented in [examples/README.md](examples/README.md). The driver and the latest fit-window scan changes have not yet been built as a complete repository snapshot.
+
+
+- The fit-window scan omits singular plateau-only windows while retaining valid intervals elsewhere; a completely constant mass curve produces no fit rows rather than aborting the ensemble export.
+- A command-line DLCA ensemble example is registered as `mc3d_dlca_ensemble`. It exports seed-level run summaries, mass-radius curves and all non-singular fit windows to three CSV files. See [examples/README.md](examples/README.md). Its full-project compilation and smoke run remain pending.
