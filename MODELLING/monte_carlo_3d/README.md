@@ -126,3 +126,7 @@ The new regression case compares cell-list candidates against brute-force minimu
 ## Current verification boundary
 
 The original geometry–interaction–Metropolis kernel passed 3/3 CTest targets in Release and sanitizer Debug builds. Subsequent DLCA, cell-list, network-observable, mass-radius, fit-window and ensemble-driver changes are covered by committed tests, including the fifth CTest entry `dlca_ensemble_smoke`. That smoke test checks successful CLI execution and all three CSV headers, without requiring stochastic aggregate completion. The full current snapshot has not yet been built or run; no new suite pass is claimed. See [TEST_RESULTS.md](TEST_RESULTS.md).
+
+## DLCA pilot interpretation and fit sensitivity
+
+The pilot workflow now runs `analysis/analyze_dlca_fit_sensitivity.py` after the seed-level ensemble summary and stores its CSV outputs with the other pilot artifacts. The audit reports within-seed exponent ranges across all available valid fit windows; it does not select a scaling interval or convert fit windows into independent replicates. See [DLCA_PILOT_VALIDATION_PROTOCOL.md](DLCA_PILOT_VALIDATION_PROTOCOL.md) for predeclared interpretation gates. The new script and its tests are committed, but their execution in the hosted workflow is not yet verified.
