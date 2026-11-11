@@ -66,3 +66,20 @@ The seven pressure-cell pressure levels at 20 °C and initial height 16 mm are r
 
 This trend differs from the centrifugal series in which the base/acid \(\tau\) ratio is 1.28, 1.39 and 0.90 at equivalent pressures 0.10, 0.26 and 0.39 bar. The experiments are not directly interchangeable: pressure-cell loading uses a membrane/filter-plate assembly and an initial height of 16 mm; centrifugal loading uses a 20 mm sample and a height-averaged equivalent pressure. The KIT dissertation discusses added membrane resistance. Therefore the difference is evidence that protocol/boundary effects matter, not proof of a universal reversal in intrinsic gel kinetics.
 
+
+
+## Pressure-cell forced syneresis: quantitative contrast
+
+The seven pressure-cell conditions in Table 3 of Wilhelm & Kind (2015) use \(s_0=16\) mm and \(20\,^\circ\mathrm{C}\). The reported fitted time constants are consistently lower for the base-catalysed gel than for the acid-catalysed gel, unlike the natural cylinder series:
+
+| Pressure interval (bar) | \(\tau_{base}/\tau_{acid}\) | \(S_{max,base}-S_{max,acid}\) |
+|---:|---:|---:|
+| 0.23–0.29 | 0.50 | +0.31 |
+| 0.63–0.77 | 0.54 | +0.24 |
+| 1.50–1.54 | 0.55 | +0.18 |
+| 2.24 | 0.74 | +0.16 |
+| 3.80–3.92 | 0.65 | +0.13 |
+| 6.15–6.46 | 0.91 | +0.10 |
+| 7.41–7.76 | 0.90 | +0.08 |
+
+These are ratios/differences of published empirical fit parameters. They are not direct estimates of hydraulic mobility. At higher pressure the time-constant contrast narrows, but the series does not support a universal intrinsic acid/base ordering because natural syneresis, membrane-assisted pressure-cell tests and centrifugal tests impose different boundary/loading conditions. The article also notes the sensitivity of its extrapolation toward zero pressure; extrapolated values must not be mistaken for independent measurements.
