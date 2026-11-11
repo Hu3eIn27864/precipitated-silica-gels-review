@@ -34,6 +34,21 @@ class ConsolidationTests(unittest.TestCase):
         value = average_degree_of_consolidation(1e-4, 1.0, 1.0, terms=1000)
         self.assertAlmostEqual(value, reference, places=12)
 
+    def test_corrected_reference_table(self):
+        references = (
+            (0.001, 0.035682482323055424),
+            (0.01, 0.11283791670955123),
+            (0.05, 0.2523132521777547),
+            (0.2, 0.5040878202025485),
+            (0.5, 0.7639503307438488),
+            (1.0, 0.9312596784633337),
+            (2.0, 0.9941704789261604),
+        )
+        for tv, expected in references:
+            with self.subTest(tv=tv):
+                value = average_degree_of_consolidation(tv, 1.0, 1.0)
+                self.assertAlmostEqual(value, expected, places=12)
+
     def test_reference_value_checks_eigenvalue_factor(self):
         # Independent series evaluation at Tv=0.1 for a double-drained slab.
         value = average_degree_of_consolidation(0.1, 1.0, 1.0)
