@@ -124,3 +124,41 @@ For the restricted benchmark problem of constant \(c_v\), initially uniform exce
   giving first-mode time \(\tau_1=R^2/(\pi^2c_v)\).
 
 In both cases the volume-average weights sum to one at \(t=0\). The degree of consolidation for this benchmark is \(U(t)=1-\bar u(t)/u_0\). These expressions are benchmark references for the stated idealised boundary-value problem only; they do not model evolving permeability, nonlinear skeleton mechanics, finite-cylinder end drainage, or chemical ageing. The finite-difference implementation should be tested against the full series, not only the first-mode time constant.
+
+
+## Progress update — 2026-11-11
+
+### Workstream A: latest artifact audit completed
+
+The raw artifact from run #237 (ID 13851749184) was downloaded and audited seed by seed. The detailed tables and recomputed eligibility counts are recorded in `MODELLING/monte_carlo_3d/TEST_RESULTS.md`. Decision: no-go for the full finite-size matrix until common-displacement stopping and fit-window stability are addressed. There were zero completed baseline/variant pairs, so no paired Rg or Df comparisons exist.
+
+### Workstream C: first transient radial solver implementation
+
+Added `MODELLING/transport_model/radial_consolidation.py` and
+`test_radial_consolidation.py`. The solver uses conservative cell-centred
+finite volumes, backward Euler, a symmetry condition at the centre, and a
+perfectly drained outer boundary. It reports volume-weighted mean excess
+pressure versus Fourier number for an ideal infinite cylinder or sphere.
+Independent eigenfunction-series references are included (first ten J0
+roots for the cylinder; ten spherical modes).
+
+Five local standard-library unittest cases passed in the isolated Python
+environment, including agreement with the series at Fourier numbers 0.02,
+0.1 and 0.5, monotonicity/bounds, and a grid/time refinement comparison.
+This local run is not a hosted CI result. The workflow path filter was
+extended so changes under `MODELLING/transport_model/**` trigger the existing
+transport test suite. Hosted CI validation is pending.
+
+The radial solver remains an ideal constant-coefficient benchmark. It is not
+yet experimentally validated, does not include finite-cylinder end drainage,
+and is not coupled to permeability evolution or network mechanics.
+
+### Immediate next tasks
+
+- Verify the new radial solver and its tests in hosted CI; inspect the complete
+  job logs rather than relying only on the run-level success badge.
+- Continue Workstream B by implementing a common cumulative-Q stopping mode
+  with a hard attempt cap, explicit stop reason and overshoot accounting;
+  retain the legacy fixed-attempt mode and add deterministic tests.
+- Keep the full DLCA size matrix gated until the common-Q comparison has
+  adequate completion, unwrapping and fit-window stability.
