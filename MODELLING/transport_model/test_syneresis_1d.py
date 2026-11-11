@@ -17,6 +17,23 @@ class ConsolidationTests(unittest.TestCase):
                   for t in (1.0, 10.0, 100.0, 1000.0)]
         self.assertEqual(values, sorted(values))
 
+    def test_rejects_non_finite_inputs(self):
+        for value in (float("nan"), float("inf"), float("-inf")):
+            with self.subTest(value=value):
+                with self.assertRaises(ValueError):
+                    average_degree_of_consolidation(value, 1e-10, 1e-3)
+                with self.assertRaises(ValueError):
+                    average_degree_of_consolidation(1.0, value, 1e-3)
+                with self.assertRaises(ValueError):
+                    average_degree_of_consolidation(1.0, 1e-10, value)
+
+    def test_series_truncation_convergence(self):
+        # At this dimensionless time, 1000 terms are already converged
+        # to substantially better than 1e-10 relative to a 5000-term reference.
+        reference = average_degree_of_consolidation(1e-4, 1.0, 1.0, terms=5000)
+        value = average_degree_of_consolidation(1e-4, 1.0, 1.0, terms=1000)
+        self.assertAlmostEqual(value, reference, places=12)
+
     def test_dimensionless_scaling(self):
         # Equal cv*t/Hd^2 must produce the same average consolidation.
         u1 = average_degree_of_consolidation(100.0, 1e-10, 1e-3)
