@@ -338,3 +338,10 @@ Added PSG-046, Ragueh et al. (2015), *Separation and Purification Technology* 15
 Important limit: the permeability is inferred for filtration cakes, not measured directly in freely suspended or syneresising gel fragments. Osmotic compression is slow/isotropic and filtration loading varies with cake height; do not equate their pressure thresholds. This source supports the structural-state/Darcy architecture, but is not direct calibration for the radial syneresis solver.
 
 **Updated modelling implication:** keep at least three state descriptors distinct where data permit: (i) local aggregate structure/length scales, (ii) network connectivity/percolation and volume fraction, and (iii) transport permeability and mechanical yielding. A single Df parameter is unlikely to capture all three.
+
+
+The run-summary CSV now also exports the run-level merge-event count, so
+per-size merge events can be audited against the independent run total in
+future artifacts. The CLI smoke test checks the expanded schema and row
+structure. Hosted CI validation of this final output-contract addition is
+pending.
