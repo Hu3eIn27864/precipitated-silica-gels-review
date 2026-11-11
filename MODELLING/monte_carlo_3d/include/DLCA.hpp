@@ -21,6 +21,8 @@ struct DLCAResult {
     std::vector<Particle> particles;
     std::size_t attempts{0};
     std::size_t successfulMerges{0};
+    double cumulativeSquaredClusterTranslation{0.0};
+    double cumulativeClusterTranslationPathLength{0.0};
     bool completed{false};
 };
 
