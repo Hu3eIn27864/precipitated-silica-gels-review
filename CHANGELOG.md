@@ -313,3 +313,11 @@
 - Initial placement is still brute force and the grid is rebuilt per attempted move; production performance claims require benchmarks and further optimisation.
 
 - Hardened periodic coordinate reduction with `std::fmod` and added regression assertions for negative query coordinates and non-finite query rejection. Full CTest execution remains pending.
+
+
+## 2026-11-11 — Cell-list memory guard and randomized reference tests
+
+- Capped dense periodic cell-list storage at 1,000,000 cells to avoid pathological allocations for sparse, large boxes.
+- Added a safe DLCA fallback to exact brute-force candidate scans when the cell-list grid exceeds its allocation/dimension limits; the narrow-phase contact geometry remains unchanged.
+- Added deterministic pseudo-random candidate-completeness checks against brute-force minimum-image distances and a regression for excessive dense-grid sizing.
+- This is a robustness change, not a performance benchmark. The new tests are registered in CTest but have not yet been run in a complete repository build; hosted CI remains unverified.
