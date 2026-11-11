@@ -125,3 +125,8 @@ The current candidate generator begins from random sequentially placed non-overl
 This is a simplified rigid-cluster Brownian aggregation algorithm, not a hydrodynamic DLCA calculation. The mobility exponent is user-specified; no Stokes-Einstein cluster hydrodynamics, rotation, hydrodynamic interactions, lubrication, electrostatics, or reaction-limited sticking are included. Periodic boundaries can create winding clusters; the analysis module flags inconsistent graph unwrapping and such clusters must not be assigned an unqualified (R_g). No fractal dimension estimator is yet implemented; report (D_f) only after a separately specified mass-radius/structure-factor regression over a justified scale interval.
 
 The new unit test target is registered with CTest. Until it is actually compiled and run, the prior 3/3 test result applies only to the original geometry/interaction/Metropolis kernel.
+
+
+### Computational scaling limitation
+
+The first DLCA-style implementation uses direct pair scans for initial exclusion placement and for moving-cluster collision detection. This is intentionally transparent but can approach O(N²) work per attempt. It is suitable for correctness tests and small pilot aggregates only. Do not use it as a 1000-particle production generator until a periodic cell-list/spatial-hash broad phase is implemented, checked against brute force, and benchmarked. The current tests establish small-system algorithmic properties only.
