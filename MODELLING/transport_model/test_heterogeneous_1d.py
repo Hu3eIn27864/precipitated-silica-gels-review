@@ -64,6 +64,27 @@ class HeterogeneousPressureTests(unittest.TestCase):
         self.assertEqual(len(result["profiles_pa"]), 21)
         self.assertTrue(all(math.isfinite(p) for profile in result["profiles_pa"] for p in profile))
 
+    def test_layer_interface_location_refinement(self):
+        # A non-grid-aligned material interface checks convergence when its
+        # represented location shifts with cell-centred discretisation.
+        # The finest-grid result is a numerical reference, not an exact solution.
+        interface_x = 0.37
+        final_time = 0.005
+        dt = 1.0e-5
+
+        def run(n):
+            dx = 1.0 / n
+            centers = [(i + 0.5) * dx for i in range(n)]
+            mobility = [1.0 if x < interface_x else 0.1 for x in centers]
+            result = solve_1d_pressure_diffusion(
+                [1.0] * n, mobility, 1.0, dt, round(final_time / dt))
+            return result["mean_pressure_pa"][-1]
+
+        reference = run(320)
+        errors = [abs(run(n) - reference) for n in (40, 80, 160)]
+        self.assertLess(errors[1], errors[0])
+        self.assertLess(errors[2], errors[1])
+
     def test_rejects_invalid_inputs(self):
         bad = [
             ([], [], 1.0, 1.0, 1),
