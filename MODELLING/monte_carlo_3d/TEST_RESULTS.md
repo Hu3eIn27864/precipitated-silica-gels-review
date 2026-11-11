@@ -221,3 +221,7 @@ Documentation-only change to trigger the repository's configured MC3D push workf
 ### Parallel validation work added (2026-11-11)
 
 Added `analysis/analyze_dlca_fit_sensitivity.py` and unit tests to quantify within-seed exponent variation across all available fit windows, while rejecting fits attached to incomplete or invalid runs. Added the script to the CI pilot workflow. Added `DLCA_PILOT_VALIDATION_PROTOCOL.md` defining integrity, completion, finite-size, fit-window, parameter-sensitivity, and physical-calibration gates. These are committed additions; no hosted CI or pilot result is claimed until the workflow run is retrieved and inspected.
+
+### Pilot provenance capture (2026-11-11)
+
+The CI pilot step now writes `build/mc3d/pilot/provenance.txt` before running the size series. It records the checked-out Git commit/ref, runner OS, CMake/compiler/Python versions, particle sizes, seed block, attempt cap, reference box/size, and common diagnostic fit interval. This metadata is uploaded with the raw CSV and analysis artifacts. The addition improves traceability but does not itself establish that the workflow executed.
