@@ -479,3 +479,14 @@ state-dependent k–M coupling can be meaningfully identified.
 **Interpretation:** Ragueh provides useful structure–cake-transport constraints, but its specific resistance is reported only relative to an undisclosed reference (R). It cannot provide an absolute permeability or a direct (k(phi)) law for natural syneresis. Keep the cake and free-gel calibration tracks separate.
 
 **Next gate:** resolve Ragueh's two table/prose label conflicts from author clarification or an independent source; obtain the Wilhelm & Kind figure images from a repository/author copy at adequate resolution; then digitise marker coordinates with calibration and uncertainty metadata.
+
+
+## Parallel work phase — 2026-11-11: relative-resistance analysis and figure recovery
+
+- Added `LITERATURE/ragueh_2015_relative_resistance_analysis.csv` and its interpretation note. The derived comparison reports grade-to-grade ratios and 400→600 kPa trends while retaining the undisclosed reference R; no absolute permeability or permeability ratio is inferred.
+- Printed relative resistance rises from 400 to 600 kPa by 45.2% (S1), 60.0% (S2) and 55.8% (S3). S1 at 600 kPa remains provisional because the printed table omits the R symbol.
+- The Ragueh full-text inspection also confirms Table 1 has the same S1/S3/S3 sample-label pattern as Table 2. The likely intended middle label is S2, but no silent correction is made.
+- Recovered the publisher's separate 1024-pixel original figure assets for Wilhelm & Kind (2015) Figures 8 and 10. Figure 8: https://mdpi-res.com/polymers/polymers-07-01528/article_deploy/html/images/polymers-07-01528-g008-1024.png ; Figure 10: https://mdpi-res.com/polymers/polymers-07-01528/article_deploy/html/images/polymers-07-01528-g010-1024.png . The KIT repository confirms an Open Access full-text record, but its 13 MB PDF endpoint remains above the retrieval limit here.
+- The image assets are now accessible for visual inspection; no marker coordinates have yet been digitised or entered as raw data. The MDPI supplementary-material endpoint did not yield a directly readable file in this pass.
+
+**Next gate:** digitise measured markers from Figs. 8 and 10 separately from the model lines, recording panel, series, axis calibration, estimated pixel/marker uncertainty and the 20 °C preconditioning interval for Fig. 10. In parallel, seek author clarification on the repeated sample-label typo and S3 fractal-dimension conflict.
