@@ -169,3 +169,5 @@ The original 1024-pixel publisher image assets for Wilhelm & Kind (2015) Figures
 - Fig. 10: https://mdpi-res.com/polymers/polymers-07-01528/article_deploy/html/images/polymers-07-01528-g010-1024.png
 
 The KIT repository lists the article as Open Access, but its PDF retrieval endpoint exceeds the current 13 MB content limit. The MDPI supplementary-material endpoint was not directly readable in this pass. Marker-level digitisation remains pending: no plotted point has been added to the data tables yet. Figure 10's first 30 minutes at 20 °C before temperature adjustment must be represented explicitly in any time-series transcription.
+
+The Ragueh Table 1 initial slurry composition has also been transcribed separately to `LITERATURE/ragueh_2015_initial_slurry_data.csv`, preserving the same printed S1/S3/S3 label ambiguity (dry mass fractions 0.053/0.053/0.034 g/g solution; initial silica volume fractions 0.020/0.018/0.011). The likely S2 identity of the middle row is provisional only.
