@@ -50,3 +50,10 @@ It also warns against collapsing all structural change into a single fractal dim
 For the industrial precipitated-silica dispersions studied by Ragueh et al., filtration-derived cake permeability and compression response can be related to hierarchical aggregate length scales and network volume fraction. Osmotic compression identifies percolation and yielding regimes, while filtration cakes largely retain their local structure over the investigated pressure range, with system-specific restructuring at the highest pressure.
 
 This is direct evidence for structure–transport–mechanics coupling in precipitated silica, but not a direct syneresis-permeability dataset.
+
+
+## Additional quantitative structural extraction
+
+Table 3 reports typical dense-aggregate radii (R_{Kratky}) of 82 nm (S1), 125 nm (S2) and 175 nm (S3), with branch-organization mass-fractal dimensions of 1.8, 2.2 and 1.8, respectively. The authors state an approximate fitting uncertainty of 0.02 for the fractal dimension and 0.2 nm for aggregate size within their chosen scattering windows. **There is an internal inconsistency:** the paragraph immediately below Table 3 gives the S3 exponent as 2.2, whereas Table 3 lists 1.8. We retain the tabulated value with a discrepancy flag and do not use S3 as an unambiguous numerical reference until the authors' data or a correction can be checked.
+
+Table 4 reports cake silica volume fractions of 0.070–0.108 over 400–600 kPa and relative specific-resistance values (normalised to an undisclosed reference R) that rise with pressure. The absolute reference resistance is withheld, so these values cannot be converted to absolute permeability from the published table alone. The paper's permeability comparison is presented in dimensionless form (K/d_{beads}^2), using the measured specific resistance and bead volume fraction.
