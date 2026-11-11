@@ -417,3 +417,19 @@ The new accounting permits a first comparison of component-merger counts relativ
 These are pooled descriptive ratios across only three paired seeds, not inferential estimates. In particular, the step-size rows reach the same Q after very different numbers of attempts, so merges per selection do not represent equal physical exposure. Likewise, changing contact distance changes the collision criterion and excluded-volume geometry; mobility exponents change the selection distribution. The small raw merge counts and incomplete aggregates make these data suitable for debugging the algorithm and designing the next pilot, not for claiming a physical parameter trend.
 
 The class-stratified output also shows that most selections and movement budget remain associated with monomers and dimers in this early stage. For the baseline, 91.1% of selections were monomers; the corresponding fraction was 84.5% at mobility exponent 0.5 and 88.5% at exponent 1.5. This is directionally consistent with the implemented mass weighting but is not a measurement of Brownian mobility in silica.
+
+
+### Merge-event distinction and artifact-level reconciliation: CI #284
+
+Added the run-level `successful_merge_events` column to `_runs.csv`, alongside the existing `successful_merges` (absorbed-component count). The per-size CSV records both quantities. Hosted CI [#284](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43020332694), commit `7f74354f819d989c2aa3dc807cfe556a81435d62`, passed build, all C++ tests, Python analysis tests, transport tests, all DLCA screens and artifact upload.
+
+The new artifact (ID `13853849502`) was independently checked across all 51 seed/configuration records. Per-size sums matched run-level totals in every record for:
+- selection count versus attempts;
+- move-level merge events;
+- absorbed components;
+- cumulative squared translation Q;
+- cumulative path length L.
+
+In the seven common-Q configurations, the total move-level event count equalled the absorbed-component count in every configuration (baseline 25, contact 0.9: 29, contact 1.1: 36, step 0.10: 31, step 0.28: 28, mobility exponent 0.5: 32, mobility exponent 1.5: 36). Thus no single move absorbed more than one other component in this bounded screen. The new distinction is still retained because it is the correct general accounting convention; the present data simply do not yet exercise multi-component contacts.
+
+The event counts are sparse and most selections are monomeric. Size-class event/selection ratios therefore have very small numerators in larger classes and should not be interpreted as stable collision probabilities. No kinetic law, physical collision kernel, or parameter trend is established.
