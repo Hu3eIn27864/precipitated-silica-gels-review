@@ -158,3 +158,8 @@ The new CMake smoke-test script was exercised locally with a temporary stand-in 
 ## Driver input and output edge-case audit (2026-11-11)
 
 A source-level audit of `dlca_ensemble.cpp` confirms that integer arguments are digit-validated before conversion, positive size arguments are required, box length must be finite and positive, seed-range overflow is rejected, all three output streams are checked before writing, and incomplete/winding aggregates are excluded from mass-radius fitting while retained in the run summary. The smoke test checks the three CSV headers after a real executable invocation. This audit is static inspection, not compilation or execution of the driver.
+
+
+## Smoke-test run-row assertion (2026-11-11)
+
+The DLCA ensemble smoke script now checks not only that all three CSV files exist with the expected headers, but also that the one-seed invocation writes exactly one run-summary data row with the requested seed and structurally valid integer metadata fields. The strengthened CMake script passed an isolated local harness using a temporary stand-in executable that emitted the expected CSV schema. This validates the script and row assertion only, not the actual C++ ensemble executable or full project build.
