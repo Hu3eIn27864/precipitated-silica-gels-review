@@ -183,6 +183,7 @@ def load_system(particle_count: int, prefix: Path,
             "particle_count": particle_count,
             "seed": seed,
             "completed": completed,
+            "attempts": as_int(row, "attempts", runs_path),
             "unwrapping_consistent": unwrapped,
             "largest_component_size": largest,
             "largest_component_fraction": largest / particle_count,
@@ -261,7 +262,7 @@ def main() -> int:
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     per_run_fields = [
-        "particle_count", "seed", "completed", "unwrapping_consistent",
+        "particle_count", "seed", "completed", "attempts", "unwrapping_consistent",
         "largest_component_size", "largest_component_fraction",
         "largest_component_rg", "df", "fit_r_squared",
         "fit_standard_error", "fit_point_count",
