@@ -14,6 +14,7 @@ void require(bool ok, const char* message) {
 bool near(double a, double b, double tol = 1e-10) {
     return std::abs(a - b) <= tol;
 }
+
 void testPeriodicUnwrappingAndGraph() {
     const mc3d::SimulationBox box(10.0);
     const std::vector<mc3d::Particle> p{
@@ -26,12 +27,34 @@ void testPeriodicUnwrappingAndGraph() {
     require(a.contactCount == 2, "wrong unique contact count");
     require(a.coordination[0] == 1 && a.coordination[1] == 2 &&
             a.coordination[2] == 1, "wrong coordination numbers");
-    require(near(a.components[0].radiusOfGyration,
-                 std::sqrt((0.8*0.8 + 0.0 + 0.8*0.8)/3.0)),
+    const double expectedRg = std::sqrt(1.28 / 3.0);
+    require(near(a.components[0].radiusOfGyration, expectedRg),
             "periodic cluster Rg was not calculated from unwrapped coordinates");
     require(a.components[0].periodicUnwrappingConsistent,
             "simple chain should unwrap consistently");
+
+    const std::vector<mc3d::Particle> translated{
+        {0, {0.6, 5.0, 5.0}}, {1, {1.4, 5.0, 5.0}},
+        {2, {2.2, 5.0, 5.0}}, {3, {6.0, 5.0, 5.0}}
+    };
+    const auto b = mc3d::analyseNetwork(translated, box, 0.81);
+    require(near(a.components[0].radiusOfGyration,
+                 b.components[0].radiusOfGyration),
+            "Rg changed when the cluster was translated across a periodic face");
 }
+
+void testPeriodicWindingIsFlagged() {
+    const mc3d::SimulationBox box(9.0);
+    const std::vector<mc3d::Particle> ring{
+        {0, {1.0, 4.5, 4.5}}, {1, {4.0, 4.5, 4.5}},
+        {2, {7.0, 4.5, 4.5}}
+    };
+    const auto a = mc3d::analyseNetwork(ring, box, 3.1);
+    require(a.componentCount == 1, "periodic ring should be connected");
+    require(!a.components[0].periodicUnwrappingConsistent,
+            "periodic winding was not flagged");
+}
+
 void testDLCAReproducibilityAndNonOverlap() {
     const mc3d::SimulationBox box(12.0);
     mc3d::DLCAConfig cfg;
@@ -57,19 +80,23 @@ void testDLCAReproducibilityAndNonOverlap() {
                 near(a.particles[i].position.z, b.particles[i].position.z),
                 "DLCA coordinates not reproducible");
     }
-    for (std::size_t i = 0; i < a.particles.size(); ++i)
-        for (std::size_t j = i + 1; j < a.particles.size(); ++j)
+    for (std::size_t i = 0; i < a.particles.size(); ++i) {
+        for (std::size_t j = i + 1; j < a.particles.size(); ++j) {
             require(box.distance(a.particles[i].position,
                                  a.particles[j].position) >= 1.0 - 1e-10,
                     "DLCA generated overlapping particles");
+        }
+    }
     const auto obs = mc3d::analyseNetwork(a.particles, box, 1.0 + 1e-10);
     require(obs.particleCount == cfg.particleCount,
             "network analysis lost particles");
     require(obs.contactCount >= a.successfulMerges,
             "contact graph has fewer contacts than component-merging events");
-    require(obs.componentCount == (a.completed ? 1u : cfg.particleCount - a.successfulMerges),
+    require(obs.componentCount ==
+                (a.completed ? 1u : cfg.particleCount - a.successfulMerges),
             "component count inconsistent with DLCA merge accounting");
 }
+
 void testEmptyNetwork() {
     const mc3d::SimulationBox box(10.0);
     const auto obs = mc3d::analyseNetwork({}, box, 1.0);
@@ -77,9 +104,11 @@ void testEmptyNetwork() {
             "empty network should have no components");
 }
 }
+
 int main() {
     try {
         testPeriodicUnwrappingAndGraph();
+        testPeriodicWindingIsFlagged();
         testDLCAReproducibilityAndNonOverlap();
         testEmptyNetwork();
     } catch (const std::exception& e) {
