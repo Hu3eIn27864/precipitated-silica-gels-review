@@ -742,7 +742,7 @@
 
 - Added a two-layer 1-D transport test with a mobility discontinuity at x/L = 0.37, deliberately not aligned to the cell grid.
 - Compares coarse-grid mean pressure against a finer-grid numerical reference and requires decreasing error under refinement; the fine-grid reference is not an exact analytical solution.
-- This checks sensitivity to representing a material interface, not a silica-gel property or physical constitutive law. Hosted CI result is pending.
+- Hosted CI #329 passed: the transport-model discovery step executed 52 tests successfully, including `test_layer_interface_location_refinement`. This checks numerical convergence for the layered test case, not a silica-gel property or physical constitutive law. Workflow: https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43073835283
 
 
 ## 2026-11-11 — Common half-shrinkage quantile added to pressure-cell comparison
