@@ -412,3 +412,4 @@
 - 2026-11-11: Isolated GCC C++17 compile and three-case runtime harness passed for the new periodic swept-collision helper using a minimal Vec3-compatible test interface. ASan execution was blocked by the environment's runtime-loading configuration; full CMake/CTest remains pending.
 - 2026-11-11: Added deterministic randomized validation of periodic swept collision against 500 sampled trajectories (2,001 time fractions each); isolated GCC C++17 harness passed. The test explicitly uses r(t)=r(0)-clusterShift*t and verifies reported contact points.
 - 2026-11-11: Added a fit-window sensitivity audit with unit tests, integrated it into the DLCA pilot workflow, and documented interpretation/validation gates. Hosted execution remains pending verification.
+- 2026-11-11: Hardened the independent 1-D consolidation baseline against non-finite inputs; added series-truncation convergence tests and included its unit tests in CI.
