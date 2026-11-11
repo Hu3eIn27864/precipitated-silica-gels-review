@@ -85,6 +85,22 @@ class HeterogeneousPressureTests(unittest.TestCase):
         self.assertLess(errors[1], errors[0])
         self.assertLess(errors[2], errors[1])
 
+    def test_global_integrated_outflow_matches_storage_loss(self):
+        n = 40
+        storage = [1.0] * 24 + [2.0] * 16
+        mobility = [1.0] * 24 + [0.15] * 16
+        dt, steps, thickness = 1.0e-5, 500, 1.0
+        result = solve_1d_pressure_diffusion(
+            storage, mobility, thickness, dt, steps)
+        dx = thickness / n
+        initial_storage = sum(s * dx for s in storage)
+        final_storage = sum(
+            storage[i] * dx * p
+            for i, p in enumerate(result["profiles_pa"][-1]))
+        integrated_outflow = dt * sum(result["boundary_outflow_m_s"][1:])
+        self.assertAlmostEqual(
+            initial_storage - final_storage, integrated_outflow, delta=1e-10)
+
     def test_rejects_invalid_inputs(self):
         bad = [
             ([], [], 1.0, 1.0, 1),
