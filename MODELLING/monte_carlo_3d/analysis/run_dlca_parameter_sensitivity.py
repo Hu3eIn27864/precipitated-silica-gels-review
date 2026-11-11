@@ -10,6 +10,7 @@ import sys
 from pathlib import Path
 
 VARIANTS = (
+    ("baseline", 1.0, 0.2, 1.0),
     ("contact_0p9", 0.9, 0.2, 1.0),
     ("contact_1p1", 1.1, 0.2, 1.0),
     ("step_0p1", 1.0, 0.1, 1.0),
