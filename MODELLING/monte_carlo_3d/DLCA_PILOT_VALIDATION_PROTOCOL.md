@@ -11,10 +11,16 @@ This protocol governs interpretation of the first reduced-unit DLCA size series 
 - Mobility exponent: 1.0 in the declared algorithmic cluster-selection law.
 - Reference system: N = 32, L = 15.0; larger boxes preserve N/L^3.
 - CI pilot: three consecutive seeds per size, maximum 50,000 cluster-move attempts per seed.
-- Mass-radius radii: 1.5, 2.0, 2.5, 3.0, 4.0, 5.0, 6.0, 8.0.
-- Common initial diagnostic fit interval: 2.0–5.0. This is not a pre-validated scaling interval.
+- Mass-radius radii: 1.5, 2.0, 2.5, 3.0, 4.0, 5.0, 6.0, 8.0 times the contact distance.
+- Common initial diagnostic fit interval: 2.0–5.0 contact-distance units. This is not a pre-validated scaling interval.
 
-Any parameter change must be recorded as a new run configuration; do not overwrite or silently mix outputs from different configurations.
+The ensemble CLI accepts optional trailing values for contact distance,
+maximum component step and mobility exponent; the original defaults remain
+available. The run-summary CSV records these values. The mass-radius grid
+scales with contact distance so fit intervals remain dimensionless in contact
+units. For a non-default contact distance, convert fit bounds accordingly.
+Any parameter change must be recorded as a new run configuration; do not
+overwrite or silently mix outputs from different configurations.
 
 ## Mandatory integrity checks
 
