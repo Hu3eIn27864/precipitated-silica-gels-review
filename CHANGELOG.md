@@ -371,3 +371,11 @@
 - Added safeguards to omit incomplete aggregates and periodic-winding components from whole-aggregate mass-radius analysis while preserving their run metadata.
 - Fit-window scans now skip singular plateau-only intervals and return an empty result for a constant mass curve; input validation remains global.
 - Added plateau-handling tests and documented command-line arguments, default reduced-unit settings and output schemas. The complete CMake build and end-to-end ensemble run remain unverified.
+
+
+## 2026-11-11 — End-to-end DLCA ensemble smoke test registered
+
+- Added a CTest smoke-test script that invokes the ensemble CLI with a small deterministic configuration and checks that all three CSV outputs exist and carry the expected headers.
+- Registered the smoke test as the fifth CTest entry; the existing GitHub Actions workflow will run it on the next matching push or pull request.
+- The smoke test deliberately checks the output contract rather than requiring stochastic aggregation completion or non-empty fit output.
+- Updated the MC3D overview, example instructions and test record to state the new verification boundary. No build or CI pass is claimed until the workflow completes.
