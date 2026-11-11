@@ -43,6 +43,7 @@
 2. **Wilhelm–Kind lineage:** Wilhelm & Kind (2014, 2015) and Wilhelm (2017). The dissertation reproduces published syneresis and pressure-cell results while adding centrifugal tests, pore-liquid analysis and model development.
 3. **Wijnen/Beelen lineage:** two 1991 papers on water-glass-derived silica-gel formation/ageing. Treat as related structural outputs, not automatically independent replication.
 4. **External independent comparator:** Knoblich & Gerber (2001), water-glass-derived SiO2 sols; Chal et al. (2019), commercial silica powder ageing. These broaden the structural context but do not independently reproduce the industrial wet-gel fragmentation-to-syneresis sequence.
+5. **Hanyang / Sarawade–Quang–Kim process-to-product lineage:** Sarawade et al. (2011) on drying effects and Quang et al. (2012) on pilot-scale gelation timing share authors and an institutional research programme. They provide complementary, not automatically independent, evidence: one isolates drying route after wet-gel preparation, the other varies the pre-gel acidification interval.
 
 ## Priority gaps (ranked)
 
