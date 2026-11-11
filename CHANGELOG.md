@@ -167,3 +167,11 @@
 - Bibliographic records are based on later scholarly reference lists and accessible institutional documents. Original journal texts have not yet been located; all four entries are marked V (verification pending), with no result inferred from title.
 - Created source assessment batch 15. Flagged a pagination discrepancy for the 1991 paper (126–128 vs 126–129) and possible research-family/data overlap among the Kontorovich–Ponomareva–Sokolova group.
 - No new claim was added to the evidence matrix because the primary experimental results remain unverified. These papers are retrieval priorities, not yet evidence for the review's conclusions.
+
+
+## 2026-11-11 — Multiscale modelling workstream defined
+
+- Added `MODELLING/modeling_strategy.md` to define a hypothesis-driven simulation pathway alongside the literature review.
+- Distinguished coarse-grained LAMMPS network modelling, continuum poromechanics / OpenFOAM, CFD–DEM (including possible OpenFOAM–LIGGGHTS coupling), and atomistic MD / Monte Carlo by the questions each can and cannot answer.
+- Set minimum requirements for parameter provenance, sensitivity, numerical checks, independent validation and reproducibility.
+- Explicit go/no-go decision: no production simulations yet. Complete the evidence audit and identify a falsifiable, data-constrained question first; prefer the smallest adequate model.
