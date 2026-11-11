@@ -108,3 +108,11 @@ The earlier statement that no direct target-chemistry mechanical data had been i
 Structured source inventory: LITERATURE/target_system_mechanical_evidence.csv. Full extraction notes: LITERATURE/target_system_rheology_evidence_2026-11-11.md.
 
 **Revised evidence gap:** target-chemistry mechanical/rheological data do exist. The unresolved key gap is a matched independent permeability measurement, plus a mechanical parameter that can be mapped rigorously to the constrained modulus used in poroelastic consolidation, on the same gel formulation and aging state.
+
+## New direct mechanical evidence — Sahabi & Kind (2011)
+
+Sahabi & Kind (2011), *Polymers* 3, 1423–1432, DOI 10.3390/polym3031423, is a full-text-inspected direct precipitated-silica study using a double-drained oedometer. Acidic (pH approximately -0.97) and alkaline (pH approximately 9) sodium-silicate/sulfuric-acid model gels were tested at approximately 15 bar and 20/80 °C. Reported fitted t90 values are 31,506/5,625 s for acidic gel and 40,401/11,236 s for alkaline gel (20/80 °C).
+
+This materially strengthens the direct mechanical evidence base. It does **not** close the permeability gap: t90 is a lumped forced-consolidation response, and the paper does not independently determine intrinsic permeability and constrained modulus. The authors also report deviations from the simple Terzaghi response during primary consolidation and suggest adding a damping element, supporting a viscoelastic/mechanical-relaxation branch in the model design. Forced oedometer data must remain distinct from natural syneresis.
+
+See LITERATURE/source_assessments_batch_21.md and the expanded target_system_mechanical_evidence.csv.
