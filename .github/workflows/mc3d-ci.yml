@@ -39,6 +39,11 @@ jobs:
             --system 128:build/mc3d/pilot/n128 \
             --fit-min 2 --fit-max 5 \
             --output build/mc3d/pilot/size_comparison
+          python3 MODELLING/monte_carlo_3d/analysis/analyze_dlca_fit_sensitivity.py \
+            --system 32:build/mc3d/pilot/n32 \
+            --system 64:build/mc3d/pilot/n64 \
+            --system 128:build/mc3d/pilot/n128 \
+            --output build/mc3d/pilot/size_comparison
       - name: Upload pilot data
         if: always()
         uses: actions/upload-artifact@v4
