@@ -19,6 +19,9 @@ def average_degree_of_consolidation(time_s: float, cv_m2_s: float,
                                     drainage_length_m: float,
                                     terms: int = 1000) -> float:
     """Average 1-D degree of consolidation for a double-drained slab."""
+    if not all(math.isfinite(value) for value in
+               (time_s, cv_m2_s, drainage_length_m)):
+        raise ValueError("time_s, cv_m2_s and drainage_length_m must be finite")
     if time_s < 0:
         raise ValueError("time_s must be >= 0")
     if cv_m2_s <= 0 or drainage_length_m <= 0:
