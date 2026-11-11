@@ -105,3 +105,7 @@ The new regression case compares cell-list candidates against brute-force minimu
 - The estimator is a transparent reference implementation with O(N² N_r) cost; it is not yet optimised for large aggregates.
 - An isolated sanitizer-compiled straight-chain test returned Df=0.964034 and R²=0.999992 for a finite 1001-particle chain over radii 10–50. The small downward bias from Df=1 is expected from finite-chain boundary effects.
 - The complete repository CMake/CTest suite, generated-aggregate scaling analysis, fit-window sensitivity and independent-seed ensemble statistics remain pending. No silica-specific fractal dimension is claimed.
+
+
+- A diagnostic fit-window scan now enumerates all contiguous windows with at least three points. It reports sensitivity; it does not automatically select a scaling interval or establish fractality.
+- Pair distances use `std::hypot` to avoid intermediate squared-distance overflow. Added tests cover exact-power-law window stability, a constructed crossover, and large finite coordinates; these new repository assertions await full CMake/CTest execution.
