@@ -631,3 +631,9 @@
 - Figure 10b's visible late markers/model curves lie substantially above the printed base-catalysed Table 2 amplitudes (0.30/0.39/0.51); the earlier AI-assisted approximate maxima are qualitatively consistent with the graph.
 - The Table 2 base amplitudes exactly repeat the Figure 8/Table 1 base amplitudes. A publication-internal table transcription/transfer error is plausible but unconfirmed.
 - No pixel coordinates were extracted because the image assets could not be downloaded into the execution environment. All 164 approximate points remain unverified. Table and figure evidence are preserved separately; no silent correction made.
+
+
+## 2026-11-11 — CI-Bestätigung der poroelastischen Skalierungsfunktionen
+
+- Hosted CI workflow #320 (`43051332381`) passed after the new scaling unit tests were added; workflow #321 (`43051400329`) also passed after the model-design specification was committed.
+- The transport-model Python test discovery step executed successfully. This verifies code-level dimensional scaling and validation cases only; no target-system parameter, constitutive law, or physical syneresis prediction has been validated.
