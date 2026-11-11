@@ -623,3 +623,11 @@ Detailed status: `LITERATURE/followup_research_status_2026-11-11.md`.
 - [ ] After CI, add systematic spatial/time refinement and explicit interface-location tests before any time-varying constitutive extension.
 
 No aging law, silica-specific parameter or calibration is included. Time-varying storage remains deferred until the conservative accumulation term and evolving-domain coupling are specified.
+
+## Literature workstream update — direct oedometer evidence (11.11.2026)
+
+- [x] Full-text inspected Sahabi & Kind (2011), *Polymers* 3, 1423–1432, DOI 10.3390/polym3031423 (PSG-003).
+- [x] Extracted acidic/alkaline sodium-silicate/sulfuric-acid gel formulations, approximately 15 bar double-drained oedometer protocol, and t90 values at 20/80 °C.
+- [x] Updated the literature database, mechanical evidence table, transport evidence audit, source-assessment batch 21 and claim C25.
+- [ ] Recover independent intrinsic permeability and constrained-modulus measurements for matched gel states; t90 alone remains a lumped forced-consolidation response.
+
