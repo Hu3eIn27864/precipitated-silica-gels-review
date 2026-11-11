@@ -111,3 +111,5 @@ The interval 2–5 is an initial **diagnostic common interval** because it is re
 The ensemble analyser also validates the underlying `_mass_radius.csv` files before accepting a fitted exponent: particle counts must match the requested system, radii and enclosed masses must be positive and finite, radius grids must agree across seeds, and each selected fit's point count must match the observations in the requested interval. This guards against comparing stale or mismatched fit summaries.
 
 The ensemble analyser also checks that the largest-component count is physically consistent with the declared system size, and that a run labelled complete has all particles in its sole aggregate. These are integrity checks on the simulation output, not physical validation of the aggregation model.
+
+The runner assigns **non-overlapping seed blocks** to different particle counts (for the defaults: 1000–1004, 1005–1009, and 1010–1014). This avoids reusing the same pseudorandom stream across system sizes. Each system still has its own independent replicate ensemble; the resulting size comparison is not a paired-seed analysis.
