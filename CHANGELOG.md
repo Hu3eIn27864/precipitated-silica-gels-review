@@ -407,3 +407,5 @@
 
 - Added a regression test that rejects a DLCA fit summary when its point count disagrees with the underlying mass-radius observations; corrected the broad-window fixture to reflect its actual six source radii.
 - 2026-11-11: Strengthened DLCA ensemble provenance validation by cross-checking mass-radius and fit rows against run-summary seeds and completion/unwrapping flags; added regression tests for orphaned fit rows and observations attached to unfinished runs. Full repository CI remains unverified.
+
+- 2026-11-11: Fixed a periodic DLCA swept-collision edge case by testing neighbouring periodic images in the narrow phase; added deterministic regression coverage. C++ build/CTest execution remains pending.
