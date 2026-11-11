@@ -413,3 +413,11 @@
 - 2026-11-11: Added deterministic randomized validation of periodic swept collision against 500 sampled trajectories (2,001 time fractions each); isolated GCC C++17 harness passed. The test explicitly uses r(t)=r(0)-clusterShift*t and verifies reported contact points.
 - 2026-11-11: Added a fit-window sensitivity audit with unit tests, integrated it into the DLCA pilot workflow, and documented interpretation/validation gates. Hosted execution remains pending verification.
 - 2026-11-11: Hardened the independent 1-D consolidation baseline against non-finite inputs; added series-truncation convergence tests and included its unit tests in CI.
+
+## 2026-11-11 — Radial geometry scaling and DLCA parameter controls
+
+- Added a standard-library utility for the ideal first-mode radial relations in infinite cylinders and spheres, including inverse conversion to diagnostic apparent diffusivity and finite/positive input checks.
+- Added tests for inverse consistency and radius-squared scaling. This is a first-mode scaling utility, not a full transient radial consolidation solver or a direct permeability measurement.
+- Extended the DLCA ensemble CLI with optional contact distance, maximum component displacement and mobility exponent; retained the original six-argument invocation through defaults.
+- Recorded these three parameter values in each run-summary row and added them to the size-series runner so controlled sensitivity ensembles can be launched and traced.
+- Updated the CMake smoke test to exercise non-default parameters and check the expanded output schema. Source and test changes are committed; full C++ build, CTest and Python repository test execution remain unverified in this environment.
