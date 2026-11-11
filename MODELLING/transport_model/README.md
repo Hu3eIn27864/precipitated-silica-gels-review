@@ -154,16 +154,25 @@ eigenvalue-exponent correction must be regenerated.
 ## Parameter identifiability
 
 In classical linear consolidation, the effective coefficient is a lumped
-quantity, conventionally (c_v=k/(m_v\gamma_w)), where (k) is hydraulic
-permeability, (m_v) is the coefficient of volume compressibility and
-\(\gamma_w\) is the liquid unit weight. Equivalently, if an appropriate
-constrained modulus (M=1/m_v) is used, (c_v=kM/\gamma_w). A fit to a
-single shrinkage/consolidation curve therefore identifies at most this
-combination (subject also to drainage length and boundary assumptions), not
-(k) and (M) separately. Independent permeability and mechanical
-measurements are needed to separate them. This is a central reason not to
-label a fitted (c_v) as a measured gel permeability.
+quantity. If hydraulic conductivity is denoted by (K) [m/s],
 
+\[c_v=\frac{K}{m_v\gamma_w}=\frac{K M}{\gamma_w},\]
+
+where (m_v) is the coefficient of volume compressibility,
+(M=1/m_v) is the appropriate constrained modulus, and
+(\gamma_w=\rho g) is liquid unit weight. If intrinsic permeability
+(\kappa) [m²] is used instead, Darcy's law gives
+
+\[c_v=\frac{\kappa M}{\mu},\]
+
+where (\mu) is dynamic viscosity. Hydraulic conductivity and intrinsic
+permeability are not the same quantity and must not share an ambiguous
+symbol or unit. A fit to a single shrinkage/consolidation curve identifies
+at most the relevant lumped combination (also subject to drainage length
+and boundary assumptions), not the hydraulic and mechanical parameters
+separately. Independent permeability/conductivity and mechanical
+measurements are needed to separate them. Do not label fitted (c_v) as
+a measured gel permeability.
 
 ### Expanded radial convergence validation
 
