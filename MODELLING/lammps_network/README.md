@@ -4,7 +4,7 @@
 
 A minimal compression–unloading test for a pre-connected bead network:
 unit-mass beads in reduced LJ units, truncated/shifted LJ non-bonded
-interactions, permanent harmonic links on a jittered simple-cubic skeleton,
+interactions, permanent harmonic links on a jittered, fully periodic simple-cubic skeleton,
 NVT equilibration, 10% isotropic compression and unloading, coordination
 output and global pressure/box dimensions.
 
@@ -34,7 +34,7 @@ coordinates and is appropriate for solid-like deformation.
 
 ## Crucial limitations
 
-- Initial network is a jittered lattice, not a measured fractal aggregate.
+- Initial network is a jittered lattice, not a measured fractal aggregate. Periodic nearest-neighbour bonds now cross all three box boundaries, avoiding an artificial unbonded surface at the periodic cell edges; the simple-cubic topology remains highly idealised.
 - Permanent harmonic bonds cannot break or reform and do not represent
   siloxane chemistry.
 - LJ parameters are arbitrary reduced units, not fitted silica potentials.
