@@ -516,3 +516,16 @@ state-dependent k–M coupling can be meaningfully identified.
 - [ ] Figure 8a bei 40/60 °C wegen später digitaler Halbzeiten erneut am Original prüfen.
 - [ ] Figure 10b späte Symbole prüfen; passende frühe Halbzeit hebt Amplitudenwiderspruch nicht auf.
 - [ ] Exakte empirische Fitgleichung im Volltext vor weitergehender Interpretation verifizieren.
+
+
+## Explorative Kurvenfits mit KI-gestützten Näherungsablesungen (2026-11-11)
+
+- [x] Provenienz der 164 Punkte präzisiert: durch einen anderen ChatGPT-Account aus Diagrammen abgelesen, nicht pixelkalibriert oder unabhängig geprüft; Datensatzklasse `ai_assisted_approximation`.
+- [x] Alle 12 Reihen separat mit der publizierten Einzelexponentialfunktion angepasst; Skript, Ergebnis-CSV und methodische Grenzen dokumentiert.
+- [x] Publizierte Fitfunktion und Parametervergleich aus Wilhelm & Kind (2015), Gleichung (3), geprüft.
+- [ ] Figure 10b am Originalbild prüfen: die drei gefitteten Amplituden liegen etwa 1.40–1.65-mal über den publizierten Tabellenwerten.
+- [ ] Figure 8a/40–60 °C prüfen: erster Nichtnullpunkt erst bei 22 h; frühe Zeitkonstanten aus den Näherungspunkten nicht belastbar aufgelöst.
+- [ ] Fehlerbalken, Markerzentren und Achsenkalibrierung unabhängig erfassen; anschließend Fits mit Ableseunsicherheit/Fehlerbalken als Sensitivitätsanalyse wiederholen.
+- [ ] Erst nach dieser Prüfung entscheiden, ob die Kurvenpunkte für quantitative Modellkalibrierung geeignet sind.
+
+**Grenze:** Die Fits sind eine explorative Beschreibung der übermittelten KI-Näherungswerte. Hohe R²-Werte validieren weder die Punktzuordnung noch die physikalische Modellannahme; (A) und τ bleiben empirische Kurvenparameter und liefern keine direkte Permeabilität oder Reaktionskonstante.
