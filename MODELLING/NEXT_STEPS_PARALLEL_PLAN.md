@@ -358,3 +358,42 @@ These values provide a useful **external scale benchmark**, not a calibration ta
 
 
 The complete workflow was rerun successfully in CI [#286](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43020521613) after the audit documentation updates. Build, C++ tests, Python ensemble-analysis tests, 1-D transport tests, bounded size pilot, fixed-attempt paired sensitivity, common-Q screening and artifact upload all passed. The DLCA event-accounting implementation itself had already been validated in #284; #286 confirms the subsequent integrated repository snapshot.
+
+
+## Parallel update — transport verification and identifiability (2026-11-11)
+
+### Workstream C1: corrected planar benchmark re-baselined
+
+Following the eigenvalue-exponent correction, added a dimensionless reference
+table for (T_v=c_vt/H_d^2=0) through 2.0. The values are computed from the
+corrected analytical series (with the short-time asymptotic below 0.01) and
+are regression references only; they are not fitted silica data. The transport
+README now states the classical identifiability relation
+(c_v=k/(m_v\gamma_w)=kM/\gamma_w). A single consolidation curve therefore
+cannot identify permeability and skeleton modulus/compressibility separately.
+Independent hydraulic and mechanical measurements are required.
+
+### Workstream C2: radial solver convergence expanded
+
+Added convergence tests for both ideal radial geometries at Fourier number
+0.1. The test suite now checks monotonic reduction of error against the
+independent eigenfunction-series reference under joint grid/time refinement
+(30/60/120 cells and decreasing time step), and time-step refinement at fixed
+120-cell resolution. A local independent numerical check of the same scheme
+gave decreasing errors for cylinder: 0.01905, 0.00480, 0.000964; sphere:
+0.02649, 0.00671, 0.00135 across those three joint refinements. These are
+diagnostic values at one Fourier number, not global error bounds. Hosted CI
+validation of the newly expanded tests is pending.
+
+### Workstream D: model-structure evidence
+
+PSG-044 (Scherer, 1995) remains class-B comparator evidence because only the
+abstract is accessible and the precursor/gel chemistry is not verified.
+Its qualitative report of pH-dependent permeability and viscoelastic
+relaxation supports allowing transport and skeleton mechanics to evolve
+together, but its pore radii and trends are not target-material parameters.
+PSG-046 (Ragueh et al., 2015) provides direct precipitated-silica cake and
+compression evidence, but not syneresis permeability. The model architecture
+must therefore keep permeability, mechanical resistance/yielding, and
+network connectivity as separate state variables until target-system data
+constrain their coupling.
