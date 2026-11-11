@@ -1,7 +1,9 @@
 import math
 import unittest
 
-from run_dlca_parameter_sensitivity import VARIANTS, validate_variant
+from run_dlca_parameter_sensitivity import (
+    VARIANTS, validate_target_q, validate_variant,
+)
 
 
 class ParameterSensitivityTests(unittest.TestCase):
@@ -14,6 +16,14 @@ class ParameterSensitivityTests(unittest.TestCase):
             self.assertEqual(sum(a != b for a, b in zip(values, baseline)),
                              0 if name == "baseline" else 1, name)
             validate_variant(*values)
+
+    def test_target_q_must_be_finite_and_nonnegative(self):
+        validate_target_q(0.0)
+        validate_target_q(2000.0)
+        for value in (-1.0, float("nan"), float("inf")):
+            with self.subTest(value=value):
+                with self.assertRaises(ValueError):
+                    validate_target_q(value)
 
     def test_rejects_contact_step_violation(self):
         with self.assertRaises(ValueError):
