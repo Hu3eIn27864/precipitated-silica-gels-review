@@ -23,12 +23,14 @@ The full proposed study uses the existing size-series runner with:
 
 For CI runtime, `run_dlca_parameter_sensitivity.py` executes a smaller
 screening subset: N = 32, three paired seeds starting at 3000, and 50,000
-attempts per seed. It runs the six non-baseline variants in the matrix below;
-the ordinary CI size-series pilot supplies the baseline at (1.0, 0.2, 1.0).
-This is a software/integration screen, not a substitute for the full matrix.
+attempts per seed. It runs the baseline (1.0, 0.2, 1.0) and all six non-baseline variants
+using the same three seeds and attempt limit. The baseline is generated in
+the same screening block, not borrowed from the separate size-series pilot,
+so all seven configurations share common random-number seeds. This is a
+software/integration screen, not a substitute for the full matrix.
 The script writes `parameter_manifest.csv` and keeps each variant in a
 separate directory. CI then runs the fixed 2–5 contact-distance-unit ensemble
-summary and fit-window sensitivity audit for every variant.
+summary and fit-window sensitivity audit for the baseline and every variant.
 
 For a paired comparison, reuse the same base seed start for each parameter
 variant. The runner then maps the same seed block to each particle count in
