@@ -147,7 +147,7 @@ environment, including agreement with the series at Fourier numbers 0.02,
 0.1 and 0.5, monotonicity/bounds, and a grid/time refinement comparison.
 This local run is not a hosted CI result. The workflow path filter was
 extended so changes under `MODELLING/transport_model/**` trigger the existing
-transport test suite. Hosted CI validation is pending.
+transport test suite. Hosted CI #293–#295 passed the expanded radial suite and complete integrated workflow.
 
 The radial solver remains an ideal constant-coefficient benchmark. It is not
 yet experimentally validated, does not include finite-cylinder end drainage,
@@ -421,3 +421,28 @@ New tests cover the finite-cylinder limiting cases and scaling, plus algebraic c
 ### Dimensional correction to hydraulic/mechanical coupling
 
 Use hydraulic conductivity (K) [m/s] in (c_v=K M/\gamma_w), or intrinsic permeability (\kappa) [m²] in (c_v=\kappa M/\mu). These are distinct forms connected by Darcy's law; do not use the same symbol or unit for both. The implementation now exposes separate functions for each form and their inverses. This is an explicit dimensional correction to earlier shorthand notation in project notes.
+
+### Follow-up: completed geometry/data/coupling branch — 2026-11-11
+
+The 18-row comparison matrix has now been analysed descriptively in
+`SYNTHESIS/experimental_syneresis_comparison_note.md`. For the natural
+12-mm-diameter cylinder series, the fitted base/acid time-constant ratio is
+2.35, 2.74 and 5.50 at 20/40/60 °C; for the approximately 3-mm droplets it
+is 1.68, 0.89 and 1.23. This protocol-dependent reversal rules out a simple
+unqualified acid/base rate ordering. These are ratios of empirical fit
+parameters, not measured diffusivities.
+
+The finite-cylinder first-mode helper is tested for drained versus sealed
+ends and its infinite-cylinder limit. The poroelastic helper now distinguishes
+hydraulic conductivity K [m/s] from intrinsic permeability κ [m²], with
+separate forms c_v=K M/γ_w and c_v=κ M/μ. The initial transient CI failure
+(#304) was an intermediate import/API mismatch in the new coupling test;
+the API and tests were reconciled. Full hosted CI #305–#308 passed, including
+the 29 transport tests in #308. This confirms implementation/test consistency
+only, not material-model validity.
+
+Next scientific gate remains evidence recovery: actual cylinder height and
+drainage surfaces, droplet contact geometry, raw syneresis curves, and
+independent permeability/conductivity and constrained-modulus measurements.
+Only then decide whether a transient finite-cylinder solver and a
+state-dependent k–M coupling can be meaningfully identified.
