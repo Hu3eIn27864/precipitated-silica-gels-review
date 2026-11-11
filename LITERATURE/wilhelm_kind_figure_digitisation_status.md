@@ -59,3 +59,7 @@ The supplied assets establish the correct figure/time-axis mapping unambiguously
 - Figure 10 (file ending `g010`): droplets; 0–8 h; relative shrinkage 0–1.0.
 
 The initial calibration coordinates were refined after inspecting the actual 1536 × 591/594 pixel images. The CSV now records the revised major-tick coordinates for all four panels. These are image-coordinate estimates from the raster and remain subject to residual checks in the calibration script before any point data are released.
+
+
+## Nutzer-Digitalisierung integriert (2026-11-11)
+164 näherungsweise aus JPEG abgelesene Messpunkte wurden aus der Chat-Nachricht in `wilhelm_kind_approximate_measurement_points.csv` rekonstruiert. Struktur- und Plausibilitätsprüfung: `wilhelm_kind_digitisation_quality_audit.md`. Keine Werte wurden an publizierte Fitparameter angepasst. Kritische Auffälligkeiten: Figure 10b bei 20/40/60 °C (digitale Maxima 0.51/0.67/0.86 gegenüber Tabellen-Fitparametern 0.30/0.39/0.51); Figure 10b/60 °C ist besonders dringlich zu prüfen. Auch Figure 8b/40 und 60 °C sowie Figure 10a/60 °C zeigen nichtmonotone Rückgänge. Pixelkoordinaten, Fehlerbalken und Unsicherheiten fehlen weiterhin. Alle Werte bleiben vorläufige Näherungsablesungen.
