@@ -24,3 +24,25 @@ jobs:
         run: ctest --test-dir build/mc3d --output-on-failure
       - name: Run Python ensemble-analysis tests
         run: python3 -m unittest discover -s MODELLING/monte_carlo_3d/analysis -p 'test_*.py' -v
+      - name: Run bounded DLCA pilot size series
+        run: |
+          python3 MODELLING/monte_carlo_3d/analysis/run_dlca_size_series.py \
+            --executable build/mc3d/mc3d_dlca_ensemble \
+            --output-dir build/mc3d/pilot \
+            --sizes 32 64 128 \
+            --seed-start 1000 \
+            --seed-count 3 \
+            --max-attempts 50000
+          python3 MODELLING/monte_carlo_3d/analysis/analyze_dlca_ensembles.py \
+            --system 32:build/mc3d/pilot/n32 \
+            --system 64:build/mc3d/pilot/n64 \
+            --system 128:build/mc3d/pilot/n128 \
+            --fit-min 2 --fit-max 5 \
+            --output build/mc3d/pilot/size_comparison
+      - name: Upload pilot data
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mc3d-dlca-pilot
+          path: build/mc3d/pilot/
+          if-no-files-found: warn
