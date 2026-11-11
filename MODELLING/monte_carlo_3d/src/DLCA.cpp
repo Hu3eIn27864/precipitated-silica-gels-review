@@ -1,5 +1,6 @@
 #include "DLCA.hpp"
 #include "PeriodicCellList.hpp"
+#include "PeriodicSweptCollision.hpp"
 
 #include <algorithm>
 #include <cmath>
@@ -140,15 +141,10 @@ DLCAResult DLCA::generate() const {
                         collision = true;
                         continue;
                     }
-                    const double projection = dot(relative, shift);
-                    if (projection <= 0.0) continue;
-                    const double discriminant =
-                        projection * projection - shift2 * (r2 - exclusion2);
-                    if (discriminant < 0.0) continue;
-                    const double entry =
-                        (projection - std::sqrt(discriminant)) / shift2;
-                    if (entry >= 0.0 && entry <= firstContact) {
-                        firstContact = entry;
+                    const auto entry = firstPeriodicSweptSphereContact(
+                        relative, shift, config_.contactDistance, box_.sideLength());
+                    if (entry && *entry <= firstContact) {
+                        firstContact = *entry;
                         collision = true;
                     }
                 }
