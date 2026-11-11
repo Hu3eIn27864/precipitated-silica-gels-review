@@ -263,3 +263,53 @@ The successful CI run verifies build, tests, execution and artifact generation f
 ### Realized-displacement instrumentation added (2026-11-11; CI validation pending)
 
 The DLCA result now accumulates the sum of squared realized cluster translations and the cumulative realized cluster-translation path length. The ensemble run-summary CSV exports both quantities, and the C++ reproducibility test checks that they are finite, nonnegative, reproducible, and internally consistent. The smoke-test schema was extended accordingly. This provides the diagnostics needed to compare runs at a common algorithmic displacement budget rather than equating a fixed number of attempts with equal progress. These fields are algorithmic path diagnostics, not physical time or a calibrated Brownian diffusivity. The instrumentation and updated CSV contract passed the integrated build, all five CTest targets, Python analysis tests, and 1-D transport tests in [hosted CI run #234](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43015552646). The regenerated artifact confirms the intended diagnostic: at 50,000 attempts, the baseline step 0.2 accumulated mean squared realized translation 2,000.71, whereas step 0.1 accumulated 500.30 (approximately one quarter). Step 0.28 completed all three runs after a mean 25,665 attempts and accumulated mean squared realized translation 2,011.66. Thus the step-size completion difference is confounded by the different displacement budget per attempt; this is exactly why future step comparisons need a common cumulative-displacement stopping criterion. The diagnostics remain algorithmic, not physical time.
+
+
+
+### Seed-level audit of latest CI artifact #237 (2026-11-11)
+
+Artifact `mc3d-dlca-pilot-and-sensitivity` (ID `13851749184`) was downloaded from workflow run [#237](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43015804303). Its provenance records source commit `9717046c349af3ca2ce246ad739d57ba4aa8198d`, Linux runner, GCC 15.2.0, Python 3.14.4, N = 32/64/128, three seeds per size, 50,000 maximum attempts, and the 2–5 contact-distance-unit diagnostic interval. The parameter block records the seven configurations and paired seeds 3000–3002. Raw run tables and stored summary tables were read independently; the key completion and eligibility counts reconcile.
+
+#### Size-series seed outcomes
+
+| N | Seed | Completed | Attempts | Successful merges | Components at stop | Largest component | Largest fraction | Rg | Unwrapping consistent |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 32 | 1000 | no | 50,000 | 28 | 4 | 15 | 0.4688 | 2.0660 | yes |
+| 32 | 1001 | yes | 45,507 | 31 | 1 | 32 | 1.0000 | 3.5069 | yes |
+| 32 | 1002 | yes | 49,819 | 31 | 1 | 32 | 1.0000 | 3.3626 | yes |
+| 64 | 1003 | no | 50,000 | 49 | 15 | 10 | 0.1562 | 1.9187 | yes |
+| 64 | 1004 | no | 50,000 | 39 | 25 | 10 | 0.1562 | 1.4504 | yes |
+| 64 | 1005 | no | 50,000 | 41 | 23 | 13 | 0.2031 | 1.7480 | yes |
+| 128 | 1006 | no | 50,000 | 48 | 80 | 6 | 0.0469 | 1.0713 | yes |
+| 128 | 1007 | no | 50,000 | 36 | 92 | 5 | 0.0391 | 1.0534 | yes |
+| 128 | 1008 | no | 50,000 | 42 | 86 | 4 | 0.0312 | 0.7445 | yes |
+
+Completion was 2/3, 0/3, and 0/3 for N = 32, 64, and 128. Only the two completed N = 32 aggregates had a valid fixed-window fit (2–5 contact units): Df = 1.2392 and 1.1586; mean 1.1989, sample SD 0.0570. However, the within-seed exponent range across all enumerated fit windows averaged 0.3940 and reached 0.5874. The fit-window scanner is diagnostic and does not select a physically justified scaling interval. Consequently, even the two N = 32 values are strongly window-sensitive and completion-selected. No finite-size scaling estimate is available.
+
+#### Paired parameter screen
+
+All seven configurations used N = 32, seeds 3000–3002, box length 15, and a 50,000-attempt cap. Means below are descriptive across three seeds. Largest-component fraction and Rg include incomplete terminal clusters; they are not completed-aggregate morphology estimates. Q is cumulative squared realized cluster translation; L is cumulative realized translation path length. Neither is physical time.
+
+| Configuration | Completed | Mean largest fraction | Mean Q | Mean L | Fixed-window Df fits |
+|---|---:|---:|---:|---:|---:|
+| Baseline (contact 1.0, step 0.20, mobility 1.0) | 0/3 | 0.3438 | 2000.71 | 9607.63 | 0 |
+| Contact 0.9 | 1/3 | 0.6562 | 1937.38 | 9303.69 | 1 |
+| Contact 1.1 | 2/3 | 0.8646 | 1695.55 | 8146.78 | 2 |
+| Step 0.10 | 0/3 | 0.1354 | 500.30 | 4804.48 | 0 |
+| Step 0.28 | 3/3 | 1.0000 | 2011.66 | 6901.79 | 3 |
+| Mobility exponent 0.5 | 0/3 | 0.6771 | 2000.64 | 9607.24 | 0 |
+| Mobility exponent 1.5 | 1/3 | 0.6979 | 1947.59 | 9352.52 | 1 |
+
+The fixed-window Df values exist only for completed aggregates: contact 0.9, seed 3002: 1.2445; contact 1.1, seeds 3000 and 3002: 1.5063 and 1.4616 (mean 1.4840, sample SD 0.0316); step 0.28, seeds 3000–3002: 1.2476, 1.1671, 1.3700 (mean 1.2616, sample SD 0.1021); mobility 1.5, seed 3000: 1.0961. These are not comparable paired estimates because no baseline seed completed. Across all fit windows, the mean within-seed exponent ranges were 0.7139 (contact 0.9; one eligible seed), 1.1293 (contact 1.1; two), 0.8570 (step 0.28; three), and 0.7936 (mobility 1.5; one). Such broad window dependence is another reason not to report a selected fractal dimension.
+
+The contact-distance variants also change the initial excluded-volume scale at fixed number density: relative to contact distance 1.0, the geometric d^3 factor is 0.729 at 0.9 and 1.331 at 1.1. Thus their completion differences cannot be attributed to contact geometry alone. In the step-size variants, the measured Q after the same attempt cap is approximately 500.30 for step 0.10 versus 2,000.71 for step 0.20; step 0.28 completes after a mean 25,665 attempts at Q = 2,011.66. This confirms the fixed-attempt confounding. Even at similar Q, L differs (e.g. 9,607.63 at baseline versus 6,901.79 at step 0.28), so Q alone is not a complete state descriptor.
+
+#### Recomputed paired eligibility
+
+The paired summary contains three common seed IDs for every variant, but **zero pairs in which both baseline and variant completed**. Therefore there are zero valid paired Rg comparisons and zero valid paired Df comparisons for all six variants. The largest-component-fraction deltas are defined for all pairs but describe finite-attempt partial progress only. No inferential statistics are warranted with three seeds.
+
+#### Decision
+
+**No-go for the preplanned full finite-size/scaling matrix at this stage.** The immediate next DLCA task is not a larger run: it is to add and test a common-`Q` stopping mode with an independent attempt safety cap, preserve the legacy mode, and record target reached/cap reached/overshoot plus both Q and L. The pilot suggests Q ≈ 2,000 reduced length-units squared as a provisional screening target only; step 0.10 did not approach it within 50,000 attempts, so its safety cap must be designed separately rather than silently treating it as matched. After the common-budget screen, inspect whether completion, unwrapping and fit-window stability improve before extending to N = 64/128 or increasing seed count.
+
+This artifact audit is a reproducible numerical diagnostic. It does not validate DLCA against precipitated-silica experiments, establish physical kinetics, or establish a universal fractal dimension.
