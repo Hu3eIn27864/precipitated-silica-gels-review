@@ -597,3 +597,11 @@ The literature gap is now more precise: direct sodium-silicate/sulfuric-acid rhe
 - [ ] Report Table 2 and Figure 10b as separate evidence streams until the inconsistency is resolved.
 
 **Interpretation change:** Figure 10b is no longer treated simply as a likely symbol-mapping/AI-digitisation error. It is a candidate publication-internal figure/table inconsistency. This is not proof of a table typo.
+
+## Table 2 reference-value decision — Wilhelm & Kind (11.11.2026)
+
+- [x] Adopt the published Table 2 entries as the authoritative literature reference values, cross-checked against the KITopen full-text copy and accepted by the user.
+- [x] Keep the 164 AI-assisted approximate graph readings and their exploratory fits in a separate evidence class; they do not replace the published fit parameters.
+- [x] Preserve the visible Figure 10b/Table 2 discrepancy as unresolved without asserting a table error or graph error.
+
+For base-catalysed droplets, use Table 2 values A = 0.30/0.39/0.51 and τ = 0.67/0.57/0.95 h at 20/40/60 °C in literature comparisons. These are published empirical fit parameters, not direct measurements of permeability, diffusivity, or a physical consolidation time.
