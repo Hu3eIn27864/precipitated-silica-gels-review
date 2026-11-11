@@ -7,6 +7,7 @@ def row(seed, completed=1, unwrapped=1, largest=10, rg=2.0, df=1.7):
     return {
         "seed": seed,
         "completed": completed,
+        "attempts": 500 if completed else 1000,
         "unwrapping_consistent": unwrapped,
         "largest_component_fraction": largest / 10,
         "largest_component_rg": rg,
