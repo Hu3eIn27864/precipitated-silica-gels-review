@@ -19,7 +19,7 @@ set(expected_files
     "${OUTPUT_PREFIX}_mobility_by_size.csv"
 )
 set(expected_headers
-    "seed,completed,attempts,successful_merges,component_count,largest_component_size,largest_component_rg,unwrapping_consistent,contact_distance,maximum_component_step,mobility_exponent,cumulative_squared_cluster_translation,cumulative_cluster_translation_path_length,target_cumulative_squared_translation,displacement_budget_reached,attempt_limit_reached,displacement_budget_overshoot"
+    "seed,completed,attempts,successful_merge_events,successful_merges,component_count,largest_component_size,largest_component_rg,unwrapping_consistent,contact_distance,maximum_component_step,mobility_exponent,cumulative_squared_cluster_translation,cumulative_cluster_translation_path_length,target_cumulative_squared_translation,displacement_budget_reached,attempt_limit_reached,displacement_budget_overshoot"
     "seed,particle_count,radius,mean_enclosed_mass"
     "seed,fit_minimum_radius,fit_maximum_radius,exponent,standard_error,r_squared,point_count"
     "seed,selected_cluster_size,selection_count,successful_merge_events,successful_merges,cumulative_squared_translation,cumulative_translation_path_length"
@@ -45,6 +45,6 @@ if(NOT run_line_count EQUAL 2)
     message(FATAL_ERROR "Expected one run-summary data row, found ${run_line_count} total lines")
 endif()
 list(GET run_lines 1 run_row)
-if(NOT run_row MATCHES "^12345,[01],[0-9]+,[0-9]+,[0-9]+,[0-9]+,.*,[01],1,0\\.14999999999999999,0\\.5,[0-9.eE+-]+,[0-9.eE+-]+,[0-9.eE+-]+,1,0,[0-9.eE+-]+$")
+if(NOT run_row MATCHES "^12345,[01],[0-9]+,[0-9]+,[0-9]+,[0-9]+,[0-9]+,.*,[01],1,0\\.14999999999999999,0\\.5,[0-9.eE+-]+,[0-9.eE+-]+,[0-9.eE+-]+,1,0,[0-9.eE+-]+$")
     message(FATAL_ERROR "Malformed run-summary row: '${run_row}'")
 endif()
