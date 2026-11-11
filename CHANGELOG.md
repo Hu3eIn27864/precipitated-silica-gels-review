@@ -432,3 +432,6 @@
 
 
 - 2026-11-11: Hosted MC3D CI run #220 passed the Release build, all five CTest targets, MC3D Python analysis tests, 1-D transport tests, DLCA size-series pilot, and seven-configuration paired sensitivity screen. Uploaded artifacts were inspected. Size-series completion was 2/3 (N=32), 0/3 (N=64), and 0/3 (N=128); only two N=32 fits were available and the within-run fit-window exponent range averaged 0.394. The paired sensitivity baseline completed 0/3, leaving no valid paired Rg or Df comparisons. These are software/pilot diagnostics, not evidence for silica-specific scaling or physical parameter selection. See MODELLING/monte_carlo_3d/TEST_RESULTS.md.
+
+
+- 2026-11-11: Added cumulative squared realized cluster translation and cumulative realized cluster-translation path length to DLCA run metadata. Extended the deterministic reproducibility assertions and smoke-test CSV contract. These diagnostics will support future equal-displacement comparisons; they are not physical time. Hosted validation is pending.
