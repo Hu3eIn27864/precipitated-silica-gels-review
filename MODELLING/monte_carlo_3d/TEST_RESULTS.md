@@ -179,7 +179,7 @@ The GitHub Actions workflow now also runs the Python standard-library unit tests
 
 Added `analysis/run_dlca_size_series.py` to execute a set of particle counts at constant initial reduced number density by scaling the cubic box as (L propto N^{1/3}). Defaults use the existing 32-particle, side-length-15 reduced-unit reference condition, with five consecutive seeds and 200,000 attempted cluster moves per run. A unit-volume-fraction calculation gives approximately 0.005 for the reference hard-sphere system; this is an algorithmic dilute test condition, not an experimentally calibrated silica concentration.
 
-A companion test checks the box-scaling relation and seed/input parsing. The runner and its tests have been committed but have not yet been executed in this environment. The suggested common fit interval 2–5 is only a diagnostic starting point and must not be interpreted as a validated scaling regime.
+A companion test checks the box-scaling relation and seed/input parsing. The runner tests were executed against an isolated local copy of the committed runner and test module: 4/4 passed, including the CLI fake-executable test and disjoint-seed allocation. The repository checkout itself and its full CI suite have not been executed locally. The suggested common fit interval 2–5 is only a diagnostic starting point and must not be interpreted as a validated scaling regime.
 
  
 ## Ensemble-fit provenance validation (2026-11-11)
