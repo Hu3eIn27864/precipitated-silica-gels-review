@@ -486,3 +486,5 @@
 - 2026-11-11: Added run-level `successful_merge_events` to DLCA run-summary CSV so per-size event totals can be independently reconciled in uploaded artifacts; updated CLI smoke schema and row validation. Hosted CI pending.
 
 - 2026-11-11: Stabilised early-time evaluation of the analytical 1-D consolidation benchmark using the Poisson-transformed short-time asymptotic for dimensionless time below 0.01; added term-independence, square-root scaling and branch-continuity tests. Hosted CI pending.
+
+- 2026-11-11: The new branch-continuity test exposed an incorrect eigenvalue exponent in the planar consolidation series (a factor of \(\pi^2/4\) was inverted). Corrected the exponent to \((2m+1)^2\pi^2 T_v/4\), and added an independent reference-value regression test at \(T_v=0.1\). The earlier CI failures were genuine test detections; rerun validation is in progress.
