@@ -54,3 +54,5 @@ These are code-level checks, not validation against experimental silica data.
 
 Extend to nonlinear permeability, viscoelastic relaxation, or other geometry
 only when published data can constrain those terms.
+
+The test suite additionally checks rejection of NaN/infinite inputs and convergence of the 1000-term default series against a 5000-term reference at a representative dimensionless time. The convergence test is specific to that test point; very early-time cases can require more terms. The function rejects non-finite inputs rather than silently returning a bounded but meaningless result.
