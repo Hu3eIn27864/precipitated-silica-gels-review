@@ -375,3 +375,19 @@ The most defensible conclusion is that Q alone does not standardise the algorith
 ### Literature update relevant to model structure
 
 Added PSG-045: Manfoumbi, Roger & Meireles (2024), DOI 10.5802/crchim.347. The study links pH/silicate precipitation history to SAXS-observed mesostructure and reports an approximately two-order improvement in filtration-cake specific resistance after silicate addition at basic pH. This is strong evidence for process-history-dependent mesostructure and filterability in its hydrometallurgical system, but cake resistance is not intrinsic gel permeability or syneresis kinetics. It must not be used to calibrate the radial transport solver.
+
+
+### Size-resolved mobility diagnostics: hosted validation in CI #267
+
+Added `_mobility_by_size.csv`, which records per seed and pre-move cluster-size class: selection count, cumulative squared realized translation Q, and cumulative path length L. Hosted CI [#267](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43019287245), commit `37ffb1678733f17212f7b0b2f311ca26a49eae36`, passed the complete workflow, including build, all C++ tests, Python analysis tests, transport tests, the three DLCA screens and artifact upload.
+
+The new artifact (ID `13854985222`) was inspected. For all 51 seed/configuration records across the size pilot, fixed-attempt sensitivity and common-Q sensitivity, three conservation identities held:
+- Sum of per-size selection counts = run attempt count.
+- Sum of per-size Q contributions = global run Q.
+- Sum of per-size L contributions = global path length.
+
+No mismatches were found. This verifies internal accounting consistency, not the physical correctness of the mobility model.
+
+For the common-Q N=32 screen, the fraction of selections involving clusters of size at least two was 8.87% for baseline, 15.53% for mobility exponent 0.5 and 11.48% for exponent 1.5. This is qualitatively consistent with the declared algorithmic weighting (m^{-\alpha}): reducing the exponent makes larger clusters relatively more selectable. The fractions are descriptive of this early incomplete stage, not estimates of physical cluster mobility. Step 0.10 had 11.31% and step 0.28 had 8.87%; step size also changes how many attempts are needed to reach Q and the trajectory sampled.
+
+The new output now allows the next analysis to stratify Q and L by selected cluster size rather than infer the whole trajectory from global totals. It still does not record cluster orientation, rotational motion, hydrodynamic interactions, or a physical clock.
