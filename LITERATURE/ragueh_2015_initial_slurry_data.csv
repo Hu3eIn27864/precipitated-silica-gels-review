@@ -1,0 +1,4 @@
+source,source_table,material_label_as_printed,material_label_interpretation,dry_silica_mass_g_per_g_solution,initial_silica_volume_fraction,record_status,transferability_note
+Ragueh et al. 2015,Table 1,S1,S1,0.053,0.020,reported,Initial industrial silica slurry composition
+Ragueh et al. 2015,Table 1,S3,probable S2; label printed S3,0.053,0.018,label_inconsistency,Middle row likely S2 because text and other tables identify S1/S2/S3; not author-confirmed
+Ragueh et al. 2015,Table 1,S3,S3,0.034,0.011,reported,Initial industrial silica slurry composition
