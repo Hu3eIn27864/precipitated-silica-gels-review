@@ -357,3 +357,9 @@
 - Replaced squared-distance comparison in the mass-radius estimator with `std::hypot` to improve numerical robustness for large finite coordinates.
 - Added test-source cases for exact power-law window stability, a constructed crossover, and large-coordinate distance evaluation. Full CMake/CTest execution remains outstanding.
 - Corrected the earlier documentation: the estimator no longer rejects radii merely because their square overflows; it uses a stable distance comparison instead.
+
+
+## 2026-11-11 — Compact and branched reference geometries
+
+- Added finite cubic-lattice and three-arm cross reference cases to the mass-radius network tests to check distinction between compact and simple branched geometries.
+- An isolated C++17 ASan/UBSan harness returned slopes 2.33099 and 1.07112, respectively. The full repository CMake/CTest suite remains unverified.
