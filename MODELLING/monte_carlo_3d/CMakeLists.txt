@@ -8,6 +8,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 add_library(mc3d_core
     src/SimulationBox.cpp
     src/NeighborList.cpp
+    src/MonteCarlo.cpp
 )
 target_include_directories(mc3d_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
@@ -18,12 +19,16 @@ add_executable(mc3d_geometry_tests tests/test_geometry.cpp)
 target_link_libraries(mc3d_geometry_tests PRIVATE mc3d_core)
 add_executable(mc3d_interaction_tests tests/test_interactions.cpp)
 target_link_libraries(mc3d_interaction_tests PRIVATE mc3d_core)
+add_executable(mc3d_metropolis_tests tests/test_metropolis.cpp)
+target_link_libraries(mc3d_metropolis_tests PRIVATE mc3d_core)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     target_compile_options(mc3d_geometry_tests PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(mc3d_interaction_tests PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(mc3d_metropolis_tests PRIVATE -Wall -Wextra -Wpedantic)
 endif()
 
 enable_testing()
 add_test(NAME geometry COMMAND mc3d_geometry_tests)
 add_test(NAME interactions COMMAND mc3d_interaction_tests)
+add_test(NAME metropolis COMMAND mc3d_metropolis_tests)
