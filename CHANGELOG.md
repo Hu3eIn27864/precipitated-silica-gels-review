@@ -572,3 +572,11 @@
 - Qualitätsaudit, Statusnotiz und Halbzeit-Auswertung um Provenienz, Evidenzgrenze und zulässige Verwendung ergänzt.
 - Wilhelm & Kind (2015), Gleichung (3), im Volltext verifiziert: S(t)=A[1−exp(−t/τ)]; damit gilt für die publizierte Fitfunktion exakt t50=τ ln 2. Dies bestätigt die Umrechnung, nicht die ungeprüften Diagrammablesungen.
 - Keine Modellanpassung und keine physikalische Validierung beansprucht.
+
+
+## 2026-11-11 — Deskriptives Temperatur-Screening publizierter Zeitkonstanten
+
+- Neue getrennte Auswertung der publizierten Wilhelm-&-Kind-Zeitkonstanten aus Tabellen 1–2: `LITERATURE/wilhelm_kind_apparent_arrhenius_screening.csv` und Begleitnotiz.
+- Zylinder ergeben positive scheinbare Arrhenius-Werte (+29.27 kJ/mol sauer; +12.29 kJ/mol basisch); Tröpfchen negative scheinbare Werte (−13.40 bzw. −6.79 kJ/mol). Letztere werden ausdrücklich nicht als chemische Aktivierungsenergien interpretiert.
+- Nur drei Temperaturpunkte je Reihe; unterschiedliche Geometrien und die dokumentierte thermische Anlaufphase der Tröpfchen verhindern eine mechanistische Arrhenius-Deutung.
+- Ausschließlich publizierte Tabellenwerte verwendet; die KI-gestützten Kurvenablesungen sind nicht in diese Rechnung eingegangen.
