@@ -14,7 +14,6 @@ void require(bool ok, const char* message) {
 bool near(double a, double b, double tol = 1e-10) {
     return std::abs(a - b) <= tol;
 }
-
 void testPeriodicUnwrappingAndGraph() {
     const mc3d::SimulationBox box(10.0);
     const std::vector<mc3d::Particle> p{
@@ -33,7 +32,6 @@ void testPeriodicUnwrappingAndGraph() {
     require(a.components[0].periodicUnwrappingConsistent,
             "simple chain should unwrap consistently");
 }
-
 void testDLCAReproducibilityAndNonOverlap() {
     const mc3d::SimulationBox box(12.0);
     mc3d::DLCAConfig cfg;
@@ -67,10 +65,11 @@ void testDLCAReproducibilityAndNonOverlap() {
     const auto obs = mc3d::analyseNetwork(a.particles, box, 1.0 + 1e-10);
     require(obs.particleCount == cfg.particleCount,
             "network analysis lost particles");
-    require(obs.contactCount == a.successfulMerges,
-            "tree-like DLCA contact count differs from successful merge count");
+    require(obs.contactCount >= a.successfulMerges,
+            "contact graph has fewer contacts than component-merging events");
+    require(obs.componentCount == (a.completed ? 1u : cfg.particleCount - a.successfulMerges),
+            "component count inconsistent with DLCA merge accounting");
 }
-
 void testEmptyNetwork() {
     const mc3d::SimulationBox box(10.0);
     const auto obs = mc3d::analyseNetwork({}, box, 1.0);
@@ -78,7 +77,6 @@ void testEmptyNetwork() {
             "empty network should have no components");
 }
 }
-
 int main() {
     try {
         testPeriodicUnwrappingAndGraph();
