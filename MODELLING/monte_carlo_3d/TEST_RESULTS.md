@@ -153,3 +153,8 @@ The existing GitHub Actions workflow builds the MC3D directory and runs CTest on
 ## Smoke-test harness logic check (2026-11-11)
 
 The new CMake smoke-test script was exercised locally with a temporary stand-in executable that wrote the three expected CSV headers. CMake 3.31.6 completed the script successfully. This verifies the CMake script's argument handling, file checks and header comparisons only; it does **not** compile or execute the actual DLCA ensemble program. The full repository build and five-test CTest run remain unverified.
+
+
+## Driver input and output edge-case audit (2026-11-11)
+
+A source-level audit of `dlca_ensemble.cpp` confirms that integer arguments are digit-validated before conversion, positive size arguments are required, box length must be finite and positive, seed-range overflow is rejected, all three output streams are checked before writing, and incomplete/winding aggregates are excluded from mass-radius fitting while retained in the run summary. The smoke test checks the three CSV headers after a real executable invocation. This audit is static inspection, not compilation or execution of the driver.
