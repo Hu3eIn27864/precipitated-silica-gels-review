@@ -278,6 +278,18 @@ void testMassRadiusCompactAndBranchedReferenceGeometries() {
             "branched reference geometry produced an unexpected mass-radius slope");
 }
 
+void testMassRadiusFitWindowScanSkipsPlateaus() {
+    const std::vector<double> radii{1, 2, 3, 4, 5, 6};
+    const auto plateauPrefix =
+        mc3d::scanMassRadiusFitWindows(radii, {1, 1, 1, 2, 3, 4}, 3);
+    require(!plateauPrefix.empty(),
+            "fit-window scan discarded all valid windows after a plateau");
+    const auto constant =
+        mc3d::scanMassRadiusFitWindows(radii, {1, 1, 1, 1, 1, 1}, 3);
+    require(constant.empty(),
+            "fit-window scan should return no slopes for a constant mass curve");
+}
+
 void testMassRadiusRecoversOneDimensionalScaling() {
     std::vector<mc3d::Vec3> line;
     line.reserve(1001);
@@ -349,6 +361,7 @@ int main() {
         testCellListRejectsExcessiveDenseGrid();
         testMassRadiusPowerLawRegression();
         testMassRadiusFitWindowSensitivityScan();
+        testMassRadiusFitWindowScanSkipsPlateaus();
         testMassRadiusCurveGeneration();
         testMassRadiusRecoversOneDimensionalScaling();
         testMassRadiusCompactAndBranchedReferenceGeometries();
