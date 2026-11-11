@@ -6,6 +6,7 @@
 #include <cmath>
 #include <exception>
 #include <iostream>
+#include <limits>
 #include <stdexcept>
 #include <vector>
 
@@ -121,6 +122,17 @@ void testPeriodicCellListIsConservative() {
     const auto candidates = smallGrid.candidates({0.1, 0.1, 0.1});
     require(std::find(candidates.begin(), candidates.end(), 1) != candidates.end(),
             "cell list failed across a periodic boundary on a small grid");
+    const auto negativeQuery = cells.candidates({-0.2, 0.2, 0.1});
+    require(std::find(negativeQuery.begin(), negativeQuery.end(), 1) !=
+                negativeQuery.end(),
+            "cell list failed to wrap negative query coordinates");
+    bool rejectedNonFinite = false;
+    try {
+        (void)cells.candidates({std::numeric_limits<double>::infinity(), 0.0, 0.0});
+    } catch (const std::invalid_argument&) {
+        rejectedNonFinite = true;
+    }
+    require(rejectedNonFinite, "cell list accepted a non-finite query coordinate");
 }
 
 void testEmptyNetwork() {
