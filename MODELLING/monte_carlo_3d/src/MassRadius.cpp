@@ -19,9 +19,8 @@ std::vector<MassRadiusPoint> calculateMassRadiusCurve(
     }
     for (std::size_t i = 0; i < radii.size(); ++i) {
         if (!std::isfinite(radii[i]) || radii[i] <= 0.0 ||
-            !std::isfinite(radii[i] * radii[i]) ||
-            (i > 0 && radii[i] <= radii[i - 1])) {
-            throw std::invalid_argument("Mass-radius radii must be finite, positive, square safely and strictly increase");
+                        (i > 0 && radii[i] <= radii[i - 1])) {
+            throw std::invalid_argument("Mass-radius radii must be finite, positive, strictly increase");
         }
     }
 
