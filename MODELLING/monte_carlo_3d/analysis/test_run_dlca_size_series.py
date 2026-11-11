@@ -1,5 +1,4 @@
 import argparse
-import os
 import subprocess
 import sys
 import tempfile
@@ -30,10 +29,10 @@ class SizeSeriesRunnerTests(unittest.TestCase):
             log = root / "calls.txt"
             fake = root / "fake_mc3d.py"
             fake.write_text(
-                "#!/usr/bin/env python3\\n"
-                "import sys\\n"
+                "#!/usr/bin/env python3\n"
+                "import sys\n"
                 "with open(" + repr(str(log)) + ", 'a', encoding='utf-8') as f: "
-                "f.write(' '.join(sys.argv[1:]) + '\\\\n')\\n",
+                "f.write(' '.join(sys.argv[1:]) + '\\n')\n",
                 encoding="utf-8",
             )
             fake.chmod(0o755)
