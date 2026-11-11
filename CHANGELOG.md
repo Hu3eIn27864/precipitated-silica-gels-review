@@ -395,3 +395,6 @@
 - Added unit tests for fixed-window extraction, run exclusions, undefined Rg and duplicate seeds. Tests are committed but not yet executed.
 
 - Extended the MC3D GitHub Actions workflow to run the Python ensemble-analysis unit tests in addition to the C++ build and CTest suite.
+
+ 
+- Added a reproducible DLCA size-series runner with constant reduced number density and a corresponding scaling/input test. Documented a pilot workflow for (N=32,64,128) and a common diagnostic fit interval, with explicit caveats against interpreting it as silica calibration or proof of fractal scaling.
