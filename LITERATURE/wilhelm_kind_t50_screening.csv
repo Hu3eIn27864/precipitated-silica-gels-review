@@ -1,0 +1,13 @@
+figure,panel,condition,temperature_C,published_fit_amplitude,tau_published_h,n_points,t50_digitised_h,t50_single_exponential_from_tau_h,ratio_digitised_to_expected,screening_status
+Figure 8,a,acidic,20,0.200,21.300,13,6.000,14.764,0.406,screening_only
+Figure 8,a,acidic,40,0.200,11.700,11,12.222,8.110,1.507,recheck_series_before_interpretation
+Figure 8,a,acidic,60,0.200,5.000,11,11.579,3.466,3.341,recheck_series_before_interpretation
+Figure 8,b,basic,20,0.300,50.100,11,20.833,34.727,0.600,screening_only
+Figure 8,b,basic,40,0.390,32.000,9,22.159,22.181,0.999,screening_only
+Figure 8,b,basic,60,0.510,27.500,10,19.318,19.062,1.013,screening_only
+Figure 10,a,acidic,20,0.370,0.400,15,0.418,0.277,1.509,screening_only
+Figure 10,a,acidic,40,0.410,0.640,19,0.413,0.444,0.930,screening_only
+Figure 10,a,acidic,60,0.480,0.770,21,0.480,0.534,0.899,screening_only
+Figure 10,b,basic,20,0.300,0.670,15,0.356,0.464,0.767,recheck_series_before_interpretation
+Figure 10,b,basic,40,0.390,0.570,16,0.319,0.395,0.808,recheck_series_before_interpretation
+Figure 10,b,basic,60,0.510,0.950,13,0.428,0.658,0.650,recheck_series_before_interpretation
