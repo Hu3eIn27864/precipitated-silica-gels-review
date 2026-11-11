@@ -94,6 +94,17 @@ void testDLCAReproducibilityAndNonOverlap() {
             near(a.displacementBudgetOvershoot, b.displacementBudgetOvershoot) &&
             a.completed == b.completed,
             "DLCA metadata not reproducible");
+    require(a.clusterMobilityStats.size() == b.clusterMobilityStats.size(),
+            "DLCA per-size mobility classes not reproducible");
+    for (std::size_t i = 0; i < a.clusterMobilityStats.size(); ++i) {
+        const auto& x = a.clusterMobilityStats[i];
+        const auto& y = b.clusterMobilityStats[i];
+        require(x.clusterSize == y.clusterSize &&
+                x.selectionCount == y.selectionCount &&
+                near(x.cumulativeSquaredTranslation, y.cumulativeSquaredTranslation) &&
+                near(x.cumulativeTranslationPathLength, y.cumulativeTranslationPathLength),
+                "DLCA per-size mobility diagnostics not reproducible");
+    }
     require(std::isfinite(a.cumulativeSquaredClusterTranslation) &&
             a.cumulativeSquaredClusterTranslation >= 0.0 &&
             std::isfinite(a.cumulativeClusterTranslationPathLength) &&
