@@ -53,3 +53,25 @@ CTest includes a deterministic end-to-end smoke test of the ensemble executable.
 
 
 The smoke test additionally requires exactly one run-summary data row for the requested seed and checks the row's basic field structure. This is a CLI/output-contract check, not a stochastic aggregation-success criterion.
+
+## Seed-level ensemble statistics
+
+After running independent ensembles at two or more particle counts, analyse them with one **predeclared common fit interval**. For example, if the driver outputs are `results/n32_*` and `results/n64_*`:
+
+```bash
+python3 analysis/analyze_dlca_ensembles.py \
+  --system 32:results/n32 \
+  --system 64:results/n64 \
+  --fit-min 2 --fit-max 5 \
+  --output results/size_comparison
+```
+
+The script writes `size_comparison_per_run.csv` and `size_comparison_summary.csv`. It reports completion and unwrapping fractions, largest-component fraction, and per-seed fractal-fit statistics (mean, sample standard deviation, median, minimum and maximum) for the exact requested fit interval. A fit is counted only for a completed aggregate with consistent periodic unwrapping. Overlapping fit windows are **not** pooled as independent observations.
+
+The particle count is supplied explicitly because it is not stored in the current run-summary CSV. Keep seed ranges distinct across systems where practical, and preserve the original CSVs, command line, and source revision. The summary reports descriptive sample statistics only; it does not provide a confidence interval or establish convergence. Use enough independent seeds and repeat the analysis with a scientifically justified common fit interval before drawing conclusions. If the requested interval is absent for a run, that run contributes to completion statistics but not to the fitted-exponent statistics.
+
+Run the standard-library unit tests with:
+
+```bash
+python3 -m unittest discover -s analysis -p 'test_*.py' -v
+```
