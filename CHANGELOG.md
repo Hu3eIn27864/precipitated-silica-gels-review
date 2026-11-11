@@ -651,3 +651,10 @@
 - Confirmed the Wilhelm & Kind (2015) Table 2 reference values against the KITopen full text; targeted erratum searches found no correction notice, without treating that negative search as proof of absence.
 - Confirmed the 2026 sodium-silicate grout paper identifies replication dataset DOI 10.34894/V9OPAT. Dataverse's Anubis challenge prevented retrieval of dataset metadata/files in this pass; no raw dataset analysis is claimed.
 - Retained the grout study as an adjacent-system comparator, not a direct precipitated-silica calibration source.
+
+## 2026-11-11 — Heterogeneous 1-D finite-volume transport prototype
+
+- Added `MODELLING/transport_model/heterogeneous_1d.py`, a conservative backward-Euler finite-volume solver for S(x) dp/dt = d/dx(lambda(x) dp/dx) with fixed spatially heterogeneous storage and mobility.
+- Added tests for homogeneous analytical recovery, stepwise mass balance, positivity/monotonicity, piecewise coefficients and input validation.
+- Documented assumptions and deferred time-varying aging/storage until the conservation equation is specified.
+- Numerical verification is pending hosted CI; no physical calibration or target-material prediction is claimed.
