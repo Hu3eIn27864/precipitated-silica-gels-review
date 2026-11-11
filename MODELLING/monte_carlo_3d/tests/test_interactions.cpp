@@ -1,4 +1,5 @@
 #include "Energy.hpp"
+#include "Random.hpp"
 
 #include <cmath>
 #include <exception>
