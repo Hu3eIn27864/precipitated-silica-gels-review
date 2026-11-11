@@ -720,3 +720,10 @@
 - The 2015 paper reports no significant difference between membrane results for the acid gel. Classified these as same-programme repeatability/membrane-comparison experiments, not independent external replication and not necessarily identical raw runs.
 - The 2015 base-gel pressure-cell series remains an additional pH-condition comparison.
 - Extended `LITERATURE/quantitative_overlap_audit_wilhelm.md` with the explicit repeat-experiment evidence.
+
+
+## 2026-11-11 — Wilhelm/Kind cross-paper fit-form caveat
+
+- Compared the reported acid pressure-cell values at similar low pressures: maximum shrinkage is similar (2014: 0.53 at 0.8 bar; 2015: 0.52 at 0.63–0.77 bar), but fitted τ differs (13.0 h versus 5.9 h).
+- Identified a response-function difference: the 2014 natural-syneresis fit uses a stretched exponential (n = 1.23), while the 2015 paper uses a simple exponential (n = 1). Cross-paper τ values are therefore model-form-confounded and must not be directly interpreted as a membrane or kinetic effect.
+- Added this qualification to `LITERATURE/quantitative_overlap_audit_wilhelm.md`; a proper comparison requires refitting raw curves with a common response function.
