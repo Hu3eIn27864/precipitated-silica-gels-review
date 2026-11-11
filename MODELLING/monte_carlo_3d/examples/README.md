@@ -182,8 +182,8 @@ equal Q does not imply equal path length or identical structural history.
 
 Every ensemble run also writes `<prefix>_mobility_by_size.csv` with one row
 per selected cluster-size class: seed, selected cluster size, number of times
-that size class was selected, successful component merges caused by those
-moves, cumulative squared realized translation Q, and cumulative realized
+that size class was selected, merge-causing moves (merge events), absorbed components, cumulative squared
+realized translation Q, and cumulative realized
 translation path length L. Summing selection counts, successful merges, Q and
 L over size classes must reproduce the run-level totals. These conservation identities are
 covered by the C++ tests.
