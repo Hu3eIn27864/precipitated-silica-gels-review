@@ -13,6 +13,7 @@ add_library(mc3d_core
     src/Observables.cpp
     src/PeriodicCellList.cpp
     src/FractalDimension.cpp
+    src/MassRadius.cpp
 )
 target_include_directories(mc3d_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
