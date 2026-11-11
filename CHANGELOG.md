@@ -98,3 +98,10 @@
 - Flagged an internal method-label ambiguity: Table 1 calls the surface-area method “BJH” while the paper otherwise discusses BET surface area. Avoid treating this as resolved.
 - Database now contains 31 records; structural validation pending.
 - Added a research-family note linking Sarawade et al. (2011) and Quang et al. (2012) as complementary outputs from the Hanyang/Sarawade–Quang–Kim programme, not independent external replications.
+
+## 2026-11-11 — Source-integrity correction and method-label clarification
+
+- Rechecked the ScienceDirect preview for PSG-030 (Quang et al., 2012) and found a serious title/abstract-content mismatch: the preview text shifts to aerogel modification, MTMS/TMCS and calcination rather than clearly describing the titled pilot-scale precipitated-silica gelation study.
+- Withdrawn the previously inferred directional Δt/temperature/BET/pore-volume claims. PSG-030 is now marked verification-pending and quarantined; it no longer supports a substantive claim in the evidence matrix.
+- Corrected the Sarawade et al. (2011) methods note: Section 2.4 specifies BET for specific surface area and BJH/desorption for pore volume and pore-size distribution, whereas Table 1 labels the surface-area column “BJH method”. Table 2 labels area as BET. This is an internal table-label inconsistency, likely typographical, not a reason to reclassify the measured endpoint trends.
+- Clarified that the paper's stated RMS/replicate treatment explicitly covers porosity, packing density and absorption metrics; uncertainty for nitrogen-sorption values is not clearly reported.
