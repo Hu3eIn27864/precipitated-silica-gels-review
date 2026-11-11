@@ -23,12 +23,30 @@ Arguments are:
 4. number of consecutive seeds
 5. maximum attempted cluster moves per run
 6. output prefix
+7. optional contact distance (default 1.0)
+8. optional maximum component displacement per coordinate (default 0.2)
+9. optional mobility exponent (default 1.0; zero gives size-independent cluster selection weights)
+
+For a parameter-sensitivity run, append all three optional values, for example:
+
+```bash
+./build/mc3d_dlca_ensemble 32 15.0 2000 5 200000 results/contact_1p1 1.1 0.15 0.5
+```
+
+The size-series runner accepts the same controls as `--contact-distance`,
+`--maximum-component-step`, and `--mobility-exponent`. Its run-summary CSV
+records all three values for every seed, so parameter variants remain
+auditable. For controlled comparisons, keep particle counts, box number
+density, attempt limits and fit interval fixed; use independent seed blocks
+or deliberately paired seeds and state which design was used. Do not compare
+runs with different contact distances without also checking the resulting
+initial excluded-volume fraction.
 
 The driver uses contact distance 1.0, maximum component displacement 0.2, mobility exponent 1.0, and radii 1.5, 2, 2.5, 3, 4, 5, 6 and 8. These are explicit algorithmic defaults, not calibrated silica parameters. Ensure the box side length is greater than twice the contact distance. The example is intended for small verification systems; DLCA performance and feasibility at larger particle counts have not yet been benchmarked.
 
 Three CSV files are written:
 
-- `<prefix>_runs.csv`: seed, completion, attempts, merge count, component count, largest component size, radius of gyration and periodic-unwrapping flag.
+- `<prefix>_runs.csv`: seed, completion, attempts, merge count, component count, largest component size, radius of gyration, periodic-unwrapping flag, contact distance, maximum component step and mobility exponent.
 - `<prefix>_mass_radius.csv`: all-centre mean enclosed mass for completed aggregates whose largest component unwraps consistently.
 - `<prefix>_fit_windows.csv`: all non-singular contiguous log-log fit windows with exponent, standard error, R² and point count.
 
@@ -92,7 +110,9 @@ python3 analysis/run_dlca_size_series.py \
   --output-dir results/size_series \
   --sizes 32 64 128 \
   --seed-start 1000 --seed-count 5 \
-  --max-attempts 200000
+  --max-attempts 200000 \
+  --contact-distance 1.0 --maximum-component-step 0.2 \
+  --mobility-exponent 1.0
 ```
 
 Then analyse the resulting CSV files using the same fixed interval for all sizes:
