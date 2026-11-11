@@ -35,3 +35,13 @@
 - Confirmed that Schlomach (2006) cites Schlomach & Kind (2004); exact figure-level overlap between the journal article and dissertation remains to be checked.
 - Added `LITERATURE/research_family_overlap_audit_schlomach_quarch.md` and refined PSG-001, PSG-018 and PSG-019 notes.
 - CSV validation: 19 records, 18 columns per record; 0 malformed rows.
+
+
+## 2026-11-11 — Independent SAXS comparator studies
+
+- Added PSG-020 (Wijnen et al., 1991, *JCIS*) on SAXS/NMR/BET evidence for ageing of water-glass-derived aqueous silica gels.
+- Added PSG-021 (Knoblich & Gerber, 2001) on pH-dependent aggregation of sodium-silicate-derived SiO2 sols by SAXS.
+- Added LITERATURE/source_assessments_batch_04.md with evidence boundaries, methodological caveats and research-family notes.
+- Kept both studies in class B: they provide independent structural/mechanistic comparators, not direct replications of industrial semi-batch precipitated-silica gel fragmentation or syneresis.
+- Emphasised that fractal dimensions cannot be compared across studies without harmonising material route, length-scale window and fitting assumptions.
+- CSV validation after update: 21 records; 18 columns per record; no malformed rows.
