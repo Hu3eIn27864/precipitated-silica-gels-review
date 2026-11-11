@@ -74,4 +74,25 @@ PowerLawFit fitMassRadiusPowerLaw(const std::vector<double>& radii,
     return fit;
 }
 
+
+std::vector<PowerLawFit> scanMassRadiusFitWindows(
+    const std::vector<double>& radii,
+    const std::vector<double>& meanMass,
+    std::size_t minimumPoints) {
+    if (minimumPoints < 3 || radii.size() != meanMass.size() ||
+        radii.size() < minimumPoints) {
+        throw std::invalid_argument("Invalid data or minimum point count for fit-window scan");
+    }
+
+    std::vector<PowerLawFit> fits;
+    for (std::size_t first = 0; first + minimumPoints <= radii.size(); ++first) {
+        for (std::size_t last = first + minimumPoints - 1;
+             last < radii.size(); ++last) {
+            fits.push_back(fitMassRadiusPowerLaw(
+                radii, meanMass, radii[first], radii[last]));
+        }
+    }
+    return fits;
+}
+
 } // namespace mc3d
