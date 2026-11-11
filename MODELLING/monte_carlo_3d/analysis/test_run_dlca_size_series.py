@@ -54,6 +54,8 @@ class SizeSeriesRunnerTests(unittest.TestCase):
             self.assertAlmostEqual(float(second[1]), 15.0 * 2 ** (1 / 3))
             self.assertEqual(first[2:5], ["0", "2", "50"])
             self.assertEqual(second[2:5], ["2", "2", "50"])
+            self.assertEqual(first[6:9], ["1.0", "0.2", "1.0"])
+            self.assertEqual(second[6:9], ["1.0", "0.2", "1.0"])
 
 
 if __name__ == "__main__":
