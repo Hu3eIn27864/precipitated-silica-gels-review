@@ -95,3 +95,5 @@ The network regression target was subsequently extended with two further cases: 
 ## Periodic cell-list broad-phase check (2026-11-11)
 
 The periodic cell-list source was compiled in an isolated C++17 harness with GCC, `-Wall -Wextra -Wpedantic`, AddressSanitizer and UndefinedBehaviorSanitizer. Tests compared candidate sets with brute-force minimum-image distance checks for a periodic-face configuration and a two-cells-per-dimension grid. All tested in-radius neighbours were present in the candidate set; the executable completed successfully. A separate isolated DLCA harness using interface-compatible geometry/RNG headers completed a 12-particle seeded run and verified no overlaps. These are isolated module checks, not a complete build/test of the committed CMake project. The full four-target CTest suite and hosted CI remain unverified.
+
+The cell-list regression source was also extended to cover negative periodic query coordinates and rejection of non-finite query coordinates. These additional assertions are registered in the CTest source but have not been run as part of a full repository build.
