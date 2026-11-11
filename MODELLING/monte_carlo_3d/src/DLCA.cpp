@@ -2,7 +2,9 @@
 
 #include <algorithm>
 #include <cmath>
+#include <limits>
 #include <stdexcept>
+#include <utility>
 
 namespace mc3d {
 
@@ -30,6 +32,9 @@ DLCAResult DLCA::generate() const {
     std::vector<Cluster> clusters;
     clusters.reserve(config_.particleCount);
     const double exclusion2 = config_.contactDistance * config_.contactDistance;
+    if (config_.particleCount > std::numeric_limits<std::size_t>::max() / 100000) {
+        throw std::invalid_argument("DLCA particle count is too large");
+    }
     const std::size_t placementLimit = config_.particleCount * 100000;
 
     // Random sequential placement creates a dilute, non-overlapping monomer suspension.
