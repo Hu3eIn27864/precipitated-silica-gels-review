@@ -2,7 +2,7 @@
 
 ## Status
 
-Design only. No C++ implementation, simulation, calibration, or validation has yet been completed in this directory.
+Partial implementation. The C++17 build scaffold, core vector/particle types, periodic simulation-box geometry, seeded RNG wrapper, and geometry tests have been added. The project has not yet been compiled in this environment; interaction, network, and Monte Carlo modules remain unimplemented.
 
 ## Scientific purpose
 
@@ -60,3 +60,15 @@ No source files are added until the energy function, aggregate-generation method
 ## Detailed implementation specification
 
 The implementable V1 contract is now defined in [TECHNICAL_SPEC.md](TECHNICAL_SPEC.md). It narrows the first code milestone to reversible Metropolis sampling with an effective pair potential, reproducible geometry/RNG, verified neighbour lists, observables and unit tests. Coordination-dependent kinetic detachment, irreversible contacts and compaction are explicitly deferred to V2; no physical syneresis time or drainage is claimed. The technical specification is authoritative where this overview is less detailed.
+
+
+## Implemented foundation (initial code milestone)
+
+- `CMakeLists.txt`: C++17 core library and CTest geometry-test target.
+- `include/Vec3.hpp`, `Particle.hpp`: minimal vector and particle data types.
+- `include/SimulationBox.hpp` and `src/SimulationBox.cpp`: validated cubic box, periodic wrapping, minimum-image displacement and distance.
+- `include/Random.hpp`: seeded `std::mt19937_64` wrapper.
+- `tests/test_geometry.cpp`: tests for wrapping, minimum-image geometry and invalid box dimensions.
+- `examples/README.md`: build/test instructions.
+
+**Verification status:** source files are committed, but compilation and CTest execution have not been verified here because the repository could not be cloned into the execution environment. Do not treat the tests as passed until they are run locally or in CI.
