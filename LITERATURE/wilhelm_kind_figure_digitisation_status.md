@@ -61,9 +61,18 @@ The supplied assets establish the correct figure/time-axis mapping unambiguously
 The initial calibration coordinates were refined after inspecting the actual 1536 × 591/594 pixel images. The CSV now records the revised major-tick coordinates for all four panels. These are image-coordinate estimates from the raster and remain subject to residual checks in the calibration script before any point data are released.
 
 
-## Nutzer-Digitalisierung integriert (2026-11-11)
-164 näherungsweise aus JPEG abgelesene Messpunkte wurden aus der Chat-Nachricht in `wilhelm_kind_approximate_measurement_points.csv` rekonstruiert. Struktur- und Plausibilitätsprüfung: `wilhelm_kind_digitisation_quality_audit.md`. Keine Werte wurden an publizierte Fitparameter angepasst. Kritische Auffälligkeiten: Figure 10b bei 20/40/60 °C (digitale Maxima 0.51/0.67/0.86 gegenüber Tabellen-Fitparametern 0.30/0.39/0.51); Figure 10b/60 °C ist besonders dringlich zu prüfen. Auch Figure 8b/40 und 60 °C sowie Figure 10a/60 °C zeigen nichtmonotone Rückgänge. Pixelkoordinaten, Fehlerbalken und Unsicherheiten fehlen weiterhin. Alle Werte bleiben vorläufige Näherungsablesungen.
+## KI-gestützte Näherungsablesung integriert (2026-11-11; Provenienz präzisiert)
+164 näherungsweise aus JPEG abgelesene Messpunkte wurden durch einen anderen ChatGPT-Account erstellt und anschließend vom Nutzer als Text übermittelt; sie wurden nicht vom Projektteam pixelkalibriert oder unabhängig am Originalbild geprüft. Die Werte wurden in `wilhelm_kind_approximate_measurement_points.csv` überführt. Struktur- und Plausibilitätsprüfung: `wilhelm_kind_digitisation_quality_audit.md`. Keine Werte wurden an publizierte Fitparameter angepasst. Kritische Auffälligkeiten: Figure 10b bei 20/40/60 °C (digitale Maxima 0.51/0.67/0.86 gegenüber Tabellen-Fitparametern 0.30/0.39/0.51); Figure 10b/60 °C ist besonders dringlich zu prüfen. Auch Figure 8b/40 und 60 °C sowie Figure 10a/60 °C zeigen nichtmonotone Rückgänge. Pixelkoordinaten, Fehlerbalken und Unsicherheiten fehlen weiterhin. Alle Werte bleiben vorläufige Näherungsablesungen.
 
 
 ## Explorative Halbzeitprüfung (2026-11-11)
 Ein fitfreies Screening der Zeit bis zur Hälfte der publizierten Fit-Amplitude wurde ergänzt: `wilhelm_kind_t50_screening.csv` und zugehörige Methodennotiz. Die Ergebnisse sind nur Plausibilitätsprüfung mittels linearer Interpolation, keine neue Parameterschätzung. Auffällig sind verzögerte digitale Halbzeiten in Figure 8a bei 40/60 °C; Figure 10b zeigt trotz relativ passender Halbzeiten weiterhin stark überhöhte digitale Endmaxima.
+
+
+### Provenienz-Korrektur und Evidenzgrenze (2026-11-11)
+
+Die 164 Kurvenpunkte sind **KI-gestützte, ungeprüfte Näherungsablesungen**, keine vom Projektteam selbst digitalisierten Messdaten und keine Originaldaten der Autoren. Die zuvor verwendete Formulierung „Nutzer-Digitalisierung“ war unpräzise und wird zurückgenommen. Bis zur unabhängigen Prüfung am Originalbild bleiben die Werte Evidenzgrad D: ausschließlich exploratives Screening; keine gewichteten Fits, Fehlerstatistik, physikalische Parameteridentifikation oder quantitativen Schlussfolgerungen aus kleinen Kurvenunterschieden. Tabellenwerte (A) und τ aus dem Artikel werden separat als publizierte Literaturwerte behandelt.
+
+### Verifikation der empirischen Fitfunktion
+
+Der Volltext gibt Gleichung (3) als (S(t)=A[1-\exp(-t/\tau)]) an. Für diese Funktion gilt exakt (t_{50}=\tau\ln 2). Die bisherige Umrechnung in `wilhelm_kind_t50_screening.csv` ist daher formal korrekt; die digitale Halbzeit bleibt wegen der ungeprüften Kurvenpunkte unsicher. Quelle: Wilhelm & Kind (2015), Gleichung (3), Abschnitt 4.1.
