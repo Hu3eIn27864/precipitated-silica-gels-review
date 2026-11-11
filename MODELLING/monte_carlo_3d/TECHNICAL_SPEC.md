@@ -154,3 +154,10 @@ The network test includes a three-particle analytic fixture, rigid-translation i
 
 
 The network-analysis result now retains the graph-unwrapped coordinates for each connected component in traversal order. This allows the mass-radius estimator to operate on the actual analysed aggregate without reconstructing periodic images independently. The coordinate vector is populated even for components flagged as winding, but **must not be used for a fractal fit unless** `periodicUnwrappingConsistent` is true. Retaining these coordinates increases observable-result memory by O(N) per analysis call. A periodic-boundary chain regression now connects network unwrapping directly to the mass-radius curve generator; the updated full test target still requires a complete CMake/CTest run.
+
+
+## 19. Mass-radius estimator hardening and known-geometry regression
+
+The direct estimator now counts enclosed particles in the inner pair loop without allocating a temporary distance vector for every centre/radius pair. This removes avoidable O(N) scratch storage and repeated allocation, but the computational cost remains O(N² N_r). Radii whose square overflows the floating-point range are rejected explicitly.
+
+A deterministic 201-particle straight-chain fixture has been added. Its expected intermediate-scale mass-radius exponent is one; the regression requires the fitted exponent to lie within 0.08 of unity and log-log R² to exceed 0.995. This is a software/estimator sanity check on a known one-dimensional geometry, not evidence that generated DLCA clusters have a fractal scaling regime. A complete CMake/CTest execution is still required.
