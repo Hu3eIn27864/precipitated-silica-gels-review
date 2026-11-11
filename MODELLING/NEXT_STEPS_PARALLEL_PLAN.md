@@ -417,3 +417,7 @@ Completed three independent implementation branches:
 New tests cover the finite-cylinder limiting cases and scaling, plus algebraic coupling and independent sensitivity to permeability and modulus. These tests establish mathematical/code consistency only. The new comparison CSV was parsed and checked for a consistent 17-column schema (18 data records).
 
 **Next gate:** complete hosted CI for these commits; then, if it passes, decide whether a transient axisymmetric finite-volume solver is warranted by recoverable specimen dimensions and drainage boundaries. Do not use the ideal finite-cylinder formula to fit the Wilhelm & Kind cylinder data until those boundary conditions are established.
+
+### Dimensional correction to hydraulic/mechanical coupling
+
+Use hydraulic conductivity (K) [m/s] in (c_v=K M/\gamma_w), or intrinsic permeability (\kappa) [m²] in (c_v=\kappa M/\mu). These are distinct forms connected by Darcy's law; do not use the same symbol or unit for both. The implementation now exposes separate functions for each form and their inverses. This is an explicit dimensional correction to earlier shorthand notation in project notes.
