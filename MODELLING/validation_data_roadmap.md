@@ -156,3 +156,16 @@ Tables 2–4 of Ragueh et al. (2015) are now transcribed to `LITERATURE/ragueh_2
 Two source conflicts are now explicitly tracked: (i) Table 2 prints the sample labels S1/S3/S3 although the text and other tables use S1/S2/S3; (ii) Table 3 lists S3 branch fractal dimension 1.8 while adjacent prose says 2.2. The dataset retains the printed labels and both S3 values rather than silently choosing one.
 
 The Wilhelm & Kind HTML page exposes Figure 8 and Figure 10 image references, but direct image retrieval failed in this pass and its 13 MB PDF endpoint exceeded the retrieval limit. Raw marker digitisation remains outstanding; no marker-level data were generated.
+
+
+## 2026-11-11 — Ragueh relative-resistance analysis and Wilhelm & Kind figure access
+
+A derived comparison is now available in `LITERATURE/ragueh_2015_relative_resistance_analysis.csv`, documented in the companion note. Table 4's reported relative cake resistance increases from 400 to 600 kPa by 45.2% (S1), 60.0% (S2) and 55.8% (S3). At fixed pressure, the S1/S3 ratio ranges from 2.56 to 3.25. These are ratios of the published resistance multiples of an undisclosed reference R, not absolute permeability values or validated permeability ratios. The S1 600 kPa entry lacks the printed R symbol and remains provisional.
+
+The Ragueh full PDF inspection also shows that **Table 1**, as well as Table 2, prints the sample labels S1/S3/S3; Tables and prose elsewhere use S1/S2/S3. This repeated typo makes the middle-row S2 interpretation plausible, but it remains unconfirmed. The S3 fractal-dimension discrepancy (Table 3: 1.8; adjacent prose: 2.2) is unchanged.
+
+The original 1024-pixel publisher image assets for Wilhelm & Kind (2015) Figures 8 and 10 are now directly accessible:
+- Fig. 8: https://mdpi-res.com/polymers/polymers-07-01528/article_deploy/html/images/polymers-07-01528-g008-1024.png
+- Fig. 10: https://mdpi-res.com/polymers/polymers-07-01528/article_deploy/html/images/polymers-07-01528-g010-1024.png
+
+The KIT repository lists the article as Open Access, but its PDF retrieval endpoint exceeds the current 13 MB content limit. The MDPI supplementary-material endpoint was not directly readable in this pass. Marker-level digitisation remains pending: no plotted point has been added to the data tables yet. Figure 10's first 30 minutes at 20 °C before temperature adjustment must be represented explicitly in any time-series transcription.
