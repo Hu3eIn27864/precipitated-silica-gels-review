@@ -680,3 +680,9 @@
 - Added source assessment batch 22 and claim C26, documenting the 1,000-particle fractal cluster, LJ/Hamaker-based interactions, and comparisons with earlier KIT experimental datasets.
 - Recorded the empirical time rescaling factors (100 for the single-fragment comparison; 10 for network consolidation) and the authors' explicit statement that pore-fluid flow was omitted and must be coupled in future work.
 - Updated the poroelastic model design: this is a direct modelling precedent, not physical-time validation or a transferable parameter source; the experimental comparators are from the same KIT/Kind research lineage.
+
+## 2026-11-11 — Heterogeneous solver refinement tests and CI verification
+
+- Added spatial-grid and time-step refinement checks to `test_heterogeneous_1d.py`.
+- Hosted CI #328 passed; all 51 transport-model tests passed, including both new refinement tests: https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43053892073
+- Remaining numerical work: interface-location refinement and a manufactured-solution test for spatially varying coefficients. Physical calibration remains out of scope.
