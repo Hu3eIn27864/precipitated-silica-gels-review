@@ -340,3 +340,38 @@ The common-Q screen reveals a second important limitation: equal Q does **not** 
 **Interpretation:** common Q removes the gross difference in squared-displacement budget seen under a fixed attempt count, but it does not fully normalise trajectory history. Retain both Q and L, plus attempts and cluster-size/mobility histories, in subsequent analysis. Do not call either coordinate physical time. A larger Q target would be needed to reach later aggregation states, but it must be selected only after inspecting whether all variants can reach it without completion-selection bias or hitting the safety cap. The current Q=450 screen is an algorithmic diagnostic, not a physical robustness result.
 
 The common-Q implementation and this screen pass software verification. Neither establishes silica-specific kinetics, a physical Brownian clock, or a fractal scaling law.
+
+
+### Follow-up audit of CI run #257 and secondary common-Q diagnostics
+
+The subsequent complete hosted workflow [#257](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43018713555), commit `84aadadd63dbdf58d6ffb456593ab982d2ad2c02`, passed every step: Release build, all C++ tests, Python analysis tests, transport tests, fixed-attempt size pilot, fixed-attempt paired sensitivity, common-Q paired sensitivity, and artifact upload. The artifact (ID `13853349427`) was downloaded and independently re-read.
+
+The fixed-attempt size pilot confirms the completion bottleneck:
+
+| N | Completed aggregates | Mean successful merges | Mean largest-component fraction | Mean component count |
+|---:|---:|---:|---:|---:|
+| 32 | 2/3 | 30.0 | 0.8229 | 2.0 |
+| 64 | 0/3 | 43.0 | 0.1719 | 21.0 |
+| 128 | 0/3 | 42.0 | 0.0391 | 86.0 |
+
+The size series used separate seed blocks, so these are descriptive pilot summaries, not paired size-effect estimates. N=32 has one censored/incomplete run; N=64 and N=128 have no complete aggregates. No cross-size Df scaling conclusion is supported.
+
+For the Q=450 screen, the raw run CSVs allow additional normalisation. Mean successful merges and Q per merge vary by configuration, while Q per attempt changes strongly with step size:
+
+| Configuration | Mean merges | Mean Q/attempt | Mean path length/attempt | Mean Q/merge |
+|---|---:|---:|---:|---:|
+| Baseline | 8.33 | 0.04012 | 0.19251 | 61.25 |
+| Contact 0.9 | 9.67 | 0.04011 | 0.19249 | 51.54 |
+| Contact 1.1 | 12.00 | 0.04004 | 0.19231 | 37.99 |
+| Step 0.10 | 10.33 | 0.01001 | 0.09609 | 45.29 |
+| Step 0.28 | 9.33 | 0.07862 | 0.26945 | 50.60 |
+| Mobility 0.5 | 10.67 | 0.04011 | 0.19248 | 44.47 |
+| Mobility 1.5 | 12.00 | 0.04011 | 0.19248 | 38.92 |
+
+These ratios are algorithmic diagnostics, not physical rates. At common Q, step 0.10 requires about four times as many attempts as step 0.20, while step 0.28 requires about half as many. Mean path length per attempt is also step-dependent. The contact-distance variants show different merge counts despite nearly identical Q and path length, but changing contact distance also changes the collision geometry and effective initial excluded-volume scale. The mobility-exponent variants show differences in merge counts at this very early, incomplete stage, but three seeds are insufficient to estimate stable effects.
+
+The most defensible conclusion is that Q alone does not standardise the algorithmic trajectory. Q, path length L, attempts, successful merges, component count and largest-component fraction should all be retained. However, normalising by merges would condition on an outcome that itself depends on the parameters; Q-per-merge is descriptive, not a replacement clock. No fractal fit, completed Rg comparison or physical kinetic inference is available from this screen.
+
+### Literature update relevant to model structure
+
+Added PSG-045: Manfoumbi, Roger & Meireles (2024), DOI 10.5802/crchim.347. The study links pH/silicate precipitation history to SAXS-observed mesostructure and reports an approximately two-order improvement in filtration-cake specific resistance after silicate addition at basic pH. This is strong evidence for process-history-dependent mesostructure and filterability in its hydrometallurgical system, but cake resistance is not intrinsic gel permeability or syneresis kinetics. It must not be used to calibrate the radial transport solver.
