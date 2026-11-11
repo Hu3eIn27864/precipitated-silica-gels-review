@@ -292,3 +292,21 @@ The next analysis can now distinguish (i) how often each size class is selected,
 associated with its selected moves. It still cannot infer a physical collision
 kernel or hydrodynamic mobility without an independently justified time and
 mobility model.
+
+
+### First per-size outcome analysis completed
+
+The CI #274 artifact was reduced to total selections, successful component
+merges, merges per selection, and fraction of selections involving size >=2.
+The pooled three-seed ratios range from 0.00023 (step 0.10) to 0.00163
+(step 0.28), with baseline 0.00074. The large spread is strongly confounded
+by step-dependent attempt counts at common Q; these ratios are not physical
+collision rates. Most selection exposure is still monomeric (about 84.5–91.1%
+across baseline and mobility variants). These diagnostics are documented in
+TEST_RESULTS.md and do not justify parameter trends or physical interpretation.
+
+**Next modelling action:** before attempting larger Q, instrument merge events
+as distinct move-level events (separate from number of components merged),
+and consider a stopping design that matches both cumulative Q and a
+predeclared attempt/path-length envelope. Avoid conditioning the sample on
+only those trajectories that complete.
