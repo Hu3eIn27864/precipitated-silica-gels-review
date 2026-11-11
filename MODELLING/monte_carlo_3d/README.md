@@ -54,7 +54,7 @@ One MC sweep is not a physical second. Do not report laboratory syneresis times 
 - examples/: small smoke-test configurations.
 - analysis/: optional plotting / statistical analysis scripts.
 
-No source files are added until the energy function, aggregate-generation method, and move/acceptance rules are specified precisely enough to test.
+The current kernel implementation and its verification record are documented in [TEST_RESULTS.md](TEST_RESULTS.md). The remaining V1 work is aggregate generation/import, periodic cluster unwrapping, structural observables, reproducible run configuration/output, and a minimal end-to-end smoke run.
 
 
 ## Detailed implementation specification
