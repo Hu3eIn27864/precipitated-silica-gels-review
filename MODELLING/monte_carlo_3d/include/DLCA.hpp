@@ -22,6 +22,7 @@ struct DLCAConfig {
 struct DLCAClusterMobilityStats {
     std::size_t clusterSize{0};
     std::size_t selectionCount{0};
+    std::size_t successfulMerges{0};
     double cumulativeSquaredTranslation{0.0};
     double cumulativeTranslationPathLength{0.0};
 };
