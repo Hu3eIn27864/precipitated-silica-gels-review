@@ -115,3 +115,17 @@ The ensemble analyser also checks that the largest-component count is physically
 The runner assigns **non-overlapping seed blocks** to different particle counts (for the defaults: 1000–1004, 1005–1009, and 1010–1014). This avoids reusing the same pseudorandom stream across system sizes. Each system still has its own independent replicate ensemble; the resulting size comparison is not a paired-seed analysis.
 
 The analyser's tests include deliberately corrupted fit metadata to ensure a derived exponent is rejected when its declared number of points does not match the source radius grid.
+
+## Fit-window sensitivity audit
+
+The additional diagnostic `analysis/analyze_dlca_fit_sensitivity.py` summarises the range of apparent exponents across all valid fit windows within each seed. It rejects fit rows linked to incomplete, inconsistently unwrapped, or unknown runs. Outputs are seed-level and system-level CSV files. Fit windows within a single aggregate are correlated observations; the reported within-seed range is a sensitivity diagnostic, not a confidence interval and not a method for selecting a preferred scaling range.
+
+```bash
+python3 analysis/analyze_dlca_fit_sensitivity.py \
+  --system 32:results/size_series/n32 \
+  --system 64:results/size_series/n64 \
+  --system 128:results/size_series/n128 \
+  --output results/size_series/comparison
+```
+
+See [DLCA_PILOT_VALIDATION_PROTOCOL.md](../DLCA_PILOT_VALIDATION_PROTOCOL.md) for integrity checks and interpretation gates.
