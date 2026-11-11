@@ -88,3 +88,12 @@
 - Reassessed PSG-028 and PSG-029 using expanded publisher previews. Added the cation-specific qualification for lithium-silicate gel ripening and the reported SAXS/FTIR/chemical-analysis methods and Si7-type species in concentrated basic sodium silicate.
 - Updated source assessments and claim-evidence matrix; no claims transfer these basic HCl-acidified silicate systems directly to industrial sulfuric-acid precipitated silica.
 - Database remains at 30 records; structural validation to be rerun after this batch.
+
+## 2026-11-11 — Full-text drying study and final-product confounder
+
+- Added PSG-031 (Sarawade et al., 2011) after inspecting the full article PDF.
+- Extracted the common wet-gel preparation and three drying routes (oven, microwave, pilot-plant spray drying), including reported endpoint texture values.
+- Added `LITERATURE/source_assessments_batch_09.md` and C17 in the claim-evidence matrix.
+- The drying study shows substantial protocol-dependent differences in final surface area, pore volume, pore diameter, porosity and tapping density. It does not measure wet-gel syneresis.
+- Flagged an internal method-label ambiguity: Table 1 calls the surface-area method “BJH” while the paper otherwise discusses BET surface area. Avoid treating this as resolved.
+- Database now contains 31 records; structural validation pending.
