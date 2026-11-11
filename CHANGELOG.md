@@ -422,3 +422,4 @@
 - Recorded these three parameter values in each run-summary row and added them to the size-series runner so controlled sensitivity ensembles can be launched and traced.
 - Updated the CMake smoke test to exercise non-default parameters and check the expanded output schema. Source and test changes are committed; full C++ build, CTest and Python repository test execution remain unverified in this environment.
 - 2026-11-11: Normalised the DLCA mass-radius grid to multiples of the configured contact distance, keeping fit-window coordinates comparable in dimensionless contact units across contact-distance sensitivity runs. Updated the pilot protocol and usage notes; full C++/CI execution remains pending.
+- 2026-11-11: Added a predeclared one-factor-at-a-time DLCA parameter-sensitivity plan with paired seed blocks, dimensionless fit bounds, and explicit completion/selection-bias reporting. No sensitivity simulations have been run yet.
