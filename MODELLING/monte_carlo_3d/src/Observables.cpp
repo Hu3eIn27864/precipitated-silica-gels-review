@@ -69,6 +69,10 @@ NetworkObservables analyseNetwork(const std::vector<Particle>& particles,
         }
 
         component.particleCount = members.size();
+        component.unwrappedPositions.reserve(members.size());
+        for (const auto i : members) {
+            component.unwrappedPositions.push_back(unwrapped[i]);
+        }
         component.contactCount /= 2;
         Vec3 centre{};
         for (const auto i : members) centre += unwrapped[i];
