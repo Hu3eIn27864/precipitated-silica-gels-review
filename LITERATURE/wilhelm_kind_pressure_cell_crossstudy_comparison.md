@@ -103,3 +103,15 @@ This is a transformation of the published fit parameters, not a refit of the raw
 | 4.0 / 3.80–3.92 | 2.598 | 1.178 | 2.20 |
 
 This quantile standardisation does not remove confounding from different fit forms, approximate pressure matching, experimental uncertainty or possible differences in the underlying observations. It shows that the published parameter sets imply slower half-response times in the 2014 fits, but it still does not establish a physical kinetic change or identify a membrane effect. A common refit of measured time-series data remains necessary.
+
+
+## 8. Direct publisher figure access and extraction setup (11 November 2026)
+
+The original publisher image assets for the two pressure-cell figures have now been opened successfully in the web interface:
+
+- 2014 Figure 7 (20 °C, measured solid curves and model dashed curves): https://mdpi-res.com/polymers/polymers-06-02896/article_deploy/html/images/polymers-06-02896-g007-1024.png
+- 2015 Figure 12 (20 °C, acid panel a and base panel b): https://mdpi-res.com/polymers/polymers-07-01528/article_deploy/html/images/polymers-07-01528-g012-1024.png
+
+The images are visually accessible, but direct download into the execution environment failed. Therefore, no new calibrated points are claimed. The repository now has a pressure-cell-specific axis calibration template and a metadata template with 21 curve-series definitions (7 visible 2014 series and 14 2015 acid/base series). Axis pixel positions are explicitly marked as preliminary visual estimates and must be checked against the original image before use.
+
+The immediate bottleneck is now narrowed to transferring the two PNGs into a local digitisation environment or having them supplied as file attachments. The 2014 Figure 7 omits 3.2 and 6.5 bar curves; these must not be reconstructed as if they were plotted observations. Keep the published parameter table for those pressures separately.
