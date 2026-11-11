@@ -161,3 +161,6 @@ The network-analysis result now retains the graph-unwrapped coordinates for each
 The direct estimator now counts enclosed particles in the inner pair loop without allocating a temporary distance vector for every centre/radius pair. This removes avoidable O(N) scratch storage and repeated allocation, but the computational cost remains O(N² N_r). Radii whose square overflows the floating-point range are rejected explicitly.
 
 A deterministic 201-particle straight-chain fixture has been added. Its expected intermediate-scale mass-radius exponent is one; the regression requires the fitted exponent to lie within 0.08 of unity and log-log R² to exceed 0.995. This is a software/estimator sanity check on a known one-dimensional geometry, not evidence that generated DLCA clusters have a fractal scaling regime. A complete CMake/CTest execution is still required.
+
+
+The known-geometry regression uses a finite 1001-particle straight chain and radii 10–50 particle spacings. Its fitted exponent is expected to be slightly below one because finite-chain boundaries reduce the mean enclosed mass, so the test uses a tolerance of 0.05 rather than asserting an exact exponent. This makes the finite-size bias visible instead of hiding it behind an ideal infinite-line expectation.
