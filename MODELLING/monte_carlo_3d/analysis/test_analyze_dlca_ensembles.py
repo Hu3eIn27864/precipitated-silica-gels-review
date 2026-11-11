@@ -73,6 +73,28 @@ class EnsembleAnalysisTests(unittest.TestCase):
             self.assertAlmostEqual(summary["df_mean"], 1.72)
             self.assertIsNone(summary["df_sd"])
 
+    def test_completed_run_must_contain_all_particles(self):
+        with tempfile.TemporaryDirectory() as directory:
+            prefix = Path(directory) / "n4"
+            self.write_csv(
+                Path(str(prefix) + "_runs.csv"),
+                ["seed", "completed", "unwrapping_consistent",
+                 "largest_component_size", "largest_component_rg"],
+                [{"seed": 7, "completed": 1, "unwrapping_consistent": 1,
+                  "largest_component_size": 3, "largest_component_rg": 1.2}],
+            )
+            self.write_csv(
+                Path(str(prefix) + "_mass_radius.csv"),
+                ["seed", "particle_count", "radius", "mean_enclosed_mass"], [],
+            )
+            self.write_csv(
+                Path(str(prefix) + "_fit_windows.csv"),
+                ["seed", "fit_minimum_radius", "fit_maximum_radius",
+                 "exponent", "r_squared", "standard_error", "point_count"], [],
+            )
+            with self.assertRaisesRegex(ValueError, "Completed run must contain all"):
+                load_system(4, prefix, 2.0, 5.0)
+
     def test_duplicate_run_seed_is_rejected(self):
         with tempfile.TemporaryDirectory() as directory:
             prefix = Path(directory) / "n4"
