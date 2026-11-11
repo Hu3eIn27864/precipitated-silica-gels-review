@@ -47,6 +47,11 @@ class EnsembleAnalysisTests(unittest.TestCase):
                 ],
             )
             self.write_csv(
+                Path(str(prefix) + "_mass_radius.csv"),
+                ["seed", "particle_count", "radius", "mean_enclosed_mass"],
+                [],
+            )
+            self.write_csv(
                 Path(str(prefix) + "_fit_windows.csv"),
                 ["seed", "fit_minimum_radius", "fit_maximum_radius",
                  "exponent", "standard_error", "r_squared", "point_count"],
