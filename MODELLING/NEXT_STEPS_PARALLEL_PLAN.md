@@ -550,3 +550,15 @@ state-dependent k–M coupling can be meaningfully identified.
 - [ ] Nach erfolgreichem Testlauf die numerische Implementierung als regressionsgeprüft markieren, weiterhin strikt getrennt von der Validierung der Kurvenablesungen und der physikalischen Modellannahme.
 
 **Nächster wissenschaftlicher Schritt:** Originalgrafikprüfung und unabhängige Achsen-/Marker-Digitalisierung. Eine Monte-Carlo-Fehlerfortpflanzung ist erst sinnvoll, wenn die Ableseunsicherheit aus Pixelauflösung, Markergröße und Achsenkalibrierung begründet abgeschätzt werden kann; frei gewählte Unsicherheiten dürfen nur als Szenarien, nicht als Messfehler ausgegeben werden.
+
+
+## Literaturbasierte Präzisierung der gekoppelten Synerese-Mechanik (2026-11-11)
+
+- [x] Scherer (1989) Synerese-Theorie und experimentelle Prüfung in der Evidenzmatrix ergänzt.
+- [x] Scherer & Swiatek (1989) Permeabilitätsmessung an alkoxid-abgeleiteten Silicagelen als Methoden-/Mechanismenvergleich ergänzt.
+- [x] Scherer (1996, Langmuir) als konzeptionellen Vorläufer zur Kopplung von Viskoelastizität und Permeabilität dokumentiert.
+- [ ] Numerische Tabellen/Kurven aus den Scherer-Primärarbeiten extrahieren, soweit OA-Zugang verfügbar; Alkoxid-Gele strikt als Vergleichssystem kennzeichnen.
+- [ ] Für das Zielsystem nach unabhängigen Permeabilitäts- und mechanischen Daten aus gefällter Kieselsäure suchen; Filterkuchen-Daten nicht als freie Gelpermeabilität behandeln.
+- [ ] Modellarchitektur auf zeitabhängige Permeabilität und zeitabhängige mechanische Antwort erweitern; zunächst Einwegkopplung und erst nach Identifizierbarkeitstests Rückkopplung.
+
+**Wissenschaftliche Konsequenz:** Synerese ist nicht als reine Darcy-Entwässerung mit konstantem Materialparameter zu behandeln. Die klassische Silicagel-Literatur zeigt, dass Schrumpfung, Permeabilität und viskoelastische Netzwerkantwort gekoppelt sind. Die Zielsystem-spezifischen Parameter bleiben jedoch offen.
