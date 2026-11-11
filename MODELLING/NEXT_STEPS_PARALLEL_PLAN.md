@@ -655,3 +655,13 @@ This is numerical verification of the implemented fixed-coefficient PDE and its 
 - [x] The homogeneous analytical limit, per-step discrete balance, non-negativity/monotonic mean pressure, and refinement trends are covered.
 - [ ] Still required before constitutive extension: interface-location refinement and a manufactured-solution check for spatially varying coefficients.
 - [ ] Time-varying storage, evolving porosity and deformation feedback remain deferred; no target material calibration or physical validation is implied.
+
+## Literature workstream — Wilhelm & Kind (2014) natural/enforced bridge (11.11.2026)
+
+- [x] Inspected full text, natural-syneresis Table 1, forced-syneresis Table 2, pressure-correlation Tables 3–4 and conclusions.
+- [x] Added complete source note and upgraded PSG-005 from abstract-level to full-text audited in the literature database.
+- [x] Added natural and forced response values to the target mechanical evidence matrix and transport-parameter audit.
+- [x] Recorded the crucial limitation: forced data begin at 0.8 bar; Δp=0 natural syneresis is extrapolated. Endpoint prediction error reaches 45%, while τ prediction error reaches 24%.
+- [ ] Retrieve and transcribe supplementary Table S1 for the 40/60 °C forced-syneresis series if it adds usable pressure-resolved data.
+- [ ] Compare this 2014 dataset with Wilhelm & Kind (2015) and the 2017 dissertation, checking overlap and avoiding double-counting the same experiments.
+- [ ] Do not fit poroelastic κ or M from these empirical curves; no independent permeability/modulus measurement is reported.
