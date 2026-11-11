@@ -490,3 +490,11 @@ state-dependent k–M coupling can be meaningfully identified.
 - The image assets are now accessible for visual inspection; no marker coordinates have yet been digitised or entered as raw data. The MDPI supplementary-material endpoint did not yield a directly readable file in this pass.
 
 **Next gate:** digitise measured markers from Figs. 8 and 10 separately from the model lines, recording panel, series, axis calibration, estimated pixel/marker uncertainty and the 20 °C preconditioning interval for Fig. 10. In parallel, seek author clarification on the repeated sample-label typo and S3 fractal-dimension conflict.
+
+
+## Figure digitisation — pipeline prepared (2026-11-11)
+
+- Added `MODELLING/transport_model/digitise_syneresis_markers.py`, a reproducible coordinate transform from manually recorded marker pixels to physical values. It supports per-panel linear/log10 calibration and first-order pixel-uncertainty propagation.
+- Added unit tests and blank CSV templates for axis ticks and marker centres. The script intentionally does not attempt automatic marker detection; each experimental marker must be selected and checked by a human, separately from model-fit lines.
+- The KITopen full-text PDF text is now accessible. It confirms Fig. 8 on printed page 2511 and Fig. 10 on page 2513. Figure 8 means average three samples per measurement point. Figure 10 droplets are held at 20 °C for 20 min before transfer to the temperature-controlled cell. The article later discusses similar curves during the first 30 min; do not confuse this observation with the actual preconditioning duration.
+- Pixel extraction remains blocked in this execution environment: the 13 MB PDF exceeds screenshot retrieval limits and direct publisher PNG downloads fail. No digitised observations have been fabricated or added. The next input needed is the two original PNG files (or a locally saved copy uploaded into the working session).
