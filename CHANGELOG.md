@@ -536,3 +536,12 @@
 - Added a source note documenting transferability limits: filter-cake data are not direct natural-syneresis gel parameters, and specific resistance is normalised by an undisclosed reference.
 - Flagged two source inconsistencies: S1/S3/S3 labels in Table 2 versus S1/S2/S3 elsewhere; S3 fractal dimension 1.8 in Table 3 versus 2.2 in adjacent prose. A missing reference symbol in one Table 4 entry is also flagged.
 - Audited original-figure access for Wilhelm & Kind: HTML figure references are present, but direct image/PDF retrieval failed in this pass. No raw curve digitisation is claimed.
+
+
+## 2026-11-11 — Relative cake-resistance analysis and figure-asset recovery
+
+- Added `LITERATURE/ragueh_2015_relative_resistance_analysis.csv` and a companion note with derived grade-to-grade resistance ratios, pressure trends and SAXS-versus-gravimetric volume-fraction differences.
+- Reported resistance increases from 400 to 600 kPa are 45.2% (S1), 60.0% (S2) and 55.8% (S3); all calculations retain the source's undisclosed reference R and do not infer absolute permeability. S1 at 600 kPa is flagged because the printed table omits the R symbol.
+- Reinspection of the original Ragueh PDF identified the S1/S3/S3 label pattern in Table 1 as well as Table 2. The probable S2 interpretation remains unconfirmed; the S3 fractal-dimension conflict remains unresolved.
+- Recovered the original publisher-hosted 1024-pixel PNG assets for Wilhelm & Kind (2015) Figures 8 and 10 and documented their exact URLs. The KIT repository's 13 MB PDF endpoint remains above the retrieval limit; the MDPI supplementary endpoint was not directly readable.
+- No raw figure markers have yet been digitised. No experimental data or physical parameters were fabricated or fitted in this phase.
