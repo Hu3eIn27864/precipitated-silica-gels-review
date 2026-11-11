@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - "MODELLING/monte_carlo_3d/**"
+      - "MODELLING/transport_model/**"
       - ".github/workflows/mc3d-ci.yml"
   pull_request:
     paths:
