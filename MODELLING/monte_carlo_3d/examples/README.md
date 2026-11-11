@@ -42,7 +42,7 @@ or deliberately paired seeds and state which design was used. Do not compare
 runs with different contact distances without also checking the resulting
 initial excluded-volume fraction.
 
-The driver uses contact distance 1.0, maximum component displacement 0.2, mobility exponent 1.0, and radii 1.5, 2, 2.5, 3, 4, 5, 6 and 8. These are explicit algorithmic defaults, not calibrated silica parameters. Ensure the box side length is greater than twice the contact distance. The example is intended for small verification systems; DLCA performance and feasibility at larger particle counts have not yet been benchmarked.
+The driver defaults to contact distance 1.0, maximum component displacement 0.2 and mobility exponent 1.0. The mass-radius grid is 1.5, 2, 2.5, 3, 4, 5, 6 and 8 times the configured contact distance, so the analysis radii remain fixed in dimensionless contact units when the contact distance is varied. These are explicit algorithmic defaults, not calibrated silica parameters. Ensure the box side length is greater than twice the contact distance. The example is intended for small verification systems; DLCA performance and feasibility at larger particle counts have not yet been benchmarked.
 
 Three CSV files are written:
 
@@ -126,7 +126,7 @@ python3 analysis/analyze_dlca_ensembles.py \
   --output results/size_series/comparison
 ```
 
-The interval 2–5 is an initial **diagnostic common interval** because it is represented in the driver's radius grid; it is not asserted to be a validated fractal scaling regime. Inspect the per-run curves and fit-window scans before interpreting it. The default five seeds are a pilot ensemble, not a basis for strong statistical inference. Increase seed count and attempt limits only after checking runtime and completion rates. The driver reports attempted cluster moves, not calibrated physical time.
+The interval 2–5 is an initial **diagnostic common interval** in units of the contact distance (for the default contact distance 1.0); for another contact distance, multiply both fit bounds by that value. It is not asserted to be a validated fractal scaling regime. Inspect the per-run curves and fit-window scans before interpreting it. The default five seeds are a pilot ensemble, not a basis for strong statistical inference. Increase seed count and attempt limits only after checking runtime and completion rates. The driver reports attempted cluster moves, not calibrated physical time.
 
 The ensemble analyser also validates the underlying `_mass_radius.csv` files before accepting a fitted exponent: particle counts must match the requested system, radii and enclosed masses must be positive and finite, radius grids must agree across seeds, and each selected fit's point count must match the observations in the requested interval. This guards against comparing stale or mismatched fit summaries.
 
