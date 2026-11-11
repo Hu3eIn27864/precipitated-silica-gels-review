@@ -105,3 +105,22 @@ A targeted source check strengthens the transport-validation workstream, while a
 - The governing radial diffusion/consolidation equation is not sufficient by itself to specify the physical model. Workstream C must state initial conditions, drained boundary conditions, volume-weighted averaging, and whether the effective consolidation coefficient is constant. The coefficient must not be equated with permeability alone; it also contains skeleton/fluid storage and stiffness terms.
 
 **Consequence for the work plan:** keep Workstream C's analytical-series cross-check independent from the finite-difference implementation; use Scherer (1989) as a mechanistic benchmark only after the sample geometry and boundary conditions are mapped. No parameter fitting is authorised by this literature check alone.
+
+
+## Analytical benchmark for the radial solver
+
+For the restricted benchmark problem of constant (c_v), initially uniform excess pressure (u(r,0)=u_0), centre symmetry, and a perfectly drained outer boundary (u(R,t)=0), the volume-averaged excess-pressure ratio has the following eigenfunction-series references. Let (T=c_vt/R^2).
+
+- Infinite cylinder (radial dimension 2):
+  [
+  \frac{\bar u(t)}{u_0}=\sum_{n=1}^{\infty}\frac{4}{\alpha_n^2}\exp(-\alpha_n^2T),
+  \qquad J_0(\alpha_n)=0.
+  ]
+  The first root is \(\alpha_1\approx2.4048255577\), giving first-mode time \(\tau_1=R^2/(\alpha_1^2c_v)\).
+- Sphere (radial dimension 3):
+  [
+  \frac{\bar u(t)}{u_0}=\sum_{n=1}^{\infty}\frac{6}{n^2\pi^2}\exp(-n^2\pi^2T),
+  \]
+  giving first-mode time \(\tau_1=R^2/(\pi^2c_v)\).
+
+In both cases the volume-average weights sum to one at (t=0). The degree of consolidation for this benchmark is \(U(t)=1-\bar u(t)/u_0\). These expressions are benchmark references for the stated idealised boundary-value problem only; they do not model evolving permeability, nonlinear skeleton mechanics, finite-cylinder end drainage, or chemical ageing. The finite-difference implementation should be tested against the full series, not only the first-mode time constant.
