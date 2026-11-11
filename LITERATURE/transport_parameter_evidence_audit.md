@@ -93,3 +93,18 @@ Bibliographie:
 2. Die nächste Modellstufe sollte einen zeitabhängigen hydraulischen Parameter \(\kappa(\phi,\mathcal{S})\) und eine zeitabhängige mechanische Antwort \(M(t)\) bzw. ein viskoelastisches Relaxationsmodell getrennt führen. \(\mathcal{S}\) bezeichnet Strukturmerkmale wie Porennetzwerk, Kontaktzahl und Aggregatstruktur; es ist noch keine kalibrierte Zustandsvariable.
 3. Erst unabhängige Permeabilitäts- und Rheologie-/Modulmessungen erlauben, beide Beiträge zu identifizieren. Die Schrumpfungskurve allein bleibt eine gekoppelte Antwort.
 4. Alkoxid-Silicagel-Daten werden zunächst für qualitative Modellprüfung und dimensionslose Skalierung verwendet; Parametertransfer auf gefällte Kieselsäure ist ohne belegte Vergleichbarkeit von Prozesschemie, Partikelstruktur und Flüssigkeitszusammensetzung nicht zulässig.
+
+
+## Update 2026-11-11 — Direct precursor-chemistry rheology sources identified
+
+The earlier statement that no direct target-chemistry mechanical data had been identified is now refined. Several sodium-silicate/sulfuric-acid silica-sol studies report mechanical evolution, but none yet supplies a matched independent intrinsic permeability for the same gel state.
+
+- **Kaide, Saeki & Kikuchi (2011), DOI 10.1678/rheology.39.205:** Y-reactor sodium-silicate/sulfuric-acid silica sols; dynamic G'/G'', creep/recovery, instantaneous modulus E0 and SPM. At pH 2, reported gel time is 40 h at 25 °C and 4.5 h at 50 °C. Increasing pH changes gel time and E0; pH 6 is interpreted as heterogeneous cluster formation. This is direct precursor chemistry and useful mechanical-aging evidence. E0 is not automatically the constrained poroelastic modulus M. Full OA source: https://www.jstage.jst.go.jp/article/rheology/39/5/39_5_205/_pdf
+- **Kaide & Saeki (2012), DOI 10.1678/rheology.40.165:** alkaline-sol-transition gel compared with acid-sol gel using dynamic viscoelasticity, creep and morphology. Direct chemistry comparator; numeric values not extracted in this pass.
+- **Wang, Winter & Auernhammer (2014), DOI 10.1016/j.jcis.2013.09.035:** reactive silica gel from sodium silicate and dilute sulfuric acid, focused on high-pH silica solubility. Storage modulus reportedly grows approximately logarithmically during aging, with low-frequency structural relaxation and finite bond lifetime. Relevant to dynamic mechanical bonds; no permeability measurement identified.
+- **Schlomach & Kind (2004), DOI 10.1016/j.jcis.2004.04.051:** direct semi-batch precipitation study separates primary-particle formation, aggregation to gel point, then fragmentation/compaction; reported cluster fractal dimension rises from approximately 1.8 to 2.4 after gel point.
+- **Valibeknejad et al. (2026), DOI 10.1016/j.conbuildmat.2026.147234:** open CC-BY sodium-silicate hydrogel/grout study with strength, stiffness, syneresis and aging measurements plus an open replication dataset (Dataverse DOI 10.34894/V9OPAT). This is adjacent grout chemistry, not the same precipitated-silica particulate gel; retain as a separate comparator and do not pool or calibrate the target model with it.
+
+Structured source inventory: LITERATURE/target_system_mechanical_evidence.csv. Full extraction notes: LITERATURE/target_system_rheology_evidence_2026-11-11.md.
+
+**Revised evidence gap:** target-chemistry mechanical/rheological data do exist. The unresolved key gap is a matched independent permeability measurement, plus a mechanical parameter that can be mapped rigorously to the constrained modulus used in poroelastic consolidation, on the same gel formulation and aging state.
