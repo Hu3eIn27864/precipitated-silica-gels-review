@@ -130,3 +130,21 @@ The original geometry–interaction–Metropolis kernel passed 3/3 CTest targets
 ## DLCA pilot interpretation and fit sensitivity
 
 The pilot workflow now runs `analysis/analyze_dlca_fit_sensitivity.py` after the seed-level ensemble summary and stores its CSV outputs with the other pilot artifacts. The audit reports within-seed exponent ranges across all available valid fit windows; it does not select a scaling interval or convert fit windows into independent replicates. See [DLCA_PILOT_VALIDATION_PROTOCOL.md](DLCA_PILOT_VALIDATION_PROTOCOL.md) for predeclared interpretation gates. The new script and its tests are committed, but their execution in the hosted workflow is not yet verified.
+
+## DLCA parameter sensitivity controls (implementation added; execution pending)
+
+The ensemble executable accepts three optional trailing parameters:
+contact distance, maximum component displacement per coordinate, and
+mobility exponent. The original six-positional-argument interface remains
+valid and uses the original defaults. Each run-summary row records the
+parameter values. The size-series runner forwards the same controls, allowing
+separate ensembles to be compared at fixed particle-number density and
+attempt limits. The CMake smoke test now invokes a non-default parameter set
+and checks the expanded run-summary schema.
+
+These controls expose algorithmic assumptions; they do not make the DLCA
+generator a hydrodynamic or silica-calibrated model. Sensitivity comparisons
+should vary one parameter at a time initially, preserve common system sizes
+and analysis intervals, and report completion fractions as well as structural
+observables. Full compilation and execution of the updated driver remain
+pending.
