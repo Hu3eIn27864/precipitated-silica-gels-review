@@ -109,3 +109,6 @@ The new regression case compares cell-list candidates against brute-force minimu
 
 - A diagnostic fit-window scan now enumerates all contiguous windows with at least three points. It reports sensitivity; it does not automatically select a scaling interval or establish fractality.
 - Pair distances use `std::hypot` to avoid intermediate squared-distance overflow. Added tests cover exact-power-law window stability, a constructed crossover, and large finite coordinates; these new repository assertions await full CMake/CTest execution.
+
+
+- Added deterministic compact-cube and three-arm branched reference geometries to the network test source. An isolated sanitizer-compiled C++17 check returned apparent slopes 2.33099 (finite cube) and 1.07112 (branched cross), within the committed regression bounds. These are estimator sanity checks, not evidence of fractal scaling or silica-specific morphology.
