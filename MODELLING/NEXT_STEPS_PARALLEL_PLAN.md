@@ -467,3 +467,15 @@ state-dependent k–M coupling can be meaningfully identified.
 - Raw experimental marker digitisation remains open. The reconstructed fit samples are explicitly not raw data and must not be used as independent validation.
 
 **Next D gate:** recover figure image assets and digitise measured markers with calibration/uncertainty metadata; in parallel, inspect the numerical Ragueh pressure/porosity curves and resolve the S3 fractal-dimension inconsistency. Do not fit intrinsic permeability or modulus from the empirical tau values.
+
+
+## Parallel work phase — 2026-11-11: Ragueh extraction and digitisation access audit
+
+- Transcribed Tables 2–4 of Ragueh et al. (2015) into `LITERATURE/ragueh_2015_structural_filtration_data.csv`, including dense aggregate sizes, primary-particle diameters, fractal dimensions, relative cake specific resistance, gravimetric cake solid fraction and SAXS bead fraction.
+- Added `LITERATURE/ragueh_2015_data_extraction_note.md` with interpretation and strict cake-to-gel transferability limits.
+- Source inspection confirms two separate label inconsistencies: Table 2 prints S1/S3/S3 where the paper's other tables and prose identify S1/S2/S3; Table 3 gives S3 fractal dimension 1.8 whereas adjacent prose gives 2.2. Both remain explicitly unresolved in the transcription.
+- The article PDF is accessible and the relevant tables were visually inspected. Wilhelm & Kind's publisher HTML exposes figure captions/assets for Figs. 8 and 10, but the direct image and 13 MB PDF endpoints could not be retrieved in this pass. No raw marker coordinates have therefore been claimed or fabricated.
+
+**Interpretation:** Ragueh provides useful structure–cake-transport constraints, but its specific resistance is reported only relative to an undisclosed reference (R). It cannot provide an absolute permeability or a direct (k(phi)) law for natural syneresis. Keep the cake and free-gel calibration tracks separate.
+
+**Next gate:** resolve Ragueh's two table/prose label conflicts from author clarification or an independent source; obtain the Wilhelm & Kind figure images from a repository/author copy at adequate resolution; then digitise marker coordinates with calibration and uncertainty metadata.
