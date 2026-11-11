@@ -37,6 +37,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     target_compile_options(mc3d_interaction_tests PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(mc3d_metropolis_tests PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(mc3d_network_tests PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(mc3d_dlca_ensemble PRIVATE -Wall -Wextra -Wpedantic)
 endif()
 
 enable_testing()
