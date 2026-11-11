@@ -63,3 +63,7 @@ The initial calibration coordinates were refined after inspecting the actual 153
 
 ## Nutzer-Digitalisierung integriert (2026-11-11)
 164 näherungsweise aus JPEG abgelesene Messpunkte wurden aus der Chat-Nachricht in `wilhelm_kind_approximate_measurement_points.csv` rekonstruiert. Struktur- und Plausibilitätsprüfung: `wilhelm_kind_digitisation_quality_audit.md`. Keine Werte wurden an publizierte Fitparameter angepasst. Kritische Auffälligkeiten: Figure 10b bei 20/40/60 °C (digitale Maxima 0.51/0.67/0.86 gegenüber Tabellen-Fitparametern 0.30/0.39/0.51); Figure 10b/60 °C ist besonders dringlich zu prüfen. Auch Figure 8b/40 und 60 °C sowie Figure 10a/60 °C zeigen nichtmonotone Rückgänge. Pixelkoordinaten, Fehlerbalken und Unsicherheiten fehlen weiterhin. Alle Werte bleiben vorläufige Näherungsablesungen.
+
+
+## Explorative Halbzeitprüfung (2026-11-11)
+Ein fitfreies Screening der Zeit bis zur Hälfte der publizierten Fit-Amplitude wurde ergänzt: `wilhelm_kind_t50_screening.csv` und zugehörige Methodennotiz. Die Ergebnisse sind nur Plausibilitätsprüfung mittels linearer Interpolation, keine neue Parameterschätzung. Auffällig sind verzögerte digitale Halbzeiten in Figure 8a bei 40/60 °C; Figure 10b zeigt trotz relativ passender Halbzeiten weiterhin stark überhöhte digitale Endmaxima.
