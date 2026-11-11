@@ -105,3 +105,10 @@
 - Withdrawn the previously inferred directional Δt/temperature/BET/pore-volume claims. PSG-030 is now marked verification-pending and quarantined; it no longer supports a substantive claim in the evidence matrix.
 - Corrected the Sarawade et al. (2011) methods note: Section 2.4 specifies BET for specific surface area and BJH/desorption for pore volume and pore-size distribution, whereas Table 1 labels the surface-area column “BJH method”. Table 2 labels area as BET. This is an internal table-label inconsistency, likely typographical, not a reason to reclassify the measured endpoint trends.
 - Clarified that the paper's stated RMS/replicate treatment explicitly covers porosity, packing density and absorption metrics; uncertainty for nitrogen-sorption values is not clearly reported.
+
+## 2026-11-11 — Quang et al. source-integrity resolution (qualified)
+
+- Further cross-checked PSG-030 against the ResearchGate publication page, which exposes publication-specific highlights and figure/full-text excerpts (including the BET-vs-Δt result at 40 and 60 °C).
+- The ScienceDirect preview does contain relevant opening abstract text but appends unrelated aerogel-modification/calcination content. This is treated as publisher-page/indexing contamination rather than evidence that the article itself is mismatched.
+- Restored the bounded directional trends to PSG-030 and C16, but kept the source at provisional class B because the original publisher PDF has not been independently inspected.
+- The review claim remains strictly about final powder endpoints; no direct wet-gel syneresis mechanism is inferred.
