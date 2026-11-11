@@ -42,7 +42,9 @@ std::size_t PeriodicCellList::flatten(std::size_t x, std::size_t y,
 }
 
 std::size_t PeriodicCellList::coordinate(double value) const noexcept {
-    const double wrapped = value - boxLength_ * std::floor(value / boxLength_);
+    double wrapped = std::fmod(value, boxLength_);
+    if (wrapped < 0.0) wrapped += boxLength_;
+    if (wrapped >= boxLength_) wrapped = 0.0;
     const auto raw = static_cast<std::size_t>(wrapped / cellWidth_);
     return std::min(raw, cellsPerDimension_ - 1);
 }
@@ -52,9 +54,13 @@ std::vector<std::size_t> PeriodicCellList::candidates(const Vec3& position) cons
         !std::isfinite(position.z)) {
         throw std::invalid_argument("Cell-list query position must be finite");
     }
-    const Vec3 p{position.x - boxLength_ * std::floor(position.x / boxLength_),
-                 position.y - boxLength_ * std::floor(position.y / boxLength_),
-                 position.z - boxLength_ * std::floor(position.z / boxLength_)};
+    const auto wrap = [this](double value) {
+        double wrapped = std::fmod(value, boxLength_);
+        if (wrapped < 0.0) wrapped += boxLength_;
+        if (wrapped >= boxLength_) wrapped = 0.0;
+        return wrapped;
+    };
+    const Vec3 p{wrap(position.x), wrap(position.y), wrap(position.z)};
     const std::size_t cx = coordinate(p.x);
     const std::size_t cy = coordinate(p.y);
     const std::size_t cz = coordinate(p.z);
