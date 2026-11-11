@@ -321,3 +321,11 @@
 - Added a safe DLCA fallback to exact brute-force candidate scans when the cell-list grid exceeds its allocation/dimension limits; the narrow-phase contact geometry remains unchanged.
 - Added deterministic pseudo-random candidate-completeness checks against brute-force minimum-image distances and a regression for excessive dense-grid sizing.
 - This is a robustness change, not a performance benchmark. The new tests are registered in CTest but have not yet been run in a complete repository build; hosted CI remains unverified.
+
+
+## 2026-11-11 — Mass-radius power-law regression utility
+
+- Added a standalone log-log OLS helper for caller-supplied mean enclosed mass versus radius, returning the candidate exponent, slope standard error, R², point count and explicit fit interval.
+- Added synthetic exact-power-law recovery and invalid-input regression tests; registered the source in CMake.
+- Explicitly limited interpretation: the helper does not construct mass-radius data, choose a fit interval, resolve periodic unwrapping/finite-size effects, or prove a fractal scaling regime. No silica fractal dimension is claimed.
+- Full CMake/CTest execution remains pending.
