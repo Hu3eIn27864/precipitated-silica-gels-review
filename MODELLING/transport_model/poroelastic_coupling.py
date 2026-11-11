@@ -1,9 +1,11 @@
-"""Minimal permeability--skeleton coupling identities for consolidation.
+"""Dimensionally explicit hydraulic/mechanical consolidation identities.
 
-This module deliberately contains no fitted or assumed constitutive law for
-silica gels. Permeability k and constrained modulus M remain independent
-inputs; the effective coefficient c_v follows the classical identity
-c_v = k*M/gamma_w under the stated linear-consolidation convention.
+Hydraulic conductivity K [m/s] and intrinsic permeability kappa [m^2] are
+not interchangeable. For the classical linear-consolidation convention:
+    c_v = K*M/gamma_w = kappa*M/mu
+where M is the appropriate constrained modulus, gamma_w=rho*g is liquid
+unit weight, and mu is dynamic viscosity. No silica-gel constitutive law is
+assumed; all quantities are independent inputs.
 """
 from __future__ import annotations
 
@@ -17,30 +19,51 @@ def _positive_finite(value: float, name: str) -> float:
     return value
 
 
-def effective_consolidation_diffusivity(
-        permeability_m2: float, constrained_modulus_pa: float,
+def effective_diffusivity_from_hydraulic_conductivity(
+        hydraulic_conductivity_m_s: float, constrained_modulus_pa: float,
         fluid_unit_weight_n_m3: float = 9810.0) -> float:
-    """Return c_v [m^2/s] = k [m^2] * M [Pa] / gamma_w [N/m^3].
-
-    M must be the modulus appropriate to the adopted one-dimensional
-    constrained response. The default unit weight is a water reference value,
-    not a silica-gel measurement; pass the actual pore-liquid value when known.
-    """
-    permeability = _positive_finite(permeability_m2, "permeability_m2")
+    """Return c_v [m^2/s] = K [m/s] * M [Pa] / gamma_w [N/m^3]."""
+    conductivity = _positive_finite(hydraulic_conductivity_m_s,
+                                    "hydraulic_conductivity_m_s")
     modulus = _positive_finite(constrained_modulus_pa,
                                "constrained_modulus_pa")
     unit_weight = _positive_finite(fluid_unit_weight_n_m3,
                                    "fluid_unit_weight_n_m3")
-    return permeability * modulus / unit_weight
+    return conductivity * modulus / unit_weight
 
 
-def permeability_from_diffusivity(
+def hydraulic_conductivity_from_diffusivity(
         diffusivity_m2_s: float, constrained_modulus_pa: float,
         fluid_unit_weight_n_m3: float = 9810.0) -> float:
-    """Algebraic inversion; only meaningful if M is independently known."""
+    """Invert for K [m/s]; meaningful only if M and gamma_w are known."""
     diffusivity = _positive_finite(diffusivity_m2_s, "diffusivity_m2_s")
     modulus = _positive_finite(constrained_modulus_pa,
                                "constrained_modulus_pa")
     unit_weight = _positive_finite(fluid_unit_weight_n_m3,
                                    "fluid_unit_weight_n_m3")
     return diffusivity * unit_weight / modulus
+
+
+def effective_diffusivity_from_intrinsic_permeability(
+        intrinsic_permeability_m2: float, constrained_modulus_pa: float,
+        dynamic_viscosity_pa_s: float) -> float:
+    """Return c_v [m^2/s] = kappa [m^2] * M [Pa] / mu [Pa s]."""
+    permeability = _positive_finite(intrinsic_permeability_m2,
+                                    "intrinsic_permeability_m2")
+    modulus = _positive_finite(constrained_modulus_pa,
+                               "constrained_modulus_pa")
+    viscosity = _positive_finite(dynamic_viscosity_pa_s,
+                                 "dynamic_viscosity_pa_s")
+    return permeability * modulus / viscosity
+
+
+def intrinsic_permeability_from_diffusivity(
+        diffusivity_m2_s: float, constrained_modulus_pa: float,
+        dynamic_viscosity_pa_s: float) -> float:
+    """Invert for intrinsic permeability [m^2] if M and mu are known."""
+    diffusivity = _positive_finite(diffusivity_m2_s, "diffusivity_m2_s")
+    modulus = _positive_finite(constrained_modulus_pa,
+                               "constrained_modulus_pa")
+    viscosity = _positive_finite(dynamic_viscosity_pa_s,
+                                 "dynamic_viscosity_pa_s")
+    return diffusivity * viscosity / modulus
