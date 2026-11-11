@@ -58,3 +58,10 @@ Reported uncertainties on specific resistance are 4.5–6.8%; the article gives 
 ## Figure-digitisation status
 
 The publisher's HTML exposes image assets and captions for Wilhelm & Kind Figures 8 and 10. This confirms that the original plot artwork is available as separate figure resources, but no experimental marker coordinates have yet been digitised in this phase. Digitisation remains pending until image files can be retrieved at sufficient resolution and axis/marker uncertainty can be recorded.
+
+
+## Additional source audit and derived comparison (2026-11-11)
+
+A further inspection of the original PDF shows that the S1/S3/S3 sample-label pattern occurs in **Table 1 as well as Table 2**. The likely intended middle label is S2, consistent with the prose and the other sample labels, but the source has not been author-confirmed. The CSV continues to preserve the printed Table 2 label.
+
+A derived comparison of the Table 4 values is available in `LITERATURE/ragueh_2015_relative_resistance_analysis.csv` and `LITERATURE/ragueh_2015_relative_resistance_analysis_note.md`. It calculates pressure trends and grade-to-grade ratios on the printed relative-resistance scale only. It does not infer absolute cake permeability. The reported 400→600 kPa increases are 45.2% (S1), 60.0% (S2) and 55.8% (S3), with the S1 600 kPa calculation flagged because the table omits the reference symbol R.
