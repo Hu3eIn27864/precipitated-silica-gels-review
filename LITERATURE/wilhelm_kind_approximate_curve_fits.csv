@@ -1,0 +1,13 @@
+figure,panel,condition,temperature_C,n_points,first_nonzero_time_h,published_A,published_tau_h,fitted_A,fitted_tau_h,R2,RMSE,fitted_to_published_A_ratio,fitted_to_published_tau_ratio,data_status
+Figure 8,a,acidic,20,13,6.0000,0.2000,21.3000,0.186972,11.112245,0.962402,0.010370,0.934859,0.521702,AI-assisted unverified approximation; exploratory fit only
+Figure 8,a,acidic,40,11,22.0000,0.2000,11.7000,0.200143,8.930941,0.999378,0.001421,1.000717,0.763328,AI-assisted unverified approximation; exploratory fit only
+Figure 8,a,acidic,60,11,22.0000,0.2000,5.0000,0.202547,8.238037,0.995855,0.003722,1.012737,1.647607,AI-assisted unverified approximation; exploratory fit only
+Figure 8,b,basic,20,11,25.0000,0.3000,50.1000,0.284680,41.270724,0.934619,0.021322,0.948935,0.823767,AI-assisted unverified approximation; exploratory fit only
+Figure 8,b,basic,40,9,25.0000,0.3900,32.0000,0.358675,24.824797,0.990798,0.010835,0.919679,0.775775,AI-assisted unverified approximation; exploratory fit only
+Figure 8,b,basic,60,10,25.0000,0.5100,27.5000,0.491508,24.895657,0.960664,0.029766,0.963742,0.905297,AI-assisted unverified approximation; exploratory fit only
+Figure 10,a,acidic,20,15,0.1500,0.3700,0.4000,0.369125,0.523842,0.986901,0.013396,0.997634,1.309605,AI-assisted unverified approximation; exploratory fit only
+Figure 10,a,acidic,40,19,0.1500,0.4100,0.6400,0.426357,0.696609,0.937705,0.031990,1.039895,1.088452,AI-assisted unverified approximation; exploratory fit only
+Figure 10,a,acidic,60,21,0.1500,0.4800,0.7700,0.471068,0.620366,0.965389,0.025905,0.981392,0.805671,AI-assisted unverified approximation; exploratory fit only
+Figure 10,b,basic,20,15,0.1500,0.3000,0.6700,0.419496,0.726348,0.943905,0.033307,1.398322,1.084101,AI-assisted unverified approximation; exploratory fit only
+Figure 10,b,basic,40,16,0.1500,0.3900,0.5700,0.643144,0.682848,0.985969,0.024831,1.649089,1.197979,AI-assisted unverified approximation; exploratory fit only
+Figure 10,b,basic,60,13,0.1500,0.5100,0.9500,0.825351,1.118093,0.967146,0.047966,1.618336,1.176940,AI-assisted unverified approximation; exploratory fit only
