@@ -411,3 +411,4 @@
 - 2026-11-11: Fixed a periodic DLCA swept-collision edge case by testing neighbouring periodic images in the narrow phase; added deterministic regression coverage. C++ build/CTest execution remains pending.
 - 2026-11-11: Isolated GCC C++17 compile and three-case runtime harness passed for the new periodic swept-collision helper using a minimal Vec3-compatible test interface. ASan execution was blocked by the environment's runtime-loading configuration; full CMake/CTest remains pending.
 - 2026-11-11: Added deterministic randomized validation of periodic swept collision against 500 sampled trajectories (2,001 time fractions each); isolated GCC C++17 harness passed. The test explicitly uses r(t)=r(0)-clusterShift*t and verifies reported contact points.
+- 2026-11-11: Added a fit-window sensitivity audit with unit tests, integrated it into the DLCA pilot workflow, and documented interpretation/validation gates. Hosted execution remains pending verification.
