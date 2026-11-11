@@ -38,3 +38,10 @@ A single shrinkage curve constrains a lumped transport/mechanical timescale, add
 - Scherer & Swiatek: recover full methods and numerical permeability curves, then mark alkoxide-derived gel values as comparator-only.
 - Wilhelm & Kind: digitise measured markers separately from empirical fit curves; retain pressure-cell membrane resistance as a separate apparatus term.
 - Do not calibrate the model against a dataset and then call the same dataset an independent validation.
+
+
+## Additional source-label inconsistencies identified in Ragueh et al. (2015)
+
+A visual inspection of the open PDF tables revealed that the earlier S3 fractal-dimension conflict is not the only transcription hazard. Table 2 prints the material labels as S1, S3, S3 (primary particle diameters 17, 25, 10 nm), while Table 3 and the article's prose identify the three materials as S1, S2, S3. The 25 nm row is likely S2, but the CSV preserves the printed label and marks the likely interpretation as unconfirmed. Table 3 itself reports S3 (D_f=1.8), while the adjacent prose gives 2.2. Both values are retained without resolution.
+
+Table 4 specific resistance is relative to an undisclosed reference (R). One S1 entry at 600 kPa is printed without the (R) symbol; it is flagged rather than silently repaired. This prevents reconstruction of absolute cake permeability from the table alone.
