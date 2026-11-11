@@ -242,3 +242,33 @@ records the reported geometry without silently inferring cylinder height
 from sample volume or exact droplet sphericity. Boundary-condition
 uncertainty is explicit. These records are not pooled into a single fit;
 they do not identify permeability or a unique diffusivity.
+
+## Published-fit curve reconstruction (not raw-data digitisation)
+
+`reconstruct_published_syneresis_fits.py` generates a derived CSV from the tabulated
+`Smax` and `tau_h` values in the two literature comparison tables. It uses the
+single-exponential empirical form
+
+\[
+S(t)=S_{\max}\left[1-\exp(-t/\tau)\right].
+\]
+
+Run from the repository root:
+
+    python3 MODELLING/transport_model/reconstruct_published_syneresis_fits.py
+
+The default output is
+`LITERATURE/derived/published_fit_curve_reconstructions.csv`. Each row is
+explicitly labelled
+`published_empirical_fit_reconstruction_not_digitised_data`. These generated
+points merely sample the reported fit equation and parameters; they are not
+experimental marker coordinates, replicate measurements, or an independent
+validation dataset. The procedure does not recover residuals, uncertainty,
+scatter, or deviations of measurements from the empirical fit.
+
+Tests:
+
+    python3 -m unittest discover -s MODELLING/transport_model -p 'test_reconstruct*.py' -v
+
+Actual figure digitisation remains a separate task and must retain figure,
+axis-calibration, pixel/marker, and digitisation-uncertainty metadata.
