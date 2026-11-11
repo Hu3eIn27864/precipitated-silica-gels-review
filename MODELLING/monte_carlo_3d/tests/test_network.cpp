@@ -152,6 +152,22 @@ void testDLCACommonDisplacementBudgetAndAttemptCap() {
                  targetResult.cumulativeSquaredClusterTranslation - 1e-8),
             "DLCA displacement-budget overshoot was not recorded");
 
+    std::size_t selectedCount = 0;
+    double sizeClassQ = 0.0;
+    double sizeClassPath = 0.0;
+    for (const auto& stats : targetResult.clusterMobilityStats) {
+        require(stats.clusterSize > 0,
+                "DLCA mobility statistics contain an empty size class");
+        selectedCount += stats.selectionCount;
+        sizeClassQ += stats.cumulativeSquaredTranslation;
+        sizeClassPath += stats.cumulativeTranslationPathLength;
+    }
+    require(selectedCount == targetResult.attempts,
+            "cluster-size selection counts do not sum to total attempts");
+    require(near(sizeClassQ, targetResult.cumulativeSquaredClusterTranslation) &&
+            near(sizeClassPath, targetResult.cumulativeClusterTranslationPathLength),
+            "cluster-size movement statistics do not sum to global movement totals");
+
     mc3d::DLCAConfig cappedConfig = targetConfig;
     cappedConfig.maximumAttempts = 1;
     cappedConfig.targetCumulativeSquaredTranslation = 1e9;
