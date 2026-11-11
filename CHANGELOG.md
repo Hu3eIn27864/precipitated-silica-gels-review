@@ -127,3 +127,10 @@
 - Added assessment batch 10 and database record PSG-032. The study measures expelled-liquid mass from sealed alkaline sodium-silicate gels (3–6 wt%, HCl-adjusted pH 8.6–10.7), varying concentration, pH, temperature, divalent ions, pressure and container material.
 - Key caution: the authors infer shrinkage from expelled-liquid mass under an equal-density assumption; this is not geometric ΔV/V0. Glass versus polypropylene changes the measured one-week shrinkage strongly (~2.3 vs ~12 wt% in one comparison).
 - Added bounded claim C18 as an independent mechanistic comparator only. The system is dilute, alkaline and HCl-acidified, not industrial sulfuric-acid precipitated silica. Do not pool its numerical data with the Wilhelm geometric shrinkage series.
+
+## 2026-11-11 — Alkaline granular consolidation and historical syneresis leads
+
+- Added Kouassi et al. (2011), *Journal of Non-Crystalline Solids* 357, 3013–3021, DOI 10.1016/j.jnoncrysol.2011.04.006, as PSG-033. Publisher abstract and extended indexed text inspected; original PDF not accessed.
+- The study combines concentrated HCl-acidified waterglass gel with crystalline silica powder and sand. Weight loss, FTIR, SEM and compression tests track composite consolidation. FTIR evolution is interpreted as dissolution/precipitation and the mechanical response depends on fine-silica content.
+- Explicitly bounded the result: composite weight loss is not an isolated-gel syneresis measurement; crystalline silica/sand and alkaline waterglass differ from industrial amorphous acid-precipitated silica. Added C19 as mechanistic comparator only.
+- Added historical leads Holmes, Kaufmann & Nicholas (1919), DOI 10.1021/ja02230a002, and Ferguson & Applebey (1930), DOI 10.1039/TF9302600642, as H-001/H-002 with status V. Holmes bibliographic metadata is confirmed by ACS, but full text is paywalled. Ferguson title/authors/year/DOI are indexed, while full pagination and publisher record remain to verify. No historical mechanistic claims are made.
