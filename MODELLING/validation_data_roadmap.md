@@ -138,3 +138,12 @@ The next data task is point-by-point figure digitisation under the rules in LITE
 ### Pressure-cell data added
 
 The open Wilhelm & Kind (2015) Table 3 fit parameters have been transcribed into LITERATURE/pressure_cell_syneresis_comparison.csv: seven pressure intervals, acid/base gels, 20 °C, initial height 16 mm. They remain separate from the 2017 centrifugal data (20 mm initial height and height-averaged equivalent pressure). The article reports a membrane/filter-plate assembly; the dissertation identifies membrane-related flow resistance as a possible reason for different forced-syneresis time constants. Neither series is a direct intrinsic-permeability measurement.
+
+
+## 2026-11-11 fit-curve reconstruction and parameter evidence audit
+
+A small standard-library Python utility now reconstructs sampled curves from the published Smax and tau parameters in the natural/centrifugal comparison table and the separate pressure-cell table:
+`MODELLING/transport_model/reconstruct_published_syneresis_fits.py`.
+Its output is explicitly labelled `published_empirical_fit_reconstruction_not_digitised_data`. These points are useful for plotting and checking the consequences of the reported empirical fit, but they contain no experimental scatter, residuals, replicate variation, or digitisation uncertainty. They are not a substitute for marker-level figure digitisation. A dedicated unit test checks the equation and its limiting behaviour.
+
+A separate parameter-evidence audit is in `LITERATURE/transport_parameter_evidence_audit.md`. Ragueh et al. (2015) is the strongest direct precipitated-silica bridge for network consolidation under pressure, but it characterises filter cakes rather than free-standing syneresing gels. It cannot supply an intrinsic gel permeability without a transfer model and matching boundary/state definitions. The current evidence set still lacks an independently measured permeability–modulus pair for the Wilhelm & Kind target gels. Therefore no target-system permeability or modulus fit is authorised at this stage.
