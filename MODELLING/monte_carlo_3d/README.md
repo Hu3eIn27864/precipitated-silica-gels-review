@@ -2,7 +2,7 @@
 
 ## Status
 
-Verified software kernel plus committed aggregation, network-observable and mass-radius analysis modules pending complete-project execution. The existing geometry, interaction and Metropolis kernel previously passed 3/3 CTest targets in Release and sanitizer Debug builds (see TEST_RESULTS.md). This update adds a reproducible rigid-cluster Brownian aggregation generator (DLCA-style) and contact-graph observables, including graph-based periodic unwrapping of cluster coordinates for radius of gyration. A fourth CTest target has been registered, but the new modules have not yet been locally compiled or tested; do not extend the earlier 3/3 pass claim to them. The neighbour list remains independently verified but is not yet wired into Metropolis. General configuration-file parsing and a production Metropolis simulation driver remain unimplemented. A separate small-system DLCA ensemble executable now exports run summaries, mass-radius curves and fit-window diagnostics to CSV; its complete build/run verification remains pending. No physical silica validation or calibrated interaction model is claimed.
+Verified software kernel plus committed aggregation, network-observable, mass-radius and ensemble-export modules pending complete-project execution. The original geometry, interaction and Metropolis kernel passed 3/3 CTest targets in Release and sanitizer Debug builds (see TEST_RESULTS.md). Five CTest entries are now registered, including a deterministic end-to-end DLCA ensemble smoke test that checks creation and headers of all three CSV outputs. Do not extend the earlier 3/3 pass claim to newer modules until the current full suite passes. The neighbour list remains independently verified but is not yet wired into Metropolis. No physical silica validation or calibrated interaction model is claimed.
 
 ## Scientific purpose
 
@@ -121,3 +121,8 @@ The new regression case compares cell-list candidates against brute-force minimu
 
 - The fit-window scan omits singular plateau-only windows while retaining valid intervals elsewhere; a completely constant mass curve produces no fit rows rather than aborting the ensemble export.
 - A command-line DLCA ensemble example is registered as `mc3d_dlca_ensemble`. It exports seed-level run summaries, mass-radius curves and all non-singular fit windows to three CSV files. See [examples/README.md](examples/README.md). Its full-project compilation and smoke run remain pending.
+
+
+## Current verification boundary
+
+The original geometry–interaction–Metropolis kernel passed 3/3 CTest targets in Release and sanitizer Debug builds. Subsequent DLCA, cell-list, network-observable, mass-radius, fit-window and ensemble-driver changes are covered by committed tests, including the fifth CTest entry `dlca_ensemble_smoke`. That smoke test checks successful CLI execution and all three CSV headers, without requiring stochastic aggregate completion. The full current snapshot has not yet been built or run; no new suite pass is claimed. See [TEST_RESULTS.md](TEST_RESULTS.md).
