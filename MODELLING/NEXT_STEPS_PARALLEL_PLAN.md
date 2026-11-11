@@ -275,3 +275,20 @@ the sum of size-class merge counts to equal the run-level successful-merge
 count, and the reproducibility test includes this new field. This allows
 selection/movement exposure to be distinguished from merge outcomes in the
 next analysis. Hosted CI validation of this extension is pending.
+
+
+### Workstream B extension validated: merge outcomes by size class
+
+The per-size `successful_merges` field is now included in the output. Hosted
+CI [#274](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43019534498)
+passed the full workflow and CLI smoke test. The artifact was audited across
+51 seed/configuration records: per-size selection counts, successful merges,
+Q and L each reproduce the corresponding run-level totals in all 51 cases.
+The accounting convention attributes the reduction in component count caused
+by a move to the selected cluster's size immediately before that move.
+
+The next analysis can now distinguish (i) how often each size class is selected,
+(ii) how much Q/L it accumulates, and (iii) how many component mergers are
+associated with its selected moves. It still cannot infer a physical collision
+kernel or hydrodynamic mobility without an independently justified time and
+mobility model.
