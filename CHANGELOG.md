@@ -151,3 +151,11 @@
 - Upgraded the bibliographic record and bounded the reported result: alkoxide-derived silica gels stiffen during syneresis; drying produces a much larger modulus increase with substantial contraction.
 - Kept PSG-013 in class C as an abstract-level mechanistic comparator, not direct evidence for industrial precipitated silica. Full text remains uninspected.
 - Added a detailed assessment to batch 01. The review synthesis should distinguish volume loss, permeability and modulus rather than treating shrinkage as a proxy for mechanical consolidation.
+
+
+## 2026-11-11 — Syneresis transport–mechanics framework (Scherer 1989 Parts I–II)
+
+- Added PSG-037 and PSG-038 for Scherer's *Mechanics of syneresis* Parts I and II, with publisher-verified metadata and abstract-level appraisal.
+- Part I predicts sample-size/geometry dependence through pore-liquid flow resistance and network viscoelasticity; Part II reports reasonable agreement between shrinkage curves and calculations using independently measured permeability, modulus and viscosity.
+- Added C22 as a bounded mechanistic framework. Exact precursor chemistry, assumptions, sample geometry and uncertainty require full-text inspection; no direct industrial precipitated-silica equivalence is assumed.
+- Added source assessment batch 14. The synthesis now explicitly treats syneresis kinetics as coupled to transport and mechanical properties, not as a volume-change-only process.
