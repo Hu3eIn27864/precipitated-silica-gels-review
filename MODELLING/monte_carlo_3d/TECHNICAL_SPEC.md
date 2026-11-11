@@ -176,3 +176,10 @@ The mass-radius distance comparison now uses three-argument `std::hypot` rather 
 ## 21. Compact and branched reference geometries
 
 The network test source now includes two additional deterministic mass-radius references. A finite, fully occupied 9×9×9 cubic lattice is expected to produce an apparent slope between 2 and 3 over radii 1–4.5 lattice spacings; the exponent is below three because the estimator averages over centres near the finite boundary. A three-arm cross made from 603 lattice points is tested over radii 5–20 and should yield a slope between 1.0 and 1.3. The cross is a branched geometry sanity check, not a scale-invariant fractal. These tests check whether the estimator distinguishes compact and simple branched structures; they do not validate a physical DLCA aggregate or silica morphology.
+
+
+## 22. Ensemble export and plateau-safe fit-window diagnostics
+
+The `mc3d_dlca_ensemble` example accepts particle count, box length, initial seed, seed count, maximum attempts and output prefix. It writes separate run-summary, mass-radius and fit-window CSV files. Each seed is run independently with a freshly initialized RNG. Incomplete aggregates and components with inconsistent graph-based periodic unwrapping are retained in the run summary but excluded from whole-aggregate mass-radius output. The executable's defaults (contact distance 1, maximum component step 0.2, mobility exponent 1, and a fixed list of radii) are reduced-unit algorithmic choices, not experimentally calibrated silica parameters.
+
+The fit-window scan now validates its complete input before enumeration and skips individual windows with no response variation. Thus a plateau at some radii does not prevent valid windows elsewhere from being reported; a completely constant mass curve returns an empty fit list. The scan remains diagnostic and does not select a scaling interval. CSV output must be accompanied by the command line and source revision for reproducibility.
