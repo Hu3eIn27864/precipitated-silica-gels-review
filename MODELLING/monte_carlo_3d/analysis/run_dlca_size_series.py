@@ -41,10 +41,21 @@ def main() -> int:
     parser.add_argument("--max-attempts", type=positive_int, default=200000)
     parser.add_argument("--reference-size", type=positive_int, default=32)
     parser.add_argument("--reference-box", type=float, default=15.0)
+    parser.add_argument("--contact-distance", type=float, default=1.0)
+    parser.add_argument("--maximum-component-step", type=float, default=0.2)
+    parser.add_argument("--mobility-exponent", type=float, default=1.0)
     args = parser.parse_args()
 
     if not math.isfinite(args.reference_box) or args.reference_box <= 2.0:
         parser.error("--reference-box must be finite and greater than 2.0")
+    if not math.isfinite(args.contact_distance) or args.contact_distance <= 0.0:
+        parser.error("--contact-distance must be finite and > 0")
+    if not math.isfinite(args.maximum_component_step) or args.maximum_component_step <= 0.0:
+        parser.error("--maximum-component-step must be finite and > 0")
+    if not math.isfinite(args.mobility_exponent) or args.mobility_exponent < 0.0:
+        parser.error("--mobility-exponent must be finite and >= 0")
+    if args.maximum_component_step * math.sqrt(3.0) > 0.5 * args.contact_distance:
+        parser.error("maximum component step violates the DLCA contact-detection bound")
     if len(set(args.sizes)) != len(args.sizes):
         parser.error("--sizes must not contain duplicates")
     if not args.executable.is_file():
@@ -57,13 +68,14 @@ def main() -> int:
     for size_index, count in enumerate(args.sizes):
         system_seed_start = args.seed_start + size_index * args.seed_count
         box = scaled_box_length(count, args.reference_size, args.reference_box)
-        if box <= 2.0:
-            parser.error(f"Calculated box length {box} is too small for N={count}")
+        if box <= 2.0 * args.contact_distance:
+            parser.error(f"Calculated box length {box} is too small for the contact distance at N={count}")
         prefix = args.output_dir / f"n{count}"
         command = [
             str(args.executable), str(count), f"{box:.17g}",
             str(system_seed_start), str(args.seed_count),
-            str(args.max_attempts), str(prefix),
+            str(args.max_attempts), str(prefix), str(args.contact_distance),
+            str(args.maximum_component_step), str(args.mobility_exponent),
         ]
         print("Running:", " ".join(command), flush=True)
         subprocess.run(command, check=True)
