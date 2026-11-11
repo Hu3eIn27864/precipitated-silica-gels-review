@@ -49,18 +49,20 @@ def main() -> int:
         parser.error("--sizes must not contain duplicates")
     if not args.executable.is_file():
         parser.error(f"Executable not found: {args.executable}")
-    if args.seed_start + args.seed_count - 1 > (2**64 - 1):
-        parser.error("Seed range overflows uint64")
+    total_seeds = args.seed_count * len(args.sizes)
+    if total_seeds > 0 and args.seed_start + total_seeds - 1 > (2**64 - 1):
+        parser.error("Combined seed range overflows uint64")
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
-    for count in args.sizes:
+    for size_index, count in enumerate(args.sizes):
+        system_seed_start = args.seed_start + size_index * args.seed_count
         box = scaled_box_length(count, args.reference_size, args.reference_box)
         if box <= 2.0:
             parser.error(f"Calculated box length {box} is too small for N={count}")
         prefix = args.output_dir / f"n{count}"
         command = [
             str(args.executable), str(count), f"{box:.17g}",
-            str(args.seed_start), str(args.seed_count),
+            str(system_seed_start), str(args.seed_count),
             str(args.max_attempts), str(prefix),
         ]
         print("Running:", " ".join(command), flush=True)
