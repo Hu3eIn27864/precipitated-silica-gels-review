@@ -58,3 +58,11 @@ justify fitting a common material diffusivity, extracting intrinsic
 permeability, or assigning pH-specific constitutive laws. The next
 experimental-data gate is recovery of specimen dimensions, boundary
 conditions, raw time series and independent mechanical/hydraulic data.
+
+
+## Pressure-cell forced syneresis — additional open-table extraction
+
+The seven pressure-cell pressure levels at 20 °C and initial height 16 mm are recorded separately in LITERATURE/pressure_cell_syneresis_comparison.csv. From the lowest to highest pressure interval, fitted \(\tau\) falls from 13.1 to 1.0 h for acid-catalysed gel and from 6.5 to 0.9 h for base-catalysed gel. Fitted maximum shrinkage rises from 0.38 to 0.80 for acid gel and 0.69 to 0.88 for base gel. These are Table 3 fit parameters, not digitised time series or direct hydraulic measurements.
+
+This trend differs from the centrifugal series in which the base/acid \(\tau\) ratio is 1.28, 1.39 and 0.90 at equivalent pressures 0.10, 0.26 and 0.39 bar. The experiments are not directly interchangeable: pressure-cell loading uses a membrane/filter-plate assembly and an initial height of 16 mm; centrifugal loading uses a 20 mm sample and a height-averaged equivalent pressure. The KIT dissertation discusses added membrane resistance. Therefore the difference is evidence that protocol/boundary effects matter, not proof of a universal reversal in intrinsic gel kinetics.
+
