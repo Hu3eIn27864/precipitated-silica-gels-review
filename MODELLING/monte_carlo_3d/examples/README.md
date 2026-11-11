@@ -107,3 +107,5 @@ python3 analysis/analyze_dlca_ensembles.py \
 ```
 
 The interval 2–5 is an initial **diagnostic common interval** because it is represented in the driver's radius grid; it is not asserted to be a validated fractal scaling regime. Inspect the per-run curves and fit-window scans before interpreting it. The default five seeds are a pilot ensemble, not a basis for strong statistical inference. Increase seed count and attempt limits only after checking runtime and completion rates. The driver reports attempted cluster moves, not calibrated physical time.
+
+The ensemble analyser also validates the underlying `_mass_radius.csv` files before accepting a fitted exponent: particle counts must match the requested system, radii and enclosed masses must be positive and finite, radius grids must agree across seeds, and each selected fit's point count must match the observations in the requested interval. This guards against comparing stale or mismatched fit summaries.
