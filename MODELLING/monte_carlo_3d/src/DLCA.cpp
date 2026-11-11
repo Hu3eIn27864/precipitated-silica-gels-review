@@ -165,15 +165,26 @@ DLCAResult DLCA::generate() const {
                 }
             }
             const double contactTolerance = config_.contactDistance * (1.0 + 1e-10);
-            const PeriodicCellList finalCells(box_, finalPositions, contactTolerance);
+            std::unique_ptr<PeriodicCellList> finalCells;
+            if (contactTolerance < 0.5 * box_.sideLength()) {
+                finalCells = std::make_unique<PeriodicCellList>(
+                    box_, finalPositions, contactTolerance);
+            }
             std::vector<bool> hitFlag(clusters.size(), false);
             std::size_t movingFlat = 0;
             for (std::size_t c = 0; c < moving; ++c)
                 movingFlat += clusters[c].size();
             for (std::size_t local = 0; local < clusters[moving].size(); ++local) {
                 const auto flat = movingFlat + local;
-                for (const auto candidate :
-                     finalCells.candidates(clusters[moving][local].position)) {
+                std::vector<std::size_t> candidates;
+                if (finalCells) {
+                    candidates = finalCells->candidates(clusters[moving][local].position);
+                } else {
+                    candidates.resize(finalPositions.size());
+                    for (std::size_t k = 0; k < finalPositions.size(); ++k)
+                        candidates[k] = k;
+                }
+                for (const auto candidate : candidates) {
                     const auto owner = finalOwners[candidate];
                     if (owner == moving || candidate == flat || hitFlag[owner]) continue;
                     if (box_.distanceSquared(clusters[moving][local].position,
