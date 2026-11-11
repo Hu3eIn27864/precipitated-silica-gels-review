@@ -400,3 +400,5 @@
 - Added a reproducible DLCA size-series runner with constant reduced number density and a corresponding scaling/input test. Documented a pilot workflow for (N=32,64,128) and a common diagnostic fit interval, with explicit caveats against interpreting it as silica calibration or proof of fractal scaling.
 
 - Strengthened DLCA ensemble analysis by validating fit provenance against the underlying mass-radius observations, including system particle count, finite positive data, common radius grids, and fit point-count consistency.
+
+- Added integrity checks for DLCA ensemble summaries: largest-component size cannot exceed the system size, and a completed run must contain all simulated particles in its largest component. Added a regression test for inconsistent completion metadata.
