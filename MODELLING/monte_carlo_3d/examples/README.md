@@ -149,3 +149,17 @@ python3 analysis/analyze_dlca_fit_sensitivity.py \
 ```
 
 See [DLCA_PILOT_VALIDATION_PROTOCOL.md](../DLCA_PILOT_VALIDATION_PROTOCOL.md) for integrity checks and interpretation gates.
+
+## Paired parameter-sensitivity comparison
+
+The bounded CI sensitivity workflow includes one baseline and six one-factor
+variants with identical seed IDs. After per-configuration summaries and
+fit-window audits, run `analysis/compare_dlca_parameter_sensitivity.py` with
+the baseline and six `--variant NAME=N:PREFIX` arguments, plus `--fit-min 2`
+and `--fit-max 5`. For example, the CI workflow contains the full reproducible
+command and output paths.
+
+The paired outputs preserve incomplete seeds and report valid-pair counts
+separately for largest-component fraction, Rg and the fixed-window exponent.
+Only descriptive paired deltas are produced; three seeds are a CI smoke screen,
+not enough for significance testing or a physical robustness conclusion.
