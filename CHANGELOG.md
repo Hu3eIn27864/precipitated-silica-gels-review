@@ -514,3 +514,6 @@
 - Flagged the ~3 mm droplets as confined in a sealed PMMA microscopy cell, so a free-sphere boundary cannot be assumed.
 - Added a reproducible curve-digitisation protocol separating measured markers from empirical fit curves and keeping pressure-cell and centrifugal datasets distinct.
 - No raw curve points were fabricated or added; curve digitisation remains an explicit next step.
+
+
+- 2026-11-11: Added 14 separate pressure-cell forced-syneresis fit records from Wilhelm & Kind (2015), Table 3, preserving pressure intervals, initial height and membrane boundary metadata. Documented why these records must not be pooled with the 2017 centrifugal series.
