@@ -46,7 +46,7 @@ The driver defaults to contact distance 1.0, maximum component displacement 0.2 
 
 Three CSV files are written:
 
-- `<prefix>_runs.csv`: seed, completion, attempts, merge count, component count, largest component size, radius of gyration, periodic-unwrapping flag, contact distance, maximum component step and mobility exponent.
+- `<prefix>_runs.csv`: seed, completion, attempts, merge count, component count, largest component size, radius of gyration, periodic-unwrapping flag, contact distance, maximum component step, mobility exponent, cumulative squared realized cluster translation and cumulative realized cluster-translation path length.
 - `<prefix>_mass_radius.csv`: all-centre mean enclosed mass for completed aggregates whose largest component unwraps consistently.
 - `<prefix>_fit_windows.csv`: all non-singular contiguous log-log fit windows with exponent, standard error, R² and point count.
 
