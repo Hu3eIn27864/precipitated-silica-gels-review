@@ -750,3 +750,9 @@
 - Added derived t50 = τ(ln 2)^(1/n) for four approximate 2014/2015 acid pressure matches in the comparison CSV and evidence note.
 - The transformed values imply t50 ratios of about 2.20–2.75 (2014/2015), similar to or somewhat larger than the τ ratios.
 - This is algebraic standardisation of published fit summaries only; pressure is not exactly matched and no raw-curve refit, physical rate-change claim, permeability inference or membrane-effect attribution is made.
+
+
+## 2026-11-11 — Global transport balance test added
+
+- Added a heterogeneous two-layer test that integrates boundary outflow over all backward-Euler steps and compares it with the total storage-weighted pressure loss.
+- This is an independent global conservation check alongside the existing per-step balance residual test. Hosted CI result is pending.
