@@ -26,6 +26,11 @@ def nonnegative_int(value: str) -> int:
     return parsed
 
 
+def validate_target_q(value: float) -> None:
+    if not math.isfinite(value) or value < 0.0:
+        raise ValueError("target Q must be finite and >= 0")
+
+
 def scaled_box_length(particle_count: int, reference_size: int,
                       reference_box: float) -> float:
     return reference_box * (particle_count / reference_size) ** (1.0 / 3.0)
@@ -44,6 +49,8 @@ def main() -> int:
     parser.add_argument("--contact-distance", type=float, default=1.0)
     parser.add_argument("--maximum-component-step", type=float, default=0.2)
     parser.add_argument("--mobility-exponent", type=float, default=1.0)
+    parser.add_argument("--target-q", type=float, default=0.0,
+                        help="optional cumulative squared realized-translation target; 0 disables it")
     args = parser.parse_args()
 
     if not math.isfinite(args.reference_box) or args.reference_box <= 2.0:
@@ -54,6 +61,10 @@ def main() -> int:
         parser.error("--maximum-component-step must be finite and > 0")
     if not math.isfinite(args.mobility_exponent) or args.mobility_exponent < 0.0:
         parser.error("--mobility-exponent must be finite and >= 0")
+    try:
+        validate_target_q(args.target_q)
+    except ValueError as exc:
+        parser.error(str(exc))
     if args.maximum_component_step * math.sqrt(3.0) > 0.5 * args.contact_distance:
         parser.error("maximum component step violates the DLCA contact-detection bound")
     if len(set(args.sizes)) != len(args.sizes):
@@ -77,6 +88,8 @@ def main() -> int:
             str(args.max_attempts), str(prefix), str(args.contact_distance),
             str(args.maximum_component_step), str(args.mobility_exponent),
         ]
+        if args.target_q > 0.0:
+            command.append(str(args.target_q))
         print("Running:", " ".join(command), flush=True)
         subprocess.run(command, check=True)
     print("All requested ensembles finished. No physical-time interpretation is implied.")
