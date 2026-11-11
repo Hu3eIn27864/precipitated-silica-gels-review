@@ -21,4 +21,11 @@ PowerLawFit fitMassRadiusPowerLaw(const std::vector<double>& radii,
                                   double fitMinimumRadius,
                                   double fitMaximumRadius);
 
+// Enumerates every contiguous fit window containing at least minimumPoints.
+// This is a diagnostic scan, not an automatic selector of a "best" fractal range.
+std::vector<PowerLawFit> scanMassRadiusFitWindows(
+    const std::vector<double>& radii,
+    const std::vector<double>& meanMass,
+    std::size_t minimumPoints = 3);
+
 } // namespace mc3d
