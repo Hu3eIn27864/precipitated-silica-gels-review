@@ -490,3 +490,5 @@
 - 2026-11-11: The new branch-continuity test exposed an incorrect eigenvalue exponent in the planar consolidation series (a factor of \(\pi^2/4\) was inverted). Corrected the exponent to \((2m+1)^2\pi^2 T_v/4\), and added an independent reference-value regression test at \(T_v=0.1\). The earlier CI failures were genuine test detections; rerun validation is in progress.
 
 - 2026-11-11: Added corrected dimensionless planar-consolidation reference values and explicit identifiability note (c_v=k/(m_v\gamma_w)); expanded radial cylinder/sphere tests to check convergence under grid and time-step refinement. Hosted CI validation pending.
+
+- 2026-11-11: Hosted CI #293–#295 passed expanded radial cylinder/sphere convergence checks and the corrected planar consolidation reference-table regression tests; full integrated DLCA and transport workflow passed in #295.
