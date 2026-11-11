@@ -51,6 +51,9 @@ def compare_rows(baseline_rows, variant_rows, variant_name):
             "seed": seed,
             "baseline_completed": b["completed"],
             "variant_completed": v["completed"],
+            "baseline_attempts": b["attempts"],
+            "variant_attempts": v["attempts"],
+            "delta_attempts": v["attempts"] - b["attempts"],
             "baseline_unwrapped": b["unwrapping_consistent"],
             "variant_unwrapped": v["unwrapping_consistent"],
             "baseline_largest_fraction": b["largest_component_fraction"],
@@ -151,6 +154,7 @@ def main():
     args.output.parent.mkdir(parents=True, exist_ok=True)
     per_fields = [
         "variant", "seed", "baseline_completed", "variant_completed",
+        "baseline_attempts", "variant_attempts", "delta_attempts",
         "baseline_unwrapped", "variant_unwrapped",
         "baseline_largest_fraction", "variant_largest_fraction",
         "delta_largest_fraction", "rg_pair_valid", "baseline_rg",
