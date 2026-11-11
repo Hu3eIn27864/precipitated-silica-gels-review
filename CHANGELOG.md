@@ -289,3 +289,14 @@
 - Repeated the build in Debug with AddressSanitizer and UndefinedBehaviorSanitizer; CTest passed 3/3 targets.
 - Verification is limited to the tested software kernel. The neighbour list is not yet integrated into Metropolis; aggregate generation, observables, physical parameter calibration, and experimental validation remain open. Hosted GitHub Actions status has not been confirmed.
 - Detailed commands and environment are recorded in `MODELLING/monte_carlo_3d/TEST_RESULTS.md`.
+
+
+## 2026-11-11 — DLCA-style aggregate generation and network observables
+
+- Added a seeded rigid-cluster Brownian aggregation generator with periodic boundaries, random sequential non-overlapping monomer placement, a configurable mass-dependent cluster mobility law, finite-step continuous collision detection, and explicit completion/attempt/merge diagnostics.
+- Added contact-graph analysis for coordination numbers, unique contacts, connected components, largest-component fraction, mean coordination, and graph-unwrapped cluster radius of gyration. Periodic winding/inconsistent unwrapping is explicitly flagged.
+- Added a network regression test and registered a fourth CTest target.
+- Initial isolated C++ smoke testing of the new algorithm/analysis interfaces compiled and ran the equivalent module harness; periodic Rg, deterministic seeds, particle non-overlap, contact graph and merge accounting passed. This was not a full build of the repository snapshot; the new CTest target still requires full-project/CI verification.
+- Corrected the first aggregation draft after a test exposed endpoint-overlap risk: collision detection now locates first contact along the translation segment rather than accepting penetrative endpoint configurations.
+- Scientific limits: this is a simplified rigid-cluster DLCA-style algorithm, not a hydrodynamic Brownian-dynamics solver. No cluster rotation, hydrodynamic interactions, lubrication, electrostatics, or reaction-limited sticking. The mobility exponent is an explicit algorithmic assumption; no fractal dimension or silica parameter is prescribed or claimed.
+- No physical calibration, fractal-dimension fit, or experimental validation is claimed.
