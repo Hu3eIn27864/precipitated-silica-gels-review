@@ -311,3 +311,5 @@
 - Added regression coverage comparing candidate sets against brute-force neighbour checks, including periodic boundaries and a small grid.
 - Isolated C++17 ASan/UBSan cell-list checks passed; a separate isolated 12-particle DLCA smoke run completed without overlaps. These are not a full repository CMake build or hosted CI result.
 - Initial placement is still brute force and the grid is rebuilt per attempted move; production performance claims require benchmarks and further optimisation.
+
+- Hardened periodic coordinate reduction with `std::fmod` and added regression assertions for negative query coordinates and non-finite query rejection. Full CTest execution remains pending.
