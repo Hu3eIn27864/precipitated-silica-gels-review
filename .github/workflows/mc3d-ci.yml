@@ -72,7 +72,14 @@ jobs:
             --particle-count 32 --seed-start 3000 --seed-count 3 \
             --max-attempts 50000 --reference-box 15.0
           {
-            echo "git_commit=$(git rev-parse HEAD)"\n            echo "seed_start=3000"\n            echo "seed_count=3"\n            echo "maximum_attempts=50000"\n            echo "particle_count=32"\n            echo "reference_box=15.0"\n            echo "fit_interval=2.0,5.0 contact-distance units"\n            echo "design=paired baseline plus six one-factor variants"
+            echo "git_commit=$(git rev-parse HEAD)"
+            echo "seed_start=3000"
+            echo "seed_count=3"
+            echo "maximum_attempts=50000"
+            echo "particle_count=32"
+            echo "reference_box=15.0"
+            echo "fit_interval=2.0,5.0 contact-distance units"
+            echo "design=paired baseline plus six one-factor variants"
           } > build/mc3d/parameter_sensitivity/provenance.txt
           for variant in baseline contact_0p9 contact_1p1 step_0p1 step_0p28 mobility_0p5 mobility_1p5; do
             prefix="build/mc3d/parameter_sensitivity/$variant/n32"
