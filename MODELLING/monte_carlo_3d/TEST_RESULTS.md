@@ -201,3 +201,7 @@ The analyser regression suite now includes an explicit mismatch test for the fit
 ## Run-manifest provenance checks (2026-11-11)
 
 The ensemble analyzer cross-checks all mass-radius observations and selected fit rows against the run-summary manifest. It rejects observations for unknown seeds, mass-radius data attached to incomplete or periodically ambiguous runs, and selected fit rows without a matching completed and consistently unwrapped run. This prevents derived rows from being silently omitted from seed-level statistics. Regression tests cover orphaned fit seeds and mass-radius data attached to unfinished runs. Full repository CI remains unverified.
+
+## Periodic swept-collision image audit (2026-11-11)
+
+A code review found an edge case in DLCA collision detection: the narrow phase solved the swept-sphere quadratic only for the initial minimum image. For contact distances approaching half the box length, a permitted cluster translation can cross a minimum-image Voronoi face and encounter a neighbouring periodic image; the old calculation could miss that collision. Added a dedicated periodic swept-collision helper that checks the 27 images surrounding the initial minimum image, integrated it into DLCA, and added a deterministic regression test for a collision that occurs only after crossing the image boundary. The change is committed but the C++ build and CTest suite have not yet been executed.
