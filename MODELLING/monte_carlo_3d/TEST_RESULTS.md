@@ -225,3 +225,7 @@ Added `analysis/analyze_dlca_fit_sensitivity.py` and unit tests to quantify with
 ### Pilot provenance capture (2026-11-11)
 
 The CI pilot step now writes `build/mc3d/pilot/provenance.txt` before running the size series. It records the checked-out Git commit/ref, runner OS, CMake/compiler/Python versions, particle sizes, seed block, attempt cap, reference box/size, and common diagnostic fit interval. This metadata is uploaded with the raw CSV and analysis artifacts. The addition improves traceability but does not itself establish that the workflow executed.
+
+### Parallel 1-D transport benchmark hardening (2026-11-11)
+
+The slab consolidation function now rejects non-finite time, diffusivity, and drainage-length inputs. Added tests for NaN/infinity rejection and for agreement of the default 1000-term series with a 5000-term reference at a representative dimensionless time. The hosted MC3D workflow now also runs the independent `MODELLING/transport_model` Python unit tests. These changes are committed; hosted test results remain unverified.
