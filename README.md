@@ -29,6 +29,7 @@ The review will distinguish industrially precipitated silica from related but no
 - `OUTLINE/` — proposed review architecture.
 - `MANUSCRIPT/` — draft text.
 - `FIGURES/` — figure concepts and evidence mapping.
+- `MODELLING/` — hypothesis-driven model strategy, candidate validation datasets, and starter transport/LAMMPS prototypes.
 - `CHANGELOG.md` — substantive project decisions.
 
 ## Evidence grades
@@ -41,4 +42,4 @@ The review will distinguish industrially precipitated silica from related but no
 A/B/C/D are provisional until the source has been checked at the appropriate depth. **V is a workflow status, not a quality grade.** Scientific quality and relevance to this review are assessed separately.
 
 ## Current status
-Project initialisation. The initial candidate bibliography exists in the working conversation and must be independently verified before it is treated as a curated reference list.
+The literature database and claim–evidence synthesis are under active development, with source-family overlap and access status tracked explicitly. The optional modelling workstream has been defined; first executable 1-D transport and coarse-grained LAMMPS prototypes are available as non-predictive baselines. No production simulation has been calibrated or run, and no model parameter is yet claimed to represent measured silica properties.
