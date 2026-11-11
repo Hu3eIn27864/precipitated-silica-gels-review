@@ -160,6 +160,12 @@ int main(int argc, char** argv) {
                  << (generated.displacementBudgetReached ? 1 : 0) << ','
                  << (generated.attemptLimitReached ? 1 : 0) << ','
                  << generated.displacementBudgetOvershoot << '\n';
+            for (const auto& stats : generated.clusterMobilityStats) {
+                mobility << seed << ',' << stats.clusterSize << ','
+                         << stats.selectionCount << ','
+                         << stats.cumulativeSquaredTranslation << ','
+                         << stats.cumulativeTranslationPathLength << '\n';
+            }
 
             // Only a completed, consistently unwrapped aggregate is suitable
             // for this whole-aggregate mass-radius export.
