@@ -143,3 +143,11 @@
 - Added a bounded C20: the reported 70 °C glass-like adhesive layer and 150 °C dissolution–precipitation mechanism are author interpretations for a drying granular composite, not direct evidence for wet precipitated-silica gel syneresis.
 - Added source assessment batch 12 and flagged the Tognonvi/Rossignol research-family relationship with Kouassi et al. (2011); independent dataset status remains to be checked.
 - Database now contains 36 records; structural validation to be performed.
+
+
+## 2026-11-11 — Modulus evolution during silica-gel syneresis (PSG-013 appraisal)
+
+- Verified Scherer (1989), *Journal of Non-Crystalline Solids* 109, 183–190, DOI 10.1016/0022-3093(89)90030-6, against the Elsevier publisher record and abstract.
+- Upgraded the bibliographic record and bounded the reported result: alkoxide-derived silica gels stiffen during syneresis; drying produces a much larger modulus increase with substantial contraction.
+- Kept PSG-013 in class C as an abstract-level mechanistic comparator, not direct evidence for industrial precipitated silica. Full text remains uninspected.
+- Added a detailed assessment to batch 01. The review synthesis should distinguish volume loss, permeability and modulus rather than treating shrinkage as a proxy for mechanical consolidation.
