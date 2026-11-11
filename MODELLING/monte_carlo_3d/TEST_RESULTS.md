@@ -398,3 +398,22 @@ The new output now allows the next analysis to stratify Q and L by selected clus
 The follow-up adds `successful_merges` to each selected pre-move size class. Hosted CI [#274](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43019534498), commit `a43eae97776fb54e31f933307dd7240e0089b84e`, passed the complete workflow, including all C++ tests and the end-to-end CLI smoke test. The artifact (ID `13855090255`) was inspected across all 51 seed/configuration records. In every record, per-size selection counts, successful merges, Q and L summed to the corresponding run-level totals (51/51 matches for each identity).
 
 This establishes that the newly exported per-size accounting is internally consistent across the size pilot, fixed-attempt sensitivity and common-Q sensitivity outputs. Merge attribution is to the cluster size immediately before the selected cluster's move; if it contacts multiple other clusters, the count added is the number of components removed from the component count (the existing run-level `successful_merges` definition). It does not resolve the full pairwise collision graph or measure physical collision rates.
+
+
+### Descriptive per-size-class outcome analysis from CI #274 artifact
+
+The new accounting permits a first comparison of component-merger counts relative to selection exposure. Across the three paired seeds at Q=450:
+
+| Configuration | Total selections | Successful component merges | Merges / selection | Selection fraction for size ≥2 |
+|---|---:|---:|---:|---:|
+| Baseline | 33,652 | 25 | 0.00074 | 8.87% |
+| Contact 0.9 | 33,658 | 29 | 0.00086 | 8.40% |
+| Contact 1.1 | 33,718 | 36 | 0.00107 | 11.07% |
+| Step 0.10 | 134,917 | 31 | 0.00023 | 11.31% |
+| Step 0.28 | 17,173 | 28 | 0.00163 | 8.87% |
+| Mobility 0.5 | 33,664 | 32 | 0.00095 | 15.53% |
+| Mobility 1.5 | 33,663 | 36 | 0.00107 | 11.48% |
+
+These are pooled descriptive ratios across only three paired seeds, not inferential estimates. In particular, the step-size rows reach the same Q after very different numbers of attempts, so merges per selection do not represent equal physical exposure. Likewise, changing contact distance changes the collision criterion and excluded-volume geometry; mobility exponents change the selection distribution. The small raw merge counts and incomplete aggregates make these data suitable for debugging the algorithm and designing the next pilot, not for claiming a physical parameter trend.
+
+The class-stratified output also shows that most selections and movement budget remain associated with monomers and dimers in this early stage. For the baseline, 91.1% of selections were monomers; the corresponding fraction was 84.5% at mobility exponent 0.5 and 88.5% at exponent 1.5. This is directionally consistent with the implemented mass weighting but is not a measurement of Brownian mobility in silica.
