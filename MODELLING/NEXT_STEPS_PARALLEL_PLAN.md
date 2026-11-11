@@ -585,3 +585,15 @@ state-dependent k–M coupling can be meaningfully identified.
 
 ### Scientific correction
 The literature gap is now more precise: direct sodium-silicate/sulfuric-acid rheology data are available, including pH- and temperature-dependent aging. What remains missing is a matched intrinsic-permeability measurement and a rigorous mapping from reported rheological/creep moduli to the constrained modulus required by the poroelastic model.
+
+
+## Original-figure review update — Wilhelm & Kind Figure 10b (2026-11-11)
+
+- [x] Open original publisher PNGs for Figures 8 and 10 and visually inspect panel identity/late marker levels.
+- [x] Identify candidate internal inconsistency: Figure 10b's base-catalysed plotted markers/curves visibly exceed Table 2 A values (0.30/0.39/0.51); these Table 2 values repeat Figure 8/Table 1 base values exactly.
+- [x] Record that the prior AI-assisted approximate maxima (about 0.51/0.67/0.86) are qualitatively consistent with Figure 10b, while remaining unverified readings.
+- [ ] Obtain original PNGs in a local image-analysis environment and perform pixel-calibrated marker digitisation with uncertainty; retain error bars separately.
+- [ ] Search for errata/corrections or contact authors before treating Table 2 values as erroneous.
+- [ ] Report Table 2 and Figure 10b as separate evidence streams until the inconsistency is resolved.
+
+**Interpretation change:** Figure 10b is no longer treated simply as a likely symbol-mapping/AI-digitisation error. It is a candidate publication-internal figure/table inconsistency. This is not proof of a table typo.
