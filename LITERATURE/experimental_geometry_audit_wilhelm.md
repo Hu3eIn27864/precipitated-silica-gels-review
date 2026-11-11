@@ -16,7 +16,7 @@ H_{\mathrm{calc}}=\frac{V}{\pi(d/2)^2}
 
 This is a **derived geometric estimate**, not a directly reported height. It is useful for a sensitivity analysis, but it must not be silently promoted to a measured dimension. The pycnometer method measures volume by displacement/gravimetry; the complete external drainage boundary and the local geometry of the gel in the vessel still need confirmation from the apparatus description/figure and the cited earlier method.
 
-Consequently, the finite-cylinder eigenmode can be evaluated over a plausible height range, but a unique finite-cylinder conversion of the reported \(\tau\) values is not justified yet.
+The 2015 article later explicitly assumes radial flow for its comparison of natural and enforced syneresis and uses (r_{cyl}=d_{cyl}/2=6\,\mathrm{mm}) as the characteristic drainage length. That is a **published modelling assumption** and should be reproduced when reproducing the authors’ comparison. It is not the same as independent experimental verification that axial drainage is negligible. Therefore, use the radial model as the primary reproduction of the paper’s assumption and treat finite-cylinder end drainage as a separate sensitivity case, not as a replacement assumption.
 
 ## 2. Natural syneresis: approximately 3 mm droplets
 
