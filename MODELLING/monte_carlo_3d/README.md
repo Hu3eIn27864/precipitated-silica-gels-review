@@ -55,3 +55,8 @@ One MC sweep is not a physical second. Do not report laboratory syneresis times 
 - analysis/: optional plotting / statistical analysis scripts.
 
 No source files are added until the energy function, aggregate-generation method, and move/acceptance rules are specified precisely enough to test.
+
+
+## Detailed implementation specification
+
+The implementable V1 contract is now defined in [TECHNICAL_SPEC.md](TECHNICAL_SPEC.md). It narrows the first code milestone to reversible Metropolis sampling with an effective pair potential, reproducible geometry/RNG, verified neighbour lists, observables and unit tests. Coordination-dependent kinetic detachment, irreversible contacts and compaction are explicitly deferred to V2; no physical syneresis time or drainage is claimed. The technical specification is authoritative where this overview is less detailed.
