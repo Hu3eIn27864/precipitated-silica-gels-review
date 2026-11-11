@@ -95,7 +95,9 @@ int main(int argc, char** argv) {
 
         runs << "seed,completed,attempts,successful_merges,component_count,"
                 "largest_component_size,largest_component_rg,unwrapping_consistent,"
-                "contact_distance,maximum_component_step,mobility_exponent\n";
+                "contact_distance,maximum_component_step,mobility_exponent,"
+                "cumulative_squared_cluster_translation,"
+                "cumulative_cluster_translation_path_length\n";
         curves << "seed,particle_count,radius,mean_enclosed_mass\n";
         fits << "seed,fit_minimum_radius,fit_maximum_radius,exponent,"
                 "standard_error,r_squared,point_count\n";
@@ -141,7 +143,9 @@ int main(int argc, char** argv) {
                  << (hasLargest ? largest->particleCount : 0) << ','
                  << rg << ',' << (unwrapped ? 1 : 0) << ','
                  << config.contactDistance << ',' << config.maximumComponentStep << ','
-                 << config.mobilityExponent << '\n';
+                 << config.mobilityExponent << ','
+                 << generated.cumulativeSquaredClusterTranslation << ','
+                 << generated.cumulativeClusterTranslationPathLength << '\n';
 
             // Only a completed, consistently unwrapped aggregate is suitable
             // for this whole-aggregate mass-radius export.
