@@ -101,6 +101,7 @@ void testDLCAReproducibilityAndNonOverlap() {
         const auto& y = b.clusterMobilityStats[i];
         require(x.clusterSize == y.clusterSize &&
                 x.selectionCount == y.selectionCount &&
+                x.successfulMergeEvents == y.successfulMergeEvents &&
                 x.successfulMerges == y.successfulMerges &&
                 near(x.cumulativeSquaredTranslation, y.cumulativeSquaredTranslation) &&
                 near(x.cumulativeTranslationPathLength, y.cumulativeTranslationPathLength),
@@ -165,6 +166,7 @@ void testDLCACommonDisplacementBudgetAndAttemptCap() {
             "DLCA displacement-budget overshoot was not recorded");
 
     std::size_t selectedCount = 0;
+    std::size_t sizeClassMergeEvents = 0;
     std::size_t sizeClassMerges = 0;
     double sizeClassQ = 0.0;
     double sizeClassPath = 0.0;
@@ -172,12 +174,15 @@ void testDLCACommonDisplacementBudgetAndAttemptCap() {
         require(stats.clusterSize > 0,
                 "DLCA mobility statistics contain an empty size class");
         selectedCount += stats.selectionCount;
+        sizeClassMergeEvents += stats.successfulMergeEvents;
         sizeClassMerges += stats.successfulMerges;
         sizeClassQ += stats.cumulativeSquaredTranslation;
         sizeClassPath += stats.cumulativeTranslationPathLength;
     }
     require(selectedCount == targetResult.attempts,
             "cluster-size selection counts do not sum to total attempts");
+    require(sizeClassMergeEvents == targetResult.successfulMergeEvents,
+            "cluster-size merge-event counts do not sum to total merge events");
     require(sizeClassMerges == targetResult.successfulMerges,
             "cluster-size merge counts do not sum to total successful merges");
     require(near(sizeClassQ, targetResult.cumulativeSquaredClusterTranslation) &&
