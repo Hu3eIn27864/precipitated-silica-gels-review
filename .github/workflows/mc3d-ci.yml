@@ -24,6 +24,8 @@ jobs:
         run: ctest --test-dir build/mc3d --output-on-failure
       - name: Run Python ensemble-analysis tests
         run: python3 -m unittest discover -s MODELLING/monte_carlo_3d/analysis -p 'test_*.py' -v
+      - name: Run 1-D transport model tests
+        run: python3 -m unittest discover -s MODELLING/transport_model -p 'test_*.py' -v
       - name: Record pilot provenance
         run: |
           mkdir -p build/mc3d/pilot
