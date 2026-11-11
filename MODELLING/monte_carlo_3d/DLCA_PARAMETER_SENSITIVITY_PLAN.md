@@ -78,3 +78,22 @@ or produces a higher R-squared. If completion, unwrapping, or fit-window
 stability changes strongly across the bracket, classify the model output as
 algorithmically sensitive and defer physical interpretation. No universal
 fractal exponent or silica-specific parameter is inferred from this study.
+
+## Paired seed-level comparison
+
+After all seven configurations (baseline plus six variants) have been run and
+analysed, `compare_dlca_parameter_sensitivity.py` compares each variant
+against the baseline using identical seed IDs. It writes
+`*_paired_per_seed.csv` and `*_paired_summary.csv`. The per-seed file retains
+every seed, including incomplete or unwrapping-invalid runs. Largest-component
+fraction differences are reported for every paired seed; radius-of-gyration
+and fixed-window exponent differences are calculated only when the observable
+is available for both members of the pair. The summary reports valid-pair
+counts and paired completion counts. A strict seed-set check prevents
+accidental unpaired comparisons. Positive deltas mean the variant exceeds
+the baseline.
+
+These are descriptive paired differences, not inferential tests. With only
+three seeds in CI, standard deviations are unstable and no significance or
+physical robustness claim should be made. The larger preplanned matrix and
+more independent seeds are required before scientific interpretation.
