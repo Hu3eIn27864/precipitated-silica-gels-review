@@ -562,3 +562,26 @@ state-dependent k–M coupling can be meaningfully identified.
 - [ ] Modellarchitektur auf zeitabhängige Permeabilität und zeitabhängige mechanische Antwort erweitern; zunächst Einwegkopplung und erst nach Identifizierbarkeitstests Rückkopplung.
 
 **Wissenschaftliche Konsequenz:** Synerese ist nicht als reine Darcy-Entwässerung mit konstantem Materialparameter zu behandeln. Die klassische Silicagel-Literatur zeigt, dass Schrumpfung, Permeabilität und viskoelastische Netzwerkantwort gekoppelt sind. Die Zielsystem-spezifischen Parameter bleiben jedoch offen.
+
+
+## Parallel update — direct rheology evidence and poroelastic scaling (2026-11-11)
+
+### Workstream D — evidence update
+- [x] Add Kaide et al. (2011) open-access sodium-silicate/sulfuric-acid silica-sol rheology and creep evidence. Source-reported gel times at pH 2: 40 h (25 °C), 4.5 h (50 °C); pH also affects instantaneous modulus E0 and network morphology.
+- [x] Add Kaide & Saeki (2012) acid/alkaline silica-sol rheology comparison.
+- [x] Add Wang et al. (2014) reactive high-pH silica-gel aging rheology: logarithmic storage-modulus growth and low-frequency relaxation, based on article abstract/preview.
+- [x] Add Schlomach & Kind (2004) process-stage and aggregation/fractal evidence.
+- [x] Add Valibeknejad et al. (2026) open sodium-silicate grout dataset as a strictly separate adjacent comparator.
+- [ ] Retrieve and inspect the open 2026 replication dataset; record which files contain rheology, strength and syneresis data before any extraction.
+- [ ] Extract Kaide 2011/2012 and Wang 2014 figure-level numerical data only after a documented image calibration and source check; no approximate graph values entered in this pass.
+- [ ] Continue search for direct intrinsic permeability on the same precipitated-silica gel formulations.
+
+### Workstream C — constitutive identifiability
+- [x] Add dimensional scaling utility: cv = κ M / μ, tc = Ld²/cv, and inverse permeability implied by a selected M and characteristic time.
+- [x] Add unit tests for dimensional scaling, inverse consistency, expected linear scaling and rejection of nonphysical inputs.
+- [x] Add staged poroelastic design specification. It explicitly separates storage modulus/instantaneous creep modulus from constrained modulus M.
+- [ ] Wait for hosted CI before treating the utility as regression-tested.
+- [ ] Next code stage: variable-coefficient 1-D solver with prescribed κ(t), M(t), no target-system fitting and no feedback to MC until constant-coefficient recovery, mass balance and convergence are verified.
+
+### Scientific correction
+The literature gap is now more precise: direct sodium-silicate/sulfuric-acid rheology data are available, including pH- and temperature-dependent aging. What remains missing is a matched intrinsic-permeability measurement and a rigorous mapping from reported rheological/creep moduli to the constrained modulus required by the poroelastic model.
