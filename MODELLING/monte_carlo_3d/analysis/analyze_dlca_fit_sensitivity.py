@@ -32,8 +32,10 @@ def finite(row, key, path):
 
 def analyse(prefix: Path, particle_count: int):
     runs_path = Path(str(prefix) + "_runs.csv")
+    mass_path = Path(str(prefix) + "_mass_radius.csv")
     fits_path = Path(str(prefix) + "_fit_windows.csv")
     runs = read_rows(runs_path)
+    mass_rows = read_rows(mass_path)
     fits = read_rows(fits_path)
     valid = {}
     for row in runs:
@@ -52,6 +54,32 @@ def analyse(prefix: Path, particle_count: int):
             raise ValueError(f"Impossible largest-component size in {runs_path}: {row}")
         valid[seed] = complete == 1 and unwrapped == 1 and largest == particle_count
 
+    radii_by_seed = {}
+    reference_grid = None
+    for row in mass_rows:
+        try:
+            seed = int(row["seed"])
+            recorded_n = int(row["particle_count"])
+        except (KeyError, TypeError, ValueError) as exc:
+            raise ValueError(f"Invalid mass-radius metadata in {mass_path}: {row}") from exc
+        if seed not in valid:
+            raise ValueError(f"Mass-radius data for unknown seed {seed}")
+        if not valid[seed] or recorded_n != particle_count:
+            raise ValueError(f"Mass-radius data attached to invalid run or wrong N: {row}")
+        radius = finite(row, "radius", mass_path)
+        mass = finite(row, "mean_enclosed_mass", mass_path)
+        if radius <= 0 or mass <= 0:
+            raise ValueError(f"Mass-radius values must be positive: {row}")
+        radii = radii_by_seed.setdefault(seed, set())
+        if radius in radii:
+            raise ValueError(f"Duplicate radius for seed {seed} in {mass_path}")
+        radii.add(radius)
+    for seed, radii in radii_by_seed.items():
+        if reference_grid is None:
+            reference_grid = radii
+        elif radii != reference_grid:
+            raise ValueError(f"Inconsistent mass-radius grid for seed {seed}")
+
     grouped = {}
     for row in fits:
         try:
@@ -69,6 +97,12 @@ def analyse(prefix: Path, particle_count: int):
         count = int(row["point_count"])
         if lo <= 0 or hi <= lo or count < 3 or not 0 <= r2 <= 1:
             raise ValueError(f"Invalid fit metadata in {fits_path}: {row}")
+        if seed not in radii_by_seed:
+            raise ValueError(f"Fit for seed {seed} has no source mass-radius curve")
+        grid = radii_by_seed[seed]
+        expected_count = sum(lo <= radius <= hi for radius in grid)
+        if lo not in grid or hi not in grid or count != expected_count:
+            raise ValueError(f"Fit window/point count does not match source curve: {row}")
         grouped.setdefault(seed, []).append((lo, hi, exponent, r2, count))
 
     per_seed = []
