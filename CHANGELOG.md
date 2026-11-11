@@ -73,3 +73,10 @@
 - Added LITERATURE/source_assessments_batch_07.md and SYNTHESIS/claim_evidence_matrix_v02.md. The matrix now contains 15 bounded claims.
 - Updated Shapiro & Kolthoff (1950) assessment using an accessible reproduced abstract; still not full-text inspected and strictly limited to high-temperature powder/gel ageing.
 - Database validation: 29 records; 18 columns per record; no malformed rows.
+
+## 2026-11-11 — Pilot-scale gelation-to-product-property link
+
+- Added PSG-030 (Quang et al., 2012), a pilot-scale study of staged sulfuric-acid addition to sodium silicate and the effect of gelation history on final powder BET surface area and pore volume.
+- Added `LITERATURE/source_assessments_batch_08.md`; the assessment is deliberately abstract-level and does not infer the direction or magnitude of property changes.
+- Extended the claim-evidence matrix with C16 as a provisional bridge from process history to final powder properties, not as direct evidence for wet-gel syneresis.
+- Database now contains 30 records; CSV row/column validation is pending an independent structural check.
