@@ -248,3 +248,12 @@
 - Separated reversible equilibrium sampling (V1) from coordination-dependent kinetic detachment, persistent contacts and compaction (V2) to avoid mixing irreversible kinetics into an equilibrium sampler.
 - Explicitly excluded pore-liquid drainage, pore pressure, physical syneresis time, pH-dependent chemistry and calibrated silica force fields from V1. Box contraction is not treated as solvent removal.
 - Updated the MC overview and modelling strategy to link to the technical specification. No C++ source code has been implemented and no simulation has been run, calibrated, or validated.
+
+
+## 2026-11-11 — Initial C++ Monte Carlo software scaffold
+
+- Added a C++17/CMake/CTest project scaffold under `MODELLING/monte_carlo_3d/`.
+- Added `Vec3`, `Particle`, cubic periodic `SimulationBox` (wrapping, minimum-image displacement and distance), and a seeded `std::mt19937_64` wrapper.
+- Added geometry tests for periodic wrapping, minimum-image distances and invalid box dimensions, plus build instructions.
+- Updated the MC README and technical specification to distinguish committed source from unimplemented modules.
+- Verification limitation: GitHub repository cloning was unavailable in the execution environment, so compilation and CTest could not be run. No test-pass claim, simulation, calibration, or physical validation is made.
