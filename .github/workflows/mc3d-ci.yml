@@ -24,6 +24,24 @@ jobs:
         run: ctest --test-dir build/mc3d --output-on-failure
       - name: Run Python ensemble-analysis tests
         run: python3 -m unittest discover -s MODELLING/monte_carlo_3d/analysis -p 'test_*.py' -v
+      - name: Record pilot provenance
+        run: |
+          mkdir -p build/mc3d/pilot
+          {
+            echo "git_commit=$(git rev-parse HEAD)"
+            echo "git_ref=$GITHUB_REF"
+            echo "runner_os=$RUNNER_OS"
+            echo "cmake_version=$(cmake --version | head -n 1)"
+            echo "compiler_version=$(c++ --version | head -n 1)"
+            echo "python_version=$(python3 --version)"
+            echo "particle_sizes=32 64 128"
+            echo "seed_start=1000"
+            echo "seed_count=3"
+            echo "maximum_attempts=50000"
+            echo "reference_size=32"
+            echo "reference_box=15.0"
+            echo "fit_interval=2.0,5.0"
+          } > build/mc3d/pilot/provenance.txt
       - name: Run bounded DLCA pilot size series
         run: |
           python3 MODELLING/monte_carlo_3d/analysis/run_dlca_size_series.py \
