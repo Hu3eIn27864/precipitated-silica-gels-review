@@ -184,3 +184,13 @@
 - Identified a CC BY 4.0 public colloidal-silica transport dataset from the University of Strathclyde as an adjacent software/transport benchmark, not direct syneresis validation.
 - Distinguished target-system validation from TEOS-derived and generic colloidal-silica comparators; recorded independent-validation and research-family overlap rules.
 - No simulation has been run or calibrated; digitisation, full-text checks, and data suitability assessment remain pending.
+
+
+## 2026-11-11 — First executable transport and LAMMPS prototypes
+
+- Added a dependency-free Python 1-D double-drained slab consolidation benchmark in `MODELLING/transport_model/`, using the classical linear pore-pressure diffusion series and an explicitly prescribed ultimate shrinkage.
+- Added a LAMMPS coarse-grained compression/unloading prototype and seeded network-data generator in `MODELLING/lammps_network/`.
+- The LAMMPS prototype uses reduced LJ units, truncated/shifted LJ non-bonded interactions, permanent harmonic links, NVT equilibration, affine box compression/unloading, coordination output and pressure/box observables.
+- Both prototypes are explicitly non-predictive baselines: the transport model is constant-coefficient 1-D poro-consolidation; the LAMMPS network is a jittered lattice, not measured fractal silica, and has no solvent, chemistry, or dynamic bond kinetics.
+- Added execution instructions, assumptions, validation checks and model limitations. No parameter calibration or production simulation has been performed.
+- LAMMPS command choices checked against the official manual for `pair_style lj/cut`, `bond_style harmonic`, and `fix deform`.
