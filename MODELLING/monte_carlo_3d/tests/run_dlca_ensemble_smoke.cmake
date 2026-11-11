@@ -3,7 +3,7 @@ if(NOT DEFINED MC3D_EXECUTABLE OR NOT DEFINED OUTPUT_PREFIX)
 endif()
 
 execute_process(
-    COMMAND "${MC3D_EXECUTABLE}" 12 12.0 12345 1 30000 "${OUTPUT_PREFIX}"
+    COMMAND "${MC3D_EXECUTABLE}" 12 12.0 12345 1 30000 "${OUTPUT_PREFIX}" 1.0 0.15 0.5
     RESULT_VARIABLE run_result
     OUTPUT_VARIABLE run_stdout
     ERROR_VARIABLE run_stderr
@@ -18,7 +18,7 @@ set(expected_files
     "${OUTPUT_PREFIX}_fit_windows.csv"
 )
 set(expected_headers
-    "seed,completed,attempts,successful_merges,component_count,largest_component_size,largest_component_rg,unwrapping_consistent"
+    "seed,completed,attempts,successful_merges,component_count,largest_component_size,largest_component_rg,unwrapping_consistent,contact_distance,maximum_component_step,mobility_exponent"
     "seed,particle_count,radius,mean_enclosed_mass"
     "seed,fit_minimum_radius,fit_maximum_radius,exponent,standard_error,r_squared,point_count"
 )
@@ -43,6 +43,6 @@ if(NOT run_line_count EQUAL 2)
     message(FATAL_ERROR "Expected one run-summary data row, found ${run_line_count} total lines")
 endif()
 list(GET run_lines 1 run_row)
-if(NOT run_row MATCHES "^12345,[01],[0-9]+,[0-9]+,[0-9]+,[0-9]+,")
+if(NOT run_row MATCHES "^12345,[01],[0-9]+,[0-9]+,[0-9]+,[0-9]+,.*,[01],1\\.0,0\\.14999999999999999,0\\.5$")
     message(FATAL_ERROR "Malformed run-summary row: '${run_row}'")
 endif()
