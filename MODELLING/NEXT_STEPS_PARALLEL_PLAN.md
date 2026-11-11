@@ -580,7 +580,7 @@ state-dependent k–M coupling can be meaningfully identified.
 - [x] Add dimensional scaling utility: cv = κ M / μ, tc = Ld²/cv, and inverse permeability implied by a selected M and characteristic time.
 - [x] Add unit tests for dimensional scaling, inverse consistency, expected linear scaling and rejection of nonphysical inputs.
 - [x] Add staged poroelastic design specification. It explicitly separates storage modulus/instantaneous creep modulus from constrained modulus M.
-- [ ] Wait for hosted CI before treating the utility as regression-tested.
+- [x] Hosted CI passed for the poroelastic scaling utility and its unit tests (workflow #320/#321).
 - [ ] Next code stage: variable-coefficient 1-D solver with prescribed κ(t), M(t), no target-system fitting and no feedback to MC until constant-coefficient recovery, mass balance and convergence are verified.
 
 ### Scientific correction
