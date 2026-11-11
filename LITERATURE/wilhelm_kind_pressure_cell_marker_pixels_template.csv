@@ -1,0 +1,22 @@
+source_year,source_doi,figure_panel,series_id,curve_type,gel_type,temperature_C,pressure_label_bar,pressure_min_bar,pressure_max_bar,initial_height_mm,point_id,x_pixel,y_pixel,x_pixel_uncertainty,y_pixel_uncertainty,extraction_confidence,notes
+2014,10.3390/polym6122896,7,2014-F7-0.8,experimental_marker,acid,20,0.8,0.8,0.8,16,,,,,,not_digitised,Figure 7 omits 3.2 and 6.5 bar curves
+2014,10.3390/polym6122896,7,2014-F7-1.6,experimental_marker,acid,20,1.6,1.6,1.6,16,,,,,,not_digitised,Figure 7 omits 3.2 and 6.5 bar curves
+2014,10.3390/polym6122896,7,2014-F7-2.4,experimental_marker,acid,20,2.4,2.4,2.4,16,,,,,,not_digitised,Figure 7 omits 3.2 and 6.5 bar curves
+2014,10.3390/polym6122896,7,2014-F7-4,experimental_marker,acid,20,4,4,4,16,,,,,,not_digitised,Figure 7 omits 3.2 and 6.5 bar curves
+2014,10.3390/polym6122896,7,2014-F7-5,experimental_marker,acid,20,5,5,5,16,,,,,,not_digitised,Figure 7 omits 3.2 and 6.5 bar curves
+2014,10.3390/polym6122896,7,2014-F7-8,experimental_marker,acid,20,8,8,8,16,,,,,,not_digitised,Figure 7 omits 3.2 and 6.5 bar curves
+2014,10.3390/polym6122896,7,2014-F7-15.5,experimental_marker,acid,20,15.5,15.5,15.5,16,,,,,,not_digitised,Figure 7 omits 3.2 and 6.5 bar curves
+2015,10.3390/polym7121528,12a,2015-F12-acid-0.23–0.29,experimental_marker,acid,20,0.23–0.29,0.23,0.29,16,,,,,,not_digitised,Figure 12 measured solid traces only; pressure interval preserved
+2015,10.3390/polym7121528,12a,2015-F12-acid-0.63–0.77,experimental_marker,acid,20,0.63–0.77,0.63,0.77,16,,,,,,not_digitised,Figure 12 measured solid traces only; pressure interval preserved
+2015,10.3390/polym7121528,12a,2015-F12-acid-1.50–1.54,experimental_marker,acid,20,1.50–1.54,1.5,1.54,16,,,,,,not_digitised,Figure 12 measured solid traces only; pressure interval preserved
+2015,10.3390/polym7121528,12a,2015-F12-acid-2.24,experimental_marker,acid,20,2.24,2.24,2.24,16,,,,,,not_digitised,Figure 12 measured solid traces only; pressure interval preserved
+2015,10.3390/polym7121528,12a,2015-F12-acid-3.80–3.92,experimental_marker,acid,20,3.80–3.92,3.8,3.92,16,,,,,,not_digitised,Figure 12 measured solid traces only; pressure interval preserved
+2015,10.3390/polym7121528,12a,2015-F12-acid-6.15–6.46,experimental_marker,acid,20,6.15–6.46,6.15,6.46,16,,,,,,not_digitised,Figure 12 measured solid traces only; pressure interval preserved
+2015,10.3390/polym7121528,12a,2015-F12-acid-7.41–7.76,experimental_marker,acid,20,7.41–7.76,7.41,7.76,16,,,,,,not_digitised,Figure 12 measured solid traces only; pressure interval preserved
+2015,10.3390/polym7121528,12b,2015-F12-base-0.23–0.29,experimental_marker,base,20,0.23–0.29,0.23,0.29,16,,,,,,not_digitised,Figure 12 measured solid traces only; pressure interval preserved
+2015,10.3390/polym7121528,12b,2015-F12-base-0.63–0.77,experimental_marker,base,20,0.63–0.77,0.63,0.77,16,,,,,,not_digitised,Figure 12 measured solid traces only; pressure interval preserved
+2015,10.3390/polym7121528,12b,2015-F12-base-1.50–1.54,experimental_marker,base,20,1.50–1.54,1.5,1.54,16,,,,,,not_digitised,Figure 12 measured solid traces only; pressure interval preserved
+2015,10.3390/polym7121528,12b,2015-F12-base-2.24,experimental_marker,base,20,2.24,2.24,2.24,16,,,,,,not_digitised,Figure 12 measured solid traces only; pressure interval preserved
+2015,10.3390/polym7121528,12b,2015-F12-base-3.80–3.92,experimental_marker,base,20,3.80–3.92,3.8,3.92,16,,,,,,not_digitised,Figure 12 measured solid traces only; pressure interval preserved
+2015,10.3390/polym7121528,12b,2015-F12-base-6.15–6.46,experimental_marker,base,20,6.15–6.46,6.15,6.46,16,,,,,,not_digitised,Figure 12 measured solid traces only; pressure interval preserved
+2015,10.3390/polym7121528,12b,2015-F12-base-7.41–7.76,experimental_marker,base,20,7.41–7.76,7.41,7.76,16,,,,,,not_digitised,Figure 12 measured solid traces only; pressure interval preserved
