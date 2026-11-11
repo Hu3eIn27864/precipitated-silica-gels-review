@@ -452,3 +452,9 @@
 - Clarified that permeability and network viscoelasticity/stiffness jointly control response; an effective consolidation coefficient must not be interpreted as permeability alone.
 - Preserved transferability limits: the Scherer studies are mechanistic comparators and are not automatically independent validation data for industrial precipitated silica.
 - No model parameters were fitted and no new physical claim was promoted to established fact.
+
+
+## 2026-11-11 — Radial transport analytical benchmark
+- Added volume-averaged eigenfunction-series references for the idealised infinite-cylinder and sphere diffusion/consolidation problems to the parallel work plan.
+- Specified the initial condition, centre symmetry, perfectly drained outer boundary, volume-average weights, and first-mode time constants.
+- Required finite-difference validation against the full series and retained explicit limits: constant effective coefficient, no evolving permeability or nonlinear skeleton mechanics, and no finite-cylinder end drainage.
