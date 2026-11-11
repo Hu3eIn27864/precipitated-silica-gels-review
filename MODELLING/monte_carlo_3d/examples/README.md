@@ -26,6 +26,7 @@ Arguments are:
 7. optional contact distance (default 1.0)
 8. optional maximum component displacement per coordinate (default 0.2)
 9. optional mobility exponent (default 1.0; zero gives size-independent cluster selection weights)
+10. optional target cumulative squared realized cluster translation Q (default 0 disables this stopping rule)
 
 For a parameter-sensitivity run, append all three optional values, for example:
 
@@ -34,7 +35,12 @@ For a parameter-sensitivity run, append all three optional values, for example:
 ```
 
 The size-series runner accepts the same controls as `--contact-distance`,
-`--maximum-component-step`, and `--mobility-exponent`. Its run-summary CSV
+`--maximum-component-step`, and `--mobility-exponent`. The direct executable
+also accepts an optional tenth argument `target_Q`; when positive, a run stops
+at the first complete cluster move for which cumulative realized squared
+translation reaches or exceeds Q. The move is never truncated. The existing
+maximum-attempt limit remains a hard safety cap. A zero target preserves the
+legacy fixed-attempt behaviour. Its run-summary CSV
 records all three values for every seed, so parameter variants remain
 auditable. For controlled comparisons, keep particle counts, box number
 density, attempt limits and fit interval fixed; use independent seed blocks
@@ -46,7 +52,7 @@ The driver defaults to contact distance 1.0, maximum component displacement 0.2 
 
 Three CSV files are written:
 
-- `<prefix>_runs.csv`: seed, completion, attempts, merge count, component count, largest component size, radius of gyration, periodic-unwrapping flag, contact distance, maximum component step, mobility exponent, cumulative squared realized cluster translation and cumulative realized cluster-translation path length.
+- `<prefix>_runs.csv`: seed, completion, attempts, merge count, component count, largest component size, radius of gyration, periodic-unwrapping flag, contact distance, maximum component step, mobility exponent, cumulative squared realized cluster translation, cumulative realized cluster-translation path length, target Q, target-reached flag, attempt-cap flag and Q overshoot.
 - `<prefix>_mass_radius.csv`: all-centre mean enclosed mass for completed aggregates whose largest component unwraps consistently.
 - `<prefix>_fit_windows.csv`: all non-singular contiguous log-log fit windows with exponent, standard error, R² and point count.
 
@@ -163,3 +169,10 @@ The paired outputs preserve incomplete seeds and report valid-pair counts
 separately for largest-component fraction, Rg and the fixed-window exponent.
 Only descriptive paired deltas are produced; three seeds are a CI smoke screen,
 not enough for significance testing or a physical robustness conclusion.
+
+
+The optional common-Q mode is an algorithmic stopping criterion, not physical
+time. The reported Q target may be overshot by the final complete move; the
+overshoot is exported. Runs can instead stop at the independent attempt cap,
+which is reported separately. Also inspect cumulative path length L because
+equal Q does not imply equal path length or identical structural history.
