@@ -598,3 +598,10 @@
 - Besonders punktempfindlich: Figure 8a/20 °C (LOO-τ-Spannweite 71.6 %; früher Punkt bei 6 h) und Figure 8b/20 °C (53.6 %; erster Nichtnullpunkt bei 25 h).
 - Figure 10b-Amplituden bleiben auch nach Entfernung einzelner Punkte deutlich oberhalb der publizierten Werte; kein einzelner Punkt erklärt den systematischen Widerspruch.
 - LOO-Spannweiten sind keine Konfidenzintervalle und können systematische Kurvenverwechslungen/Ablesefehler nicht erkennen. Keine physikalische Validierung beansprucht.
+
+
+## 2026-11-11 — Numerische Regressionstests des empirischen Syneresis-Fitters
+
+- Drei synthetische Unit-Tests ergänzt: Wiedergewinnung bekannter rauschfreier Parameter, Invarianz gegenüber dem (0,0)-Ursprungspunkt und endliche Fitdiagnostik.
+- Die Tests prüfen ausschließlich numerische Implementierungseigenschaften des Fitters. Sie validieren weder die KI-gestützten Diagrammablesungen noch die empirische Modellform oder eine physikalische Interpretation.
+- Der bestehende CI-Schritt zur Python-Testsuche im Transportmodell-Verzeichnis erfasst die neue Testdatei automatisch; Ergebnis wird nach dem Workflow-Lauf geprüft.
