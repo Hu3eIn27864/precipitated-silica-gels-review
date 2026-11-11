@@ -147,3 +147,12 @@ A small standard-library Python utility now reconstructs sampled curves from the
 Its output is explicitly labelled `published_empirical_fit_reconstruction_not_digitised_data`. These points are useful for plotting and checking the consequences of the reported empirical fit, but they contain no experimental scatter, residuals, replicate variation, or digitisation uncertainty. They are not a substitute for marker-level figure digitisation. A dedicated unit test checks the equation and its limiting behaviour.
 
 A separate parameter-evidence audit is in `LITERATURE/transport_parameter_evidence_audit.md`. Ragueh et al. (2015) is the strongest direct precipitated-silica bridge for network consolidation under pressure, but it characterises filter cakes rather than free-standing syneresing gels. It cannot supply an intrinsic gel permeability without a transfer model and matching boundary/state definitions. The current evidence set still lacks an independently measured permeability–modulus pair for the Wilhelm & Kind target gels. Therefore no target-system permeability or modulus fit is authorised at this stage.
+
+
+## 2026-11-11 — Ragueh structural/filtration data extracted
+
+Tables 2–4 of Ragueh et al. (2015) are now transcribed to `LITERATURE/ragueh_2015_structural_filtration_data.csv`. A companion note records the source inconsistencies and transferability assessment. The paper supplies three useful levels of evidence: structural length scales (primary particles and dense aggregates), branch-network fractal descriptors, and cake consolidation/filtration properties. Its specific resistance is normalised by an undisclosed reference (R), so absolute permeability cannot be recovered from the table.
+
+Two source conflicts are now explicitly tracked: (i) Table 2 prints the sample labels S1/S3/S3 although the text and other tables use S1/S2/S3; (ii) Table 3 lists S3 branch fractal dimension 1.8 while adjacent prose says 2.2. The dataset retains the printed labels and both S3 values rather than silently choosing one.
+
+The Wilhelm & Kind HTML page exposes Figure 8 and Figure 10 image references, but direct image retrieval failed in this pass and its 13 MB PDF endpoint exceeded the retrieval limit. Raw marker digitisation remains outstanding; no marker-level data were generated.
