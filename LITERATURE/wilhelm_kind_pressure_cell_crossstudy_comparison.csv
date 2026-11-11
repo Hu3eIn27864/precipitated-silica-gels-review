@@ -1,5 +1,5 @@
-study_2014_pressure_bar,study_2014_shrinkage,study_2014_tau_h,study_2015_pressure_low_bar,study_2015_pressure_high_bar,study_2015_shrinkage,study_2015_tau_h,pressure_match_note,shrinkage_difference_2015_minus_2014,tau_ratio_2014_over_2015,interpretation
-0.8,0.53,13.0,0.63,0.77,0.52,5.9,approximate pressure match,-0.01,2.2034,not paired raw observations; exponents differ
-1.6,0.63,8.4,1.50,1.54,0.63,3.8,approximate pressure match,0.00,2.2105,not paired raw observations; exponents differ
-2.4,0.69,5.9,2.24,2.24,0.67,2.3,approximate pressure match,-0.02,2.5652,not paired raw observations; exponents differ
-4.0,0.73,3.5,3.80,3.92,0.72,1.7,approximate pressure match,-0.01,2.0588,not paired raw observations; exponents differ
+study_2014_pressure_bar,study_2014_shrinkage,study_2014_tau_h,study_2015_pressure_low_bar,study_2015_pressure_high_bar,study_2015_shrinkage,study_2015_tau_h,pressure_match_note,shrinkage_difference_2015_minus_2014,tau_ratio_2014_over_2015,interpretation,study_2014_t50_h,study_2015_t50_h,t50_ratio_2014_over_2015
+0.8,0.53,13.0,0.63,0.77,0.52,5.9,approximate pressure match,-0.01,2.2034,not paired raw observations; exponents differ,9.650,4.090,2.360
+1.6,0.63,8.4,1.50,1.54,0.63,3.8,approximate pressure match,0.00,2.2105,not paired raw observations; exponents differ,6.235,2.634,2.367
+2.4,0.69,5.9,2.24,2.24,0.67,2.3,approximate pressure match,-0.02,2.5652,not paired raw observations; exponents differ,4.380,1.594,2.747
+4.0,0.73,3.5,3.80,3.92,0.72,1.7,approximate pressure match,-0.01,2.0588,not paired raw observations; exponents differ,2.598,1.178,2.205
