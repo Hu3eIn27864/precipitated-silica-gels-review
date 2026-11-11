@@ -478,3 +478,5 @@
 - 2026-11-11: Began the next DLCA observability increment: core result now accumulates cluster-selection count, cumulative Q and path length by pre-move cluster-size class. Added conservation/reproducibility tests, per-size mobility CSV output and documentation. Hosted CI validation is pending.
 
 - 2026-11-11: Extended size-resolved DLCA trajectory accounting to attribute successful component merges to the selected cluster's pre-move size class. Tests verify per-size merge totals equal the run-level successful-merge count; the mobility CSV exports the new field. Hosted CI validation pending.
+
+- 2026-11-11: DLCA now distinguishes move-level successful merge events from the number of absorbed components. Per-size and run-level counters, CSV export, reproducibility/conservation tests and CLI smoke schema updated. Hosted CI validation pending.
