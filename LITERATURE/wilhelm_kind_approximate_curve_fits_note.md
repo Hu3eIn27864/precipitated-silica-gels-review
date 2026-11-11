@@ -70,3 +70,12 @@ Priorität für eine spätere Originalbildprüfung:
 4. Figure 8b und Figure 10a als vorläufig weniger auffällige Vergleichsreihen.
 
 Die Daten bleiben als `ai_assisted_approximation` gekennzeichnet. Keine physikalische Modellvalidierung wird beansprucht.
+
+
+## Nachprüfung Figure 10b: möglicher Widerspruch zwischen Abbildung und Table 2
+
+Die Original-PNGs der Figures 8 und 10 wurden am 11.11.2026 direkt auf der Verlagsseite geöffnet. Die visuelle Prüfung zeigt, dass die späten Messmarker und Modellkurven in Figure 10b deutlich oberhalb der in Table 2 gedruckten basischen Maximalamplituden 0.30/0.39/0.51 liegen. Die zuvor übermittelten Näherungsmaxima 0.51/0.67/0.86 sind qualitativ mit den sichtbaren Markerlagen vereinbar. Außerdem sind die basischen Table-2-Amplituden zahlenidentisch mit den basischen Table-1-Amplituden für Figure 8. Das legt einen möglichen Übertragungs-/Tabellenfehler nahe, beweist ihn aber nicht.
+
+Daher wird die bisherige Interpretation „Figure 10b muss vorrangig wegen möglicher Symbol-/Kurvenfehlzuordnung korrigiert werden“ eingeschränkt: Die Diskrepanz kann bereits in der Publikation selbst liegen. Die Fitparameter aus der KI-gestützten Kurvenablesung (A≈0.419/0.643/0.825; τ≈0.726/0.683/1.118 h) sind keine unabhängig verifizierten Werte, stimmen aber in der Größenordnung der sichtbaren Figure-10b-Kurven besser überein als die gedruckten Table-2-Amplituden. Die Zahlen werden nicht ersetzt oder angepasst.
+
+**Wissenschaftliche Behandlung:** Table 2 bleibt als wörtlich publizierte Tabelle gespeichert; Figure 10b bleibt als separate graphische Evidenz. Beide Evidenzstränge müssen in einer künftigen Auswertung getrennt ausgewiesen werden. Keine stillschweigende Korrektur der Tabelle oder der Messpunkte.
