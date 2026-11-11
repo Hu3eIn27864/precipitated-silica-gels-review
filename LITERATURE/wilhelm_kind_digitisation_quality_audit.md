@@ -61,3 +61,9 @@ Die Original-PNGs von Figure 8 und Figure 10 wurden direkt über die MDPI-Artike
 Die ungeprüften 164 Punkte bleiben KI-gestützte Näherungsablesungen und werden nicht nachträglich als unabhängig digitalisiert deklariert. Die visuelle Sichtprüfung bestätigt nur die qualitative Größenordnung und die Symbolzuordnung (Quadrate 20 °C, Kreise 40 °C, Dreiecke 60 °C) für Figure 10b. Es wurden keine neuen Pixelkoordinaten, kalibrierten Werte oder Fehlerbalken erfasst.
 
 **Konsequenz:** Table-2-Werte und Figure-10b-Kurvenwerte müssen als zwei getrennte Quellenevidenzen erhalten bleiben. Keine der beiden darf stillschweigend an die andere angepasst werden. Für jede quantitative Verwendung ist die Inkonsistenz offenzulegen; eine Autorenanfrage bzw. ein Erratum-Check wäre sinnvoll.
+
+Addendum (11.11.2026): source status of Table 2
+
+The user has accepted the Table 2 entries as the authoritative published values for this review. The values have also been checked against the full-text copy in KITopen (DOI 10.5445/IR/1000052536; original article DOI 10.3390/polym7121528). Accordingly, record them as **verified transcription of the published table**, not as provisional readings. For base-catalysed droplets (Figure 10/Table 2), the published maximum-shrinkage parameters are A = 0.30, 0.39 and 0.51 at 20, 40 and 60 °C, respectively; the corresponding published time constants are 0.67, 0.57 and 0.95 h. These values are not to be replaced by approximate readings from Figure 10b.
+
+This decision does not establish that the plotted Figure 10b curves are wrong or that the table contains a typographical error. Preserve the graph/table discrepancy as an unresolved source-level observation. The 164 point readings remain AI-assisted approximate readings, not pixel-digitised measurements. Source text: https://publikationen.bibliothek.kit.edu/1000052536/3796774
