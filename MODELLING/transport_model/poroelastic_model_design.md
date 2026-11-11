@@ -86,3 +86,16 @@ A permeability experiment on a deformable gel must correct for pressure-induced 
 - Do not transfer alkoxide-derived silica-gel parameters to precipitated silica without explicit evidence of material equivalence.
 - Do not fit and validate on the same Wilhelm & Kind shrinkage curves.
 - Do not call a high R² fit to AI-assisted approximate digitisation a physical validation.
+
+## 8. First heterogeneous finite-volume solver (implemented; verification pending)
+
+A new fixed-coefficient 1-D finite-volume implementation is added in heterogeneous_1d.py. It solves
+
+\[
+S(x)\,\partial_t p=\partial_x\!\left(\lambda(x)\,\partial_x p\right),\qquad
+S=1/M,\quad \lambda=\kappa/\mu,
+\]
+
+on a fixed slab with zero excess pressure at both drained faces. Coefficients are cellwise constant and time-independent in this first implementation. Internal face mobility uses a harmonic mean; the implicit backward-Euler system is tridiagonal. The solver returns storage-weighted mean pressure, profiles, boundary outflow and a per-step discrete balance residual.
+
+This is deliberately not yet a time-dependent aging model. If storage changes with time, the conservative accumulation term and any coupling to evolving porosity/deformation must be specified before prescribing arbitrary M(t). The implementation is a mathematical transport benchmark only; no silica-specific law or parameter is supplied. Tests compare the homogeneous limit with the existing analytical slab series, check discrete mass balance, positivity/monotonicity, piecewise coefficients and input validation. Hosted CI must pass before the implementation is considered numerically verified.
