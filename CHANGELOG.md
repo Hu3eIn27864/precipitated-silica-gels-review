@@ -560,3 +560,6 @@
 
 
 - 2026-11-11: Integrierte 164 vom Nutzer übermittelte ungefähre JPEG-Messpunktablesungen für Wilhelm & Kind (2015), Figures 8 und 10. CSV und separate Qualitätsprüfung erstellt. Keine Anpassung an Tabellen-Fitparameter; erhebliche Abweichungen in Figure 10b werden als Prüfhinweise dokumentiert. Modellkurven und Fehlerbalken noch nicht digitalisiert.
+
+
+- 2026-11-11: Ergänzte exploratives (t_{50})-Screening der 12 vorläufig digitalisierten Wilhelm-&-Kind-Reihen gegen (\tau\ln 2). Keine Fit-Anpassung; Screening dient nur zur Identifikation auffälliger Zeitachsen-/Serienzuordnungen.
