@@ -2,7 +2,7 @@
 
 ## Status
 
-Partial implementation. The C++17 build scaffold, core vector/particle types, periodic simulation-box geometry, seeded RNG wrapper, and geometry tests have been added. The project has not yet been compiled in this environment; interaction, network, and Monte Carlo modules remain unimplemented.
+Partial implementation. The C++17 scaffold now includes periodic geometry, seeded RNG, a shifted/truncated Lennard-Jones test potential with hard-core rejection, brute-force energy helpers, a Verlet-style neighbour list with a skin/rebuild validity check, and geometry/interaction tests. Network generation, Metropolis moves, observables, and a runnable simulation driver remain unimplemented. Compilation and CTest have not yet been verified in this environment.
 
 ## Scientific purpose
 
@@ -69,6 +69,10 @@ The implementable V1 contract is now defined in [TECHNICAL_SPEC.md](TECHNICAL_SP
 - `include/SimulationBox.hpp` and `src/SimulationBox.cpp`: validated cubic box, periodic wrapping, minimum-image displacement and distance.
 - `include/Random.hpp`: seeded `std::mt19937_64` wrapper.
 - `tests/test_geometry.cpp`: tests for wrapping, minimum-image geometry and invalid box dimensions.
+- `include/PairPotential.hpp`: shifted/truncated LJ potential with an explicit hard core; generic reduced-unit test interaction, not a silica force field.
+- `include/Energy.hpp`: brute-force total and single-particle local energy calculations.
+- `include/NeighborList.hpp` and `src/NeighborList.cpp`: periodic candidate list with cutoff + skin and a conservative skin/2 rebuild criterion.
+- `tests/test_interactions.cpp`: cutoff continuity, hard-core, zero-attraction, local-vs-total energy difference, neighbour-list agreement and invalid-box checks.
 - `examples/README.md`: build/test instructions.
 
 **Verification status:** source files are committed, but compilation and CTest execution have not been verified here because the repository could not be cloned into the execution environment. Do not treat the tests as passed until they are run locally or in CI.
