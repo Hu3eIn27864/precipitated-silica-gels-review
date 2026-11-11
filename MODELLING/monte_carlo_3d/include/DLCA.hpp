@@ -19,6 +19,13 @@ struct DLCAConfig {
     double targetCumulativeSquaredTranslation{0.0};
 };
 
+struct DLCAClusterMobilityStats {
+    std::size_t clusterSize{0};
+    std::size_t selectionCount{0};
+    double cumulativeSquaredTranslation{0.0};
+    double cumulativeTranslationPathLength{0.0};
+};
+
 struct DLCAResult {
     std::vector<Particle> particles;
     std::size_t attempts{0};
@@ -28,6 +35,7 @@ struct DLCAResult {
     bool displacementBudgetReached{false};
     bool attemptLimitReached{false};
     double displacementBudgetOvershoot{0.0};
+    std::vector<DLCAClusterMobilityStats> clusterMobilityStats;
     bool completed{false};
 };
 
