@@ -623,3 +623,11 @@
 - Added poroelastic scaling utility and tests for cv=κM/μ and tc=Ld²/cv. These are dimensional/identifiability tools only, with no material defaults or fitted target parameters.
 - Added staged poroelastic model design document. No variable-coefficient physical solver or silica constitutive closure is claimed yet.
 - Hosted CI result for the new tests is pending at commit time.
+
+
+## 2026-11-11 — Original Figure 10b visual source check
+
+- Opened the publisher PNGs for Wilhelm & Kind (2015), Figures 8 and 10, through the article page.
+- Figure 10b's visible late markers/model curves lie substantially above the printed base-catalysed Table 2 amplitudes (0.30/0.39/0.51); the earlier AI-assisted approximate maxima are qualitatively consistent with the graph.
+- The Table 2 base amplitudes exactly repeat the Figure 8/Table 1 base amplitudes. A publication-internal table transcription/transfer error is plausible but unconfirmed.
+- No pixel coordinates were extracted because the image assets could not be downloaded into the execution environment. All 164 approximate points remain unverified. Table and figure evidence are preserved separately; no silent correction made.
