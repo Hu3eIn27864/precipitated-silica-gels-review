@@ -345,3 +345,6 @@ per-size merge events can be audited against the independent run total in
 future artifacts. The CLI smoke test checks the expanded schema and row
 structure. Hosted CI validation of this final output-contract addition is
 pending.
+
+
+The run-level event count and expanded CSV schema passed hosted CI [#284](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43020332694). Artifact-level reconciliation across 51 seed/configuration records matched size-class and run-level totals for attempts, merge events, absorbed components, Q and L in every record. In the seven common-Q configurations, merge-event totals equalled absorbed-component totals (25–36 per configuration), i.e. no move absorbed multiple other components in this screen. The distinction remains in the schema for correct general accounting, but the current pilot does not yet demonstrate a multi-contact move. Larger-size event ratios are too sparse for inference.
