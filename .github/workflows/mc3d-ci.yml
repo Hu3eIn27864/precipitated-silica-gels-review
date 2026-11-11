@@ -64,10 +64,28 @@ jobs:
             --system 64:build/mc3d/pilot/n64 \
             --system 128:build/mc3d/pilot/n128 \
             --output build/mc3d/pilot/size_comparison
-      - name: Upload pilot data
+      - name: Run bounded paired-seed DLCA parameter sensitivity
+        run: |
+          python3 MODELLING/monte_carlo_3d/analysis/run_dlca_parameter_sensitivity.py \
+            --executable build/mc3d/mc3d_dlca_ensemble \
+            --output-dir build/mc3d/parameter_sensitivity \
+            --particle-count 32 --seed-start 3000 --seed-count 3 \
+            --max-attempts 50000 --reference-box 15.0
+          for variant in contact_0p9 contact_1p1 step_0p1 step_0p28 mobility_0p5 mobility_1p5; do
+            prefix="build/mc3d/parameter_sensitivity/$variant/n32"
+            python3 MODELLING/monte_carlo_3d/analysis/analyze_dlca_ensembles.py \
+              --system "32:$prefix" --fit-min 2 --fit-max 5 \
+              --output "build/mc3d/parameter_sensitivity/$variant/summary"
+            python3 MODELLING/monte_carlo_3d/analysis/analyze_dlca_fit_sensitivity.py \
+              --system "32:$prefix" \
+              --output "build/mc3d/parameter_sensitivity/$variant/summary"
+          done
+      - name: Upload pilot and sensitivity data
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: mc3d-dlca-pilot
-          path: build/mc3d/pilot/
+          name: mc3d-dlca-pilot-and-sensitivity
+          path: |
+            build/mc3d/pilot/
+            build/mc3d/parameter_sensitivity/
           if-no-files-found: warn
