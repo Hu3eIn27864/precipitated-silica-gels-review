@@ -83,3 +83,23 @@ Additional direct-source observations:
 - Figure 12 (2015) and Figure 7 (2014) are both published as measured curve plus model curve; only measured traces should be used as data in a cross-study re-fit.
 
 Sources: Wilhelm & Kind (2014), publisher full text, §4.2 and Table 2; Wilhelm & Kind (2015), publisher full text, §4.2, Figure 12 and Table 3.
+
+
+## 7. Derived half-shrinkage time as a common response quantile
+
+To make the different fitted curve shapes easier to compare descriptively, the CSV now also reports the algebraically derived half-shrinkage time
+
+\[
+t_{50}=\tau(\ln 2)^{1/n}.
+\]
+
+This is a transformation of the published fit parameters, not a refit of the raw observations. For the four approximate pressure matches, the derived values are:
+
+| 2014 / 2015 pressure match (bar) | 2014 t50 (h; n=1.23) | 2015 t50 (h; n=1) | Ratio |
+|---|---:|---:|---:|
+| 0.8 / 0.63–0.77 | 9.650 | 4.090 | 2.36 |
+| 1.6 / 1.50–1.54 | 6.235 | 2.634 | 2.37 |
+| 2.4 / 2.24 | 4.380 | 1.594 | 2.75 |
+| 4.0 / 3.80–3.92 | 2.598 | 1.178 | 2.20 |
+
+This quantile standardisation does not remove confounding from different fit forms, approximate pressure matching, experimental uncertainty or possible differences in the underlying observations. It shows that the published parameter sets imply slower half-response times in the 2014 fits, but it still does not establish a physical kinetic change or identify a membrane effect. A common refit of measured time-series data remains necessary.
