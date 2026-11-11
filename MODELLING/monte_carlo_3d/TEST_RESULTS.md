@@ -90,3 +90,8 @@ The new files `DLCA.cpp`, `Observables.cpp`, and `test_network.cpp` have been ad
 **Verification boundary:** this isolated harness is a preliminary algorithm check, not a full CMake build of the repository's committed source tree. The previous 3/3 Release and sanitizer results still apply only to the original geometry/interaction/Metropolis targets. The new fourth CTest target has not yet been confirmed by a complete repository build or hosted CI run. No claim of physical DLCA fidelity or silica validation is made.
 
 The network regression target was subsequently extended with two further cases: invariance of (R_g) when a connected cluster is translated across a periodic face, and explicit flagging of a component that winds around the periodic box. The equivalent isolated harness passed both checks. The full-project/hosted-CI verification boundary stated above remains unchanged.
+
+
+## Periodic cell-list broad-phase check (2026-11-11)
+
+The periodic cell-list source was compiled in an isolated C++17 harness with GCC, `-Wall -Wextra -Wpedantic`, AddressSanitizer and UndefinedBehaviorSanitizer. Tests compared candidate sets with brute-force minimum-image distance checks for a periodic-face configuration and a two-cells-per-dimension grid. All tested in-radius neighbours were present in the candidate set; the executable completed successfully. A separate isolated DLCA harness using interface-compatible geometry/RNG headers completed a 12-particle seeded run and verified no overlaps. These are isolated module checks, not a complete build/test of the committed CMake project. The full four-target CTest suite and hosted CI remain unverified.
