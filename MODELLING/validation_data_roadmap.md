@@ -133,3 +133,8 @@ The first transport-model tests should therefore be mathematical verification (i
 The open full text of Wilhelm & Kind (2015) confirms 12 mm cylinder diameter and approximately 3 mL volume, plus approximately 3 mm droplets observed in a sealed PMMA microscopy cell with cover glasses. Assuming a right circular cylinder, the first two values imply a **calculated** height of about 26.5 mm; this is not a directly reported measured height. The droplet cannot be presumed to be a freely drained sphere, and its early thermal history includes an initial 20 °C period. The 2015 pressure-cell table uses 16 mm initial height, while the 2017 centrifugation data use 20 mm. See LITERATURE/experimental_geometry_audit_wilhelm.md.
 
 The next data task is point-by-point figure digitisation under the rules in LITERATURE/syneresis_curve_digitisation_protocol.md. Measured markers and fitted curves must be stored separately; fit parameters in Tables 1–2 are not raw data. No diffusivity or permeability should be fitted until effective drainage lengths/boundaries and model identifiability have been addressed.
+
+
+### Pressure-cell data added
+
+The open Wilhelm & Kind (2015) Table 3 fit parameters have been transcribed into LITERATURE/pressure_cell_syneresis_comparison.csv: seven pressure intervals, acid/base gels, 20 °C, initial height 16 mm. They remain separate from the 2017 centrifugal data (20 mm initial height and height-averaged equivalent pressure). The article reports a membrane/filter-plate assembly; the dissertation identifies membrane-related flow resistance as a possible reason for different forced-syneresis time constants. Neither series is a direct intrinsic-permeability measurement.
