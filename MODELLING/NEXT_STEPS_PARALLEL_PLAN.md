@@ -214,3 +214,24 @@ The screen shows that equal Q does not equalise path length L: step 0.10 produce
 ### Workstream C result: hosted verification
 
 The radial finite-volume cylinder/sphere solver passed the integrated transport test stage in hosted CI runs #239 and #254. This verifies the implementation against the analytical eigenfunction series and numerical refinement tests. It remains a constant-coefficient ideal-geometry benchmark; experimental validation and coupling to evolving permeability/mechanics are still pending.
+
+
+## Update after CI run #257 (2026-11-11)
+
+The common-Q screen is no longer pending: [CI #257](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43018713555) passed the complete workflow, including all three DLCA screens and artifact upload. The latest artifact was inspected. The fixed-attempt size series completed 2/3 N=32 runs, 0/3 N=64 runs and 0/3 N=128 runs. Do not fit a size-dependent Df trend to this pilot.
+
+The common-Q raw data were further reduced to Q/attempt, path-length/attempt and Q/successful-merge diagnostics. These confirm that Q alone does not standardise the algorithmic trajectory. Step-size changes Q/attempt by nearly a factor of eight across the tested 0.10 and 0.28 settings. Q per merge varies across all configurations, but it is an outcome-conditioned descriptor and must not be treated as a universal clock. Keep Q, path length, attempts, successful merges, component count and largest-component fraction together.
+
+### Workstream D update: direct process-history / mesostructure evidence
+
+Added PSG-045 (Manfoumbi, Roger & Meireles, 2024; DOI 10.5802/crchim.347) and a full source assessment. The study combines SAXS and filtration experiments and reports that adding silicate at basic pH changes the silica network from polymer-like q^-2 scattering toward particle-like q^-4 Porod behaviour, with about two orders of magnitude improvement in filtration-cake specific resistance. This directly supports process-history-dependent mesostructure and filtration behaviour in the studied hydrometallurgical systems. It does **not** measure intrinsic gel permeability, syneresis kinetics or mechanical modulus, so it is not a calibration dataset for the radial solver.
+
+### Revised immediate priorities
+
+1. **DLCA observables:** add explicit cluster-selection counts and per-size-class translation statistics (counts, attempted displacement, realised displacement, Q contribution, path-length contribution). This is needed to understand why Q and L differ across step-size and mobility settings.
+2. **DLCA comparison protocol:** retain the three-seed CI screen as a smoke/sensitivity check only. Before a larger study, pre-register a higher-Q target based on a pilot stopping-time distribution and require a minimum completion fraction; do not select only successful runs after seeing the data.
+3. **Transport validation:** add mass-conservation and long-time equilibrium checks, mesh/time-step convergence over a wider parameter grid, and an independent manufactured-solution check. Keep constant-coefficient ideal geometry separate from evolving-permeability models.
+4. **Evidence synthesis:** distinguish three different transport observables in the review: intrinsic gel permeability, consolidation/syneresis time response, and filtration-cake specific resistance. PSG-043/044 and PSG-045 inform different parts of this chain and must not be numerically pooled.
+5. **Manuscript:** update the central process-history framework, but defer any universal causal law or fitted pH-dependent permeability relation until target-system measurements exist.
+
+**Roadmap gate:** no full N=32/64/128 DLCA matrix, no Df-vs-size claim, and no parameter calibration from the present CI pilots. The next DLCA code increment should improve trajectory observability, not simply increase the attempt budget.
