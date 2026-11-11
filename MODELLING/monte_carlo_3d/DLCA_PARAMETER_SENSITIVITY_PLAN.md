@@ -137,3 +137,6 @@ displacement clock only; it is not physical time and does not by itself
 calibrate Brownian diffusivity. The present fixed-attempt screen is useful
 for diagnosing runtime/completion sensitivity, not for isolating a
 step-independent structural effect.
+
+
+The follow-up instrumentation was validated in hosted CI run #234. At 50,000 attempts, the three baseline seeds (s = 0.2) accumulated mean Σ|Δr|² = 2,000.71; the s = 0.1 runs accumulated 500.30, close to the expected quarter ratio. The s = 0.28 runs completed in a mean 25,665 attempts and accumulated mean Σ|Δr|² = 2,011.66 at completion. This confirms that fixed attempt count substantially changes the displacement budget across step sizes. It motivates the next implementation step: stop at a common cumulative realized squared-translation budget, with an independent maximum-attempt safety cap, and compare seed-matched structures at that common algorithmic progress coordinate.
