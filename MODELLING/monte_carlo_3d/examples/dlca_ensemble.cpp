@@ -60,10 +60,11 @@ double parseNonnegativeDouble(const char* value, const char* name) {
 
 int main(int argc, char** argv) {
     try {
-        if (argc < 7 || argc > 10) {
+        if (argc < 7 || argc > 11) {
             std::cerr << "Usage: mc3d_dlca_ensemble <particle_count> <box_length> "
                          "<seed_start> <seed_count> <maximum_attempts> <output_prefix> "
-                         "[contact_distance [maximum_component_step [mobility_exponent]]]\n";
+                         "[contact_distance [maximum_component_step [mobility_exponent "
+                         "[target_cumulative_squared_translation]]]]\n";
             return 2;
         }
 
@@ -79,6 +80,8 @@ int main(int argc, char** argv) {
             ? parsePositiveDouble(argv[8], "maximum component step") : 0.2;
         const double mobilityExponent = argc >= 10
             ? parseNonnegativeDouble(argv[9], "mobility exponent") : 1.0;
+        const double targetQ = argc >= 11
+            ? parseNonnegativeDouble(argv[10], "target cumulative squared translation") : 0.0;
         if (contactDistance >= 0.5 * boxLength)
             throw std::invalid_argument("Contact distance must be below half the box length");
         if (maximumComponentStep * std::sqrt(3.0) > 0.5 * contactDistance)
@@ -97,7 +100,9 @@ int main(int argc, char** argv) {
                 "largest_component_size,largest_component_rg,unwrapping_consistent,"
                 "contact_distance,maximum_component_step,mobility_exponent,"
                 "cumulative_squared_cluster_translation,"
-                "cumulative_cluster_translation_path_length\n";
+                "cumulative_cluster_translation_path_length,"
+                "target_cumulative_squared_translation,displacement_budget_reached,"
+                "attempt_limit_reached,displacement_budget_overshoot\n";
         curves << "seed,particle_count,radius,mean_enclosed_mass\n";
         fits << "seed,fit_minimum_radius,fit_maximum_radius,exponent,"
                 "standard_error,r_squared,point_count\n";
@@ -112,6 +117,7 @@ int main(int argc, char** argv) {
         config.maximumComponentStep = maximumComponentStep;
         config.mobilityExponent = mobilityExponent;
         config.maximumAttempts = maximumAttempts;
+        config.targetCumulativeSquaredTranslation = targetQ;
         // Preserve the analysis radii in units of the configured contact distance.
         const std::vector<double> radii{
             1.5 * contactDistance, 2.0 * contactDistance,
