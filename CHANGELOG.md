@@ -545,3 +545,5 @@
 - Reinspection of the original Ragueh PDF identified the S1/S3/S3 label pattern in Table 1 as well as Table 2. The probable S2 interpretation remains unconfirmed; the S3 fractal-dimension conflict remains unresolved.
 - Recovered the original publisher-hosted 1024-pixel PNG assets for Wilhelm & Kind (2015) Figures 8 and 10 and documented their exact URLs. The KIT repository's 13 MB PDF endpoint remains above the retrieval limit; the MDPI supplementary endpoint was not directly readable.
 - No raw figure markers have yet been digitised. No experimental data or physical parameters were fabricated or fitted in this phase.
+
+- 2026-11-11: Added a separate structured transcription of Ragueh et al. Table 1 initial slurry composition in `LITERATURE/ragueh_2015_initial_slurry_data.csv`; retained the printed S1/S3/S3 labels and documented the probable-but-unconfirmed S2 middle-row identity.
