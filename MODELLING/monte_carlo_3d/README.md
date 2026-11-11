@@ -54,7 +54,7 @@ One MC sweep is not a physical second. Do not report laboratory syneresis times 
 - examples/: small smoke-test configurations.
 - analysis/: optional plotting / statistical analysis scripts.
 
-The current kernel implementation and its verification record are documented in [TEST_RESULTS.md](TEST_RESULTS.md). The remaining V1 work is independent build/test verification of the new DLCA and observables modules, a general Metropolis run driver, broader finite-size and sensitivity checks, and a verified end-to-end DLCA ensemble smoke run.
+The current kernel implementation and its verification record are documented in [TEST_RESULTS.md](TEST_RESULTS.md). Remaining work includes a general Metropolis run driver, improved DLCA completion and equal-displacement sensitivity diagnostics, broader finite-size ensembles, and physical validation against independent structural data.
 
 
 ## Detailed implementation specification
@@ -77,7 +77,7 @@ The implementable V1 contract is now defined in [TECHNICAL_SPEC.md](TECHNICAL_SP
 - `tests/test_metropolis.cpp`: seeded reproducibility, sweep-count, empty-system and 1000-sweep hard-core regression checks.
 - `examples/README.md`: build/test instructions.
 
-**Verification status:** see [TEST_RESULTS.md](TEST_RESULTS.md) for the exact compiler/build commands and recorded results. The tested snapshot was reconstructed from the committed source contents fetched from GitHub and built locally; the repository itself was not cloned. The GitHub Actions workflow is configured, but no completed hosted CI result has been retrieved. These checks verify software behaviour only; they do not validate the model against experimental silica data.
+**Verification status:** see [TEST_RESULTS.md](TEST_RESULTS.md) for exact hosted build/test results and pilot outcomes. GitHub Actions run #220 built and tested the current MC3D snapshot and executed the bounded DLCA workflows. These checks verify software behaviour only; they do not validate the model against experimental silica data.
 
 
 ## Aggregation and network-analysis modules (hosted software verification passed)
