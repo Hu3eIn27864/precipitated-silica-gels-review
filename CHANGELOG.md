@@ -302,3 +302,12 @@
 - No physical calibration, fractal-dimension fit, or experimental validation is claimed.
 
 - Extended the network regression suite to check (R_g) invariance under translation across a periodic face and explicit detection of a periodic-winding component. Local equivalent-harness check passed; full CMake/CI status remains unconfirmed.
+
+
+## 2026-11-11 — Periodic cell-list broad phase
+
+- Added a periodic uniform-cell candidate generator with wrapped 3×3×3 queries, duplicate-cell suppression for small grids, finite-query validation, and overflow checks.
+- Integrated the cell list into DLCA swept-contact broad-phase queries and post-contact cluster identification; exact minimum-image and swept-sphere tests remain authoritative. Brute-force fallback is retained near half-box search radii.
+- Added regression coverage comparing candidate sets against brute-force neighbour checks, including periodic boundaries and a small grid.
+- Isolated C++17 ASan/UBSan cell-list checks passed; a separate isolated 12-particle DLCA smoke run completed without overlaps. These are not a full repository CMake build or hosted CI result.
+- Initial placement is still brute force and the grid is rebuilt per attempted move; production performance claims require benchmarks and further optimisation.
