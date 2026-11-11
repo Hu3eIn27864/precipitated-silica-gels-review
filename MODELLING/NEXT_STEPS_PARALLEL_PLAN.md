@@ -509,3 +509,10 @@ state-dependent k–M coupling can be meaningfully identified.
 - [ ] Figure 8b (40/60 °C) und Figure 10a (60 °C) wegen Rückgängen visuell prüfen.
 - [ ] Modellkurven und Fehlerbalken getrennt digitalisieren; Pixelkoordinaten und Ableseunsicherheiten ergänzen.
 - [ ] Erst danach kinetische Parametervergleichsrechnung durchführen. Vorläufige JPEG-Punkte nicht als Originaldaten oder validierte Messwerte behandeln.
+
+
+## Zusätzliche Kinetik-Plausibilitätsprüfung (2026-11-11)
+- [x] Fitfreies (t_{50})-Screening durch lineare Interpolation bei (A/2), Vergleich mit (\tau\ln 2) dokumentiert.
+- [ ] Figure 8a bei 40/60 °C wegen später digitaler Halbzeiten erneut am Original prüfen.
+- [ ] Figure 10b späte Symbole prüfen; passende frühe Halbzeit hebt Amplitudenwiderspruch nicht auf.
+- [ ] Exakte empirische Fitgleichung im Volltext vor weitergehender Interpretation verifizieren.
