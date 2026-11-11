@@ -89,3 +89,10 @@ The implementable V1 contract is now defined in [TECHNICAL_SPEC.md](TECHNICAL_SP
 
 
 **Performance boundary:** the first implementation uses direct particle-pair scans for collision detection and random-sequential initial placement. Its cost can approach quadratic scaling in particle count per attempted move. Treat it as a small-system algorithm/verification prototype; do not assume it is practical at N≈1000. A periodic cell-list/spatial-hash broad phase and benchmarks are required before production-scale generation.
+
+
+## Periodic cell-list broad phase (new; isolated checks passed)
+
+A periodic uniform-cell grid now supplies conservative candidate sets for DLCA swept-contact detection and post-contact cluster identification. The cell width is chosen at least as large as the query radius, so a wrapped 3×3×3 cell neighbourhood is a superset of all possible neighbours within that radius; the caller still applies exact minimum-image/swept-distance tests. If the swept search radius approaches half the box length, DLCA falls back to the brute-force candidate scan. Initial random sequential placement is still brute force, and the cell grid is rebuilt during cluster moves, so this is not yet a fully optimised production implementation.
+
+The new regression case compares cell-list candidates against brute-force minimum-image neighbours, including periodic-face and small-grid cases. An isolated C++17 ASan/UBSan check of the cell-list module passed. Full CMake verification of the current repository remains pending.
