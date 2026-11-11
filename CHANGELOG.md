@@ -492,3 +492,11 @@
 - 2026-11-11: Added corrected dimensionless planar-consolidation reference values and explicit identifiability note (c_v=k/(m_v\gamma_w)); expanded radial cylinder/sphere tests to check convergence under grid and time-step refinement. Hosted CI validation pending.
 
 - 2026-11-11: Hosted CI #293–#295 passed expanded radial cylinder/sphere convergence checks and the corrected planar consolidation reference-table regression tests; full integrated DLCA and transport workflow passed in #295.
+
+
+## 2026-11-11 — Parallel transport/data workstreams
+
+- Added `LITERATURE/experimental_syneresis_comparison.csv` with 18 geometry- and protocol-tagged syneresis records, preserving fitted-parameter status and unresolved drainage conditions; validated all rows against a 17-column schema.
+- Added a finite-cylinder first-mode time-constant helper with drained-end and sealed-end limits; added tests for the infinite-cylinder limit and geometry scaling.
+- Added `poroelastic_coupling.py` for the classical `c_v = k M / gamma_w` identity and algebraic inversion, keeping permeability and constrained modulus separate and avoiding uncalibrated constitutive laws.
+- Added regression tests for both additions and documented their strict limits: code verification only, no experimental calibration or silica-specific constitutive validation.
