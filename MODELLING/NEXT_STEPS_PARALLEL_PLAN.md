@@ -456,3 +456,14 @@ state-dependent k–M coupling can be meaningfully identified.
 - Conditional on a right-cylinder interpretation of \(d=12\) mm and \(V\\approx3\) mL, the implied height is 26.5 mm. This is calculated, not reported as a measured height.
 - Actual digitised marker points remain outstanding. The published Tables 1–3 are fitted parameters, and the paper's plotted markers must be extracted separately from the fitted lines before residual-based model validation can be attempted.
 - Priority next: digitise Figure 8 natural cylinder curves and Figure 10 confined-droplet curves first, preserving source/panel and point uncertainty; then pressure-cell Figure 12 / supplementary data. Avoid fitting a common \(c_v\) before boundary conditions and geometry are mapped.
+
+
+## Workstream D update — 2026-11-11
+
+- Added a reproducible utility that samples the published single-exponential fit curves from the reported Smax/tau pairs in the natural/centrifugal and pressure-cell comparison tables.
+- Added unit tests for the fit equation, initial condition, long-time limit and invalid inputs. Hosted run #312 executed the full transport test discovery command, including the new reconstruction tests, successfully.
+- Added a transferability audit for Ragueh et al. (2015), Wilhelm & Kind (2015), Scherer (1989), Scherer & Swiatek (1989), and Park et al. (2006).
+- The audit confirms that the strongest direct precipitated-silica pressure-consolidation source concerns filter cakes, not free-standing gels undergoing natural syneresis. No independent permeability–modulus pair for the Wilhelm & Kind target gels has yet been found.
+- Raw experimental marker digitisation remains open. The reconstructed fit samples are explicitly not raw data and must not be used as independent validation.
+
+**Next D gate:** recover figure image assets and digitise measured markers with calibration/uncertainty metadata; in parallel, inspect the numerical Ragueh pressure/porosity curves and resolve the S3 fractal-dimension inconsistency. Do not fit intrinsic permeability or modulus from the empirical tau values.
