@@ -555,3 +555,5 @@
 - Added calibration and marker-pixel CSV templates plus unit tests for linear/logarithmic transforms.
 - Added a figure-access/status note. The article's PDF text is available through KITopen, but screenshot/image extraction remains blocked by a 13 MB retrieval limit and direct PNG downloads fail in this execution environment. No digitised points are claimed.
 - Corrected the droplet preconditioning metadata: Methods section states 20 min at 20 °C before transfer to the thermostated cell; the later reference to the first 30 min describes similar curve courses, not the actual hold duration.
+
+- Hosted CI #314 passed after adding the digitisation utility and tests. The transport-model discovery step explicitly ran the three new digitisation tests (linear, log10 and multi-tick calibration) together with the existing transport tests. This validates coordinate-transform code paths, not extraction accuracy or physical model validity.
