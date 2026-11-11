@@ -189,3 +189,18 @@ A closer re-read of the full publisher text makes the geometry effect more speci
 **Interpretive consequence:** “Sample size” is not merely a geometric correction factor. It changes the drainage length and apparent consolidation kinetics, and may change the measured maximum shrinkage. The different thermal histories of the cylinder and droplet protocols also mean that geometry effects should not be interpreted as a perfectly isolated one-variable comparison. Natural-syneresis datasets should therefore be compared only with geometry, exposed surface/drainage boundary, sample age and temperature history reported alongside the shrinkage metric.
 
 **Important boundary:** The authors describe natural and enforced syneresis as having analogous parameter dependencies, but this does not mean their absolute shrinkage, kinetics or microscopic pathways are interchangeable. The forced test imposes a mechanical pressure gradient and uses a membrane; the natural test does not.
+
+
+## PSG-013 — Scherer (1989): modulus evolution during silica-gel shrinkage
+
+**Reference:** G. W. Scherer, “Effect of Shrinkage on the Modulus of Silica Gel,” *Journal of Non-Crystalline Solids* 109 (1989), 183–190. DOI: 10.1016/0022-3093(89)90030-6.
+
+**Verification and access:** Elsevier publisher metadata and abstract inspected; DOI, volume, issue range and pagination confirmed. Full text not accessed.
+
+**System and study type:** Experimental study of alkoxide-derived silica gels, including acid- and base-catalysed formulations, during ageing/syneresis and drying.
+
+**Reported observations:** The abstract reports a continuing increase in shear modulus during syneresis, fastest during approximately the first two weeks after gelation. Immersion in a liquid containing more water than the pore liquid accelerates shrinkage and stiffening. During evaporative drying, modulus increases by roughly three orders of magnitude as linear contraction approaches 50%. The abstract also reports phase separation in base-catalysed gels, tentatively attributed to segregation of residual partially condensed TEOS.
+
+**Limits and transferability:** The precursor route is alkoxide-derived sol-gel silica, not industrial sodium-silicate/sulfuric-acid precipitated silica. Only abstract-level evidence is currently available. The numerical modulus–strain relation should not be transferred to precipitated silica without matched chemistry, structure and measurement conditions. The proposed phase-separation explanation is explicitly tentative.
+
+**Role and grade:** Mechanistic comparator for the coupling between syneresis, shrinkage and mechanical stiffening; not direct precipitated-silica evidence. OBS;MODEL; provisional class C.
