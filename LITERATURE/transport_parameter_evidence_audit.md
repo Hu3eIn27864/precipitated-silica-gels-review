@@ -116,3 +116,9 @@ Sahabi & Kind (2011), *Polymers* 3, 1423–1432, DOI 10.3390/polym3031423, is a 
 This materially strengthens the direct mechanical evidence base. It does **not** close the permeability gap: t90 is a lumped forced-consolidation response, and the paper does not independently determine intrinsic permeability and constrained modulus. The authors also report deviations from the simple Terzaghi response during primary consolidation and suggest adding a damping element, supporting a viscoelastic/mechanical-relaxation branch in the model design. Forced oedometer data must remain distinct from natural syneresis.
 
 See LITERATURE/source_assessments_batch_21.md and the expanded target_system_mechanical_evidence.csv.
+
+## Additional direct target-system evidence: Wilhelm & Kind (2014)
+
+Wilhelm & Kind (2014), *Polymers* 6, 2896–2911, DOI 10.3390/polym6122896, provides paired natural pycnometer syneresis and pressure-forced plunger syneresis for acidic precipitated silica (theoretical pH −0.97). Natural endpoint shrinkage is 0.197/0.197/0.198 and fitted τ is 21.7/11.1/5.6 h at 20/40/60 °C (n=1.23). At 20 °C, increasing forced pressure from 0.8 to 15.5 bar increases fitted endpoint shrinkage from 0.53 to 0.87 and reduces τ from 13.0 to 1.1 h. The authors extrapolate forced data to natural Δp=0 using separate endpoint and rate correlations; the extrapolated endpoint error reaches 45%, while τ error reaches 24%. The lowest forced pressure is still 0.8 bar, so the natural state is an extrapolation.
+
+This is a valuable empirical bridge between natural and enforced response, but it does not independently measure permeability or constrained modulus and is not a Darcy/poroelastic constitutive law. It also demonstrates why endpoint shrinkage and kinetic rate must be assessed separately. Detailed extraction: `LITERATURE/wilhelm_kind_2014_natural_enforced_syneresis_evidence.md`.
