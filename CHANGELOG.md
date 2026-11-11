@@ -16,3 +16,13 @@
 - Added `LITERATURE/source_assessments_batch_03.md` with direct-evidence summaries, limitations and a three-family overlap map.
 - Identified major dataset overlap within the Schlomach/Quarch and Wilhelm publication families; these outputs must not be counted as independent replications without figure-level verification.
 - Validated the CSV structure: 19 records, 18 columns per record.
+
+
+## 2026-11-11 — Wilhelm quantitative overlap audit
+
+- Re-inspected the full Wilhelm (2017) dissertation and mapped explicit figure/table attributions to Wilhelm & Kind (2014, 2015).
+- Confirmed that the natural-syneresis pyknometer method/figure is attributed to the 2014 paper and that Appendix D pressure-cell curves/tables are attributed to the 2015 paper; these are reused outputs, not independent replications.
+- Identified additional centrifugal forced-syneresis experiments and membrane/pore-liquid analysis in the dissertation.
+- Extracted six centrifugal data points at 20 °C and initial sample height 20 mm into `LITERATURE/quantitative_extraction_syneresis.csv`; preserved the reported non-monotonic acid-gel characteristic time.
+- Added `LITERATURE/quantitative_overlap_audit_wilhelm.md` and refined PSG-008 research-family notes.
+- CSV validation: 19 records, 18 columns per record; no malformed rows.
