@@ -79,15 +79,19 @@ Responsibilities: SimulationBox handles wrapping/minimum-image displacement; Pai
 
 Use a dependency-free documented key-value configuration parser initially. Do not silently add external dependencies. Large generated trajectories remain local and are not committed.
 
+### Implemented interaction-layer contract
+
+The current scaffold implements a shifted/truncated 12-6 Lennard-Jones potential with a hard-core overlap sentinel (+infinity), brute-force total/local energy functions, and a periodic neighbour candidate list. The list stores pairs within `cutoff + skin`; it is considered valid only while every particle has moved no more than `skin/2` from its reference position (minimum-image displacement). The list radius must be smaller than half the cubic box length. The interaction tests compare neighbour-list local energy against brute force and compare local energy differences with full-system energy differences. These tests are committed but have not yet been compiled or executed.
+
 ## 11. Required tests
-1. Periodic wrapping below zero and above L.
+1. Periodic wrapping below zero and above L. (implemented; execution pending)
 2. Minimum-image distance across opposite faces.
 3. Unwrapped-cluster Rg invariant to translating a cluster across a periodic face.
 4. Hard-core overlap proposals rejected.
-5. Potential gives expected values and zero beyond cutoff; shifted cutoff is continuous.
-6. Local Delta U equals full-system energy difference in a small system.
+5. Potential gives expected values and zero beyond cutoff; shifted cutoff is continuous. (implemented; execution pending)
+6. Local Delta U equals full-system energy difference in a small system. (implemented for brute-force local energy; execution pending)
 7. Metropolis accepts Delta U<=0 and gives the correct probability for positive Delta U in a seeded statistical test.
-8. Neighbour list agrees with brute-force enumeration for random small systems.
+8. Neighbour list agrees with brute-force enumeration for random small systems. (basic deterministic configuration implemented; randomized coverage pending)
 9. Connectivity and coordination match known test graphs.
 10. Same seed/configuration reproduces identical output on the same build.
 11. Zero-attraction limit has no attraction-driven compaction; algorithm check only, not material prediction.
