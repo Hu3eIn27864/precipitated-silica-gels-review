@@ -712,3 +712,11 @@
 - Identified an unresolved geometry discrepancy: the 2014 article reports d = 18 mm, ~6 mL cylinders, whereas the 2015 article describes the Figure 8 cylinder series as d = 12 mm, ~3 mL.
 - Revised the overlap audit: count the acid-cylinder curve as one likely shared evidence family, preserve the geometry inconsistency, and keep acid pressure-cell overlap unresolved pending point-level comparison.
 - The 2015 base-cylinder series is not attributed to the 2014 article and is treated as additional comparative evidence.
+
+
+## 2026-11-11 — Acidic pressure-cell repeatability clarified
+
+- Verified in Wilhelm & Kind (2015), §3.2 and §4.2, that the 2015 pressure-cell design was modified relative to 2014 and that the earlier acid-gel forced-syneresis experiments were repeated with the NP010 membrane instead of NF270.
+- The 2015 paper reports no significant difference between membrane results for the acid gel. Classified these as same-programme repeatability/membrane-comparison experiments, not independent external replication and not necessarily identical raw runs.
+- The 2015 base-gel pressure-cell series remains an additional pH-condition comparison.
+- Extended `LITERATURE/quantitative_overlap_audit_wilhelm.md` with the explicit repeat-experiment evidence.
