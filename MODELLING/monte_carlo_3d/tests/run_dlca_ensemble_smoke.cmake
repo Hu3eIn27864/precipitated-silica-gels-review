@@ -16,11 +16,13 @@ set(expected_files
     "${OUTPUT_PREFIX}_runs.csv"
     "${OUTPUT_PREFIX}_mass_radius.csv"
     "${OUTPUT_PREFIX}_fit_windows.csv"
+    "${OUTPUT_PREFIX}_mobility_by_size.csv"
 )
 set(expected_headers
     "seed,completed,attempts,successful_merges,component_count,largest_component_size,largest_component_rg,unwrapping_consistent,contact_distance,maximum_component_step,mobility_exponent,cumulative_squared_cluster_translation,cumulative_cluster_translation_path_length,target_cumulative_squared_translation,displacement_budget_reached,attempt_limit_reached,displacement_budget_overshoot"
     "seed,particle_count,radius,mean_enclosed_mass"
     "seed,fit_minimum_radius,fit_maximum_radius,exponent,standard_error,r_squared,point_count"
+    "seed,selected_cluster_size,selection_count,cumulative_squared_translation,cumulative_translation_path_length"
 )
 list(LENGTH expected_files file_count)
 math(EXPR last_index "${file_count} - 1")
