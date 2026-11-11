@@ -106,3 +106,34 @@ GitHub Actions run [#220](https://github.com/Hu3eIn27864/precipitated-silica-gel
 There were no pairs in which both baseline and variant runs completed, so the number of valid paired Rg and fixed-window exponent comparisons was zero for every variant. The per-seed largest-component-fraction deltas remain available, but they mix incomplete outcomes and should be read only as finite-attempt progress descriptors. They do not support conclusions about equilibrium morphology, fractal dimension, or physical kinetics. The high completion sensitivity to the maximum cluster step is a reason to investigate algorithmic time stepping and collision-detection robustness before expanding the physical interpretation.
 
 The separate size-series pilot in the same CI run completed 2/3 runs at N = 32 and 0/3 at N = 64 or 128. Its two eligible N = 32 exponents had mean 1.199 (sample SD 0.057), but the mean within-run exponent range across fit windows was 0.394 (maximum 0.587). Thus even the eligible N = 32 fit is strongly window-dependent. No finite-size scaling result is available. These observations reinforce the predeclared decision gate: do not launch or interpret the larger matrix as a scientific scaling study until completion and fit-window stability are improved.
+
+
+## Important: step size also changes the algorithmic clock
+
+A fixed number of attempts is not a common elapsed-time basis when
+`maximum_component_step` changes. Each proposed displacement has independent
+Cartesian components uniform on [-s, s], so its mean squared vector length is
+E[|Δr_proposed|²] = s². Before collision clipping and state-dependent cluster
+selection, changing s from 0.2 to 0.1 reduces this proposal mean-square
+displacement per attempt by a factor of four; changing it to 0.28 increases
+it by a factor of 1.96. The first CI screen deliberately held attempt count
+fixed and therefore mixes step-size effects with different algorithmic
+progress per attempt.
+
+The observed completion counts (0/3 at s = 0.2, 0/3 at s = 0.1, and 3/3 at
+s = 0.28) must not be interpreted as evidence that the larger step produces
+a more physical or more robust aggregate. They are completion outcomes under
+different proposal-displacement budgets. The realized displacement is further
+reduced by first-contact clipping, and cluster masses/selection probabilities
+change during aggregation.
+
+Before a step-size robustness claim, extend the run output to record at least
+the cumulative realized squared cluster translations
+Σ |Δr_cluster,realized|² and cumulative realized path length. Then compare
+configurations at a common, predeclared cumulative translation budget (with
+the maximum-attempt limit retained as a safety cap), or use stored trajectory
+snapshots at common values of that budget. This is an algorithmic
+displacement clock only; it is not physical time and does not by itself
+calibrate Brownian diffusivity. The present fixed-attempt screen is useful
+for diagnosing runtime/completion sensitivity, not for isolating a
+step-independent structural effect.
