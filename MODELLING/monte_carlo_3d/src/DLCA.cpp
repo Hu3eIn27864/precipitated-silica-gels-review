@@ -238,6 +238,7 @@ DLCAResult DLCA::generate() const {
                 survivors.push_back(std::move(merged));
                 clusters = std::move(survivors);
                 result.successfulMerges += hit.size();
+                mobilityStats.successfulMerges += hit.size();
             }
         }
     }
