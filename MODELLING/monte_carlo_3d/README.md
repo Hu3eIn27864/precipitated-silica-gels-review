@@ -2,7 +2,7 @@
 
 ## Status
 
-Partial implementation. The C++17 scaffold now includes periodic geometry, seeded RNG, a shifted/truncated Lennard-Jones test potential with hard-core rejection, brute-force energy helpers, a Verlet-style neighbour list with a skin/rebuild validity check, and geometry/interaction tests. Network generation, observables, and a runnable simulation driver remain unimplemented. The current Metropolis kernel uses brute-force local energies as a correctness-first baseline; the neighbour list is tested independently and is not yet wired into the sampler. Compilation and CTest have not yet been verified in this environment. A GitHub Actions workflow now runs CMake build and CTest on relevant pushes and pull requests; its first completed result is still pending.
+Verified software baseline (V1 kernel only). The C++17 core now compiles with GCC 14.2.0 and CMake 3.31.6; all three CTest targets pass in a Release build and in a Debug build with AddressSanitizer and UndefinedBehaviorSanitizer. The tests cover periodic geometry, shifted/truncated pair interactions, neighbour-list agreement including a seeded skin-displacement case, local-vs-total energy differences, deterministic Metropolis reproducibility, and a 1000-sweep hard-core regression. The neighbour list is independently verified but is not yet wired into the Metropolis sampler, which deliberately retains brute-force local energies. Initial aggregate generation, structural observables, configuration parsing, output/metadata, and a production simulation driver remain unimplemented. This is code verification, not physical validation or a calibrated silica model.
 
 ## Scientific purpose
 
@@ -74,7 +74,7 @@ The implementable V1 contract is now defined in [TECHNICAL_SPEC.md](TECHNICAL_SP
 - `include/NeighborList.hpp` and `src/NeighborList.cpp`: periodic candidate list with cutoff + skin and a conservative skin/2 rebuild criterion.
 - `tests/test_interactions.cpp`: cutoff continuity, hard-core, zero-attraction, local-vs-total energy difference, neighbour-list agreement and invalid-box checks.
 - `include/MonteCarlo.hpp` and `src/MonteCarlo.cpp`: reversible single-particle Metropolis moves with symmetric uniform displacement, hard-overlap rejection, reduced-unit acceptance, sweep and acceptance diagnostics. Uses brute-force local energies pending neighbour-list integration.
-- `tests/test_metropolis.cpp`: seeded reproducibility, sweep-count and empty-system checks.
+- `tests/test_metropolis.cpp`: seeded reproducibility, sweep-count, empty-system and 1000-sweep hard-core regression checks.
 - `examples/README.md`: build/test instructions.
 
-**Verification status:** source files are committed, but compilation and CTest execution have not been verified here because the repository could not be cloned into the execution environment. Do not treat the tests as passed until they are run locally or in CI.
+**Verification status:** see [TEST_RESULTS.md](TEST_RESULTS.md) for the exact compiler/build commands and recorded results. The tested snapshot was reconstructed from the committed source contents fetched from GitHub and built locally; the repository itself was not cloned. The GitHub Actions workflow is configured, but no completed hosted CI result has been retrieved. These checks verify software behaviour only; they do not validate the model against experimental silica data.
