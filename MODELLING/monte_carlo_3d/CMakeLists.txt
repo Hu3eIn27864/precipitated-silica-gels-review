@@ -45,3 +45,10 @@ add_test(NAME geometry COMMAND mc3d_geometry_tests)
 add_test(NAME interactions COMMAND mc3d_interaction_tests)
 add_test(NAME metropolis COMMAND mc3d_metropolis_tests)
 add_test(NAME network COMMAND mc3d_network_tests)
+add_test(
+    NAME dlca_ensemble_smoke
+    COMMAND ${CMAKE_COMMAND}
+        -DMC3D_EXECUTABLE=$<TARGET_FILE:mc3d_dlca_ensemble>
+        -DOUTPUT_PREFIX=${CMAKE_CURRENT_BINARY_DIR}/dlca_smoke
+        -P ${CMAKE_CURRENT_SOURCE_DIR}/tests/run_dlca_ensemble_smoke.cmake
+)
