@@ -458,3 +458,6 @@
 - Added volume-averaged eigenfunction-series references for the idealised infinite-cylinder and sphere diffusion/consolidation problems to the parallel work plan.
 - Specified the initial condition, centre symmetry, perfectly drained outer boundary, volume-average weights, and first-mode time constants.
 - Required finite-difference validation against the full series and retained explicit limits: constant effective coefficient, no evolving permeability or nonlinear skeleton mechanics, and no finite-cylinder end drainage.
+
+
+- 2026-11-11: Downloaded and independently audited the raw artifact from hosted CI run #237 (artifact 13851749184). Added seed-level size-series outcomes, per-variant completion/Q/L summaries, fixed-window fit eligibility, fit-window sensitivity, and paired-comparison eligibility to `MODELLING/monte_carlo_3d/TEST_RESULTS.md`. Reconfirmed no valid completed baseline/variant Rg or Df pairs and no basis for finite-size scaling; full matrix remains gated. Common-Q stopping is the next DLCA implementation task, with Q and L both retained as algorithmic (not physical-time) progress diagnostics.
