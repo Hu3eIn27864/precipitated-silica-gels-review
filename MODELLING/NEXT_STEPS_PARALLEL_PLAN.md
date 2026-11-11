@@ -404,3 +404,16 @@ constrain their coupling.
 Hosted CI [#293](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43021684276) passed the expanded cylinder/sphere grid- and time-step-convergence tests. CI [#294](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43021709035) passed the corrected planar benchmark tests and the integrated DLCA screens. After adding seven regression points to the corrected planar dimensionless reference curve, CI [#295](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43021757732) passed the complete workflow, including C++ tests, Python analysis, all transport tests, the bounded DLCA screens and artifact upload.
 
 The planar code-verification references now cover (T_v=0.001,0.01,0.05,0.1,0.2,0.5,1,2), with the independent (T_v=0.1) reference retained. The radial suite tests both ideal geometries against the eigenfunction series and checks monotone error reduction under grid/time refinement. These are numerical verification results only. No experimental parameter fitting or silica-specific validation has been performed.
+
+
+## Parallel implementation update — 2026-11-11
+
+Completed three independent implementation branches:
+
+- **Experimental comparison:** added `LITERATURE/experimental_syneresis_comparison.csv` with 18 records and explicit fields for natural versus centrifugal forced syneresis, gel type, temperature, reported geometry/dimension, fit-parameter status, drainage-boundary knowledge, permitted comparisons and prohibited inferences. Cylinder height is not inferred from the reported sample volume; approximate droplets are not silently promoted to exact spheres. Natural and forced records are not pooled.
+- **Finite-cylinder geometry:** extended `geometry_scaling.py` with the separable first-mode time constant for a finite cylinder with a drained curved wall and either two drained ends or sealed ends. The sealed-end limit recovers the infinite-cylinder radial expression. This is a first-mode identity, not yet a transient 2-D solver; actual specimen end conditions remain unverified.
+- **Permeability/mechanics separation:** added `poroelastic_coupling.py` implementing only `c_v=k*M/gamma_w` and its inversion. No constitutive evolution law is assumed; `k` and the constrained modulus `M` remain separate independently supplied inputs.
+
+New tests cover the finite-cylinder limiting cases and scaling, plus algebraic coupling and independent sensitivity to permeability and modulus. These tests establish mathematical/code consistency only. The new comparison CSV was parsed and checked for a consistent 17-column schema (18 data records).
+
+**Next gate:** complete hosted CI for these commits; then, if it passes, decide whether a transient axisymmetric finite-volume solver is warranted by recoverable specimen dimensions and drainage boundaries. Do not use the ideal finite-cylinder formula to fit the Wilhelm & Kind cylinder data until those boundary conditions are established.
