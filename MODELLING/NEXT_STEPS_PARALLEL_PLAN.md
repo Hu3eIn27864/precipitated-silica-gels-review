@@ -235,3 +235,23 @@ Added PSG-045 (Manfoumbi, Roger & Meireles, 2024; DOI 10.5802/crchim.347) and a 
 5. **Manuscript:** update the central process-history framework, but defer any universal causal law or fitted pH-dependent permeability relation until target-system measurements exist.
 
 **Roadmap gate:** no full N=32/64/128 DLCA matrix, no Df-vs-size claim, and no parameter calibration from the present CI pilots. The next DLCA code increment should improve trajectory observability, not simply increase the attempt budget.
+
+
+### Workstream B implementation increment: size-resolved trajectory accounting
+
+Implemented the first observability increment in the DLCA core. For every
+attempted cluster move, the selected cluster's particle count immediately
+before the move is used as the size class. The result accumulates, by class:
+selection count, realized squared translation Q, and realized path length L.
+The ensemble driver writes these values to `_mobility_by_size.csv` for every
+seed, including incomplete runs. C++ tests verify that size-class counts sum
+to attempts, size-class Q/L sum to global Q/L, and repeated seeds reproduce
+the same size-class statistics. CLI smoke coverage checks the additional
+output file and schema.
+
+The implementation is committed; the next hosted CI run must validate build,
+tests and output. These statistics are trajectory diagnostics only. They do
+not implement hydrodynamic mobility, cluster rotation, or physical Brownian
+time. The next analysis should compare Q and L accumulated in each size class
+against selection frequency and merge events, while retaining all incomplete
+runs and the attempt-cap status.
