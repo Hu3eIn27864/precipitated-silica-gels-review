@@ -4,6 +4,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <cstdint>
 #include <exception>
 #include <iostream>
 #include <limits>
@@ -143,7 +144,7 @@ void testCellListRandomizedAgainstBruteForce() {
     // Deterministic pseudo-random coordinates avoid coupling this regression
     // to the simulation RNG or platform-specific distribution implementations.
     std::uint64_t state = 0x9e3779b97f4a7c15ULL;
-    const auto unit = [&state]() mutable {
+    const auto unit = [&state]() {
         state = state * 6364136223846793005ULL + 1442695040888963407ULL;
         return static_cast<double>(state >> 11) / 9007199254740992.0;
     };
