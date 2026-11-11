@@ -191,3 +191,6 @@ A local isolated regression check of the size-series runner logic and its four r
 
  
 The seed-level analyser additionally rejects impossible largest-component counts and any run marked complete whose largest component does not contain all particles. A dedicated regression case was added. The updated analyser test suite remains pending execution in a repository checkout or CI run.
+
+ 
+The size-series runner now allocates disjoint consecutive seed blocks across particle counts and checks the combined seed range for uint64 overflow. Its CLI regression test verifies that separate system sizes receive non-overlapping seed ranges. This design supports unpaired comparisons across sizes; it does not implement paired-seed statistics.
