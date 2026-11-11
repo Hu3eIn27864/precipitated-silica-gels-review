@@ -130,3 +130,10 @@ The new unit test target is registered with CTest. Until it is actually compiled
 ### Computational scaling limitation
 
 The first DLCA-style implementation uses direct pair scans for initial exclusion placement and for moving-cluster collision detection. This is intentionally transparent but can approach O(N²) work per attempt. It is suitable for correctness tests and small pilot aggregates only. Do not use it as a 1000-particle production generator until a periodic cell-list/spatial-hash broad phase is implemented, checked against brute force, and benchmarked. The current tests establish small-system algorithmic properties only.
+
+
+## 16. Periodic cell-list broad phase (verification boundary retained)
+
+A uniform periodic cell grid has been added as a conservative broad-phase candidate generator. For requested search radius (r_s), the number of cells per axis is (lfloor L/r_s\rfloor), hence cell width (L/n_c\ge r_s). Querying the current cell and its 26 neighbours therefore cannot omit a particle within (r_s), subject to periodic indexing. Exact distance and swept-contact calculations remain the narrow phase. Duplicate wrapped cells are removed for grids with only one or two cells per dimension. Non-finite query coordinates and arithmetic overflow in grid sizing are rejected.
+
+DLCA uses search radius (r_c+|\Delta r|) for the swept path and (r_c(1+10^{-10})) for final contact identification. If the swept broad-phase radius or final contact tolerance is not below half the box length, the corresponding query falls back to brute force. The initial random sequential placement remains brute force, and the grid is rebuilt each attempted move. Therefore the algorithm reduces narrow-phase pair checks in typical boxes but still incurs O(N) grid construction/flattening per attempted move; benchmark before claiming a particular asymptotic wall-time improvement.
