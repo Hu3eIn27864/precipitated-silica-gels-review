@@ -164,3 +164,8 @@ The preferred long-term architecture is a staged, one-way-first coupling from at
 The central feedback hypothesis is: contact evolution changes network stiffness and permeability; pore-pressure gradients and drainage change local stress and compaction; compaction in turn changes the contact network. This remains a testable hypothesis, not an assumed universal mechanism.
 
 The initial continuum treatment should generally be Darcy flow coupled to a deformable porous skeleton, not fully resolved Navier–Stokes flow through every nanoscale pore. MC structures must be upscaled through representative-volume calculations to obtain permeability and stiffness maps. MD is included only if its silica/water/ion force field and surface chemistry can be defended. A one-way workflow is the first target; bidirectional staggered coupling follows only after each component is verified.
+
+
+## Implementation contract for the 3-D MC workstream
+
+The first C++ milestone is governed by `MODELLING/monte_carlo_3d/TECHNICAL_SPEC.md`. It deliberately starts with reversible equilibrium-style Metropolis sampling and a transparent effective pair potential. Coordination-dependent detachment, irreversible/persistent bond kinetics, and imposed compaction are separate later extensions; they must not be mixed into the V1 equilibrium sampler. V1 reports algorithmic sweeps, not physical time, and does not model pore-liquid drainage. The detailed specification defines units, periodic geometry, initial-aggregate requirements, software modules, observables, tests, verification gates, and explicit non-goals.
