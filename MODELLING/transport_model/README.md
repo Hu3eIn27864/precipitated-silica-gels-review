@@ -204,3 +204,27 @@ height is inferred from the reported 3 mL volume, and the Wilhelm & Kind
 source evidence. Mixed drainage, external resistance and evolving geometry
 remain unresolved. Tests verify the mathematical limit and parameter
 monotonicity only.
+## Minimal permeability--mechanics coupling identity
+
+`poroelastic_coupling.py` implements only the classical identity
+`c_v = k M / gamma_w` and its algebraic inversion. Permeability `k` and
+the appropriate constrained modulus `M` are independent inputs. No
+evolution law for either quantity is imposed: a future network model may
+provide separate state-dependent values, but those functions require
+independent measurements or justified constitutive evidence.
+
+The default `gamma_w=9810 N/m^3` is a water reference, not a measured pore
+liquid property. The inversion for `k` is meaningful only if `M` and
+`gamma_w` are independently known. A fitted `c_v` alone cannot identify
+both parameters. Tests cover the algebraic identity, independent linear
+sensitivity to `k` and `M`, and invalid inputs; these are dimensional/code
+checks, not a calibrated silica-gel model.
+
+## Geometry-resolved experimental comparison
+
+`LITERATURE/experimental_syneresis_comparison.csv` separates natural
+syneresis fit parameters from centrifugal forced-syneresis records. It
+records the reported geometry without silently inferring cylinder height
+from sample volume or exact droplet sphericity. Boundary-condition
+uncertainty is explicit. These records are not pooled into a single fit;
+they do not identify permeability or a unique diffusivity.
