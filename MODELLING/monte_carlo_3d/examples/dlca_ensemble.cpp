@@ -5,6 +5,7 @@
 
 #include <algorithm>
 #include <cstdint>
+#include <cmath>
 #include <cstdlib>
 #include <fstream>
 #include <iomanip>
@@ -18,6 +19,8 @@ namespace {
 std::size_t parseSize(const char* value, const char* name) {
     std::size_t consumed = 0;
     const std::string input(value);
+    if (input.empty() || input.find_first_not_of("0123456789") != std::string::npos)
+        throw std::invalid_argument(std::string("Invalid ") + name);
     const unsigned long long parsed = std::stoull(input, &consumed);
     if (consumed != input.size() || parsed == 0 ||
         parsed > std::numeric_limits<std::size_t>::max()) {
@@ -29,6 +32,8 @@ std::size_t parseSize(const char* value, const char* name) {
 std::uint64_t parseSeed(const char* value) {
     std::size_t consumed = 0;
     const std::string input(value);
+    if (input.empty() || input.find_first_not_of("0123456789") != std::string::npos)
+        throw std::invalid_argument("Invalid seed");
     const unsigned long long parsed = std::stoull(input, &consumed);
     if (consumed != input.size()) throw std::invalid_argument("Invalid seed");
     return static_cast<std::uint64_t>(parsed);
