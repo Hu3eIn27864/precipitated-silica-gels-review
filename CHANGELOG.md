@@ -429,3 +429,6 @@
 - 2026-11-11: Corrected the paired-seed sensitivity design: the baseline is now run inside the same N=32, seed-3000 block as all six one-factor variants, rather than reusing the separate pilot baseline with different seeds. CI analyses and retains outputs for all seven configurations.
 
 - 2026-11-11: Added a paired seed-level sensitivity analyser and tests. It checks identical seed sets, retains incomplete runs, calculates largest-component-fraction deltas for all paired seeds, and restricts Rg/exponent deltas to pairs where both values are defined. Integrated paired summaries into the CI sensitivity workflow; no simulation result or CI pass is claimed.
+
+
+- 2026-11-11: Hosted MC3D CI run #220 passed the Release build, all five CTest targets, MC3D Python analysis tests, 1-D transport tests, DLCA size-series pilot, and seven-configuration paired sensitivity screen. Uploaded artifacts were inspected. Size-series completion was 2/3 (N=32), 0/3 (N=64), and 0/3 (N=128); only two N=32 fits were available and the within-run fit-window exponent range averaged 0.394. The paired sensitivity baseline completed 0/3, leaving no valid paired Rg or Df comparisons. These are software/pilot diagnostics, not evidence for silica-specific scaling or physical parameter selection. See MODELLING/monte_carlo_3d/TEST_RESULTS.md.
