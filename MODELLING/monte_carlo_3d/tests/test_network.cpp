@@ -1,6 +1,8 @@
 #include "DLCA.hpp"
 #include "Observables.hpp"
+#include "PeriodicCellList.hpp"
 
+#include <algorithm>
 #include <cmath>
 #include <exception>
 #include <iostream>
@@ -97,6 +99,30 @@ void testDLCAReproducibilityAndNonOverlap() {
             "component count inconsistent with DLCA merge accounting");
 }
 
+void testPeriodicCellListIsConservative() {
+    const mc3d::SimulationBox box(12.0);
+    const std::vector<mc3d::Vec3> positions{
+        {0.1, 0.1, 0.1}, {11.8, 0.2, 0.1}, {6.0, 6.0, 6.0},
+        {1.0, 0.1, 0.1}, {11.0, 11.0, 11.0}, {5.9, 6.0, 6.0}
+    };
+    const double radius = 1.25;
+    const mc3d::PeriodicCellList cells(box, positions, radius);
+    for (std::size_t i = 0; i < positions.size(); ++i) {
+        const auto candidates = cells.candidates(positions[i]);
+        for (std::size_t j = 0; j < positions.size(); ++j) {
+            if (box.distance(positions[i], positions[j]) <= radius) {
+                require(std::find(candidates.begin(), candidates.end(), j) !=
+                            candidates.end(),
+                        "cell list omitted a particle inside the search radius");
+            }
+        }
+    }
+    const mc3d::PeriodicCellList smallGrid(box, positions, 5.9);
+    const auto candidates = smallGrid.candidates({0.1, 0.1, 0.1});
+    require(std::find(candidates.begin(), candidates.end(), 1) != candidates.end(),
+            "cell list failed across a periodic boundary on a small grid");
+}
+
 void testEmptyNetwork() {
     const mc3d::SimulationBox box(10.0);
     const auto obs = mc3d::analyseNetwork({}, box, 1.0);
@@ -110,6 +136,7 @@ int main() {
         testPeriodicUnwrappingAndGraph();
         testPeriodicWindingIsFlagged();
         testDLCAReproducibilityAndNonOverlap();
+        testPeriodicCellListIsConservative();
         testEmptyNetwork();
     } catch (const std::exception& e) {
         std::cerr << "FAILED: " << e.what() << '\n';
