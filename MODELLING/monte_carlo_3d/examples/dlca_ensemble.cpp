@@ -151,7 +151,11 @@ int main(int argc, char** argv) {
                  << config.contactDistance << ',' << config.maximumComponentStep << ','
                  << config.mobilityExponent << ','
                  << generated.cumulativeSquaredClusterTranslation << ','
-                 << generated.cumulativeClusterTranslationPathLength << '\n';
+                 << generated.cumulativeClusterTranslationPathLength << ','
+                 << config.targetCumulativeSquaredTranslation << ','
+                 << (generated.displacementBudgetReached ? 1 : 0) << ','
+                 << (generated.attemptLimitReached ? 1 : 0) << ','
+                 << generated.displacementBudgetOvershoot << '\n';
 
             // Only a completed, consistently unwrapped aggregate is suitable
             // for this whole-aggregate mass-radius export.
