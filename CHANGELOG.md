@@ -605,3 +605,12 @@
 - Drei synthetische Unit-Tests ergänzt: Wiedergewinnung bekannter rauschfreier Parameter, Invarianz gegenüber dem (0,0)-Ursprungspunkt und endliche Fitdiagnostik.
 - Die Tests prüfen ausschließlich numerische Implementierungseigenschaften des Fitters. Sie validieren weder die KI-gestützten Diagrammablesungen noch die empirische Modellform oder eine physikalische Interpretation.
 - Der bestehende CI-Schritt zur Python-Testsuche im Transportmodell-Verzeichnis erfasst die neue Testdatei automatisch; Ergebnis wird nach dem Workflow-Lauf geprüft.
+
+
+## 2026-11-11 — Erweiterung der Evidenzbasis zu Synerese-Mechanik und Permeabilität
+
+- Scherer (1989, Synerese I/II) ergänzt: Syneresekinetik hängt gekoppelt von Probengröße, Permeabilität und viskoelastischen Netzwerkeigenschaften ab; Modellkurven wurden mit unabhängig bestimmten Materialparametern verglichen.
+- Scherer & Swiatek (1989) ergänzt: direkte Permeabilitätsmessung an alkoxid-abgeleiteten Silicagelen; qualitative Hinweise auf Unterschiede zwischen homogener saurer und inhomogener basischer Mikrostruktur sowie starke Permeabilitätsabnahme bei partieller Trocknung.
+- Scherer (1996, Langmuir) als thematischen Vorläufer aufgenommen.
+- Alle drei Quellen sind als Mechanismen-/Methodenvergleich klassifiziert. Alkoxid-abgeleitete Gele sind nicht mit industriell gefällter Kieselsäure gleichzusetzen; keine numerischen Parameter werden übertragen.
+- Modellkonsequenz: hydraulische Permeabilität und mechanische/viskoelastische Antwort getrennt und zeitabhängig führen; Identifikation verlangt unabhängige hydraulische und mechanische Messungen.
