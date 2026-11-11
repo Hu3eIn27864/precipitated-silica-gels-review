@@ -65,7 +65,7 @@ Compare seed-level curves, not just pooled summary values. A proposed scaling in
 
 ### Gate D — parameter sensitivity
 
-Before any physical interpretation, vary one factor at a time: maximum cluster step, mobility exponent, initial number density/box length, and contact distance. Keep seeds and other settings fixed where a paired comparison is intended. This separates algorithmic robustness from random-seed variation.
+Before any physical interpretation, vary one factor at a time: maximum cluster step, mobility exponent, initial number density/box length, and contact distance. Keep seeds and other settings fixed where a paired comparison is intended. Equal attempt counts are not equal elapsed algorithmic progress when the maximum step changes: the proposal mean-square displacement per attempt is s² for Cartesian components uniform on [-s,s]. A step-size comparison must therefore record realized cumulative cluster displacement and compare at a common predeclared displacement budget (or common-budget trajectory snapshots), while retaining an attempt cap. This is an algorithmic clock, not physical time. The initial fixed-attempt screen is only a completion/runtime diagnostic. This separates algorithmic robustness from random-seed variation.
 
 ### Gate E — physical calibration and validation
 
