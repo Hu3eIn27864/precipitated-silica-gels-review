@@ -529,3 +529,15 @@ state-dependent k–M coupling can be meaningfully identified.
 - [ ] Erst nach dieser Prüfung entscheiden, ob die Kurvenpunkte für quantitative Modellkalibrierung geeignet sind.
 
 **Grenze:** Die Fits sind eine explorative Beschreibung der übermittelten KI-Näherungswerte. Hohe R²-Werte validieren weder die Punktzuordnung noch die physikalische Modellannahme; (A) und τ bleiben empirische Kurvenparameter und liefern keine direkte Permeabilität oder Reaktionskonstante.
+
+
+## Leave-one-out-Sensitivitätsanalyse (2026-11-11)
+
+- [x] Für alle 164 Näherungspunkte je Reihe Leave-one-out-Fits berechnet; 12 Reihenübersichten und vollständige Punkt-Detailtabelle erstellt.
+- [x] Punktdominierte Zeitkonstanten identifiziert: Figure 8a/20 °C (τ-Spannweite 71.6 %) und Figure 8b/20 °C (53.6 %).
+- [x] Geprüft, ob einzelne Punkte den Figure-10b-Amplitudenwiderspruch erklären: nein, der Widerspruch bleibt über alle Einzelpunktentfernungen bestehen.
+- [ ] Originalabbildung Figure 10b auf systematische Symbol-/Kurvenzuordnung prüfen.
+- [ ] Frühe Marker in Figure 8a/20 °C und Figure 8b/20 °C unabhängig digitalisieren.
+- [ ] Nach Originalbildprüfung Fehlerbalken/Ableseunsicherheit berücksichtigen und Fits erneut durchführen.
+
+**Interpretationsgrenze:** LOO-Spannweiten sind keine Konfidenzintervalle; die Analyse kann systematische Ableseverzerrung nicht erkennen.
