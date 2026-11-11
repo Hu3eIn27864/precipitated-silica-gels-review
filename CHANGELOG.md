@@ -435,3 +435,6 @@
 
 
 - 2026-11-11: Added cumulative squared realized cluster translation and cumulative realized cluster-translation path length to DLCA run metadata. Extended the deterministic reproducibility assertions and smoke-test CSV contract. These diagnostics will support future equal-displacement comparisons; they are not physical time. Hosted validation is pending.
+
+
+- 2026-11-11: Hosted CI run #234 passed after adding realized-displacement diagnostics to the DLCA result and CSV schema. The new metrics showed mean cumulative squared translation 2,000.71 for the baseline step 0.2 versus 500.30 for step 0.1 after the same 50,000 attempts; step 0.28 completed in a mean 25,665 attempts at mean cumulative squared translation 2,011.66. This confirms that fixed-attempt step-size comparisons mix structural and algorithmic-clock effects. A common-displacement stopping criterion is the next planned improvement.
