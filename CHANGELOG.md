@@ -427,3 +427,5 @@
 - 2026-11-11: Added a bounded paired-seed DLCA parameter-sensitivity runner and unit tests; integrated six non-baseline one-factor variants into CI with per-variant summaries, fit-window audits and raw artifact retention. The full sensitivity matrix remains a separate, larger study; hosted execution is pending.
 
 - 2026-11-11: Corrected the paired-seed sensitivity design: the baseline is now run inside the same N=32, seed-3000 block as all six one-factor variants, rather than reusing the separate pilot baseline with different seeds. CI analyses and retains outputs for all seven configurations.
+
+- 2026-11-11: Added a paired seed-level sensitivity analyser and tests. It checks identical seed sets, retains incomplete runs, calculates largest-component-fraction deltas for all paired seeds, and restricts Rg/exponent deltas to pairs where both values are defined. Integrated paired summaries into the CI sensitivity workflow; no simulation result or CI pass is claimed.
