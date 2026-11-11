@@ -5,7 +5,9 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from run_dlca_size_series import nonnegative_int, positive_int, scaled_box_length
+from run_dlca_size_series import (
+    nonnegative_int, positive_int, scaled_box_length, validate_target_q,
+)
 
 
 class SizeSeriesRunnerTests(unittest.TestCase):
@@ -15,6 +17,14 @@ class SizeSeriesRunnerTests(unittest.TestCase):
         self.assertAlmostEqual(reference, 15.0)
         self.assertAlmostEqual(doubled / reference, 2.0 ** (1.0 / 3.0))
         self.assertAlmostEqual(64 / doubled**3, 32 / reference**3)
+
+    def test_target_q_must_be_finite_and_nonnegative(self):
+        validate_target_q(0.0)
+        validate_target_q(2000.0)
+        for value in (-1.0, float("nan"), float("inf")):
+            with self.subTest(value=value):
+                with self.assertRaises(ValueError):
+                    validate_target_q(value)
 
     def test_seed_start_can_be_zero(self):
         self.assertEqual(nonnegative_int("0"), 0)
@@ -41,7 +51,8 @@ class SizeSeriesRunnerTests(unittest.TestCase):
             subprocess.run(
                 [sys.executable, str(script), "--executable", str(fake),
                  "--output-dir", str(output_dir), "--sizes", "32", "64",
-                 "--seed-start", "0", "--seed-count", "2", "--max-attempts", "50"],
+                 "--seed-start", "0", "--seed-count", "2", "--max-attempts", "50",
+                 "--target-q", "2000"],
                 check=True, capture_output=True, text=True,
             )
             calls = log.read_text(encoding="utf-8").splitlines()
@@ -56,6 +67,8 @@ class SizeSeriesRunnerTests(unittest.TestCase):
             self.assertEqual(second[2:5], ["2", "2", "50"])
             self.assertEqual(first[6:9], ["1.0", "0.2", "1.0"])
             self.assertEqual(second[6:9], ["1.0", "0.2", "1.0"])
+            self.assertEqual(first[9], "2000.0")
+            self.assertEqual(second[9], "2000.0")
 
 
 if __name__ == "__main__":
