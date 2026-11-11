@@ -47,6 +47,15 @@ double parsePositiveDouble(const char* value, const char* name) {
         throw std::invalid_argument(std::string("Invalid ") + name);
     return parsed;
 }
+
+double parseNonnegativeDouble(const char* value, const char* name) {
+    std::size_t consumed = 0;
+    const std::string input(value);
+    const double parsed = std::stod(input, &consumed);
+    if (consumed != input.size() || !std::isfinite(parsed) || parsed < 0.0)
+        throw std::invalid_argument(std::string("Invalid ") + name);
+    return parsed;
+}
 }
 
 int main(int argc, char** argv) {
@@ -63,6 +72,16 @@ int main(int argc, char** argv) {
         const std::size_t seedCount = parseSize(argv[4], "seed count");
         const std::size_t maximumAttempts = parseSize(argv[5], "maximum attempts");
         const std::string prefix(argv[6]);
+        const double contactDistance = argc >= 8
+            ? parsePositiveDouble(argv[7], "contact distance") : 1.0;
+        const double maximumComponentStep = argc >= 9
+            ? parsePositiveDouble(argv[8], "maximum component step") : 0.2;
+        const double mobilityExponent = argc >= 10
+            ? parseNonnegativeDouble(argv[9], "mobility exponent") : 1.0;
+        if (contactDistance >= 0.5 * boxLength)
+            throw std::invalid_argument("Contact distance must be below half the box length");
+        if (maximumComponentStep * std::sqrt(3.0) > 0.5 * contactDistance)
+            throw std::invalid_argument("Maximum component step is too large for contact detection");
         if (seedCount - 1 > std::numeric_limits<std::uint64_t>::max() - seedStart)
             throw std::invalid_argument("Seed range overflows uint64_t");
 
@@ -85,8 +104,9 @@ int main(int argc, char** argv) {
         const mc3d::SimulationBox box(boxLength);
         mc3d::DLCAConfig config;
         config.particleCount = particleCount;
-        config.contactDistance = 1.0;
-        config.maximumComponentStep = 0.2;
+        config.contactDistance = contactDistance;
+        config.maximumComponentStep = maximumComponentStep;
+        config.mobilityExponent = mobilityExponent;
         config.maximumAttempts = maximumAttempts;
         const std::vector<double> radii{1.5, 2.0, 2.5, 3.0, 4.0, 5.0, 6.0, 8.0};
 
