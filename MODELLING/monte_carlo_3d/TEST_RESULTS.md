@@ -235,3 +235,15 @@ The slab consolidation function now rejects non-finite time, diffusivity, and dr
 Added `MODELLING/transport_model/geometry_scaling.py` with ideal first-mode time-constant and inverse apparent-diffusivity functions for radially drained infinite cylinders and spheres. Added tests for inverse consistency, radius-squared scaling and invalid inputs. This utility does not solve the full transient radial field and does not identify permeability.
 
 The DLCA CLI now accepts optional `contact_distance`, `maximum_component_step` and `mobility_exponent` arguments, while preserving prior calls through the original defaults. The run-summary CSV records all three parameters. The size-series runner forwards the parameters and validates their ranges. The smoke test was updated to check a non-default parameter set and the expanded CSV schema. These changes are committed, but no full-project C++ build, CTest, or repository Python test pass is claimed here.
+
+### Bounded parameter-sensitivity workflow added (2026-11-11)
+
+Added `analysis/run_dlca_parameter_sensitivity.py` and unit tests for its
+six-variant one-factor-at-a-time matrix and conservative contact-detection
+bound. The CI workflow now runs the N=32, three-seed, 50,000-attempt screening
+subset and analyses every variant with the fixed 2–5 contact-distance-unit
+interval and fit-window audit. A parameter manifest and per-variant raw
+outputs are included in the workflow artifact. The workflow edit is committed;
+the new runner, its tests, the C++ driver integration and the stochastic
+screen have **not yet been executed in hosted CI**. No simulation result or
+test pass is claimed here.
