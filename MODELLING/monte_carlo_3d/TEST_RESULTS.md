@@ -247,3 +247,14 @@ outputs are included in the workflow artifact. The workflow edit is committed;
 the new runner, its tests, the C++ driver integration and the stochastic
 screen have **not yet been executed in hosted CI**. No simulation result or
 test pass is claimed here.
+
+
+### Hosted CI and bounded DLCA pilot (2026-11-11)
+
+GitHub Actions run [#220](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43015008467), source commit `11e98b710927ccafa3284851165177e14b3e79d8`, completed successfully. The Release CMake build succeeded; all five CTest targets passed, including the DLCA ensemble smoke test; the complete MC3D Python analysis test discovery passed; and the 1-D transport-model unit tests passed. The bounded DLCA size-series and seven-configuration parameter-sensitivity steps also completed, and the raw CSV/summary artifact was uploaded.
+
+The size-series pilot used N = 32, 64, 128, three seeds per size, 50,000 attempts per run, and the common diagnostic fit interval 2–5 contact-distance units. Completion was 2/3 for N = 32 and 0/3 for N = 64 and N = 128. Only the two completed N = 32 aggregates had valid fixed-window fits (mean Df = 1.199, sample SD = 0.057); no fit exists for N = 64 or N = 128. The N = 32 within-run fit-window exponent range averaged 0.394 and reached 0.587, indicating substantial fit-window sensitivity. These small, completion-selected samples do not establish finite-size scaling or a robust fractal dimension.
+
+In the paired N = 32 parameter screen (three common seeds, 50,000 attempts), the baseline completed 0/3. Completion counts were 1/3 (contact 0.9), 2/3 (contact 1.1), 0/3 (step 0.10), 3/3 (step 0.28), 0/3 (mobility exponent 0.5), and 1/3 (mobility exponent 1.5). Because no baseline run completed, there were zero valid paired Rg and zero valid paired Df comparisons. Largest-component-fraction differences are retained as incomplete-run progress descriptors only; they are not equilibrium or physical-time structural effects. The apparent completion sensitivity, especially to maximum component step, is an algorithmic warning, not a basis for choosing a physical parameter.
+
+The successful CI run verifies build, tests, execution and artifact generation for this bounded workflow. It does not validate the DLCA algorithm against silica experiments, establish a physical time mapping, or demonstrate a silica-specific scaling law. The larger preplanned matrix (N = 32, 64, 128; five seeds; 200,000 attempts) remains pending and should be considered only after the observed completion and fit-window limitations are addressed.
