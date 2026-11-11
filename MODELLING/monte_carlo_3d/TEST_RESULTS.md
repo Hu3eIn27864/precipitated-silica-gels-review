@@ -217,3 +217,7 @@ Added a deterministic 500-trajectory regression that compares the analytic perio
 ### CI rerun trigger (2026-11-11)
 
 Documentation-only change to trigger the repository's configured MC3D push workflow after the periodic swept-collision regression was added. This note is not a test result; record build and test outcomes only after inspecting the workflow run.
+
+### Parallel validation work added (2026-11-11)
+
+Added `analysis/analyze_dlca_fit_sensitivity.py` and unit tests to quantify within-seed exponent variation across all available fit windows, while rejecting fits attached to incomplete or invalid runs. Added the script to the CI pilot workflow. Added `DLCA_PILOT_VALIDATION_PROTOCOL.md` defining integrity, completion, finite-size, fit-window, parameter-sensitivity, and physical-calibration gates. These are committed additions; no hosted CI or pilot result is claimed until the workflow run is retrieved and inspected.
