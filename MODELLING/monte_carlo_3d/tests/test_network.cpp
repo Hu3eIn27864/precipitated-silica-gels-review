@@ -214,6 +214,33 @@ void testMassRadiusPowerLawRegression() {
     require(rejected, "mass-radius fit accepted a non-positive mass");
 }
 
+void testMassRadiusRecoversOneDimensionalScaling() {
+    std::vector<mc3d::Vec3> line;
+    line.reserve(201);
+    for (int i = 0; i <= 200; ++i) {
+        line.push_back({static_cast<double>(i), 0.0, 0.0});
+    }
+    const std::vector<double> radii{2, 3, 4, 5, 6, 8, 10, 12, 15};
+    const auto curve = mc3d::calculateMassRadiusCurve(line, radii);
+    std::vector<double> masses;
+    masses.reserve(curve.size());
+    for (const auto& point : curve) masses.push_back(point.meanEnclosedMass);
+    const auto fit = mc3d::fitMassRadiusPowerLaw(radii, masses, 2.0, 15.0);
+    require(std::abs(fit.exponent - 1.0) < 0.08,
+            "mass-radius estimator did not recover line-like Df near one");
+    require(fit.rSquared > 0.995,
+            "line-like mass-radius scaling should be strongly linear in log-log space");
+
+    bool rejectedOverflowingRadius = false;
+    try {
+        (void)mc3d::calculateMassRadiusCurve(line, {1.0e200});
+    } catch (const std::invalid_argument&) {
+        rejectedOverflowingRadius = true;
+    }
+    require(rejectedOverflowingRadius,
+            "mass-radius estimator accepted a radius whose square overflows");
+}
+
 void testMassRadiusCurveGeneration() {
     const std::vector<mc3d::Vec3> positions{
         {0.0, 0.0, 0.0}, {1.0, 0.0, 0.0}, {3.0, 0.0, 0.0}
@@ -260,6 +287,7 @@ int main() {
         testCellListRejectsExcessiveDenseGrid();
         testMassRadiusPowerLawRegression();
         testMassRadiusCurveGeneration();
+        testMassRadiusRecoversOneDimensionalScaling();
         testEmptyNetwork();
     } catch (const std::exception& e) {
         std::cerr << "FAILED: " << e.what() << '\n';
