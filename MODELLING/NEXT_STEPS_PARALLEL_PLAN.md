@@ -329,3 +329,12 @@ been updated. Hosted CI validation is pending. This distinction will let us
 report event probability per selected move separately from component
 reduction per move; neither is a physical collision rate without a physical
 time/mobility model.
+
+
+### Workstream D: direct industrial precipitated-silica transport/mechanics evidence
+
+Added PSG-046, Ragueh et al. (2015), *Separation and Purification Technology* 156, 2–11, DOI 10.1016/j.seppur.2015.10.005. The full author manuscript was inspected. It studies three industrial precipitated-silica dispersions sampled directly from a reactor, combining TEM/SAXS/USAXS, pressure filtration (400–600 kPa, five repeats), Darcy-derived cake permeability and osmotic compression. Percolation thresholds are reported at silica volume fractions approximately 0.06, 0.08 and 0.09 for the three systems. It provides unusually direct evidence linking hierarchy, cake transport and compression/yielding.
+
+Important limit: the permeability is inferred for filtration cakes, not measured directly in freely suspended or syneresising gel fragments. Osmotic compression is slow/isotropic and filtration loading varies with cake height; do not equate their pressure thresholds. This source supports the structural-state/Darcy architecture, but is not direct calibration for the radial syneresis solver.
+
+**Updated modelling implication:** keep at least three state descriptors distinct where data permit: (i) local aggregate structure/length scales, (ii) network connectivity/percolation and volume fraction, and (iii) transport permeability and mechanical yielding. A single Df parameter is unlikely to capture all three.
