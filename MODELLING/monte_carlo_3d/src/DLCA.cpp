@@ -6,6 +6,7 @@
 #include <cmath>
 #include <limits>
 #include <memory>
+#include <map>
 #include <stdexcept>
 #include <utility>
 
@@ -70,6 +71,7 @@ DLCAResult DLCA::generate() const {
     }
 
     DLCAResult result;
+    std::map<std::size_t, DLCAClusterMobilityStats> mobilityBySize;
     while (clusters.size() > 1 && result.attempts < config_.maximumAttempts &&
            (config_.targetCumulativeSquaredTranslation == 0.0 ||
             result.cumulativeSquaredClusterTranslation <
@@ -90,6 +92,11 @@ DLCAResult DLCA::generate() const {
                 break;
             }
         }
+
+        const std::size_t selectedClusterSize = clusters[moving].size();
+        auto& mobilityStats = mobilityBySize[selectedClusterSize];
+        mobilityStats.clusterSize = selectedClusterSize;
+        ++mobilityStats.selectionCount;
 
         const Vec3 shift{
             random_.uniform(-config_.maximumComponentStep, config_.maximumComponentStep),
@@ -160,7 +167,10 @@ DLCAResult DLCA::generate() const {
         const Vec3 realizedShift = shift * travelFraction;
         const double realizedDistanceSquared = normSquared(realizedShift);
         result.cumulativeSquaredClusterTranslation += realizedDistanceSquared;
-        result.cumulativeClusterTranslationPathLength += std::sqrt(realizedDistanceSquared);
+        const double realizedDistance = std::sqrt(realizedDistanceSquared);
+        result.cumulativeClusterTranslationPathLength += realizedDistance;
+        mobilityStats.cumulativeSquaredTranslation += realizedDistanceSquared;
+        mobilityStats.cumulativeTranslationPathLength += realizedDistance;
         for (auto& particle : clusters[moving]) {
             particle.position = box_.wrap(particle.position + shift * travelFraction);
         }
@@ -243,6 +253,9 @@ DLCAResult DLCA::generate() const {
     result.attemptLimitReached =
         clusters.size() > 1 && !result.displacementBudgetReached &&
         result.attempts >= config_.maximumAttempts;
+
+    for (const auto& entry : mobilityBySize)
+        result.clusterMobilityStats.push_back(entry.second);
 
     for (const auto& cluster : clusters) {
         result.particles.insert(result.particles.end(), cluster.begin(), cluster.end());
