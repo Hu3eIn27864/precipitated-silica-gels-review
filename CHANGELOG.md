@@ -519,3 +519,12 @@
 - 2026-11-11: Added 14 separate pressure-cell forced-syneresis fit records from Wilhelm & Kind (2015), Table 3, preserving pressure intervals, initial height and membrane boundary metadata. Documented why these records must not be pooled with the 2017 centrifugal series.
 
 - 2026-11-11: Added conditional finite-cylinder end-drainage sensitivity ratios for the 12 mm / approximately 3 mL natural-cylinder sample. The article's radial-flow assumption is retained as the reproduction baseline; axial drainage remains a sensitivity case until boundary evidence is confirmed.
+
+
+## 2026-11-11 — Empirical fit reconstruction and transport-parameter audit
+
+- Added a standard-library utility to sample the published single-exponential syneresis fits from the tabulated Smax/tau values, including the pressure-cell series.
+- Added unit tests for the reconstruction equation, initial condition, long-time limit and invalid inputs.
+- Explicitly labelled all generated rows as fit reconstructions, not digitised experimental points; actual marker digitisation remains outstanding.
+- Added a parameter-evidence audit distinguishing direct precipitated-silica filter-cake consolidation from free-gel syneresis and alkoxide-derived silica-gel comparators.
+- No intrinsic permeability or modulus values were inferred from empirical syneresis time constants.
