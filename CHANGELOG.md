@@ -63,3 +63,13 @@
 - Added PSG-023 (Sing & Madeley, 1953), PSG-024 (Shapiro & Kolthoff, 1950), PSG-025 (Merrill & Spencer, 1950) and PSG-026 (Madeley & Sing, 1962).
 - Added LITERATURE/source_assessments_batch_06.md; paywalled/abstract-unavailable papers remain provisional and no substantive claims are inferred from titles alone.
 - Database validation: 26 records; 18 columns per record; no malformed rows.
+
+
+## 2026-11-11 — Independent wet-process aggregation and silicate-gel syneresis
+
+- Added PSG-027 (Bałdyga et al., 2012): independent batch sodium-silicate/sulfuric-acid precipitation study with pH, temperature, silica and electrolyte variation; abstract indicates DLVO forces alone are insufficient and surface reactions matter.
+- Added PSG-028 (Tognonvi et al., 2011): reports ripening-associated syneresis and irreversible consolidation in basic alkali-silicate gels acidified with HCl.
+- Added PSG-029 (Tognonvi et al., 2019): abstract-level evidence on chemical species during basic sodium-silicate gel ripening and dissolution/precipitation.
+- Added LITERATURE/source_assessments_batch_07.md and SYNTHESIS/claim_evidence_matrix_v02.md. The matrix now contains 15 bounded claims.
+- Updated Shapiro & Kolthoff (1950) assessment using an accessible reproduced abstract; still not full-text inspected and strictly limited to high-temperature powder/gel ageing.
+- Database validation: 29 records; 18 columns per record; no malformed rows.
