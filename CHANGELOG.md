@@ -506,3 +506,11 @@
 - Distinguished hydraulic conductivity K [m/s] from intrinsic permeability κ [m²] throughout the coupling implementation.
 - Added separate identities and inverses: cv = K M / γw and cv = κ M / μ.
 - Corrected the README parameter-identifiability explanation; no generic 'permeability' symbol is used for both quantities.
+
+## 2026-11-11 — Source-verified geometry and curve extraction plan
+
+- Audited the open Wilhelm & Kind (2015) article and KIT dissertation for sample geometry and thermal/boundary conditions.
+- Documented a conditional cylinder-height estimate (~26.5 mm from 12 mm diameter and ~3 mL, assuming a right circular cylinder) as derived, not measured.
+- Flagged the ~3 mm droplets as confined in a sealed PMMA microscopy cell, so a free-sphere boundary cannot be assumed.
+- Added a reproducible curve-digitisation protocol separating measured markers from empirical fit curves and keeping pressure-cell and centrifugal datasets distinct.
+- No raw curve points were fabricated or added; curve digitisation remains an explicit next step.
