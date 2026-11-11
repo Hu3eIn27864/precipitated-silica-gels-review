@@ -126,3 +126,8 @@ The component-observables structure now retains graph-unwrapped coordinates, and
 ## Known-geometry line-scaling harness (2026-11-11)
 
 A standalone C++17 harness implementing the committed mass-radius counting and log-log regression logic was compiled with GCC using `-Wall -Wextra -Wpedantic -fsanitize=address,undefined`. For a finite straight chain of 1001 equally spaced particles and radii 10, 15, 20, 25, 30 and 40, 50, it returned (D_f=0.964034) and (R^2=0.999992); both satisfy the repository regression thresholds (|Df−1| < 0.05, R² > 0.995). The deviation from exactly one is expected from finite-chain boundary effects. The harness is an isolated executable, not the complete CMake/CTest suite, and does not independently compile the complete committed repository target.
+
+
+## Fit-window scan and robust distance tests added (2026-11-11)
+
+The test source now checks exhaustive contiguous-window enumeration (28 windows for nine radii with at least three points), exponent invariance for an exact power law, and detection of a deliberately constructed crossover. It also checks the mass-radius estimator at large finite coordinate scales after replacing squared-distance comparison with `std::hypot`. These assertions have been committed but have **not** yet been executed in the full CMake/CTest target. No test pass is claimed for these additions.
