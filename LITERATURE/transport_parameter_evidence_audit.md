@@ -45,3 +45,12 @@ A single shrinkage curve constrains a lumped transport/mechanical timescale, add
 A visual inspection of the open PDF tables revealed that the earlier S3 fractal-dimension conflict is not the only transcription hazard. Table 2 prints the material labels as S1, S3, S3 (primary particle diameters 17, 25, 10 nm), while Table 3 and the article's prose identify the three materials as S1, S2, S3. The 25 nm row is likely S2, but the CSV preserves the printed label and marks the likely interpretation as unconfirmed. Table 3 itself reports S3 (D_f=1.8), while the adjacent prose gives 2.2. Both values are retained without resolution.
 
 Table 4 specific resistance is relative to an undisclosed reference (R). One S1 entry at 600 kPa is printed without the (R) symbol; it is flagged rather than silently repaired. This prevents reconstruction of absolute cake permeability from the table alone.
+
+
+## 2026-11-11 — Derived Ragueh resistance ratios and source-access update
+
+A derived Table 4 comparison is stored in `LITERATURE/ragueh_2015_relative_resistance_analysis.csv`. The reported relative cake resistance rises 45.2% (S1), 60.0% (S2) and 55.8% (S3) from 400 to 600 kPa. At fixed pressure, S1/S3 resistance ratios are 3.25, 2.56 and 3.03. These comparisons remain on the source's relative scale (undisclosed reference R); they are not absolute permeability values. The 600 kPa S1 entry lacks the R symbol in the printed table and is treated as provisional.
+
+A second inspection of the Ragueh PDF confirms the S1/S3/S3 label pattern in Table 1 in addition to Table 2. The middle row is probably S2, but the source does not authorise silent correction. The S3 fractal dimension remains 1.8 in Table 3 versus 2.2 in adjacent prose.
+
+For Wilhelm & Kind (2015), the original publisher image assets are now accessible at 1024-pixel width for Figures 8 and 10 (URLs recorded in `MODELLING/validation_data_roadmap.md`). This removes the previous image-access blocker, although digitisation and pixel/axis uncertainty annotation have not yet been completed. The KIT repository record confirms Open Access availability; its 13 MB PDF endpoint remains beyond the retrieval limit in this environment.
