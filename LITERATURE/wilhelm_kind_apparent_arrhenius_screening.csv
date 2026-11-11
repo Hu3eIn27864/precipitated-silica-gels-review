@@ -1,0 +1,13 @@
+geometry,catalysis,temperature_C,temperature_K,tau_h,ln_inverse_tau,reciprocal_temperature_K_inv,apparent_Ea_kJ_mol_from_three_point_regression,linear_R2,interpretation_status
+cylinder,acidic,20,293.15,21.3,-3.05870707,0.003411223,29.27,0.9815,descriptive_apparent_value_not_mechanistic
+cylinder,acidic,40,313.15,11.7,-2.45958884,0.003193358,29.27,0.9815,descriptive_apparent_value_not_mechanistic
+cylinder,acidic,60,333.15,5.0,-1.60943791,0.003001651,29.27,0.9815,descriptive_apparent_value_not_mechanistic
+cylinder,basic,20,293.15,50.1,-3.91402101,0.003411223,12.29,0.9429,descriptive_apparent_value_not_mechanistic
+cylinder,basic,40,313.15,32.0,-3.46573590,0.003193358,12.29,0.9429,descriptive_apparent_value_not_mechanistic
+cylinder,basic,60,333.15,27.5,-3.31418600,0.003001651,12.29,0.9429,descriptive_apparent_value_not_mechanistic
+droplet,acidic,20,293.15,0.40,0.91629073,0.003411223,-13.40,0.9568,negative_apparent_slope_requires_thermal_history_caution
+droplet,acidic,40,313.15,0.64,0.44628710,0.003193358,-13.40,0.9568,negative_apparent_slope_requires_thermal_history_caution
+droplet,acidic,60,333.15,0.77,0.26136476,0.003001651,-13.40,0.9568,negative_apparent_slope_requires_thermal_history_caution
+droplet,basic,20,293.15,0.67,0.40047757,0.003411223,-6.79,0.4107,weak_three_point_linearity_and_thermal_history_caution
+droplet,basic,40,313.15,0.57,0.56211892,0.003193358,-6.79,0.4107,weak_three_point_linearity_and_thermal_history_caution
+droplet,basic,60,333.15,0.95,0.05129329,0.003001651,-6.79,0.4107,weak_three_point_linearity_and_thermal_history_caution
