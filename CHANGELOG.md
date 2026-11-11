@@ -580,3 +580,12 @@
 - Zylinder ergeben positive scheinbare Arrhenius-Werte (+29.27 kJ/mol sauer; +12.29 kJ/mol basisch); Tröpfchen negative scheinbare Werte (−13.40 bzw. −6.79 kJ/mol). Letztere werden ausdrücklich nicht als chemische Aktivierungsenergien interpretiert.
 - Nur drei Temperaturpunkte je Reihe; unterschiedliche Geometrien und die dokumentierte thermische Anlaufphase der Tröpfchen verhindern eine mechanistische Arrhenius-Deutung.
 - Ausschließlich publizierte Tabellenwerte verwendet; die KI-gestützten Kurvenablesungen sind nicht in diese Rechnung eingegangen.
+
+
+## 2026-11-11 — Explorative Fits der 164 KI-gestützten Kurvenablesungen
+
+- Alle 12 Reihen der als `ai_assisted_approximation` gekennzeichneten Näherungspunkte wurden separat mit der publizierten Einzelexponentialfunktion (S(t)=A[1-\exp(-t/\tau)]) angepasst.
+- Ergänzt: reproduzierbares Standardbibliothek-Skript `MODELLING/transport_model/fit_wilhelm_kind_approximate_curves.py`, Ergebnistabelle `LITERATURE/wilhelm_kind_approximate_curve_fits.csv` und methodische Begleitnotiz.
+- Figure 8 und Figure 10a liefern überwiegend Amplituden in der Nähe der publizierten Tabellenwerte; Figure 10b zeigt systematisch 1.40–1.65-fach höhere Fit-Amplituden.
+- Figure 8a bei 40/60 °C ist wegen des ersten Nichtnullpunkts erst bei 22 h für die frühe Zeitkonstante schlecht aufgelöst; hohe R²-Werte werden ausdrücklich nicht als Ablesevalidierung interpretiert.
+- Keine Punktgewichtung, keine Glättung, keine Konfidenzintervalle und keine physikalische Parameteridentifikation; alle Fits bleiben explorativ und von einer unabhängigen Originalbildprüfung abhängig.
