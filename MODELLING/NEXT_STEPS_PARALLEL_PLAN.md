@@ -264,3 +264,14 @@ The per-size diagnostics were included in hosted CI [#267](https://github.com/Hu
 The common-Q seed-level data show that the selection fraction for clusters of size at least two was 8.87% at baseline, 15.53% for mobility exponent 0.5 and 11.48% for exponent 1.5. This is qualitatively consistent with the code's declared (m^{-\alpha}) selection weighting, but only verifies an algorithmic consequence in a three-seed, incomplete-cluster screen. It is not a physical mobility law.
 
 **Next analysis gate:** use the new file to compute size-class-conditioned selection frequency, Q and L per selection, and merge outcomes after moves selected from each size class. Keep denominator definitions explicit (attempts/selections, not particles or physical time). Preserve seed-level rows and do not aggregate fit exponents for incomplete clusters. After that, decide whether a larger-Q pilot can be predeclared without strong differential censoring.
+
+
+### Workstream B extension: merge outcomes stratified by selected size
+
+Extended the per-size statistics with successful component merges caused by
+moves selected from each pre-move cluster-size class. The ensemble CSV now
+exports this count alongside selections, Q and L. A conservation test requires
+the sum of size-class merge counts to equal the run-level successful-merge
+count, and the reproducibility test includes this new field. This allows
+selection/movement exposure to be distinguished from merge outcomes in the
+next analysis. Hosted CI validation of this extension is pending.
