@@ -85,8 +85,22 @@ void testDLCAReproducibilityAndNonOverlap() {
             "DLCA particle count changed");
     require(a.attempts == b.attempts &&
             a.successfulMerges == b.successfulMerges &&
+            near(a.cumulativeSquaredClusterTranslation,
+                 b.cumulativeSquaredClusterTranslation) &&
+            near(a.cumulativeClusterTranslationPathLength,
+                 b.cumulativeClusterTranslationPathLength) &&
             a.completed == b.completed,
             "DLCA metadata not reproducible");
+    require(std::isfinite(a.cumulativeSquaredClusterTranslation) &&
+            a.cumulativeSquaredClusterTranslation >= 0.0 &&
+            std::isfinite(a.cumulativeClusterTranslationPathLength) &&
+            a.cumulativeClusterTranslationPathLength >= 0.0 &&
+            a.cumulativeSquaredClusterTranslation <=
+                a.cumulativeClusterTranslationPathLength *
+                a.cumulativeClusterTranslationPathLength + 1e-10,
+            "DLCA realized translation diagnostics are invalid");
+    require(a.cumulativeClusterTranslationPathLength > 0.0,
+            "DLCA did not record any realized cluster translation");
     for (std::size_t i = 0; i < a.particles.size(); ++i) {
         require(a.particles[i].id == b.particles[i].id,
                 "DLCA particle IDs not reproducible");
