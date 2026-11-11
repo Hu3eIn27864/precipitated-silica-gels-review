@@ -104,3 +104,8 @@ The cell-list regression source was also extended to cover negative periodic que
 The dense periodic grid now refuses allocations above 1,000,000 cells. DLCA catches this specific grid-size exception and reverts to exact brute-force candidate enumeration for both swept-contact broad phase and final contact identification. This preserves correctness while avoiding an unexpectedly large dense allocation; it may be slower for such geometries.
 
 The network CTest source now includes deterministic pseudo-random candidate-completeness comparisons against brute-force minimum-image distances (240 generated positions) and a test that verifies the dense-grid cap rejects an excessive allocation request. These tests have been added to the committed target but **have not yet been executed in a complete repository CMake build**. Earlier isolated cell-list tests do not cover these latest additions. No performance benchmark or silica validation is claimed.
+
+
+## Mass-radius power-law regression utility (2026-11-11)
+
+Added a standalone log-log OLS helper with explicit fit interval, slope standard error, R² and fitted-point count. The CTest source includes recovery of a synthetic exponent (1.65) and rejection of non-positive mass input. This checks regression arithmetic only. The utility does not generate mass-radius curves or validate a physical fractal regime. The new source and updated test have **not yet been compiled or executed in a full repository build**.
