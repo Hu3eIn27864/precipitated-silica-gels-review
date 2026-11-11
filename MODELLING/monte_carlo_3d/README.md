@@ -2,7 +2,7 @@
 
 ## Status
 
-Verified software kernel plus newly committed aggregation/analysis modules pending local execution. The existing geometry, interaction and Metropolis kernel previously passed 3/3 CTest targets in Release and sanitizer Debug builds (see TEST_RESULTS.md). This update adds a reproducible rigid-cluster Brownian aggregation generator (DLCA-style) and contact-graph observables, including graph-based periodic unwrapping of cluster coordinates for radius of gyration. A fourth CTest target has been registered, but the new modules have not yet been locally compiled or tested; do not extend the earlier 3/3 pass claim to them. The neighbour list remains independently verified but is not yet wired into Metropolis. Configuration parsing, production output/metadata and a production simulation driver remain unimplemented. No physical silica validation or calibrated interaction model is claimed.
+Verified software kernel plus committed aggregation, network-observable and mass-radius analysis modules pending complete-project execution. The existing geometry, interaction and Metropolis kernel previously passed 3/3 CTest targets in Release and sanitizer Debug builds (see TEST_RESULTS.md). This update adds a reproducible rigid-cluster Brownian aggregation generator (DLCA-style) and contact-graph observables, including graph-based periodic unwrapping of cluster coordinates for radius of gyration. A fourth CTest target has been registered, but the new modules have not yet been locally compiled or tested; do not extend the earlier 3/3 pass claim to them. The neighbour list remains independently verified but is not yet wired into Metropolis. Configuration parsing, production output/metadata and a production simulation driver remain unimplemented. No physical silica validation or calibrated interaction model is claimed.
 
 ## Scientific purpose
 
@@ -96,3 +96,12 @@ The implementable V1 contract is now defined in [TECHNICAL_SPEC.md](TECHNICAL_SP
 A periodic uniform-cell grid now supplies conservative candidate sets for DLCA swept-contact detection and post-contact cluster identification. The cell width is chosen at least as large as the query radius, so a wrapped 3×3×3 cell neighbourhood is a superset of all possible neighbours within that radius; the caller still applies exact minimum-image/swept-distance tests. If the swept search radius approaches half the box length, DLCA falls back to the brute-force candidate scan. Initial random sequential placement is still brute force, and the cell grid is rebuilt during cluster moves, so this is not yet a fully optimised production implementation.
 
 The new regression case compares cell-list candidates against brute-force minimum-image neighbours, including periodic-face and small-grid cases. An isolated C++17 ASan/UBSan check of the cell-list module passed. Full CMake verification of the current repository remains pending.
+
+
+## Mass-radius analysis (implementation and isolated checks)
+
+- `include/MassRadius.hpp` / `src/MassRadius.cpp`: mean enclosed particle count as a function of radius, averaged over all particle centres in one graph-unwrapped component. The caller must exclude components whose periodic unwrapping is inconsistent.
+- `include/FractalDimension.hpp` / `src/FractalDimension.cpp`: explicit-window log-log OLS fit returning exponent, slope standard error, R² and point count.
+- The estimator is a transparent reference implementation with O(N² N_r) cost; it is not yet optimised for large aggregates.
+- An isolated sanitizer-compiled straight-chain test returned Df=0.964034 and R²=0.999992 for a finite 1001-particle chain over radii 10–50. The small downward bias from Df=1 is expected from finite-chain boundary effects.
+- The complete repository CMake/CTest suite, generated-aggregate scaling analysis, fit-window sensitivity and independent-seed ensemble statistics remain pending. No silica-specific fractal dimension is claimed.
