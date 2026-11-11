@@ -300,3 +300,5 @@
 - Corrected the first aggregation draft after a test exposed endpoint-overlap risk: collision detection now locates first contact along the translation segment rather than accepting penetrative endpoint configurations.
 - Scientific limits: this is a simplified rigid-cluster DLCA-style algorithm, not a hydrodynamic Brownian-dynamics solver. No cluster rotation, hydrodynamic interactions, lubrication, electrostatics, or reaction-limited sticking. The mobility exponent is an explicit algorithmic assumption; no fractal dimension or silica parameter is prescribed or claimed.
 - No physical calibration, fractal-dimension fit, or experimental validation is claimed.
+
+- Extended the network regression suite to check (R_g) invariance under translation across a periodic face and explicit detection of a periodic-winding component. Local equivalent-harness check passed; full CMake/CI status remains unconfirmed.
