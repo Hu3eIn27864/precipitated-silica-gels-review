@@ -163,3 +163,14 @@ combination (subject also to drainage length and boundary assumptions), not
 (k) and (M) separately. Independent permeability and mechanical
 measurements are needed to separate them. This is a central reason not to
 label a fitted (c_v) as a measured gel permeability.
+
+
+### Expanded radial convergence validation
+
+The radial test suite now checks both cylinder and sphere against the
+independent eigenfunction series at (Fo=0.1), with joint grid/time
+refinement (30, 60 and 120 cells) and time-step refinement at fixed
+120-cell resolution. The local diagnostic errors under joint refinement
+were 0.01905, 0.00480 and 0.000964 for the cylinder, and 0.02649, 0.00671
+and 0.00135 for the sphere. Hosted CI [#293](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43021684276)
+passed the expanded radial suite as part of the complete workflow.
