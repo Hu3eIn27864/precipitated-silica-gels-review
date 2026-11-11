@@ -209,3 +209,13 @@
 
 - Added `MODELLING/transport_model/test_syneresis_1d.py` with checks for the initial condition, long-time limit, monotonicity and dimensionless scaling.
 - Documented how to run the tests. These verify mathematical/code behaviour only and do not constitute validation against experimental silica-gel data.
+
+
+## 2026-11-11 — Natural syneresis parameters extracted by geometry
+
+- Re-inspected the open publisher full text of Wilhelm & Kind (2015), including the experimental methods, Tables 1–2 and the model discussion.
+- Added 12 natural-syneresis fit-parameter records (maximum relative volume decrease and characteristic time constant) for acid/base gels, three temperatures, and cylinder/droplet geometries to `LITERATURE/quantitative_extraction_syneresis.csv`.
+- Added `LITERATURE/source_assessments_batch_17.md` to document the extraction, source context, and limits. These are published empirical fit parameters, not digitised raw time-series or direct transport measurements.
+- Updated `MODELLING/validation_data_roadmap.md` to distinguish tabulated fit parameters from raw curve data and supplementary forced-syneresis material.
+- Added `MODELLING/transport_model/geometry_scaling_note.md` with a first-eigenmode dimensional diagnostic for idealised radial cylinder/sphere diffusion. Apparent diffusivities are explicitly not treated as measured material properties.
+- Key model limitation recorded: the article's exponential shrinkage law is empirical; the authors state that a physically based model remained future work. A universal slab consolidation coefficient must not be fitted across cylinders and droplets without resolving geometry, boundary conditions and thermal history.
