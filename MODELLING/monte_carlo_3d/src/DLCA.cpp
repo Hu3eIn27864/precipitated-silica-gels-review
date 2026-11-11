@@ -63,63 +63,107 @@ DLCAResult DLCA::generate() const {
     while (clusters.size() > 1 && result.attempts < config_.maximumAttempts) {
         ++result.attempts;
         double weightSum = 0.0;
-        for (const auto& c : clusters)
-            weightSum += std::pow(static_cast<double>(c.size()), -config_.mobilityExponent);
+        for (const auto& cluster : clusters) {
+            weightSum += std::pow(static_cast<double>(cluster.size()),
+                                  -config_.mobilityExponent);
+        }
         double draw = random_.uniform(0.0, weightSum);
         std::size_t moving = clusters.size() - 1;
         for (std::size_t i = 0; i < clusters.size(); ++i) {
             draw -= std::pow(static_cast<double>(clusters[i].size()),
                              -config_.mobilityExponent);
-            if (draw <= 0.0) { moving = i; break; }
+            if (draw <= 0.0) {
+                moving = i;
+                break;
+            }
         }
 
-        const Vec3 shift{random_.uniform(-config_.maximumComponentStep,
-                                         config_.maximumComponentStep),
-                         random_.uniform(-config_.maximumComponentStep,
-                                         config_.maximumComponentStep),
-                         random_.uniform(-config_.maximumComponentStep,
-                                         config_.maximumComponentStep)};
-        for (auto& p : clusters[moving])
-            p.position = box_.wrap(p.position + shift);
+        const Vec3 shift{
+            random_.uniform(-config_.maximumComponentStep, config_.maximumComponentStep),
+            random_.uniform(-config_.maximumComponentStep, config_.maximumComponentStep),
+            random_.uniform(-config_.maximumComponentStep, config_.maximumComponentStep)};
 
-        std::vector<std::size_t> hit;
-        for (std::size_t j = 0; j < clusters.size(); ++j) {
-            if (j == moving) continue;
-            bool touching = false;
-            for (const auto& a : clusters[moving]) {
-                for (const auto& b : clusters[j]) {
-                    if (box_.distanceSquared(a.position, b.position) <= exclusion2) {
-                        touching = true;
-                        break;
+        // Continuous collision detection: find the first contact along the
+        // proposed translation, rather than allowing endpoint overlaps.
+        double firstContact = 1.0;
+        bool collision = false;
+        const double shift2 = normSquared(shift);
+        if (shift2 > 0.0) {
+            for (std::size_t j = 0; j < clusters.size(); ++j) {
+                if (j == moving) continue;
+                for (const auto& a : clusters[moving]) {
+                    for (const auto& b : clusters[j]) {
+                        const Vec3 relative =
+                            box_.minimumImageDisplacement(a.position, b.position);
+                        const double r2 = normSquared(relative);
+                        if (r2 <= exclusion2) {
+                            firstContact = 0.0;
+                            collision = true;
+                            continue;
+                        }
+                        const double projection = dot(relative, shift);
+                        if (projection <= 0.0) continue;
+                        const double discriminant =
+                            projection * projection - shift2 * (r2 - exclusion2);
+                        if (discriminant < 0.0) continue;
+                        const double entry =
+                            (projection - std::sqrt(discriminant)) / shift2;
+                        if (entry >= 0.0 && entry <= firstContact) {
+                            firstContact = entry;
+                            collision = true;
+                        }
                     }
                 }
-                if (touching) break;
             }
-            if (touching) hit.push_back(j);
         }
 
-        if (!hit.empty()) {
-            Cluster merged;
-            std::vector<bool> remove(clusters.size(), false);
-            remove[moving] = true;
-            for (const auto j : hit) remove[j] = true;
-            for (std::size_t j = 0; j < clusters.size(); ++j)
-                if (remove[j])
-                    merged.insert(merged.end(), clusters[j].begin(), clusters[j].end());
+        const double travelFraction = collision ? firstContact : 1.0;
+        for (auto& particle : clusters[moving]) {
+            particle.position = box_.wrap(particle.position + shift * travelFraction);
+        }
 
-            std::vector<Cluster> survivors;
-            survivors.reserve(clusters.size() - hit.size());
-            for (std::size_t j = 0; j < clusters.size(); ++j)
-                if (!remove[j]) survivors.push_back(std::move(clusters[j]));
-            survivors.push_back(std::move(merged));
-            clusters = std::move(survivors);
-            // Each hit cluster reduces the number of components by one.
-            result.successfulMerges += hit.size();
+        if (collision) {
+            std::vector<std::size_t> hit;
+            const double contactTolerance = exclusion2 * (1.0 + 1e-10);
+            for (std::size_t j = 0; j < clusters.size(); ++j) {
+                if (j == moving) continue;
+                bool touching = false;
+                for (const auto& a : clusters[moving]) {
+                    for (const auto& b : clusters[j]) {
+                        if (box_.distanceSquared(a.position, b.position) <= contactTolerance) {
+                            touching = true;
+                            break;
+                        }
+                    }
+                    if (touching) break;
+                }
+                if (touching) hit.push_back(j);
+            }
+
+            if (!hit.empty()) {
+                Cluster merged;
+                std::vector<bool> remove(clusters.size(), false);
+                remove[moving] = true;
+                for (const auto j : hit) remove[j] = true;
+                for (std::size_t j = 0; j < clusters.size(); ++j) {
+                    if (remove[j])
+                        merged.insert(merged.end(), clusters[j].begin(), clusters[j].end());
+                }
+                std::vector<Cluster> survivors;
+                survivors.reserve(clusters.size() - hit.size());
+                for (std::size_t j = 0; j < clusters.size(); ++j) {
+                    if (!remove[j]) survivors.push_back(std::move(clusters[j]));
+                }
+                survivors.push_back(std::move(merged));
+                clusters = std::move(survivors);
+                result.successfulMerges += hit.size();
+            }
         }
     }
 
-    for (const auto& cluster : clusters)
+    for (const auto& cluster : clusters) {
         result.particles.insert(result.particles.end(), cluster.begin(), cluster.end());
+    }
     std::sort(result.particles.begin(), result.particles.end(),
               [](const Particle& a, const Particle& b) { return a.id < b.id; });
     result.completed = clusters.size() == 1;
