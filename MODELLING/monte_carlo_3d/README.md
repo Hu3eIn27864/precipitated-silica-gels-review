@@ -125,13 +125,13 @@ The new regression case compares cell-list candidates against brute-force minimu
 
 ## Current verification boundary
 
-The original geometry–interaction–Metropolis kernel passed 3/3 CTest targets in Release and sanitizer Debug builds. Subsequent DLCA, cell-list, network-observable, mass-radius, fit-window and ensemble-driver changes are covered by committed tests, including the fifth CTest entry `dlca_ensemble_smoke`. That smoke test checks successful CLI execution and all three CSV headers, without requiring stochastic aggregate completion. The full current snapshot has not yet been built or run; no new suite pass is claimed. See [TEST_RESULTS.md](TEST_RESULTS.md).
+The current snapshot has now completed a hosted Release CMake build and all five CTest targets, including `dlca_ensemble_smoke`, in [GitHub Actions run #220](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43015008467). The complete MC3D Python analysis tests and 1-D transport-model tests also passed. The bounded DLCA size pilot and seven-configuration sensitivity screen executed and their artifacts were uploaded. This verifies software execution for the tested workflow, not physical calibration or silica-specific model validity. See [TEST_RESULTS.md](TEST_RESULTS.md).
 
 ## DLCA pilot interpretation and fit sensitivity
 
-The pilot workflow now runs `analysis/analyze_dlca_fit_sensitivity.py` after the seed-level ensemble summary and stores its CSV outputs with the other pilot artifacts. The audit reports within-seed exponent ranges across all available valid fit windows; it does not select a scaling interval or convert fit windows into independent replicates. See [DLCA_PILOT_VALIDATION_PROTOCOL.md](DLCA_PILOT_VALIDATION_PROTOCOL.md) for predeclared interpretation gates. The new script and its tests are committed, but their execution in the hosted workflow is not yet verified.
+The pilot workflow now runs `analysis/analyze_dlca_fit_sensitivity.py` after the seed-level ensemble summary and stores its CSV outputs with the other pilot artifacts. The audit reports within-seed exponent ranges across all available valid fit windows; it does not select a scaling interval or convert fit windows into independent replicates. See [DLCA_PILOT_VALIDATION_PROTOCOL.md](DLCA_PILOT_VALIDATION_PROTOCOL.md) for predeclared interpretation gates. The script and its tests passed in hosted CI run #220. The pilot data show strong fit-window sensitivity and insufficient completion at larger sizes; see [TEST_RESULTS.md](TEST_RESULTS.md).
 
-## DLCA parameter sensitivity controls (implementation added; execution pending)
+## DLCA parameter sensitivity controls (implemented and executed in bounded CI; physical interpretation pending)
 
 The ensemble executable accepts three optional trailing parameters:
 contact distance, maximum component displacement per coordinate, and
@@ -156,7 +156,10 @@ for contact distance, maximum cluster step and mobility exponent using
 N = 32, three seeds per variant and a 50,000-attempt cap. It preserves the
 raw per-variant CSV files, writes a parameter manifest, and runs both the
 fixed-window ensemble summary and fit-window sensitivity audit. The six
-non-baseline variants are compared with the baseline configuration from the
-separate CI pilot. This bounded screen is not the full finite-size study and
-does not calibrate the model to silica. See
+non-baseline variants are compared with a baseline generated inside the same
+paired seed block. In the first screen the baseline completed 0/3, so no paired
+Rg or exponent comparison was valid. The size pilot completed only 2/3 at
+N = 32 and 0/3 at N = 64 or 128; its N = 32 fit-window sensitivity was high.
+This bounded screen is not the full finite-size study and does not calibrate
+the model to silica. See
 [DLCA_PARAMETER_SENSITIVITY_PLAN.md](DLCA_PARAMETER_SENSITIVITY_PLAN.md).
