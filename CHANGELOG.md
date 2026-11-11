@@ -644,3 +644,10 @@
 - Adopted Table 2 as the authoritative published reference for subsequent literature comparisons; base-catalysed droplet values are A = 0.30/0.39/0.51 and τ = 0.67/0.57/0.95 h at 20/40/60 °C.
 - Kept exploratory fits to the 164 AI-assisted approximate graph readings separate and non-authoritative.
 - Retained the visible Figure 10b/Table 2 discrepancy as unresolved; no correction to the published table or plotted values is asserted.
+
+## 2026-11-11 — Follow-up source and dataset-access audit
+
+- Added `LITERATURE/followup_research_status_2026-11-11.md`.
+- Confirmed the Wilhelm & Kind (2015) Table 2 reference values against the KITopen full text; targeted erratum searches found no correction notice, without treating that negative search as proof of absence.
+- Confirmed the 2026 sodium-silicate grout paper identifies replication dataset DOI 10.34894/V9OPAT. Dataverse's Anubis challenge prevented retrieval of dataset metadata/files in this pass; no raw dataset analysis is claimed.
+- Retained the grout study as an adjacent-system comparator, not a direct precipitated-silica calibration source.
