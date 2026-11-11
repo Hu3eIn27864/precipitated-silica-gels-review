@@ -131,3 +131,8 @@ A standalone C++17 harness implementing the committed mass-radius counting and l
 ## Fit-window scan and robust distance tests added (2026-11-11)
 
 The test source now checks exhaustive contiguous-window enumeration (28 windows for nine radii with at least three points), exponent invariance for an exact power law, and detection of a deliberately constructed crossover. It also checks the mass-radius estimator at large finite coordinate scales after replacing squared-distance comparison with `std::hypot`. These assertions have been committed but have **not** yet been executed in the full CMake/CTest target. No test pass is claimed for these additions.
+
+
+## Compact and branched reference-geometry isolated check (2026-11-11)
+
+A standalone C++17 harness using the same all-centre enclosed-mass definition and log-log OLS calculation was compiled with GCC and AddressSanitizer/UndefinedBehaviorSanitizer. It returned an apparent exponent of 2.33099 for the finite 9×9×9 cubic lattice (radii 1–4.5) and 1.07112 for the three-arm, 603-point cross (radii 5–20). Both fall inside the new regression bounds. This isolated geometry harness is not the complete repository test target; the newly committed test functions still await full CMake/CTest execution.
