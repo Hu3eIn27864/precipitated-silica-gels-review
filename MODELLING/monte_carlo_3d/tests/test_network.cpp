@@ -155,7 +155,7 @@ void testPeriodicSweptCollisionAgainstSampledTrajectories() {
         double firstSample = 1.0;
         for (int step = 0; step <= 2000; ++step) {
             const double fraction = static_cast<double>(step) / 2000.0;
-            const mc3d::Vec3 point = relative + displacement * fraction;
+            const mc3d::Vec3 point = relative - displacement * fraction;
             const mc3d::Vec3 minimumImage{
                 point.x - boxLength * std::nearbyint(point.x / boxLength),
                 point.y - boxLength * std::nearbyint(point.y / boxLength),
@@ -174,7 +174,7 @@ void testPeriodicSweptCollisionAgainstSampledTrajectories() {
                     "analytic periodic sweep reported contact after sampled contact");
         }
         if (contact) {
-            const mc3d::Vec3 point = relative + displacement * *contact;
+            const mc3d::Vec3 point = relative - displacement * *contact;
             const mc3d::Vec3 minimumImage{
                 point.x - boxLength * std::nearbyint(point.x / boxLength),
                 point.y - boxLength * std::nearbyint(point.y / boxLength),
