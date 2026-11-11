@@ -438,3 +438,10 @@
 
 
 - 2026-11-11: Hosted CI run #234 passed after adding realized-displacement diagnostics to the DLCA result and CSV schema. The new metrics showed mean cumulative squared translation 2,000.71 for the baseline step 0.2 versus 500.30 for step 0.1 after the same 50,000 attempts; step 0.28 completed in a mean 25,665 attempts at mean cumulative squared translation 2,011.66. This confirms that fixed-attempt step-size comparisons mix structural and algorithmic-clock effects. A common-displacement stopping criterion is the next planned improvement.
+
+
+## 2026-11-11 — Parallel next-step plan
+
+- Added `MODELLING/NEXT_STEPS_PARALLEL_PLAN.md` with independently executable workstreams for pilot artifact audit, common-displacement DLCA protocol, radial transport solver verification, literature/validation evidence, and manuscript synthesis.
+- Explicitly gated the full DLCA size matrix on completion, unwrapping, fit-window stability, and common algorithmic displacement; no physical-time or silica-calibration interpretation is permitted.
+- Plan records current hosted CI verification boundary and distinguishes the latest successful workflow from physical model validity.
