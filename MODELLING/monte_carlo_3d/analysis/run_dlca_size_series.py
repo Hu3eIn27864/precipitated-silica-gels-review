@@ -19,12 +19,24 @@ def positive_int(value: str) -> int:
     return parsed
 
 
+def nonnegative_int(value: str) -> int:
+    parsed = int(value)
+    if parsed < 0:
+        raise argparse.ArgumentTypeError("value must be a non-negative integer")
+    return parsed
+
+
+def scaled_box_length(particle_count: int, reference_size: int,
+                      reference_box: float) -> float:
+    return reference_box * (particle_count / reference_size) ** (1.0 / 3.0)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--executable", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--sizes", type=positive_int, nargs="+", default=[32, 64, 128])
-    parser.add_argument("--seed-start", type=positive_int, default=1000)
+    parser.add_argument("--seed-start", type=nonnegative_int, default=1000)
     parser.add_argument("--seed-count", type=positive_int, default=5)
     parser.add_argument("--max-attempts", type=positive_int, default=200000)
     parser.add_argument("--reference-size", type=positive_int, default=32)
@@ -42,7 +54,7 @@ def main() -> int:
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     for count in args.sizes:
-        box = args.reference_box * (count / args.reference_size) ** (1.0 / 3.0)
+        box = scaled_box_length(count, args.reference_size, args.reference_box)
         if box <= 2.0:
             parser.error(f"Calculated box length {box} is too small for N={count}")
         prefix = args.output_dir / f"n{count}"
