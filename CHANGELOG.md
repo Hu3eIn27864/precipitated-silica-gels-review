@@ -547,3 +547,11 @@
 - No raw figure markers have yet been digitised. No experimental data or physical parameters were fabricated or fitted in this phase.
 
 - 2026-11-11: Added a separate structured transcription of Ragueh et al. Table 1 initial slurry composition in `LITERATURE/ragueh_2015_initial_slurry_data.csv`; retained the printed S1/S3/S3 labels and documented the probable-but-unconfirmed S2 middle-row identity.
+
+
+## 2026-11-11 — Figure-digitisation pipeline prepared
+
+- Added a standard-library pixel-to-data utility supporting panel-specific linear/log10 axes and first-order propagation of marker-centre pixel uncertainty.
+- Added calibration and marker-pixel CSV templates plus unit tests for linear/logarithmic transforms.
+- Added a figure-access/status note. The article's PDF text is available through KITopen, but screenshot/image extraction remains blocked by a 13 MB retrieval limit and direct PNG downloads fail in this execution environment. No digitised points are claimed.
+- Corrected the droplet preconditioning metadata: Methods section states 20 min at 20 °C before transfer to the thermostated cell; the later reference to the first 30 min describes similar curve courses, not the actual hold duration.
