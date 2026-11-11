@@ -647,3 +647,11 @@ This is numerical verification of the implemented fixed-coefficient PDE and its 
 - [x] Recorded the authors' explicit limitation: pore-fluid flow was omitted and must be coupled to describe kinetics more thoroughly.
 - [x] Updated the literature database, source assessment batch 22, claim C26 and poroelastic model design.
 - [ ] Use this paper as a modelling precedent only; do not transfer its interaction parameters or simulation-time mapping.
+
+## Heterogeneous 1-D solver verification — CI #328 (11.11.2026)
+
+- [x] Hosted CI #328 passed after adding spatial-grid and time-step refinement tests: https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43053892073
+- [x] All 51 transport-model tests passed, including the new heterogeneous solver tests and both refinement checks.
+- [x] The homogeneous analytical limit, per-step discrete balance, non-negativity/monotonic mean pressure, and refinement trends are covered.
+- [ ] Still required before constitutive extension: interface-location refinement and a manufactured-solution check for spatially varying coefficients.
+- [ ] Time-varying storage, evolving porosity and deformation feedback remain deferred; no target material calibration or physical validation is implied.
