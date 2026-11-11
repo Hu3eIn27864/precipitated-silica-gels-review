@@ -614,3 +614,12 @@
 - Scherer (1996, Langmuir) als thematischen Vorläufer aufgenommen.
 - Alle drei Quellen sind als Mechanismen-/Methodenvergleich klassifiziert. Alkoxid-abgeleitete Gele sind nicht mit industriell gefällter Kieselsäure gleichzusetzen; keine numerischen Parameter werden übertragen.
 - Modellkonsequenz: hydraulische Permeabilität und mechanische/viskoelastische Antwort getrennt und zeitabhängig führen; Identifikation verlangt unabhängige hydraulische und mechanische Messungen.
+
+
+## 2026-11-11 — Parallel evidence and poroelastic model preparation
+
+- Added direct sodium-silicate/sulfuric-acid silica-sol rheology evidence (Kaide et al. 2011; Kaide & Saeki 2012), reactive high-pH silica-gel rheology (Wang et al. 2014), semi-batch precipitation/aggregation evidence (Schlomach & Kind 2004), and a separately classified 2026 sodium-silicate grout comparator with open replication data.
+- Added structured inventory and detailed evidence note. Corrected the parameter-gap statement: target-chemistry rheology/mechanics evidence exists; matched intrinsic permeability and a rigorous constrained-modulus mapping remain unresolved.
+- Added poroelastic scaling utility and tests for cv=κM/μ and tc=Ld²/cv. These are dimensional/identifiability tools only, with no material defaults or fitted target parameters.
+- Added staged poroelastic model design document. No variable-coefficient physical solver or silica constitutive closure is claimed yet.
+- Hosted CI result for the new tests is pending at commit time.
