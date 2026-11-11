@@ -385,3 +385,11 @@
 
 - Extended the end-to-end CMake smoke script to require exactly one run-summary data row for the requested seed and validate its basic metadata structure.
 - Re-ran the script locally against a temporary stand-in executable; the CMake harness passed. This does not substitute for building or running the actual C++ program.
+
+ 
+## 2026-11-11 — Seed-level DLCA ensemble statistics
+
+- Added a standard-library analysis script to compare independent DLCA runs across explicitly supplied particle counts using one common, predeclared mass-radius fit interval.
+- Reports per-size completion/unwrapping/fit fractions, largest-component fraction, and per-seed exponent and Rg descriptive statistics.
+- Excludes incomplete and periodically winding aggregates from exponent statistics; overlapping fit windows are not treated as independent observations.
+- Added unit tests for fixed-window extraction, run exclusions, undefined Rg and duplicate seeds. Tests are committed but not yet executed.
