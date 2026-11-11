@@ -136,3 +136,8 @@ The test source now checks exhaustive contiguous-window enumeration (28 windows 
 ## Compact and branched reference-geometry isolated check (2026-11-11)
 
 A standalone C++17 harness using the same all-centre enclosed-mass definition and log-log OLS calculation was compiled with GCC and AddressSanitizer/UndefinedBehaviorSanitizer. It returned an apparent exponent of 2.33099 for the finite 9×9×9 cubic lattice (radii 1–4.5) and 1.07112 for the three-arm, 603-point cross (radii 5–20). Both fall inside the new regression bounds. This isolated geometry harness is not the complete repository test target; the newly committed test functions still await full CMake/CTest execution.
+
+
+## Fit-window plateau handling (2026-11-11)
+
+A standalone C++17 harness mirroring the committed fit and scan logic was compiled with GCC and AddressSanitizer/UndefinedBehaviorSanitizer. A curve with an initial plateau retained nine non-singular fit windows; a fully constant curve returned zero windows without throwing. This is an isolated logic check, not execution of the complete repository CTest target. The DLCA ensemble executable has not yet been compiled or run against the complete project.
