@@ -1,0 +1,24 @@
+name: MC3D C++ tests
+
+on:
+  push:
+    paths:
+      - "MODELLING/monte_carlo_3d/**"
+      - ".github/workflows/mc3d-ci.yml"
+  pull_request:
+    paths:
+      - "MODELLING/monte_carlo_3d/**"
+      - ".github/workflows/mc3d-ci.yml"
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Configure
+        run: cmake -S MODELLING/monte_carlo_3d -B build/mc3d -DCMAKE_BUILD_TYPE=Release
+      - name: Build
+        run: cmake --build build/mc3d --parallel 2
+      - name: Run tests
+        run: ctest --test-dir build/mc3d --output-on-failure
