@@ -341,3 +341,11 @@
 
 
 - Follow-up integration: network observables now retain graph-unwrapped component coordinates, and the network test source passes a periodic-boundary cluster directly into the mass-radius estimator. Winding components remain explicitly flagged and must be excluded from fractal fitting. This integration assertion is committed but awaits the full CMake/CTest run.
+
+
+## 2026-11-11 — Mass-radius numerical hardening and known-geometry check
+
+- Removed per-centre temporary distance-vector allocation from the mass-radius inner loop; the transparent estimator remains O(N² N_r).
+- Rejects radii whose squared value overflows floating-point range.
+- Added a finite 1001-particle straight-chain regression. The expected exponent is near, not exactly, one because finite-chain boundaries bias mean enclosed mass. The test uses an explicit 0.05 exponent tolerance and R² > 0.995.
+- An isolated C++17 GCC ASan/UBSan harness returned Df=0.964034 and R²=0.999992 for that geometry. This is not a full repository CMake/CTest result.
