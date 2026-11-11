@@ -397,3 +397,10 @@ compression evidence, but not syneresis permeability. The model architecture
 must therefore keep permeability, mechanical resistance/yielding, and
 network connectivity as separate state variables until target-system data
 constrain their coupling.
+
+
+### Workstream C verification result: CI #293–#295
+
+Hosted CI [#293](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43021684276) passed the expanded cylinder/sphere grid- and time-step-convergence tests. CI [#294](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43021709035) passed the corrected planar benchmark tests and the integrated DLCA screens. After adding seven regression points to the corrected planar dimensionless reference curve, CI [#295](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43021757732) passed the complete workflow, including C++ tests, Python analysis, all transport tests, the bounded DLCA screens and artifact upload.
+
+The planar code-verification references now cover (T_v=0.001,0.01,0.05,0.1,0.2,0.5,1,2), with the independent (T_v=0.1) reference retained. The radial suite tests both ideal geometries against the eigenfunction series and checks monotone error reduction under grid/time refinement. These are numerical verification results only. No experimental parameter fitting or silica-specific validation has been performed.
