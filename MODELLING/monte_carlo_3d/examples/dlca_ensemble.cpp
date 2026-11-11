@@ -107,7 +107,7 @@ int main(int argc, char** argv) {
         curves << "seed,particle_count,radius,mean_enclosed_mass\n";
         fits << "seed,fit_minimum_radius,fit_maximum_radius,exponent,"
                 "standard_error,r_squared,point_count\n";
-        mobility << "seed,selected_cluster_size,selection_count,successful_merges,"
+        mobility << "seed,selected_cluster_size,selection_count,successful_merge_events,successful_merges,"
                     "cumulative_squared_translation,cumulative_translation_path_length\n";
         runs << std::setprecision(17);
         curves << std::setprecision(17);
@@ -162,7 +162,8 @@ int main(int argc, char** argv) {
                  << generated.displacementBudgetOvershoot << '\n';
             for (const auto& stats : generated.clusterMobilityStats) {
                 mobility << seed << ',' << stats.clusterSize << ','
-                         << stats.selectionCount << ',' << stats.successfulMerges << ','
+                         << stats.selectionCount << ',' << stats.successfulMergeEvents << ','
+                         << stats.successfulMerges << ','
                          << stats.cumulativeSquaredTranslation << ','
                          << stats.cumulativeTranslationPathLength << '\n';
             }
