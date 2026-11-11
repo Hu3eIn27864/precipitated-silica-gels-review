@@ -3,6 +3,7 @@
 #include "MassRadius.hpp"
 #include "Observables.hpp"
 #include "PeriodicCellList.hpp"
+#include "PeriodicSweptCollision.hpp"
 
 #include <algorithm>
 #include <cmath>
@@ -109,6 +110,28 @@ void testDLCAReproducibilityAndNonOverlap() {
     require(obs.componentCount ==
                 (a.completed ? 1u : cfg.particleCount - a.successfulMerges),
             "component count inconsistent with DLCA merge accounting");
+}
+
+void testPeriodicSweptCollisionChecksNeighbouringImages() {
+    // A particle starts just inside the positive half-box image boundary.
+    // Moving in +x takes the nearest image from +4.99 to -3.01; checking
+    // only the initial minimum image would miss this collision.
+    const auto contact = mc3d::firstPeriodicSweptSphereContact(
+        {4.99, 0.0, 0.0}, {-2.0, 0.0, 0.0}, 4.9, 10.0);
+    require(contact.has_value(),
+            "periodic swept collision missed a neighbouring image");
+    require(near(*contact, 0.045, 1e-10),
+            "periodic swept collision returned the wrong first-contact fraction");
+
+    const auto noContact = mc3d::firstPeriodicSweptSphereContact(
+        {4.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, 1.0, 10.0);
+    require(!noContact.has_value(),
+            "periodic swept collision reported a false contact");
+
+    const auto overlap = mc3d::firstPeriodicSweptSphereContact(
+        {0.5, 0.0, 0.0}, {0.1, 0.0, 0.0}, 1.0, 10.0);
+    require(overlap.has_value() && *overlap == 0.0,
+            "periodic swept collision did not detect initial overlap");
 }
 
 void testPeriodicCellListIsConservative() {
@@ -356,6 +379,7 @@ int main() {
         testPeriodicUnwrappingAndGraph();
         testPeriodicWindingIsFlagged();
         testDLCAReproducibilityAndNonOverlap();
+        testPeriodicSweptCollisionChecksNeighbouringImages();
         testPeriodicCellListIsConservative();
         testCellListRandomizedAgainstBruteForce();
         testCellListRejectsExcessiveDenseGrid();
