@@ -162,3 +162,42 @@ and is not coupled to permeability evolution or network mechanics.
   retain the legacy fixed-attempt mode and add deterministic tests.
 - Keep the full DLCA size matrix gated until the common-Q comparison has
   adequate completion, unwrapping and fit-window stability.
+
+
+### Workstream B: common-Q stopping mode implemented
+
+Added an optional cumulative squared realized-translation target to the DLCA
+core and CLI. The legacy fixed-attempt mode remains the default when target
+Q is zero. In common-Q mode, the simulation finishes the current rigid-cluster
+move and then stops; it never truncates a move to hit the target. The result
+records whether Q was reached, whether the hard attempt cap stopped the run,
+and the nonnegative Q overshoot. The size-series and paired-sensitivity
+runners accept and record `--target-q`.
+
+A deterministic C++ test covers target reached, attempt-cap reached, and
+legacy mode. The end-to-end CLI smoke test now exercises a positive Q target
+and checks the expanded run-summary schema. Hosted CI run #254 has passed
+build, all five CTest targets, Python analysis tests, and transport tests;
+the bounded fixed-attempt screen has completed. The common-Q paired screen
+(Q target 450, N=32, three paired seeds, 50,000-attempt safety cap) is still
+running at the time of this update. Its raw outputs and paired summaries are
+retained in the same workflow artifact.
+
+Q=450 is a provisional numerical screening target selected because all three
+step-0.10 seeds in the preceding fixed-attempt pilot reached approximately
+Q=499–502 by the 50,000-attempt cap. It is not a physical time, Brownian
+diffusivity, or material parameter. The screen must also report path length
+L, attempts, overshoot, and stop reason; equal Q is not assumed to imply
+identical trajectory history or morphology.
+
+### Workstream D: additional permeability comparator
+
+Added PSG-044, Scherer (1995), on pH-dependent permeability and viscoelastic
+relaxation of silica gels, to the literature database and source assessments
+(batch 18). The accessible abstract reports increasing permeability and
+relaxation rate with pH, pore radii around 14–20 nm, and a slight decrease in
+shear modulus. This remains class B comparator evidence: exact precursor and
+formulation are unverified, full text has not been inspected, and no values
+are transferred to industrial precipitated silica. It is grouped with the
+related Scherer silica-gel mechanics/permeability research family, not counted
+as an independent external replication.
