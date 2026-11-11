@@ -38,6 +38,14 @@ void testPeriodicUnwrappingAndGraph() {
             "periodic cluster Rg was not calculated from unwrapped coordinates");
     require(a.components[0].periodicUnwrappingConsistent,
             "simple chain should unwrap consistently");
+    require(a.components[0].unwrappedPositions.size() == 3,
+            "component did not retain graph-unwrapped coordinates");
+    const auto periodicMassRadius =
+        mc3d::calculateMassRadiusCurve(a.components[0].unwrappedPositions,
+                                        {0.81, 1.61});
+    require(near(periodicMassRadius[0].meanEnclosedMass, 7.0 / 3.0) &&
+            near(periodicMassRadius[1].meanEnclosedMass, 3.0),
+            "mass-radius estimator did not use graph-unwrapped periodic coordinates");
 
     const std::vector<mc3d::Particle> translated{
         {0, {0.6, 5.0, 5.0}}, {1, {1.4, 5.0, 5.0}},
