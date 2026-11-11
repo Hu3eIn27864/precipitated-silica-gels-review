@@ -736,3 +736,10 @@
 - Documented close fitted maximum-shrinkage values but 2015 fitted characteristic times about 2.1–2.6 times shorter at approximate matched pressures; the exponent also differs (n=1.23 vs n=1), so no physical rate-change claim is made.
 - Added `LITERATURE/wilhelm_kind_pressure_cell_crossstudy_comparison.md`; marked a common raw-curve refit as pending because the inspected sources provide fitted tables and plots, not machine-readable time-series observations.
 - No permeability, diffusivity, or constitutive parameter was inferred from empirical fit values.
+
+
+## 2026-11-11 — Layered-interface convergence gate added
+
+- Added a two-layer 1-D transport test with a mobility discontinuity at x/L = 0.37, deliberately not aligned to the cell grid.
+- Compares coarse-grid mean pressure against a finer-grid numerical reference and requires decreasing error under refinement; the fine-grid reference is not an exact analytical solution.
+- This checks sensitivity to representing a material interface, not a silica-gel property or physical constitutive law. Hosted CI result is pending.
