@@ -123,6 +123,45 @@ class EnsembleAnalysisTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "Fit point count mismatch"):
                 load_system(4, prefix, 2.0, 4.0)
 
+    def test_orphan_fit_seed_is_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            prefix = Path(directory) / "n4"
+            self.write_csv(Path(str(prefix) + "_runs.csv"),
+                ["seed", "completed", "unwrapping_consistent",
+                 "largest_component_size", "largest_component_rg"],
+                [{"seed": 1, "completed": 1, "unwrapping_consistent": 1,
+                  "largest_component_size": 4, "largest_component_rg": 1.0}])
+            self.write_csv(Path(str(prefix) + "_mass_radius.csv"),
+                ["seed", "particle_count", "radius", "mean_enclosed_mass"],
+                [{"seed": 1, "particle_count": 4, "radius": r, "mean_enclosed_mass": m}
+                 for r, m in [(2, 1.5), (3, 2.2), (4, 3.0)]])
+            self.write_csv(Path(str(prefix) + "_fit_windows.csv"),
+                ["seed", "fit_minimum_radius", "fit_maximum_radius",
+                 "exponent", "r_squared", "standard_error", "point_count"],
+                [{"seed": 99, "fit_minimum_radius": 2, "fit_maximum_radius": 4,
+                  "exponent": 1.4, "r_squared": 0.98,
+                  "standard_error": 0.05, "point_count": 3}])
+            with self.assertRaisesRegex(ValueError, "unknown seed"):
+                load_system(4, prefix, 2.0, 4.0)
+
+    def test_mass_radius_data_for_unfinished_run_is_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            prefix = Path(directory) / "n4"
+            self.write_csv(Path(str(prefix) + "_runs.csv"),
+                ["seed", "completed", "unwrapping_consistent",
+                 "largest_component_size", "largest_component_rg"],
+                [{"seed": 1, "completed": 0, "unwrapping_consistent": 1,
+                  "largest_component_size": 2, "largest_component_rg": 1.0}])
+            self.write_csv(Path(str(prefix) + "_mass_radius.csv"),
+                ["seed", "particle_count", "radius", "mean_enclosed_mass"],
+                [{"seed": 1, "particle_count": 4, "radius": 2,
+                  "mean_enclosed_mass": 1.5}])
+            self.write_csv(Path(str(prefix) + "_fit_windows.csv"),
+                ["seed", "fit_minimum_radius", "fit_maximum_radius",
+                 "exponent", "r_squared", "standard_error", "point_count"], [])
+            with self.assertRaisesRegex(ValueError, "require a completed"):
+                load_system(4, prefix, 2.0, 4.0)
+
     def test_duplicate_run_seed_is_rejected(self):
         with tempfile.TemporaryDirectory() as directory:
             prefix = Path(directory) / "n4"
