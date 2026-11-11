@@ -50,3 +50,6 @@ The complete CMake/CTest suite for the current repository snapshot has not yet b
 ## Automated smoke test
 
 CTest includes a deterministic end-to-end smoke test of the ensemble executable. It verifies successful execution and the three CSV headers, but does not require a completed aggregate or non-empty mass-radius output. The current five-test suite has not yet been executed; see [../TEST_RESULTS.md](../TEST_RESULTS.md) for the verification boundary.
+
+
+The smoke test additionally requires exactly one run-summary data row for the requested seed and checks the row's basic field structure. This is a CLI/output-contract check, not a stochastic aggregation-success criterion.
