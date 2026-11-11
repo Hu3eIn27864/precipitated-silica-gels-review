@@ -50,3 +50,14 @@ Derzeit explorative Visualisierung, grobe Plausibilitätskontrolle und Priorisie
 3. Danach Modellkurven separat digitalisieren (`source_type=model_curve`).
 4. Fehlerbalken getrennt erfassen.
 5. Erst dann Fit-/Kinetikvergleich und Unsicherheitsanalyse.
+
+
+## Zusatzprüfung anhand der Originalabbildungen auf der Verlagsseite (11.11.2026)
+
+Die Original-PNGs von Figure 8 und Figure 10 wurden direkt über die MDPI-Artikelseite geöffnet und visuell geprüft (Figure 8: https://mdpi-res.com/polymers/polymers-07-01528/article_deploy/html/images/polymers-07-01528-g008-1024.png; Figure 10: https://mdpi-res.com/polymers/polymers-07-01528/article_deploy/html/images/polymers-07-01528-g010-1024.png).
+
+**Wichtige Neubewertung von Figure 10b:** Die späten Messmarker und die eingezeichneten Modellkurven liegen visuell deutlich oberhalb der Tabellenwerte A=0.30/0.39/0.51 aus Table 2. Die zuvor übermittelten ungeprüften Näherungsmaxima (ca. 0.51/0.67/0.86) sind qualitativ mit den sichtbaren Markerlagen vereinbar. Daher ist ein reiner Ablese- oder Kurvenzuordnungsfehler nicht mehr die naheliegend einzige Erklärung. Es besteht ein möglicher interner Widerspruch zwischen Figure 10b und Table 2; insbesondere sind die drei basischen A-Werte in Table 2 identisch mit den basischen Figure-8-Werten aus Table 1. Das könnte auf eine Tabellenübertragung oder Druckfehler hindeuten, ist ohne Erratum oder Autorenbestätigung aber **nicht bewiesen**.
+
+Die ungeprüften 164 Punkte bleiben KI-gestützte Näherungsablesungen und werden nicht nachträglich als unabhängig digitalisiert deklariert. Die visuelle Sichtprüfung bestätigt nur die qualitative Größenordnung und die Symbolzuordnung (Quadrate 20 °C, Kreise 40 °C, Dreiecke 60 °C) für Figure 10b. Es wurden keine neuen Pixelkoordinaten, kalibrierten Werte oder Fehlerbalken erfasst.
+
+**Konsequenz:** Table-2-Werte und Figure-10b-Kurvenwerte müssen als zwei getrennte Quellenevidenzen erhalten bleiben. Keine der beiden darf stillschweigend an die andere angepasst werden. Für jede quantitative Verwendung ist die Inkonsistenz offenzulegen; eine Autorenanfrage bzw. ein Erratum-Check wäre sinnvoll.
