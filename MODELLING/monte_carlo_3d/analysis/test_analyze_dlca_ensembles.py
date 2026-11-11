@@ -37,13 +37,23 @@ class EnsembleAnalysisTests(unittest.TestCase):
                 ],
             )
             self.write_csv(
+                Path(str(prefix) + "_mass_radius.csv"),
+                ["seed", "particle_count", "radius", "mean_enclosed_mass"],
+                [
+                    {"seed": 11, "particle_count": 10, "radius": radius,
+                     "mean_enclosed_mass": mass}
+                    for radius, mass in [(1.5, 1.2), (2, 1.5), (3, 2.1),
+                                         (4, 2.8), (5, 3.2), (8, 4.0)]
+                ],
+            )
+            self.write_csv(
                 Path(str(prefix) + "_fit_windows.csv"),
                 ["seed", "fit_minimum_radius", "fit_maximum_radius",
                  "exponent", "standard_error", "r_squared", "point_count"],
                 [
                     {"seed": 11, "fit_minimum_radius": 2, "fit_maximum_radius": 5,
                      "exponent": 1.72, "standard_error": 0.03,
-                     "r_squared": 0.99, "point_count": 5},
+                     "r_squared": 0.99, "point_count": 4},
                     # A second window for the same seed is deliberately ignored.
                     {"seed": 11, "fit_minimum_radius": 1.5, "fit_maximum_radius": 8,
                      "exponent": 1.9, "standard_error": 0.04,
@@ -51,7 +61,7 @@ class EnsembleAnalysisTests(unittest.TestCase):
                     # Incomplete seed fit rows must not become observations.
                     {"seed": 12, "fit_minimum_radius": 2, "fit_maximum_radius": 5,
                      "exponent": 1.5, "standard_error": 0.1,
-                     "r_squared": 0.9, "point_count": 5},
+                     "r_squared": 0.9, "point_count": 4},
                 ],
             )
             rows, summary = load_system(10, prefix, 2.0, 5.0)
