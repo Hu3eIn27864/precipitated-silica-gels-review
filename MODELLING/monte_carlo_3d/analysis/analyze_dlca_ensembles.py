@@ -91,6 +91,31 @@ def load_system(particle_count: int, prefix: Path,
                 f"Inconsistent mass-radius grid for seed {seed} in {mass_path}"
             )
 
+    # Cross-check observations against the run manifest. The driver emits
+    # mass-radius data and fits only for completed, consistently unwrapped
+    # aggregates; reject orphaned or impossible derived data.
+    run_by_seed: Dict[int, dict] = {}
+    for row in runs:
+        seed = as_int(row, "seed", runs_path)
+        if seed in run_by_seed:
+            raise ValueError(f"Duplicate seed {seed} in {runs_path}")
+        completed = as_int(row, "completed", runs_path)
+        unwrapped = as_int(row, "unwrapping_consistent", runs_path)
+        if completed not in (0, 1) or unwrapped not in (0, 1):
+            raise ValueError(f"Boolean fields must be 0 or 1 in {runs_path}: {row}")
+        run_by_seed[seed] = row
+
+    for seed in radii_by_seed:
+        if seed not in run_by_seed:
+            raise ValueError(f"Mass-radius data for unknown seed {seed} in {mass_path}")
+        run = run_by_seed[seed]
+        if as_int(run, "completed", runs_path) != 1 or \
+           as_int(run, "unwrapping_consistent", runs_path) != 1:
+            raise ValueError(
+                f"Mass-radius data require a completed, consistently unwrapped run "
+                f"for seed {seed} in {runs_path}"
+            )
+
     by_seed: Dict[int, dict] = {}
     for row in fit_rows:
         seed = as_int(row, "seed", fits_path)
@@ -100,6 +125,15 @@ def load_system(particle_count: int, prefix: Path,
            math.isclose(hi, fit_max, rel_tol=1e-10, abs_tol=1e-12):
             if seed in by_seed:
                 raise ValueError(f"Multiple rows for seed {seed} and requested fit window in {fits_path}")
+            if seed not in run_by_seed:
+                raise ValueError(f"Fit row for unknown seed {seed} in {fits_path}")
+            run = run_by_seed[seed]
+            if as_int(run, "completed", runs_path) != 1 or \
+               as_int(run, "unwrapping_consistent", runs_path) != 1:
+                raise ValueError(
+                    f"Fit row requires a completed, consistently unwrapped run "
+                    f"for seed {seed} in {runs_path}"
+                )
             if seed not in radii_by_seed:
                 raise ValueError(
                     f"Fit row for seed {seed} has no corresponding mass-radius data in {mass_path}"
