@@ -45,3 +45,12 @@
 - Kept both studies in class B: they provide independent structural/mechanistic comparators, not direct replications of industrial semi-batch precipitated-silica gel fragmentation or syneresis.
 - Emphasised that fractal dimensions cannot be compared across studies without harmonising material route, length-scale window and fitting assumptions.
 - CSV validation after update: 21 records; 18 columns per record; no malformed rows.
+
+
+## 2026-11-11 — Commercial precipitated-silica powder ageing
+
+- Added PSG-022 (Chal et al., 2019, *Energy and Buildings*) on hygrothermal ageing of commercial precipitated silica powders alongside fumed, hydrophobized silica and aerogel comparators.
+- Added LITERATURE/source_assessments_batch_05.md, explicitly separating wet-gel syneresis, aqueous-gel ageing and post-drying powder ageing.
+- Completed volume/pages metadata (183, 626–638) from the publisher record.
+- Kept the source in class B: directly relevant to post-manufacture precipitated-silica ageing, but not direct evidence for wet-fragment consolidation or syneresis.
+- CSV validation: 22 records; 18 columns per record; no malformed rows.
