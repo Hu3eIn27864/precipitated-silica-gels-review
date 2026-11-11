@@ -666,3 +666,10 @@
 - Upgraded PSG-003 in the literature database and added detailed assessment batch 21 plus a row in the target-system mechanical evidence table.
 - Updated the transport-parameter audit and claim-evidence matrix (C25). The data strengthen direct mechanical evidence but do not provide independent intrinsic permeability or constrained modulus.
 - Recorded the authors' reported primary-consolidation deviations from the simple Terzaghi model as a reason to test damping/viscoelastic response, without treating it as proof of a unique constitutive law.
+
+## 2026-11-11 — Heterogeneous solver refinement verification
+
+- Hosted CI workflow #325 (`43053310816`) passed.
+- The 1-D transport-model test suite ran 51 tests successfully; explicit spatial-grid and time-step refinement tests both passed.
+- The homogeneous analytical slab limit and discrete per-step mass balance remain covered. Next numerical gate is a layered-medium/interface benchmark.
+- No target-material constitutive law or physical prediction has been validated.
