@@ -80,6 +80,16 @@ jobs:
               --system "32:$prefix" \
               --output "build/mc3d/parameter_sensitivity/$variant/summary"
           done
+          python3 MODELLING/monte_carlo_3d/analysis/compare_dlca_parameter_sensitivity.py \
+            --baseline "32:build/mc3d/parameter_sensitivity/baseline/n32" \
+            --variant "contact_0p9=32:build/mc3d/parameter_sensitivity/contact_0p9/n32" \
+            --variant "contact_1p1=32:build/mc3d/parameter_sensitivity/contact_1p1/n32" \
+            --variant "step_0p1=32:build/mc3d/parameter_sensitivity/step_0p1/n32" \
+            --variant "step_0p28=32:build/mc3d/parameter_sensitivity/step_0p28/n32" \
+            --variant "mobility_0p5=32:build/mc3d/parameter_sensitivity/mobility_0p5/n32" \
+            --variant "mobility_1p5=32:build/mc3d/parameter_sensitivity/mobility_1p5/n32" \
+            --fit-min 2 --fit-max 5 \
+            --output build/mc3d/parameter_sensitivity/paired_comparison
       - name: Upload pilot and sensitivity data
         if: always()
         uses: actions/upload-artifact@v4
