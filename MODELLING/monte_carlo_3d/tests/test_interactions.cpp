@@ -13,6 +13,7 @@ void require(bool ok, const std::string& message) {
     if (!ok) throw std::runtime_error(message);
 }
 bool near(double a, double b, double tol = 1e-10) {
+    if (std::isinf(a) || std::isinf(b)) return a == b;
     return std::abs(a - b) <= tol;
 }
 
@@ -48,7 +49,7 @@ void testNeighborList() {
     const mc3d::SimulationBox box(12.0);
     const mc3d::PairPotential potential(1.0, 0.7, 2.5);
     std::vector<mc3d::Particle> p{
-        {0, {0.4, 1.0, 1.0}}, {1, {11.5, 1.0, 1.0}},
+        {0, {0.4, 1.0, 1.0}}, {1, {11.0, 1.0, 1.0}},
         {2, {3.0, 1.0, 1.0}}, {3, {7.0, 1.0, 1.0}}
     };
     mc3d::NeighborList list(2.5, 0.4);
