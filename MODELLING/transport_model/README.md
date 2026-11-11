@@ -37,6 +37,14 @@ precipitated-silica parameters.
 - Fitted cv is a lumped parameter; it cannot independently identify
   permeability and modulus.
 
+## Tests
+
+Run the analytical-limit and dimensionless-scaling checks with:
+
+    python3 -m unittest test_syneresis_1d.py
+
+These are code-level checks, not validation against experimental silica data.
+
 ## Verification checks
 
 1. At t=0, U=0; at long times, U approaches 1.
