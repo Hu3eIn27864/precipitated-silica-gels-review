@@ -637,3 +637,10 @@
 
 - Hosted CI workflow #320 (`43051332381`) passed after the new scaling unit tests were added; workflow #321 (`43051400329`) also passed after the model-design specification was committed.
 - The transport-model Python test discovery step executed successfully. This verifies code-level dimensional scaling and validation cases only; no target-system parameter, constitutive law, or physical syneresis prediction has been validated.
+
+## 2026-11-11 — Table 2 reference values adopted for Wilhelm & Kind (2015)
+
+- Cross-checked the published Table 2 values against the full-text KITopen repository copy (DOI 10.5445/IR/1000052536).
+- Adopted Table 2 as the authoritative published reference for subsequent literature comparisons; base-catalysed droplet values are A = 0.30/0.39/0.51 and τ = 0.67/0.57/0.95 h at 20/40/60 °C.
+- Kept exploratory fits to the 164 AI-assisted approximate graph readings separate and non-authoritative.
+- Retained the visible Figure 10b/Table 2 discrepancy as unresolved; no correction to the published table or plotted values is asserted.
