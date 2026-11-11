@@ -213,3 +213,7 @@ The new PeriodicSweptCollision.cpp helper was compiled with GCC in C++17 mode us
 ### Randomized periodic swept-collision comparison (2026-11-11)
 
 Added a deterministic 500-trajectory regression that compares the analytic periodic swept-sphere result with sampled minimum-image trajectories (2,001 time fractions per trajectory). It checks that sampled contacts are not missed, that the analytic first-contact fraction is no later than the first sampled contact, and that every reported contact lies on or inside the contact sphere within tolerance. The test uses the DLCA convention relative(t) = relative(0) - clusterDisplacement*t. An isolated GCC C++17 harness using a minimal Vec3-compatible interface passed all 500 trajectories; two trajectories intersected the contact sphere in this deterministic sample. This is an isolated helper-level test, not a full integrated build or CTest run.
+
+### CI rerun trigger (2026-11-11)
+
+Documentation-only change to trigger the repository's configured MC3D push workflow after the periodic swept-collision regression was added. This note is not a test result; record build and test outcomes only after inspecting the workflow run.
