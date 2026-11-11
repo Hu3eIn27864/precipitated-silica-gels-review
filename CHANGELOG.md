@@ -267,3 +267,12 @@
 - Added interaction tests for hard-core behaviour, cutoff continuity, zero-attraction limit, local-vs-full energy differences, neighbour-list agreement and invalid list geometry.
 - Registered the new source and test target with CMake and updated the technical specification and implementation status.
 - Verification status unchanged: repository cloning/network access is unavailable in the execution environment; C++ compilation and CTest have not been run. No simulation, calibration or physical validation is claimed.
+
+
+## 2026-11-11 — Reversible Metropolis kernel added
+
+- Implemented a C++17 single-particle translation sampler with symmetric component-wise uniform proposals, periodic wrapping, hard-core overlap rejection and Metropolis acceptance in reduced units (kBT = 1).
+- Defined one sweep as exactly N attempted moves and exposed attempted/accepted counters and acceptance rate.
+- Kept brute-force local energy evaluation in the sampler as the correctness-first baseline; the neighbour list is not yet integrated into move acceptance.
+- Added seeded reproducibility, sweep-count, empty-system and invalid-step tests; registered the kernel and test with CMake/CTest.
+- No compilation or CTest execution has been possible in the current network-restricted environment. No physical time, silica-specific force field, calibrated parameter, or syneresis prediction is claimed.
