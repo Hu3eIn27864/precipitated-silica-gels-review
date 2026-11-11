@@ -276,3 +276,5 @@
 - Kept brute-force local energy evaluation in the sampler as the correctness-first baseline; the neighbour list is not yet integrated into move acceptance.
 - Added seeded reproducibility, sweep-count, empty-system and invalid-step tests; registered the kernel and test with CMake/CTest.
 - No compilation or CTest execution has been possible in the current network-restricted environment. No physical time, silica-specific force field, calibrated parameter, or syneresis prediction is claimed.
+
+- Added GitHub Actions workflow `.github/workflows/mc3d-ci.yml` to configure, compile and run CTest on changes to the MC3D project. The workflow has been committed; no completed CI result is yet available, so build/test success remains unverified.
