@@ -658,3 +658,11 @@
 - Added tests for homogeneous analytical recovery, stepwise mass balance, positivity/monotonicity, piecewise coefficients and input validation.
 - Documented assumptions and deferred time-varying aging/storage until the conservation equation is specified.
 - Numerical verification is pending hosted CI; no physical calibration or target-material prediction is claimed.
+
+## 2026-11-11 — Full-text extraction of direct precipitated-silica oedometer study
+
+- Completed full-text inspection of Sahabi & Kind (2011), *Polymers* 3, 1423–1432, DOI 10.3390/polym3031423 (PSG-003).
+- Extracted direct sodium-silicate/sulfuric-acid model-gel conditions, double-drained oedometer setup, approximately 15 bar loading, and Table 1 t90 values for acidic and alkaline gels at 20/80 °C.
+- Upgraded PSG-003 in the literature database and added detailed assessment batch 21 plus a row in the target-system mechanical evidence table.
+- Updated the transport-parameter audit and claim-evidence matrix (C25). The data strengthen direct mechanical evidence but do not provide independent intrinsic permeability or constrained modulus.
+- Recorded the authors' reported primary-consolidation deviations from the simple Terzaghi model as a reason to test damping/viscoelastic response, without treating it as proof of a unique constitutive law.
