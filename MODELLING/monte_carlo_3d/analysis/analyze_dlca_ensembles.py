@@ -58,9 +58,38 @@ def fmt(value):
 def load_system(particle_count: int, prefix: Path,
                 fit_min: float, fit_max: float) -> Tuple[List[dict], dict]:
     runs_path = Path(str(prefix) + "_runs.csv")
+    mass_path = Path(str(prefix) + "_mass_radius.csv")
     fits_path = Path(str(prefix) + "_fit_windows.csv")
     runs = read_csv(runs_path)
+    mass_rows = read_csv(mass_path)
     fit_rows = read_csv(fits_path)
+
+    # Validate the underlying mass-radius observations before trusting derived fits.
+    radii_by_seed: Dict[int, set] = {}
+    reference_radii = None
+    for row in mass_rows:
+        seed = as_int(row, "seed", mass_path)
+        recorded_count = as_int(row, "particle_count", mass_path)
+        if recorded_count != particle_count:
+            raise ValueError(
+                f"Particle count mismatch for seed {seed} in {mass_path}: "
+                f"expected {particle_count}, found {recorded_count}"
+            )
+        radius = as_float(row, "radius", mass_path)
+        mass = as_float(row, "mean_enclosed_mass", mass_path)
+        if radius <= 0.0 or mass <= 0.0:
+            raise ValueError(f"Mass-radius values must be positive in {mass_path}: {row}")
+        radii = radii_by_seed.setdefault(seed, set())
+        if radius in radii:
+            raise ValueError(f"Duplicate radius {radius} for seed {seed} in {mass_path}")
+        radii.add(radius)
+    for seed, radii in radii_by_seed.items():
+        if reference_radii is None:
+            reference_radii = radii
+        elif radii != reference_radii:
+            raise ValueError(
+                f"Inconsistent mass-radius grid for seed {seed} in {mass_path}"
+            )
 
     by_seed: Dict[int, dict] = {}
     for row in fit_rows:
@@ -71,11 +100,25 @@ def load_system(particle_count: int, prefix: Path,
            math.isclose(hi, fit_max, rel_tol=1e-10, abs_tol=1e-12):
             if seed in by_seed:
                 raise ValueError(f"Multiple rows for seed {seed} and requested fit window in {fits_path}")
+            if seed not in radii_by_seed:
+                raise ValueError(
+                    f"Fit row for seed {seed} has no corresponding mass-radius data in {mass_path}"
+                )
+            point_count = as_int(row, "point_count", fits_path)
+            expected_points = sum(
+                1 for radius in radii_by_seed[seed]
+                if radius >= fit_min and radius <= fit_max
+            )
+            if point_count != expected_points:
+                raise ValueError(
+                    f"Fit point count mismatch for seed {seed}: "
+                    f"fit reports {point_count}, mass-radius data contain {expected_points}"
+                )
             by_seed[seed] = {
                 "df": as_float(row, "exponent", fits_path),
                 "fit_r_squared": as_float(row, "r_squared", fits_path),
                 "fit_standard_error": as_float(row, "standard_error", fits_path),
-                "fit_point_count": as_int(row, "point_count", fits_path),
+                "fit_point_count": point_count,
             }
 
     output_rows = []
