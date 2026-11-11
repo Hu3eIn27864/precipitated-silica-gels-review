@@ -255,3 +255,12 @@ not implement hydrodynamic mobility, cluster rotation, or physical Brownian
 time. The next analysis should compare Q and L accumulated in each size class
 against selection frequency and merge events, while retaining all incomplete
 runs and the attempt-cap status.
+
+
+### Workstream B result: size-resolved mobility accounting passed CI
+
+The per-size diagnostics were included in hosted CI [#267](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43019287245), which completed successfully. The uploaded artifact was inspected across 51 seed/configuration records; selection counts, Q and L all sum exactly (within floating-point tolerance) to the run-level attempts/Q/L. This validates the internal bookkeeping and export path.
+
+The common-Q seed-level data show that the selection fraction for clusters of size at least two was 8.87% at baseline, 15.53% for mobility exponent 0.5 and 11.48% for exponent 1.5. This is qualitatively consistent with the code's declared (m^{-\alpha}) selection weighting, but only verifies an algorithmic consequence in a three-seed, incomplete-cluster screen. It is not a physical mobility law.
+
+**Next analysis gate:** use the new file to compute size-class-conditioned selection frequency, Q and L per selection, and merge outcomes after moves selected from each size class. Keep denominator definitions explicit (attempts/selections, not particles or physical time). Preserve seed-level rows and do not aggregate fit exponents for incomplete clusters. After that, decide whether a larger-Q pilot can be predeclared without strong differential censoring.
