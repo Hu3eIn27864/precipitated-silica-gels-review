@@ -112,3 +112,11 @@
 - The ScienceDirect preview does contain relevant opening abstract text but appends unrelated aerogel-modification/calcination content. This is treated as publisher-page/indexing contamination rather than evidence that the article itself is mismatched.
 - Restored the bounded directional trends to PSG-030 and C16, but kept the source at provisional class B because the original publisher PDF has not been independently inspected.
 - The review claim remains strictly about final powder endpoints; no direct wet-gel syneresis mechanism is inferred.
+
+## 2026-11-11 — Geometry-resolved syneresis extraction
+
+- Re-read Wilhelm & Kind (2015) in the publisher full text and extracted the distinct natural-syneresis datasets for 12-mm cylinders (~3 mL) and ~3-mm droplets.
+- Recorded that acid-catalysed cylinders show ~0.20 maximum shrinkage across 20–60 °C, whereas acid droplets show fitted maxima rising ~0.37→0.48; base-gel maxima rise ~0.30→0.51 in both reported geometry series, but characteristic times differ strongly.
+- Added the droplet protocol's initial 20 °C period and subsequent temperature change as a thermal-history caveat.
+- Refined C06/C07: geometry and drainage length are part of the measured response; “analogous” parameter dependencies between natural and enforced syneresis must not be read as quantitative or mechanistic equivalence.
+- This reinforces the comparison rule: report geometry, drainage boundary, sample age and thermal history with every syneresis number.
