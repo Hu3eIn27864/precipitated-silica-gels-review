@@ -181,3 +181,26 @@ seven nonzero Fourier numbers in addition to the independent (Fo_d=0.1)
 reference test. Hosted CI [#295](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43021757732)
 passed the complete integrated workflow, including all updated 1-D and
 radial transport tests.
+
+## Finite-cylinder first-mode extension (idealised)
+
+The helper finite_cylinder_first_mode_time_constant adds the first separable
+eigenmode for a finite cylinder with a drained curved wall and explicitly
+selected end conditions. For a cylinder of radius R and full height H,
+constant isotropic diffusivity D, and both flat ends perfectly drained,
+
+    tau_1^-1 = D * [(2.4048256/R)^2 + (pi/H)^2].
+
+With sealed (zero-flux) ends, the axial contribution is zero and the result
+reduces to the infinite-cylinder radial first mode. This provides a clean
+limiting-case test and demonstrates why an infinite-cylinder conversion can
+overestimate the characteristic time when end drainage is active.
+
+This is a first-eigenvalue calculation, not a transient finite-cylinder
+solver. It assumes uniform initial excess pressure, constant scalar D,
+perfect drainage at the stated surfaces, and separable geometry. No sample
+height is inferred from the reported 3 mL volume, and the Wilhelm & Kind
+(2015) pyknometer cylinder is not assigned end-drainage conditions without
+source evidence. Mixed drainage, external resistance and evolving geometry
+remain unresolved. Tests verify the mathematical limit and parameter
+monotonicity only.
