@@ -1,0 +1,47 @@
+# Minimal coarse-grained network compression/recovery test.
+# Reduced LJ units; NOT a chemically parameterised silica model.
+# Generate network.data first with generate_network.py.
+
+clear
+units           lj
+dimension       3
+boundary        p p p
+atom_style      bond
+read_data       network.data
+
+pair_style      lj/cut 2.5
+pair_coeff      1 1 1.0 1.0 2.5
+pair_modify     shift yes
+
+bond_style      harmonic
+bond_coeff      1 50.0 1.25
+
+neighbor        0.3 bin
+neigh_modify    delay 0 every 1 check yes
+timestep        0.002
+
+compute         cn all coord/atom cutoff 1.60
+compute         cnmean all reduce ave c_cn
+thermo          500
+thermo_style    custom step temp pe ke etotal press pxx pyy pzz lx ly lz c_cnmean
+dump            traj all custom 1000 network.lammpstrj id type x y z c_cn
+dump_modify     traj sort id
+
+min_style       cg
+minimize        1.0e-7 1.0e-9 5000 20000
+velocity        all create 0.05 4928459 mom yes dist gaussian
+fix             thermostat all nvt temp 0.05 0.05 1.0
+
+# Compress each box dimension by 10%; remap x is affine solid deformation.
+fix             compress all deform 1 x scale 0.90 y scale 0.90 z scale 0.90 remap x units box
+run             10000
+unfix           compress
+
+# Unload to the initial box dimensions.
+fix             unload all deform 1 x scale 1.1111111111 y scale 1.1111111111 z scale 1.1111111111 remap x units box
+run             10000
+unfix           unload
+
+unfix           thermostat
+write_data      network_after_cycle.data
+write_restart   network_after_cycle.restart
