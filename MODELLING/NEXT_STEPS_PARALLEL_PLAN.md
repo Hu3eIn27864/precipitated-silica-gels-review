@@ -631,3 +631,11 @@ No aging law, silica-specific parameter or calibration is included. Time-varying
 - [x] Updated the literature database, mechanical evidence table, transport evidence audit, source-assessment batch 21 and claim C25.
 - [ ] Recover independent intrinsic permeability and constrained-modulus measurements for matched gel states; t90 alone remains a lumped forced-consolidation response.
 
+## Heterogeneous solver numerical-verification update — 11.11.2026
+
+- [x] Hosted CI workflow [#325](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43053310816) passed after adding explicit grid- and time-refinement tests.
+- [x] The transport-model test discovery ran 51 tests successfully, including the heterogeneous solver tests and both refinement checks.
+- [ ] Add an analytical layered-medium/interface benchmark and test integrated boundary flux against total stored-pressure loss over the complete simulation.
+- [ ] Only after those tests, consider a carefully formulated time-varying storage/aging model.
+
+This is numerical verification of the implemented fixed-coefficient PDE and its finite-volume discretisation, not physical validation or calibration.
