@@ -155,3 +155,12 @@ Implement the first version in standard C++ (C++17 or newer), with a small depen
 ### Explicit exclusions in version 1
 
 No explicit water molecules, ionic speciation, pH-dependent surface charge, silanol condensation chemistry, hydrodynamic interactions, Darcy flow, or pore-pressure field. Those require additional evidence and a separate model layer. The existing 1-D transport benchmark remains a complementary continuum reference; it should not be artificially coupled to the MC code in the first implementation.
+
+
+## Level 5 — Multiscale MD–MC–porous-medium CFD coupling
+
+The preferred long-term architecture is a staged, one-way-first coupling from atomistic interaction modelling through 3-D MC network reorganisation and structural upscaling to porous-medium CFD/poro mechanics. Direct atom-to-CFD coupling is not recommended. The dedicated specification is `MODELLING/multiscale_coupling/README.md`.
+
+The central feedback hypothesis is: contact evolution changes network stiffness and permeability; pore-pressure gradients and drainage change local stress and compaction; compaction in turn changes the contact network. This remains a testable hypothesis, not an assumed universal mechanism.
+
+The initial continuum treatment should generally be Darcy flow coupled to a deformable porous skeleton, not fully resolved Navier–Stokes flow through every nanoscale pore. MC structures must be upscaled through representative-volume calculations to obtain permeability and stiffness maps. MD is included only if its silica/water/ion force field and surface chemistry can be defended. A one-way workflow is the first target; bidirectional staggered coupling follows only after each component is verified.
