@@ -313,3 +313,30 @@ The paired summary contains three common seed IDs for every variant, but **zero 
 **No-go for the preplanned full finite-size/scaling matrix at this stage.** The immediate next DLCA task is not a larger run: it is to add and test a common-`Q` stopping mode with an independent attempt safety cap, preserve the legacy mode, and record target reached/cap reached/overshoot plus both Q and L. The pilot suggests Q ≈ 2,000 reduced length-units squared as a provisional screening target only; step 0.10 did not approach it within 50,000 attempts, so its safety cap must be designed separately rather than silently treating it as matched. After the common-budget screen, inspect whether completion, unwrapping and fit-window stability improve before extending to N = 64/128 or increasing seed count.
 
 This artifact audit is a reproducible numerical diagnostic. It does not validate DLCA against precipitated-silica experiments, establish physical kinetics, or establish a universal fractal dimension.
+
+
+### Common-Q paired DLCA screen and radial solver CI validation (2026-11-11)
+
+Hosted CI run [#239](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43017940028), commit `244c9d4d86cd38a953637acf0822ff4532f96b8d`, passed the Release build, all five CTest targets, Python ensemble-analysis tests, and the newly added radial transport tests. The radial solver's five tests also passed in the subsequent integrated run #254.
+
+The DLCA core now supports an optional target (Q_\mathrm{target}=\sum_k|\Delta\mathbf R_k|^2). The simulation completes each proposed move, then checks the cumulative target; no move is truncated. A hard maximum-attempt cap remains independent. Result metadata distinguishes target reached from cap reached and records nonnegative Q overshoot. Target Q = 0 preserves legacy fixed-attempt mode. The CLI, size-series runner and paired-sensitivity runner expose this optional mode. The C++ unit tests and end-to-end CLI smoke test cover target stopping, cap stopping, legacy behaviour and the expanded CSV output.
+
+Hosted CI run [#254](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43018481413), source commit `76a9104863f90e7e0c4b3e7411a586de26841fda`, completed successfully, including the new common-Q paired screen. Its artifact (ID `13853109862`) was downloaded and inspected. The screen used N = 32, seeds 3000–3002, Q target 450 reduced-length-units squared, and a 50,000-attempt safety cap for all seven configurations.
+
+| Configuration | Completed | Q mean ± sample SD | L mean ± sample SD | Attempts mean | Largest-component fraction mean ± sample SD | Components mean |
+|---|---:|---:|---:|---:|---:|---:|
+| Baseline | 0/3 | 450.022 ± 0.025 | 2159.44 ± 6.54 | 11,217 | 0.1042 ± 0.0361 | 23.67 |
+| Contact 0.9 | 0/3 | 450.005 ± 0.005 | 2159.58 ± 6.52 | 11,219 | 0.0833 ± 0.0180 | 22.33 |
+| Contact 1.1 | 0/3 | 450.017 ± 0.016 | 2161.36 ± 5.58 | 11,239 | 0.1458 ± 0.0361 | 20.00 |
+| Step 0.10 | 0/3 | 450.004 ± 0.002 | 4321.35 ± 4.13 | 44,972 | 0.1354 ± 0.0477 | 21.67 |
+| Step 0.28 | 0/3 | 450.022 ± 0.011 | 1542.39 ± 5.48 | 5,724 | 0.1250 ± 0.0313 | 22.67 |
+| Mobility 0.5 | 0/3 | 450.022 ± 0.021 | 2159.81 ± 6.63 | 11,221 | 0.1146 ± 0.0361 | 21.33 |
+| Mobility 1.5 | 0/3 | 450.039 ± 0.008 | 2159.83 ± 6.82 | 11,221 | 0.1042 ± 0.0180 | 20.00 |
+
+All 21 runs reached the Q target; none hit the attempt cap, and none completed aggregation. Q overshoot was small (maximum about 0.051). Therefore no mass-radius fit or Df estimate is available in this screen. The paired summary retains three seed pairs per variant but correctly reports zero valid completed Rg and Df pairs. The partial largest-component fraction remains a finite-progress descriptor only.
+
+The common-Q screen reveals a second important limitation: equal Q does **not** equalise cumulative path length L. Relative to baseline, step 0.10 accumulated approximately twice the path length, while step 0.28 accumulated about 71% of it. At this Q target, the mean largest-component fractions for the three step settings were 0.104, 0.135 and 0.125; with only three seeds and incomplete clusters, these small differences do not establish a systematic morphology effect. Contact-distance changes also alter initial excluded-volume scale; the 0.9 and 1.1 cases cannot be attributed to contact geometry alone.
+
+**Interpretation:** common Q removes the gross difference in squared-displacement budget seen under a fixed attempt count, but it does not fully normalise trajectory history. Retain both Q and L, plus attempts and cluster-size/mobility histories, in subsequent analysis. Do not call either coordinate physical time. A larger Q target would be needed to reach later aggregation states, but it must be selected only after inspecting whether all variants can reach it without completion-selection bias or hitting the safety cap. The current Q=450 screen is an algorithmic diagnostic, not a physical robustness result.
+
+The common-Q implementation and this screen pass software verification. Neither establishes silica-specific kinetics, a physical Brownian clock, or a fractal scaling law.
