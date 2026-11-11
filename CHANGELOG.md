@@ -393,3 +393,5 @@
 - Reports per-size completion/unwrapping/fit fractions, largest-component fraction, and per-seed exponent and Rg descriptive statistics.
 - Excludes incomplete and periodically winding aggregates from exponent statistics; overlapping fit windows are not treated as independent observations.
 - Added unit tests for fixed-window extraction, run exclusions, undefined Rg and duplicate seeds. Tests are committed but not yet executed.
+
+- Extended the MC3D GitHub Actions workflow to run the Python ensemble-analysis unit tests in addition to the C++ build and CTest suite.
