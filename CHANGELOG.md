@@ -175,3 +175,12 @@
 - Distinguished coarse-grained LAMMPS network modelling, continuum poromechanics / OpenFOAM, CFD–DEM (including possible OpenFOAM–LIGGGHTS coupling), and atomistic MD / Monte Carlo by the questions each can and cannot answer.
 - Set minimum requirements for parameter provenance, sensitivity, numerical checks, independent validation and reproducibility.
 - Explicit go/no-go decision: no production simulations yet. Complete the evidence audit and identify a falsifiable, data-constrained question first; prefer the smallest adequate model.
+
+
+## 2026-11-11 — Published validation-data roadmap
+
+- Added `MODELLING/validation_data_roadmap.md` to map candidate published benchmarks to possible model classes.
+- Prioritised direct precipitated-silica syneresis data from Wilhelm & Kind (2015), aggregation/fragmentation data from Schlomach & Kind (2004) and Quarch et al. (2010), and mechanistic continuum benchmarks from Scherer (1989).
+- Identified a CC BY 4.0 public colloidal-silica transport dataset from the University of Strathclyde as an adjacent software/transport benchmark, not direct syneresis validation.
+- Distinguished target-system validation from TEOS-derived and generic colloidal-silica comparators; recorded independent-validation and research-family overlap rules.
+- No simulation has been run or calibrated; digitisation, full-text checks, and data suitability assessment remain pending.
