@@ -665,3 +665,15 @@ This is numerical verification of the implemented fixed-coefficient PDE and its 
 - [ ] Retrieve and transcribe supplementary Table S1 for the 40/60 °C forced-syneresis series if it adds usable pressure-resolved data.
 - [ ] Compare this 2014 dataset with Wilhelm & Kind (2015) and the 2017 dissertation, checking overlap and avoiding double-counting the same experiments.
 - [ ] Do not fit poroelastic κ or M from these empirical curves; no independent permeability/modulus measurement is reported.
+
+
+## Research-family overlap update — 2026-11-11
+
+The Wilhelm/Kind source-family audit is complete at the level of explicit publication attributions:
+
+- Wilhelm & Kind (2015) Figure 8a explicitly cites the 2014 paper for the acid-cylinder natural-syneresis curve; fitted values are nearly identical, so treat it as one likely shared/refitted evidence family, not two independent replications. The papers report inconsistent cylinder dimensions (2014: 18 mm/~6 mL; 2015: 12 mm/~3 mL); this remains unresolved.
+- Wilhelm & Kind (2015) states that the earlier acid-gel pressure-cell experiments were repeated with a different membrane (NF270 versus NP010), with no significant difference reported. This is same-programme repeatability/membrane comparison, not independent external replication.
+- The 2015 base-gel series is additional pH-comparison evidence. The 2017 dissertation reproduces 2015-attributed figures/tables and adds centrifugation and pore-liquid/membrane analyses.
+- Do not count the thesis and explicitly reproduced 2015 outputs again as independent data. Keep the geometry discrepancy visible in any review table.
+
+**Next evidence gate:** compare the 2014 and 2015 acid pressure-cell tables/curves point by point, then update the literature-family map and evidence-count denominator. No new physical model calibration is authorised by this audit.
