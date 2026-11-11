@@ -85,3 +85,8 @@ The original 1024-pixel publisher PNGs for Figures 8 and 10 were opened directly
 For Figure 10b, the visible late experimental markers and plotted model curves are clearly above the base-catalysed Table 2 amplitudes (0.30/0.39/0.51). The previously supplied approximate maxima (about 0.51/0.67/0.86) are qualitatively consistent with the visible marker levels. Notably, the three base-catalysed Table 2 amplitudes repeat the Table 1 base-catalysed cylinder amplitudes exactly. This raises a plausible source-level table transcription/transfer error, but no erratum or author confirmation has been established.
 
 Preserve the table values as printed and the figure as separate evidence. Do not overwrite either. The 164 AI-assisted approximate points remain unverified; this visual check only weakens the hypothesis that the discrepancy must be caused by symbol misassignment. Figure 10b should now be flagged as a **publication-internal figure/table inconsistency candidate**, not simply as a digitisation outlier.
+
+## Table 2 values: adopted reference status (11 November 2026)
+
+The published Table 2 values are now treated as the authoritative reference values for literature comparison, following cross-check against the full-text KITopen copy and the user's explicit decision. For base-catalysed droplets, A = 0.30/0.39/0.51 and τ = 0.67/0.57/0.95 h at 20/40/60 °C. This is a verified transcription of the table, not an independent remeasurement. The apparent difference from the visible Figure 10b traces remains an unresolved figure/table discrepancy. It does not justify changing the table values or relabelling the AI-assisted approximate points as verified measurements.
+Source: https://publikationen.bibliothek.kit.edu/1000052536/3796774
