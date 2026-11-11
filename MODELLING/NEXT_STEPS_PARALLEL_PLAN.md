@@ -639,3 +639,11 @@ No aging law, silica-specific parameter or calibration is included. Time-varying
 - [ ] Only after those tests, consider a carefully formulated time-varying storage/aging model.
 
 This is numerical verification of the implemented fixed-coefficient PDE and its finite-volume discretisation, not physical validation or calibration.
+
+## Literature/model precedent update — Sahabi & Kind (2011) MD study (11.11.2026)
+
+- [x] Full-text inspected the direct precipitated-silica MD paper, DOI 10.3390/polym3042156 (PSG-004).
+- [x] Extracted its 1,000-particle fractal fragment, LJ/Hamaker interaction approach, comparisons to Schlomach (2004) and Sahabi & Kind oedometer data, and reported time rescaling factors (100 for fragment evolution; 10 for network consolidation).
+- [x] Recorded the authors' explicit limitation: pore-fluid flow was omitted and must be coupled to describe kinetics more thoroughly.
+- [x] Updated the literature database, source assessment batch 22, claim C26 and poroelastic model design.
+- [ ] Use this paper as a modelling precedent only; do not transfer its interaction parameters or simulation-time mapping.
