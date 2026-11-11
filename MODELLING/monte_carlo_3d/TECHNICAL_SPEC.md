@@ -111,8 +111,17 @@ V1 does not predict natural/forced syneresis curves, pore-liquid pressure or dra
 4. Neighbour list verified against brute force.
 5. Single-particle Metropolis moves and diagnostics.
 6. Observables and reproducible output.
-7. DLCA generator/imported fractal cluster and structural characterisation.
-8. Smoke tests, independent seeds, finite-size and parameter sensitivity.
+7. Seeded rigid-cluster DLCA-style generator and contact-graph observables (new modules committed; independent test execution pending).
+8. Coordinate import/export, reproducible run driver and smoke tests; independent seeds, finite-size and parameter sensitivity.
 9. Only after V1 review: specify V2 kinetic contact dynamics and compaction.
 
 **Go/no-go:** do not start V2 irreversible kinetics, MD parameter transfer, or MC–continuum coupling until V1 passes code verification and the relevant parameter/validation gap is identified.
+
+
+## 15. Implemented aggregation/analysis candidate (new; verification pending)
+
+The current candidate generator begins from random sequentially placed non-overlapping monomers. At each attempt it selects one cluster with probability proportional to (M^{-\alpha}), translates the entire cluster by a bounded random displacement, and irreversibly merges any clusters that enter the contact distance. The component-wise step is constrained so its maximum vector length is at most half the contact distance, limiting missed encounters in this discrete-step scheme. The process stops at a single cluster or a maximum-attempt limit.
+
+This is a simplified rigid-cluster Brownian aggregation algorithm, not a hydrodynamic DLCA calculation. The mobility exponent is user-specified; no Stokes-Einstein cluster hydrodynamics, rotation, hydrodynamic interactions, lubrication, electrostatics, or reaction-limited sticking are included. Periodic boundaries can create winding clusters; the analysis module flags inconsistent graph unwrapping and such clusters must not be assigned an unqualified (R_g). No fractal dimension estimator is yet implemented; report (D_f) only after a separately specified mass-radius/structure-factor regression over a justified scale interval.
+
+The new unit test target is registered with CTest. Until it is actually compiled and run, the prior 3/3 test result applies only to the original geometry/interaction/Metropolis kernel.
