@@ -103,3 +103,13 @@ This is deliberately not yet a time-dependent aging model. If storage changes wi
 ### Verification status after hosted CI #325 (11 November 2026)
 
 The fixed-coefficient solver passed hosted workflow #325. The transport-model test discovery executed 51 tests, including homogeneous analytical recovery, discrete per-step mass balance, nonnegative/monotonic pressure response, piecewise coefficient handling, and explicit spatial-grid and time-step refinement checks. This establishes numerical consistency for the implemented fixed-coefficient PDE within the tested cases. It does not validate the PDE as a complete physical model of silica-gel syneresis, nor any silica-specific parameter or closure. A layered-medium/interface benchmark and global integrated-flux/storage-loss check remain next before introducing time-dependent material coefficients.
+
+## 9. Direct precedent for particle-scale consolidation and missing transport
+
+Sahabi & Kind (2011), “Experimentally Justified Model-Like Description of Consolidation of Precipitated Silica,” *Polymers* 3, 2156–2171, DOI 10.3390/polym3042156, is a direct precedent for MD modelling of precipitated-silica fragment consolidation. The paper uses a 1,000-primary-particle fractal cluster, LJ/Hamaker-derived colloid interactions and a solvent-particle lattice. It compares the simulated structural evolution with Schlomach & Kind (2004), and a particulate-network consolidation curve with Sahabi & Kind (2011) oedometer measurements.
+
+Two limitations are decisive for the present architecture:
+- agreement with the experimental time courses required empirical simulation-time factors of 100 for the single-fragment comparison and 10 for the network/oedometer comparison;
+- the authors explicitly state that fluid flow through the network was omitted and is required to describe the temporal course more thoroughly.
+
+The study therefore motivates, but does not validate, a coupled particle/transport model. Its simulation time scaling and interaction parameters are not transferable calibration data. Its experimental comparators are inherited from the same KIT/Kind research lineage, not independent replication. The current project should retain particle-scale structural evolution and Darcy/poroelastic transport as separate coupled components, and should not use MD/MC algorithmic time as physical syneresis time.
