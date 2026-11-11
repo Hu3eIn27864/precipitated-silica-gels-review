@@ -677,3 +677,11 @@ The Wilhelm/Kind source-family audit is complete at the level of explicit public
 - Do not count the thesis and explicitly reproduced 2015 outputs again as independent data. Keep the geometry discrepancy visible in any review table.
 
 **Next evidence gate:** compare the 2014 and 2015 acid pressure-cell tables/curves point by point, then update the literature-family map and evidence-count denominator. No new physical model calibration is authorised by this audit.
+
+
+## Pressure-cell cross-study comparison — 2026-11-11
+
+- Compare the 2014 and 2015 acid-catalysed forced-syneresis series as within-programme repeat/membrane-comparison evidence, not independent external replication.
+- Published fit summaries show close endpoint amplitudes but shorter reported 2015 time constants at approximate matched pressures. The exponent differs (2014 n=1.23; 2015 n=1), so the apparent rate discrepancy remains unresolved.
+- A common refit is blocked until original time-series data or independently verified digitisation of Figures 7 (2014) and 12 (2015) is available. Never reconstruct raw observations from fitted parameters.
+- Do not use these empirical fits to infer permeability or poroelastic diffusivity.
