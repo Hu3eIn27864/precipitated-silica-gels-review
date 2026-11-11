@@ -97,7 +97,7 @@ int main(int argc, char** argv) {
         if (!runs || !curves || !fits || !mobility)
             throw std::runtime_error("Could not open one or more output CSV files");
 
-        runs << "seed,completed,attempts,successful_merges,component_count,"
+        runs << "seed,completed,attempts,successful_merge_events,successful_merges,component_count,"
                 "largest_component_size,largest_component_rg,unwrapping_consistent,"
                 "contact_distance,maximum_component_step,mobility_exponent,"
                 "cumulative_squared_cluster_translation,"
@@ -148,7 +148,8 @@ int main(int argc, char** argv) {
             const bool unwrapped = hasLargest && largest->periodicUnwrappingConsistent;
 
             runs << seed << ',' << (generated.completed ? 1 : 0) << ','
-                 << generated.attempts << ',' << generated.successfulMerges << ','
+                 << generated.attempts << ',' << generated.successfulMergeEvents << ','
+                 << generated.successfulMerges << ','
                  << network.componentCount << ','
                  << (hasLargest ? largest->particleCount : 0) << ','
                  << rg << ',' << (unwrapped ? 1 : 0) << ','
