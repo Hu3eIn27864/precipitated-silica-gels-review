@@ -101,6 +101,7 @@ void testDLCAReproducibilityAndNonOverlap() {
         const auto& y = b.clusterMobilityStats[i];
         require(x.clusterSize == y.clusterSize &&
                 x.selectionCount == y.selectionCount &&
+                x.successfulMerges == y.successfulMerges &&
                 near(x.cumulativeSquaredTranslation, y.cumulativeSquaredTranslation) &&
                 near(x.cumulativeTranslationPathLength, y.cumulativeTranslationPathLength),
                 "DLCA per-size mobility diagnostics not reproducible");
@@ -164,17 +165,21 @@ void testDLCACommonDisplacementBudgetAndAttemptCap() {
             "DLCA displacement-budget overshoot was not recorded");
 
     std::size_t selectedCount = 0;
+    std::size_t sizeClassMerges = 0;
     double sizeClassQ = 0.0;
     double sizeClassPath = 0.0;
     for (const auto& stats : targetResult.clusterMobilityStats) {
         require(stats.clusterSize > 0,
                 "DLCA mobility statistics contain an empty size class");
         selectedCount += stats.selectionCount;
+        sizeClassMerges += stats.successfulMerges;
         sizeClassQ += stats.cumulativeSquaredTranslation;
         sizeClassPath += stats.cumulativeTranslationPathLength;
     }
     require(selectedCount == targetResult.attempts,
             "cluster-size selection counts do not sum to total attempts");
+    require(sizeClassMerges == targetResult.successfulMerges,
+            "cluster-size merge counts do not sum to total successful merges");
     require(near(sizeClassQ, targetResult.cumulativeSquaredClusterTranslation) &&
             near(sizeClassPath, targetResult.cumulativeClusterTranslationPathLength),
             "cluster-size movement statistics do not sum to global movement totals");
