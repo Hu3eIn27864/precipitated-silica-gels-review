@@ -433,3 +433,75 @@ The new artifact (ID `13853849502`) was independently checked across all 51 seed
 In the seven common-Q configurations, the total move-level event count equalled the absorbed-component count in every configuration (baseline 25, contact 0.9: 29, contact 1.1: 36, step 0.10: 31, step 0.28: 28, mobility exponent 0.5: 32, mobility exponent 1.5: 36). Thus no single move absorbed more than one other component in this bounded screen. The new distinction is still retained because it is the correct general accounting convention; the present data simply do not yet exercise multi-component contacts.
 
 The event counts are sparse and most selections are monomeric. Size-class event/selection ratios therefore have very small numerators in larger classes and should not be interpreted as stable collision probabilities. No kinetic law, physical collision kernel, or parameter trend is established.
+
+
+### Hosted workflow and DLCA artifact re-audit — run #331 (2026-11-12)
+
+#### Repository head and workflow scope
+
+The current `main` branch head at the time of this audit was `e58ca2a9d685d30fd3dad52e3a781df704ff863f` (commit message: “Log pressure-cell digitisation templates”). The latest completed run of `.github/workflows/mc3d-ci.yml` on `main` was **push run #331**, [run 43073997963](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43073997963), on source commit `aef25a30e8bf607fc09746b55067ce7d6d2483c2`. It completed successfully on 2026-11-11 at 18:03:38 UTC.
+
+The workflow run listing returned 331 push-triggered runs and zero `pull_request`-triggered runs for this workflow. There is no run, check suite, or check run attached to the current `main` head SHA. This is not interpreted as a pass or a failure: the 12 commits between the tested source commit and current head changed only `CHANGELOG.md` and files under `LITERATURE/`, outside the workflow's configured path filters. Thus run #331 verifies its recorded source snapshot, not the later documentation-only head. Empty combined-status responses are not treated as evidence of success.
+
+#### Hosted build and test execution
+
+Run #331 completed every workflow step successfully:
+
+- CMake Release configure and C++17 build: passed.
+- CTest: **5/5 passed** — `geometry`, `interactions`, `metropolis`, `network`, and `dlca_ensemble_smoke`.
+- MC3D Python analysis suite: **21/21 passed**.
+- 1-D transport-model Python suite: **53/53 passed**.
+- Syneresis leave-one-out analysis: validated **12 series and 164 leave-one-out fits**.
+- Fixed-attempt DLCA size pilot, paired one-factor sensitivity screen, common-`Q` screen, and artifact upload: all completed successfully.
+
+The CI log includes non-fatal dependency/runtime deprecation warnings for Node.js 20 actions, Node's `punycode` module, and `url.parse()`. No test or workflow step failed.
+
+#### Artifact and provenance
+
+The workflow uploaded artifact **`mc3d-dlca-pilot-and-sensitivity`**, ID `13878434607`, size 66,591 bytes. The downloaded ZIP contains 137 files. Its locally recomputed SHA-256 matches the GitHub artifact digest:
+
+```text
+30e950a3e3e80d19e5c670a5a93cd94f913c3d29d48c88d88be2987f5143fe1b
+```
+
+The archived `pilot/provenance.txt` records source commit `aef25a30e8bf607fc09746b55067ce7d6d2483c2`, `refs/heads/main`, Linux, CMake 4.4.5, GCC 15.2.0 and Python 3.14.4. The size pilot used N = 32/64/128, three seeds per size (1000–1008), 50,000 maximum attempts, and the common diagnostic fit interval 2–5 contact-distance units. The parameter screens used seeds 3000–3002 and N = 32; the common-displacement screen used target Q = 450 reduced-length-units squared.
+
+#### Fixed-attempt DLCA size pilot
+
+| N | Completed | Run flag for consistent unwrapping | Attempt-cap hits | Largest-component sizes | Mean largest-component fraction | Valid fixed-window fits |
+|---:|---:|---:|---:|---:|---:|---:|
+| 32 | 2/3 | 3/3 | 1/3 | 15, 32, 32 | 0.8229 | 2 |
+| 64 | 0/3 | 3/3 | 3/3 | 10, 10, 13 | 0.1719 | 0 |
+| 128 | 0/3 | 3/3 | 3/3 | 6, 5, 4 | 0.0391 | 0 |
+
+The unwrapping flag for an incomplete run does not make its multi-component system a completed aggregate or make it eligible for a mass-radius fit. Only two N = 32 runs yielded complete, consistently unwrapped aggregates. For the fixed 2–5 interval their fitted exponents were 1.2392 and 1.1586 (mean 1.1989, sample SD 0.0570; corresponding R² values 0.9927 and 0.9993). These two exploratory fits do not establish a general fractal exponent.
+
+The 21 candidate fit windows per eligible N = 32 seed show substantial within-run dependence on the chosen interval: exponent ranges 0.5874 and 0.2007 (mean range 0.3940; maximum 0.5874). The N = 64 and N = 128 mass-radius and fit-window CSVs contain headers only. The falling largest-component fraction with increasing N therefore describes incomplete finite-attempt aggregation under this algorithmic setup; it is not a cross-size fractal-scaling result.
+
+#### Fixed-attempt parameter screen
+
+For the seven paired configurations (baseline plus six one-factor variants), the completion counts were:
+
+| Configuration | Completed |
+|---|---:|
+| Baseline | 0/3 |
+| Contact distance 0.9 | 1/3 |
+| Contact distance 1.1 | 2/3 |
+| Maximum component step 0.10 | 0/3 |
+| Maximum component step 0.28 | 3/3 |
+| Mobility exponent 0.5 | 0/3 |
+| Mobility exponent 1.5 | 1/3 |
+
+No seed pair had both baseline and variant completed; the paired comparison therefore contains zero valid paired Rg values and zero valid paired exponents for every variant. Largest-component-fraction differences remain partial-progress descriptors only. The strong completion dependence on the step-size bracket is an algorithmic sensitivity warning, not evidence that a larger step is more physical. Contact-distance changes also alter the initial excluded-volume scale.
+
+#### Common-displacement screen
+
+All 21 runs reached Q = 450, none hit the attempt cap, and none completed aggregation. The largest target overshoot was 0.0506. No complete mass-radius curves or valid paired Rg/Df comparisons are available.
+
+The cumulative path length remains step-size dependent despite the common Q target: mean L was 2,159.44 (sample SD 6.54) at step 0.20, 4,321.35 (SD 4.13) at step 0.10, and 1,542.39 (SD 5.48) at step 0.28. Mean attempt counts were approximately 11,217, 44,972, and 5,724, respectively. The corresponding mean largest-component fractions were 0.1042, 0.1354, and 0.1250. With three seeds and all clusters incomplete, these differences do not establish a morphology trend. Q is a cumulative squared-translation coordinate, not physical time; equal Q does not equalise path length or trajectory history.
+
+#### Per-size accounting audit and interpretation
+
+Across all **51 seed/configuration records** in the 17 run CSVs with matching `*_mobility_by_size.csv` files, the per-size sums reproduced the run-level attempt count, successful merge-event count, absorbed-component count, cumulative squared translation Q, and cumulative path length L. All 255 identity checks passed with no mismatch.
+
+**Conclusion:** run #331 verifies that the current software builds, tests, exports, and analyses execute on the recorded source snapshot. The DLCA pilot remains completion-limited at N = 64 and 128; the two N = 32 exponents are strongly fit-window dependent; the fixed-attempt screen has no valid completed baseline pairs; and the common-Q screen stops before aggregate completion. No silica-calibrated interaction, physical time scale, syneresis prediction, or robust cross-size fractal exponent is established.
