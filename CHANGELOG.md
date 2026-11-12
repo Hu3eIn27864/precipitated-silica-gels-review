@@ -764,3 +764,13 @@
 - Direct download into the execution environment failed, so no new pixel-level data or refit was fabricated.
 - Added pressure-cell-specific calibration and marker templates: 36 preliminary axis-tick correspondences and 21 curve-series metadata rows.
 - Expanded the extraction protocol to preserve pressure intervals, omitted 2014 curves, and separation of measured traces (solid) from model fits (dashed).
+
+
+## 2026-11-12 — Audit of hosted MC3D CI run #331 and DLCA artifact
+
+- Re-checked the current `main` head (`e58ca2a9d685d30fd3dad52e3a781df704ff863f`) and the latest completed `.github/workflows/mc3d-ci.yml` run: push run #331 on source commit `aef25a30e8bf607fc09746b55067ce7d6d2483c2`, completed successfully. The current head has no associated run/checks; the intervening commits touch only `CHANGELOG.md` and `LITERATURE/`, outside the workflow path filters. No empty status response was interpreted as a pass. No pull-request runs were listed for this workflow.
+- Inspected the uploaded 137-file artifact (ID `13878434607`); verified its SHA-256 digest against GitHub and checked `pilot/provenance.txt`.
+- Confirmed the hosted Release build, 5/5 CTest targets, 21/21 MC3D analysis tests, 53/53 transport tests, and 12-series/164-fit syneresis leave-one-out analysis.
+- Reconfirmed the DLCA limitations: the N=32 size pilot completed 2/3 runs, while N=64 and N=128 completed 0/3; the two N=32 fixed-window fits remain strongly fit-window dependent. The fixed-attempt parameter screen has no completed baseline/variant pairs, and the common-Q=450 screen reached its displacement target in all 21 runs but completed no aggregate.
+- Independently checked per-size mobility accounting for all 51 seed/configuration records: selection counts, merge events, absorbed components, cumulative Q and path length all reconcile with run-level CSVs. No new silica-specific or physical-kinetic inference is supported.
+- Detailed provenance, exact summaries and interpretation limits are recorded in `MODELLING/monte_carlo_3d/TEST_RESULTS.md`.
