@@ -505,3 +505,17 @@ The cumulative path length remains step-size dependent despite the common Q targ
 Across all **51 seed/configuration records** in the 17 run CSVs with matching `*_mobility_by_size.csv` files, the per-size sums reproduced the run-level attempt count, successful merge-event count, absorbed-component count, cumulative squared translation Q, and cumulative path length L. All 255 identity checks passed with no mismatch.
 
 **Conclusion:** run #331 verifies that the current software builds, tests, exports, and analyses execute on the recorded source snapshot. The DLCA pilot remains completion-limited at N = 64 and 128; the two N = 32 exponents are strongly fit-window dependent; the fixed-attempt screen has no valid completed baseline pairs; and the common-Q screen stops before aggregate completion. No silica-calibrated interaction, physical time scale, syneresis prediction, or robust cross-size fractal exponent is established.
+
+### Repeat hosted validation and artifact comparison — run #332 (2026-11-12)
+
+The next workflow execution was **push run #332**, [run 43180196635](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43180196635), on source commit `4c28858729e70dba444483173f6f8f61cfc5368f`. GitHub reports `event=push`, `status=completed`, `conclusion=success`; the single job and all 13 substantive workflow steps completed successfully. The workflow-wide run query currently reports 332 push runs and zero pull-request runs for this workflow. The current branch head subsequently advanced to `300e368366c186b881dae8ace95137b0453bc9dd`; the only commit after the run source changes `CHANGELOG.md`, outside the workflow path filters. The current head therefore has no associated run/check; this empty result is not treated as a pass.
+
+Run #332 repeated the Release configure/build, **5/5 CTest targets**, **21/21 MC3D Python analysis tests**, **53/53 transport-model tests**, and the syneresis leave-one-out validation of **12 series and 164 fits**. The bounded size pilot, both paired parameter screens, and artifact upload also completed successfully. Non-fatal Node.js 20, `punycode`, and `url.parse()` deprecation warnings remain in the upload/action runtime; no workflow step failed.
+
+The artifact `mc3d-dlca-pilot-and-sensitivity` (ID `13926191518`, 66,592 bytes, 137 files) was downloaded and its SHA-256 independently recomputed as:
+
+```text
+29732db522b503f51862fc66f183bd35dd34b813e01e17022b27440500782796
+```
+
+All numerical CSV and summary files are byte-identical to run #331. Only the three provenance files differ, each recording the new source commit `4c28858729e70dba444483173f6f8f61cfc5368f`. Thus run #332 independently reproduces the prior DLCA outcomes but adds no new stochastic sample or scientific result. The fixed-attempt completion fractions, two eligible N=32 fits and their fit-window ranges, zero valid completed baseline/variant pairs, and 21/21 common-Q target reaches with no completed aggregate remain exactly as reported above. The 51-record, 255-identity per-size accounting audit is unchanged.
