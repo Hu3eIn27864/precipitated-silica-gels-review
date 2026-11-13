@@ -3,13 +3,13 @@
 import math
 import unittest
 from interface_aware_1d import solve_interface_aware
-from layered_reference import two_layer_mean_pressure_ratio, two_layer_eigenvalues
+from layered_reference import two_layer_mean_pressure_ratio
 
 
 class InterfaceAwareTests(unittest.TestCase):
     def test_uniform_material_matches_homogeneous_reference(self):
         r=solve_interface_aware([0.0,1.0],[1.0],[1.0],80,1.0,2e-5,100)
-        exact=two_layer_mean_pressure_ratio(0.002,1.0,1.0,1.0,1.0,1.0,0.5,120)
+        exact=(8.0/math.pi**2)*sum(math.exp(-(2*k+1)**2*math.pi**2*0.002)/(2*k+1)**2 for k in range(500))
         self.assertAlmostEqual(r["mean_pressure_pa"][-1],exact,delta=2e-4)
 
     def test_off_grid_interface_matches_fixed_interface_series(self):
