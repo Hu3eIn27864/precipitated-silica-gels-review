@@ -331,7 +331,7 @@ uniform initial excess pressure. It uses only the Python standard library.
 
 Run the independent tests with:
 
-    python3 -m unittest MODELLING/transport_model/test_layered_reference.py -v
+    python3 -m unittest discover -s MODELLING/transport_model -p 'test_layered_reference.py' -v
 
 The tests check ordered eigenvalues and a first-eigenvalue regression value,
 the modal reference limits/monotonicity, finite-volume convergence against
