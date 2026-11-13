@@ -92,3 +92,12 @@ checkout.
 - The independent eigenvalue and piecewise sinusoidal mode enforce pressure continuity and nonzero hydraulic-flux continuity at x=0.375.
 - L2 errors at N=40,80,160 are 1.5534e-4, 3.8877e-5 and 9.7218e-6 (approximately second-order spatial convergence with dt proportional to dx^2).
 - Hosted CI for this additional test is pending. This remains code verification for a grid-aligned two-layer jump, not validation of silica parameters or constitutive laws.
+
+
+## AP C extension — off-grid interface, multilayer reference and time-dependent mobility (13 November 2026)
+
+- Added an off-grid two-layer comparison at x=0.37 and N=40,80,160. The test requires decreasing error against the independent eigenfunction reference. This characterises the current cell-centred sampling approach; it does not establish interface-fitted second-order accuracy. A subcell-aware capacity/conductance formulation remains a future numerical improvement.
+- Added multilayer_reference.py, an exact transfer-matrix characteristic equation for piecewise-constant layers. Tests check the homogeneous three-layer limit and heterogeneous three-layer eigenvalue roots. This is an eigenvalue reference, not yet a multilayer transient solver benchmark.
+- Added time-varying mobility verification against the exact transformed time for uniform lambda(t)=1+0.5t and fixed storage. The test checks temporal convergence and storage/flux balance. Time-varying storage and coupled aging remain unsupported.
+- Hosted 1-D transport test steps passed in CI #360, #362 and #363. Their full integrated workflows were still running at the time of this update; final workflow status must be checked before describing the complete pipeline as green.
+- All of the above is numerical code verification, not silica-specific physical validation.
