@@ -63,9 +63,12 @@ The backward-Euler FV system retains cell-centred representative pressures and m
 
 Tests in test_interface_aware_1d.py check the homogeneous limit, off-grid two-layer mean response against the independent eigenfunction series, exact cut-cell capacity, exact conductance across a face segment containing the interface, global conservation/positivity for a three-layer stack, and invalid geometry rejection.
 
-This is an interface-aware piecewise-constant coefficient discretisation, not a general high-order embedded-interface scheme. It does not yet handle moving interfaces, contact resistance, nonlinear material laws, or within-layer smooth variation. CI result pending.
+This is an interface-aware piecewise-constant coefficient discretisation, not a general high-order embedded-interface scheme. It does not yet handle moving interfaces, contact resistance, nonlinear material laws, or within-layer smooth variation. The original interface-aware implementation and its five-test suite passed the full integrated CI workflow #374 (build, C++, Python, 1-D transport, syneresis sensitivity and DLCA stages): https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43510730207.
 
 
 ## 6. Off-grid interface eigenmode: full-profile test
 
 Extended `solve_interface_aware` with an optional cell-centred initial pressure profile while preserving the uniform scalar default. Added a manufactured transient based on the independent first eigenmode for the two-layer problem with interface at x=0.37. The analytical mode enforces both pressure continuity and nonzero Darcy-flux continuity; the test compares the full cell-centred numerical profile against its exact exponential decay for N=40,80,160. A separate invalid-profile test checks input validation. This is a profile-level interface verification, not merely a mean-pressure comparison. Hosted CI is running; convergence order and final pass status remain pending until the run is inspected.
+
+
+CI follow-up: workflow #376 has passed the build, C++ tests, Python ensemble tests, the complete 1-D transport test step (including the new off-grid full-profile eigenmode test), syneresis sensitivity and all DLCA pilot stages; artifact upload/final job completion was still in progress at the time of this update. Run: https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43511164695.
