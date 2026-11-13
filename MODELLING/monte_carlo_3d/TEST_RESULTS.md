@@ -519,3 +519,21 @@ The artifact `mc3d-dlca-pilot-and-sensitivity` (ID `13926191518`, 66,592 bytes, 
 ```
 
 All numerical CSV and summary files are byte-identical to run #331. Only the three provenance files differ, each recording the new source commit `4c28858729e70dba444483173f6f8f61cfc5368f`. Thus run #332 independently reproduces the prior DLCA outcomes but adds no new stochastic sample or scientific result. The fixed-attempt completion fractions, two eligible N=32 fits and their fit-window ranges, zero valid completed baseline/variant pairs, and 21/21 common-Q target reaches with no completed aggregate remain exactly as reported above. The 51-record, 255-identity per-size accounting audit is unchanged.
+
+
+### Latest hosted verification and common-Q artifact re-audit — run #342 (2026-11-13)
+
+Hosted workflow [#342](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43493536161), source commit `cbc54c0bb12065b1cf80c346e9d2d51cc3ac24f8`, completed successfully. The job log confirms: Release build passed; CTest 5/5 passed; Python ensemble-analysis tests 21/21 passed; transport-model tests **62/62 passed**; the leave-one-out analysis, fixed-attempt pilots, common-Q paired screen and artifact upload all completed.
+
+Artifact `mc3d-dlca-pilot-and-sensitivity` (ID `14069877896`) was downloaded and inspected. Provenance records N=32/64/128, seeds 1000–1008 for the size series, seeds 3000–3002 for paired configurations, and a 50,000-attempt hard cap. The source commit in the artifact matches the workflow head commit.
+
+The new common-Q=450 N=32 screen again contains seven configurations and 21 total runs. All 21 reached the Q target; none hit the attempt cap; none completed aggregation. The baseline seed-level records are:
+- seed 3000: 8 successful merge events, 24 components, largest component 4/32;
+- seed 3001: 5 events, 27 components, largest component 2/32;
+- seed 3002: 12 events, 20 components, largest component 4/32.
+
+Across the seven configurations, completion was 0/3 in every case. Mean largest-component fractions were 0.0833–0.1458; mean component counts were 18.0–25.0. Mean path length remained strongly step-size dependent: 4,321.35 at step 0.10, 2,159.44 at step 0.20, and 1,542.39 at step 0.28. Mean attempts were 44,972, 11,217 and 5,724, respectively. The maximum Q overshoot over all 21 runs was 0.0506. The summary CSVs correctly contain zero completed runs and zero eligible Df fits.
+
+This latest artifact reproduces the earlier scientific conclusion rather than resolving it: equal Q is not an equal trajectory history, and the selected budget is far too early to produce complete N=32 aggregates under the tested settings. Do not increase Q blindly. First inspect why the simulations produce so few merge events per Q, whether the collision/aggregation kernel is behaving as intended, and whether the current density/initialisation/step schedule creates a physically meaningful regime. Any revised pilot must retain paired seeds, all run-level outcomes and a predeclared stopping rule. These are algorithmic diagnostics only; Q, path length and attempt count are not physical time.
+
+**Artifact digest:** `sha256:adf62092cb6e18f77488107774d6dd17c11936cfd1795e7ca3c08fb3a0539887`.
