@@ -90,11 +90,14 @@ class InterfaceAwareTests(unittest.TestCase):
         self.assertTrue(all(v>=0 for row in contacted["profiles_pa"] for v in row))
         # Both interfaces lie strictly between cell centres; the exact series
         # resistance on the corresponding faces includes each contact jump.
-        dx=1.0/80
+        # Each physical interface is represented by a co-located minus/plus
+        # trace pair, with exactly the prescribed contact conductance.
         for interface,rc in zip(args[0][1:-1],[0.03,0.08]):
-            j=next(j for j in range(1,80)
-                   if (j-0.5)*dx < interface < (j+0.5)*dx)
-            self.assertGreater(1.0/contacted["face_conductance_m_pa_s"][j],rc)
+            j=next(j for j in range(len(contacted["node_coordinates_m"])-1)
+                   if contacted["node_coordinates_m"][j]==interface
+                   and contacted["node_coordinates_m"][j+1]==interface)
+            self.assertEqual(contacted["node_sides"][j:j+2],["minus","plus"])
+            self.assertAlmostEqual(contacted["face_conductance_m_pa_s"][j+1],1.0/rc,places=12)
 
 
     def test_three_layer_contact_eigenmode_full_profile(self):
@@ -151,11 +154,17 @@ class InterfaceAwareTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             solve_interface_aware([0,.37,1],[1,2],[1,.15],40,1,1e-5,10,
                                    interface_contact_resistance_pa_s_m=[-1.0])
-        # x=.3625 is a cell centre for N=40; a jump resistance there needs
-        # an explicit interface degree of freedom, not a hidden split.
-        with self.assertRaises(ValueError):
-            solve_interface_aware([0,.3625,1],[1,2],[1,.15],40,1,1e-5,10,
-                                   interface_contact_resistance_pa_s_m=[0.1])
+        # x=.3625 is exactly a cell centre for N=40. The new formulation
+        # represents it by two independent traces instead of rejecting it.
+        centred=solve_interface_aware([0,.3625,1],[1,2],[1,.15],40,1,1e-5,100,
+                                      interface_contact_resistance_pa_s_m=[0.1])
+        j=next(j for j in range(len(centred["node_coordinates_m"])-1)
+               if centred["node_coordinates_m"][j]==.3625
+               and centred["node_coordinates_m"][j+1]==.3625)
+        self.assertEqual(centred["node_sides"][j:j+2],["minus","plus"])
+        self.assertAlmostEqual(centred["face_conductance_m_pa_s"][j+1],10.0,places=12)
+        jump=centred["node_profiles_pa"][-1][j+1]-centred["node_profiles_pa"][-1][j]
+        self.assertGreater(jump,0.0)
 
     def test_invalid_initial_profile_rejected(self):
         with self.assertRaises(ValueError):
