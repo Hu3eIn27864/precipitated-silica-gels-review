@@ -57,7 +57,7 @@ checkout.
 
 - Hosted CI #342 passed 5/5 CTest targets, 21/21 Python ensemble-analysis tests and 62/62 transport-model tests. Full job log and latest artifact were inspected.
 - The Q=450 paired screen reproduced 0/21 completed aggregates. All runs reached Q without hitting the attempt cap. This is a stop/diagnostic result, not a basis for a larger production matrix.
-- AP C now has an implemented fixed-physical-interface two-layer eigenfunction reference (`layered_reference.py`) and dedicated tests (`test_layered_reference.py`). Local focused numerical checks show grid convergence (errors 3.84e-3, 8.33e-4, 2.05e-4 for N=40,80,160), monotone time refinement, and independent boundary-gradient flux/storage-loss agreement (residual 1.31e-13). Hosted CI has not yet been verified for this addition. Variable-coefficient manufactured-solution testing remains open.
+- AP C now has an implemented fixed-physical-interface two-layer eigenfunction reference (`layered_reference.py`) and dedicated tests (`test_layered_reference.py`). Local focused numerical checks show grid convergence (errors 3.84e-3, 8.33e-4, 2.05e-4 for N=40,80,160), monotone time refinement, and independent boundary-gradient flux/storage-loss agreement (residual 1.31e-13). Hosted CI #351 passed on commit `9a8160b3bf909d8f953bc11556957444dacc61b7`; the complete transport suite passed 68/68 tests, including all six new layered-reference tests. Variable-coefficient manufactured-solution testing remains open.
 - AP D source-by-source parameter comparison is documented in `LITERATURE/transport_parameter_comparison_2026-11-13.md`. The decisive target-system permeability–mechanical-modulus identifiability gap remains open.
 
 
@@ -74,5 +74,5 @@ checkout.
 - Added `MODELLING/transport_model/layered_reference.py`: independent standard-library eigenvalue and storage-weighted modal reference for a two-layer drained slab with a fixed physical interface.
 - Added `MODELLING/transport_model/test_layered_reference.py`: eigenvalue regression, reference limits/monotonicity, grid/time refinement, and independently reconstructed boundary-gradient flux balance.
 - Added README usage and numerical verification details; full review note updated.
-- Focused local numerical cross-check: 4/4 checks passed; the check used a local reproduction of the existing finite-volume update because a clean checkout/runtime execution of the remote repository test suite was not available in this session. Hosted CI status is pending verification.
+- Focused local numerical cross-check: 4/4 checks passed; the check used a local reproduction of the existing finite-volume update because a clean checkout/runtime execution of the remote repository test suite was not available in this session. Hosted CI #351 is now verified successful: 68/68 transport tests passed, including the six new layered-reference tests. The earlier CI #347 also passed 68 tests on the initial implementation commit.
 - Numerical convergence and conservation are code-verification only. No material calibration or physical validation is implied.
