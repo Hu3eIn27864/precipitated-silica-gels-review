@@ -439,3 +439,8 @@ Usage:
         n_cells=80, thickness_m=1.0, dt_s=1e-5, n_steps=100)
 
 This is an interface-aware, piecewise-constant 1-D method with cell-centred representative pressures and mass-lumped storage. It is not a high-order cut-cell method for smoothly varying coefficients inside layers, moving interfaces, nonlinear mobility, or interface contact resistance. It also does not validate silica constitutive parameters. Hosted CI status must be checked before marking the implementation verified.
+
+
+### Off-grid interface eigenmode verification
+
+The interface-aware solver also accepts an explicit cell-centred initial pressure profile. This enables a full-profile eigenmode test for a two-layer jump located inside a cell. The test compares the transient numerical profile with the independent analytical first eigenmode, whose pressure and nonzero Darcy flux are continuous at the physical interface, over three grid resolutions. This is a stronger check than comparing only the spatial mean. Hosted CI is running for this addition; no convergence order is claimed until the numerical errors are inspected.
