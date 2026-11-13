@@ -72,3 +72,6 @@ Extended `solve_interface_aware` with an optional cell-centred initial pressure 
 
 
 CI follow-up: workflow #376 completed successfully, including build, C++ tests, Python ensemble tests, the complete 1-D transport test step (including the new off-grid full-profile eigenmode test), syneresis sensitivity, all DLCA pilot stages and artifact upload. Run: https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43511164695.
+
+
+Independent numerical cross-check of the full-profile test: a separate NumPy implementation of the same finite-volume equations, using the exact two-layer eigenmode and the test's grid/time sequence, gave RMS profile errors 1.428e-5, 2.301e-6 and 7.729e-7 for N=40,80,160 (dt=1.5625e-4, 3.90625e-5 and 9.765625e-6 s; final time 0.005 s). This independently confirms decreasing error and comfortable margin below the test threshold. The ratios are not used to claim a formal asymptotic order; the test itself asserts monotone refinement, not a prescribed order.
