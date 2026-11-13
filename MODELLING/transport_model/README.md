@@ -354,3 +354,41 @@ These checks verify the numerical implementation for a fixed two-layer
 linear problem. They do not validate material parameters, constitutive laws,
 or the applicability of the model to precipitated-silica syneresis.
 Hosted CI [#351](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43506021553) passed after the layered reference and tests were committed; the complete 1-D transport suite reported **68/68 tests passing**, including all six fixed-interface tests. This is numerical code verification only.
+
+
+## Manufactured-solution verification with spatially variable coefficients
+
+`heterogeneous_1d.py` now accepts an optional cell-centred initial pressure profile and a source callback
+`source_term_s_inv(x, t)`. The solver advances
+
+\[
+S(x)\,\partial_t p = \partial_x\!\left(\lambda(x)\,\partial_x p\right)+f(x,t)
+\]
+
+with backward Euler; the source is evaluated at cell centres and the new time
+level. The source has units s⁻¹ when S is in Pa⁻¹, p in Pa, and λ in
+m²/(Pa s). The default path (uniform initial pressure, no source) is unchanged.
+
+`test_manufactured_solution.py` prescribes
+\(p(x,t)=e^{-t}\sin(\pi x/L)\), with smooth nonconstant
+\(S(x)=1+0.4x\) and \(\lambda(x)=1+0.3x\) on \(L=1\). The source is
+derived independently as \(f=S p_t-\partial_x(\lambda p_x)\). Tests cover
+spatial refinement, temporal refinement against a small-time-step reference
+on the same grid, source-inclusive global storage/flux balance, initial
+profile handling, finite/nonnegative pressure and invalid inputs.
+
+Run:
+
+    python3 -m unittest discover -s MODELLING/transport_model -p 'test_manufactured_solution.py' -v
+
+Local focused results: five tests pass. At N=20,40,80 the discrete L2
+errors are approximately 3.377e-4, 8.471e-5 and 2.119e-5 (about second-order
+spatial convergence with dt proportional to dx²). At N=40, temporal
+differences against dt=1e-5 are 2.388e-6, 1.165e-6 and 5.519e-7 for
+dt=4e-4,2e-4,1e-4. The maximum source-inclusive discrete balance residual
+in the selected run is 1.18e-16.
+
+These results verify the discretisation for a smooth manufactured problem
+with variable storage and mobility. They do not verify discontinuous
+coefficients, evolving coefficients, silica material parameters, or
+physical constitutive validity.
