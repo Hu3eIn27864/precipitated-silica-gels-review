@@ -781,3 +781,11 @@
 - Both runs completed the Release build, 5/5 CTest targets, 21/21 MC3D Python tests, 53/53 transport tests, and the 12-series/164-fit syneresis leave-one-out validation. The pilot, fixed-attempt parameter screen, common-Q screen and artifact upload all completed. Logs show only non-fatal Node.js/action deprecation warnings.
 - Downloaded and verified artifacts #332 (ID `13926191518`, 137 files, SHA-256 `29732db522b503f51862fc66f183bd35dd34b813e01e17022b27440500782796`) and #333 (ID `13926013582`, 137 files, SHA-256 `cca25914c775411adf072d5fcd7c6aa4449d04f48eddf38fc263bae0c4c11a93`). Full directory comparisons show only the three provenance files change between successive runs; all numerical CSVs and summaries are byte-identical across runs #331–#333. The independent 51-record/255-identity accounting audit and all DLCA completion and fit-window findings therefore remain unchanged.
 - Run #333 verifies the TEST_RESULTS update on its source commit. The subsequent changelog-only commit is outside the workflow path filters; its lack of a run/check is not interpreted as a pass. Detailed numerical outcomes and limitations remain in `MODELLING/monte_carlo_3d/TEST_RESULTS.md`.
+
+## 2026-11-13 — Parallel mechanistic synthesis and kinetic analysis protocol
+
+- Added `SYNTHESIS/pH_dependent_network_permeability_syneresis_framework.md`, separating transport, skeleton mechanics, structural evolution, chemistry and apparatus resistance into competing hypotheses.
+- Added `LITERATURE/common_form_syneresis_kinetic_analysis_protocol.md`, defining provenance classes, common stretched-exponential fit cases, quality gates and uncertainty/sensitivity requirements.
+- Added `LITERATURE/research_status_2026-11-13.md` with bounded literature synthesis and next priorities.
+- Rechecked Scherer (1989) syneresis/permeability framework and Wang et al. (2014) reactive silica-gel rheology against publisher/academic source records.
+- No new CSV audit, curve fit, code execution or physical validation is claimed in this update.
