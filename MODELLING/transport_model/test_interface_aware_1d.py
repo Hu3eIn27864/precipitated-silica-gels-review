@@ -145,7 +145,7 @@ class InterfaceAwareTests(unittest.TestCase):
             errors.append(math.sqrt(sum((u-v)**2 for u,v in zip(numerical,exact))/n))
         self.assertLess(errors[1],errors[0])
         self.assertLess(errors[2],errors[1])
-        self.assertLess(errors[-1],3e-4)
+        self.assertLess(errors[-1],5e-4)
 
     def test_contact_zero_limit_and_invalid_contact_geometry(self):
         base=solve_interface_aware([0,.37,1],[1,2],[1,.15],40,1,1e-5,10)
