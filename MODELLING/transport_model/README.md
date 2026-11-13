@@ -293,3 +293,21 @@ Tests:
 
 A successful test run establishes numerical consistency only, not physical
 validation or silica-specific calibration.
+
+
+## Finite external drainage resistance
+
+The prescribed-aging solver `time_dependent_1d.py` now accepts independent
+left/right area-specific boundary hydraulic resistances
+(`left_boundary_resistance_pa_s_m`, `right_boundary_resistance_pa_s_m`,
+units Pa s/m). These represent lumped membrane/support/deposit resistance in
+series with the half-cell Darcy resistance. Zero recovers perfect drainage;
+large resistance approaches a sealed boundary. The default remains zero, so
+existing calls are unchanged.
+
+The extension is documented in
+`external_drainage_resistance.md`. Tests cover the zero-resistance limit,
+slower relaxation with finite resistance, global mass balance with asymmetric
+boundaries and invalid inputs. This is a boundary-condition sensitivity
+model, not a calibrated membrane model or proof that the reported base-gel
+membrane layer explains the full acid/base kinetic reversal.
