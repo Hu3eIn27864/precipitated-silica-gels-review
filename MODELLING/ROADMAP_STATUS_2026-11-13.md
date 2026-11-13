@@ -84,3 +84,11 @@ checkout.
 - Added five manufactured-solution tests with smooth nonconstant storage and mobility. Local run: 5/5 passed.
 - L2 errors for N=20,40,80: 3.377e-4, 8.471e-5, 2.119e-5; temporal refinement against a same-grid small-dt reference is monotone; source-inclusive balance residual max 1.18e-16.
 - Hosted workflow status is pending; no claim of CI success until the run is inspected. This is numerical code verification, not silica-specific physical validation.
+
+
+## AP C follow-up — discontinuous-interface eigenmode (13 November 2026)
+
+- Added a full-profile, source-free eigenmode verification across the fixed two-layer interface in test_layered_reference.py.
+- The independent eigenvalue and piecewise sinusoidal mode enforce pressure continuity and nonzero hydraulic-flux continuity at x=0.375.
+- L2 errors at N=40,80,160 are 1.5534e-4, 3.8877e-5 and 9.7218e-6 (approximately second-order spatial convergence with dt proportional to dx^2).
+- Hosted CI for this additional test is pending. This remains code verification for a grid-aligned two-layer jump, not validation of silica parameters or constitutive laws.
