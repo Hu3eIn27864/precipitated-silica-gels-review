@@ -50,3 +50,12 @@ It does **not** yet support a numerical intrinsic permeability or constrained mo
 3. Where only filtration cake data exist, retain them as structure/transport comparators and do not use them as direct solver calibration.
 4. Where only oedometer or syneresis time constants exist, retain them as lumped-response targets and do not invert them to permeability without independent mechanical and geometry information.
 5. For any future matched dataset, record formulation, pH history, ionic strength, solids fraction, ageing time, temperature, pressure path, drainage length, membrane/filter resistance, and uncertainty before parameter fitting.
+
+
+## Additional adjacent pure-gel comparator: Butrón et al. (2009; PSG-047)
+
+A targeted search identified Butrón, Axelsson & Gustafson (2009), *Tunnelling and Underground Space Technology* 24(6), 603–607, DOI [10.1016/j.tust.2009.04.003](https://doi.org/10.1016/j.tust.2009.04.003). The Chalmers publication record reports a commercial colloidal silica sol with 5–100 nm particles, hydraulic conductivity of 10^-10 to 10^-11 m/s, initial strength of a few kPa increasing with age, and a ductile-to-elastic–plastic mechanical evolution. The study used fall-cone, unconfined compression, triaxial and oedometer methods.
+
+This is a useful adjacent comparator because it concerns a pure silica-sol gel rather than only a filter cake or grouted soil. It still does not close the target-system gap: the material route is commercial colloidal silica, not the sodium-silicate/sulfuric-acid precipitated silica under review; conductivity is not intrinsic permeability; and the accessible institutional record does not provide paired numerical conductivity and constrained-modulus values for the same specimen state. Full numerical data and test conditions remain to be extracted. The record is now catalogued as PSG-047 in the literature database and assessed in `LITERATURE/source_assessment_PSG-047_butron_2009.md`.
+
+**Updated interpretation:** the absence is not “no silica-gel permeability or mechanical data.” Such data exist in adjacent colloidal-silica grout systems. The narrower and still unresolved gap is a matched, state-resolved hydraulic and constrained-mechanical dataset for the specific precipitated-silica gel formulations and ageing paths used in syneresis studies.
