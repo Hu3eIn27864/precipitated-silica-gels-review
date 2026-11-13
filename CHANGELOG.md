@@ -789,3 +789,11 @@
 - Added `LITERATURE/research_status_2026-11-13.md` with bounded literature synthesis and next priorities.
 - Rechecked Scherer (1989) syneresis/permeability framework and Wang et al. (2014) reactive silica-gel rheology against publisher/academic source records.
 - No new CSV audit, curve fit, code execution or physical validation is claimed in this update.
+
+## 2026-11-13 — Prescribed time-dependent mobility prototype
+
+- Added `MODELLING/transport_model/time_dependent_1d.py`: conservative 1-D backward-Euler pressure diffusion with prescribed time-dependent cellwise hydraulic mobility and fixed storage compliance.
+- Added `MODELLING/transport_model/test_time_dependent_1d.py`: tests for constant-coefficient recovery, increased-mobility response, pressure positivity/monotonicity, per-step mass balance and invalid inputs.
+- Added `MODELLING/transport_model/prescribed_aging_permeability_design.md` and documented usage/limitations in the transport-model README.
+- This is a one-way numerical sensitivity prototype only. It does not include evolving modulus/storage, porosity, moving boundaries, a structure-derived permeability law, membrane resistance, or pressure-to-MC feedback.
+- Hosted workflow #334 was triggered by the solver commit and was still in progress at the time of this note; no test pass is claimed here.
