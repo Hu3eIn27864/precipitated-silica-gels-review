@@ -803,3 +803,11 @@
 - Added `MODELLING/transport_model/timescale_competition_framework.md`: defines the hydraulic relaxation scale and a structural-evolution timescale ratio, states regime hypotheses, distinguishes the roles of permeability and modulus, and lists falsifiable drainage-length and aging predictions.
 - Extended the pH-dependent framework with the acid/base topology and alkaline solubility distinctions discussed by Wilhelm & Kind (2015). pH is not treated as a simple scalar kinetic multiplier.
 - GitHub Actions run #334 completed successfully after adding the time-dependent 1-D solver tests. This verifies software/numerical test consistency only; it does not validate silica-specific constitutive assumptions or the physical model.
+
+
+## 2026-11-13 — Geometry and pH quantitative interpretation
+
+- Added `LITERATURE/wilhelm_kind_2015_geometry_pH_quantitative_interpretation.md` with published fit parameters for natural cylindrical samples, natural droplets and enforced pressure-cell syneresis.
+- Explicitly documented the reversal of acid/base fitted time-constant ordering between natural cylinders and enforced pressure-cell experiments, and the membrane-layer confounder in base-gel tests.
+- Separated empirical exponential fit constants from hydraulic consolidation times; no permeability or modulus values are inferred.
+- Recorded pore-liquid monomeric silicic-acid concentration contrast and its mechanistic implications with evidence boundaries.
