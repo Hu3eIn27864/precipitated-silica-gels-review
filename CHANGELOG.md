@@ -811,3 +811,12 @@
 - Explicitly documented the reversal of acid/base fitted time-constant ordering between natural cylinders and enforced pressure-cell experiments, and the membrane-layer confounder in base-gel tests.
 - Separated empirical exponential fit constants from hydraulic consolidation times; no permeability or modulus values are inferred.
 - Recorded pore-liquid monomeric silicic-acid concentration contrast and its mechanistic implications with evidence boundaries.
+
+
+## 2026-11-13 — Finite external drainage resistance boundary
+
+- Extended the prescribed-aging 1-D pressure solver with separate left/right area-specific hydraulic boundary resistances in series with the half-cell Darcy resistance.
+- Zero boundary resistance recovers perfect drainage; large resistance tends to the sealed-boundary limit.
+- Added regression tests for the zero-resistance limit, slower pressure relaxation, asymmetric-boundary mass balance and invalid inputs.
+- Added `MODELLING/transport_model/external_drainage_resistance.md` and updated the transport README.
+- Kept external membrane/support resistance separate from intrinsic gel permeability; no parameters were fitted to the published curves.
