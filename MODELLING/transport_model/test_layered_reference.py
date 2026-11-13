@@ -139,5 +139,27 @@ class FixedInterfaceLayeredReferenceTests(unittest.TestCase):
         self.assertGreater(errors[1]/errors[2], 3.5)
 
 
+    def test_off_grid_interface_error_decreases_under_refinement(self):
+        # The current API samples piecewise coefficients at cell centres.
+        # For a=0.37, the material interface is deliberately not a cell face
+        # on N=40,80,160. This is a convergence/limitation test, not a claim
+        # of second-order accuracy for a discontinuity at an arbitrary x.
+        interface = 0.37
+        errors = []
+        for n in (40,  80, 160):
+            dx = self.L/n
+            centres = [(i+0.5)*dx for i in range(n)]
+            storage = [self.S1 if x < interface else self.S2 for x in centres]
+            mobility = [self.LAMBDA1 if x < interface else self.LAMBDA2 for x in centres]
+            exact = two_layer_mean_pressure_ratio(
+                0.005, self.S1, self.LAMBDA1, self.S2, self.LAMBDA2,
+                self.L, interface, n_modes=160)
+            result = solve_1d_pressure_diffusion(
+                storage, mobility, self.L, 2.0e-6, 2500)
+            errors.append(abs(result["mean_pressure_pa"][-1]-exact))
+        self.assertTrue(all(b < a for a, b in zip(errors, errors[1:])))
+        self.assertLess(errors[-1], 2.0e-3)
+
+
 if __name__ == "__main__":
     unittest.main()
