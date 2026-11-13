@@ -8,7 +8,7 @@ from layered_reference import two_layer_mean_pressure_ratio
 
 class InterfaceAwareTests(unittest.TestCase):
     def test_uniform_material_matches_homogeneous_reference(self):
-        r=solve_interface_aware([0.0,1.0],[1.0],[1.0],80,1.0,2e-5,100)
+        r=solve_interface_aware([0.0,1.0],[1.0],[1.0],160,1.0,1e-5,200)
         exact=(8.0/math.pi**2)*sum(math.exp(-(2*k+1)**2*math.pi**2*0.002)/(2*k+1)**2 for k in range(500))
         self.assertAlmostEqual(r["mean_pressure_pa"][-1],exact,delta=2e-4)
 
