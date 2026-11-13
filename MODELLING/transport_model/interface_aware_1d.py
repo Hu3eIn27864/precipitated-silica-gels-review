@@ -53,8 +53,9 @@ def solve_interface_aware(
     n_cells: int, thickness_m: float, dt_s: float, n_steps: int,
     initial_pressure_pa: float = 1.0,
     initial_pressure_profile_pa: Sequence[float] | None = None,
+    interface_contact_resistance_pa_s_m: Sequence[float] | None = None,
 ) -> dict[str,list]:
-    """Solve using exact layer-overlap storage and integrated Darcy resistance.
+    """Solve with exact layer storage, bulk resistance and interface contacts.
 
     Returns cell-centre pressure profiles, storage-weighted mean pressure,
     outward boundary flux and global conservation residual. Supply either a
@@ -67,15 +68,27 @@ def solve_interface_aware(
     if not math.isfinite(dt_s) or dt_s <= 0: raise ValueError("dt_s must be > 0")
     if not isinstance(n_steps,int) or isinstance(n_steps,bool) or n_steps < 1:
         raise ValueError("n_steps must be >= 1")
+    if interface_contact_resistance_pa_s_m is None:
+        contacts=[0.0]*(len(x)-2)
+    else:
+        contacts=[float(v) for v in interface_contact_resistance_pa_s_m]
+        if len(contacts)!=len(x)-2 or any(not math.isfinite(v) or v<0 for v in contacts):
+            raise ValueError("need one finite nonnegative contact resistance per internal interface")
     dx=thickness_m/n_cells
     centres=[(i+0.5)*dx for i in range(n_cells)]
     edges=[i*dx for i in range(n_cells+1)]
     capacity=[_integrate_piecewise(edges[i],edges[i+1],x,s) for i in range(n_cells)]
     conductance=[0.0]*(n_cells+1)
+    for interface, rc in zip(x[1:-1],contacts):
+        if rc > 0 and any(math.isclose(interface, xc, rel_tol=0.0, abs_tol=1e-13*thickness_m)
+                          for xc in centres):
+            raise ValueError("nonzero contact resistance at a cell centre requires an interface degree of freedom")
     conductance[0]=1.0/_integrate_piecewise(0.0,centres[0],x,lam,lambda v:1.0/v)
     conductance[n_cells]=1.0/_integrate_piecewise(centres[-1],thickness_m,x,lam,lambda v:1.0/v)
     for j in range(1,n_cells):
         resistance=_integrate_piecewise(centres[j-1],centres[j],x,lam,lambda v:1.0/v)
+        resistance += sum(rc for interface,rc in zip(x[1:-1],contacts)
+                          if centres[j-1] < interface < centres[j])
         conductance[j]=1.0/resistance
     lower=[0.0]*n_cells; upper=[0.0]*n_cells; diagonal=[0.0]*n_cells
     for i in range(n_cells):
@@ -106,4 +119,4 @@ def solve_interface_aware(
     return {"times_s":times,"profiles_pa":profiles,"mean_pressure_pa":means,
             "boundary_outflow_m_s":fluxes,"balance_residual_m":residuals,
             "cell_capacity_pa_inv_m":capacity,"face_conductance_m_pa_s":conductance,
-            "cell_centres_m":centres}
+            "cell_centres_m":centres,"interface_contact_resistance_pa_s_m":contacts}
