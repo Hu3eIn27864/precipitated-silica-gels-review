@@ -30,6 +30,7 @@ The review will distinguish industrially precipitated silica from related but no
 - `MANUSCRIPT/` — draft text.
 - `FIGURES/` — figure concepts and evidence mapping.
 - `MODELLING/` — hypothesis-driven model strategy, candidate validation datasets, and starter transport/LAMMPS prototypes.
+- `MODELLING/ROADMAP_STATUS_2026-11-13.md` — current AP/work-package status, gates, and immediate execution order.
 - `CHANGELOG.md` — substantive project decisions.
 
 ## Evidence grades
