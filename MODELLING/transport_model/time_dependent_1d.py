@@ -47,12 +47,20 @@ def solve_1d_time_dependent_mobility(
     thickness_m: float,
     dt_s: float,
     initial_pressure_pa: float = 1.0,
+    left_boundary_resistance_pa_s_m: float = 0.0,
+    right_boundary_resistance_pa_s_m: float = 0.0,
 ) -> dict[str, list]:
     """Solve using one mobility field per time step (evaluated at t[n+1]).
 
     The schedule length defines the number of steps. Each mobility field
     must have one positive value per cell. The fixed storage field is
     intentionally not time-dependent in this first extension.
+
+    Boundary resistances are area-specific hydraulic resistances [Pa s/m],
+    defined by q = p_boundary / R_b for outward superficial flux q [m/s].
+    They are placed in series with the half-cell Darcy resistance. A value
+    of zero recovers a perfectly drained p=0 boundary. These are lumped
+    external resistances (e.g. membrane/support/cake), not gel permeability.
     """
     storage = _positive(storage_compliance_pa_inv, "storage_compliance_pa_inv")
     if not math.isfinite(thickness_m) or thickness_m <= 0:
@@ -63,6 +71,10 @@ def solve_1d_time_dependent_mobility(
         raise ValueError("initial_pressure_pa must be finite and > 0")
     if not mobility_schedule_m2_pa_s:
         raise ValueError("mobility schedule must contain at least one step")
+    for value, name in ((left_boundary_resistance_pa_s_m, "left_boundary_resistance_pa_s_m"),
+                        (right_boundary_resistance_pa_s_m, "right_boundary_resistance_pa_s_m")):
+        if not math.isfinite(value) or value < 0.0:
+            raise ValueError(f"{name} must be finite and >= 0")
 
     n = len(storage)
     dx = thickness_m/n
@@ -80,8 +92,8 @@ def solve_1d_time_dependent_mobility(
         if len(mobility) != n:
             raise ValueError("each mobility field must match the storage grid")
         face_g = [0.0]*(n+1)
-        face_g[0] = 2.0*mobility[0]/dx
-        face_g[n] = 2.0*mobility[-1]/dx
+        face_g[0] = 1.0 / (dx/(2.0*mobility[0]) + left_boundary_resistance_pa_s_m)
+        face_g[n] = 1.0 / (dx/(2.0*mobility[-1]) + right_boundary_resistance_pa_s_m)
         for j in range(1, n):
             left, right = mobility[j-1], mobility[j]
             face_g[j] = (2.0*left*right/(left+right))/dx
