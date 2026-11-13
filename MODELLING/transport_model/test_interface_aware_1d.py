@@ -126,8 +126,9 @@ class InterfaceAwareTests(unittest.TestCase):
             p_left,q_left=state_in_layer(p,q,storage[i],mobility[i],width)
             p_right=p_left+contacts[i]*q_left
             self.assertAlmostEqual(p_right-p_left,contacts[i]*q_left,places=12)
-            self.assertAlmostEqual(q_left,q_left,places=12)
+            self.assertTrue(math.isfinite(q_left))
             p,q=p_right,q_left
+        self.assertAlmostEqual(exact_mode(1.0),0.0,delta=2e-10)
         errors=[]
         for n in (40,80,160):
             dx=1.0/n
@@ -164,7 +165,7 @@ class InterfaceAwareTests(unittest.TestCase):
         self.assertEqual(centred["node_sides"][j:j+2],["minus","plus"])
         self.assertAlmostEqual(centred["face_conductance_m_pa_s"][j+1],10.0,places=12)
         jump=centred["node_profiles_pa"][-1][j+1]-centred["node_profiles_pa"][-1][j]
-        self.assertGreater(jump,0.0)
+        self.assertLess(jump,0.0)
 
     def test_invalid_initial_profile_rejected(self):
         with self.assertRaises(ValueError):
