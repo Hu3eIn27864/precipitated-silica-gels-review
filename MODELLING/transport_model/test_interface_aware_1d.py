@@ -77,6 +77,38 @@ class InterfaceAwareTests(unittest.TestCase):
         self.assertLess(errors[2],errors[1])
         self.assertLess(errors[-1],2e-4)
 
+
+    def test_three_layer_contact_resistance_slows_drainage_and_conserves(self):
+        args=([0.0,0.23,0.71,1.0],[1.0,2.0,0.7],[1.0,0.15,0.6])
+        plain=solve_interface_aware(*args,80,1.0,2e-5,100)
+        contacted=solve_interface_aware(*args,80,1.0,2e-5,100,
+                                         interface_contact_resistance_pa_s_m=[0.03,0.08])
+        self.assertGreater(contacted["mean_pressure_pa"][-1],
+                           plain["mean_pressure_pa"][-1])
+        self.assertLess(max(abs(v) for v in contacted["balance_residual_m"][1:]),2e-12)
+        self.assertTrue(all(v>=0 for row in contacted["profiles_pa"] for v in row))
+        # Both interfaces lie strictly between cell centres; the exact series
+        # resistance on the corresponding faces includes each contact jump.
+        dx=1.0/80
+        for interface,rc in zip(args[0][1:-1],[0.03,0.08]):
+            j=next(j for j in range(1,80)
+                   if (j-0.5)*dx < interface < (j+0.5)*dx)
+            self.assertGreater(1.0/contacted["face_conductance_m_pa_s"][j],rc)
+
+    def test_contact_zero_limit_and_invalid_contact_geometry(self):
+        base=solve_interface_aware([0,.37,1],[1,2],[1,.15],40,1,1e-5,10)
+        zero=solve_interface_aware([0,.37,1],[1,2],[1,.15],40,1,1e-5,10,
+                                   interface_contact_resistance_pa_s_m=[0.0])
+        self.assertEqual(base["profiles_pa"],zero["profiles_pa"])
+        with self.assertRaises(ValueError):
+            solve_interface_aware([0,.37,1],[1,2],[1,.15],40,1,1e-5,10,
+                                   interface_contact_resistance_pa_s_m=[-1.0])
+        # x=.3625 is a cell centre for N=40; a jump resistance there needs
+        # an explicit interface degree of freedom, not a hidden split.
+        with self.assertRaises(ValueError):
+            solve_interface_aware([0,.3625,1],[1,2],[1,.15],40,1,1e-5,10,
+                                   interface_contact_resistance_pa_s_m=[0.1])
+
     def test_invalid_initial_profile_rejected(self):
         with self.assertRaises(ValueError):
             solve_interface_aware([0.0,1.0],[1.0],[1.0],10,1.0,1e-4,1,
