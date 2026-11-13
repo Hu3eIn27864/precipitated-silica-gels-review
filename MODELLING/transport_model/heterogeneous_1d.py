@@ -1,19 +1,14 @@
 #!/usr/bin/env python3
-"""Finite-volume 1-D pore-pressure diffusion with heterogeneous fixed coefficients.
+"""Finite-volume 1-D pore-pressure diffusion with heterogeneous coefficients.
 
-PDE: S(x) * dp/dt = d/dx(lambda(x) * dp/dx)
-where S=1/M is constrained storage compliance [1/Pa] and
-lambda=kappa/mu is hydraulic mobility [m^2/(Pa s)].
-
-The domain is a fixed slab with p=0 at both drained faces. Coefficients
-are piecewise constant per cell and time-independent in this first version.
-Backward Euler is used in time; harmonic face mobility preserves flux
-continuity across material interfaces. This is a numerical benchmark, not
-a calibrated silica-gel constitutive model.
+PDE: S(x) dp/dt = d/dx(lambda(x) dp/dx) + f(x,t).
+S is storage compliance [1/Pa], lambda is hydraulic mobility
+[m^2/(Pa s)], and f has units 1/time. Cell-centred coefficients
+are fixed in time; backward Euler and harmonic face mobility are used.
 """
 from __future__ import annotations
 import math
-from typing import Sequence
+from typing import Callable, Optional, Sequence
 
 
 def _validate_positive_array(values: Sequence[float], name: str) -> list[float]:
@@ -54,15 +49,18 @@ def solve_1d_pressure_diffusion(
     dt_s: float,
     n_steps: int,
     initial_pressure_pa: float = 1.0,
+    *,
+    initial_pressure_profile_pa: Optional[Sequence[float]] = None,
+    source_term_s_inv: Optional[Callable[[float, float], float]] = None,
 ) -> dict[str, list]:
-    """Solve a fixed-coefficient, double-drained 1-D slab problem.
+    """Solve a double-drained slab with optional manufactured forcing.
 
-    Arrays contain cell-centred values, one per equally sized finite volume.
-    The returned average pressure is storage-weighted, so the degree of
-    consolidation is 1 - mean_pressure/initial_pressure. The returned
-    boundary flux is the sum of outward Darcy fluxes at both faces [m/s].
-    The discrete balance residual has units of length and should approach
-    roundoff for each backward-Euler step.
+    ``source_term_s_inv(x, t)`` returns f in
+    S(x)*dp/dt = d/dx(lambda(x)*dp/dx) + f(x,t), evaluated at cell centres
+    and the new time level (backward Euler). ``initial_pressure_profile_pa``
+    overrides the uniform initial pressure and must contain one value/cell.
+    Returned mean pressure is storage weighted; boundary outflow is the sum
+    of outward Darcy fluxes [m/s].
     """
     storage = _validate_positive_array(storage_compliance_pa_inv, "storage_compliance_pa_inv")
     mobility = _validate_positive_array(mobility_m2_pa_s, "mobility_m2_pa_s")
@@ -79,6 +77,14 @@ def solve_1d_pressure_diffusion(
 
     n = len(storage)
     dx = thickness_m / n
+    x_centres = [(i + 0.5) * dx for i in range(n)]
+    if initial_pressure_profile_pa is None:
+        pressure = [initial_pressure_pa] * n
+    else:
+        pressure = [float(v) for v in initial_pressure_profile_pa]
+        if len(pressure) != n or any(not math.isfinite(v) for v in pressure):
+            raise ValueError("initial pressure profile must have n finite values")
+
     capacity = [s * dx for s in storage]
     face_g = [0.0] * (n + 1)
     face_g[0] = 2.0 * mobility[0] / dx
@@ -93,19 +99,30 @@ def solve_1d_pressure_diffusion(
         upper[i] = -face_g[i + 1] if i < n - 1 else 0.0
         diagonal[i] = capacity[i] / dt_s + face_g[i] + face_g[i + 1]
 
-    pressure = [initial_pressure_pa] * n
-    times, mean_pressure = [0.0], [initial_pressure_pa]
+    times = [0.0]
+    mean_pressure = [sum(capacity[i]*pressure[i] for i in range(n))/sum(capacity)]
     profiles, boundary_flux, balance_residual = [pressure[:]], [0.0], [0.0]
     total_capacity = sum(capacity)
 
     for step in range(1, n_steps + 1):
         old_storage = sum(capacity[i] * pressure[i] for i in range(n))
+        t_new = step * dt_s
         rhs = [capacity[i] * pressure[i] / dt_s for i in range(n)]
+        source_values = []
+        if source_term_s_inv is not None:
+            for x in x_centres:
+                source = float(source_term_s_inv(x, t_new))
+                if not math.isfinite(source):
+                    raise ValueError("source term must return finite values")
+                source_values.append(source)
+            for i, source in enumerate(source_values):
+                rhs[i] += dx * source
         pressure = _solve_tridiagonal(lower, diagonal, upper, rhs)
         outflow = face_g[0] * pressure[0] + face_g[n] * pressure[-1]
         new_storage = sum(capacity[i] * pressure[i] for i in range(n))
-        residual = (new_storage - old_storage) + dt_s * outflow
-        times.append(step * dt_s)
+        source_integral = dx * sum(source_values)
+        residual = (new_storage - old_storage) + dt_s * outflow - dt_s * source_integral
+        times.append(t_new)
         mean_pressure.append(new_storage / total_capacity)
         profiles.append(pressure[:])
         boundary_flux.append(outflow)
