@@ -29,7 +29,7 @@ class InterfaceAwareTests(unittest.TestCase):
         # segment [0.3625,.3875]. Both integrals are exact.
         r=solve_interface_aware([0,.37,1],[1,2],[1,.1],40,1,1e-4,1)
         cap=r["cell_capacity_pa_inv_m"]
-        self.assertAlmostEqual(cap[14],.02*.1 + .03*.2,places=14)
+        self.assertAlmostEqual(cap[14],.02*1.0 + .005*2.0,places=14)
         resistance=.0075/1.0 + .0175/.1
         self.assertAlmostEqual(r["face_conductance_m_pa_s"][15],1/resistance,places=12)
 
