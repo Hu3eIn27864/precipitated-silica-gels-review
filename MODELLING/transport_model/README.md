@@ -438,7 +438,7 @@ Usage:
         mobility_m2_pa_s=[1.0, 0.15],
         n_cells=80, thickness_m=1.0, dt_s=1e-5, n_steps=100)
 
-This is an interface-aware, piecewise-constant 1-D method with cell-centred representative pressures and mass-lumped storage. It is not a high-order cut-cell method for smoothly varying coefficients inside layers, moving interfaces, nonlinear mobility, or interface contact resistance. It also does not validate silica constitutive parameters. Hosted CI status must be checked before marking the implementation verified.
+This is an interface-aware, piecewise-constant 1-D method with cell-centred representative pressures and mass-lumped storage. With finite contact resistance, it augments the grid by a co-located pair of minus/plus interface pressure degrees of freedom; the associated control volumes are split exactly at the interface. It is not a high-order method for smoothly varying coefficients inside layers, moving interfaces, or nonlinear mobility. It does not validate silica constitutive parameters.
 
 
 ### Off-grid interface eigenmode verification
@@ -450,6 +450,13 @@ The interface-aware solver also accepts an explicit cell-centred initial pressur
 
 `interface_aware_1d.py` accepts an optional area-specific contact resistance for each internal material interface, in Pa s/m. It is added in series to the exact bulk resistance between adjacent cell centres. For the transfer state q=lambda dp/dx, the interface law is q_left=q_right and p_right-p_left=R_c q. The physical Darcy flux is -q; this sign convention makes a positive resistance increase the pressure jump in the direction of increasing x for positive q.
 
-`multilayer_reference.py` now applies the same jump law as an independent transfer-matrix eigenvalue reference. Zero contact resistance recovers the perfectly bonded interface; positive resistance slows modal relaxation. Tests cover this zero limit, nonnegative-input validation, slower drainage in a three-layer FV stack, and conservation. A nonzero contact resistance at a cell-centre interface is rejected by this cell-centred formulation because it requires a separate interface pressure degree of freedom; it is not silently approximated. This is a deliberate scope limitation.
+`multilayer_reference.py` now applies the same jump law as an independent transfer-matrix eigenvalue reference. Zero contact resistance recovers the perfectly bonded interface; positive resistance slows modal relaxation. Tests cover this zero limit, nonnegative-input validation, slower drainage in a three-layer FV stack, and conservation. A nonzero contact resistance is represented by separate minus/plus interface degrees of freedom, including when the interface coincides with an original cell centre. The ordinary cell-centred profile returned for compatibility averages the two traces at a coincident centre; the complete `node_profiles_pa`, `node_coordinates_m`, and `node_sides` arrays preserve the one-sided values.
 
 The contact resistance is an optional phenomenological parameter, not a measured silica-gel property. It must not be fitted independently from bulk mobility without additional measurements or identifiability analysis.
+
+
+## Two-sided interface degrees of freedom
+
+When any contact resistance is positive, the solver augments the one-dimensional FV graph with a pair of co-located `minus` and `plus` pressure unknowns at each such interface. The two adjacent control volumes are split at the physical interface, so their storage is integrated on the correct material side. The link between the traces has conductance `1/R_c`; bulk links on either side use the exact integrated resistance. This works both for off-grid interfaces and when the interface exactly coincides with an original cell centre. The solver returns the augmented `node_profiles_pa`, `node_coordinates_m`, and `node_sides`; the legacy `profiles_pa` remains an original-cell-centre projection and averages the two traces if the interface coincides with a centre.
+
+The new test checks the coincident-centre case explicitly, including the finite jump and exact contact conductance. The three-layer eigenmode test continues to compare the transient FV solution with the independent transfer-matrix spectrum. The current scheme remains mass-lumped and first-order in time (backward Euler); no higher-order spatial claim is made. Contact resistance remains phenomenological and uncalibrated for silica gels.
