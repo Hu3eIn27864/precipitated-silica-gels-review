@@ -43,8 +43,7 @@ Interpretation: the solver still has fixed storage compliance and prescribed mob
 ## Overall status and physical limits
 
 - Previous workflow #359: full integrated workflow successful.
-- New workflows #360, #362, #363: their 1-D transport test steps passed; integrated DLCA/pilot stages had not yet all completed at the time of this note.
-- Workflow #361 (the standalone transfer-matrix module commit) was still in progress at the last check; its code is exercised by the subsequent #362 transport test step.
+- New workflows #360, #361, #362 and #363: all four complete integrated workflows succeeded, including the 1-D transport suite and downstream DLCA/pilot stages.
 - No new silica material parameter was fitted or validated.
 - Numerical convergence, eigenvalue consistency and discrete conservation are code verification, not experimental validation of precipitated-silica syneresis.
 
