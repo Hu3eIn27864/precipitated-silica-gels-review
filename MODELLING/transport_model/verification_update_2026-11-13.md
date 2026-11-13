@@ -75,3 +75,10 @@ CI follow-up: workflow #376 completed successfully, including build, C++ tests, 
 
 
 Independent numerical cross-check of the full-profile test: a separate NumPy implementation of the same finite-volume equations, using the exact two-layer eigenmode and the test's grid/time sequence, gave RMS profile errors 1.428e-5, 2.301e-6 and 7.729e-7 for N=40,80,160 (dt=1.5625e-4, 3.90625e-5 and 9.765625e-6 s; final time 0.005 s). This independently confirms decreasing error and comfortable margin below the test threshold. The ratios are not used to claim a formal asymptotic order; the test itself asserts monotone refinement, not a prescribed order.
+
+
+## Interface contact resistance extension
+
+Added optional area-specific contact resistances (Pa s/m) to the interface-aware FV solver. For the transfer state q=lambda dp/dx, the interface conditions are q_left=q_right and p_right-p_left=R_c q. The actual Darcy flux is -q. The FV face conductance is computed from the exact piecewise bulk resistance plus the contact resistance whenever an interface lies between the two cell centres. The method rejects a nonzero contact resistance when the interface coincides with a cell centre, because the current pressure representation has no two-sided interface degree of freedom there.
+
+The independent multilayer transfer-matrix reference now applies the same jump law. Its zero-contact limit recovers the previous reference; positive contact resistance is tested to reduce modal decay rates. The three-layer FV test checks slower pressure relaxation and exact global conservation. This parameter is phenomenological, not a silica measurement. A full-profile eigenmode test is being added to verify the transient contact-resistance solution.
