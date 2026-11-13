@@ -444,3 +444,12 @@ This is an interface-aware, piecewise-constant 1-D method with cell-centred repr
 ### Off-grid interface eigenmode verification
 
 The interface-aware solver also accepts an explicit cell-centred initial pressure profile. This enables a full-profile eigenmode test for a two-layer jump located inside a cell. The test compares the transient numerical profile with the independent analytical first eigenmode, whose pressure and nonzero Darcy flux are continuous at the physical interface, over three grid resolutions. This is a stronger check than comparing only the spatial mean. Hosted CI is running for this addition; no convergence order is claimed until the numerical errors are inspected.
+
+
+## Finite contact resistance at internal material interfaces
+
+`interface_aware_1d.py` accepts an optional area-specific contact resistance for each internal material interface, in Pa s/m. It is added in series to the exact bulk resistance between adjacent cell centres. For the transfer state q=lambda dp/dx, the interface law is q_left=q_right and p_right-p_left=R_c q. The physical Darcy flux is -q; this sign convention makes a positive resistance increase the pressure jump in the direction of increasing x for positive q.
+
+`multilayer_reference.py` now applies the same jump law as an independent transfer-matrix eigenvalue reference. Zero contact resistance recovers the perfectly bonded interface; positive resistance slows modal relaxation. Tests cover this zero limit, nonnegative-input validation, slower drainage in a three-layer FV stack, and conservation. A nonzero contact resistance at a cell-centre interface is rejected by this cell-centred formulation because it requires a separate interface pressure degree of freedom; it is not silently approximated. This is a deliberate scope limitation.
+
+The contact resistance is an optional phenomenological parameter, not a measured silica-gel property. It must not be fitted independently from bulk mobility without additional measurements or identifiability analysis.
