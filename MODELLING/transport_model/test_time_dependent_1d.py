@@ -48,6 +48,54 @@ class TimeDependentMobilityTests(unittest.TestCase):
         means = result["mean_pressure_pa"]
         self.assertTrue(all(a >= b for a, b in zip(means, means[1:])))
 
+
+    def test_zero_boundary_resistance_recovers_perfect_drainage(self):
+        n, steps = 18, 40
+        storage = [1e-5]*n
+        mobility = [1e-12]*n
+        schedule = [mobility[:] for _ in range(steps)]
+        finite = solve_1d_time_dependent_mobility(
+            storage, schedule, 1e-3, 0.2,
+            left_boundary_resistance_pa_s_m=0.0,
+            right_boundary_resistance_pa_s_m=0.0)
+        perfect = solve_1d_time_dependent_mobility(
+            storage, schedule, 1e-3, 0.2)
+        self.assertAlmostEqual(finite["mean_pressure_pa"][-1],
+                               perfect["mean_pressure_pa"][-1], places=13)
+
+    def test_external_resistance_slows_pressure_relaxation(self):
+        n, steps = 20, 100
+        storage = [1e-5]*n
+        schedule = [[1e-12]*n for _ in range(steps)]
+        ideal = solve_1d_time_dependent_mobility(
+            storage, schedule, 1e-3, 0.1)
+        resisted = solve_1d_time_dependent_mobility(
+            storage, schedule, 1e-3, 0.1,
+            left_boundary_resistance_pa_s_m=1e10,
+            right_boundary_resistance_pa_s_m=1e10)
+        self.assertGreater(resisted["mean_pressure_pa"][-1],
+                           ideal["mean_pressure_pa"][-1])
+
+    def test_boundary_resistance_preserves_global_mass_balance(self):
+        n = 16
+        schedule = [[1e-12*(1.0+0.01*k)]*n for k in range(30)]
+        result = solve_1d_time_dependent_mobility(
+            [2e-5]*n, schedule, 1e-3, 0.2,
+            left_boundary_resistance_pa_s_m=2e10,
+            right_boundary_resistance_pa_s_m=5e10)
+        for residual in result["balance_residual_m"][1:]:
+            self.assertLess(abs(residual), 1e-14)
+
+    def test_rejects_negative_or_nonfinite_boundary_resistance(self):
+        with self.assertRaises(ValueError):
+            solve_1d_time_dependent_mobility(
+                [1.0], [[1.0]], 1.0, 0.1,
+                left_boundary_resistance_pa_s_m=-1.0)
+        with self.assertRaises(ValueError):
+            solve_1d_time_dependent_mobility(
+                [1.0], [[1.0]], 1.0, 0.1,
+                right_boundary_resistance_pa_s_m=float("inf"))
+
     def test_rejects_bad_schedule(self):
         with self.assertRaises(ValueError):
             solve_1d_time_dependent_mobility([1.0, 1.0], [], 1.0, 0.1)
