@@ -272,3 +272,24 @@ Tests:
 
 Actual figure digitisation remains a separate task and must retain figure,
 axis-calibration, pixel/marker, and digitisation-uncertainty metadata.
+
+## Prescribed time-dependent hydraulic mobility (one-way prototype)
+
+`time_dependent_1d.py` extends the fixed-coefficient slab solver by accepting
+one positive cellwise hydraulic-mobility field per backward-Euler time step.
+Storage compliance remains fixed. This isolates the effect of a prescribed
+aging permeability/mobility field while preserving conservative pressure
+storage and boundary-flux accounting.
+
+The implementation is intentionally not a fully coupled aging model:
+there is no time-varying modulus/storage, porosity evolution, moving boundary,
+structure-derived permeability law, membrane-resistance boundary condition,
+or pressure-to-MC feedback. See
+`prescribed_aging_permeability_design.md` for equations, usage and stop rules.
+
+Tests:
+
+    python3 -m unittest discover -s MODELLING/transport_model -p 'test_time_dependent_1d.py' -v
+
+A successful test run establishes numerical consistency only, not physical
+validation or silica-specific calibration.
