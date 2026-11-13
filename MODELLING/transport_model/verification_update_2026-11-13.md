@@ -53,3 +53,14 @@ Interpretation: the solver still has fixed storage compliance and prescribed mob
 - Added MODELLING/transport_model/multilayer_reference.py.
 - Added MODELLING/transport_model/test_multilayer_reference.py.
 - Added MODELLING/transport_model/test_time_dependent_reference.py.
+
+
+## 5. Interface-aware finite-volume implementation
+
+Added interface_aware_1d.py. The caller supplies exact physical layer boundaries and one storage/mobility value per layer. The method integrates storage exactly over each cell-layer overlap, including cut cells. For each pressure-centre connection and drained boundary half-cell, it integrates 1/lambda exactly over the traversed layer segments and inverts the total series resistance to obtain conductance.
+
+The backward-Euler FV system retains cell-centred representative pressures and mass-lumped capacity, while resolving the discontinuity geometry in both storage and flux conductance. A separate module preserves compatibility with the earlier array-based solver.
+
+Tests in test_interface_aware_1d.py check the homogeneous limit, off-grid two-layer mean response against the independent eigenfunction series, exact cut-cell capacity, exact conductance across a face segment containing the interface, global conservation/positivity for a three-layer stack, and invalid geometry rejection.
+
+This is an interface-aware piecewise-constant coefficient discretisation, not a general high-order embedded-interface scheme. It does not yet handle moving interfaces, contact resistance, nonlinear material laws, or within-layer smooth variation. CI result pending.
