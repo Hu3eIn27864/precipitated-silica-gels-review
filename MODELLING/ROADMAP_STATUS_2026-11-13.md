@@ -109,11 +109,21 @@ checkout.
 - Cell storage is integrated exactly over layer/cell overlaps, including cut cells.
 - Hydraulic conductance is computed from the exact series integral of 1/lambda between adjacent cell centres and between boundary and first/last centre.
 - Added tests for homogeneous recovery, off-grid two-layer analytical comparison, cut-cell capacity, interface-crossing resistance, three-layer conservation/positivity and invalid geometry.
-- This is a conservative piecewise-constant interface-aware method with cell-centred representative pressures. It is not a moving-interface, nonlinear, or high-order cut-cell solver; silica physical validation remains separate. Hosted CI is pending.
+- This is a conservative piecewise-constant interface-aware method with cell-centred representative pressures. It is not a moving-interface, nonlinear, or high-order cut-cell solver; silica physical validation remains separate. Hosted CI #374 passed the full integrated workflow.
 
 
 ## AP C follow-up — off-grid interface eigenmode profile (13 November 2026)
 
 - Extended the interface-aware solver to accept a prescribed cell-centred initial pressure profile, retaining the scalar uniform-initial-pressure API.
 - Added an off-grid two-layer first-eigenmode transient test at x=0.37. It checks analytical pressure continuity and nonzero Darcy-flux continuity, then compares the complete numerical profile against the exact decaying eigenmode for N=40,80,160.
-- Added validation for malformed initial profiles. Hosted CI #376 is running; do not claim this test passed or assign a convergence order until its outcome and error sequence are inspected.
+- Added validation for malformed initial profiles. Hosted CI #376 completed successfully, including the full transport suite and all downstream stages.
+
+
+## AP C extension — finite contact resistance at internal interfaces (13 November 2026)
+
+- Added optional area-specific contact resistances (Pa s/m), one per internal interface, to the interface-aware finite-volume solver. They are added in series to the exact bulk resistance between adjacent cell centres.
+- Added an independent transfer-matrix jump condition using q=lambda dp/dx: q_left=q_right and p_right-p_left=R_c q. The sign was checked against the physical Darcy flux -q; a positive resistance slows modal relaxation.
+- Added zero-contact limit, modal-rate shift, validation, three-layer conservation/positivity, and full-profile three-layer eigenmode tests. The latter compares the transient FV pressure with the independent analytical eigenmode for N=40,80,160.
+- The current cell-centred method explicitly rejects a nonzero contact resistance when the interface coincides with a cell centre; that case needs a two-sided interface degree of freedom.
+- Hosted workflow #388 passed all 92 transport tests and the complete integrated pipeline: https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43511782095.
+- Contact resistance remains a phenomenological parameter. No value is assigned to precipitated silica and no physical calibration is claimed.
