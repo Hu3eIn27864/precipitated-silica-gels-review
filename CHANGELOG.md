@@ -797,3 +797,9 @@
 - Added `MODELLING/transport_model/prescribed_aging_permeability_design.md` and documented usage/limitations in the transport-model README.
 - This is a one-way numerical sensitivity prototype only. It does not include evolving modulus/storage, porosity, moving boundaries, a structure-derived permeability law, membrane resistance, or pressure-to-MC feedback.
 - Hosted workflow #334 was triggered by the solver commit and was still in progress at the time of this note; no test pass is claimed here.
+
+
+## 2026-11-13 — Timescale competition and pH-dependent network pathways
+- Added `MODELLING/transport_model/timescale_competition_framework.md`: defines the hydraulic relaxation scale and a structural-evolution timescale ratio, states regime hypotheses, distinguishes the roles of permeability and modulus, and lists falsifiable drainage-length and aging predictions.
+- Extended the pH-dependent framework with the acid/base topology and alkaline solubility distinctions discussed by Wilhelm & Kind (2015). pH is not treated as a simple scalar kinetic multiplier.
+- GitHub Actions run #334 completed successfully after adding the time-dependent 1-D solver tests. This verifies software/numerical test consistency only; it does not validate silica-specific constitutive assumptions or the physical model.
