@@ -411,7 +411,7 @@ Three additional verification branches were added after the grid-aligned two-lay
 
 **Time-varying mobility.** A new test uses the time transformation theta(t)=integral(lambda/S dt) to compare the existing prescribed-mobility schedule solver with an independent analytical reference for spatially uniform lambda(t)=1+0.5t and fixed S=1. It checks time-step convergence of mean pressure, stepwise storage/flux balance and nonnegative pressure. The solver still keeps storage compliance fixed and accepts mobility as a per-step schedule; this is not a coupled aging/poroelastic model.
 
-Hosted CI transport-test steps passed for workflow #360 (off-grid interface), #362 (three-layer tests), and #363 (time-dependent mobility reference). The complete integrated workflows were still running when this note was written; see the linked runs for their final status:
+Hosted CI transport-test steps passed for workflow #360 (off-grid interface), #362 (three-layer tests), and #363 (time-dependent mobility reference). All four integrated workflows #360–#363 completed successfully, including build, C++ tests, Python ensemble analysis, the full 1-D transport suite and the downstream syneresis/DLCA pilot stages. See:
 - https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43509969646
 - https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43509979674
 - https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43509984528
