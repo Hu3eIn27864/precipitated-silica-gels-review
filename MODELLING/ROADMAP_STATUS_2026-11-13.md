@@ -124,6 +124,15 @@ checkout.
 - Added optional area-specific contact resistances (Pa s/m), one per internal interface, to the interface-aware finite-volume solver. They are added in series to the exact bulk resistance between adjacent cell centres.
 - Added an independent transfer-matrix jump condition using q=lambda dp/dx: q_left=q_right and p_right-p_left=R_c q. The sign was checked against the physical Darcy flux -q; a positive resistance slows modal relaxation.
 - Added zero-contact limit, modal-rate shift, validation, three-layer conservation/positivity, and full-profile three-layer eigenmode tests. The latter compares the transient FV pressure with the independent analytical eigenmode for N=40,80,160.
-- The current cell-centred method explicitly rejects a nonzero contact resistance when the interface coincides with a cell centre; that case needs a two-sided interface degree of freedom.
+- Extended the FV graph with co-located minus/plus pressure degrees of freedom whenever contact resistance is positive. Adjacent control volumes are split at the physical interface and storage is integrated one-sided; the method supports interfaces both on and off original cell centres. Legacy cell-centre profiles are projected from the augmented state, while full one-sided node values remain available.
 - Hosted workflow #388 passed all 92 transport tests and the complete integrated pipeline: https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43511782095.
 - Contact resistance remains a phenomenological parameter. No value is assigned to precipitated silica and no physical calibration is claimed.
+
+
+## AP C extension — two-sided interface degrees of freedom (13 November 2026)
+
+- Added an augmented FV graph with co-located minus/plus pressure unknowns at each positive-contact interface. The interface is an explicit node pair, not a resistance hidden inside a bulk face.
+- Control-volume storage is split at the interface and integrated separately on each material side. Bulk links use exact integrated resistance; the contact link uses conductance 1/R_c.
+- The new representation handles a contact interface exactly at an original cell centre as well as off-grid interfaces. The full augmented state is exposed through node coordinates, side labels and node profiles; the legacy cell-centre profile is projected for compatibility.
+- Added a test at x=0.3625 with N=40, verifying the two one-sided traces, finite pressure jump and exact contact conductance. Existing three-layer full-profile eigenmode and conservation checks remain active.
+- Hosted CI for the two-sided DOF extension is pending; no claim of success until the run is inspected. No physical contact resistance has been assigned to silica gel.
