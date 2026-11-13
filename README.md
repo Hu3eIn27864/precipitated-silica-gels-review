@@ -48,3 +48,17 @@ The literature database and claim–evidence synthesis are under active developm
 ## Current parallel research plan
 
 The next gated work packages for DLCA robustness, radial transport verification, literature validation, and manuscript synthesis are maintained in [MODELLING/NEXT_STEPS_PARALLEL_PLAN.md](MODELLING/NEXT_STEPS_PARALLEL_PLAN.md). This plan separates software checks from physical validation and records explicit stop rules.
+
+## Digitized syneresis curves — provenance and reuse
+
+The curve-digitization dataset used in the syneresis analysis was independently digitized from figures in:
+
+Wilhelm, S.; Kind, M. (2015). *Influence of pH, Temperature and Sample Size on Natural and Enforced Syneresis of Precipitated Silica*. **Polymers**, 7(12), 2504–2521. https://doi.org/10.3390/polym7121528
+
+The article is published under the **Creative Commons Attribution 4.0 International (CC BY 4.0)** license (https://creativecommons.org/licenses/by/4.0/). Reuse and adaptation of material covered by that license are permitted subject to its terms. Before redistributing any particular figure or figure-derived material, check its caption and credit line for third-party material or a separate rights notice; such material may not be covered by the article's general license.
+
+The CSV is an independently produced, figure-derived digitization for quantitative analysis and model development. It is **not** the authors' original experimental dataset and should not be cited or described as raw measurement data supplied by the authors. Cite the source publication whenever using or redistributing the digitized values, identify the values as digitized, and describe any subsequent processing or modifications.
+
+**Trace limitation:** in some panels, experimental and model traces overlap or cannot be distinguished reliably. The affected series are therefore labelled as combined visible traces; they must not be presented as exclusively experimental measurements. The original figures are not reproduced in this dataset.
+
+Suggested attribution: “Data digitized from figures in Wilhelm and Kind (2015), *Polymers* 7(12), 2504–2521, https://doi.org/10.3390/polym7121528 (CC BY 4.0). Digitization and any subsequent processing by this project; values are figure-derived, not original author-supplied raw data.”
