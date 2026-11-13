@@ -52,24 +52,25 @@ def solve_interface_aware(
     mobility_m2_pa_s: Sequence[float],
     n_cells: int, thickness_m: float, dt_s: float, n_steps: int,
     initial_pressure_pa: float = 1.0,
+    initial_pressure_profile_pa: Sequence[float] | None = None,
 ) -> dict[str,list]:
     """Solve using exact layer-overlap storage and integrated Darcy resistance.
 
     Returns cell-centre pressure profiles, storage-weighted mean pressure,
-    outward boundary flux and global conservation residual.
+    outward boundary flux and global conservation residual. Supply either a
+    scalar uniform initial pressure or an explicit cell-centred profile.
     """
     x,s,lam=_validate_layers(layer_boundaries_m,storage_compliance_pa_inv,
                              mobility_m2_pa_s,thickness_m)
-    if not isinstance(n_cells,int) or n_cells < 2: raise ValueError("n_cells must be >= 2")
+    if not isinstance(n_cells,int) or isinstance(n_cells,bool) or n_cells < 2:
+        raise ValueError("n_cells must be >= 2")
     if not math.isfinite(dt_s) or dt_s <= 0: raise ValueError("dt_s must be > 0")
-    if not isinstance(n_steps,int) or n_steps < 1: raise ValueError("n_steps must be >= 1")
-    if not math.isfinite(initial_pressure_pa): raise ValueError("initial pressure must be finite")
+    if not isinstance(n_steps,int) or isinstance(n_steps,bool) or n_steps < 1:
+        raise ValueError("n_steps must be >= 1")
     dx=thickness_m/n_cells
     centres=[(i+0.5)*dx for i in range(n_cells)]
     edges=[i*dx for i in range(n_cells+1)]
-    capacity=[_integrate_piecewise(edges[i],edges[i+1],x,s)*1.0 for i in range(n_cells)]
-    # Conductance between adjacent pressure centres: inverse of exact
-    # series resistance, including any interface crossed between centres.
+    capacity=[_integrate_piecewise(edges[i],edges[i+1],x,s) for i in range(n_cells)]
     conductance=[0.0]*(n_cells+1)
     conductance[0]=1.0/_integrate_piecewise(0.0,centres[0],x,lam,lambda v:1.0/v)
     conductance[n_cells]=1.0/_integrate_piecewise(centres[-1],thickness_m,x,lam,lambda v:1.0/v)
@@ -81,7 +82,14 @@ def solve_interface_aware(
         lower[i]=-conductance[i] if i else 0.0
         upper[i]=-conductance[i+1] if i<n_cells-1 else 0.0
         diagonal[i]=capacity[i]/dt_s+conductance[i]+conductance[i+1]
-    p=[initial_pressure_pa]*n_cells
+    if initial_pressure_profile_pa is None:
+        if not math.isfinite(initial_pressure_pa):
+            raise ValueError("initial pressure must be finite")
+        p=[float(initial_pressure_pa)]*n_cells
+    else:
+        p=[float(v) for v in initial_pressure_profile_pa]
+        if len(p)!=n_cells or any(not math.isfinite(v) for v in p):
+            raise ValueError("initial pressure profile must contain n_cells finite values")
     total_capacity=sum(capacity)
     times=[0.0]; profiles=[p[:]]
     means=[sum(c*v for c,v in zip(capacity,p))/total_capacity]
