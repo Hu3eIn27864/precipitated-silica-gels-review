@@ -4,6 +4,7 @@ import math
 import unittest
 from interface_aware_1d import solve_interface_aware
 from layered_reference import two_layer_mean_pressure_ratio, two_layer_eigenvalues
+from multilayer_reference import multilayer_eigenvalues
 
 
 class InterfaceAwareTests(unittest.TestCase):
@@ -94,6 +95,53 @@ class InterfaceAwareTests(unittest.TestCase):
             j=next(j for j in range(1,80)
                    if (j-0.5)*dx < interface < (j+0.5)*dx)
             self.assertGreater(1.0/contacted["face_conductance_m_pa_s"][j],rc)
+
+
+    def test_three_layer_contact_eigenmode_full_profile(self):
+        boundaries=[0.0,0.23,0.71,1.0]
+        storage=[1.0,2.0,0.7]
+        mobility=[1.0,0.15,0.6]
+        contacts=[0.03,0.08]
+        widths=[b-a for a,b in zip(boundaries,boundaries[1:])]
+        sigma=multilayer_eigenvalues(storage,mobility,widths,1,contacts)[0]
+        wave=math.sqrt(sigma)
+        def state_in_layer(p0,q0,si,li,z):
+            k=wave*math.sqrt(si/li)
+            return (p0*math.cos(k*z)+q0*math.sin(k*z)/(li*k),
+                    -li*k*p0*math.sin(k*z)+q0*math.cos(k*z))
+        def exact_mode(x):
+            p,q=0.0,1.0
+            for i,(left,right) in enumerate(zip(boundaries,boundaries[1:])):
+                if x <= right:
+                    return state_in_layer(p,q,storage[i],mobility[i],x-left)[0]
+                p,q=state_in_layer(p,q,storage[i],mobility[i],right-left)
+                if i < len(contacts):
+                    p += contacts[i]*q
+            raise AssertionError("coordinate outside slab")
+        p,q=0.0,1.0
+        for i,width in enumerate(widths[:-1]):
+            p_left,q_left=state_in_layer(p,q,storage[i],mobility[i],width)
+            p_right=p_left+contacts[i]*q_left
+            self.assertAlmostEqual(p_right-p_left,contacts[i]*q_left,places=12)
+            self.assertAlmostEqual(q_left,q_left,places=12)
+            p,q=p_right,q_left
+        errors=[]
+        for n in (40,80,160):
+            dx=1.0/n
+            steps=round(0.002/(0.1*dx*dx))
+            dt=0.002/steps
+            centres=[(i+0.5)*dx for i in range(n)]
+            initial=[exact_mode(x) for x in centres]
+            result=solve_interface_aware(
+                boundaries,storage,mobility,n,1.0,dt,steps,
+                initial_pressure_profile_pa=initial,
+                interface_contact_resistance_pa_s_m=contacts)
+            numerical=result["profiles_pa"][-1]
+            exact=[math.exp(-sigma*0.002)*exact_mode(x) for x in centres]
+            errors.append(math.sqrt(sum((u-v)**2 for u,v in zip(numerical,exact))/n))
+        self.assertLess(errors[1],errors[0])
+        self.assertLess(errors[2],errors[1])
+        self.assertLess(errors[-1],3e-4)
 
     def test_contact_zero_limit_and_invalid_contact_geometry(self):
         base=solve_interface_aware([0,.37,1],[1,2],[1,.15],40,1,1e-5,10)
