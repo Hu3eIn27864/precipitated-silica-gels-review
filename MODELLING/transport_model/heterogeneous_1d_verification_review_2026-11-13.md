@@ -108,3 +108,11 @@ verification gate locally. Hosted CI integration is pending until the
 workflow triggered by these commits completes. The test does not establish
 physical validity, target-silica calibration, or robustness for discontinuous
 or evolving material coefficients.
+
+## Discontinuous-interface eigenmode extension
+
+Added a full-profile eigenmode test to test_layered_reference.py. The exact mode is assembled from sinusoidal layer solutions using the independently computed first eigenvalue. Its amplitude enforces pressure continuity, and the characteristic equation is checked through nonzero lambda*dp/dx continuity at the fixed interface.
+
+At N=40,80,160 with dt=0.05*dx^2, local diagnostic L2 errors at t=0.05 are 1.5534e-4, 3.8877e-5 and 9.7218e-6. The observed refinement ratios are approximately four. The interface flux is explicitly nonzero, so the test does not pass merely because the interface gradient vanishes. This extends the previous storage-weighted mean-pressure comparison to a full spatial profile.
+
+Hosted CI for this new test is pending. The verification covers a grid-aligned, fixed, two-layer interface only; off-grid/moving interfaces and multilayer heterogeneity remain open.
