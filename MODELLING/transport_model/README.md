@@ -392,3 +392,11 @@ These results verify the discretisation for a smooth manufactured problem
 with variable storage and mobility. They do not verify discontinuous
 coefficients, evolving coefficients, silica material parameters, or
 physical constitutive validity.
+
+### Discontinuous-interface eigenmode verification
+
+The fixed-interface suite additionally tests a nonzero-flux eigenmode of the two-layer operator. The mode is assembled from phi1=sin(k1*x) and phi2=A*sin(k2*(L-x)), with A chosen for pressure continuity. The independent two-layer characteristic equation enforces continuity of lambda*dp/dx. Unlike the earlier uniform-initial-pressure mean-response check, this test directly evolves a spatial eigenfunction with nonzero interface flux and compares the full cell-centred profile with exp(-sigma*t)*phi(x).
+
+For N=40,80,160 and dt=0.05*dx^2, the discrete L2 errors at t=0.05 are approximately 1.5534e-4, 3.8877e-5 and 9.7218e-6, respectively, consistent with second-order spatial convergence. The test also asserts pressure and flux continuity at the interface and explicitly rejects the trivial zero-interface-flux case. Run with the existing test_layered_reference.py command above.
+
+This verifies the piecewise-constant discontinuity at a grid-aligned fixed interface for a nonzero-flux eigenmode. It does not yet test a moving or off-grid interface, more than two layers, or nonlinear constitutive jumps.
