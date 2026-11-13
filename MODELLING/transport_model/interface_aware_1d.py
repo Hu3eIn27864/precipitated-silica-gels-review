@@ -74,6 +74,12 @@ def solve_interface_aware(
         contacts=[float(v) for v in interface_contact_resistance_pa_s_m]
         if len(contacts)!=len(x)-2 or any(not math.isfinite(v) or v<0 for v in contacts):
             raise ValueError("need one finite nonnegative contact resistance per internal interface")
+    if interface_contact_resistance_pa_s_m is None:
+        contacts=[0.0]*(len(x)-2)
+    else:
+        contacts=[float(v) for v in interface_contact_resistance_pa_s_m]
+        if len(contacts)!=len(x)-2 or any(not math.isfinite(v) or v<0 for v in contacts):
+            raise ValueError("need one finite nonnegative contact resistance per internal interface")
     dx=thickness_m/n_cells
     centres=[(i+0.5)*dx for i in range(n_cells)]
     edges=[i*dx for i in range(n_cells+1)]
