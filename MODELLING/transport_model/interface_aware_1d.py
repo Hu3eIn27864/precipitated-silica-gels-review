@@ -62,10 +62,11 @@ def solve_interface_aware(
     scalar uniform initial pressure or an explicit cell-centred profile.
 
     interface_contact_resistance_pa_s_m contains one nonnegative area-specific
-    resistance (Pa s/m) per internal interface. It is added to the bulk series
-    resistance when that interface lies between adjacent cell centres. A
-    nonzero contact resistance at a cell centre is rejected: this formulation
-    needs a two-sided interface pressure degree of freedom for that geometry.
+    resistance (Pa s/m) per internal interface. For positive values, the FV
+    graph inserts co-located minus/plus pressure unknowns and splits storage
+    control volumes at the interface, including when it coincides with an
+    original cell centre. The augmented state is returned separately from the
+    legacy projected cell-centre pressure profile.
     """
     x,s,lam=_validate_layers(layer_boundaries_m,storage_compliance_pa_inv,
                              mobility_m2_pa_s,thickness_m)
@@ -80,7 +81,7 @@ def solve_interface_aware(
         contacts=[float(v) for v in interface_contact_resistance_pa_s_m]
         if len(contacts)!=len(x)-2 or any(not math.isfinite(v) or v<0 for v in contacts):
             raise ValueError("need one finite nonnegative contact resistance per internal interface")
-    # A positive contact resistance introduces two massless pressure traces
+    # A positive contact resistance introduces two one-sided interface pressure unknowns
     # at the physical interface. The associated control volumes are split at
     # the interface, even when it coincides with an original cell centre.
     if any(rc > 0.0 for rc in contacts):
