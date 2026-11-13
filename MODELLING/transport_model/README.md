@@ -311,3 +311,45 @@ slower relaxation with finite resistance, global mass balance with asymmetric
 boundaries and invalid inputs. This is a boundary-condition sensitivity
 model, not a calibrated membrane model or proof that the reported base-gel
 membrane layer explains the full acid/base kinetic reversal.
+
+## Fixed-interface two-layer eigenfunction verification
+
+`layered_reference.py` provides an independent analytical reference for a
+double-drained slab with two piecewise-constant layers separated at a fixed
+physical coordinate x=a. Pressure and hydraulic flux are continuous at the
+interface. For decay rate sigma, ki=sqrt(sigma Si/lambda_i), and the
+characteristic equation is
+
+\[
+\lambda_1 k_1\cot(k_1 a)+
+\lambda_2 k_2\cot(k_2(L-a))=0.
+\]
+
+The implementation solves the equivalent determinant equation, avoiding
+cotangent poles, then evaluates the storage-weighted modal expansion for a
+uniform initial excess pressure. It uses only the Python standard library.
+
+Run the independent tests with:
+
+    python3 -m unittest MODELLING/transport_model/test_layered_reference.py -v
+
+The tests check ordered eigenvalues and a first-eigenvalue regression value,
+the modal reference limits/monotonicity, finite-volume convergence against
+the fixed-interface analytical result under grid refinement, time-step
+refinement, and an independent boundary-gradient reconstruction. The latter
+uses p=0 at each boundary and the adjacent cell-centre pressure to reconstruct
+Darcy flux, then compares its backward-Euler time integral with independently
+computed storage loss; it does not consume the solver's reported flux array.
+
+The fixed-interface verification case uses L=1, a=0.375, (S1,lambda1)=(1,1)
+and (S2,lambda2)=(2,0.15) in consistent dimensionless verification units.
+The interface is exactly a cell face for N=40,80,160. At t=0.005, the
+analytical storage-weighted pressure ratio is 0.9240059118. Spatial errors
+for those grids are approximately 3.84e-3, 8.33e-4 and 2.05e-4. At N=160,
+time-step refinement from 8e-6 to 4e-6 to 2e-6 also decreases the error.
+The independently reconstructed integrated boundary flux differs from
+storage loss by about 1.3e-13 in the selected regression case.
+
+These checks verify the numerical implementation for a fixed two-layer
+linear problem. They do not validate material parameters, constitutive laws,
+or the applicability of the model to precipitated-silica syneresis.
