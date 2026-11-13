@@ -85,3 +85,10 @@ A decisive test is whether measured \\(\\kappa(t)\\), \\(M(t)\\), viscosity and 
 - Scherer (1989), *J. Non-Cryst. Solids* 108, 18–27 and 28–36. DOI: 10.1016/0022-3093(89)90328-1 and 10.1016/0022-3093(89)90329-3.
 - Scherer & Swiatek (1989), *J. Non-Cryst. Solids* 113, 119–129. DOI: 10.1016/0022-3093(89)90002-1.
 - Wang, Winter & Auernhammer (2014), *J. Colloid Interface Sci.* 413, 159–166. DOI: 10.1016/j.jcis.2013.09.035.
+
+
+## Additional mechanistic constraint from Wilhelm & Kind (2015)
+
+The 2015 study distinguishes acid- and base-catalysed condensation pathways: acidic conditions are described as favouring more linear, weakly branched structures, whereas basic conditions favour more highly branched clusters. It also discusses the strong increase in monomeric silicic-acid solubility above approximately pH 8. These observations imply that pH can affect both network topology and dissolution/reprecipitation, not merely the rate constant of one common syneresis law. The reported trends should be interpreted within the specific sodium-silicate/sulfuric-acid formulations and conditions used by Wilhelm & Kind, not universalised to all silica gels.
+
+**Model consequence:** do not encode pH only as a scalar multiplier on permeability or on a common kinetic rate. Treat acid/base route as potentially different structural and chemical closures, and test whether a common hydraulic equation remains adequate after independently measuring permeability and mechanics.
