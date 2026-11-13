@@ -32,6 +32,7 @@ The review will distinguish industrially precipitated silica from related but no
 - `MODELLING/` — hypothesis-driven model strategy, candidate validation datasets, and starter transport/LAMMPS prototypes.
 - `MODELLING/ROADMAP_STATUS_2026-11-13.md` — current AP/work-package status, gates, and immediate execution order.
 - `MODELLING/transport_model/layered_reference.py` and `test_layered_reference.py` — fixed-interface two-layer eigenfunction reference and independent transport verification tests.
+- `MODELLING/transport_model/test_manufactured_solution.py` — manufactured-solution verification for spatially varying storage and hydraulic mobility.
 - `CHANGELOG.md` — substantive project decisions.
 
 ## Evidence grades
