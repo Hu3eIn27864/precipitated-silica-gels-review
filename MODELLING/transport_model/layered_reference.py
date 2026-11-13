@@ -91,17 +91,18 @@ def two_layer_mean_pressure_ratio(
     for sigma in rates:
         k1 = math.sqrt(sigma*storage_left/mobility_left)
         k2 = math.sqrt(sigma*storage_right/mobility_right)
-        s2 = math.sin(k2*b)
-        if abs(s2) < 1e-14:
-            continue
-        amp2 = math.sin(k1*a)/s2
-        integral_left = (1.0-math.cos(k1*a))/k1
-        integral_right = amp2*(1.0-math.cos(k2*b))/k2
+        # Scale both layer shapes by the opposite interface sine. This
+        # enforces pressure continuity without dividing by a small sine.
+        amp_left, amp_right = math.sin(k2*b), math.sin(k1*a)
+        integral_left = amp_left*(1.0-math.cos(k1*a))/k1
+        integral_right = amp_right*(1.0-math.cos(k2*b))/k2
         weighted_integral = (storage_left*integral_left
                              + storage_right*integral_right)
-        norm_left = a/2.0-math.sin(2.0*k1*a)/(4.0*k1)
-        norm_right = amp2*amp2*(b/2.0-math.sin(2.0*k2*b)/(4.0*k2))
+        norm_left = amp_left*amp_left*(a/2.0-math.sin(2.0*k1*a)/(4.0*k1))
+        norm_right = amp_right*amp_right*(b/2.0-math.sin(2.0*k2*b)/(4.0*k2))
         weighted_norm = storage_left*norm_left + storage_right*norm_right
+        if weighted_norm <= 0.0:
+            continue
         ratio += (weighted_integral**2/(weighted_norm*total_capacity)
                   * math.exp(-sigma*time_s))
     return ratio
