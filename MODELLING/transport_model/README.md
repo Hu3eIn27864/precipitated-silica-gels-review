@@ -417,3 +417,25 @@ Hosted CI transport-test steps passed for workflow #360 (off-grid interface), #3
 - https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43509984528
 
 These are numerical verification results only. They do not validate precipitated-silica material parameters, constitutive laws, or physical predictions of syneresis.
+
+
+## Interface-aware finite-volume discretisation
+
+Added interface_aware_1d.py as a separate solver so the established cell-centred-array API remains backward compatible. Unlike the prior off-grid test, this solver receives the exact physical layer boundaries.
+
+For piecewise-constant layers it computes:
+- exact storage capacity in each finite volume, C_i = integral_cell S(x) dx, including cells cut by a material interface;
+- exact centre-to-centre hydraulic resistance, R_(i+1/2) = integral_between_centres 1/lambda(x) dx, then conductance G=1/R;
+- exact boundary half-cell resistance from each drained boundary to its adjacent pressure centre.
+
+The resulting backward-Euler system is conservative. Its global residual is the storage change plus time-integrated boundary outflow. Tests cover the homogeneous-material limit, a non-grid-aligned two-layer comparison against the independent eigenfunction series, exact cut-cell capacity and crossed-face resistance, a three-layer conservation/positivity case, and invalid layer partitions.
+
+Usage:
+    from interface_aware_1d import solve_interface_aware
+    result = solve_interface_aware(
+        layer_boundaries_m=[0.0, 0.37, 1.0],
+        storage_compliance_pa_inv=[1.0, 2.0],
+        mobility_m2_pa_s=[1.0, 0.15],
+        n_cells=80, thickness_m=1.0, dt_s=1e-5, n_steps=100)
+
+This is an interface-aware, piecewise-constant 1-D method with cell-centred representative pressures and mass-lumped storage. It is not a high-order cut-cell method for smoothly varying coefficients inside layers, moving interfaces, nonlinear mobility, or interface contact resistance. It also does not validate silica constitutive parameters. Hosted CI status must be checked before marking the implementation verified.
