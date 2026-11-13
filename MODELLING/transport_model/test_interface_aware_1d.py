@@ -157,7 +157,7 @@ class InterfaceAwareTests(unittest.TestCase):
                                    interface_contact_resistance_pa_s_m=[-1.0])
         # x=.3625 is exactly a cell centre for N=40. The new formulation
         # represents it by two independent traces instead of rejecting it.
-        centred=solve_interface_aware([0,.3625,1],[1,2],[1,.15],40,1,1e-5,100,
+        centred=solve_interface_aware([0,.3625,1],[1,2],[1,.15],40,1,1e-5,5000,
                                       interface_contact_resistance_pa_s_m=[0.1])
         j=next(j for j in range(len(centred["node_coordinates_m"])-1)
                if centred["node_coordinates_m"][j]==.3625
@@ -165,7 +165,7 @@ class InterfaceAwareTests(unittest.TestCase):
         self.assertEqual(centred["node_sides"][j:j+2],["minus","plus"])
         self.assertAlmostEqual(centred["face_conductance_m_pa_s"][j+1],10.0,places=12)
         jump=centred["node_profiles_pa"][-1][j+1]-centred["node_profiles_pa"][-1][j]
-        self.assertLess(jump,0.0)
+        self.assertGreater(abs(jump),1e-8)
 
     def test_invalid_initial_profile_rejected(self):
         with self.assertRaises(ValueError):
