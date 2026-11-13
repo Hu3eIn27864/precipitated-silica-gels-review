@@ -3,7 +3,7 @@
 import math
 import unittest
 from interface_aware_1d import solve_interface_aware
-from layered_reference import two_layer_mean_pressure_ratio
+from layered_reference import two_layer_mean_pressure_ratio, two_layer_eigenvalues
 
 
 class InterfaceAwareTests(unittest.TestCase):
@@ -39,6 +39,48 @@ class InterfaceAwareTests(unittest.TestCase):
         self.assertLess(max(abs(v) for v in r["balance_residual_m"][1:]),2e-12)
         self.assertTrue(all(v>=0 for row in r["profiles_pa"] for v in row))
         self.assertTrue(all(b<a for a,b in zip(r["mean_pressure_pa"],r["mean_pressure_pa"][1:])))
+
+
+    def test_off_grid_nonzero_flux_eigenmode_full_profile(self):
+        # Exact eigenmode: continuous pressure and nonzero continuous flux at x=.37.
+        a=0.37; L=1.0; t=0.005
+        sigma=two_layer_eigenvalues(1.0,1.0,2.0,0.15,L,a,1)[0]
+        k1=math.sqrt(sigma)
+        k2=math.sqrt(sigma*2.0/0.15)
+        b=L-a
+        amp_left=math.sin(k2*b)
+        amp_right=math.sin(k1*a)
+        def mode(x):
+            return (amp_left*math.sin(k1*x) if x <= a
+                    else amp_right*math.sin(k2*(L-x)))
+        p_left=amp_left*math.sin(k1*a)
+        p_right=amp_right*math.sin(k2*b)
+        q_left=amp_left*k1*math.cos(k1*a)
+        q_right=-0.15*amp_right*k2*math.cos(k2*b)
+        self.assertAlmostEqual(p_left,p_right,places=11)
+        self.assertAlmostEqual(q_left,q_right,places=10)
+        self.assertGreater(abs(q_left),0.1)
+        errors=[]
+        for n in (40,80,160):
+            dx=L/n
+            steps=round(t/(0.25*dx*dx))
+            dt=t/steps
+            centres=[(i+0.5)*dx for i in range(n)]
+            initial=[mode(x) for x in centres]
+            r=solve_interface_aware([0.0,a,L],[1.0,2.0],[1.0,0.15],
+                                    n,L,dt,steps,
+                                    initial_pressure_profile_pa=initial)
+            numerical=r["profiles_pa"][-1]
+            exact=[math.exp(-sigma*t)*mode(x) for x in centres]
+            errors.append(math.sqrt(sum((u-v)**2 for u,v in zip(numerical,exact))/n))
+        self.assertLess(errors[1],errors[0])
+        self.assertLess(errors[2],errors[1])
+        self.assertLess(errors[-1],2e-4)
+
+    def test_invalid_initial_profile_rejected(self):
+        with self.assertRaises(ValueError):
+            solve_interface_aware([0.0,1.0],[1.0],[1.0],10,1.0,1e-4,1,
+                                  initial_pressure_profile_pa=[1.0,2.0])
 
     def test_invalid_layer_partition_rejected(self):
         with self.assertRaises(ValueError):
