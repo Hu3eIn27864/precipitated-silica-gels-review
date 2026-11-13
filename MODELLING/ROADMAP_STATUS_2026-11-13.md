@@ -110,3 +110,10 @@ checkout.
 - Hydraulic conductance is computed from the exact series integral of 1/lambda between adjacent cell centres and between boundary and first/last centre.
 - Added tests for homogeneous recovery, off-grid two-layer analytical comparison, cut-cell capacity, interface-crossing resistance, three-layer conservation/positivity and invalid geometry.
 - This is a conservative piecewise-constant interface-aware method with cell-centred representative pressures. It is not a moving-interface, nonlinear, or high-order cut-cell solver; silica physical validation remains separate. Hosted CI is pending.
+
+
+## AP C follow-up — off-grid interface eigenmode profile (13 November 2026)
+
+- Extended the interface-aware solver to accept a prescribed cell-centred initial pressure profile, retaining the scalar uniform-initial-pressure API.
+- Added an off-grid two-layer first-eigenmode transient test at x=0.37. It checks analytical pressure continuity and nonzero Darcy-flux continuity, then compares the complete numerical profile against the exact decaying eigenmode for N=40,80,160.
+- Added validation for malformed initial profiles. Hosted CI #376 is running; do not claim this test passed or assign a convergence order until its outcome and error sequence are inspected.
