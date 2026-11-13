@@ -60,6 +60,12 @@ def solve_interface_aware(
     Returns cell-centre pressure profiles, storage-weighted mean pressure,
     outward boundary flux and global conservation residual. Supply either a
     scalar uniform initial pressure or an explicit cell-centred profile.
+
+    interface_contact_resistance_pa_s_m contains one nonnegative area-specific
+    resistance (Pa s/m) per internal interface. It is added to the bulk series
+    resistance when that interface lies between adjacent cell centres. A
+    nonzero contact resistance at a cell centre is rejected: this formulation
+    needs a two-sided interface pressure degree of freedom for that geometry.
     """
     x,s,lam=_validate_layers(layer_boundaries_m,storage_compliance_pa_inv,
                              mobility_m2_pa_s,thickness_m)
