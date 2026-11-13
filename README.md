@@ -50,7 +50,7 @@ The literature database and claim–evidence synthesis are under active developm
 
 The next gated work packages for DLCA robustness, radial transport verification, literature validation, and manuscript synthesis are maintained in [MODELLING/NEXT_STEPS_PARALLEL_PLAN.md](MODELLING/NEXT_STEPS_PARALLEL_PLAN.md). This plan separates software checks from physical validation and records explicit stop rules.
 
-Latest execution notes: [heterogeneous transport-solver verification review](MODELLING/transport_model/heterogeneous_1d_verification_review_2026-11-13.md), [transport-parameter evidence comparison](LITERATURE/transport_parameter_comparison_2026-11-13.md), and [latest DLCA test/artifact audit](MODELLING/monte_carlo_3d/TEST_RESULTS.md).
+Latest execution notes: [heterogeneous transport-solver verification review](MODELLING/transport_model/heterogeneous_1d_verification_review_2026-11-13.md), [transport-parameter evidence comparison](LITERATURE/transport_parameter_comparison_2026-11-13.md) (including the new PSG-047 silica-sol comparator), and [latest DLCA test/artifact audit](MODELLING/monte_carlo_3d/TEST_RESULTS.md).
 
 ## Digitized syneresis curves — provenance and reuse
 
