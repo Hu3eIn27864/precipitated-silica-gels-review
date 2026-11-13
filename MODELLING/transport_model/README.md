@@ -443,7 +443,7 @@ This is an interface-aware, piecewise-constant 1-D method with cell-centred repr
 
 ### Off-grid interface eigenmode verification
 
-The interface-aware solver also accepts an explicit cell-centred initial pressure profile. This enables a full-profile eigenmode test for a two-layer jump located inside a cell. The test compares the transient numerical profile with the independent analytical first eigenmode, whose pressure and nonzero Darcy flux are continuous at the physical interface, over three grid resolutions. This is a stronger check than comparing only the spatial mean. Hosted CI is running for this addition; no convergence order is claimed until the numerical errors are inspected.
+The interface-aware solver also accepts an explicit cell-centred initial pressure profile. This enables a full-profile eigenmode test for a two-layer jump located inside a cell. The test compares the transient numerical profile with the independent analytical first eigenmode, whose pressure and nonzero Darcy flux are continuous at the physical interface, over three grid resolutions. This is a stronger check than comparing only the spatial mean. The augmented two-sided implementation passed all 92 transport tests in hosted CI #399; the full integrated workflow also completed successfully. No formal spatial convergence order is claimed.
 
 
 ## Finite contact resistance at internal material interfaces
