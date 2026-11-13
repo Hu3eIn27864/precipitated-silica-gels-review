@@ -25,6 +25,27 @@ class MultilayerReferenceTests(unittest.TestCase):
                 math.sqrt(rate), storage, mobility, widths)
             self.assertLess(abs(residual), 2e-9)
 
+
+    def test_contact_resistance_zero_limit_and_slower_modes(self):
+        s=[1.0,2.0,0.7]; lam=[1.0,0.15,0.6]; w=[0.25,0.4,0.35]
+        base=multilayer_eigenvalues(s,lam,w,n_modes=4)
+        zero=multilayer_eigenvalues(s,lam,w,n_modes=4,contact_resistances=[0.0,0.0])
+        finite=multilayer_eigenvalues(s,lam,w,n_modes=4,contact_resistances=[0.03,0.08])
+        for a,b in zip(base,zero):
+            self.assertAlmostEqual(a,b,places=11)
+        self.assertTrue(all(x<y for x,y in zip(finite,base)))
+        for rate in finite:
+            self.assertLess(abs(multilayer_characteristic(
+                math.sqrt(rate),s,lam,w,[0.03,0.08])),2e-9)
+
+    def test_contact_resistance_validation(self):
+        with self.assertRaises(ValueError):
+            multilayer_eigenvalues([1.0,2.0],[1.0,1.0],[0.5,0.5],
+                                   contact_resistances=[-0.1])
+        with self.assertRaises(ValueError):
+            multilayer_eigenvalues([1.0,2.0],[1.0,1.0],[0.5,0.5],
+                                   contact_resistances=[0.1,0.2])
+
     def test_rejects_invalid_layer_definitions(self):
         with self.assertRaises(ValueError):
             multilayer_eigenvalues([1.0, 2.0], [1.0], [0.5, 0.5])
