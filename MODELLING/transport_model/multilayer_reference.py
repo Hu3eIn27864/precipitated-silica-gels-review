@@ -1,7 +1,7 @@
 """Transfer-matrix eigenvalue reference for piecewise-constant multilayers.
 
 The state is [p, q=lambda*p_x]. At an interface with area-specific contact
-resistance Rc, flux is continuous and pressure has jump p_left-p_right=Rc*q.
+resistance Rc, flux is continuous and pressure has jump p_right-p_left=Rc*q.
 """
 from __future__ import annotations
 import math
@@ -38,9 +38,9 @@ def multilayer_characteristic(q: float, storage: list[float],
     for i, (si, li, wi) in enumerate(zip(storage, mobility, widths)):
         state = _propagate(q, si, li, wi, state)
         if i < len(contacts):
-            # Across contact: p_right = p_left - Rc*q; flux is unchanged.
+            # Across contact: p_right = p_left + Rc*q; flux is unchanged.
             p, flux = state
-            state = (p - contacts[i]*flux, flux)
+            state = (p + contacts[i]*flux, flux)
     return state[0]
 
 
