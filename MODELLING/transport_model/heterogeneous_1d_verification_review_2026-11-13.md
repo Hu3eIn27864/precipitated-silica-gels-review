@@ -53,3 +53,28 @@ A second independent conservation check should reconstruct the physical boundary
 - Time-varying storage, evolving porosity, moving boundaries and coupled mechanics: **deferred**.
 
 No target-system fitting or pH-dependent constitutive law should begin until the independent layered benchmark and the remaining convergence/conservation checks pass.
+
+## Implementation update — fixed-interface analytical benchmark
+
+Implemented in `layered_reference.py` with regression tests in
+`test_layered_reference.py`:
+
+- Solves the two-layer eigenvalue condition at a fixed physical interface
+  using a determinant form (rather than evaluating cotangents at their poles).
+- Evaluates the storage-weighted mean-pressure modal series for uniform
+  initial pressure.
+- Compares the finite-volume solver against this reference at L=1, a=0.375,
+  S1=1, lambda1=1, S2=2, lambda2=0.15 and t=0.005.
+- Grid errors for N=40,80,160 are 3.84e-3, 8.33e-4 and 2.05e-4.
+- Time-step refinement at N=160 from dt=8e-6 to 4e-6 to 2e-6 is monotone.
+- Independently reconstructs both boundary Darcy fluxes from the boundary
+  Dirichlet value and adjacent cell-centre pressures, integrates them using
+  backward-Euler time weights, and compares against independently computed
+  storage loss. The selected-case residual is 1.31e-13.
+
+The local numerical cross-check ran four focused checks successfully against
+a local reproduction of the existing finite-volume update and the committed
+reference implementation. The GitHub test file is committed, but a hosted
+CI run has not yet been verified in this update. Therefore the implementation
+and focused numerical checks are complete; hosted integration status remains
+pending. These remain code-verification results, not material validation.
