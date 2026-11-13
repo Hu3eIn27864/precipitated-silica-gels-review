@@ -101,3 +101,12 @@ checkout.
 - Added time-varying mobility verification against the exact transformed time for uniform lambda(t)=1+0.5t and fixed storage. The test checks temporal convergence and storage/flux balance. Time-varying storage and coupled aging remain unsupported.
 - Hosted 1-D transport test steps passed in CI #360, #362 and #363. All four integrated workflows #360–#363 subsequently completed successfully, including the full 1-D transport suite and downstream workflow stages.
 - All of the above is numerical code verification, not silica-specific physical validation.
+
+
+## AP C — interface-aware finite volumes (13 November 2026)
+
+- Added a separate interface-aware 1-D FV solver accepting explicit physical layer boundaries.
+- Cell storage is integrated exactly over layer/cell overlaps, including cut cells.
+- Hydraulic conductance is computed from the exact series integral of 1/lambda between adjacent cell centres and between boundary and first/last centre.
+- Added tests for homogeneous recovery, off-grid two-layer analytical comparison, cut-cell capacity, interface-crossing resistance, three-layer conservation/positivity and invalid geometry.
+- This is a conservative piecewise-constant interface-aware method with cell-centred representative pressures. It is not a moving-interface, nonlinear, or high-order cut-cell solver; silica physical validation remains separate. Hosted CI is pending.
