@@ -353,3 +353,4 @@ storage loss by about 1.3e-13 in the selected regression case.
 These checks verify the numerical implementation for a fixed two-layer
 linear problem. They do not validate material parameters, constitutive laws,
 or the applicability of the model to precipitated-silica syneresis.
+Hosted CI [#351](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43506021553) passed after the layered reference and tests were committed; the complete 1-D transport suite reported **68/68 tests passing**, including all six fixed-interface tests. This is numerical code verification only.
