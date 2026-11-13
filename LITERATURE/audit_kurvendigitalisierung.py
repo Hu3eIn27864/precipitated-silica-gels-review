@@ -10,7 +10,7 @@ from pathlib import Path
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "DATA" / "raw" / "kurvendigitalisierung.csv"
+SOURCE = ROOT / "DATA" / "Raw" / "kurvendigitalisierung.csv"
 OUT = ROOT / "DATA" / "processed"
 OUT.mkdir(parents=True, exist_ok=True)
 
