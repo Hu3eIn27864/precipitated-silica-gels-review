@@ -400,3 +400,20 @@ The fixed-interface suite additionally tests a nonzero-flux eigenmode of the two
 For N=40,80,160 and dt=0.05*dx^2, the discrete L2 errors at t=0.05 are approximately 1.5534e-4, 3.8877e-5 and 9.7218e-6, respectively, consistent with second-order spatial convergence. The test also asserts pressure and flux continuity at the interface and explicitly rejects the trivial zero-interface-flux case. Run with the existing test_layered_reference.py command above.
 
 This verifies the piecewise-constant discontinuity at a grid-aligned fixed interface for a nonzero-flux eigenmode. It does not yet test a moving or off-grid interface, more than two layers, or nonlinear constitutive jumps.
+
+### Off-grid interface, multilayer reference and time-varying mobility — 13 November 2026
+
+Three additional verification branches were added after the grid-aligned two-layer eigenmode test.
+
+**Off-grid two-layer interface.** The layered-reference test now places the material jump at x=0.37 for N=40,80,160, so the interface is not a cell face. It compares the cell-centred-coefficient solver with the independent two-layer eigenfunction reference and requires the mean-pressure error to decrease under refinement. This is deliberately a convergence/limitation test: the present solver does not receive the exact subcell interface coordinate, and its cell-centre sampling does not provide a general interface-fitted second-order guarantee. A future interface-aware finite-volume representation should integrate storage over each cut cell and use exact series resistance for faces crossed by a material boundary.
+
+**Three-layer analytical eigenvalue reference.** multilayer_reference.py propagates pressure and flux (lambda*p_x) exactly through each piecewise-constant layer with a transfer matrix. Tests check the homogeneous limit when all three layers are identical, ordered eigenvalues for a heterogeneous three-layer stack, and the characteristic residual at each computed root. This is an independent eigenvalue reference; it is not yet a multilayer transient finite-volume convergence benchmark.
+
+**Time-varying mobility.** A new test uses the time transformation theta(t)=integral(lambda/S dt) to compare the existing prescribed-mobility schedule solver with an independent analytical reference for spatially uniform lambda(t)=1+0.5t and fixed S=1. It checks time-step convergence of mean pressure, stepwise storage/flux balance and nonnegative pressure. The solver still keeps storage compliance fixed and accepts mobility as a per-step schedule; this is not a coupled aging/poroelastic model.
+
+Hosted CI transport-test steps passed for workflow #360 (off-grid interface), #362 (three-layer tests), and #363 (time-dependent mobility reference). The complete integrated workflows were still running when this note was written; see the linked runs for their final status:
+- https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43509969646
+- https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43509979674
+- https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43509984528
+
+These are numerical verification results only. They do not validate precipitated-silica material parameters, constitutive laws, or physical predictions of syneresis.
