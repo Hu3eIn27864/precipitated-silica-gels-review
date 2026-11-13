@@ -78,3 +78,33 @@ reference implementation. The GitHub test file is committed, but a hosted
 CI run has not yet been verified in this update. Therefore the implementation
 and focused numerical checks are complete; hosted integration status remains
 pending. These remain code-verification results, not material validation.
+
+
+## Implementation update — variable-coefficient manufactured solution
+
+Implemented in `heterogeneous_1d.py` and tested in
+`test_manufactured_solution.py`.
+
+- Added optional cell-centred initial pressure profiles and an optional
+  `source_term_s_inv(x,t)` callback, evaluated at cell centres and the new
+  backward-Euler time level. The no-source, uniform-initial-condition
+  interface remains backward compatible.
+- Manufactured exact field:
+  \(p(x,t)=e^{-t}\sin(\pi x/L)\), with
+  \(S(x)=1+0.4x\), \(\lambda(x)=1+0.3x\), and
+  \(f=S p_t-\partial_x(\lambda p_x)\).
+- Five focused tests pass: spatial refinement, time refinement against a
+  small-dt same-grid reference, source-inclusive global balance, initial
+  profile/boundary behaviour, and invalid inputs.
+- Spatial L2 errors for N=20,40,80 are 3.377e-4, 8.471e-5 and 2.119e-5,
+  respectively (approximately second-order).
+- At N=40, temporal differences from the dt=1e-5 same-grid reference are
+  2.388e-6, 1.165e-6 and 5.519e-7 for dt=4e-4,2e-4,1e-4.
+- Maximum source-inclusive discrete balance residual in the selected test
+  is 1.18e-16.
+
+This closes the smooth variable-coefficient manufactured-solution code
+verification gate locally. Hosted CI integration is pending until the
+workflow triggered by these commits completes. The test does not establish
+physical validity, target-silica calibration, or robustness for discontinuous
+or evolving material coefficients.
