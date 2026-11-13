@@ -6,9 +6,9 @@ all layer intersections; every centre-to-centre and boundary-to-centre
 hydraulic resistance is integrated exactly in series. Backward Euler solves
 S(x) p_t = (lambda(x) p_x)_x on a double-drained slab.
 
-Cell pressures are representative centre values (mass-lumped FV). This
-standard cell-centred formulation is conservative and exactly locates
-material interfaces in capacities and face resistances.
+Cell pressures are representative centre values. With finite contact
+resistance, two massless pressure traces are inserted at each interface and
+the adjacent control volumes are split at the interface.
 """
 from __future__ import annotations
 import math
@@ -88,7 +88,6 @@ def solve_interface_aware(
         original_centres=[(i+0.5)*dx for i in range(n_cells)]
         contact_map={x[i+1]:contacts[i] for i in range(len(contacts)) if contacts[i]>0.0}
         nodes=[]
-        original_to_node={}
         for i,xc in enumerate(original_centres):
             if any(math.isclose(xc,a,rel_tol=0.0,abs_tol=1e-13*thickness_m)
                    for a in contact_map):
@@ -148,9 +147,18 @@ def solve_interface_aware(
                 else:
                     # Interface lies between original centres: linear interpolation
                     # supplies the initial trace without changing the evolution law.
-                    pos=max(0,min(n_cells-2,int(a/dx)))
-                    frac=(a-original_centres[pos])/(original_centres[pos+1]-original_centres[pos])
-                    pn.append(original[pos]+frac*(original[pos+1]-original[pos]))
+                    if side=="minus":
+                        ids=[k for k,xc in enumerate(original_centres) if xc<a]
+                        ids=ids[-2:]
+                    else:
+                        ids=[k for k,xc in enumerate(original_centres) if xc>a]
+                        ids=ids[:2]
+                    if len(ids)==2:
+                        i0,i1=ids
+                        frac=(a-original_centres[i0])/(original_centres[i1]-original_centres[i0])
+                        pn.append(original[i0]+frac*(original[i1]-original[i0]))
+                    else:
+                        pn.append(original[ids[0]] if ids else original[0])
         total_capacity=sum(node_capacity)
         times=[0.0]; node_profiles=[pn[:]]
         def project(values):
@@ -185,10 +193,6 @@ def solve_interface_aware(
     edges=[i*dx for i in range(n_cells+1)]
     capacity=[_integrate_piecewise(edges[i],edges[i+1],x,s) for i in range(n_cells)]
     conductance=[0.0]*(n_cells+1)
-    for interface, rc in zip(x[1:-1],contacts):
-        if rc > 0 and any(math.isclose(interface, xc, rel_tol=0.0, abs_tol=1e-13*thickness_m)
-                          for xc in centres):
-            raise ValueError("nonzero contact resistance at a cell centre requires an interface degree of freedom")
     conductance[0]=1.0/_integrate_piecewise(0.0,centres[0],x,lam,lambda v:1.0/v)
     conductance[n_cells]=1.0/_integrate_piecewise(centres[-1],thickness_m,x,lam,lambda v:1.0/v)
     for j in range(1,n_cells):
