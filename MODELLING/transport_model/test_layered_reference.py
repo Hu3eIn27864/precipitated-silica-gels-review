@@ -93,5 +93,51 @@ class FixedInterfaceLayeredReferenceTests(unittest.TestCase):
             two_layer_eigenvalues(1.0, 1.0, 2.0, 0.15, 1.0, 1.0, 5)
 
 
+    def test_nonzero_interface_flux_eigenmode_converges(self):
+        # Exact first eigenmode has nonzero interface gradient. Its amplitude
+        # is chosen for pressure continuity; the characteristic equation
+        # enforces continuity of lambda * dp/dx at x=A.
+        sigma = two_layer_eigenvalues(
+            self.S1, self.LAMBDA1, self.S2, self.LAMBDA2,
+            self.L, self.A, n_modes=1)[0]
+        k1 = math.sqrt(sigma * self.S1 / self.LAMBDA1)
+        k2 = math.sqrt(sigma * self.S2 / self.LAMBDA2)
+        b = self.L - self.A
+        amplitude_right = math.sin(k1*self.A) / math.sin(k2*b)
+
+        pressure_left_at_interface = math.sin(k1*self.A)
+        pressure_right_at_interface = amplitude_right * math.sin(k2*b)
+        flux_left = self.LAMBDA1 * k1 * math.cos(k1*self.A)
+        flux_right = -self.LAMBDA2 * amplitude_right * k2 * math.cos(k2*b)
+        self.assertAlmostEqual(pressure_left_at_interface,
+                               pressure_right_at_interface, places=12)
+        self.assertAlmostEqual(flux_left, flux_right, places=11)
+        self.assertGreater(abs(flux_left), 0.1)  # not the trivial zero-flux case
+
+        errors = []
+        final_time = 0.05
+        for n in (40, 80, 160):
+            storage, mobility = self.arrays(n)
+            dx = self.L / n
+            centres = [(i+0.5)*dx for i in range(n)]
+            initial_mode = [
+                math.sin(k1*x) if x < self.A
+                else amplitude_right*math.sin(k2*(self.L-x))
+                for x in centres
+            ]
+            dt = 0.05*dx*dx
+            result = solve_1d_pressure_diffusion(
+                storage, mobility, self.L, dt, round(final_time/dt),
+                initial_pressure_profile_pa=initial_mode)
+            exact = [math.exp(-sigma*final_time)*v for v in initial_mode]
+            numerical = result["profiles_pa"][-1]
+            errors.append(math.sqrt(sum((u-v)**2 for u, v in
+                                        zip(numerical, exact))/n))
+        self.assertLess(errors[1], errors[0])
+        self.assertLess(errors[2], errors[1])
+        self.assertGreater(errors[0]/errors[1], 3.5)
+        self.assertGreater(errors[1]/errors[2], 3.5)
+
+
 if __name__ == "__main__":
     unittest.main()
