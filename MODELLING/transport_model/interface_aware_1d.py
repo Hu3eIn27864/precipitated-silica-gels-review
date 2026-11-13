@@ -80,12 +80,106 @@ def solve_interface_aware(
         contacts=[float(v) for v in interface_contact_resistance_pa_s_m]
         if len(contacts)!=len(x)-2 or any(not math.isfinite(v) or v<0 for v in contacts):
             raise ValueError("need one finite nonnegative contact resistance per internal interface")
-    if interface_contact_resistance_pa_s_m is None:
-        contacts=[0.0]*(len(x)-2)
-    else:
-        contacts=[float(v) for v in interface_contact_resistance_pa_s_m]
-        if len(contacts)!=len(x)-2 or any(not math.isfinite(v) or v<0 for v in contacts):
-            raise ValueError("need one finite nonnegative contact resistance per internal interface")
+    # A positive contact resistance introduces two massless pressure traces
+    # at the physical interface. The associated control volumes are split at
+    # the interface, even when it coincides with an original cell centre.
+    if any(rc > 0.0 for rc in contacts):
+        dx=thickness_m/n_cells
+        original_centres=[(i+0.5)*dx for i in range(n_cells)]
+        contact_map={x[i+1]:contacts[i] for i in range(len(contacts)) if contacts[i]>0.0}
+        nodes=[]
+        original_to_node={}
+        for i,xc in enumerate(original_centres):
+            if any(math.isclose(xc,a,rel_tol=0.0,abs_tol=1e-13*thickness_m)
+                   for a in contact_map):
+                a=min(contact_map,key=lambda v:abs(v-xc))
+                nodes.extend([(a,"minus",i),(a,"plus",i)])
+            else:
+                nodes.append((xc,"cell",i))
+        for a in contact_map:
+            if not any(math.isclose(a,xc,rel_tol=0.0,abs_tol=1e-13*thickness_m)
+                       for xc in original_centres):
+                nodes.extend([(a,"minus",None),(a,"plus",None)])
+        nodes.sort(key=lambda z:(z[0],0 if z[1]=="minus" else 1 if z[1]=="plus" else 0))
+        # Voronoi capacities: a duplicated interface coordinate splits its
+        # control volume exactly at the interface into left/right half volumes.
+        unique=sorted(set(z[0] for z in nodes))
+        group_bounds={}
+        for k,a in enumerate(unique):
+            left=0.0 if k==0 else 0.5*(unique[k-1]+a)
+            right=thickness_m if k==len(unique)-1 else 0.5*(a+unique[k+1])
+            group_bounds[a]=(left,right)
+        node_capacity=[]
+        for a,side,_ in nodes:
+            left,right=group_bounds[a]
+            if side=="minus": right=a
+            elif side=="plus": left=a
+            node_capacity.append(_integrate_piecewise(left,right,x,s))
+        m=len(nodes)
+        link=[0.0]*(m-1)
+        for j in range(m-1):
+            xa,sa,_=nodes[j]; xb,sb,_=nodes[j+1]
+            if xa==xb:
+                link[j]=1.0/contact_map[xa]
+            else:
+                resistance=_integrate_piecewise(xa,xb,x,lam,lambda v:1.0/v)
+                link[j]=1.0/resistance
+        left_boundary=1.0/_integrate_piecewise(0.0,nodes[0][0],x,lam,lambda v:1.0/v)
+        right_boundary=1.0/_integrate_piecewise(nodes[-1][0],thickness_m,x,lam,lambda v:1.0/v)
+        lower=[0.0]*m; upper=[0.0]*m; diagonal=[0.0]*m
+        for j in range(m):
+            gl=left_boundary if j==0 else link[j-1]
+            gr=right_boundary if j==m-1 else link[j]
+            lower[j]=-gl if j else 0.0
+            upper[j]=-gr if j<m-1 else 0.0
+            diagonal[j]=node_capacity[j]/dt_s+gl+gr
+        if initial_pressure_profile_pa is None:
+            if not math.isfinite(initial_pressure_pa):
+                raise ValueError("initial pressure must be finite")
+            pn=[float(initial_pressure_pa)]*m
+        else:
+            original=[float(v) for v in initial_pressure_profile_pa]
+            if len(original)!=n_cells or any(not math.isfinite(v) for v in original):
+                raise ValueError("initial pressure profile must contain n_cells finite values")
+            pn=[]
+            for a,side,i in nodes:
+                if i is not None:
+                    pn.append(original[i])
+                else:
+                    # Interface lies between original centres: linear interpolation
+                    # supplies the initial trace without changing the evolution law.
+                    pos=max(0,min(n_cells-2,int(a/dx)))
+                    frac=(a-original_centres[pos])/(original_centres[pos+1]-original_centres[pos])
+                    pn.append(original[pos]+frac*(original[pos+1]-original[pos]))
+        total_capacity=sum(node_capacity)
+        times=[0.0]; node_profiles=[pn[:]]
+        def project(values):
+            out=[]
+            for i,xc in enumerate(original_centres):
+                matches=[j for j,z in enumerate(nodes) if z[2]==i]
+                out.append(sum(values[j] for j in matches)/len(matches))
+            return out
+        profiles=[project(pn)]
+        means=[sum(c0*v for c0,v in zip(node_capacity,pn))/total_capacity]
+        fluxes=[0.0]; residuals=[0.0]
+        for step in range(1,n_steps+1):
+            old=sum(c0*v for c0,v in zip(node_capacity,pn))
+            rhs=[node_capacity[j]*pn[j]/dt_s for j in range(m)]
+            pn=_solve_tridiagonal(lower,diagonal,upper,rhs)
+            out=left_boundary*pn[0]+right_boundary*pn[-1]
+            new=sum(c0*v for c0,v in zip(node_capacity,pn))
+            times.append(step*dt_s); node_profiles.append(pn[:])
+            profiles.append(project(pn)); means.append(new/total_capacity)
+            fluxes.append(out); residuals.append(new-old+dt_s*out)
+        return {"times_s":times,"profiles_pa":profiles,"node_profiles_pa":node_profiles,
+                "node_coordinates_m":[z[0] for z in nodes],
+                "node_sides":[z[1] for z in nodes],
+                "mean_pressure_pa":means,"boundary_outflow_m_s":fluxes,
+                "balance_residual_m":residuals,
+                "cell_capacity_pa_inv_m":node_capacity,
+                "face_conductance_m_pa_s":[left_boundary]+link+[right_boundary],
+                "cell_centres_m":original_centres,
+                "interface_contact_resistance_pa_s_m":contacts}
     dx=thickness_m/n_cells
     centres=[(i+0.5)*dx for i in range(n_cells)]
     edges=[i*dx for i in range(n_cells+1)]
