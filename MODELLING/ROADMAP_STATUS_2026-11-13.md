@@ -135,4 +135,4 @@ checkout.
 - Control-volume storage is split at the interface and integrated separately on each material side. Bulk links use exact integrated resistance; the contact link uses conductance 1/R_c.
 - The new representation handles a contact interface exactly at an original cell centre as well as off-grid interfaces. The full augmented state is exposed through node coordinates, side labels and node profiles; the legacy cell-centre profile is projected for compatibility.
 - Added a test at x=0.3625 with N=40, verifying the two one-sided traces, finite pressure jump and exact contact conductance. Existing three-layer full-profile eigenmode and conservation checks remain active.
-- Hosted CI for the two-sided DOF extension is pending; no claim of success until the run is inspected. No physical contact resistance has been assigned to silica gel.
+- Hosted workflow #399 passed all 92 transport tests and the complete integrated pipeline: https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43512476946. No physical contact resistance has been assigned to silica gel.
