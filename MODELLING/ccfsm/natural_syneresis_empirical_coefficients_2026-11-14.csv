@@ -1,0 +1,8 @@
+series,geometry,catalyst,temperature_C,n_points,A_fit,A_published,tau_fit_h,tau_published_h,RMSE,apparent_rate_h_inv,initial_rate_h_inv,provenance
+"Figure 8a","cylinder","acidic",20,13,0.186976,0.20,11.116871,21.3,0.010370,0.089953,0.016819,"Primary digitized fit; AI-assisted chart approximations"
+"Figure 8b","cylinder","basic",20,11,0.284690,0.30,41.279528,50.1,0.021322,0.024225,0.006897,"Primary digitized fit; AI-assisted chart approximations"
+"Figure 8b","cylinder","basic",40,9,0.358679,0.39,24.827435,32.0,0.010835,0.040278,0.014447,"Primary digitized fit; AI-assisted chart approximations"
+"Figure 8b","cylinder","basic",60,10,0.491525,0.51,24.904800,27.5,0.029766,0.040153,0.019736,"Primary digitized fit; AI-assisted chart approximations"
+"Figure 10a","droplet","acidic",20,15,0.369139,0.37,0.523974,0.40,0.013396,1.908492,0.704498,"Primary digitized fit; AI-assisted chart approximations"
+"Figure 10a","droplet","acidic",40,19,0.426341,0.41,0.696416,0.64,0.031990,1.435923,0.612192,"Primary digitized fit; AI-assisted chart approximations"
+"Figure 10a","droplet","acidic",60,21,0.471044,0.48,0.620095,0.77,0.025905,1.612656,0.759632,"Primary digitized fit; AI-assisted chart approximations"
