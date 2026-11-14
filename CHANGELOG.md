@@ -879,3 +879,11 @@
 - Added a 1D semidiscrete finite-volume operator in which the same prescribed Darcy face flux updates fluid capacity and mobile Si inventories, with c_i=m_i/theta and concentration-based diffusion.
 - Added regression tests for fluid-capacity conservation, total Si conservation, per-species conservation in the reaction-free limit, uniform-concentration consistency, zero-flow behaviour and validation.
 - Explicitly bounded the result: prescribed Darcy flux only, closed boundaries, no pressure/mechanics solver, no free-drainage boundary, no nonlinear PDE existence theorem, no total-energy proof and no empirical calibration. The operator is a balance/software-verification milestone for natural syneresis, not physical validation.
+
+
+## 2026-11-14 — CCFSM P8a hydraulic pressure-storage coupling
+
+- Added a linear storage closure linking fluid capacity and pressure, plus a conservative 1D Darcy finite-volume pressure operator with harmonic face permeability and closed boundaries.
+- Coupled the pressure-derived Darcy flux to the P8 variable-capacity mobile-species transport and reaction block; both use the same discrete fluid balance.
+- Added tests for pressure-capacity closure, Darcy sign, harmonic resistance, no-flow boundaries, fluid-volume conservation, pressure dissipation and coupled RHS.
+- Explicit scope: reduced linear hydraulic block only; no Biot mechanics, osmotic feedback, free drainage, empirical calibration or global nonlinear PDE theorem.
