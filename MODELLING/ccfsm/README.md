@@ -104,3 +104,5 @@ Der Rezeptur-Speziationsblock wurde mit dem bestehenden CCFSM-Kinetikmodul über
 - test_ccfsm_v05_calibration.py prüft die Datenprovenienz, den Ausschluss von Druckzellkurven und die Fitfunktionen.
 
 Die sieben natürlichen Kurven beruhen auf KI-gestützten ungeprüften Näherungsablesungen, nicht auf pixelkalibrierten Marker-Rohdaten. Die Ergebnisse bleiben explorativ; sie sind keine belastbare empirische Kalibrierung und keine physikalische Validierung.
+
+- CCFSM_v0.5_CORRECTED_CI_RESULTS_2026-11-14_DE.md dokumentiert den korrigierten Lauf: 73/73 Tests, 7 natürliche Näherungskurven, 21 getrennt auditierte Druckzellkurven und die Identifizierbarkeitsgrenze des zweistufigen Fits.
