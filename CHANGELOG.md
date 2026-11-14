@@ -1004,3 +1004,12 @@
 - Gibt P13-Transport-RHS, P19-räumliche Lösung und P19-vs-P9-Druckvergleich aus.
 - Hält die Einwegkopplung transparent: P13-Flüsse verwenden weiterhin P9-lokale Felder; kein vollständiger 3D-Zeitintegrator oder physikalischer Validierungsanspruch.
 - Ergänzt Regressionstests für Feldmapping, Gleichgewichtslösung, Druckvergleich und Eingabevalidierung.
+
+
+## 2026-11-14 — CCFSM P21 räumliche Druckrückkopplung in den FV-Transport
+
+- Ergänzt die quadraturgewichtete Projektion der P19-FE-Porendrücke auf alle FV-Zellen.
+- Berechnet mit der P9-Permeabilität einen neuen Darcy-Fluss; exakt derselbe Fluss treibt Fluidkapazitätsbilanz und mobile M/O-Upwind-Advektion.
+- Ersetzt nur den advektiven Anteil der P13-Flüsse; Onsager-Diffusion und P10-Reaktionsraten bleiben erhalten. Die FV-Divergenzform bleibt konservativ.
+- Ergänzt Tests für Druckfeedback, Fluidbilanz, fehlende Zellabdeckung und ungültige Gewichte.
+- Statusgrenze: gestaffelte Snapshot-Rückkopplung, keine iterierte monolithische Zeitintegration, keine globale Energieidentität und keine physikalische Validierung.
