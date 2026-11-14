@@ -67,3 +67,7 @@ The CSV is an independently produced, figure-derived digitization for quantitati
 **Trace limitation:** in some panels, experimental and model traces overlap or cannot be distinguished reliably. The affected series are therefore labelled as combined visible traces; they must not be presented as exclusively experimental measurements. The original figures are not reproduced in this dataset.
 
 Suggested attribution: “Data digitized from figures in Wilhelm and Kind (2015), *Polymers* 7(12), 2504–2521, https://doi.org/10.3390/polym7121528 (CC BY 4.0). Digitization and any subsequent processing by this project; values are figure-derived, not original author-supplied raw data.”
+
+## CCFSM — natural syneresis model
+
+A first mathematically specified and partially empirically parameterised version of the **Chemically Coupled Fractal Syneresis Model (CCFSM v0.1)** is now documented in [MODELLING/ccfsm/README.md](MODELLING/ccfsm/README.md). The package contains the governing equations and proofs for the reduced/linearised core, a provenance-labelled table of seven natural-syneresis fits, a reduced Python implementation, and unit tests. Oedometer and mechanically enforced consolidation coefficients are explicitly excluded. Chemical/fractal constitutive coefficients and independently identified permeability/modulus values remain open because the matched natural-syneresis measurements required to identify them are not yet available.
