@@ -12,7 +12,7 @@ class TestCCFSMP9MechanicalFeedback(unittest.TestCase):
         self.par = P9Parameters(
             lame_lambda_pa=2.0e6, shear_modulus_pa=1.0e6,
             biot_modulus_pa=1.0e7, biot_coefficient=0.8,
-            bridge_eigenstrain=0.01, bridge_reference=0.2,
+            bridge_eigenstrain=0.01, bridge_reference=15.0/51.0,
             bridge_regularization=1.0, reference_fluid_capacity=0.3,
             reference_axial_strain=0.0,
             reference_permeability_m2_per_pas=1.0e-12,
