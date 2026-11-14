@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-14 — Hosted CCFSM verification
+
+- Verified GitHub Actions run [43569636089](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43569636089): dedicated CCFSM workflow completed successfully; 22/22 tests passed (10 v0.1 plus 12 v0.2).
+- The CI job tests software regressions only. No empirical model validation or physical parameter identification is implied.
+
+
 ## 2026-11-14 — Dedicated CCFSM continuous integration
 
 - Added .github/workflows/ccfsm-ci.yml. Changes to the natural-syneresis CCFSM package now trigger a light Python 3.12 unit-test workflow independently of the computationally heavier MC3D pipeline.
