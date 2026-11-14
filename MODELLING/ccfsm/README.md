@@ -290,3 +290,12 @@ Die 22 Sensitivitäts- und 44 Figure/Table-Konfliktpunkte bleiben getrennte Evid
 - `ccfsm_p10_spatial_coupling.py` ruft die P9-Zellschließung auf, berechnet harmonische Flächenpermeabilitäten und einen einzigen Darcy-Fluss für Fluid- und mobile Silica-Bilanzen. Die lokalen Reaktionen verwenden P9-korrigierte Gesamtpotentiale.
 - `test_ccfsm_p10_spatial_coupling.py` prüft Fluid- und Siliciumerhaltung, Flusskonsistenz, Reaktionsdissipation und positive Transportdiagnostiken.
 - P10 ist semidiskret und 1D; keine Zeitintegration, vollständige Energiedissipationsaussage, PDE-Existenztheorie oder empirische Kalibrierung wird beansprucht.
+
+
+
+## CCFSM v2.6 — P11 energieüberwachte Zeitintegration
+
+- `CCFSM_v2.6_P11_ENERGY_TIME_INTEGRATION_DE.md` dokumentiert adaptive explizite Euler-Schritte mit Positivitäts-Schranke und Energierückwärtssuche.
+- `ccfsm_p11_energy_time_integration.py` integriert den P10-Operator und akzeptiert nur Schritte, die strikt positive Inventare, (0<\theta\leq1) und eine nicht zunehmende P9-Zellenergie (bis zur numerischen Toleranz) erfüllen.
+- `test_ccfsm_p11_energy_time_integration.py` prüft Energieabnahme, geschlossene Silicium-/Fluidbilanzen, Positivität, stationären Nullreaktionsfall und die Zurückweisung offener Randflüsse.
+- Die Energiekontrolle ist derzeit auf geschlossene hydraulische und mobile Stoffrandflüsse beschränkt. Reservoir-Energie/-Arbeit, allgemeine mechanische Randarbeit, unbedingte Stabilität, kontinuierliche PDE-Existenz und empirische Kalibrierung sind nicht bewiesen.
