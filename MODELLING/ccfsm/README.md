@@ -33,3 +33,14 @@ The two new rates are not fitted to the current one-exponential tables or approx
 Local software verification: 12/12 v0.2 tests passed with python -m unittest -v. Hosted GitHub Actions run [43569636089](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43569636089) passed 22/22 tests in total (10 v0.1 and 12 v0.2). This is not physical validation. The natural-only exclusion remains in force: no oedometer, forced-syneresis or imposed-load coefficient is used.
 
 The dedicated GitHub Actions workflow at .github/workflows/ccfsm-ci.yml runs all CCFSM unit tests on push/pull requests that touch this package.
+
+
+## CCFSM v0.2a — prescribed temperature history
+
+Added a protocol-aware piecewise-constant rate propagator:
+
+- CCFSM_v0.2a_TEMPERATURE_HISTORY.md — source-level audit of the 20 °C droplet preparation period, the approximately 30-min initial curve overlap, sample heating lag, and exact segment propagator.
+- ccfsm_thermal_history.py — Arrhenius helper with user-supplied parameters and exact piecewise rate switching for the two-state natural-syneresis ODE.
+- test_ccfsm_thermal_history.py — seven tests including v0.2 recovery, semigroup composition, staged-rate history, invariant region, Arrhenius direction and validation.
+
+The model holds q_infinity and natural-interface accessibility fixed within one specified protocol. The available article reports temperature-dependent endpoints, so one endpoint is not assumed to apply to all protocols. No activation energy, sample thermal time constant, permeability or modulus is estimated from nominal bath temperature. Local verification: 7/7 new tests passed; the dedicated CCFSM CI runs the full package test suite.
