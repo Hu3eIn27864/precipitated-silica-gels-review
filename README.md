@@ -71,3 +71,8 @@ Suggested attribution: “Data digitized from figures in Wilhelm and Kind (2015)
 ## CCFSM — natural syneresis model
 
 A first mathematically specified and partially empirically parameterised version of the **Chemically Coupled Fractal Syneresis Model (CCFSM v0.1)** is now documented in [MODELLING/ccfsm/README.md](MODELLING/ccfsm/README.md). The package contains the governing equations and proofs for the reduced/linearised core, the 12 source-reported natural-syneresis coefficient combinations from Wilhelm & Kind (2015) Tables 1–2, a separate provenance-labelled table of seven digitized primary re-fits, a reduced Python implementation, and unit tests. Oedometer and mechanically enforced consolidation coefficients are explicitly excluded. Chemical/fractal constitutive coefficients and independently identified permeability/modulus values remain open because the matched natural-syneresis measurements required to identify them are not yet available.
+
+
+### CCFSM v0.2 — separation of network contraction and drainage
+
+The new [CCFSM v0.2 two-timescale specification](MODELLING/ccfsm/CCFSM_v0.2_TWO_TIMESCALE.md) separates the intrinsic network contraction potential from the observed natural-syneresis response. It includes exact solutions and mathematical results for positivity, monotonicity, convergence and structural non-identifiability of the two rate labels, plus an executable implementation and 12 regression tests. The rate constants are intentionally not fitted from the existing single-exponential tables or approximate figure digitizations. The extension remains limited to natural, mechanically unloaded syneresis; it uses no oedometer or forced-syneresis coefficients.
