@@ -1,3 +1,4 @@
+import math
 import unittest
 from ccfsm_p2_chemical_affinity import ChemicalParametersP2, R_GAS
 from ccfsm_p8_variable_capacity import P8Grid
@@ -53,7 +54,7 @@ class TestCCFSMP8cThermodynamicClosure(unittest.TestCase):
     def test_reactions_conserve_local_total_silicon(self):
         state=((30.,25.,20.),(20.,22.,24.),
                (35.,34.,33.),(15.,16.,17.))
-        result=p8c_coupled_rhs(state,(1.01e5,)*3,self.grid,self.hyd,
+        result=p8c_coupled_rhs(state,(1e5,)*3,self.grid,self.hyd,
             (0.,0.),self.chem,1e5)
         for j in range(3):
             self.assertAlmostEqual(sum(f[j] for f in result["inventory_dot"]),
