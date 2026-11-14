@@ -871,3 +871,11 @@
 - Added separate machine-readable datasets for the seven curated digitized primary re-fits, the twelve source-reported natural-syneresis coefficients from Wilhelm & Kind (2015) Tables 1–2, and the conflicting basic-droplet natural-syneresis coefficients from Wilhelm (2017) Table 5.3.
 - Kept the Figure 10b basic-droplet source conflict explicit and recorded the exact dissertation Table 5.3 values separately; no averaging across the two sources. Kept the oedometer/enforced-syneresis data and parameters outside the natural-syneresis calibration.
 - The reduced model tests pass in an isolated run. No hosted CI result is claimed. Chemical/fractal constitutive coefficients and independent matched-state permeability/modulus remain unidentified; finite-strain extension and physical validation remain open.
+
+
+## 2026-11-14 — CCFSM P8 variable-capacity chemo-hydraulic coupling
+
+- Added a conservative variable-capacity formulation joining the P4 fluid balance with the P5/P7 phase distinction: M/O are mobile, N/B are immobilized network inventories.
+- Added a 1D semidiscrete finite-volume operator in which the same prescribed Darcy face flux updates fluid capacity and mobile Si inventories, with c_i=m_i/theta and concentration-based diffusion.
+- Added regression tests for fluid-capacity conservation, total Si conservation, per-species conservation in the reaction-free limit, uniform-concentration consistency, zero-flow behaviour and validation.
+- Explicitly bounded the result: prescribed Darcy flux only, closed boundaries, no pressure/mechanics solver, no free-drainage boundary, no nonlinear PDE existence theorem, no total-energy proof and no empirical calibration. The operator is a balance/software-verification milestone for natural syneresis, not physical validation.
