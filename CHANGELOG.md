@@ -825,6 +825,6 @@
 
 - Added `MODELLING/ccfsm/CCFSM_NATURAL_SYNERESIS_v0.1.md` with the coupled chemistry–fractal–eigenstrain–poroelastic model, natural-only boundary conditions, parameter-identifiability limits, invariant-region proofs, global fluid balance and a linearized poroelastic energy identity.
 - Added the reduced scalar Python implementation and ten regression tests for exact response, positivity/bounds, semigroup consistency, solid-volume balance and dimensional hydraulic time-scale evaluation.
-- Added separate machine-readable datasets for the seven curated digitized primary re-fits and the twelve source-reported natural-syneresis coefficients from Wilhelm & Kind (2015) Tables 1–2.
-- Kept the Figure 10b basic-droplet source conflict explicit; kept the oedometer/enforced-syneresis data and parameters outside the natural-syneresis calibration.
+- Added separate machine-readable datasets for the seven curated digitized primary re-fits, the twelve source-reported natural-syneresis coefficients from Wilhelm & Kind (2015) Tables 1–2, and the conflicting basic-droplet natural-syneresis coefficients from Wilhelm (2017) Table 5.3.
+- Kept the Figure 10b basic-droplet source conflict explicit and recorded the exact dissertation Table 5.3 values separately; no averaging across the two sources. Kept the oedometer/enforced-syneresis data and parameters outside the natural-syneresis calibration.
 - The reduced model tests pass in an isolated run. No hosted CI result is claimed. Chemical/fractal constitutive coefficients and independent matched-state permeability/modulus remain unidentified; finite-strain extension and physical validation remain open.
