@@ -26,6 +26,12 @@ class IdentifiabilityTests(unittest.TestCase):
         self.assertTrue(math.isfinite(result["condition_number"]))
         self.assertGreater(result["singular_values"][1], 0.0)
 
+    def test_nearly_collinear_modes_keep_small_singular_value(self):
+        result = log_rate_sensitivity([self.design], n_modes=3, mode_indices=(0, 1))
+        self.assertEqual(result["rank"], 2)
+        self.assertGreater(result["singular_values"][1], 0.0)
+        self.assertGreater(result["condition_number"], 1e3)
+
     def test_log_finite_difference_step_stability(self):
         coarse = log_rate_sensitivity([self.design], n_modes=3, step=1e-3)
         fine = log_rate_sensitivity([self.design], n_modes=3, step=5e-4)
