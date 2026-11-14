@@ -75,6 +75,8 @@ def p11_advance(state: P11State, dt_s, grid, mechanical_parameters, chemistry,
     routine to integrate over a requested time interval.
     """
     theta, fields = _validate_state(state, grid.cells)
+    if abs(float(mechanical_parameters.applied_axial_traction_pa)) > 1e-14:
+        raise ValueError("P11 currently requires zero applied axial traction; mechanical boundary work is not included")
     dt = float(dt_s)
     if not math.isfinite(dt) or dt <= 0.0:
         raise ValueError("dt_s must be finite and positive")
