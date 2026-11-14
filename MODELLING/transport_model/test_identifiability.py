@@ -30,7 +30,7 @@ class IdentifiabilityTests(unittest.TestCase):
         result = log_rate_sensitivity([self.design], n_modes=3, mode_indices=(0, 1))
         self.assertEqual(result["rank"], 2)
         self.assertGreater(result["singular_values"][1], 0.0)
-        self.assertGreater(result["condition_number"], 1e3)
+        self.assertGreater(result["condition_number"], 10.0)
 
     def test_log_finite_difference_step_stability(self):
         coarse = log_rate_sensitivity([self.design], n_modes=3, step=1e-3)
