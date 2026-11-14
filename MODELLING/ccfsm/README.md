@@ -125,3 +125,14 @@ Die 22 Sensitivitäts- und 44 Figure/Table-Konfliktpunkte bleiben getrennte Evid
 - Kritische Trennung: Qⁿ-NMR ist ein Kondensationsproxy, kein direkter Lastbrückenzähler; SAXS-D_f ist skalenabhängig; G' ist kein K_eff; Rheologie-Relaxation ist nicht automatisch k_r.
 - Die Hauptprobe für S(t) bleibt mechanisch unbelastet; Struktur-, Permeabilitäts- und Rheologiemessungen erfolgen an zustandsangepassten Opferproben.
 - Der Plan ist ein Versuchsdesign, keine experimentelle Validierung oder Parameterschätzung.
+
+
+## CCFSM — Literaturbasierte Forschungsroute ohne neue Laborversuche (14.11.2026)
+
+- [CCFSM_LITERATURE_FIRST_RESEARCH_PLAN_DE.md](CCFSM_LITERATURE_FIRST_RESEARCH_PLAN_DE.md) legt Evidenzklassen, Quellenkritik, Modellverwendbarkeit und die priorisierte Literaturarbeit fest. Neue Probenherstellung wird nicht vorausgesetzt.
+- [ccfsm_literature_source_inventory_2026-11-14.csv](ccfsm_literature_source_inventory_2026-11-14.csv) enthält das maschinenlesbare Quelleninventar mit Prozessklasse, verfügbaren Observablen, Datenform, Status und zulässiger CCFSM-Verwendung.
+- Neu erschlossen wurden insbesondere Scherer (1989), *Mechanics of syneresis II* (experimentelle TEOS-Silicagel-Synerese mit unabhängig gemessenen Permeabilitäts-/Modul-/Viskositätsgrößen), Scherer & Swiatek (1989) zur Permeabilitätsmessung sowie Scherer (1989) zum Modul während Alterung und Schrumpfung.
+- Die Scherer-Daten sind wertvoll für die mechanistisch-physikalische Prüfung, aber Alkoxid-/TEOS-Gele sind nicht dasselbe Materialsystem wie gefällte Silica aus Natriumsilikat. Sie werden deshalb nicht mit Wilhelm & Kind gepoolt.
+- Der Supplement-Link von Wilhelm & Kind (2015) wurde gefunden; die Inhalte der Supplement-Tabellen und -Abbildungen sind noch nicht dekodiert/ausgewertet. Dies ist die höchste nächste Recherchepriorität.
+- Quarchs Dissertation wurde mit dem korrekten KITopen-Datensatz verknüpft: `https://publikationen.bibliothek.kit.edu/1000017100/1376042`. Keine falsche DOI-Zuordnung.
+- Die v0.6 Labormatrix bleibt als Identifizierbarkeitsreferenz erhalten, wird aber nicht als Voraussetzung an den Nutzer gestellt. Literaturdaten ersetzen keine fehlenden unabhängigen Messungen von B_eff, q, sigma, k_r oder Permeabilität im Zielsystem.
