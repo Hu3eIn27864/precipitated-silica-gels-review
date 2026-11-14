@@ -185,3 +185,8 @@ CCFSM v0.4 sollte zunächst ein **modulares Eingabe- und Zustandsmodell** sein:
 Nicht alle Parameter sollten in eine einzelne empirische Funktion wie (k_b=f(pH,T,c,ldots)) gezwungen werden. Zunächst ist die kausale Trennung nötig, damit Parameter nicht doppelt gezählt und nicht identifizierbare Größen nicht verborgen werden.
 
 **Erfolgskriterium:** Für jeden Einflussparameter ist dokumentiert, ob er Eingabe, Zustand, abgeleitete Größe oder Mess-/Randbedingung ist; über welchen Wirkpfad er S beeinflusst; welche Einheit er hat; welche Messung ihn bestimmt; und ob die Gleichung mathematisch, physikalisch und empirisch grün ist.
+
+
+## Chemisches Teilmodell (v0.4)
+
+Die chemische ODE-Implementierung und ihre Grenzen sind in [CCFSM_v0.4_CHEMICAL_SUBMODEL_DE.md](CCFSM_v0.4_CHEMICAL_SUBMODEL_DE.md) beschrieben. Monomer-Si, lösliche Oligomere, kondensiertes Netzwerk-Si und tragende Brückenfraktion sind getrennt. Das breite Einflussparameterregister enthält jetzt auch die chemischen Zustände und Koeffizienten. Alle chemischen Raten bleiben unkalibriert.
