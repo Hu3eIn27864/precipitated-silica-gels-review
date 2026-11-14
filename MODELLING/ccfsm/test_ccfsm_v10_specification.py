@@ -15,7 +15,7 @@ class CCFSMv10SpecificationTests(unittest.TestCase):
         for token in ("Phasenbilanz", "Darcy-Fluss", "Mechanisches Gleichgewicht",
                       "Netzwerkbildung", "Morphologie", "Chemischer Speziestransport",
                       "Thermodynamische Struktur", "Rand- und Anfangsbedingungen",
-                      "keine vollständig abgeleitete freie Energie"):
+                      "**keine** vollständig abgeleitete freie Energie"):
             self.assertIn(token, text)
 
     def test_mathematical_programme_separates_proof_goals(self):
