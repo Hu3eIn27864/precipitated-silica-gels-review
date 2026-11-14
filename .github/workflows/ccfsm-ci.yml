@@ -35,6 +35,11 @@ jobs:
             --input LITERATURE/wilhelm_kind_approximate_measurement_points_curated.csv \
             --pressure-audit DATA/Raw/kurvendigitalisierung.csv \
             --output-dir ccfsm-v05-results
+      - name: Run branch-separated natural-syneresis sensitivity analysis
+        run: |
+          python MODELLING/ccfsm/ccfsm_v05_branch_sensitivity.py \\
+            --input LITERATURE/wilhelm_kind_approximate_measurement_points_curated.csv \\
+            --output ccfsm-v05-results/wilhelm_kind_branch_sensitivity.csv
       - name: Upload v0.5 calibration results
         uses: actions/upload-artifact@v4
         with:
