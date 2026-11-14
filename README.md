@@ -74,7 +74,7 @@ Suggested attribution: “Data digitized from figures in Wilhelm and Kind (2015)
 
 ## CCFSM — natural syneresis model
 
-Current audited CCFSM implementation status (P0–P22), including the P22 fixed-point residual issue and gated roadmap P22.1–P29: [CCFSM roadmap and status audit](MODELLING/ccfsm/CCFSM_ROADMAP_STATUS_2026-11-14_DE.md).
+Current audited CCFSM implementation status (P0–P22.1), including the P22.1 fixed-point residual correction and gated roadmap P23–P29: [CCFSM roadmap and status audit](MODELLING/ccfsm/CCFSM_ROADMAP_STATUS_2026-11-14_DE.md).
 
 
 A first mathematically specified and partially empirically parameterised version of the **Chemically Coupled Fractal Syneresis Model (CCFSM v0.1)** is now documented in [MODELLING/ccfsm/README.md](MODELLING/ccfsm/README.md). The package contains the governing equations and proofs for the reduced/linearised core, the 12 source-reported natural-syneresis coefficient combinations from Wilhelm & Kind (2015) Tables 1–2, a separate provenance-labelled table of seven digitized primary re-fits, a reduced Python implementation, and unit tests. Oedometer and mechanically enforced consolidation coefficients are explicitly excluded. Chemical/fractal constitutive coefficients and independently identified permeability/modulus values remain open because the matched natural-syneresis measurements required to identify them are not yet available.
