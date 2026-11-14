@@ -564,3 +564,14 @@ Run the focused tests with:
     python3 -m unittest discover -s MODELLING/transport_model -p 'test_robustness_screening.py' -v
 
 These are deterministic bounded scenarios, not probability distributions, confidence intervals, or a Monte Carlo posterior. They test sensitivity of the local two-parameter diagnostic, not uncertainty in fitted material properties. Interface offsets are absolute fractions of specimen thickness; storage multipliers are independent by layer; modal subsets represent omitted/ambiguous assignments but do not model a full automated mode-matching algorithm. No experimental design recommendation follows without measured geometry tolerances, storage uncertainty, modal uncertainty, and physically defensible contact resistance.
+
+
+### Synthetic reference-screen result (not experimental data)
+
+The reproducible scenario set in `run_reference_robustness_screen.py` uses a dimensionless two-layer reference (`storage=[1.0, 1.2]`, `mobility=[1.0, 0.65]`, widths `[0.4, 0.6]`, contact resistance `[0.08]`), interface fractions 0.35/0.40/0.45, storage multipliers `(0.9,1.1)`, `(1,1)`, `(1.1,0.9)`, and five modal subsets. This gives 45 deterministic scenarios. The stable singular-value calculation yields 36/45 full-rank scenarios (80%); the nine single-mode scenarios are rank one. Among full-rank scenarios, the worst condition number is approximately `1.7791e4`, occurring at the nominal interface fraction 0.40, nominal storage, and modal subset `(0,1)`. The three-mode baseline at nominal geometry/storage has condition number approximately `25.65`; subsets `(0,2)` and `(1,2)` are approximately `23.62` and `23.59`, respectively.
+
+Interpretation: mode selection can dominate the conditioning in this constructed example; the first two modes happen to give a very poor separation of the two parameter sensitivities. This is not evidence that real silica-gel measurements will behave similarly. All values are dimensionless synthetic inputs, not measured material constants. Reproduce with:
+
+    python3 MODELLING/transport_model/run_reference_robustness_screen.py
+
+The smaller singular value is computed using the sum of squared 2x2 minors (Cauchy–Binet) rather than subtracting nearly equal eigenvalue expressions. This avoids catastrophic cancellation for nearly collinear sensitivity columns; a regression test covers this case.
