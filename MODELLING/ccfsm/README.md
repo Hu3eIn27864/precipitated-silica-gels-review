@@ -250,3 +250,11 @@ Die 22 Sensitivitäts- und 44 Figure/Table-Konfliktpunkte bleiben getrennte Evid
 - `ccfsm_p8_variable_capacity.py` implements the semidiscrete 1D finite-volume operator. The same prescribed Darcy face flux updates fluid capacity and mobile species inventories; mobile concentrations are evaluated as m/theta.
 - `test_ccfsm_p8_variable_capacity.py` checks fluid-capacity and total-Si conservation, species conservation without reaction, uniform-concentration transport consistency, zero-flow limits and input validation.
 - Scope is deliberately restricted: Darcy flux is prescribed, boundaries are closed, and there is no pressure/mechanics solver, open free-drainage boundary, global nonlinear existence theorem, total-energy proof or empirical calibration. The P8 document records these limitations and separates the next proof gates.
+
+
+## CCFSM v2.1 — P8a hydraulischer Druck-Speicher-Darcy-Block
+
+- `CCFSM_v2.1_P8A_HYDRAULIC_PRESSURE_DE.md` leitet die lokale Speicherschließung θ=θ_ref+S_p(p-p_ref), den Druck-Darcy-Operator und seine semidiskrete Dissipationsidentität her.
+- `ccfsm_p8a_hydraulic_pressure.py` berechnet Druckentwicklung, harmonisch gemittelte Darcy-Flüsse und Fluidkapazität; dieselben Flüsse werden direkt an den P8-Transport-/Reaktionsoperator übergeben.
+- `test_ccfsm_p8a_hydraulic_pressure.py` prüft Schließung, Flussrichtung, No-Flow-Ränder, Kapazitätserhaltung, Druckmittelwert, Dissipation und Kopplung.
+- Geltungsbereich: linearer 1D-Referenzblock mit konstantem/gegebenem positiven Speicher und positiver Permeabilität. Keine Biot-Mechanik, kein osmotischer Druck-Feedback, keine freie Drainage, keine Kalibrierung oder vollständige nichtlineare Existenztheorie.
