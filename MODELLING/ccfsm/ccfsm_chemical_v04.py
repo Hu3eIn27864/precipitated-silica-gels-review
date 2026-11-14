@@ -72,6 +72,7 @@ class ChemicalEnvironment:
         _nonnegative(self.ionic_strength_mol_kg, "ionic_strength_mol_kg")
         _positive(self.silica_solubility_mol_m3, "silica_solubility_mol_m3")
         _positive(self.pKw, "pKw")
+        _finite(self.pKa_monomer, "pKa_monomer")
 
 
 @dataclass(frozen=True)
