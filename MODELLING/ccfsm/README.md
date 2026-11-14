@@ -368,3 +368,12 @@ P16 ist kein vollständiger Energiebeweis: Die P9-Spannungs-/Energiekonsistenz i
 - P13-Transport-RHS und P19-Druck werden gemeinsam ausgegeben; der Druckunterschied P19 minus P9 wird als Vergleich, nicht als Residuum, ausgewiesen.
 - P13-Flüsse verwenden vorerst weiterhin P9-lokale Druck-/Permeabilitätsfelder. Eine echte Zweiwegkopplung ist ausdrücklich noch nicht implementiert.
 - CCFSM_v3.5_P20_STAGGERED_COUPLING_DE.md dokumentiert Schnittstelle, Abbildung, Verifikation und nächste Schritte.
+
+
+## CCFSM P21 — räumliche Druckrückkopplung in den FV-Transport
+
+- `CCFSM_v3.6_P21_TWO_WAY_PRESSURE_FEEDBACK_DE.md` dokumentiert FE-Druckprojektion, neuen Darcy-Fluss und Erhaltungsform der M/O-Advektion.
+- `ccfsm_p21_two_way_pressure_feedback.py` projiziert P19-Druck quadraturgewichtet auf jede FV-Zelle; derselbe Darcy-Fluss treibt Fluidkapazität und mobile Advektion. P13-Onsager-Diffusion und P10-Reaktionen bleiben erhalten.
+- `test_ccfsm_p21_two_way_pressure_feedback.py` prüft Rückkopplung, Fluidbilanz und Eingabevalidierung.
+
+P21 ist eine gestaffelte Snapshot-Kopplung, kein iterierter monolithischer Zeitschritt. Die Permeabilität bleibt unkalibriert; Projektion auf allgemeine nicht deckungsgleiche Netze, gemeinsame Energiebilanz und physikalische Validierung sind offen.
