@@ -126,6 +126,20 @@ class TestCCFSMP5ThermodynamicCoupling(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.evaluate(mobile=(0.0, self.mobile[1]))
 
+
+    def test_fluid_content_derivative_includes_mobile_osmotic_term(self):
+        result = self.evaluate()
+        h = 1e-7
+        plus = self.evaluate(zeta=self.zeta+h)
+        minus = self.evaluate(zeta=self.zeta-h)
+        fd = (plus.free_energy_j_m3_reference - minus.free_energy_j_m3_reference)/(2*h)
+        self.assertAlmostEqual(fd, result.fluid_energy_conjugate_pa, delta=2e-2)
+        self.assertAlmostEqual(result.fluid_energy_conjugate_pa, result.pore_pressure_pa-result.osmotic_pressure_pa, delta=1e-8)
+
+    def test_osmotic_pressure_scales_with_mobile_inventory(self):
+        result = self.evaluate()
+        self.assertAlmostEqual(result.osmotic_pressure_pa, R_GAS*self.params.chemistry.temperature_k*sum(self.mobile)/result.theta)
+
     def test_log_mean_equal_activity_limit(self):
         result = self.evaluate()
         self.assertTrue(all(math.isfinite(v) for v in result.reaction_rates_mol_m3_s))
