@@ -258,3 +258,11 @@ Die 22 Sensitivitäts- und 44 Figure/Table-Konfliktpunkte bleiben getrennte Evid
 - `ccfsm_p8a_hydraulic_pressure.py` berechnet Druckentwicklung, harmonisch gemittelte Darcy-Flüsse und Fluidkapazität; dieselben Flüsse werden direkt an den P8-Transport-/Reaktionsoperator übergeben.
 - `test_ccfsm_p8a_hydraulic_pressure.py` prüft Schließung, Flussrichtung, No-Flow-Ränder, Kapazitätserhaltung, Druckmittelwert, Dissipation und Kopplung.
 - Geltungsbereich: linearer 1D-Referenzblock mit konstantem/gegebenem positiven Speicher und positiver Permeabilität. Keine Biot-Mechanik, kein osmotischer Druck-Feedback, keine freie Drainage, keine Kalibrierung oder vollständige nichtlineare Existenztheorie.
+
+
+## CCFSM v2.2 — P8b offene Drainage und Si-Austrag
+
+- `CCFSM_v2.2_P8B_OPEN_DRAINAGE_DE.md` definiert offene hydraulische Randflächen mit äußerem Reservoirdruck und die konsistente mobile M/O-Silicium-Randbilanz.
+- `ccfsm_p8b_open_drainage.py` koppelt Druck-Speicher-Darcy-Flüsse an Fluidkapazität und M/O/N/B-Reaktion/Transport. Bei Einströmung wird die vorgegebene Außenkonzentration, bei Ausströmung die Gelkonzentration verwendet; N/B bleiben immobilisiert.
+- `test_ccfsm_p8b_open_drainage.py` prüft Aus-/Einströmung, Fluidvolumenbilanz, Si-Austragsbilanz, Rand-Upwinding, Nullfluss und Druckdissipation.
+- Begrenzung: fester 1D-Rand, vorgegebener Außenreservoir-Druck und Außenkonzentrationen; kein Kapillargesetz, keine bewegliche Grenzfläche, keine Verdunstung, keine Kalibrierung und kein globaler nichtlinearer Existenzsatz.
