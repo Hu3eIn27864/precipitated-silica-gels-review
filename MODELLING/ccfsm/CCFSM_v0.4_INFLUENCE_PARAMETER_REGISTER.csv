@@ -59,5 +59,4 @@ k_d,dissolution rate,chemistry parameter,parameter,s-1,unidentified,c_n to c_m,d
 k_form,bridge formation rate,chemistry parameter,parameter,s-1,unidentified,beta evolution,network connectivity proxy,distinct from total condensation
 k_hyd,bridge hydrolysis rate,chemistry parameter,parameter,s-1,unidentified,beta loss,relaxation/chemical ageing series,may covary with dissolution
 m_I,ionic-strength exponent,chemistry parameter,parameter,dimensionless,unidentified,ionic strength modifier,controlled electrolyte series,ion-specific effects not captured by I
-E_a_j,mechanism activation energy,chemistry parameter,parameter,J mol-1,unidentified,temperature dependence of each rate,multi-temperature gel-core time series,one Ea per pathway
 f_load,load-bearing network fraction,network closure,parameter,dimensionless,unidentified,network Si to bridge density,contact topology and rheology,not equal to chemical bond fraction
