@@ -28,7 +28,7 @@ class TestCCFSMP2ChemicalAffinity(unittest.TestCase):
 
     def test_nonnegative_dissipation(self):
         result = evaluate_p2_rates(self.y, self.p)
-        self.assertGreaterEqual(result.entropy_production_w_m3, 0.0)
+        self.assertGreaterEqual(result.chemical_dissipation_w_m3, 0.0)
         self.assertAlmostEqual(result.free_energy_rate_w_m3,
                                -result.entropy_production_w_m3)
 
