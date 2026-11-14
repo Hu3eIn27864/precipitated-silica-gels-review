@@ -226,3 +226,11 @@ Die 22 Sensitivitäts- und 44 Figure/Table-Konfliktpunkte bleiben getrennte Evid
 - `ccfsm_p6_convexity.py` enthält analytische quadratische Form und Eigenverformungsschranke; `test_ccfsm_p6_convexity.py` prüft die Identitäten.
 - Der P5-Kernel liefert zusätzlich osmotischen Druck und vollständiges Energie-Konjugiertes; ein Finite-Differenzen-Test prüft die Ableitung nach der Fluidkapazität.
 - P6 beweist weder globale Existenz des nichtlinearen P5-Systems noch empirische Gültigkeit oder Identifizierbarkeit der Eigenverformung. Die lineare Biot-Existenz folgt unter den P0-Annahmen.
+
+
+## CCFSM v1.8 — P6 Konvexitätsaudit und schwache Teilformulierung (14.11.2026)
+
+- `CCFSM_v1.8_P6_CONVEXITY_WEAK_FORM_DE.md` dokumentiert den osmotischen Beitrag zur Fluidkapazitäts-Ableitung, die Konvexität des idealen mobilen Mischungsblocks, die Beschränktheit der Brückeneigenverformung und die schwache Form des linearen Biot-Referenzblocks.
+- `ccfsm_p6_convexity.py` enthält analytische quadratische Form und Eigenverformungsschranke; `test_ccfsm_p6_convexity.py` prüft die Identitäten.
+- Der P5-Kernel liefert zusätzlich osmotischen Druck und vollständiges Energie-Konjugiertes; ein Finite-Differenzen-Test prüft die Ableitung nach der Fluidkapazität.
+- P6 beweist weder globale Existenz des nichtlinearen P5-Systems noch empirische Gültigkeit oder Identifizierbarkeit der Eigenverformung. Die lineare Biot-Existenz folgt unter den P0-Annahmen.
