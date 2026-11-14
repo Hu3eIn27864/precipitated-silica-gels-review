@@ -1,0 +1,41 @@
+record_id,source,year,variable,value,unit,classification,process,geometry,temperature_C,catalysis,ccfsm_use,notes
+WK15-CYL-A20,Wilhelm & Kind,2015,S_max,0.20,1,A,natural_unloaded_syneresis,cylinder_12mm_3mL,20,acid,primary_natural_calibration,Source-reported exponential-fit parameter
+WK15-CYL-B20,Wilhelm & Kind,2015,S_max,0.30,1,A,natural_unloaded_syneresis,cylinder_12mm_3mL,20,base,primary_natural_calibration,Source-reported exponential-fit parameter
+WK15-CYL-A40,Wilhelm & Kind,2015,S_max,0.20,1,A,natural_unloaded_syneresis,cylinder_12mm_3mL,40,acid,primary_natural_calibration,Source-reported exponential-fit parameter
+WK15-CYL-B40,Wilhelm & Kind,2015,S_max,0.39,1,A,natural_unloaded_syneresis,cylinder_12mm_3mL,40,base,primary_natural_calibration,Source-reported exponential-fit parameter
+WK15-CYL-A60,Wilhelm & Kind,2015,S_max,0.20,1,A,natural_unloaded_syneresis,cylinder_12mm_3mL,60,acid,primary_natural_calibration,Source-reported exponential-fit parameter
+WK15-CYL-B60,Wilhelm & Kind,2015,S_max,0.51,1,A,natural_unloaded_syneresis,cylinder_12mm_3mL,60,base,primary_natural_calibration,Source-reported exponential-fit parameter
+WK15-CYL-TAU-A20,Wilhelm & Kind,2015,tau,21.3,h,A,natural_unloaded_syneresis,cylinder_12mm_3mL,20,acid,primary_natural_calibration,Source-reported exponential-fit parameter
+WK15-CYL-TAU-B20,Wilhelm & Kind,2015,tau,50.1,h,A,natural_unloaded_syneresis,cylinder_12mm_3mL,20,base,primary_natural_calibration,Source-reported exponential-fit parameter
+WK15-CYL-TAU-A40,Wilhelm & Kind,2015,tau,11.7,h,A,natural_unloaded_syneresis,cylinder_12mm_3mL,40,acid,primary_natural_calibration,Source-reported exponential-fit parameter
+WK15-CYL-TAU-B40,Wilhelm & Kind,2015,tau,32.0,h,A,natural_unloaded_syneresis,cylinder_12mm_3mL,40,base,primary_natural_calibration,Source-reported exponential-fit parameter
+WK15-CYL-TAU-A60,Wilhelm & Kind,2015,tau,5.0,h,A,natural_unloaded_syneresis,cylinder_12mm_3mL,60,acid,primary_natural_calibration,Source-reported exponential-fit parameter
+WK15-CYL-TAU-B60,Wilhelm & Kind,2015,tau,27.5,h,A,natural_unloaded_syneresis,cylinder_12mm_3mL,60,base,primary_natural_calibration,Source-reported exponential-fit parameter
+WK15-DROP-A20,Wilhelm & Kind,2015,S_max,0.37,1,A,natural_unloaded_syneresis,droplet_3mm,20,acid,separate_geometry_protocol,Initial 30 min at 20 C before target-temperature phase
+WK15-DROP-B20,Wilhelm & Kind,2015,S_max,0.30,1,A,natural_unloaded_syneresis,droplet_3mm,20,base,separate_geometry_protocol,Initial 30 min at 20 C before target-temperature phase
+WK15-DROP-A40,Wilhelm & Kind,2015,S_max,0.41,1,A,natural_unloaded_syneresis,droplet_3mm,40,acid,separate_geometry_protocol,Initial 30 min at 20 C before target-temperature phase
+WK15-DROP-B40,Wilhelm & Kind,2015,S_max,0.39,1,A,natural_unloaded_syneresis,droplet_3mm,40,base,separate_geometry_protocol,Initial 30 min at 20 C before target-temperature phase
+WK15-DROP-A60,Wilhelm & Kind,2015,S_max,0.48,1,A,natural_unloaded_syneresis,droplet_3mm,60,acid,separate_geometry_protocol,Initial 30 min at 20 C before target-temperature phase
+WK15-DROP-B60,Wilhelm & Kind,2015,S_max,0.51,1,A,natural_unloaded_syneresis,droplet_3mm,60,base,separate_geometry_protocol,Initial 30 min at 20 C before target-temperature phase
+WK15-DROP-TAU-A20,Wilhelm & Kind,2015,tau,0.40,h,A,natural_unloaded_syneresis,droplet_3mm,20,acid,separate_geometry_protocol,Initial 30 min at 20 C before target-temperature phase
+WK15-DROP-TAU-B20,Wilhelm & Kind,2015,tau,0.67,h,A,natural_unloaded_syneresis,droplet_3mm,20,base,separate_geometry_protocol,Initial 30 min at 20 C before target-temperature phase
+WK15-DROP-TAU-A40,Wilhelm & Kind,2015,tau,0.64,h,A,natural_unloaded_syneresis,droplet_3mm,40,acid,separate_geometry_protocol,Initial 30 min at 20 C before target-temperature phase
+WK15-DROP-TAU-B40,Wilhelm & Kind,2015,tau,0.57,h,A,natural_unloaded_syneresis,droplet_3mm,40,base,separate_geometry_protocol,Initial 30 min at 20 C before target-temperature phase
+WK15-DROP-TAU-A60,Wilhelm & Kind,2015,tau,0.77,h,A,natural_unloaded_syneresis,droplet_3mm,60,acid,separate_geometry_protocol,Initial 30 min at 20 C before target-temperature phase
+WK15-DROP-TAU-B60,Wilhelm & Kind,2015,tau,0.95,h,A,natural_unloaded_syneresis,droplet_3mm,60,base,separate_geometry_protocol,Initial 30 min at 20 C before target-temperature phase
+SK04-PRIMARY-DIAM,Schlomach & Kind,2004,primary_particle_diameter,22.7,nm,D,semi_batch_precipitation,not_applicable,,,,Morphology anchor; not a syneresis coefficient
+SK04-DF-INITIAL,Schlomach & Kind,2004,fractal_dimension,1.8,1,D,semi_batch_precipitation,not_applicable,,,,Initial reported cluster value; method-specific
+SK04-DF-PLATEAU,Schlomach & Kind,2004,fractal_dimension,2.4,1,D,semi_batch_precipitation,not_applicable,,,,Later reported cluster value; method-specific
+SK04-BET-INITIAL,Schlomach & Kind,2004,specific_surface_area,480,m2_g,D,semi_batch_precipitation,not_applicable,,,,Morphology anchor; measurement protocol must be retained
+SK04-BET-LATER,Schlomach & Kind,2004,specific_surface_area,300,m2_g,D,semi_batch_precipitation,not_applicable,,,,Morphology anchor; measurement protocol must be retained
+Q10-GEL-TIME,Quarch,2010,gelation_time,35,min,D,base_gel_ageing_test,cast_gel,,,,Context-specific gelation time; not a natural-syneresis rate constant
+Q10-AGE-PLATEAU,Quarch,2010,age_to_curve_plateau,7,d,Q,base_gel_ageing_test,dispersion_measurement,,,,Approximate observation; not a universal ageing time
+Q10-SALT-LOW,Quarch,2010,sodium_sulfate_loading,22.5,g_kg_water,Q,qualitative_shrinkage_context,cast_gel,,,,Reference salt loading; not isolated causal coefficient
+Q10-SALT-HIGH,Quarch,2010,sodium_sulfate_loading,45,g_kg_water,Q,qualitative_shrinkage_context,cast_gel,,,,Higher salt loading associated with faster observed shrinkage; protocol includes environmental/dilution changes
+Q10-BATCH-COH-ACID,Quarch,2010,cohesion_force,320,nN,X,stirred_batch_fragmentation,batch,,,,Not natural syneresis; mean reported with SD in source text
+Q10-BATCH-COH-BASE,Quarch,2010,cohesion_force,95,nN,X,stirred_batch_fragmentation,batch,,,,Not natural syneresis; mean reported with SD in source text
+Q10-BATCH-COH-SALT,Quarch,2010,cohesion_force,170,nN,X,stirred_batch_fragmentation,batch,,,,Not natural syneresis; mean reported with SD in source text
+Q10-BATCH-COH-80C,Quarch,2010,cohesion_force,712,nN,X,stirred_batch_fragmentation,batch,80,,,Not natural syneresis; mean reported with SD in source text
+SAHABI11-MD-CLUSTER,Sahabi & Kind,2011,md_primary_particles,1000,count,D,molecular_dynamics,cluster,,,,Simulation setup; not a material parameter
+SAHABI11-MD-SOLVENT,Sahabi & Kind,2011,md_solvent_particles,400000,count,D,molecular_dynamics,solvent_box,,,,Approximate simulation setup
+SAHABI11-TIME-SCALE,Sahabi & Kind,2011,md_time_mapping_factor,100,simulation_steps_per_min,D,molecular_dynamics,simulation,,,,Authors' time mapping; not transferable as physical kinetic coefficient
