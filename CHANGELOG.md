@@ -1,3 +1,11 @@
+## 2026-11-14 — CCFSM P22.1 fixed-point acceptance correction
+
+- Replaced the relaxed-update state residual by the unrelaxed fixed-point defect \(x^n+\Delta t F_{P21}(x^k)-x^k\), so small under-relaxation cannot by itself trigger false convergence.
+- The accepted state is now the current iterate at which the final P21 pressure snapshot was evaluated; the returned pressure snapshot therefore corresponds to that state.
+- Extended the admissibility limiter to enforce the upper fluid-capacity bound \(\theta\leq1\), while retaining strict positivity margins.
+- Added regression tests for relaxation-induced false convergence and upper-bound limiting, plus assertions for the new residual definition and pressure/state consistency.
+- Updated P22 documentation and CCFSM package README. Physical validation and a discrete global energy theorem remain open.
+
 ## 2026-11-14 — CCFSM status audit and gated roadmap
 
 - Added `MODELLING/ccfsm/CCFSM_ROADMAP_STATUS_2026-11-14_DE.md` covering the implemented P0–P22 chain, the verified 259-test CI run and v0.5 calibration summary, and staged gates P22.1–P29.
