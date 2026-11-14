@@ -4,7 +4,7 @@ c_o,soluble oligomeric silica,chemical state,state,mol Si m-3,measured or inferr
 c_n,condensed network silicon,chemical state,state,mol Si m-3,measured or mass-balanced,bridge inventory,total Si minus soluble pools and effluent,closed Si balance only if no effluent
 beta,load-bearing bridge fraction,network state,state,dimensionless,unidentified,network Si to effective bridges,independent connectivity/rheology proxy,not all Si-O-Si bonds bear load
 c_eq,silica solubility at current pH T I,chemical state,input,mol Si m-3,measured or thermodynamic model,supersaturation,solubility/speciation at actual electrolyte,not transferable from dilute model fluids
-pKa_monomer,monomer first dissociation constant,chemistry parameter,parameter,dimensionless,condition dependent,silanolate fraction,speciation vs pH and T,oligomer surface pKa differs
+pKa_monomer,monomer first dissociation constant,chemical environment,input,dimensionless,condition dependent,silanolate fraction,speciation vs pH and T,oligomer surface pKa differs
 pKw,water ion product,chemical environment,input,dimensionless,condition dependent,hydroxide activity,temperature/electrolyte thermodynamics,not fixed at 14 outside reference conditions
 k_o,oligomerization rate,chemistry parameter,parameter,s-1,unidentified,c_m to c_o,time-resolved monomer and oligomer series,concentration order and saturation law
 k_n,network growth rate,chemistry parameter,parameter,s-1,unidentified,c_o to c_n,oligomer and network Si time series,not gel-point time alone
