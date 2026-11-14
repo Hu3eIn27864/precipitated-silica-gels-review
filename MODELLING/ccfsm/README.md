@@ -157,3 +157,12 @@ Die 22 Sensitivitäts- und 44 Figure/Table-Konfliktpunkte bleiben getrennte Evid
 - Interne Variablen, chemische Spezies und viskoelastische Beiträge sind als Onsager-/Gradientenfluss-Erweiterungen strukturiert, aber silica-spezifische Energien und kinetische Koeffizienten bleiben offen.
 
 **Statusgrenze:** Die P0-Energieabschätzung ist hergeleitet für das lineare, isotherme, gesättigte Referenzsystem unter den dokumentierten Annahmen. Die vollständige Galerkin-Existenzkonstruktion ist noch nicht ausgeführt. Daraus folgt kein Beweis für P1–P5.
+
+
+## CCFSM v1.2 — P0-Galerkin-Existenz und Eindeutigkeit (14.11.2026)
+
+- `CCFSM_v1.2_P0_GALERKIN_EXISTENCE_DE.md` reduziert den linearen Biot-Darcy-Kern über den mechanischen Lösungsoperator auf eine parabolische Evolutionsgleichung mit positivem Schur-Komplement-Speicherprodukt.
+- Unter homogenen Verschiebungs-Dirichletbedingungen, geschlossenem No-Flow-Rand, gleichmäßig koerziven Elastizitäts-/Mobilitätstensoren, (M>0), (p_0\in L^2) und (s_f\in L^2(0,T;H^1{}')) wird schwache Existenz und Eindeutigkeit hergeleitet. Die Druckkonstante wird durch den Speicherterm kontrolliert; eine künstliche Nullmittelwertbedingung ist nicht nötig.
+- Der Beweis nutzt die parabolische Evolutionsstruktur (Galerkin/Lions), liefert die Energieidentität und stellt die technische Einschränkung bei gleichmäßigen Zeitderivierten-Schranken beliebiger Galerkin-Projektionen ausdrücklich klar.
+- `test_ccfsm_v12_p0_galerkin_proof.py` prüft die strukturelle Vollständigkeit und die dokumentierten Geltungsgrenzen. Ein solcher Texttest ist kein mathematischer Beweis.
+- **Statusgrenze:** schwacher P0-Satz für das lineare Referenzsystem; keine klassische Regularität und kein Existenz-/Regularitätsbeweis für das nichtlineare CCFSM P1–P5.
