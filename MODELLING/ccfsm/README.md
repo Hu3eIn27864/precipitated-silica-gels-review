@@ -94,14 +94,13 @@ Der Rezeptur-Speziationsblock wurde mit dem bestehenden CCFSM-Kinetikmodul über
 **Kalibrierungsregel:** Nur die zwölf zylindrischen Wilhelm-&-Kind-Kennwerte (sechs (S_{max})- und sechs \\(\\tau\\)-Werte) sind im Datensatz als primäre natürliche CCFSM-Kalibrierwerte markiert. Tröpfchen bleiben ein separater Geometrie-/Temperaturhistorien-Datensatz. Quarch liefert überwiegend kontextuelle bzw. qualitative Angaben; Schlomach Morphologieanker; Sahabi & Kind MD-Setup und erzwungene Konsolidierung. Letztere werden nicht als natürliche Synäreseparameter gefittet.
 
 
-## CCFSM v0.5 — natürliche Kurvenkalibrierung und Modellvergleich
+## CCFSM v0.5 — explorativer Vergleich natürlicher Synäresekurven
 
-- ccfsm_v05_calibration.py liest die vorhandene DATA/Raw/kurvendigitalisierung.csv ein und wertet exakt die 14 natürlichen Kurven (7 sauer, 7 basisch) aus. Das erzwungene Panel wird ausgeschlossen.
-- Verglichen werden exponentielle, gestreckt-exponentielle und zweistufige CCFSM-Antworten; enthalten sind AICc, RMSE, chronologischer 80/20-Holdout, Residuen und Grenzparameter-Markierung.
-- CCFSM_v0.5_CALIBRATION_DE.md dokumentiert Gleichungen, Schätzverfahren, Identifizierbarkeitsgrenzen und Ausführung.
-- test_ccfsm_v05_calibration.py prüft synthetische Parameterwiedergewinnung, den gleichen-Raten-Grenzfall, die ungeordnete Ratenidentifikation und den Ausschluss erzwungener Daten.
-- GitHub Actions führt die Kurvenauswertung aus und lädt die Ergebnisse als CI-Artefakt hoch. Die Quelldaten bleiben unverändert.
+- ccfsm_v05_calibration.py verwendet ausschließlich sieben primäre natürliche Näherungskurven aus LITERATURE/wilhelm_kind_approximate_measurement_points_curated.csv (Figures 8 und 10).
+- DATA/Raw/kurvendigitalisierung.csv wird nur als Provenienz-Audit eingelesen: Die 21 Reihen enthalten Δp-Druckbedingungen und gehören zur erzwungenen Druckzell-Synärese; sie werden nicht zur natürlichen Kalibrierung verwendet.
+- Verglichen werden exponentielle, gestreckt-exponentielle und zweistufige CCFSM-Antworten mit AICc, RMSE, chronologischem 80/20-Holdout und Residuen.
+- CCFSM_v0.5_CALIBRATION_DE.md beschreibt den korrigierten Datenumfang und die Identifizierbarkeitsgrenzen.
+- CCFSM_v0.5_FIRST_CI_RESULTS_2026-11-14_DE.md dokumentiert ausdrücklich die Rücknahme des ersten, falsch klassifizierten Laufs.
+- test_ccfsm_v05_calibration.py prüft die Datenprovenienz, den Ausschluss von Druckzellkurven und die Fitfunktionen.
 
-Die digitalisierten Spuren sind keine Rohmessungen und teils Mess-/Modellüberlagerungen. Deshalb werden keine i.i.d.-Konfidenzintervalle aus Kurvenpunkten behauptet. Die Pipeline ist Software- und Modellvergleich, keine vollständige physikalische Validierung.
-
-- CCFSM_v0.5_FIRST_CI_RESULTS_2026-11-14_DE.md dokumentiert den ersten erfolgreichen CI-Lauf (72/72 Tests), 14 natürliche Kurven, 42 Fits und die vorläufige AICc-/Holdout-Zusammenfassung.
+Die sieben natürlichen Kurven beruhen auf KI-gestützten ungeprüften Näherungsablesungen, nicht auf pixelkalibrierten Marker-Rohdaten. Die Ergebnisse bleiben explorativ; sie sind keine belastbare empirische Kalibrierung und keine physikalische Validierung.
