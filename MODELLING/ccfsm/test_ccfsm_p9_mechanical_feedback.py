@@ -34,6 +34,23 @@ class TestCCFSMP9MechanicalFeedback(unittest.TestCase):
         r = self.state(theta=0.31)
         self.assertAlmostEqual(r["fluid_content_residual"], 0.0, delta=1e-14)
 
+    def test_variational_axial_stress_matches_energy_derivative(self):
+        theta, sn, sb = 0.31, 34.0, 18.0
+        r = p9_cell_closure(theta, (30., 20.), (sn, sb), self.chem, self.par)
+        eps, eigen = r["axial_strain"], r["chemical_eigenstrain"]
+        p = self.par
+        h = 1e-7
+        def mechanical_energy(e):
+            trace = e-3.0*eigen
+            diag = (e-eigen, -eigen, -eigen)
+            zeta = theta-p.reference_fluid_capacity
+            storage = 0.5*p.biot_modulus_pa*(zeta-p.biot_coefficient*e)**2
+            elastic = (0.5*p.lame_lambda_pa*trace**2
+                       +p.shear_modulus_pa*sum(x*x for x in diag))
+            return elastic+storage
+        derivative = (mechanical_energy(eps+h)-mechanical_energy(eps-h))/(2*h)
+        self.assertAlmostEqual(derivative, r["total_axial_stress_pa"], delta=2e-3)
+
     def test_mechanical_equilibrium_matches_traction(self):
         p = P9Parameters(**{**self.par.__dict__,
                             "applied_axial_traction_pa": 2.5e4})
