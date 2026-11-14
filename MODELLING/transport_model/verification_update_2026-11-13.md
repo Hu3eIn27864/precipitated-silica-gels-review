@@ -63,12 +63,12 @@ The backward-Euler FV system retains cell-centred representative pressures and m
 
 Tests in test_interface_aware_1d.py check the homogeneous limit, off-grid two-layer mean response against the independent eigenfunction series, exact cut-cell capacity, exact conductance across a face segment containing the interface, global conservation/positivity for a three-layer stack, and invalid geometry rejection.
 
-This is an interface-aware piecewise-constant coefficient discretisation, not a general high-order embedded-interface scheme. It does not yet handle moving interfaces, contact resistance, nonlinear material laws, or within-layer smooth variation. The original interface-aware implementation and its five-test suite passed the full integrated CI workflow #374 (build, C++, Python, 1-D transport, syneresis sensitivity and DLCA stages): https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43510730207.
+This initial interface-aware piecewise-constant coefficient discretisation is not a general high-order embedded-interface scheme. The subsequent contact-resistance extension is documented below. Moving interfaces, nonlinear material laws, and within-layer smooth variation remain unsupported. The original interface-aware implementation and its five-test suite passed the full integrated CI workflow #374 (build, C++, Python, 1-D transport, syneresis sensitivity and DLCA stages): https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43510730207.
 
 
 ## 6. Off-grid interface eigenmode: full-profile test
 
-Extended `solve_interface_aware` with an optional cell-centred initial pressure profile while preserving the uniform scalar default. Added a manufactured transient based on the independent first eigenmode for the two-layer problem with interface at x=0.37. The analytical mode enforces both pressure continuity and nonzero Darcy-flux continuity; the test compares the full cell-centred numerical profile against its exact exponential decay for N=40,80,160. A separate invalid-profile test checks input validation. This is a profile-level interface verification, not merely a mean-pressure comparison. Hosted CI is running; convergence order and final pass status remain pending until the run is inspected.
+Extended `solve_interface_aware` with an optional cell-centred initial pressure profile while preserving the uniform scalar default. Added a manufactured transient based on the independent first eigenmode for the two-layer problem with interface at x=0.37. The analytical mode enforces both pressure continuity and nonzero Darcy-flux continuity; the test compares the full cell-centred numerical profile against its exact exponential decay for N=40,80,160. A separate invalid-profile test checks input validation. This is a profile-level interface verification, not merely a mean-pressure comparison. Hosted CI #376 passed; the convergence test asserts monotone refinement and does not claim a formal asymptotic order.
 
 
 CI follow-up: workflow #376 completed successfully, including build, C++ tests, Python ensemble tests, the complete 1-D transport test step (including the new off-grid full-profile eigenmode test), syneresis sensitivity, all DLCA pilot stages and artifact upload. Run: https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43511164695.
@@ -87,3 +87,22 @@ The independent multilayer transfer-matrix reference applies the same jump law. 
 ## Two-sided interface pressure degrees of freedom
 
 The interface-aware solver now inserts a co-located `minus`/`plus` pressure pair for every interface with positive contact resistance. The two adjacent control volumes terminate/start exactly at the interface and their storage is integrated on the appropriate material side. The contact link has conductance 1/R_c; bulk links use exact integrated piecewise resistance. Thus a contact at a cell centre is no longer rejected or hidden inside a single pressure unknown. The solver exposes augmented node profiles and side labels while retaining a projected original-cell-centre profile for API compatibility. Tests cover a contact exactly at x=0.3625 (a cell centre for N=40), the resulting nonzero pressure jump, exact 1/R_c conductance, and the existing three-layer transient eigenmode case. Hosted workflow #399 passed all 92 transport tests and the complete integrated pipeline, including build, C++, Python, syneresis sensitivity and DLCA stages: https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43512476946.
+
+
+## 7. Conservative two-sided finite-volume contact interface — derivation and verification
+
+For the transfer variable q=\(\lambda\,\partial p/\partial x\), the interface conditions are q^-=q^+=q_\Gamma and p^+-p^-=R_c q_\Gamma. Eliminating q_\Gamma gives q_\Gamma=(p^+-p^-)/R_c for R_c>0. Therefore the interface edge in the finite-volume conductance graph has G_c=1/R_c. The physical Darcy flux is j_D=-q; this sign distinction is retained consistently in the transfer-matrix reference and the FV balance. In the zero-contact limit, p^+=p^- and the duplicate interface unknowns collapse to the ordinary perfectly bonded link.
+
+The implementation uses explicit physical layer boundaries, exact integration of storage over the one-sided dual control volumes, exact bulk resistance integrals between neighbouring pressure unknowns, and the contact edge 1/R_c. At a cell-centred interface, the original dual volume is split into left/right storage portions and its single legacy pressure value is the arithmetic projection of the two one-sided values; the augmented `node_profiles_pa`, `node_coordinates_m` and `node_sides` retain the discontinuous state. These one-sided degrees of freedom carry their corresponding dual-volume storage; they are not massless algebraic multipliers. The original `heterogeneous_1d.py` API remains separate and unchanged for existing cell-array use.
+
+Verification coverage in `test_interface_aware_1d.py` and `test_multilayer_reference.py` includes:
+- R_c=0 recovery of the no-contact result and R_c>0 pressure-jump/conductance checks;
+- an interface exactly at x=0.3625 for N=40, with a resolved nonzero jump;
+- off-grid positive-contact interfaces in a three-layer stack;
+- an independent transfer-matrix characteristic/eigenvalue reference, including the interface jump matrix \(\begin{bmatrix}1&R_c\\0&1\end{bmatrix}\);
+- full-profile three-layer eigenmode comparison over N=40,80,160 with monotone error reduction;
+- nonnegative pressure and global stepwise storage/outflow conservation residuals below the test tolerance.
+
+Hosted integrated workflow #43564342050 passed build, C++ tests, 21 Python ensemble-analysis tests, all 112 transport-model tests, syneresis leave-one-out analysis and all DLCA pilot/sensitivity stages: https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43564342050. Earlier focused interface verification is also recorded in workflow #43512476946.
+
+**Interpretation boundary:** this is numerical verification of a fixed-interface, piecewise-constant, double-drained Darcy-storage model. It is not experimental validation of precipitated-silica syneresis. No value of R_c, lambda, or storage compliance is assigned to silica gels from these tests. A physical contact resistance, its spatial uniformity, and its evolution with chemistry/ageing remain unverified hypotheses requiring matched-state experimental evidence.
