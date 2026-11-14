@@ -330,3 +330,12 @@ Die 22 Sensitivitäts- und 44 Figure/Table-Konfliktpunkte bleiben getrennte Evid
 - `test_ccfsm_p15_mobile_boundary_balance.py` — Regressionstests für die gemeinsame Identität und Grenzfälle.
 
 Die Identität ist eine mobile Transport-Teilbilanz bei konstanten Aktivitätskoeffizienten, kein globaler CCFSM-Energiesatz und keine physikalische Kalibrierung.
+
+
+## CCFSM P16 — gekoppelte Energiebilanz und Mechanikaudit
+
+- `CCFSM_v3.1_P16_COUPLED_ENERGY_LEDGER_DE.md` — semidiskrete Kettenregelzerlegung aus P15-Transport, P10-Reaktionen und hydraulischer Reservoirleistung/Darcy-Dissipation; kritischer Variationsaudit der P9-Mechanik.
+- `ccfsm_p16_coupled_energy_ledger.py` — berechnet Gesamtenergierate, Teilbeiträge, offene Bilanzresiduen und mechanische Stationaritätsresiduen.
+- `test_ccfsm_p16_coupled_energy_ledger.py` — prüft Reaktionsdissipation, Darcy-Randbilanz, Kettenregelzerlegung und das bewusste Erkennen mechanischer Inkonsistenz.
+
+P16 ist kein vollständiger Energiebeweis: Die P9-Spannungs-/Energiekonsistenz ist im Allgemeinen nicht erfüllt und äußere mechanische Arbeit bleibt offen.
