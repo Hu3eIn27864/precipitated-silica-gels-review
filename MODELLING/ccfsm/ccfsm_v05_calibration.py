@@ -176,6 +176,7 @@ def run(input_csv,output_dir,pressure_audit=None):
     write_csv(out/"ccfsm_v05_predictions_residuals.csv",preds,["figure","panel","condition","series","reanalysis_use","model","time_h","approximate_digitized_shrinkage","fitted_shrinkage","residual","source_type"])
     write_csv(out/"ccfsm_v05_curve_winners.csv",winrows,["figure","panel","condition","series","model","full_aicc","full_rmse","holdout_rmse","boundary_hit"])
     counts={m:sum(r["model"]==m for r in winrows) for m in MODELS}
+    boundary_counts={m:sum(bool(r["boundary_hit"]) for r in fits if r["model"]==m) for m in MODELS}
     medians={m:sorted(r["holdout_rmse"] for r in fits if r["model"]==m)[len(curves)//2] for m in MODELS}
     report=["# CCFSM v0.5 — explorativer Vergleich natürlicher Synäresekurven","",
       f"- Primäre natürliche Kurven: {len(curves)}; nur die kuratierten Zweige primary_exploratory und primary_with_local_reversals.",
@@ -188,8 +189,8 @@ def run(input_csv,output_dir,pressure_audit=None):
       "Zweistufiges CCFSM: S=A_eff{1-[k_f exp(-k_s t)-k_s exp(-k_f t)]/(k_f-k_s)}; bei gleichen Raten gilt S=A_eff[1-(1+kt)exp(-kt)].",
       "A_eff=eta_a*q_inf; die Faktoren sind aus S(t) allein nicht separat identifizierbar. Das Ratenpaar ist ungeordnet; langsam/schnell ist keine physikalische Zuordnung.","",
       "## Vergleich","",
-      "| Modell | AICc-Sieger (von 7) | Median Holdout-RMSE |","|---|---:|---:|"]
-    for m in MODELS: report.append(f"| {m} | {counts[m]} | {medians[m]:.6g} |")
+      "| Modell | AICc-Sieger (von 7) | Fits mit Randtreffer (von 7) | Median Holdout-RMSE |","|---|---:|---:|---:|"]
+    for m in MODELS: report.append(f"| {m} | {counts[m]} | {boundary_counts[m]} | {medians[m]:.6g} |")
     report += ["","Je Kurve: Vollfit mit AICc/RMSE und chronologischer Holdout (erste 80 % Fit, letzte 20 % Test). Wegen weniger Punkte pro Reihe und unsicherer Herkunft ist dies nur explorative Konsistenzprüfung, keine unabhängige Validierung.",
       "AICc/Holdout-Werte sind angesichts ungeprüfter Näherungsablesungen und kleiner Kurvenzahl rein deskriptiv. Parameter an Suchgrenzen sind mit boundary_hit=True markiert.",
       "Aus diesen Reihen werden keine Aktivierungsenergie, kein kausales pH-Gesetz und keine hydraulischen Materialkonstanten abgeleitet.","",
@@ -198,7 +199,7 @@ def run(input_csv,output_dir,pressure_audit=None):
       "Die Ergebnisse sind explorative Modellvergleiche der Näherungsablesungen. Sie validieren nicht das vollständige chemisch-hydraulische CCFSM."]
     (out/"CCFSM_v0.5_CALIBRATION_REPORT_DE.md").write_text("\n".join(report)+"\n",encoding="utf-8")
     return {"natural_curves":len(curves),"fit_rows":len(fits),"pressure_audit":pressure_info,
-            "winner_counts":counts,"median_holdout_rmse":medians}
+            "winner_counts":counts,"boundary_hit_counts":boundary_counts,"median_holdout_rmse":medians}
 
 def main():
     p=argparse.ArgumentParser()
