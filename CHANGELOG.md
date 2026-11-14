@@ -950,3 +950,10 @@
 - Trennt Upwind-Advektion und Diffusion explizit; der vollständige diskrete Entropiefluss der Advektion und die gemeinsame offene Randbilanz bleiben ungelöst.
 - Ergänzt das konstante Dead-load-Potential `Psi - traction * axial_strain`; vollständige räumliche Mechanik-/Randarbeitskopplung bleibt offen.
 - Keine empirische Kalibrierung oder physikalische Validierung behauptet.
+
+
+## 2026-11-14 — CCFSM P14 Upwind-Entropiebilanz
+
+- Ergänzt eine algebraische Entropiebilanz für mobile ideale Mischungsentropie und variable Fluidkapazität unter konservativer Upwind-Advektion.
+- Weist Reservoir-Entropietransport über den tatsächlichen Upwind-Donor und eine nichtnegative innere numerische Entropieproduktion explizit aus.
+- Dokumentiert ausdrücklich, dass Diffusion, Reaktion, Darcy-/Druckarbeit und Mechanik noch nicht zu einem globalen Energie-/Entropiesatz gekoppelt sind.
