@@ -71,6 +71,13 @@ class TestCCFSMP11EnergyTimeIntegration(unittest.TestCase):
         self.assertEqual(result["state"].inventories, s.inventories)
         self.assertAlmostEqual(result["free_energy_change_j_m2"], 0.0, delta=1e-12)
 
+    def test_nonzero_applied_traction_is_rejected(self):
+        from dataclasses import replace
+        loaded = replace(self.mech, applied_axial_traction_pa=1.0e3)
+        with self.assertRaises(ValueError):
+            p11_advance(self.state(), 1e-4, self.grid, loaded, self.no_reaction,
+                (0., 0.), 0.0)
+
     def test_open_boundary_is_rejected(self):
         s = self.state()
         with self.assertRaises(ValueError):
