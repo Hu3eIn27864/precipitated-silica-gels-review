@@ -257,7 +257,7 @@ There are two separate empirical layers. First, the article reports fitted natur
 
 These are natural-syneresis conditions only. No imposed pressure or oedometer coefficients enter this table. The basic-droplet row set is retained as **source-reported Table 2 evidence**, but not used as a primary digitized calibration because the 2017 dissertation gives a conflicting basic-droplet parameter set. Figure/table and dissertation conflict remain an explicit audit item. The droplet protocol also holds the samples at 20 °C initially, then applies the target temperature; the thermal history is therefore not equivalent to an instantaneous isothermal start.
 
-The table shows that temperature responses depend on both catalyst branch and geometry. For example, the acid-catalysed cylinder has constant reported amplitude (A=0.20) while (	au) falls from 21.3 to 5.0 h; the acid-catalysed droplet instead has increasing amplitude and increasing reported (	au). A single Arrhenius coefficient fitted across these unlike geometries would be scientifically unjustified.
+The table shows that temperature responses depend on both catalyst branch and geometry. For the acid-catalysed cylinder, the reported amplitude A = 0.20 remains constant while tau falls from 21.3 to 5.0 h. The acid-catalysed droplet instead has increasing amplitude and increasing reported tau. A single Arrhenius coefficient fitted across these unlike geometries would be scientifically unjustified.
 
 ### 6.2. Project's digitized primary re-fits
 
