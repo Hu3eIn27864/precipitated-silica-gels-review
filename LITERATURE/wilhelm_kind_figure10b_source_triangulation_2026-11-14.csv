@@ -1,4 +1,4 @@
-temperature_C,figure10b_chart_fit_A,figure10b_chart_fit_tau_h,journal_2015_table2_A,journal_2015_table2_tau_h,dissertation_2017_table5_3_A,dissertation_2017_table5_3_tau_h,chart_fit_over_journal_A,chart_fit_over_dissertation_A,interpretation
-20,0.419494,0.726325,0.30,0.67,0.40,0.671,1.3983,1.0487,"Chart fit is much closer to dissertation A; same author lineage, not independent replication"
-40,0.643178,0.683050,0.39,0.57,0.63,0.640,1.6492,1.0209,"Chart fit is much closer to dissertation A; same author lineage, not independent replication"
-60,0.825343,1.118060,0.51,0.95,0.82,1.055,1.6183,1.0065,"Chart fit is much closer to dissertation A; same author lineage, not independent replication"
+temperature_C,n_points,figure10b_free_fit_A,figure10b_free_fit_tau_h,free_fit_RMSE,journal_2015_table2_A,journal_2015_table2_tau_h,journal_parameters_RMSE,dissertation_2017_table5_3_A,dissertation_2017_table5_3_tau_h,dissertation_parameters_RMSE,chart_fit_over_journal_A,chart_fit_over_dissertation_A,interpretation
+20,15,0.419494,0.726325,0.0333068,0.30,0.67,0.0960433,0.40,0.671,0.0353650,1.3983,1.0487,"Dissertation parameters reproduce chart points nearly as well as free fit; journal parameters fit substantially worse"
+40,16,0.643178,0.683050,0.0248309,0.39,0.57,0.1953710,0.63,0.640,0.0262390,1.6492,1.0209,"Dissertation parameters reproduce chart points nearly as well as free fit; journal parameters fit substantially worse"
+60,13,0.825343,1.118060,0.0479658,0.51,0.95,0.1943835,0.82,1.055,0.0488836,1.6183,1.0065,"Dissertation parameters reproduce chart points nearly as well as free fit; journal parameters fit substantially worse"
