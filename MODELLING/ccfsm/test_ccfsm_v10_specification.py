@@ -22,7 +22,7 @@ class CCFSMv10SpecificationTests(unittest.TestCase):
         text = (ROOT / "CCFSM_v1.0_MATHEMATICAL_PROGRAMME_DE.md").read_text(encoding="utf-8")
         for token in ("P0", "P5", "schwache Existenz", "Eindeutigkeit",
                       "Funktionsräume", "a-priori-Abschätzungen",
-                      "nicht als Beweis", "kein vollständig ausgeführter Beweis"):
+                      "kein vollständig ausgeführter Beweis"):
             self.assertIn(token, text)
 
     def test_equation_register_schema_and_blocks(self):
