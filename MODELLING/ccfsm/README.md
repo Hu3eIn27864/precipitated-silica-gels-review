@@ -282,3 +282,11 @@ Die 22 Sensitivitäts- und 44 Figure/Table-Konfliktpunkte bleiben getrennte Evid
 - `ccfsm_p9_mechanical_feedback.py` löst quasistatisches axiales Gleichgewicht und Biot-Fluidinhalt algebraisch, berechnet mechanische Beiträge zu den Netzwerkpotentialen und eine positive struktur-/dehnungsabhängige Permeabilität.
 - `test_ccfsm_p9_mechanical_feedback.py` prüft Referenzzustand, Fluidinhaltsidentität, Traktionsgleichgewicht, Permeabilitätspositivität/-Monotonie und Eingabevalidierung.
 - P9 ist ein lokaler konstitutiver Baustein, noch kein räumlicher PDE-Löser. Das exponentielle (K(b,e))-Gesetz ist eine unkalibrierte, falsifizierbare Hypothese; keine globale PDE-Existenz oder vollständige Energieungleichung wird beansprucht.
+
+
+## CCFSM P10 — räumliche chemo-poroelastische Kopplung
+
+- `CCFSM_v2.5_P10_SPATIAL_COUPLING_DE.md` beschreibt den semidiskreten 1D-Finite-Volumen-Operator.
+- `ccfsm_p10_spatial_coupling.py` ruft die P9-Zellschließung auf, berechnet harmonische Flächenpermeabilitäten und einen einzigen Darcy-Fluss für Fluid- und mobile Silica-Bilanzen. Die lokalen Reaktionen verwenden P9-korrigierte Gesamtpotentiale.
+- `test_ccfsm_p10_spatial_coupling.py` prüft Fluid- und Siliciumerhaltung, Flusskonsistenz, Reaktionsdissipation und positive Transportdiagnostiken.
+- P10 ist semidiskret und 1D; keine Zeitintegration, vollständige Energiedissipationsaussage, PDE-Existenztheorie oder empirische Kalibrierung wird beansprucht.
