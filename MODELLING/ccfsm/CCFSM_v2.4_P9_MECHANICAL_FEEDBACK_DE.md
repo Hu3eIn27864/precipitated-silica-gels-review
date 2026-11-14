@@ -31,7 +31,7 @@ H=\lambda+2G,\quad
 p=M(\zeta-\alpha_B e),
 ]
 [
-t=H(e-\varepsilon_{ch})-\alpha_Bp.
+t=\lambda(e-3\varepsilon_{ch})+2G(e-\varepsilon_{ch})-\alpha_Bp.
 ]
 
 Diese beiden Gleichungen werden analytisch gemeinsam gelöst:
@@ -62,7 +62,7 @@ Die gespeicherte lokale Energie pro Referenzvolumen ist
 wobei (E=\operatorname{diag}(e-\varepsilon_{ch},
 -\varepsilon_{ch},-\varepsilon_{ch})) und (\Psi_{mix}) die P8c-Ideal-Mischungsenergie bezeichnet.
 
-Die mechanische Ableitung nach (b) wird über das Hüllkurvenargument am quasistatischen Gleichgewicht gebildet:
+Die axiale Spannung ist die Ableitung derselben gespeicherten Energie nach (e). Die mechanische Ableitung nach (b) wird über das Hüllkurvenargument am quasistatischen Gleichgewicht gebildet:
 [
 \frac{\partial\Psi_{mech}}{\partial b}
 =-\beta_B\operatorname{tr}\sigma_{el},
