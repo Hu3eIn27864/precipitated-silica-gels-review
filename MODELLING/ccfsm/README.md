@@ -116,3 +116,12 @@ Die sieben natürlichen Kurven beruhen auf KI-gestützten ungeprüften Näherung
 - Der CI-Workflow führt die Sensitivitätsanalyse jetzt zusätzlich aus und legt die CSV im Ergebnisartefakt ab.
 
 Die 22 Sensitivitäts- und 44 Figure/Table-Konfliktpunkte bleiben getrennte Evidenzzweige; sie werden nicht in die primäre natürliche Kalibrierung eingemischt. Alle Kurvenwerte bleiben KI-gestützte, ungeprüfte Diagramm-Näherungsablesungen.
+
+
+## CCFSM v0.6 — experimenteller Identifizierbarkeitsplan (14.11.2026)
+
+- CCFSM_v0.6_EXPERIMENTAL_IDENTIFIABILITY_PROTOCOL_DE.md definiert ein gestuftes, natürlich-syneresebasiertes Messprogramm, unabhängige Replikate, Identifizierbarkeitsgrenzen, Falsifikationskriterien und Freigabe-Gates.
+- CCFSM_v0.6_EXPERIMENT_MATRIX.csv enthält die maschinenlesbare Zuordnung von Messblöcken, Haupt-/Opferproben, Outputs und Identifizierbarkeitsstatus.
+- Kritische Trennung: Qⁿ-NMR ist ein Kondensationsproxy, kein direkter Lastbrückenzähler; SAXS-D_f ist skalenabhängig; G' ist kein K_eff; Rheologie-Relaxation ist nicht automatisch k_r.
+- Die Hauptprobe für S(t) bleibt mechanisch unbelastet; Struktur-, Permeabilitäts- und Rheologiemessungen erfolgen an zustandsangepassten Opferproben.
+- Der Plan ist ein Versuchsdesign, keine experimentelle Validierung oder Parameterschätzung.
