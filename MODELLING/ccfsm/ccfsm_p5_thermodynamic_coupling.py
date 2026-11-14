@@ -49,6 +49,8 @@ class P5Parameters:
 class P5Result:
     theta: float
     pore_pressure_pa: float
+    osmotic_pressure_pa: float
+    fluid_energy_conjugate_pa: float
     bridge_fraction: float
     stress_pa: tuple[tuple[float, float, float], ...]
     free_energy_j_m3_reference: float
@@ -138,6 +140,10 @@ def p5_evaluate(
     pressure = parameters.biot_modulus_pa * (
         zeta - parameters.biot_coefficient * trace
     )
+    # Mobile ideal-mixture energy depends on theta via a_i=m_i/(theta*c_ref).
+    # Thus dPsi/dtheta = p - RT*(c_M+c_O); Darcy still uses mechanical p.
+    osmotic_pressure = rt * (m_m + m_o) / theta
+    fluid_energy_conjugate = pressure - osmotic_pressure
     stress = tuple(tuple(
         elastic_stress[i][j] - (
             parameters.biot_coefficient * pressure if i == j else 0.0
@@ -177,6 +183,7 @@ def p5_evaluate(
         dissipation += rate * affinities[i]
 
     return P5Result(
-        theta, pressure, bridge_fraction, stress, free_energy,
+        theta, pressure, osmotic_pressure, fluid_energy_conjugate,
+        bridge_fraction, stress, free_energy,
         mu_chem, mu_total, affinities, tuple(rates), dissipation
     )
