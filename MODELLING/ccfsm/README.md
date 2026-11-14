@@ -62,5 +62,7 @@ The bridge-to-morphology relations are explicit testable hypotheses, not establi
 
 - CCFSM_v0.4_PARAMETER_ARCHITECTURE_DE.md — kausale Parametergruppen von Rezeptur/Fällchemie über Temperatur, Mischung, Netzwerk, Porenraum und Mechanik bis Transport, Grenzfläche, Geometrie und Messunsicherheit; Freigabekriterien für vollständig grüne Gleichungen.
 - CCFSM_v0.4_INFLUENCE_PARAMETER_REGISTER.csv — maschinenlesbares Register mit Symbol, Gruppe, Rolle, Einheit, Wirkpfad, Messbedarf und Identifizierbarkeitswarnung.
+- CCFSM_v0.4_EQUATION_VERIFICATION_MATRIX_DE.md — 13 equation blocks with separate mathematical, physical and empirical readiness gates; explicit rejection rules for double counting and unsupported structure–permeability laws.
+- test_ccfsm_v04_parameter_register.py — schema, unique-symbol and required-influence checks for the machine-readable parameter register.
 
 v0.4 ist zunächst eine vollständige Parameterarchitektur, keine unkalibrierte Erweiterung aller ODEs. Insbesondere werden pH und Rezeptur nicht doppelt als unabhängige Ursachen gezählt; Gelkerntemperatur wird von Badtemperatur getrennt; D_f/z werden nicht ohne Porenhals- und Konnektivitätsdaten als Permeabilitätsersatz verwendet. Die natürliche, mechanisch unbelastete Synärese bleibt der einzige Geltungsbereich.
