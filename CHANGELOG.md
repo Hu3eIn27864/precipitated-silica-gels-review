@@ -933,3 +933,11 @@
 
 
 - Präzisierung P11: Nichtverschwindende angelegte axiale Traktion wird zurückgewiesen, da äußere mechanische Arbeit noch nicht Teil der diskreten Energiebilanz ist.
+
+
+## 2026-11-14 — CCFSM P12 offene Energiebilanz und Randarbeits-Audit
+
+- Ergänzt die P9/P10-Kettenregel für die semidiskrete gespeicherte Energierate und legt hydraulische Reservoirleistung sowie M/O-Siliciumrandflüsse offen.
+- Ergänzt eine donor-seitige chemische Randarbeits-Schätzung und ein nicht geschlossenes Energieresiduum; die chemische Größe wird ausdrücklich nicht als exakter diskreter Entropiefluss ausgegeben.
+- Äußere axiale Traktion wird als nicht bilanzierte mechanische Arbeit markiert.
+- P12 ist ein Diagnose-/Auditmodul, kein Beweis einer vollständigen offenen Energiebilanz und keine empirische Validierung.
