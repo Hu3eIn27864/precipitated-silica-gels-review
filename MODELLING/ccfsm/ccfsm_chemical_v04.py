@@ -65,6 +65,7 @@ class ChemicalEnvironment:
     silica_solubility_mol_m3: float
     pKw: float = 14.0
     pKa_monomer: float = 9.5
+    pKa_oligomer_surface: float = 6.8
 
     def __post_init__(self):
         _finite(self.pH, "pH")
@@ -73,6 +74,7 @@ class ChemicalEnvironment:
         _positive(self.silica_solubility_mol_m3, "silica_solubility_mol_m3")
         _positive(self.pKw, "pKw")
         _finite(self.pKa_monomer, "pKa_monomer")
+        _finite(self.pKa_oligomer_surface, "pKa_oligomer_surface")
 
 
 @dataclass(frozen=True)
@@ -94,6 +96,11 @@ class ChemicalParameters:
     acid_catalysis_order: float = 1.0
     silanolate_pair_weight: float = 0.0
     base_catalysis_weight: float = 1.0
+    network_acid_catalysis_weight: float = 1.0
+    network_silanolate_pair_weight: float = 0.0
+    network_base_catalysis_weight: float = 1.0
+    network_acid_catalysis_order: float = 1.0
+    network_base_catalysis_order: float = 1.0
     hydroxide_activity_reference: float = 1.0e-5
     base_catalysis_order: float = 1.0
     ionic_strength_reference_mol_kg: float = 0.1
@@ -119,20 +126,26 @@ class ChemicalParameters:
             "activation_energy_bridge_formation_j_mol",
             "activation_energy_bridge_hydrolysis_j_mol",
             "acid_catalysis_weight", "silanolate_pair_weight",
-            "base_catalysis_weight", "ionic_strength_exponent",
+            "base_catalysis_weight", "network_acid_catalysis_weight",
+            "network_silanolate_pair_weight", "network_base_catalysis_weight",
+            "ionic_strength_exponent",
             "dissolution_base_weight", "dissolution_acid_weight",
             "bridge_hydrolysis_base_weight", "bridge_hydrolysis_acid_weight",
         ):
             _nonnegative(getattr(self, name), name)
         for name in ("acid_activity_reference", "hydroxide_activity_reference",
                      "ionic_strength_reference_mol_kg",
-                     "supersaturation_order", "oligomerization_order"):
+                     "supersaturation_order", "oligomerization_order",
+                     "network_acid_catalysis_order", "network_base_catalysis_order"):
             _positive(getattr(self, name), name)
         _bounded(self.load_bearing_fraction, 0.0, 1.0,
                  "load_bearing_fraction")
         if (self.acid_catalysis_weight + self.silanolate_pair_weight
                 + self.base_catalysis_weight) <= 0:
-            raise ValueError("at least one condensation pH-channel weight must be positive")
+            raise ValueError("at least one monomer-condensation pH-channel weight must be positive")
+        if (self.network_acid_catalysis_weight + self.network_silanolate_pair_weight
+                + self.network_base_catalysis_weight) <= 0:
+            raise ValueError("at least one network-growth pH-channel weight must be positive")
 
 
 @dataclass(frozen=True)
@@ -160,23 +173,34 @@ def _pow_ratio(value, reference, exponent):
     return math.exp(max(-700.0, min(700.0, log_value)))
 
 
-def acid_base_activity_factors(env, p):
+def acid_base_activity_factors(env, p, site="monomer"):
     """Return acid, silanolate-pair, base and combined pH factors.
 
-    The pair term 4 alpha(1-alpha) is a bounded speciation proxy, not a
-    complete oligomer/surface speciation model. pKa is an input parameter.
+    Monomer and oligomer-surface channels use separate pKa inputs and
+    independently identifiable weights/orders. Surface pKa is not assumed
+    equal to the monomer pKa.
     """
     a_h = 10.0 ** max(-300.0, min(300.0, -env.pH))
     a_oh = 10.0 ** max(-300.0, min(300.0, env.pH - env.pKw))
-    alpha = 1.0 / (1.0 + 10.0 ** max(-300.0, min(300.0, env.pKa_monomer-env.pH)))
-    f_acid = _pow_ratio(a_h, p.acid_activity_reference,
-                        p.acid_catalysis_order)
+    if site == "monomer":
+        pka = env.pKa_monomer
+        w_h, w_pair, w_oh = (p.acid_catalysis_weight,
+                             p.silanolate_pair_weight,
+                             p.base_catalysis_weight)
+        m_h, m_oh = p.acid_catalysis_order, p.base_catalysis_order
+    elif site == "network":
+        pka = env.pKa_oligomer_surface
+        w_h, w_pair, w_oh = (p.network_acid_catalysis_weight,
+                             p.network_silanolate_pair_weight,
+                             p.network_base_catalysis_weight)
+        m_h, m_oh = p.network_acid_catalysis_order, p.network_base_catalysis_order
+    else:
+        raise ValueError("site must be 'monomer' or 'network'")
+    alpha = 1.0 / (1.0 + 10.0 ** max(-300.0, min(300.0, pka-env.pH)))
+    f_acid = _pow_ratio(a_h, p.acid_activity_reference, m_h)
     f_pair = 4.0 * alpha * (1.0 - alpha)
-    f_base = _pow_ratio(a_oh, p.hydroxide_activity_reference,
-                        p.base_catalysis_order)
-    f_ph = (p.acid_catalysis_weight*f_acid
-            + p.silanolate_pair_weight*f_pair
-            + p.base_catalysis_weight*f_base)
+    f_base = _pow_ratio(a_oh, p.hydroxide_activity_reference, m_oh)
+    f_ph = w_h*f_acid + w_pair*f_pair + w_oh*f_base
     return f_acid, f_pair, f_base, f_ph
 
 
@@ -196,7 +220,9 @@ def evaluate_chemical_rates(state, environment, parameters):
     c_ref = parameters.reference_silica_concentration_mol_m3
 
     f_acid, f_pair, f_base, f_ph = acid_base_activity_factors(
-        environment, parameters)
+        environment, parameters, site="monomer")
+    f_acid_net, f_pair_net, f_base_net, f_ph_net = acid_base_activity_factors(
+        environment, parameters, site="network")
     f_ionic = (1.0 + environment.ionic_strength_mol_kg
                / parameters.ionic_strength_reference_mol_kg) ** parameters.ionic_strength_exponent
     omega = max(cm / environment.silica_solubility_mol_m3 - 1.0, 0.0)
@@ -220,16 +246,16 @@ def evaluate_chemical_rates(state, environment, parameters):
     r_olig = (k_olig*c_ref*(omega**parameters.supersaturation_order)
               *(cm/c_ref)**parameters.oligomerization_order
               * f_ph*f_ionic)
-    r_net = k_net * co * f_ph * f_ionic
+    r_net = k_net * co * f_ph_net * f_ionic
     f_diss = (1.0
-        + parameters.dissolution_base_weight*f_base
-        + parameters.dissolution_acid_weight*f_acid)
+        + parameters.dissolution_base_weight*f_base_net
+        + parameters.dissolution_acid_weight*f_acid_net)
     r_diss = k_diss * cn * f_diss
 
     f_bridge_hydrolysis = (1.0
-        + parameters.bridge_hydrolysis_base_weight*f_base
-        + parameters.bridge_hydrolysis_acid_weight*f_acid)
-    dbeta = (k_bform*f_ph*f_ionic*(1.0-beta)
+        + parameters.bridge_hydrolysis_base_weight*f_base_net
+        + parameters.bridge_hydrolysis_acid_weight*f_acid_net)
+    dbeta = (k_bform*f_ph_net*f_ionic*(1.0-beta)
              - k_bhyd*f_bridge_hydrolysis*beta)
 
     f_load = parameters.load_bearing_fraction
