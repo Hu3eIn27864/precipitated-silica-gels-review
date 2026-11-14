@@ -299,3 +299,11 @@ Die 22 Sensitivitäts- und 44 Figure/Table-Konfliktpunkte bleiben getrennte Evid
 - `ccfsm_p11_energy_time_integration.py` integriert den P10-Operator und akzeptiert nur Schritte, die strikt positive Inventare, (0<\theta\leq1) und eine nicht zunehmende P9-Zellenergie (bis zur numerischen Toleranz) erfüllen.
 - `test_ccfsm_p11_energy_time_integration.py` prüft Energieabnahme, geschlossene Silicium-/Fluidbilanzen, Positivität, stationären Nullreaktionsfall und die Zurückweisung offener Randflüsse.
 - Die Energiekontrolle ist derzeit auf geschlossene hydraulische und mobile Stoffrandflüsse beschränkt. Reservoir-Energie/-Arbeit und mechanische Randarbeit sind nicht enthalten; von null verschiedene angelegte axiale Traktion wird zurückgewiesen. Unbedingte Stabilität, kontinuierliche PDE-Existenz und empirische Kalibrierung sind nicht bewiesen.
+
+
+## CCFSM v2.7 — P12 offene Energiebilanz und Randarbeits-Audit
+
+- `CCFSM_v2.7_P12_ENERGY_BUDGET_AUDIT_DE.md` dokumentiert die semidiskrete Energierate aus der P9-Kettenregel sowie hydraulische und chemische Randarbeitsdiagnostik.
+- `ccfsm_p12_energy_budget_audit.py` gibt gespeicherte Energie, Energierate, Reservoirleistung, M/O-Randflüsse, Dissipationsdiagnostik und ein ausdrücklich nicht geschlossenes Energieresiduum aus.
+- `test_ccfsm_p12_energy_budget_audit.py` prüft geschlossene Referenz, offene Druckgrenze, Kennzeichnung der chemischen Randarbeits-Näherung und nicht bilanzierte mechanische Traktion.
+- Wichtig: Die chemische Randarbeitsgröße ist noch kein exakter diskreter Entropiefluss. P12 behauptet deshalb keinen vollständigen offenen Energiebilanzsatz; äußere mechanische Arbeit ist nicht enthalten.
