@@ -13,7 +13,7 @@ Legende:
 | EQ-01 | (B)-Kinetik: (dot B=k_b(B_infty-B)) | (k_b,B_infty,B_0,pH,T_g,I,c_{Si},t_{age}) | M-GRÜN für konstante positive Parameter | P-GELB: Sättigungskinetik ist Hypothese | E-ROT | zeitaufgelöster Brücken-/Si-Proxy, getrennte Säure-/Basenroute |
 | EQ-02 | Temperaturgesetz (k_j(T_g)) | (E_{a,j},T_g(t)) | M-GRÜN als Arrhenius-Ansatz | P-GELB | E-ROT | Gelkerntemperatur und Rate bei mehreren Temperaturen |
 | EQ-03 | Speziation (pH,I,{c_i}	o) Aktivitäten | Säure/Base, Gegenionen, Silikatmodul, Wasser | NICHT AKTIV | P-GELB | E-ROT | vollständige Stoff-/Ladungsbilanz und validiertes Aktivitätsmodell |
-| EQ-04 | reversible Brückenbilanz (dot B=k_f(cdot)(B_{max}-B)-k_{hyd}(cdot)B) | pH, Temperatur, Ionen, gelöstes Si, (k_f,k_{hyd}) | M-GRÜN nach Positivitätsprüfung | P-GELB | E-ROT | Si-Massenbilanz plus Zeitreihen; noch nicht in v0.3 implementiert |
+| EQ-04 | reversible Brückenbilanz (dot B=k_f(cdot)(B_{max}-B)-k_{b hyd}(cdot)B) | pH, Temperatur, Ionen, gelöstes Si, (k_f,k_{b hyd}) | M-GRÜN nach Positivitätsprüfung | P-GELB | E-ROT | Si-Massenbilanz plus Zeitreihen; noch nicht in v0.3 implementiert |
 | EQ-05 | Morphologie-Nachführung (dot D_f=k_m(D_{f,eq}-D_f)), (dot z=k_m(z_{eq}-z)) | (k_m,D_{f,0},Delta D_f,z_0,Delta z,B) | M-GRÜN bei zulässigen Zielwerten | P-GELB | E-ROT | synchronisierte zeitaufgelöste Df-/Kontaktmessung |
 | EQ-06 | Porenstruktur-Schließung ((D_f,z,phi,r_{throat},C_{conn},	au_p)	okappa_{eff}) | Porenhalsverteilung, Konnektivität, Tortuosität, Sättigung | NICHT AKTIV | P-GELB | E-ROT | 3D-Porenanalyse plus unabhängige Permeabilitätsmessung |
 | EQ-07 | Mechanik-Schließung Netzwerk (	o K_{eff}) | Kontaktverteilung, Bindungsstärke, Dichte, Rheologie | NICHT AKTIV | P-GELB | E-ROT | Modul/Rheologie am gleichen Gelzustand; freie-Synärese-relevanter Modul |
@@ -56,7 +56,7 @@ Erst nach Gate 5 ist eine vollständig grüne empirische Modellgleichung vertret
 | EQ-14 | \(\dot c_m=-r_o+r_d;\ \dot c_o=r_o-r_n;\ \dot c_n=r_n-r_d\) | \(k_o,k_n,k_d,c_m,c_o,c_n\) | M-GRÜN: exakte Si-Erhaltung | P-GELB: geschlossene Bilanz, Spezieszuordnung vereinfacht | E-ROT | zeitaufgelöste Si-Spezies plus Si-Ausflussbilanz |
 | EQ-15 | \(r_o=k_oc_{ref}(c_m/c_{ref})^{n_o}\Omega^{m_o}F_{pH}F_I\) | pH-Kanalgewichte/-ordnungen, \(I,m_I,c_{eq}\) | M-GRÜN als definierte Rate | P-GELB: Modellsysteme nicht gleich Industriefällung | E-ROT | pH-/I-/Konzentrationsmatrix im Zielsystem |
 | EQ-16 | \(r_n=k_nc_oF_{pH}F_I;\ r_d=k_dc_nF_d\) | Netzwerk- und Auflösungsraten | M-GRÜN | P-GELB | E-ROT | gelöste/oligomere/netzwerkgebundene Si-Zeitreihen |
-| EQ-17 | \(\dot\beta=k_{form}F_{pH}F_I(1-\beta)-k_{hyd}F_{hyd}\beta\) | \(k_{form},k_{hyd},f_{load}\) | M-GRÜN: Intervall \([0,1]\) invariant | P-GELB: mesoskopische Brückendefinition | E-ROT | unabhängiger Tragfähigkeits-/Konnektivitätsproxy |
+| EQ-17 | \(\dot\beta=k_{form}F_{pH}F_I(1-\beta)-k_{b hyd}F_{hyd}\beta\) | \(k_{form},k_{b hyd},f_{load}\) | M-GRÜN: Intervall \([0,1]\) invariant | P-GELB: mesoskopische Brückendefinition | E-ROT | unabhängiger Tragfähigkeits-/Konnektivitätsproxy |
 | EQ-18 | \(B=f_{load}c_n\beta\) | \(f_{load},c_n,\beta\) | M-GRÜN: \(0\le B\le f_{load}c_n\) | P-GELB | E-ROT | gleichzeitige Netzwerk-Si- und Kontaktmessung |
 
 Die drei Si-Pools sind eine konservative Transferbilanz. Bei relevantem Siliciumaustrag im Syneresat muss ein gemessener Randfluss ergänzt werden. Die pH-/Ionenstärke-/Arrheniusfaktoren sind flexible Hypothesen und keine universellen Naturgesetze.
