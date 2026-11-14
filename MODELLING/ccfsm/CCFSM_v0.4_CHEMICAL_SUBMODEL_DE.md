@@ -88,33 +88,45 @@ Die Gewichte sind nichtnegative, zu kalibrierende Parameter. Die Form ist eine p
 
 pH ist eine Aktivitätsgröße. Wir setzen:
 
-[
-a_H=10^{-pH},qquad a_{OH}=10^{pH-pK_w(T,I)}.
-]
+\[
+a_H=10^{-pH},\qquad a_{OH}=10^{pH-pK_w(T,I)}.
+\]
 
-Für eine erste monomere Speziationsnäherung:
+Wir trennen die erste Dissoziation des Monomers von der Säure-Base-Chemie bereits gebildeter Oligomer-/Partikeloberflächen:
 
-[
-alpha=rac{1}{1+10^{pK_{a,1}(T,I)-pH}},
-]
+\[
+\alpha_m=\frac{1}{1+10^{pK_{a,m}-pH}},\qquad
+\alpha_s=\frac{1}{1+10^{pK_{a,s}-pH}}.
+\]
 
-wobei (alpha) den deprotonierten Anteil einer repräsentativen monomeren Silanol-Spezies bezeichnet. Ein möglicher Reaktionspartnerfaktor ist:
+\[
+F_{pair,m}=4\alpha_m(1-\alpha_m),\qquad
+F_{pair,s}=4\alpha_s(1-\alpha_s).
+\]
 
-[
-F_{pair}=4alpha(1-alpha),qquad 0le F_{pair}le1.
-]
+Die erste Version verwendet zwei getrennte gewichtete Katalysefaktoren:
 
-Die erste Version verwendet getrennte gewichtete Katalysefaktoren für Monomer-Kondensation und Wachstum an bereits gebildeten Oligomer-/Partikeloberflächen:
+\[
+F_{pH}^{(m)}=
+w_H^{(m)}\left(\frac{a_H}{a_{H,ref}}\right)^{m_H^{(m)}}
++w_{pair}^{(m)}F_{pair,m}
++w_{OH}^{(m)}\left(\frac{a_{OH}}{a_{OH,ref}}\right)^{m_{OH}^{(m)}},
+\]
 
-[
-F_{pH}=w_Hleft(rac{a_H}{a_{H,ref}}ight)^{m_H}
-+w_{pair}F_{pair}
-+w_{OH}left(rac{a_{OH}}{a_{OH,ref}}ight)^{m_{OH}}.
-]
+\[
+F_{pH}^{(s)}=
+w_H^{(s)}\left(\frac{a_H}{a_{H,ref}}\right)^{m_H^{(s)}}
++w_{pair}^{(s)}F_{pair,s}
++w_{OH}^{(s)}\left(\frac{a_{OH}}{a_{OH,ref}}\right)^{m_{OH}^{(s)}}.
+\]
 
-Das ist eine **additive Kanalhypothese** für saure, gemischte Silanol/Silanolat- und alkalische Beiträge. Sie ist nicht als vollständig hergeleiteter Elementarmechanismus zu verstehen. Insbesondere besitzen oligomere und Partikeloberflächen andere Säure-Base-Eigenschaften als das Monomer. Für industrielle Natriumsilikat/Schwefelsäure-Systeme müssen daher mindestens getrennte Parameter-/Protokollfamilien für saure und alkalische Rezepturen geschätzt werden.
+\(F_{pH}^{(m)}\) moduliert die Monomer-Oligomer-Bildung \(r_o\); \(F_{pH}^{(s)}\) moduliert das Wachstum an Oligomer-/Partikeloberflächen \(r_n\) und die Entwicklung der tragenden Brückenfraktion. Die Gewichte und Reaktionsordnungen sind getrennt identifizierbar zu machen.
 
-(pK_w) und (pK_a) sind temperatur- und elektrolytabhängig. Im Code wird (pK_w) als Umweltgröße und (pK_{a,monomer}) und (pK_{a,surface}) als zustandsabhängige Umweltgrößen geführt; die Standardwerte dienen nur für Tests und sind keine universellen Werte für konzentrierte Prozessbrühen.
+Die Trennung ist chemisch wichtig: Die scheinbare Säuredissoziation von Oligomer-/Partikeloberflächen ist nicht gleich der ersten Dissoziation des Monomers. In der Literatur wird für ionisierbare Polysilicic-acid-Oberflächen ein deutlich niedrigerer scheinbarer pKa-Wert (Größenordnung 6.8) diskutiert als für monomere Kieselsäure (Größenordnung 9–10). Diese Werte sind nur Orientierung; sie hängen von Spezies, Ionenstärke, Temperatur und Auswertungsmodell ab und sind nicht als feststehende Werte für unsere Prozessbrühen zu verwenden.
+
+Das ist eine **additive Kanalhypothese**, kein vollständig hergeleiteter Elementarmechanismus. Die Speziation von Oligomeren und realen Partikeloberflächen ist breiter als ein einzelnes Henderson-Hasselbalch-Gleichgewicht. Säure- und Basenroute werden daher getrennt kalibriert.
+
+\(pK_w\), \(p_{K,a,m}\) und \(p_{K,a,s}\) werden als zustandsabhängige Umweltgrößen behandelt. Die Code-Standardwerte dienen nur für Tests und sind keine universellen Werte für konzentrierte Prozessbrühen.
 
 ## 4. Ionenstärke und Temperatur
 
