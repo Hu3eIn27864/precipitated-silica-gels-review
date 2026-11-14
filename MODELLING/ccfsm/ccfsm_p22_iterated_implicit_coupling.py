@@ -24,14 +24,12 @@ def _relative_change(a, b, floor=1e-30):
         floor, *(abs(x) for x in a), *(abs(x) for x in b))
 
 
-def _admissible_relaxation(current, target, lower, upper=None):
+def _admissible_relaxation(current, target, lower=0.0):
     omega = 1.0
     for i, (x, y) in enumerate(zip(current, target)):
         d = y-x
         if d < 0:
             omega = min(omega, 0.95*(x-lower)/(-d))
-        if upper is not None and d > 0:
-            omega = min(omega, 0.95*(upper-x)/d)
     return max(0.0, min(1.0, omega))
 
 
@@ -86,10 +84,8 @@ def p22_iterated_implicit_step(
 
         current_flat = list(theta) + [v for row in fields for v in row]
         target_flat = list(target_theta) + [v for row in target_fields for v in row]
-        lower = [0.0]*(grid.cells*5)
-        upper = [1.0]*grid.cells + [None]*(grid.cells*4)
         omega = min(omega0, _admissible_relaxation(
-            current_flat, target_flat, lower, None))
+            current_flat, target_flat, 0.0))
         if omega < min_omega:
             return {
                 "converged": False, "iterations": iteration,
