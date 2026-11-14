@@ -887,3 +887,11 @@
 - Coupled the pressure-derived Darcy flux to the P8 variable-capacity mobile-species transport and reaction block; both use the same discrete fluid balance.
 - Added tests for pressure-capacity closure, Darcy sign, harmonic resistance, no-flow boundaries, fluid-volume conservation, pressure dissipation and coupled RHS.
 - Explicit scope: reduced linear hydraulic block only; no Biot mechanics, osmotic feedback, free drainage, empirical calibration or global nonlinear PDE theorem.
+
+
+## 2026-11-14 — CCFSM P8b open drainage and silicon export
+
+- Added open pressure-reservoir boundary fluxes to the P8a storage-Darcy block.
+- Added consistent mobile M/O boundary transport with upwind reservoir concentrations on inflow and gel concentrations on outflow; immobilized N/B pools are not advected out.
+- Added exact semidiscrete global fluid and silicon boundary-balance checks and a nonnegative pressure dissipation functional.
+- Added regression tests for inflow/outflow signs, fluid-volume balance, silicon export, boundary upwinding and validation. No capillary law, moving interface, evaporation or empirical calibration is claimed.
