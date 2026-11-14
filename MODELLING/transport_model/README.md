@@ -492,3 +492,29 @@ profiles and model discrepancy. This utility uses common multipliers only,
 requires strictly-positive contact resistances for log differentiation, and
 does not estimate layer-specific parameters. Its synthetic verification is
 not a measurement or calibration of precipitated-silica gel.
+
+
+
+## Synthetic inverse recovery of bulk mobility and contact resistance
+
+`synthetic_inverse.py` adds a small deterministic weighted Gauss--Newton
+inverse demonstrator. It estimates only two global positive multipliers:
+one on every layer mobility and one on every strictly-positive interface
+contact resistance. Input observations are log modal decay rates from one or
+more specimen designs; optional `sigma_log_rates` values weight the residuals.
+The implementation rejects locally rank-deficient or severely ill-conditioned
+designs and uses a backtracking line search.
+
+Run the focused checks with:
+
+    python3 -m unittest discover -s MODELLING/transport_model -p 'test_synthetic_inverse.py' -v
+
+The tests generate exact synthetic modal observations from known parameter
+multipliers, recover them from multiple heterogeneous designs and a displaced
+initial guess, and check rejection of a one-mode underdetermined design and
+invalid uncertainties. These are algorithmic verification tests only. They
+do not use experimental observations, establish practical identifiability
+under model discrepancy, estimate layer-specific parameters, or calibrate
+precipitated-silica gels. Before applying the inverse method to experiments,
+the mode assignment, geometry, storage compliance, uncertainty model and
+contact-resistance interpretation must be independently justified.
