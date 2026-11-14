@@ -1,0 +1,13 @@
+figure,panel,condition,temperature,evidence_branch,n_points,exp_A,exp_tau_h,exp_RMSE,exp_AICc,stretch_A,stretch_tau_h,stretch_beta,stretch_RMSE,stretch_AICc,delta_AICc_stretch_minus_exp,beta_boundary,amplitude_boundary
+Figure 8,a,acidic,20 C,primary_exploratory,13,0.186976,11.116871,0.010370,-113.5904,0.197158,11.660912,0.500,0.002304,-149.2307,-35.6403,false,false
+Figure 8,a,acidic,40 C,sensitivity_only,11,0.200144,8.932139,0.001421,-138.7341,0.200002,16.657089,3.000,0.000016,-233.5284,-94.7943,true,false
+Figure 8,a,acidic,60 C,sensitivity_only,11,0.202549,8.240117,0.003722,-117.5548,0.202956,3.636271,0.550,0.003621,-114.2356,3.3192,false,false
+Figure 8,b,basic,20 C,primary_exploratory,11,0.284690,41.279528,0.021322,-79.1560,1.000000,7227.625875,0.300,0.011486,-88.8375,-9.6816,true,true
+Figure 8,b,basic,40 C,primary_with_local_reversals,9,0.358679,24.827435,0.010835,-75.4491,0.356484,25.716798,1.175,0.010142,-71.8392,3.6099,false,false
+Figure 8,b,basic,60 C,primary_with_local_reversals,10,0.491525,24.904801,0.029766,-64.5735,0.494076,23.834742,0.875,0.029424,-60.5191,4.0544,false,false
+Figure 10,a,acidic,20 C,primary_exploratory,15,0.369139,0.523974,0.013396,-124.3842,0.363299,0.511142,1.350,0.007531,-138.4818,-14.0976,false,false
+Figure 10,a,acidic,40 C,primary_exploratory,19,0.426341,0.696416,0.031990,-126.0590,0.502277,1.222313,0.550,0.021288,-138.6852,-12.6263,false,false
+Figure 10,a,acidic,60 C,primary_with_local_reversals,21,0.471044,0.620095,0.025905,-148.7720,0.468883,0.616683,1.100,0.025473,-146.7343,2.0377,false,false
+Figure 10,b,basic,20 C,figure_table_conflict_branch,15,0.419494,0.726325,0.033307,-97.0598,0.446341,0.888428,0.800,0.032694,-94.4348,2.6250,false,false
+Figure 10,b,basic,40 C,figure_table_conflict_branch,16,0.643178,0.683050,0.024831,-113.3382,0.627993,0.639628,1.275,0.018832,-119.1096,-5.7715,false,false
+Figure 10,b,basic,60 C,figure_table_conflict_branch,13,0.825343,1.118060,0.047966,-73.7689,0.866081,1.265886,0.875,0.045539,-71.6527,2.1163,false,false
