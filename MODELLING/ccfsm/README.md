@@ -377,3 +377,12 @@ P16 ist kein vollständiger Energiebeweis: Die P9-Spannungs-/Energiekonsistenz i
 - `test_ccfsm_p21_two_way_pressure_feedback.py` prüft Rückkopplung, Fluidbilanz und Eingabevalidierung.
 
 P21 ist eine gestaffelte Snapshot-Kopplung, kein iterierter monolithischer Zeitschritt. Die Permeabilität bleibt unkalibriert; Projektion auf allgemeine nicht deckungsgleiche Netze, gemeinsame Energiebilanz und physikalische Validierung sind offen.
+
+
+## CCFSM P22 — iterierte Druck-Mechanik-Transport-Kopplung
+
+- `CCFSM_v3.7_P22_ITERATED_IMPLICIT_COUPLING_DE.md` dokumentiert einen gedämpften Picard-Fixpunktlöser für einen impliziten Euler-Schritt.
+- `ccfsm_p22_iterated_implicit_coupling.py` wiederholt P21 inklusive P19-Mechanik, FE→FV-Druckprojektion und Darcy-/M/O-Advektion, bis Zustands- und Druckresiduum die Toleranzen erfüllen.
+- `test_ccfsm_p22_iterated_implicit_coupling.py` prüft Konvergenzmeldung, Positivität, Residuen und Nichtannahme bei Nichtkonvergenz.
+
+P22 ist kein monolithischer Newton-Löser und liefert bei Nichtkonvergenz keinen akzeptierten Zustand. Energie-Monotonie und physikalische Validierung sind nicht nachgewiesen.
