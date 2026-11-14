@@ -44,3 +44,12 @@ Added a protocol-aware piecewise-constant rate propagator:
 - test_ccfsm_thermal_history.py — seven tests including v0.2 recovery, semigroup composition, staged-rate history, invariant region, Arrhenius direction and validation.
 
 The model holds q_infinity and natural-interface accessibility fixed within one specified protocol. The available article reports temperature-dependent endpoints, so one endpoint is not assumed to apply to all protocols. No activation energy, sample thermal time constant, permeability or modulus is estimated from nominal bath temperature. Local verification: 7/7 new tests passed; the dedicated CCFSM CI runs the full package test suite.
+
+
+## CCFSM v0.3 — bridge / morphology / eigenstress / natural drainage
+
+- CCFSM_v0.3_BRIDGE_MORPHOLOGY_STRESS.md — governing equations, parameter meanings, identifiability limits and synchronized natural-syneresis experiment design.
+- ccfsm_v03.py — state model for load-bearing bridge inventory, fractal dimension, contact number, residual eigenstress, stress-relaxed contraction and observed natural shrinkage.
+- test_ccfsm_v03.py — nine regression tests.
+
+The bridge-to-morphology relations are explicit testable hypotheses, not established silica laws. Df/contact number are not used as unvalidated surrogates for permeability or modulus. All coefficients remain user-supplied/un-calibrated; no oedometer or forced-syneresis data enter the natural model.
