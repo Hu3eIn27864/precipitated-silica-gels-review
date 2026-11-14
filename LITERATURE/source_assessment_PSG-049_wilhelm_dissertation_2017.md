@@ -65,3 +65,14 @@ Using the curated approximate chart points, we evaluated both source tables *wit
 | 60 °C | 0.1944 | 0.0489 |
 
 The dissertation parameters reduce chart-point RMSE by factors of approximately 2.7, 7.4 and 4.0, respectively. Their errors are close to the freely fitted RMSE values (0.0333, 0.0248 and 0.0480). This strengthens the conclusion that the 2017 dissertation parameter set is consistent with the plotted basic-droplet curves. Because the chart points remain approximate and uncalibrated, these RMSE values are diagnostic comparisons only, not formal measurement-error statistics.
+
+
+## Cross-check of the plotted curves: dissertation Figure 5.5 versus article Figure 10
+
+The two primary sources identify the same experiment family: natural syneresis of approximately 3 mm gel droplets, shown for acid- and base-catalyzed gels at 20, 40 and 60 °C. The dissertation explicitly captions Figure 5.5 as the droplet-volume-shrinkage curves and cites Wilhelm & Kind (2015); the article captions Figure 10 as the corresponding droplet-shrinkage curves. Both discussions describe the first 30 min as a common 20 °C period before the samples are brought to their target temperatures. For the base-catalyzed droplets, both sources describe increasing maximum shrinkage with increasing temperature.
+
+The dissertation's Figure 5.5(b) description and its Table 5.3 are mutually consistent: the 20/40/60 °C model curves approach successively larger shrinkage levels, corresponding to A = 0.40/0.63/0.82. The journal Figure 10(b) chart-derived approximate points likewise support those larger levels; the free fits to the 2015 chart are A = 0.4195/0.6432/0.8253. In contrast, the journal Table 2 values A = 0.30/0.39/0.51 would predict materially lower asymptotes, especially at 40 and 60 °C, and are not consistent with the plotted levels. The dissertation's tau values (0.671/0.640/1.055 h) are also close to the chart-derived free fits (0.726/0.683/1.118 h).
+
+A direct pixel-by-pixel overlay was not possible in this audit: the PDF screenshot endpoint rejected both large source PDFs. The comparison above therefore combines the primary-source captions and textual descriptions with the already curated approximate chart-point fits and fixed-parameter RMSE crosswalk; it is not a new image-registration or pixel-calibration result.
+
+**Assessment:** the discrepancy is localized primarily to the basic-droplet amplitude column in the 2015 journal Table 2. The later dissertation account and the journal's own Figure 10(b) are mutually consistent to the resolution of the available chart digitization. Keep both published tables unchanged in the evidence record and flag the journal table as an unresolved internal inconsistency; do not silently replace it or assert a confirmed erratum.
