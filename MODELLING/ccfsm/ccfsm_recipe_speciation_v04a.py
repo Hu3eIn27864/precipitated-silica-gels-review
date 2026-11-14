@@ -146,12 +146,11 @@ class SpeciationResult:
 def _gammas(ionic, recipe):
     if recipe.activity_model == "ideal":
         return 1.0, 1.0
-    if ionic > recipe.max_davies_ionic_strength_mol_l:
-        raise ValueError(
-            f"Davies model invalid at I={ionic:.5g} mol/L; "
-            "use measured activities or a validated Pitzer/SIT model")
-    root = math.sqrt(max(ionic, 0.0))
-    term = root/(1.0+root)-0.3*ionic
+    # Cap only trial gamma values during pH bracketing. The final solution
+    # is rejected below if its self-consistent ionic strength exceeds limit.
+    i_eval = min(ionic, recipe.max_davies_ionic_strength_mol_l)
+    root = math.sqrt(max(i_eval, 0.0))
+    term = root/(1.0+root)-0.3*i_eval
     return (_pow10(-DAVIES_A_25C*term),
             _pow10(-4.0*DAVIES_A_25C*term))
 
@@ -250,6 +249,11 @@ def solve_sodium_silicate_sulfuric_acid(recipe, pH_min=-2.0, pH_max=16.0):
             lo,flo=mid,fm
     pH=0.5*(lo+hi)
     ionic,d=_equilibrated_at_pH(pH,recipe)
+    if (recipe.activity_model == "davies"
+            and ionic > recipe.max_davies_ionic_strength_mol_l):
+        raise ValueError(
+            f"final self-consistent I={ionic:.5g} mol/L exceeds Davies limit; "
+            "use measured activities or a validated Pitzer/SIT model")
     si_res=d["h4"]+d["h3"]+d["h2"]-recipe.dissolved_silica_mol_l
     s_res=d["so4"]+d["hso4"]+d["pair"]-recipe.total_sulfate_mol_l
     na_res=d["na"]+d["pair"]-recipe.total_sodium_mol_l
