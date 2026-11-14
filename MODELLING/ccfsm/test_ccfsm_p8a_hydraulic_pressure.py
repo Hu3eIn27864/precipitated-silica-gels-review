@@ -78,7 +78,7 @@ class TestCCFSMP8aHydraulicPressure(unittest.TestCase):
 
     def test_rejects_nonpositive_capacity_and_bad_parameters(self):
         bad = P8aHydraulicParameters((1e-9,)*4, (1e-12,)*4,
-                                     (.3,)*4, 1e5)
+                                     (.00001,)*4, 1e5)
         with self.assertRaises(ValueError):
             p8a_hydraulic_rhs((0.,)*4, self.grid, bad)
         with self.assertRaises(ValueError):
