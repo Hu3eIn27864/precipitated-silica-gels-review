@@ -1,3 +1,9 @@
+## 2026-11-14 — CCFSM status audit and gated roadmap
+
+- Added `MODELLING/ccfsm/CCFSM_ROADMAP_STATUS_2026-11-14_DE.md` covering the implemented P0–P22 chain, the verified 259-test CI run and v0.5 calibration summary, and staged gates P22.1–P29.
+- The audit identified that P22's reported state residual is based on the relaxed update rather than the unrelaxed fixed-point defect. Strong under-relaxation can therefore make the reported update small without proving a correspondingly small fixed-point defect. This is recorded as a correction gate before P23.
+- Linked the roadmap from the CCFSM package README and repository README. No solver code was changed in this audit commit; the existing CI result remains the verification status for the existing implementation, not for a new code revision.
+
 # Changelog
 
 ## 2026-11-14 — CCFSM v0.3 CI verification
