@@ -73,3 +73,11 @@ Das chemische Teilmodell ist mechanistisch modular, aber noch nicht an industrie
 - test_ccfsm_v04_parameter_register.py — schema, unique-symbol and required-influence checks for the machine-readable parameter register.
 
 v0.4 ist zunächst eine vollständige Parameterarchitektur, keine unkalibrierte Erweiterung aller ODEs. Insbesondere werden pH und Rezeptur nicht doppelt als unabhängige Ursachen gezählt; Gelkerntemperatur wird von Badtemperatur getrennt; D_f/z werden nicht ohne Porenhals- und Konnektivitätsdaten als Permeabilitätsersatz verwendet. Die natürliche, mechanisch unbelastete Synärese bleibt der einzige Geltungsbereich.
+
+## CCFSM v0.4a — Rezeptur-zu-Speziation
+
+- CCFSM_v0.4a_RECIPE_SPECIATION_DE.md — Rezeptur-Stoffbilanz, Speziationsgleichgewichte, Aktivitätsmodell und Gültigkeitsgrenzen.
+- ccfsm_recipe_speciation_v04a.py — pH-Solver aus Natriumsilikatmodul, Gesamtsilicium, Schwefelsäure, NaOH/NaCl, Sulfat- und Natrium-Bilanz.
+- test_ccfsm_recipe_speciation_v04a.py — Regressionstests für Elektroneutralität, Stoffbilanzen, Säurewirkung, Ionenpaarbildung und Davies-Abbruch.
+
+Der Solver ist ein vorläufiges Gleichgewichtsmodul. Davies wird oberhalb 0,5 mol/L Ionenstärke nicht extrapoliert. Für konzentrierte Prozessbrühen ist ein validiertes Pitzer/SIT-Modell bzw. eine experimentelle Aktivitätsbestimmung erforderlich. Die Temperaturabhängigkeit der Gleichgewichtskonstanten und zusätzliche Silica-Oligomer-/Oberflächenspezies sind noch nicht implementiert.
