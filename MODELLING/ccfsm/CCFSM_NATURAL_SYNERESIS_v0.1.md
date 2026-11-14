@@ -59,14 +59,14 @@ A candidate reduced kinetic law is
 \dot\alpha =
 k_{\alpha,0}
 \exp\!\left(-\frac{E_\alpha}{RT}\right)
-f_{\rm pH}(\mathrm{pH})
+f_{\rm pH}^{\rm branch}(\mathrm{pH},\mathrm{pH}_{\rm iso})
 f_I(I)
 f_c(c_{\rm Si},c_{\rm acid},c_{\rm base})
 (1-\alpha)^m ,
 \tag{1}
 \]
 
-with \(k_{\alpha,0}>0\), \(E_\alpha\geq0\), \(m>0\), and non-negative dimensionless modifier functions. This is a model class, not an empirically established reaction law. Its coefficient values are **not identified** by the present shrinkage curves.
+with \(k_{\alpha,0}>0\), \(E_\alpha\geq0\), \(m>0\), and non-negative dimensionless modifier functions. The pH response is branch-specific: acid-catalysed and base-catalysed condensation are not constrained to share one symmetric function. Wilhelm and Kind report an isoelectric point near pH 1.7–2, acid-catalysed conditions below it (their experiment pH < 0) and base-catalysed conditions above it (their experiment pH approximately 10); their mechanistic discussion distinguishes the resulting network structures. This supports separate functions \(f_{\rm pH}^{\rm acid}\) and \(f_{\rm pH}^{\rm base}\), but does not numerically identify their exponents or amplitudes. This is a model class, not an empirically established post-gel reaction law. Its coefficient values are **not identified** by the present shrinkage curves.
 
 If temperature or pH changes during the experiment, equation (1) must use their measured time histories. A constant-temperature fit must not be silently applied through a temperature ramp.
 
@@ -236,7 +236,32 @@ where \(\lambda_h>0\), \(0\leq A_{\rm eq}\leq A_{\max}<1\). Equation (13) follow
 
 ## 6. Empirical coefficients recovered from the repository
 
-The table below reproduces the current curated primary fits in
+There are two separate empirical layers. First, the article reports fitted natural-syneresis coefficients in Tables 1 and 2. These are reproduced below as source-reported values, not refitted raw data. The formulation used sodium silicate solution with mass fraction 0.40 and sulfuric acid mass fractions 0.50 (acidic condition, pH < 0) or 0.032 (basic condition, pH approximately 10). The paper gives pH categories relative to its isoelectric point (approximately 1.7–2), not a continuous pH-response data set.
+
+### 6.1. Source-reported natural-syneresis coefficients
+
+| Geometry | Catalyst | T (°C) | A (source table) | τ (h) | 1/τ (h⁻¹) | A/τ (h⁻¹) |
+|---|---|---:|---:|---:|---:|---:|
+| cylinder | acidic | 20 | 0.20 | 21.3 | 0.04695 | 0.00939 |
+| cylinder | acidic | 40 | 0.20 | 11.7 | 0.08547 | 0.01709 |
+| cylinder | acidic | 60 | 0.20 | 5.0 | 0.20000 | 0.04000 |
+| cylinder | basic | 20 | 0.30 | 50.1 | 0.01996 | 0.00599 |
+| cylinder | basic | 40 | 0.39 | 32.0 | 0.03125 | 0.01219 |
+| cylinder | basic | 60 | 0.51 | 27.5 | 0.03636 | 0.01855 |
+| droplet | acidic | 20 | 0.37 | 0.40 | 2.50000 | 0.92500 |
+| droplet | acidic | 40 | 0.41 | 0.64 | 1.56250 | 0.64063 |
+| droplet | acidic | 60 | 0.48 | 0.77 | 1.29870 | 0.62338 |
+| droplet | basic | 20 | 0.30 | 0.67 | 1.49254 | 0.44776 |
+| droplet | basic | 40 | 0.39 | 0.57 | 1.75439 | 0.68421 |
+| droplet | basic | 60 | 0.51 | 0.95 | 1.05263 | 0.53684 |
+
+These are natural-syneresis conditions only. No imposed pressure or oedometer coefficients enter this table. The basic-droplet row set is retained as **source-reported Table 2 evidence**, but not used as a primary digitized calibration because the 2017 dissertation gives a conflicting basic-droplet parameter set. Figure/table and dissertation conflict remain an explicit audit item. The droplet protocol also holds the samples at 20 °C initially, then applies the target temperature; the thermal history is therefore not equivalent to an instantaneous isothermal start.
+
+The table shows that temperature responses depend on both catalyst branch and geometry. For example, the acid-catalysed cylinder has constant reported amplitude (A=0.20) while (	au) falls from 21.3 to 5.0 h; the acid-catalysed droplet instead has increasing amplitude and increasing reported (	au). A single Arrhenius coefficient fitted across these unlike geometries would be scientifically unjustified.
+
+### 6.2. Project's digitized primary re-fits
+
+The next table reproduces the current curated primary fits in
 LITERATURE/wilhelm_kind_curated_primary_fits_2026-11-14.csv.
 The fits use 98 AI-assisted approximate chart readings in seven series, from Figures 8a, 8b and 10a of Wilhelm & Kind (2015). They are not author-supplied raw data, were not pixel-calibrated, and have no pointwise uncertainty estimates. No inferential confidence intervals or significance tests are justified.
 
@@ -252,7 +277,7 @@ The fits use 98 AI-assisted approximate chart readings in seven series, from Fig
 
 The distinction between 4 cylinder series and 3 acidic-droplet series is intentional. The two omitted acidic-cylinder series at 40/60 °C remain sensitivity-only. The 3 basic-droplet series from Figure 10b remain excluded from the primary calibration because the figure/table and dissertation evidence require a separately audited conflict branch.
 
-### 6.1 What these numbers do and do not show
+### 6.3 What these numbers do and do not show
 
 1. The amplitudes are broadly close to the published table values, but this is an internal digitization cross-check, not independent experimental validation.
 2. Time constants differ noticeably between digitized refits and published table entries. Figure 8a acidic cylinder at 20 °C is the largest discrepancy in this primary set.
@@ -260,7 +285,7 @@ The distinction between 4 cylinder series and 3 acidic-droplet series is intenti
 4. Geometry changes the observed time scale dramatically. Cylinder and droplet time constants must never be pooled into one universal coefficient.
 5. These primary data provide only one acidic-cylinder temperature, three basic-cylinder temperatures and three acidic-droplet temperatures. No continuous pH series, ionic-strength series, or matched \(D_f,z,k,K\) measurements exist in this fit table.
 
-### 6.2 Parameter identification status
+### 6.4 Parameter identification status
 
 | Parameter | Meaning | Current status |
 |---|---|---|
