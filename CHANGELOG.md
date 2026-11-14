@@ -973,3 +973,11 @@
 - Leitet die hydraulische Reservoirleistung mit korrekter Vorzeichenkonvention sowie Darcy-Dissipation einschließlich beider Reservoir-Halbzellen her.
 - Prüft explizit, ob die P9-Spannung die Ableitung der gespeicherten elastischen plus Biot-Energie ist. Der allgemeine Restterm −2 lambda epsilon_ch wird offengelegt; keine vollständige mechanische Energiekonsistenz wird behauptet.
 - Kein globaler PDE-Energiesatz, keine mechanische Randarbeitsbilanz und keine empirische Validierung.
+
+
+## 2026-11-14 — CCFSM P17 variational konsistente axiale Mechanik
+
+- Korrigiert die P9-Spannungs-/Biot-Schließung: Die axiale Spannung wird als Ableitung der vollständigen 3D-isotropen Eigenstrain- plus Biot-Speicherenergie bei verschwindender lateraler Gesamtdehnung gebildet.
+- Die analytische Druck-/Dehnungslösung enthält nun den Faktor `(3 lambda + 2 G) * epsilon_ch`; Fluidinhaltsidentität und Traktionsgleichgewicht bleiben exakt.
+- Ergänzt einen zentralen Finite-Differenzen-Test der Energiederivative gegen die Spannung; P16 testet die korrigierte mechanische Stationarität.
+- Keine räumliche 3D-Mechanik, mechanische Randarbeitsbilanz, globale PDE-Energieabschätzung oder empirische Validierung behauptet.
