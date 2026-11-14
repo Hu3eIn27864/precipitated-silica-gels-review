@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-11-14 — CCFSM v0.3 CI verification
+
+- Dedicated GitHub Actions run [43570338906](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43570338906) succeeded: **38/38 tests passed**, including all nine v0.3 tests.
+- An initial test assertion had its inequality reversed; this was corrected. The model equations were unchanged. The final CI run is green.
+- Result validates code regression behaviour only, not empirical coefficients or the proposed constitutive bridge/morphology relationships.
+
+
 ## 2026-11-14 — CCFSM temperature-history CI verification
 
 - Verified latest dedicated workflow run [43570017461](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43570017461): successful Python 3.12 test job; **29/29 CCFSM tests passed** (10 v0.1, 12 two-timescale v0.2, 7 temperature-history v0.2a).
