@@ -386,3 +386,8 @@ P21 ist eine gestaffelte Snapshot-Kopplung, kein iterierter monolithischer Zeits
 - `test_ccfsm_p22_iterated_implicit_coupling.py` prüft Konvergenzmeldung, Positivität, Residuen und Nichtannahme bei Nichtkonvergenz.
 
 P22 ist kein monolithischer Newton-Löser und liefert bei Nichtkonvergenz keinen akzeptierten Zustand. Energie-Monotonie und physikalische Validierung sind nicht nachgewiesen.
+
+
+## Aktueller Status und priorisierte Roadmap (14.11.2026)
+
+Der geprüfte Stand P0–P22, der P22-Fixpunktresiduum-Audit und die Freigabegates P22.1–P29 sind in [CCFSM_ROADMAP_STATUS_2026-11-14_DE.md](CCFSM_ROADMAP_STATUS_2026-11-14_DE.md) dokumentiert. Nächster Schritt: P22.1 vor P23.
