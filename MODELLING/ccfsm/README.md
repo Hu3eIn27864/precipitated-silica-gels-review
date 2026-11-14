@@ -188,3 +188,14 @@ Die 22 Sensitivitäts- und 44 Figure/Table-Konfliktpunkte bleiben getrennte Evid
 - `test_ccfsm_p2_chemical_affinity.py` prüft Stoffbilanz, Affinitäts-/Ratenvorzeichen, Dissipation, Gleichgewicht, Brückenfraktion, Randzustände und Eingabevalidierung.
 - Die Parameter (k_j), (K_j), Aktivitätskoeffizienten und Referenzkonzentration bleiben explizite Eingaben; es werden keine nicht belegten pH-/Temperaturgesetze oder Messwerte erfunden.
 - **Statusgrenze:** P2 ist ein lokaler, gut durchmischter Reaktionsblock. Räumliche Speziesdiffusion, Wasser-/Ladungsbilanz, vollständige Silica-Oligomer-/Oberflächenspezierung, freie Oberfläche und die volle 3D-PDE-Kopplung bleiben P3-Aufgaben. Die thermodynamische Dissipation ist eine Eigenschaft der gewählten Modellschließung, keine empirische Validierung.
+
+
+## CCFSM v1.5 — P3 räumliches 3D-Reaktions-Diffusions-Darcy-System
+
+- \`CCFSM_v1.5_P3_REACTION_DIFFUSION_3D_DE.md\` formuliert die vier konservativen Si-Pool-PDEs mit No-Flux-Randbedingungen, chemischer P2-Reaktion, Diffusionsdissipation und der einseitigen Kopplung über eine regularisierte Brückenfraktion an den P0/P1-Darcy-Block.
+- \`ccfsm_p3_reaction_diffusion.py\` enthält einen zellzentrierten Finite-Volume-Referenzoperator auf 1D/2D/3D-kartesischen Gittern. Innere Flüsse werden paarweise gebucht; äußere Flüsse sind null. Dazu kommen Si-Gesamtbilanz und regularisierte Brückenfraktion.
+- \`test_ccfsm_p3_reaction_diffusion.py\` prüft globale Si-Erhaltung, Spezieserhaltung bei abgeschalteten Reaktionen, konstante Felder, P2-Grenzfall, Porositätsgewichtung und Eingabevalidierung.
+- Der mathematische Existenz-/Eindeutigkeitsumfang ist ausdrücklich auf das lineare chemische Reaktions-Diffusions-System mit konstanten positiven Diffusionskoeffizienten und anschließendem linearem Druck-Unterproblem beschränkt. Die Kopplung ist dreieckig (Chemie → Mobilität → Druck), nicht bidirektional.
+- Die Brückenregularisierung \(b_\delta=c_B/(c_N+c_B+\delta_B)\) verhindert eine undefinierte Fraktion bei leerem Netzwerk; \(\delta_B\) bleibt unkalibriert.
+- Die Energieungleichung setzt konstante Temperatur, Aktivitätskoeffizienten, Porosität und Diffusionskoeffizienten voraus. Variable Porosität, Advektion, Wärme, Ladungsbilanz und Druck-zu-Chemie-Rückkopplung bleiben P4.
+- Alle Transport- und Reaktionsparameter bleiben unkalibriert. Die Referenzimplementierung ist ein semidiskreter Operator, kein validierter industrieller 3D-Solver. Ein expliziter Zeitschritt ist nicht automatisch positivitätserhaltend.
