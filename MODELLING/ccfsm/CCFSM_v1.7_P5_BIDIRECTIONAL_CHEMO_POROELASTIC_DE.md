@@ -184,6 +184,16 @@ Die Darcy-/Advektionsterme ergeben zusammen \(\nabla p\cdot Q\); die chemischen 
 
 **Status des Resultats:** (P5.14) ist eine formale Energieidentität für hinreichend glatte Lösungen unter den ausdrücklich genannten Annahmen. Sie ist noch kein Existenzbeweis für schwache Lösungen. Bei offenen Drainagerändern, vorgegebenen Traktionen, zeitabhängigen Randdaten, nichtidealen Aktivitäten oder variabler Temperatur treten zusätzliche Rand-/Kopplungsterme auf, die gesondert bilanziert werden müssen.
 
+
+## P5-Präzisierung aus dem P6-Thermodynamik-Audit
+
+Die Ableitung der gesamten freien Energie nach der Fluidkapazität enthält neben dem Biot-Anteil auch den Beitrag der mobilen idealen Mischung. Bei festgehaltenen Inventaren gilt
+\[
+\\frac{\\partial\\Psi}{\\partial\\theta}=p-\\Pi_{osm},\\qquad
+\\Pi_{osm}=RT(c_M+c_O)=RT\\frac{m_M+m_O}{\\theta}.
+\]
+Der mechanische Biot-Porendruck bleibt \(p=M_B(\\zeta-\\alpha_B\\operatorname{tr}\\varepsilon)\); er ist vom vollständigen Energie-Konjugierten \(p-\\Pi_{osm}\) zu unterscheiden. In der Energiebilanz heben sich der osmotische Anteil aus der Fluidkapazitätsänderung und der Gibbs-Duhem-Beitrag der mobilen Advektion exakt auf. Zusammen bleibt die Darcy-Dissipation \(\\nabla p\\cdot\\mathbb K_p\\nabla p\). Der P5-Kernel gibt deshalb nun zusätzlich den osmotischen Druck und das vollständige Fluidenergie-Konjugierte aus; ein Finite-Differenzen-Test prüft die Ableitung.
+
 ## 8. Erhaltung und Invarianten
 
 Aus (P5.8), (P5.11) und (P5.13) folgt lokal
