@@ -518,3 +518,29 @@ under model discrepancy, estimate layer-specific parameters, or calibrate
 precipitated-silica gels. Before applying the inverse method to experiments,
 the mode assignment, geometry, storage compliance, uncertainty model and
 contact-resistance interpretation must be independently justified.
+
+
+## Geometry screening and robustness checks
+
+`geometry_screening.py` ranks two-layer specimen designs over user-supplied
+total thicknesses and interface fractions using the local weighted log-rate
+Jacobian. It reports numerical rank, condition number, singular values and
+the determinant of the local information matrix. The helper is deliberately
+limited to two layers and two common scaling parameters; its ranking is
+conditional on the assumed storage, mobility, contact resistance, measured
+modes and uncertainty values.
+
+The inverse tests additionally perturb synthetic log modal rates with small
+deterministic noise and inject a mode-dependent systematic discrepancy. The
+former checks parameter stability; the latter checks that a residual remains
+when the assumed two-parameter model cannot explain the observations.
+
+Run the focused suite with:
+
+    python3 -m unittest discover -s MODELLING/transport_model -p 'test_*screening.py' -v
+    python3 -m unittest discover -s MODELLING/transport_model -p 'test_synthetic_inverse.py' -v
+
+No ranking is an experimental recommendation yet. A useful experimental
+design must also account for feasible specimen fabrication, boundary-condition
+uncertainty, mode-identification error, parameter heterogeneity, and the
+possibility that contact resistance is not a spatially uniform interface law.
