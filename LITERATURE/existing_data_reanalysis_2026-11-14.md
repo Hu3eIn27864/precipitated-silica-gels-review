@@ -94,3 +94,15 @@ The six centrifugal points from Wilhelm (2017) remain a separate series: 20 mm i
 ## 6. Decision gate
 
 **Current decision:** proceed with literature-data curation and source-figure verification. Do not yet infer target-gel permeability, modulus, diffusivity, or contact resistance from the published (	au) values. The next quantitative model test should be a geometry-aware prediction with explicitly bounded nuisance parameters, not a free fit of every condition.
+
+
+## Addendum: use of the 164 approximate chart points (2026-11-14)
+
+The 164 AI-assisted approximate readings are retained rather than discarded wholesale. A row-preserving curated copy is available at `LITERATURE/wilhelm_kind_approximate_measurement_points_curated.csv`, with transparent use labels and reasons. The policy is documented in `LITERATURE/approximate_point_reanalysis_policy_2026-11-14.md`.
+
+- 58 points: primary exploratory series.
+- 40 points: primary exploratory series with local reversals retained (not smoothed).
+- 22 points: sensitivity-only (Figure 8a, 40/60 °C; half-time screening disagrees materially with the published exponential-fit half-time).
+- 44 points: separate Figure 10b figure/table-conflict branch; not fit against Table 2 amplitudes, but retained as independent approximate evidence for the plotted figure.
+
+These are evidence-use categories, not statistical weights or probabilities. No point is represented as author raw data or independently pixel-digitised. A robust fit and sensitivity comparison are the next steps; no physical transport coefficient is inferred from this classification alone.
