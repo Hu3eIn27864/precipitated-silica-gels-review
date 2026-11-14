@@ -5,6 +5,7 @@ on:
     paths:
       - "MODELLING/ccfsm/**"
       - "DATA/Raw/kurvendigitalisierung.csv"
+      - "LITERATURE/wilhelm_kind_approximate_measurement_points_curated.csv"
       - ".github/workflows/ccfsm-ci.yml"
   pull_request:
     paths:
@@ -31,7 +32,8 @@ jobs:
       - name: Run v0.5 natural-syneresis calibration
         run: |
           python MODELLING/ccfsm/ccfsm_v05_calibration.py \
-            --input DATA/Raw/kurvendigitalisierung.csv \
+            --input LITERATURE/wilhelm_kind_approximate_measurement_points_curated.csv \
+            --pressure-audit DATA/Raw/kurvendigitalisierung.csv \
             --output-dir ccfsm-v05-results
       - name: Upload v0.5 calibration results
         uses: actions/upload-artifact@v4
