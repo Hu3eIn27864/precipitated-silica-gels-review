@@ -1,6 +1,6 @@
 # CCFSM — natural syneresis only
 
-This folder contains version 0.1 of the Chemically Coupled Fractal Syneresis Model for **unloaded natural syneresis of precipitated silica gels**.
+This folder contains the versioned CCFSM specifications and implementations for **unloaded natural syneresis of precipitated silica gels** (v0.1 empirical/poroelastic core and v0.2 two-timescale extension).
 
 - CCFSM_NATURAL_SYNERESIS_v0.1.md — model definition, governing equations, empirical coefficient audit, identifiability limits, and mathematical propositions/energy proof.
 - ccfsm_reduced.py — verified scalar natural-syneresis response and dimensionally checked hydraulic time-scale helper.
@@ -30,6 +30,6 @@ Added on 14 November 2026:
 
 The two new rates are not fitted to the current one-exponential tables or approximate digitized traces. The source-reported (A, tau) values from v0.1 remain unchanged. A single zero-start shrinkage curve only identifies an unordered pair of two rates and the endpoint product eta_a*q_infinity; assigning physical labels requires an independent chemical/structural or hydraulic measurement.
 
-Local software verification: 12/12 tests passed with python -m unittest -v. This is not physical validation. The natural-only exclusion remains in force: no oedometer, forced-syneresis or imposed-load coefficient is used.
+Local software verification: 12/12 v0.2 tests passed with python -m unittest -v. Hosted GitHub Actions run [43569636089](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43569636089) passed 22/22 tests in total (10 v0.1 and 12 v0.2). This is not physical validation. The natural-only exclusion remains in force: no oedometer, forced-syneresis or imposed-load coefficient is used.
 
 The dedicated GitHub Actions workflow at .github/workflows/ccfsm-ci.yml runs all CCFSM unit tests on push/pull requests that touch this package.
