@@ -234,3 +234,11 @@ Die 22 Sensitivitäts- und 44 Figure/Table-Konfliktpunkte bleiben getrennte Evid
 - `ccfsm_p6_convexity.py` enthält analytische quadratische Form und Eigenverformungsschranke; `test_ccfsm_p6_convexity.py` prüft die Identitäten.
 - Der P5-Kernel liefert zusätzlich osmotischen Druck und vollständiges Energie-Konjugiertes; ein Finite-Differenzen-Test prüft die Ableitung nach der Fluidkapazität.
 - P6 beweist weder globale Existenz des nichtlinearen P5-Systems noch empirische Gültigkeit oder Identifizierbarkeit der Eigenverformung. Die lineare Biot-Existenz folgt unter den P0-Annahmen.
+
+
+## CCFSM v1.9 — P7 räumlicher chemo-hydraulischer Reaktionstransport (14.11.2026)
+
+- `CCFSM_v1.9_P7_CHEMO_TRANSPORT_DE.md` formuliert den triangularen Existenzblock: linearer Biot-Darcy-Fluss aus P6 treibt mobile M/O-Spezies; reversible Reaktionen koppeln diese an immobilisierte Netzwerkpools N/B.
+- `ccfsm_p7_chemo_transport.py` implementiert einen konservativen 1D-Finite-Volumen-Referenzoperator mit Upwind-Advektion, zentraler Diffusion, lokalen detailliert balancierten Reaktionen und Nullflussrändern.
+- `test_ccfsm_p7_chemo_transport.py` prüft Gesamt-Si-Erhaltung, interne Flusskonservierung, Uniformzustände und Eingabevalidierung.
+- Die Existenztheorie gilt bei konstanter positiver Fluidkapazität, abgeschalteter mechanischer Rückkopplung und vorgegebenem divergenzfreiem Darcy-Fluss. Das vollständige nichtlineare rückgekoppelte P5-System bleibt offen; keine Parameterkalibrierung oder physikalische Validierung wird behauptet.
