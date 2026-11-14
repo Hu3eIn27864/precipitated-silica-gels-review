@@ -922,3 +922,11 @@
 - Added mobile diffusion, reservoir concentration conditions and local reversible M/O/N/B reactions driven by P9 total chemical potentials.
 - Added closed/open-boundary silicon and fluid balance tests plus nonnegative reaction, Darcy and ideal-diffusion diagnostics.
 - Explicitly bounded the result: no time integrator, global coupled energy theorem, PDE existence result, 3D mechanics or empirical calibration is claimed; natural syneresis remains distinct from forced consolidation data.
+
+
+## 2026-11-14 — CCFSM P11 energieüberwachte Zeitintegration
+
+- Ergänzt P10 um adaptive explizite Euler-Zeitintegration mit analytischer Positivitäts-Schranke und Energierückwärtssuche anhand der P9-Zellenergie.
+- Akzeptierte Schritte halten (0<\theta\leq1), positive M/O/N/B-Inventare und die diskrete Energienichtzunahme bis zur dokumentierten numerischen Toleranz ein.
+- Die Energiekontrolle weist nichtverschwindende hydraulische oder mobile Silicium-Randflüsse zurück; Reservoir-Energie- und Arbeitsbeiträge sind noch nicht implementiert.
+- Der Geltungsbereich ist ein diskreter Algorithmus mit geschlossenen Rändern, kein unbedingter Stabilitätssatz, kein PDE-Existenzbeweis und keine empirische Validierung.
