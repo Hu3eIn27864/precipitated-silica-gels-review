@@ -228,11 +228,11 @@ For a state-dependent extension,
 
 \[
 \dot S=\lambda_h(\alpha,D_f,z,\phi,T,L_c)
-       \,[A_{\rm eq}(\alpha,D_f,z,\mathbf q)-S],
+       \,[A_{\rm eq}(\chi,\phi_0,\text{geometry, BC})-S],
 \tag{15}
 \]
 
-where \(\lambda_h>0\), \(0\leq A_{\rm eq}\leq A_{\max}<1\). Equation (13) follows exactly when \(A_{\rm eq}=A\) and \(\lambda_h=1/\tau\) are constant from the defined observation start. If chemistry or structure continues to evolve appreciably, a single exponential is only an effective approximation and equation (15), or the spatial system (7)–(10), must be fitted to richer measurements.
+where \(\lambda_h>0\), \(0\leq A_{\rm eq}\leq A_{\max}<1\), and \(A_{\rm eq}\) maps the natural contractile potential to the accessible bulk shrinkage under the specified geometry and hydraulic boundary condition. The reduced hydraulic rate is constrained by \(\lambda_h\simeq C_g k_{\rm eff}K_{\rm eff}/(\mu L_c^2)\). Equation (13) follows exactly when \(A_{\rm eq}=A\) and \(\lambda_h=1/\tau\) are constant from the defined observation start. If chemistry or structure continues to evolve appreciably, a single exponential is only an effective approximation and equation (15), or the spatial system (7)–(10), must be fitted to richer measurements.
 
 ## 6. Empirical coefficients recovered from the repository
 
@@ -343,7 +343,7 @@ If the silica solid volume is conserved, there is no solid mass loss, and the wh
 
 ### Theorem 4 — fluid balance and energy identity for the linearized natural subsystem
 
-Assume a fixed Lipschitz domain, \(\mathbb C\) symmetric and uniformly positive definite, \(M>0\), \(k/\mu\geq\kappa_{\min}>0\), sufficiently regular fields, zero applied traction \(\boldsymbol\sigma\mathbf n=0\), and either \(p=0\) on the drained boundary or \(\mathbf q\cdot\mathbf n=0\) on an impermeable boundary. Then equations (7)–(10) satisfy:
+Assume a fixed Lipschitz domain; time-independent \(\mathbb C(x)\) symmetric and uniformly positive definite, time-independent \(M(x)>0\), time-independent Biot coefficient \(b(x)\), and time-independent hydraulic mobility \(k(x)/\mu(x)\geq\kappa_{\min}>0\); sufficiently regular fields; zero applied traction \(\boldsymbol\sigma\mathbf n=0\), and either \(p=0\) on the drained boundary or \(\mathbf q\cdot\mathbf n=0\) on an impermeable boundary. Then equations (7)–(10) satisfy:
 
 **Global fluid balance**
 \[
@@ -393,7 +393,7 @@ and combine the two identities. This gives (18). \(\square\)
 
 If \(\dot{\boldsymbol\epsilon}^{\rm nat}=0\), the stored elastic-plus-fluid energy cannot increase; dissipation is non-negative. During natural syneresis, chemical/network evolution supplies the eigenstrain work on the right-hand side. Equation (17) makes the expelled-liquid balance explicit. Neither identity introduces an externally imposed mechanical load.
 
-For the linearized subsystem, the energy estimate also gives uniqueness of the weak solution modulo rigid-body motions under the stated coercivity and boundary assumptions: subtract two solutions with identical data and identical natural eigenstrain; the right-hand side in (18) vanishes, so zero initial energy and non-negative dissipation force zero pressure and zero elastic strain. Existence follows under the standard weak-solution assumptions for linear quasi-static Biot poroelasticity, with the displacement gauge fixed. This is a mathematical result for the stated linearized subsystem, not proof that the constitutive coefficients represent silica correctly.
+For the linearized subsystem with the time-independent coefficients just stated, the energy estimate also gives uniqueness of the weak solution modulo rigid-body motions under the stated coercivity and boundary assumptions. If coefficients evolve with \(\alpha,D_f,z,\phi\), their time derivatives add terms to the energy balance and (18) must be re-derived; it must not be reused unchanged.  subtract two solutions with identical data and identical natural eigenstrain; the right-hand side in (18) vanishes, so zero initial energy and non-negative dissipation force zero pressure and zero elastic strain. Existence follows under the standard weak-solution assumptions for linear quasi-static Biot poroelasticity, with the displacement gauge fixed. This is a mathematical result for the stated linearized subsystem, not proof that the constitutive coefficients represent silica correctly.
 
 ## 8. What has actually been established
 
