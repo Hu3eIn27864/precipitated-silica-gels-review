@@ -45,6 +45,19 @@ Weitere P22-Prüfpunkte:
 - die Picard-Konvergenz ist zustands- und zeitschrittabhängig; Unterrelaxation allein beweist keine Kontraktion;
 - kein diskreter Gesamtenergie-Monotonienachweis.
 
+## P22.1 completion update — 14 November 2026
+
+P22.1 is implemented and its hosted CI is green.
+
+- The state convergence criterion now measures the unrelaxed fixed-point defect \(x^n+\Delta t F_{P21}(x^k)-x^k\), not the damped update. Strong under-relaxation can no longer independently manufacture a small state residual.
+- The accepted state is the current iterate for which the final P21 pressure snapshot was evaluated, so the returned pressure snapshot corresponds to the accepted iterate.
+- The admissibility limiter constrains both strict positivity and the upper fluid-capacity bound \(\theta\leq1\), with a 5% safety margin when moving toward a bound.
+- Regression coverage includes a deliberately tiny relaxation with a non-small fixed-point defect, the upper fluid-capacity bound, and accepted-state/pressure-snapshot consistency.
+- Hosted workflow [#269](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43635230416) passed; the test log reports **262 tests in 0.708 s, OK**.
+- This is a numerical acceptance-criterion correction, not a proof of Picard convergence, global energy stability, or physical validity.
+
+**Gate A is complete for this correction. Next: P23, discrete energy and silicon balance of the accepted P22 step.** P24–P29 remain as planned below.
+
 ## 3. Priorisierte Roadmap und Freigabegates
 
 ### Gate A — P22.1: Fixpunktresiduum und Akzeptanzkriterien korrigieren
