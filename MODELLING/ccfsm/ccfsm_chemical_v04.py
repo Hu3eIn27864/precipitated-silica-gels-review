@@ -109,7 +109,6 @@ class ChemicalParameters:
     def __post_init__(self):
         _positive(self.reference_silica_concentration_mol_m3,
                   "reference_silica_concentration_mol_m3")
-        _finite(self.pKa_monomer, "pKa_monomer")
         for name in (
             "oligomerization_rate_ref_s", "network_growth_rate_ref_s",
             "dissolution_rate_ref_s", "bridge_formation_rate_ref_s",
