@@ -307,3 +307,10 @@ Die 22 Sensitivitäts- und 44 Figure/Table-Konfliktpunkte bleiben getrennte Evid
 - `ccfsm_p12_energy_budget_audit.py` gibt gespeicherte Energie, Energierate, Reservoirleistung, M/O-Randflüsse, Dissipationsdiagnostik und ein ausdrücklich nicht geschlossenes Energieresiduum aus.
 - `test_ccfsm_p12_energy_budget_audit.py` prüft geschlossene Referenz, offene Druckgrenze, Kennzeichnung der chemischen Randarbeits-Näherung und nicht bilanzierte mechanische Traktion.
 - Wichtig: Die chemische Randarbeitsgröße ist noch kein exakter diskreter Entropiefluss. P12 behauptet deshalb keinen vollständigen offenen Energiebilanzsatz; äußere mechanische Arbeit ist nicht enthalten.
+
+
+## CCFSM P13 — Onsager-konformer Stofftransport
+
+- `ccfsm_p13_onsager_transport.py` ersetzt den diffusionsgetriebenen Anteil von P10 durch einen logarithmischen Onsager-Fluss auf Basis diskreter chemischer Potentiale; Upwind-Advektion und Darcy-Kopplung bleiben explizit getrennt.
+- `test_ccfsm_p13_onsager_transport.py` prüft nichtnegative Diffusionsdissipation, homogene Grenzfälle, Null-Diffusivität und das mechanische Dead-load-Potential.
+- `CCFSM_v2.8_P13_ONSAGER_TRANSPORT_DE.md` dokumentiert Herleitung und Grenzen. P13 beweist noch keinen vollständigen offenen Energie-/Entropiesatz; insbesondere bleibt die Entropiebilanz der Upwind-Advektion offen.
