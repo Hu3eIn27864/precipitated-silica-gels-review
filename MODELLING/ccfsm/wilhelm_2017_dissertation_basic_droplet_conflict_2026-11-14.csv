@@ -1,0 +1,4 @@
+geometry,catalyst,temperature_C,A_dissertation,tau_dissertation_h,apparent_rate_h_inv,initial_rate_h_inv,source_table,provenance
+"droplet","basic",20,0.40,0.671,1.490313,0.596125,"Wilhelm 2017 dissertation Table 5.3","natural syneresis; source-conflict branch; not merged with 2015 Table 2"
+"droplet","basic",40,0.63,0.640,1.562500,0.984375,"Wilhelm 2017 dissertation Table 5.3","natural syneresis; source-conflict branch; not merged with 2015 Table 2"
+"droplet","basic",60,0.82,1.055,0.947867,0.777251,"Wilhelm 2017 dissertation Table 5.3","natural syneresis; source-conflict branch; not merged with 2015 Table 2"
