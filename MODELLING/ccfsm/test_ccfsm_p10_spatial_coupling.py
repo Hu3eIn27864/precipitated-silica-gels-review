@@ -71,7 +71,7 @@ class TestCCFSMP10SpatialCoupling(unittest.TestCase):
         no_reaction = ChemicalParametersP2(100.,298.15,(0.,0.,0.),
             (2.,.5,1.5),(1.,1.1,.9,1.05))
         r = p10_coupled_rhs(th, inv, self.grid, self.mech, no_reaction,
-                            (1e-10,1e-10), 0.)
+                            (0.,0.), 0.)
         total_rate = sum(sum(f) for f in r["inventory_dot"])*self.grid.spacing_m
         self.assertAlmostEqual(total_rate, 0.0, delta=1e-12)
 
