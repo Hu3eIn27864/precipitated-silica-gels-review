@@ -353,3 +353,10 @@ P16 ist kein vollständiger Energiebeweis: Die P9-Spannungs-/Energiekonsistenz i
 - `ccfsm_p18_3d_biot_variational.py` implementiert die isotrope 3D-Energie, Spannung und Eigenstrain-Konjugierte.
 - `p18_plane_strain` reproduziert P17; `p18_uniaxial_stress_free_laterals` löst axiale Traktion bei spannungsfreien Seitenflächen.
 - `CCFSM_v3.3_P18_3D_BIOT_VARIATIONAL_DE.md` dokumentiert die Randbedingungsunterscheidung und Grenzen.
+
+
+## CCFSM P19 — räumlicher 3D-Biot-Eigenstrain-Assembler
+
+- ccfsm_p19_spatial_biot_bvp.py assembliert und löst die lineare quasistatische schwache 3D-Gleichgewichtsform auf bereitgestellten FE-Quadraturdaten.
+- Berücksichtigt Dirichlet-Verschiebungen, äußere Gesamttraktionen, Porendruck, isotrope Eigenstrain, gespeicherte Energie und Reaktionsresiduen.
+- CCFSM_v3.4_P19_SPATIAL_BIOT_BVP_DE.md dokumentiert starke/schwache Form, Tangente, Randarbeit und Geltungsgrenzen.
