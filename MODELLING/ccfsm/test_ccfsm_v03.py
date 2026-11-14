@@ -27,7 +27,7 @@ class TestV03(unittest.TestCase):
     def test_natural_shrinkage_monotone_and_bounded(self):
         x=simulate_natural_syneresis_v03(make(),10,.01)
         for i,s in enumerate(x):
-            self.assertGreaterEqual(s.observed_shrinkage-1e-12,0)
+            self.assertGreaterEqual(s.observed_shrinkage,-1e-12)
             self.assertLessEqual(s.observed_shrinkage,.75*s.intrinsic_shrinkage_potential+1e-9)
             if i: self.assertGreaterEqual(s.observed_shrinkage+1e-12,x[i-1].observed_shrinkage)
     def test_relaxation_changes_partition_not_total_q(self):
