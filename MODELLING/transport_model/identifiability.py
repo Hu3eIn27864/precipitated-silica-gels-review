@@ -25,9 +25,8 @@ def log_rate_sensitivity(designs, n_modes=2, step=1e-4, mode_indices=None):
     """Return log-rate Jacobian and 2-parameter rank/conditioning diagnostics.
 
     Each design maps storage, mobility, widths and positive contact_resistances.
-    Optional sigma_log_rates weights each selected modal observation. If
-    mode_indices is supplied, it is a strictly increasing sequence of
-    zero-based eigenmode indices; omitted modes are not included in the fit.
+    Optional sigma_log_rates weights rows. mode_indices selects zero-based,
+    strictly increasing eigenmode indices among the first n_modes modes.
     """
     if not designs:
         raise ValueError("at least one design is required")
@@ -47,7 +46,6 @@ def log_rate_sensitivity(designs, n_modes=2, step=1e-4, mode_indices=None):
             raise ValueError("mode_indices must be smaller than n_modes")
     rows = []
     for design in designs:
-        base = _rates(design, 1.0, 1.0, n_modes)
         plus_m = _rates(design, math.exp(step), 1.0, n_modes)
         minus_m = _rates(design, math.exp(-step), 1.0, n_modes)
         plus_r = _rates(design, 1.0, math.exp(step), n_modes)
@@ -56,21 +54,26 @@ def log_rate_sensitivity(designs, n_modes=2, step=1e-4, mode_indices=None):
         if len(sigmas) != n_modes or any(not math.isfinite(float(v)) or float(v) <= 0.0 for v in sigmas):
             raise ValueError("sigma_log_rates must contain n_modes finite positive values")
         for i in indices:
-            row = [
-                (math.log(plus_m[i]) - math.log(minus_m[i])) / (2.0 * step),
-                (math.log(plus_r[i]) - math.log(minus_r[i])) / (2.0 * step),
-            ]
             weight = float(sigmas[i])
-            rows.append([v / weight for v in row])
+            rows.append([
+                (math.log(plus_m[i]) - math.log(minus_m[i])) / (2.0 * step * weight),
+                (math.log(plus_r[i]) - math.log(minus_r[i])) / (2.0 * step * weight),
+            ])
 
     a = sum(row[0] * row[0] for row in rows)
     b = sum(row[0] * row[1] for row in rows)
     c = sum(row[1] * row[1] for row in rows)
     trace = a + c
-    disc = math.sqrt(max(0.0, (a - c) * (a - c) + 4.0 * b * b))
-    eig_max = max(0.0, 0.5 * (trace + disc))
-    eig_min = max(0.0, 0.5 * (trace - disc))
-    singular_values = [math.sqrt(eig_max), math.sqrt(eig_min)]
+    # Stable eigenvalue calculation: direct trace-discriminant subtraction
+    # loses the small eigenvalue when the two sensitivity columns are nearly
+    # collinear. For a two-column matrix, det(J'J) is the sum of squared
+    # 2x2 minors (Cauchy-Binet), which avoids that catastrophic cancellation.
+    eig_max = max(0.0, 0.5 * (trace + math.hypot(a - c, 2.0 * b)))
+    gram_determinant = sum(
+        (rows[i][0] * rows[j][1] - rows[j][0] * rows[i][1]) ** 2
+        for i in range(len(rows)) for j in range(i + 1, len(rows)))
+    eig_min = gram_determinant / eig_max if eig_max > 0.0 else 0.0
+    singular_values = [math.sqrt(eig_max), math.sqrt(max(0.0, eig_min))]
     tol = 1e-10 * max(1.0, singular_values[0])
     rank = sum(v > tol for v in singular_values)
     condition = (singular_values[0] / singular_values[1]
