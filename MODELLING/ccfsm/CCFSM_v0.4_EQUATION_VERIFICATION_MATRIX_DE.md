@@ -60,3 +60,17 @@ Erst nach Gate 5 ist eine vollständig grüne empirische Modellgleichung vertret
 | EQ-18 | \(B=f_{load}c_n\beta\) | \(f_{load},c_n,\beta\) | M-GRÜN: \(0\le B\le f_{load}c_n\) | P-GELB | E-ROT | gleichzeitige Netzwerk-Si- und Kontaktmessung |
 
 Die drei Si-Pools sind eine konservative Transferbilanz. Bei relevantem Siliciumaustrag im Syneresat muss ein gemessener Randfluss ergänzt werden. Die getrennten Monomer- und Oberflächen-pH-Faktoren vermeiden, dass die Säure-Base-Eigenschaften beider Speziesgruppen gleichgesetzt werden. Die pH-/Ionenstärke-/Arrheniusfaktoren bleiben flexible Hypothesen und keine universellen Naturgesetze.
+
+
+## Ergänzung v0.4a — Rezeptur-Speziation
+
+| ID | Beziehung | Parameter | M | P | E | Freigabebedingung |
+|---|---|---|---|---|---|---|
+| EQ-19 | \(C_{Na,T}=2C_{Si,T}/M+C_{NaOH}+C_{NaCl}\) | Silikatmodul, Stoffmengen und Endvolumen | M-GRÜN: stöchiometrische Rezepturumrechnung | P-GELB: reale Modul-/Feedstockanalyse erforderlich | E-ROT | unabhängige Na-/Si-Analyse und gemessenes Endvolumen |
+| EQ-20 | \(a_{H_3SiO_4^-}=K_1a_{H_4SiO_4}/a_H;\ a_{H_2SiO_4^{2-}}=K_{1,overall}a_{H_4SiO_4}/a_H^2\) | pKa und Aktivitätskoeffizienten | M-GRÜN: Massenwirkung | P-GELB: Monomerannahme und konstante Referenz-pKa | E-ROT | Speziationsmessung bei Prozess-I/T |
+| EQ-21 | \(a_{HSO_4^-}=K_{assoc}a_Ha_{SO_4^{2-}};\ a_{NaSO_4^-}=K_{pair}a_{Na^+}a_{SO_4^{2-}}\) | \(K_{assoc},K_{pair}\) | M-GRÜN: Massenwirkung und analytische Bilanzen | P-GELB: nur ausgewählte Ionenpaare | E-ROT | Aktivitäts-/Ionenpaarvalidierung im Na-H-Sulfat-System |
+| EQ-22 | \(\sum_i z_i c_i=0\) | pH und Spezieskonzentrationen | M-GRÜN: Elektroneutralitätsabschluss | P-GELB: unberücksichtigte Oberflächen-/Oligomerladung | E-ROT | vollständige Ionen- und Oberflächenladungsbilanz |
+| EQ-23 | \(\log_{10}\gamma_i=-Az_i^2(\sqrt I/(1+\sqrt I)-0.3I)\) | \(A,I\), Aktivitätsmodell | M-GRÜN: implementierte Davies-Form | P-GELB: nur begrenzter Verdünnungsbereich | E-ROT | Vergleich mit Pitzer/SIT oder gemessenen Aktivitäten |
+| EQ-24 | \(I_{molal}=I_{molar}/m_{solvent,L}\) | Lösungsmittelmasse je Liter Lösung | M-GRÜN: Einheitenumrechnung | P-GELB: Dichte/Komposition erforderlich | E-ROT | gemessene Batchmasse, Dichte und Lösungsmittelanteil |
+
+Die Massenwirkungskonstanten sind 25-°C-Referenzwerte aus PHREEQC. Temperaturkorrekturen müssen über temperaturabhängige Konstanten oder Aktivitätsdaten erfolgen; die Temperaturangabe allein ändert die Konstanten im aktuellen Solver noch nicht. Das Davies-Modell wird für endgültige Lösungen oberhalb 0,5 mol/L Ionenstärke abgelehnt. Das Modell berechnet noch keine amorphe Silica-Löslichkeit und keine oligomere oder geladene Oberflächenspeziation.
