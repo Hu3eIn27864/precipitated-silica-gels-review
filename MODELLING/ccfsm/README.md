@@ -346,3 +346,10 @@ P16 ist kein vollständiger Energiebeweis: Die P9-Spannungs-/Energiekonsistenz i
 - `CCFSM_v3.2_P17_VARIATIONAL_MECHANICS_DE.md` — Ableitung der axialen Spannung und geschlossenen Biot-/Eigenstrain-Lösung aus derselben 3D-isotropen Energie bei verschwindender lateraler Gesamtdehnung.
 - Aktualisiert `ccfsm_p9_mechanical_feedback.py` und die P9/P16-Tests: Die fehlende laterale Eigenstrain-Komponente ist korrigiert; P16 prüft nun die korrigierte mechanische Stationarität.
 - Der Schritt schließt keine räumliche Mechanik, äußere mechanische Randarbeit oder globale PDE-Energiebilanz.
+
+
+## CCFSM P18 — 3D-Biot-/Eigenstrain-Kern
+
+- `ccfsm_p18_3d_biot_variational.py` implementiert die isotrope 3D-Energie, Spannung und Eigenstrain-Konjugierte.
+- `p18_plane_strain` reproduziert P17; `p18_uniaxial_stress_free_laterals` löst axiale Traktion bei spannungsfreien Seitenflächen.
+- `CCFSM_v3.3_P18_3D_BIOT_VARIATIONAL_DE.md` dokumentiert die Randbedingungsunterscheidung und Grenzen.
