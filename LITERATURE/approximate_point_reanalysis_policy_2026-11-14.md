@@ -33,3 +33,10 @@ Es werden keine numerischen Gewichte vergeben, weil aus den vorliegenden Informa
 ## Empfohlene Fit-Strategie
 
 Zunächst Kurvenformen des primären Zweigs deskriptiv vergleichen und Residuen gegen die publizierte Exponentialfunktion darstellen. Danach Sensitivitätsvergleich (a) mit/ohne Figure 8a 40/60 °C und (b) separat für Figure 10b gegenüber Table 2. Keine gemeinsame Anpassung aller Reihen mit einem einzigen Transportparameter, bevor Geometrie, Randbedingungen und thermische Vorgeschichte explizit modelliert sind.
+
+
+## Addendum 2026-11-14: independent source triangulation for Figure 10b
+
+A later primary source by the same first author was inspected: Wilhelm (2017), KIT dissertation, DOI 10.5445/KSP/1000073100, Chapter 5.1, Table 5.3. It reports basic-catalyzed natural syneresis of droplets with A=0.40/0.63/0.82 and tau=0.671/0.640/1.055 h at 20/40/60 °C. This differs from Wilhelm & Kind (2015), Table 2, which reports A=0.30/0.39/0.51 and tau=0.67/0.57/0.95 h. The free fits to the approximate Figure 10b chart points (A=0.419/0.643/0.825) are much closer to the dissertation amplitudes.
+
+This is strong same-lineage source triangulation, not independent replication. It makes a simple chart-digitization error less likely as the sole explanation, but does not establish whether the discrepancy arose from a correction, table transcription, or changed analysis/data selection. Keep the 2015 journal Table 2 and 2017 dissertation Table 5.3 as separate source-specific records; do not silently replace one with the other. Full assessment: `source_assessment_PSG-049_wilhelm_dissertation_2017.md`.
