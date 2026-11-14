@@ -177,3 +177,14 @@ Die 22 Sensitivitäts- und 44 Figure/Table-Konfliktpunkte bleiben getrennte Evid
 - \`ccfsm_p1_bridge.py\` implementiert die exakte lokale Relaxationslösung und eine skalare Referenzinterpolation; \`test_ccfsm_p1_bridge.py\` prüft Invarianz, Semigruppeneigenschaft, Relaxationsrichtung, positive Mobilität und Eingabevalidierung.
 - **Konstitutive Statusgrenze:** Die affine Mobilitätsinterpolation ist eine mathematische Platzhalterschließung, kein experimentell belegtes Gesetz \(K(B)\). \(k_b\), \(b_{\rm eq}\), \(B_\infty\), die Brückenenergie und die Mobilitäts-Endwerte sind nicht für gefällte Silica identifiziert. Druck-/pH-Feedback, chemische Reaktionen, Moduländerung, Eigenkontraktion und drainierende freie Oberfläche sind noch nicht enthalten.
 - P1 ist ein schwacher Existenz-/Eindeutigkeitsbeweis für diese reduzierte Schließung, nicht für das vollständige nichtlineare CCFSM P1–P5 und kein klassischer 3D-Regularitätsbeweis.
+
+
+## CCFSM v1.4 — P2 chemische Affinität und reversible Si-Umwandlung (14.11.2026)
+
+- `CCFSM_v1.4_P2_CHEMICAL_AFFINITY_DE.md` definiert die konservative Reaktionskette Monomer ⇌ Oligomer ⇌ Netzwerk-Si ⇌ lasttragendes Brücken-Si.
+- Die Reaktionsraten werden aus Aktivitäten und Gleichgewichtskonstanten aufgebaut; chemische Affinitäten folgen aus den chemischen Potentialen. Die Standardpotentiale sind konsistent zu den angegebenen Gleichgewichtskonstanten definiert.
+- Für den lokalen geschlossenen Reaktionsblock gelten exakte Si-Erhaltung, Quasi-Positivität, Beschränktheit auf dem Si-Simplex und nichtnegative chemische Dissipation. Der endliche-dimensionale ODE-Block besitzt deshalb globale Lösungen für nichtnegative Anfangsdaten.
+- `ccfsm_p2_chemical_affinity.py` implementiert Zustände, Aktivitätskorrekturen, reversible Raten, Affinitäten, freie Energie und die konservative rechte Seite.
+- `test_ccfsm_p2_chemical_affinity.py` prüft Stoffbilanz, Affinitäts-/Ratenvorzeichen, Dissipation, Gleichgewicht, Brückenfraktion, Randzustände und Eingabevalidierung.
+- Die Parameter (k_j), (K_j), Aktivitätskoeffizienten und Referenzkonzentration bleiben explizite Eingaben; es werden keine nicht belegten pH-/Temperaturgesetze oder Messwerte erfunden.
+- **Statusgrenze:** P2 ist ein lokaler, gut durchmischter Reaktionsblock. Räumliche Speziesdiffusion, Wasser-/Ladungsbilanz, vollständige Silica-Oligomer-/Oberflächenspezierung, freie Oberfläche und die volle 3D-PDE-Kopplung bleiben P3-Aufgaben. Die thermodynamische Dissipation ist eine Eigenschaft der gewählten Modellschließung, keine empirische Validierung.
