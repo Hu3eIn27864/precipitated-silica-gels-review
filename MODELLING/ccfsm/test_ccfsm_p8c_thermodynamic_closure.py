@@ -16,14 +16,14 @@ class TestCCFSMP8cThermodynamicClosure(unittest.TestCase):
             (2e-9,)*3,(1e-12,)*3,(0.3,)*3,1e5)
 
     def data(self,theta=0.3,mm=30.,mo=20.):
-        return p8c_cell_thermodynamics(theta,1.02e5,(mm,mo),(35.,15.),
+        return p8c_cell_thermodynamics(theta,1e5+(theta-0.3)/2e-9,(mm,mo),(35.,15.),
             self.chem,0.3,1e5,2e-9)
 
     def test_osmotic_pressure_and_fluid_conjugate(self):
         r=self.data()
         expected=R_GAS*298.15*50./0.3
         self.assertAlmostEqual(r["osmotic_pressure_pa"],expected)
-        self.assertAlmostEqual(r["fluid_energy_conjugate_pa"],1.02e5-expected)
+        self.assertAlmostEqual(r["fluid_energy_conjugate_pa"],1e5-expected)
 
     def test_theta_derivative_is_pressure_minus_osmotic(self):
         theta=.3; h=1e-6
@@ -36,7 +36,7 @@ class TestCCFSMP8cThermodynamicClosure(unittest.TestCase):
     def test_mobile_inventory_derivative_is_chemical_potential(self):
         h=1e-4
         base=self.data()["free_energy_j_m3_reference"]
-        plus=p8c_cell_thermodynamics(.3,1.02e5,(30.+h,20.),(35.,15.),
+        plus=p8c_cell_thermodynamics(.3,1e5,(30.+h,20.),(35.,15.),
              self.chem,.3,1e5,2e-9)["free_energy_j_m3_reference"]
         numeric=(plus-base)/h
         self.assertAlmostEqual(numeric,
