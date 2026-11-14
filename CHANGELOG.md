@@ -930,3 +930,6 @@
 - Akzeptierte Schritte halten (0<\theta\leq1), positive M/O/N/B-Inventare und die diskrete Energienichtzunahme bis zur dokumentierten numerischen Toleranz ein.
 - Die Energiekontrolle weist nichtverschwindende hydraulische oder mobile Silicium-Randflüsse zurück; Reservoir-Energie- und Arbeitsbeiträge sind noch nicht implementiert.
 - Der Geltungsbereich ist ein diskreter Algorithmus mit geschlossenen Rändern, kein unbedingter Stabilitätssatz, kein PDE-Existenzbeweis und keine empirische Validierung.
+
+
+- Präzisierung P11: Nichtverschwindende angelegte axiale Traktion wird zurückgewiesen, da äußere mechanische Arbeit noch nicht Teil der diskreten Energiebilanz ist.
