@@ -114,7 +114,7 @@ F_{pH}=w_Hleft(rac{a_H}{a_{H,ref}}ight)^{m_H}
 
 Das ist eine **additive Kanalhypothese** für saure, gemischte Silanol/Silanolat- und alkalische Beiträge. Sie ist nicht als vollständig hergeleiteter Elementarmechanismus zu verstehen. Insbesondere besitzen oligomere und Partikeloberflächen andere Säure-Base-Eigenschaften als das Monomer. Für industrielle Natriumsilikat/Schwefelsäure-Systeme müssen daher mindestens getrennte Parameter-/Protokollfamilien für saure und alkalische Rezepturen geschätzt werden.
 
-(pK_w) und (pK_a) sind temperatur- und elektrolytabhängig. Im Code wird (pK_w) als Umweltgröße und (pK_a) als vorläufiger Modellparameter geführt; die Standardwerte dienen nur für Tests und sind keine universellen Werte für konzentrierte Prozessbrühen.
+(pK_w) und (pK_a) sind temperatur- und elektrolytabhängig. Im Code wird (pK_w) als Umweltgröße und (pK_a) als zustandsabhängige Umweltgröße geführt; die Standardwerte dienen nur für Tests und sind keine universellen Werte für konzentrierte Prozessbrühen.
 
 ## 4. Ionenstärke und Temperatur
 
