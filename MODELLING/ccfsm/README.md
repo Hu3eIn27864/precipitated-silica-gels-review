@@ -166,3 +166,14 @@ Die 22 Sensitivitäts- und 44 Figure/Table-Konfliktpunkte bleiben getrennte Evid
 - Der Beweis nutzt die parabolische Evolutionsstruktur (Galerkin/Lions), liefert die Energieidentität und stellt die technische Einschränkung bei gleichmäßigen Zeitderivierten-Schranken beliebiger Galerkin-Projektionen ausdrücklich klar.
 - `test_ccfsm_v12_p0_galerkin_proof.py` prüft die strukturelle Vollständigkeit und die dokumentierten Geltungsgrenzen. Ein solcher Texttest ist kein mathematischer Beweis.
 - **Statusgrenze:** schwacher P0-Satz für das lineare Referenzsystem; keine klassische Regularität und kein Existenz-/Regularitätsbeweis für das nichtlineare CCFSM P1–P5.
+
+
+## CCFSM v1.3 — P1 beschränkte Netzwerkbrückenvariable (14.11.2026)
+
+- \`CCFSM_v1.3_P1_BOUNDED_BRIDGE_COUPLING_DE.md\` ergänzt P0 um die normierte Brückenfraktion \(b=B/B_\infty\), eine explizit lösbare Relaxationskinetik und eine zeitabhängige Darcy-Mobilität.
+- Der Invarianzbeweis zeigt \(0\le b\le1\) für alle Zeiten, sofern Anfangs- und Gleichgewichtswert im zulässigen Intervall liegen.
+- Unter gleichmäßiger Elliptizität der beiden Mobilitäts-Endtensoren bleibt die interpolierte Darcy-Form messbar, beschränkt und koerziv. Der nichtautonome parabolische Evolutionssatz liefert schwache Existenz; die Energieabschätzung liefert Eindeutigkeit.
+- Die Gesamtenergie ergänzt P0 um eine konvexe Brückenrelaxationsenergie. Darcy-Fluss und Brückenrelaxation sind nichtnegative Dissipationskanäle.
+- \`ccfsm_p1_bridge.py\` implementiert die exakte lokale Relaxationslösung und eine skalare Referenzinterpolation; \`test_ccfsm_p1_bridge.py\` prüft Invarianz, Semigruppeneigenschaft, Relaxationsrichtung, positive Mobilität und Eingabevalidierung.
+- **Konstitutive Statusgrenze:** Die affine Mobilitätsinterpolation ist eine mathematische Platzhalterschließung, kein experimentell belegtes Gesetz \(K(B)\). \(k_b\), \(b_{\rm eq}\), \(B_\infty\), die Brückenenergie und die Mobilitäts-Endwerte sind nicht für gefällte Silica identifiziert. Druck-/pH-Feedback, chemische Reaktionen, Moduländerung, Eigenkontraktion und drainierende freie Oberfläche sind noch nicht enthalten.
+- P1 ist ein schwacher Existenz-/Eindeutigkeitsbeweis für diese reduzierte Schließung, nicht für das vollständige nichtlineare CCFSM P1–P5 und kein klassischer 3D-Regularitätsbeweis.
