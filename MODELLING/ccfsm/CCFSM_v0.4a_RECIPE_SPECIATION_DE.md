@@ -60,7 +60,7 @@ Die Davies-Näherung:
 \log_{10}\gamma_i=-Az_i^2\left(\frac{\sqrt I}{1+\sqrt I}-0.3I\right).
 \]
 
-Der Solver verweigert standardmäßig Davies-Rechnungen oberhalb I = 0.5 mol/L. Diese Grenze ist eine praktische Obergrenze, keine Genauigkeitsgarantie. Bei konzentrierten Prozessbrühen ist ein Pitzer- oder geeignetes SIT-Modell mit Parametern für das tatsächliche Na-H-SO4-Silikat-System erforderlich. Das ideale Aktivitätsmodell ist nur ein expliziter Vergleichs-/Grenzfall.
+Bei der pH-Intervallsuche werden Aktivitätskoeffizienten extremer Probewerte nur bis zur Davies-Grenze ausgewertet, damit die Nullstelle eingegrenzt werden kann. Die endgültige selbstkonsistente Lösung wird verworfen, sobald I > 0.5 mol/L ist. Der Solver verweigert damit jede ausgegebene Davies-Lösung außerhalb dieses Bereichs. Diese Grenze ist eine praktische Obergrenze, keine Genauigkeitsgarantie. Bei konzentrierten Prozessbrühen ist ein Pitzer- oder geeignetes SIT-Modell mit Parametern für das tatsächliche Na-H-SO4-Silikat-System erforderlich. Das ideale Aktivitätsmodell ist nur ein expliziter Vergleichs-/Grenzfall.
 
 ## 4. Numerische Lösung
 
