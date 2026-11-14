@@ -47,6 +47,8 @@ The model holds q_infinity and natural-interface accessibility fixed within one 
 
 
 ## CCFSM v0.3 — bridge / morphology / eigenstress / natural drainage
+- CCFSM_v0.3_IDENTIFIABILITY_DE.md — structural and practical identifiability analysis; exact unobservable parameter blocks, bridge-scale symmetry, and measurement requirements.
+- test_ccfsm_identifiability.py — regression tests demonstrating exact output invariance under bridge-scale, stress-relaxation-rate and morphology-parameter changes.
 - CCFSM_v0.3_MATHEMATICAL_DERIVATION_DE.md — German step-by-step derivation, exact state solutions, contraction-inventory balance, dimensional check and conditional proofs of positivity, boundedness and monotonicity.
 
 - CCFSM_v0.3_BRIDGE_MORPHOLOGY_STRESS.md — governing equations, parameter meanings, identifiability limits and synchronized natural-syneresis experiment design.
