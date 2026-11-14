@@ -136,3 +136,12 @@ checkout.
 - The new representation handles a contact interface exactly at an original cell centre as well as off-grid interfaces. The full augmented state is exposed through node coordinates, side labels and node profiles; the legacy cell-centre profile is projected for compatibility.
 - Added a test at x=0.3625 with N=40, verifying the two one-sided traces, finite pressure jump and exact contact conductance. Existing three-layer full-profile eigenmode and conservation checks remain active.
 - Hosted workflow #399 passed all 92 transport tests and the complete integrated pipeline: https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43512476946. No physical contact resistance has been assigned to silica gel.
+
+
+## AP D — bulk mobility / contact-resistance identifiability (14 November 2026)
+
+- Added `MODELLING/transport_model/identifiability_bulk_mobility_contact_resistance_2026-11-14.md` with the governing parameter distinction, dimensional analysis, local sensitivity-matrix design, experiment-design priorities and scientific stop rules.
+- Key structural point: one scalar relaxation rate cannot generally identify both a bulk mobility scale and an interface contact resistance. Additional independent information is needed; the proposed hierarchy is matched-state storage/compressibility, multiple relaxation modes, thickness variation, controlled interface-position variation and (where feasible) independent boundary-flux measurements.
+- If storage compliance is not independently constrained, pressure relaxation primarily identifies diffusivity-like combinations `lambda/S`, not `lambda` alone. Multiple layer mobilities and multiple interface resistances require a correspondingly richer set of independent observations.
+- **Numerical sensitivity calculations, singular values, inverse recovery and synthetic-noise tests have not yet been run.** The data-analysis capability was unavailable during this session. The note is a mathematical/design framework only, not a computed identifiability result and not a silica-specific parameter estimate.
+- Next gate: implement and test the log-sensitivity utility against `multilayer_eigenvalues`; demonstrate rank deficiency for an underdetermined observation set and assess rank/conditioning for stacked modes and geometries. Do not fit experimental parameters until matched-state storage and transport observations are available.
