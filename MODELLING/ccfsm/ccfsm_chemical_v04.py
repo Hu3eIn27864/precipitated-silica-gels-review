@@ -64,6 +64,7 @@ class ChemicalEnvironment:
     ionic_strength_mol_kg: float
     silica_solubility_mol_m3: float
     pKw: float = 14.0
+    pKa_monomer: float = 9.5
 
     def __post_init__(self):
         _finite(self.pH, "pH")
@@ -77,7 +78,6 @@ class ChemicalEnvironment:
 class ChemicalParameters:
     """Kinetic and closure parameters; no defaults imply fitted silica values."""
     reference_silica_concentration_mol_m3: float
-    pKa_monomer: float
     oligomerization_rate_ref_s: float
     network_growth_rate_ref_s: float
     dissolution_rate_ref_s: float
@@ -168,7 +168,7 @@ def acid_base_activity_factors(env, p):
     """
     a_h = 10.0 ** max(-300.0, min(300.0, -env.pH))
     a_oh = 10.0 ** max(-300.0, min(300.0, env.pH - env.pKw))
-    alpha = 1.0 / (1.0 + 10.0 ** max(-300.0, min(300.0, p.pKa_monomer-env.pH)))
+    alpha = 1.0 / (1.0 + 10.0 ** max(-300.0, min(300.0, env.pKa_monomer-env.pH)))
     f_acid = _pow_ratio(a_h, p.acid_activity_reference,
                         p.acid_catalysis_order)
     f_pair = 4.0 * alpha * (1.0 - alpha)
