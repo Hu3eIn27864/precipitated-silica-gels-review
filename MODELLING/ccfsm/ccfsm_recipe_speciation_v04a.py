@@ -48,6 +48,7 @@ class SodiumSilicateRecipe:
     pKw: float = 14.0
     pKa_silicic_1: float = 9.83
     pKa_silicic_overall_2: float = 23.0
+    pKa_surface: float = 6.8
     logK_hso4_association: float = LOG_K_HSO4_ASSOC
     logK_naso4_pair: float = LOG_K_NASO4_PAIR
     activity_model: str = "davies"
@@ -65,6 +66,7 @@ class SodiumSilicateRecipe:
         _positive(self.pKw, "pKw")
         _finite(self.pKa_silicic_1, "pKa_silicic_1")
         _finite(self.pKa_silicic_overall_2, "pKa_silicic_overall_2")
+        _finite(self.pKa_surface, "pKa_surface")
         _finite(self.logK_hso4_association, "logK_hso4_association")
         _finite(self.logK_naso4_pair, "logK_naso4_pair")
         if self.activity_model not in ("ideal", "davies"):
@@ -119,6 +121,10 @@ class SodiumSilicateRecipe:
 @dataclass(frozen=True)
 class SpeciationResult:
     pH: float
+    temperature_k: float
+    pKw: float
+    pKa_monomer: float
+    pKa_surface: float
     ionic_strength_mol_l: float
     activity_model: str
     gamma_monovalent: float
@@ -258,6 +264,32 @@ def solve_sodium_silicate_sulfuric_acid(recipe, pH_min=-2.0, pH_max=16.0):
     s_res=d["so4"]+d["hso4"]+d["pair"]-recipe.total_sulfate_mol_l
     na_res=d["na"]+d["pair"]-recipe.total_sodium_mol_l
     return SpeciationResult(
-        pH,ionic,recipe.activity_model,d["g1"],d["g2"],d["na"],d["pair"],
+        pH,recipe.temperature_k,recipe.pKw,recipe.pKa_silicic_1,
+        recipe.pKa_surface,ionic,recipe.activity_model,d["g1"],d["g2"],d["na"],d["pair"],
         d["so4"],d["hso4"],d["cl"],d["h4"],d["h3"],d["h2"],d["h"],d["oh"],
         d["charge"],si_res,s_res,na_res)
+
+
+def to_ccfsm_chemical_environment(speciation, *, solvent_mass_kg_per_l,
+                                  silica_solubility_mol_m3):
+    """Adapt recipe speciation to CCFSM v0.4 kinetics.
+
+    solvent_mass_kg_per_l is kg solvent per litre of final solution and must
+    be measured or calculated from batch mass/density/composition. It is not
+    silently replaced by solution density.
+    """
+    if not isinstance(speciation, SpeciationResult):
+        raise TypeError("speciation must be SpeciationResult")
+    solvent_mass = _positive(solvent_mass_kg_per_l, "solvent_mass_kg_per_l")
+    solubility = _positive(silica_solubility_mol_m3, "silica_solubility_mol_m3")
+    from ccfsm_chemical_v04 import ChemicalEnvironment
+    ionic_molality = speciation.ionic_strength_mol_l / solvent_mass
+    return ChemicalEnvironment(
+        pH=speciation.pH,
+        temperature_k=speciation.temperature_k,
+        ionic_strength_mol_kg=ionic_molality,
+        silica_solubility_mol_m3=solubility,
+        pKw=speciation.pKw,
+        pKa_monomer=speciation.pKa_monomer,
+        pKa_oligomer_surface=speciation.pKa_surface,
+    )
