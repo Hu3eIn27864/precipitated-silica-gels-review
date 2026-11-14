@@ -8,7 +8,7 @@ class TestP19(unittest.TestCase):
   q=[{"B":B,"weight":1.,"eigenstrain":0.,"fluid_content_increment":0.}]
   face={"N":[[0.,1.],[0.,0.],[0.,0.]],"traction":[1000.,0.,0.],"weight":1.}
   r=p19_solve_spatial_biot_bvp(2,q,self.p,{0:0.},[face])
-  self.assertAlmostEqual(r["displacement_dofs"][1],1000./4e6,delta=1e-12)
+  self.assertAlmostEqual(r["displacement_dofs"][1],1000./(4e6+0.8**2*1e7),delta=1e-12)
   self.assertTrue(r["free_dof_equilibrium_verified"])
  def test_eigenstrain_and_fluid_drive_solution(self):
   B=[[-1.,1.],[0,0],[0,0],[0,0],[0,0],[0,0]]
