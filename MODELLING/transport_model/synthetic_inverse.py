@@ -78,6 +78,12 @@ def recover_common_scales(records, n_modes=2, initial=(0.0, 0.0),
     def objective(residual):
         return sum(v*v for v in residual)
 
+    def result(params, residual, iteration):
+        return {"mobility_scale": math.exp(params[0]),
+                "contact_resistance_scale": math.exp(params[1]),
+                "weighted_residual_norm": math.sqrt(objective(residual)),
+                "iterations": iteration, "converged": True}
+
     for iteration in range(max_iterations + 1):
         residual = evaluate(x)
         J = jacobian(x)
@@ -95,10 +101,7 @@ def recover_common_scales(records, n_modes=2, initial=(0.0, 0.0),
         d0 = (-c*g0+b*g1)/det
         d1 = (b*g0-a*g1)/det
         if max(abs(d0), abs(d1)) < tolerance:
-            return {"mobility_scale": math.exp(x[0]),
-                    "contact_resistance_scale": math.exp(x[1]),
-                    "weighted_residual_norm": math.sqrt(objective(residual)),
-                    "iterations": iteration, "converged": True}
+            return result(x, residual, iteration)
         old = objective(residual)
         accepted = False
         alpha = 1.0
@@ -111,17 +114,20 @@ def recover_common_scales(records, n_modes=2, initial=(0.0, 0.0),
                 break
             alpha *= 0.5
         if not accepted:
-            if old < tolerance*tolerance:
-                return {"mobility_scale": math.exp(x[0]),
-                        "contact_resistance_scale": math.exp(x[1]),
-                        "weighted_residual_norm": math.sqrt(old),
-                        "iterations": iteration, "converged": True}
+            # At a noisy or misspecified least-squares minimum the residual
+            # need not vanish. A finite-difference Gauss-Newton step can then
+            # be below objective resolution, so strict decrease is not a
+            # valid convergence test. Accept only a demonstrably tiny step or
+            # a sufficiently small gradient; otherwise preserve the failure.
+            step_norm = max(abs(d0), abs(d1))
+            gradient_norm = max(abs(g0), abs(g1))
+            parameter_scale = 1.0 + max(abs(x[0]), abs(x[1]))
+            if (step_norm <= 1e-7*parameter_scale or
+                    gradient_norm <= 1e-8*(1.0 + math.sqrt(old))):
+                return result(x, residual, iteration)
             raise ArithmeticError("Gauss-Newton line search did not reduce residual")
     residual = evaluate(x)
     norm = math.sqrt(objective(residual))
     if norm < tolerance:
-        return {"mobility_scale": math.exp(x[0]),
-                "contact_resistance_scale": math.exp(x[1]),
-                "weighted_residual_norm": norm,
-                "iterations": max_iterations, "converged": True}
+        return result(x, residual, max_iterations)
     raise ArithmeticError("parameter recovery did not converge")
