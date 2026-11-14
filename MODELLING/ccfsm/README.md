@@ -199,3 +199,12 @@ Die 22 Sensitivitäts- und 44 Figure/Table-Konfliktpunkte bleiben getrennte Evid
 - Die Brückenregularisierung \(b_\delta=c_B/(c_N+c_B+\delta_B)\) verhindert eine undefinierte Fraktion bei leerem Netzwerk; \(\delta_B\) bleibt unkalibriert.
 - Die Energieungleichung setzt konstante Temperatur, Aktivitätskoeffizienten, Porosität und Diffusionskoeffizienten voraus. Variable Porosität, Advektion, Wärme, Ladungsbilanz und Druck-zu-Chemie-Rückkopplung bleiben P4.
 - Alle Transport- und Reaktionsparameter bleiben unkalibriert. Die Referenzimplementierung ist ein semidiskreter Operator, kein validierter industrieller 3D-Solver. Ein expliziter Zeitschritt ist nicht automatisch positivitätserhaltend.
+
+
+## CCFSM v1.6 — P4 variable Porosität und konservativer Advektions-Diffusions-Transport
+
+- CCFSM_v1.6_P4_VARIABLE_POROSITY_ADVECTION_DE.md formuliert P4 in der Referenzkonfiguration des Feststoffgerüsts. Die Fluidkapazität ist \(\theta=J\phi\); für inkompressible Silica-Körner gilt bedingt \((1-\phi)J=1-\phi_0\).
+- Die Fluidbilanz \(\partial_t\theta+\operatorname{Div}Q=0\) wird mit den konservativen Speziesbilanzen \(\partial_t(\theta c_i)+\operatorname{Div}(c_iQ+\mathcal J_i)=\theta R_i\) gekoppelt. Der Darcy-Fluss ist relativ zum Gerüst; die P2-Reaktion bleibt Si-konservativ.
+- ccfsm_p4_variable_porosity.py implementiert einen semidiskreten Finite-Volumen-Operator mit Upwind-Advektion, symmetrischer Zwei-Punkt-Diffusion, variabler Fluidkapazität und gemeinsamer diskreter Fluidbilanz.
+- test_ccfsm_p4_variable_porosity.py prüft Fluidbilanz, globale Si-Inventarerhaltung, Spezieserhaltung ohne Reaktion, Mitführung homogener Konzentrationen, Diffusionsgrenzfall und Eingabevalidierung.
+- **Statusgrenze:** P4 ist noch kein bidirektional gekoppelter Mechanik-Darcy-Chemie-Solver. Deformation, Porosität und Flüsse müssen miteinander kompatibel sein. Es gibt noch keinen gemeinsamen Energiebeweis, keine Gitter-/Zeitschritt-Konvergenzstudie und keine empirische Kalibrierung. Natürliche Synärese bleibt der Geltungsbereich; Druckzell-/Oedometerdaten werden nicht zur natürlichen Kalibrierung verwendet.
