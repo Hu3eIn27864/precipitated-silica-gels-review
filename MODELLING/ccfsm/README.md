@@ -47,6 +47,7 @@ The model holds q_infinity and natural-interface accessibility fixed within one 
 
 
 ## CCFSM v0.3 — bridge / morphology / eigenstress / natural drainage
+- CCFSM_v0.3_MATHEMATICAL_DERIVATION_DE.md — German step-by-step derivation, exact state solutions, contraction-inventory balance, dimensional check and conditional proofs of positivity, boundedness and monotonicity.
 
 - CCFSM_v0.3_BRIDGE_MORPHOLOGY_STRESS.md — governing equations, parameter meanings, identifiability limits and synchronized natural-syneresis experiment design.
 - ccfsm_v03.py — state model for load-bearing bridge inventory, fractal dimension, contact number, residual eigenstress, stress-relaxed contraction and observed natural shrinkage.
