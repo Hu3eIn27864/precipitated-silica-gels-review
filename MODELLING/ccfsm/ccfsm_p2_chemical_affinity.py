@@ -80,7 +80,7 @@ class ChemicalParametersP2:
 class ChemicalRatesP2:
     reaction_rates: tuple[float, float, float]
     affinities_j_mol: tuple[float, float, float]
-    entropy_production_w_m3: float
+    chemical_dissipation_w_m3: float
     free_energy_rate_w_m3: float
 
 
