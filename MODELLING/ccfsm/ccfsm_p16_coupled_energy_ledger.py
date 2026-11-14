@@ -98,10 +98,9 @@ def p16_coupled_energy_ledger(
         + hydraulic_reservoir_power - darcy_dissipation)
     open_balance_residual = chain_rate-predicted_open_balance
 
-    # Variational check of the P9 elastic + Biot storage energy against its
-    # stated axial stress law, for fixed theta and inventories. The derivative
-    # of the stored density with respect to eps_xx is
-    # lambda*(eps-3 eps_ch)+2G*(eps-eps_ch)-alpha*p.
+    # Variational check of P9 elastic + Biot storage energy against its
+    # axial stress law, for fixed theta and inventories. P17 makes the
+    # constitutive stress exactly this energy derivative.
     mechanical_residuals = []
     for cell in mech["cells"]:
         eps = cell["axial_strain"]
