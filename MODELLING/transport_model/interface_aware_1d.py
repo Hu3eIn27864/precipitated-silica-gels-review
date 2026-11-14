@@ -7,8 +7,10 @@ hydraulic resistance is integrated exactly in series. Backward Euler solves
 S(x) p_t = (lambda(x) p_x)_x on a double-drained slab.
 
 Cell pressures are representative centre values. With finite contact
-resistance, two massless pressure traces are inserted at each interface and
-the adjacent control volumes are split at the interface.
+resistance, two one-sided interface pressure unknowns are inserted at each
+interface. Their dual control volumes are split at the interface and carry
+the corresponding one-sided storage; these are finite-volume pressure
+unknowns, not zero-capacity Lagrange-multiplier traces.
 """
 from __future__ import annotations
 import math
