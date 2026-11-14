@@ -242,3 +242,11 @@ Die 22 Sensitivitäts- und 44 Figure/Table-Konfliktpunkte bleiben getrennte Evid
 - `ccfsm_p7_chemo_transport.py` implementiert einen konservativen 1D-Finite-Volumen-Referenzoperator mit Upwind-Advektion, zentraler Diffusion, lokalen detailliert balancierten Reaktionen und Nullflussrändern.
 - `test_ccfsm_p7_chemo_transport.py` prüft Gesamt-Si-Erhaltung, interne Flusskonservierung, Uniformzustände und Eingabevalidierung.
 - Die Existenztheorie gilt bei konstanter positiver Fluidkapazität, abgeschalteter mechanischer Rückkopplung und vorgegebenem divergenzfreiem Darcy-Fluss. Das vollständige nichtlineare rückgekoppelte P5-System bleibt offen; keine Parameterkalibrierung oder physikalische Validierung wird behauptet.
+
+
+## CCFSM v2.0 — P8 variable-capacity chemo-hydraulic coupling
+
+- `CCFSM_v2.0_P8_VARIABLE_CAPACITY_DE.md` defines the conservative variable-fluid-capacity balance coupled to mobile M/O transport and immobilized N/B reaction pools.
+- `ccfsm_p8_variable_capacity.py` implements the semidiscrete 1D finite-volume operator. The same prescribed Darcy face flux updates fluid capacity and mobile species inventories; mobile concentrations are evaluated as m/theta.
+- `test_ccfsm_p8_variable_capacity.py` checks fluid-capacity and total-Si conservation, species conservation without reaction, uniform-concentration transport consistency, zero-flow limits and input validation.
+- Scope is deliberately restricted: Darcy flux is prescribed, boundaries are closed, and there is no pressure/mechanics solver, open free-drainage boundary, global nonlinear existence theorem, total-energy proof or empirical calibration. The P8 document records these limitations and separates the next proof gates.
