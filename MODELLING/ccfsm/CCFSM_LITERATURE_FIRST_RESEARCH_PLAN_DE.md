@@ -46,7 +46,7 @@ Volltext: https://www.mdpi.com/2073-4360/7/12/2504
 
 ### 3.2 Dissertation und KIT-Repositorium
 
-**Wilhelm, S. (2017).** *Über die Synärese kolloidaler Strukturen am Beispiel von Siliciumdioxid*. KIT Scientific Publishing. DOI: [10.5445/KSP/1000073100](https://doi.org/10.5445/KSP/1000073100).  
+**Wilhelm, S. (2017).** *Über die Synärese kolloidaler Strukturen am Beispiel von Siliciumdioxid*. KIT Scientific Publishing. DOI: [10.5445/KSP/1000073100](https://publikationen.bibliothek.kit.edu/1000017100/1376042).  
 Institutioneller Volltext/Datensatz: https://publikationen.bibliothek.kit.edu/1000052536/3796774
 
 - Dient zum Gegenprüfen der 2015er Artikelwerte, Methoden und Figuren.
@@ -110,7 +110,7 @@ Volltext-PDF: https://belinra.inrae.fr/doc_num.php?explnum_id=3120
 - Im derzeit erschlossenen Quellenstand kein gleichwertiger Satz vollständiger natürlicher S(t)-Kurven identifiziert.
 - Als Rezeptur-/Gelbildungs-/Strukturkontext verwenden; konkrete Tabellen/Figuren separat prüfen, bevor Zahlen in Register übernommen werden.
 
-**Quarch, K. (2010).** *Produktgestaltung an kolloidalen Agglomeraten und Gelen – Gelierung und Fragmentierung anorganisch gefällten Siliciumdioxids*. KIT Scientific Publishing.
+**Quarch, K. (2010).** *Produktgestaltung an kolloidalen Agglomeraten und Gelen – Gelierung und Fragmentierung anorganisch gefällten Siliciumdioxids*. KIT Scientific Publishing. ISBN 978-3-86644-503-1.
 
 - Dissertation; ergänzende Prozess-, Gelierungs- und Strukturinformationen.
 - Qualitative Synäresehinweise nicht als quantitative Zeitkurven behandeln, sofern keine expliziten Messwerte gefunden werden.
