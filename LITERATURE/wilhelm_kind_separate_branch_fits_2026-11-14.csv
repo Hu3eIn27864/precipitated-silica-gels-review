@@ -1,0 +1,6 @@
+figure,panel,condition,temperature_C,reanalysis_use,n_points,published_A,published_tau_h,fitted_A,fitted_tau_h,R2,RMSE,A_fit_over_published,tau_fit_over_published
+Figure 8,a,"acidic, pH < pHiso",40.0000000,sensitivity_only,11.0000000,0.2000000,11.7000000,0.2001445,8.9321388,0.9993773,0.0014214,1.0007224,0.7634307
+Figure 8,a,"acidic, pH < pHiso",60.0000000,sensitivity_only,11.0000000,0.2000000,5.0000000,0.2025491,8.2401170,0.9958542,0.0037224,1.0127455,1.6480234
+Figure 10,b,"basic, pH > pHiso",20.0000000,figure_table_conflict_branch,15.0000000,0.3000000,0.6700000,0.4194941,0.7263253,0.9439047,0.0333068,1.3983135,1.0840676
+Figure 10,b,"basic, pH > pHiso",40.0000000,figure_table_conflict_branch,16.0000000,0.3900000,0.5700000,0.6431781,0.6830501,0.9859688,0.0248310,1.6491746,1.1983335
+Figure 10,b,"basic, pH > pHiso",60.0000000,figure_table_conflict_branch,13.0000000,0.5100000,0.9500000,0.8253435,1.1180601,0.9671459,0.0479658,1.6183205,1.1769054
