@@ -941,3 +941,12 @@
 - Ergänzt eine donor-seitige chemische Randarbeits-Schätzung und ein nicht geschlossenes Energieresiduum; die chemische Größe wird ausdrücklich nicht als exakter diskreter Entropiefluss ausgegeben.
 - Äußere axiale Traktion wird als nicht bilanzierte mechanische Arbeit markiert.
 - P12 ist ein Diagnose-/Auditmodul, kein Beweis einer vollständigen offenen Energiebilanz und keine empirische Validierung.
+
+
+## 2026-11-14 — CCFSM P13 Onsager-konformer Stofftransport
+
+- Ergänzt chemische Potentialgradienten als treibende Kraft der mobilen Diffusion mit logarithmischem Mittel als positive Onsager-Mobilität.
+- Leitet die nichtnegative diskrete Diffusionsdissipation her und erhält für ideale Aktivitäten algebraisch die bisherige Fick-Form.
+- Trennt Upwind-Advektion und Diffusion explizit; der vollständige diskrete Entropiefluss der Advektion und die gemeinsame offene Randbilanz bleiben ungelöst.
+- Ergänzt das konstante Dead-load-Potential `Psi - traction * axial_strain`; vollständige räumliche Mechanik-/Randarbeitskopplung bleibt offen.
+- Keine empirische Kalibrierung oder physikalische Validierung behauptet.
