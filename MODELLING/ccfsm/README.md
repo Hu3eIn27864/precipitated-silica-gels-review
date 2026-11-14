@@ -360,3 +360,11 @@ P16 ist kein vollständiger Energiebeweis: Die P9-Spannungs-/Energiekonsistenz i
 - ccfsm_p19_spatial_biot_bvp.py assembliert und löst die lineare quasistatische schwache 3D-Gleichgewichtsform auf bereitgestellten FE-Quadraturdaten.
 - Berücksichtigt Dirichlet-Verschiebungen, äußere Gesamttraktionen, Porendruck, isotrope Eigenstrain, gespeicherte Energie und Reaktionsresiduen.
 - CCFSM_v3.4_P19_SPATIAL_BIOT_BVP_DE.md dokumentiert starke/schwache Form, Tangente, Randarbeit und Geltungsgrenzen.
+
+
+## CCFSM P20 — gestaffelte Kopplung von Transport und räumlicher Mechanik
+
+- ccfsm_p20_staggered_coupling.py überträgt P9-Brücken-Eigenstrain und Fluidinhaltsänderung aus FV-Zellen auf P19-FE-Quadraturpunkte und löst die räumliche quasistatische Mechanik.
+- P13-Transport-RHS und P19-Druck werden gemeinsam ausgegeben; der Druckunterschied P19 minus P9 wird als Vergleich, nicht als Residuum, ausgewiesen.
+- P13-Flüsse verwenden vorerst weiterhin P9-lokale Druck-/Permeabilitätsfelder. Eine echte Zweiwegkopplung ist ausdrücklich noch nicht implementiert.
+- CCFSM_v3.5_P20_STAGGERED_COUPLING_DE.md dokumentiert Schnittstelle, Abbildung, Verifikation und nächste Schritte.
