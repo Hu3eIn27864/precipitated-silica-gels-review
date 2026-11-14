@@ -1013,3 +1013,12 @@
 - Ersetzt nur den advektiven Anteil der P13-Flüsse; Onsager-Diffusion und P10-Reaktionsraten bleiben erhalten. Die FV-Divergenzform bleibt konservativ.
 - Ergänzt Tests für Druckfeedback, Fluidbilanz, fehlende Zellabdeckung und ungültige Gewichte.
 - Statusgrenze: gestaffelte Snapshot-Rückkopplung, keine iterierte monolithische Zeitintegration, keine globale Energieidentität und keine physikalische Validierung.
+
+
+## 2026-11-14 — CCFSM P22 iterierte Druck-Mechanik-Transport-Kopplung
+
+- Ergänzt gedämpfte Picard-Iteration für einen impliziten-Euler-Schritt auf Basis des P21-RHS.
+- Jeder Iterationsschritt löst P19 erneut und führt den räumlichen Druck über P21 in Darcy-Fluss und mobile Advektion zurück.
+- Überwacht getrennte normierte Zustands- und Druckresiduen; Positivitätsbegrenzung für Fluidkapazität und Inventare.
+- Nichtkonvergenz oder zu starke Positivitätsbegrenzung führt ausdrücklich zu keinem akzeptierten Zeitschritt.
+- Keine Behauptung eines monolithischen Newton-Verfahrens, einer Energie-Monotonie oder physikalischen Validierung.
