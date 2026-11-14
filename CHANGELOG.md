@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-14 — CCFSM temperature-history CI verification
+
+- Verified latest dedicated workflow run [43570017461](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43570017461): successful Python 3.12 test job; **29/29 CCFSM tests passed** (10 v0.1, 12 two-timescale v0.2, 7 temperature-history v0.2a).
+- This confirms software regression consistency of the model package only; it does not calibrate unknown kinetic coefficients or validate the reduced constitutive model against new physical experiments.
+
+
 ## 2026-11-14 — CCFSM v0.2a: temperature-history extension
 
 - Added a protocol-aware exact piecewise-constant rate propagator for the natural-only two-state CCFSM.
