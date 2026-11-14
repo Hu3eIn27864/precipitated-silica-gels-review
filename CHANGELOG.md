@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-11-14 — CCFSM v0.2 two-timescale natural-syneresis closure
+
+- Added MODELLING/ccfsm/CCFSM_v0.2_TWO_TIMESCALE.md with the two-state model q (intrinsic network contraction potential) and S (observed bulk shrinkage), exact solutions including the equal-rate limit, and explicit assumptions.
+- Proved global existence/uniqueness, an invariant region, positivity, monotonicity, endpoint convergence, and the zero-initial-state symmetry that prevents physical labels being assigned to the two rates from S(t) alone.
+- Derived the hydraulic first-mode scaling k_h ~ C_g*kappa_eff*K_eff/(mu*L_d^2), including units and the falsifiable drainage-length prediction; added finite-strain isotropic kinematics and a silicon-inventory caveat for ongoing polymerisation.
+- Added ccfsm_two_stage.py and 12 regression tests. Local verification on 14 November 2026: 12/12 pass. This verifies implementation and algebraic limits, not physical validity.
+- Kept all new two-timescale rates, q_infinity, interface accessibility and bridge-contraction coefficients uncalibrated. Existing source-reported empirical A/tau tables and approximate digitized refits are not treated as sufficient to identify them.
+- Natural syneresis only: no oedometer, imposed-load or forced-syneresis coefficient is used.
+
+
 ## 2026-11-11 — Project initialisation
 - Established the working title and central research question.
 - Defined the process-history-centred scope.
