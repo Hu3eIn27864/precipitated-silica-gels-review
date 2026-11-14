@@ -1,7 +1,8 @@
 """Tests for recipe-to-speciation equilibrium in CCFSM v0.4a."""
 import unittest
 from ccfsm_recipe_speciation_v04a import (
-    SodiumSilicateRecipe, solve_sodium_silicate_sulfuric_acid)
+    SodiumSilicateRecipe, solve_sodium_silicate_sulfuric_acid,
+    to_ccfsm_chemical_environment)
 
 
 def recipe(**overrides):
@@ -59,6 +60,19 @@ class TestRecipeSpeciation(unittest.TestCase):
         r=solve_sodium_silicate_sulfuric_acid(recipe(activity_model="ideal"))
         self.assertEqual(r.activity_model,"ideal")
         self.assertGreater(r.ionic_strength_mol_l,0.0)
+
+    def test_adapter_requires_solvent_mass_and_external_silica_solubility(self):
+        result = solve_sodium_silicate_sulfuric_acid(recipe())
+        env = to_ccfsm_chemical_environment(
+            result, solvent_mass_kg_per_l=0.95,
+            silica_solubility_mol_m3=2.0)
+        self.assertAlmostEqual(env.ionic_strength_mol_kg,
+                               result.ionic_strength_mol_l/0.95)
+        self.assertEqual(env.pH, result.pH)
+        with self.assertRaises(ValueError):
+            to_ccfsm_chemical_environment(
+                result, solvent_mass_kg_per_l=0.0,
+                silica_solubility_mol_m3=2.0)
 
     def test_invalid_recipe_is_rejected(self):
         with self.assertRaises(ValueError):
