@@ -996,3 +996,11 @@
 - Gibt Verschiebungen, Dehnungen, Spannungen, Porendruck, gespeicherte Energie, Traktionsarbeit und Reaktionsresiduen aus.
 - Ergänzt Regressionstests für axialen Patchfall, Eigenstrain-/Fluidantrieb, Gleichgewichtsresiduen, Reaktionen und singuläre Systeme.
 - Keine Netzkonvergenz, reale Probenrandbedingungen, gekoppelte Transportdynamik oder empirische Validierung behauptet.
+
+
+## 2026-11-14 — CCFSM P20 gestaffelte Transport-/Mechanikkopplung
+
+- Ergänzt Snapshot-Adapter P9/P13 -> P19: Brückenfraktion wird in chemische Eigenstrain, Fluidkapazität in Fluidinhaltsänderung überführt und auf FE-Quadraturpunkte abgebildet.
+- Gibt P13-Transport-RHS, P19-räumliche Lösung und P19-vs-P9-Druckvergleich aus.
+- Hält die Einwegkopplung transparent: P13-Flüsse verwenden weiterhin P9-lokale Felder; kein vollständiger 3D-Zeitintegrator oder physikalischer Validierungsanspruch.
+- Ergänzt Regressionstests für Feldmapping, Gleichgewichtslösung, Druckvergleich und Eingabevalidierung.
