@@ -103,3 +103,5 @@ Der Rezeptur-Speziationsblock wurde mit dem bestehenden CCFSM-Kinetikmodul über
 - GitHub Actions führt die Kurvenauswertung aus und lädt die Ergebnisse als CI-Artefakt hoch. Die Quelldaten bleiben unverändert.
 
 Die digitalisierten Spuren sind keine Rohmessungen und teils Mess-/Modellüberlagerungen. Deshalb werden keine i.i.d.-Konfidenzintervalle aus Kurvenpunkten behauptet. Die Pipeline ist Software- und Modellvergleich, keine vollständige physikalische Validierung.
+
+- CCFSM_v0.5_FIRST_CI_RESULTS_2026-11-14_DE.md dokumentiert den ersten erfolgreichen CI-Lauf (72/72 Tests), 14 natürliche Kurven, 42 Fits und die vorläufige AICc-/Holdout-Zusammenfassung.
