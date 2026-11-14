@@ -18,3 +18,16 @@ From this folder:
 The seven parameter rows are sourced from the project's curated primary fit table for digitized Wilhelm & Kind (2015) natural-syneresis curves. These are figure-derived approximations, not author-supplied raw data. Excluded sensitivity/conflict branches remain excluded.
 
 No oedometer, imposed-load, or forced-syneresis coefficient is used for the CCFSM natural-syneresis calibration. Unidentified chemical, fractal, eigenstrain, permeability, and modulus parameters are intentionally left unset.
+
+
+## CCFSM v0.2 — two-timescale natural-syneresis closure
+
+Added on 14 November 2026:
+
+- CCFSM_v0.2_TWO_TIMESCALE.md — separation of intrinsic network contraction and observed hydraulic shrinkage; closed-form solutions; proofs of existence, invariant region, monotonicity and rate-label non-identifiability; finite-strain kinematics; silicon-balance caveat; natural-only experiment design.
+- ccfsm_two_stage.py — exact two-state response, stable equal-rate limit, hydraulic-rate scaling, isotropic natural stretch, and unordered rate-pair recovery.
+- test_ccfsm_two_stage.py — 12 regression tests.
+
+The two new rates are not fitted to the current one-exponential tables or approximate digitized traces. The source-reported (A, tau) values from v0.1 remain unchanged. A single zero-start shrinkage curve only identifies an unordered pair of two rates and the endpoint product eta_a*q_infinity; assigning physical labels requires an independent chemical/structural or hydraulic measurement.
+
+Local software verification: 12/12 tests passed with python -m unittest -v. This is not physical validation. The natural-only exclusion remains in force: no oedometer, forced-syneresis or imposed-load coefficient is used.
