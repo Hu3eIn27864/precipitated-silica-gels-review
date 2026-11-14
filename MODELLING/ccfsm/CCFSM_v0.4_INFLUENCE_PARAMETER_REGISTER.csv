@@ -1,0 +1,48 @@
+symbol,name,group,role,unit,status,primary_path,required_observation,identifiability_caution
+c_SiO2,silica mass concentration,formulation,input,kg m-3,measured input,chemistry to B and gel structure,gravimetry and silicon assay,correlated with silicate modulus and water fraction
+M_sil,silicate modulus SiO2/alkali oxide,formulation,input,dimensionless,measured input,speciation and condensation,feedstock assay,not independent of feedstock composition
+c_acid,acid concentration,formulation,input,mol m-3,measured input,neutralisation pH and ionic strength,titration and dosing log,do not double-count with pH
+c_base,base concentration,formulation,input,mol m-3,measured input,neutralisation pH and ionic strength,titration and dosing log,do not double-count with pH
+V_acid_base,acid/base dose,formulation,input,m3,measured input,stoichiometry and final composition,mass/volume dosing log,route-specific
+r_add,addition rate,process,input,m3 s-1,measured input,local supersaturation and mixing,feed pump log,interacts with mixing
+I,ionic strength,chemical state,state,mol m-3,measured or computed,activity and colloidal stability,ion analysis and speciation,derived from all ions
+a_H,hydrogen ion activity,chemical state,state,dimensionless,measured/computed,pH and surface charge,pH with calibration, pH is not an independent recipe variable
+pH,pH,chemical state,state,dimensionless,measured time series,speciation and reaction rates,temperature-compensated pH probe,derived from recipe and reaction
+c_Si_diss,dissolved silicon concentration,chemical state,state,mol m-3,measured time series,supersaturation and bridge formation,ICP/OES or validated assay,requires dissolved/colloidal separation
+Omega_sup,silica supersaturation,chemical state,derived,dimensionless,model-derived,speciation to nucleation/condensation,speciation and solubility model,depends on activity model
+T_g,gel core temperature,thermal history,input field,K,measured time series,all kinetic and transport rates,embedded temperature probe,bath temperature is not equivalent
+E_a,j,activation energy of mechanism j,kinetics,parameter,J mol-1,unidentified,temperature dependence of rate j,multi-temperature kinetic data,one value per mechanism may be inadequate
+n_mix,mixer rotational speed,process,input,s-1,measured input,micromixing and aggregate structure,tachometer,not transferable without geometry
+P_mix,volumetric mixing power,process,input,W m-3,measured/derived,micromixing and shear history,power/torque and volume,prefer over rpm across scales
+t_age,pre-syneresis ageing time,process,input,s,measured input,post-gel condensation and restructuring,protocol timestamps,define gel point and t0
+B,load-bearing siloxane bridge density,network state,state,mol m-3,unidentified state,network cohesion and contraction,validated chemical/structural proxy,not total Si-O-Si bond count
+B_inf,asymptotic bridge density,network kinetics,parameter,mol m-3,unidentified,bridge kinetics,absolute bridge proxy time series,scale confounded with Omega_b
+k_b,bridge formation rate,network kinetics,parameter,s-1,unidentified,bridge accumulation,bridge proxy time series,temperature and pH dependent
+k_hyd,hydrolysis/dissolution rate,network kinetics,parameter,s-1,unidentified,bridge loss and dissolved Si,Si mass balance over time,may be reversible
+Omega_b,bridge-to-contraction coefficient,network contraction,parameter,m3 mol-1,unidentified,B to X,independent B and contraction inventory,product confounded with bridge scale
+D_f,fractal dimension,structure,state,dimensionless,measured time series,network morphology,scattering/imaging with scale declaration,scale and method dependent
+z,mean coordination/contact number,structure,state,dimensionless,measured/derived,contact topology and mechanics,tomography or validated structural proxy,mean alone misses distribution
+phi,porosity,structure,state,dimensionless,measured time series,pore space and transport,porosimetry or imaging,method and scale dependent
+r_throat,pore throat distribution,structure,state,m,m measured distribution,permeability and capillary pressure,3D imaging/porosimetry,distribution not one mean
+C_conn,pore connectivity,structure,state,dimensionless,measured/derived,percolating flow pathways,3D imaging/network extraction,not determined by D_f alone
+tau_p,tortuosity,structure,state,dimensionless,measured/derived,hydraulic resistance,3D imaging or transport measurement,definition must be fixed
+sigma,unrelaxed contraction inventory,mechanics,state,dimensionless,unidentified,internal potential and relaxation,rheology plus contraction proxy,not Pa stress in v0.3
+epsilon_r,relaxed contraction inventory,mechanics,state,dimensionless,unidentified,internal potential,independent relaxation/strain proxy,partition confounded in shrinkage-only data
+k_r,stress/contraction relaxation rate,mechanics,parameter,s-1,unidentified,redistribution sigma to epsilon_r,stress relaxation/rheology time series,unidentifiable from S alone in v0.3
+K_eff,effective free-syneresis modulus,mechanics,state/parameter,Pa,measured or identified,hydraulic-mechanical response,small-strain/rheology under matched state,oedometer modulus not substitute
+kappa_eff,effective permeability,transport,state,m2,measured time series,drainage rate,permeability under matched state and chemistry,may evolve with structure and saturation
+mu,liquid dynamic viscosity,transport,input/state,Pa s,measured or computed,hydraulic mobility,rheometry/viscometry at T and composition,temperature and ionic composition dependent
+rho,liquid density,transport,input/state,kg m-3,measured or computed,hydrostatic and mass balance,densimetry,usually secondary for low-gradient flow
+gamma,liquid surface tension,transport,input/state,N m-1,measured,capillary pressure and interfaces,tensiometry,include if capillary effects matter
+R_c,hydraulic contact resistance,interface,parameter,m Pa s m-3,unidentified,interface pressure drop,interface-specific flow test,definition tied to geometry
+theta,contact angle,interface,parameter,rad,measured,wetting and capillary boundary,tensiometry/contact-angle test,may be dynamic
+L_d,drainage length,geometry,input,m,measured geometry,hydraulic timescale,geometry and open boundaries,not always sample radius
+C_g,geometry/boundary factor,geometry,parameter,dimensionless,derived/calibrated,hydraulic first-mode closure,analytical solution or geometry-specific test,not universal
+A_surf,exposed surface area,geometry,input,m2,measured geometry,evaporation and drainage,geometry,distinguish drainage from evaporation
+RH,relative humidity,environment,input,dimensionless,measured time series,evaporation,humidity sensor,only relevant for exposed samples
+J_evap,evaporation flux,environment,boundary flux,kg m-2 s-1,measured/corrected,apparent mass/volume loss,mass-loss blank/control,not natural syneresis drainage
+eta_a,natural hydraulic accessibility,hydraulic closure,parameter,dimensionless,unidentified,natural boundary access to q,independent q and S,confounded with q endpoint
+k_h,hydraulic response rate,hydraulic closure,parameter,s-1,derived/identified,kappa K/(mu L2),kappa K mu L and transient response,only composite identified from S
+S,observed natural shrinkage,observation,output,dimensionless,measured time series,model output,3D volume or validated volumetric proxy,define denominator and avoid linear-strain substitution
+t0,time origin,protocol,definition,s,declared,all time histories,protocol timestamp,gel point vs mixing start matters
+sigma_S,shrinkage measurement uncertainty,measurement,uncertainty,dimensionless,measured/estimated,likelihood and confidence intervals,replicates and calibration,figure digitisation uncertainty differs from raw data
