@@ -56,3 +56,11 @@ The model holds q_infinity and natural-interface accessibility fixed within one 
 - test_ccfsm_v03.py — nine regression tests.
 
 The bridge-to-morphology relations are explicit testable hypotheses, not established silica laws. Df/contact number are not used as unvalidated surrogates for permeability or modulus. All coefficients remain user-supplied/un-calibrated; no oedometer or forced-syneresis data enter the natural model.
+
+
+## CCFSM v0.4 — vollständige Einflussparameter-Architektur
+
+- CCFSM_v0.4_PARAMETER_ARCHITECTURE_DE.md — kausale Parametergruppen von Rezeptur/Fällchemie über Temperatur, Mischung, Netzwerk, Porenraum und Mechanik bis Transport, Grenzfläche, Geometrie und Messunsicherheit; Freigabekriterien für vollständig grüne Gleichungen.
+- CCFSM_v0.4_INFLUENCE_PARAMETER_REGISTER.csv — maschinenlesbares Register mit Symbol, Gruppe, Rolle, Einheit, Wirkpfad, Messbedarf und Identifizierbarkeitswarnung.
+
+v0.4 ist zunächst eine vollständige Parameterarchitektur, keine unkalibrierte Erweiterung aller ODEs. Insbesondere werden pH und Rezeptur nicht doppelt als unabhängige Ursachen gezählt; Gelkerntemperatur wird von Badtemperatur getrennt; D_f/z werden nicht ohne Porenhals- und Konnektivitätsdaten als Permeabilitätsersatz verwendet. Die natürliche, mechanisch unbelastete Synärese bleibt der einzige Geltungsbereich.
