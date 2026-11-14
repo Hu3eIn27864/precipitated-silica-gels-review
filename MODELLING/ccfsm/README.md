@@ -138,3 +138,13 @@ Die 22 Sensitivitäts- und 44 Figure/Table-Konfliktpunkte bleiben getrennte Evid
 - Der Supplement-Link von Wilhelm & Kind (2015) wurde gefunden; die Inhalte der Supplement-Tabellen und -Abbildungen sind noch nicht dekodiert/ausgewertet. Dies ist die höchste nächste Recherchepriorität.
 - Quarchs Dissertation wurde mit dem korrekten KITopen-Datensatz verknüpft: `https://publikationen.bibliothek.kit.edu/1000017100/1376042`. Keine falsche DOI-Zuordnung.
 - Die v0.6 Labormatrix bleibt als Identifizierbarkeitsreferenz erhalten, wird aber nicht als Voraussetzung an den Nutzer gestellt. Literaturdaten ersetzen keine fehlenden unabhängigen Messungen von B_eff, q, sigma, k_r oder Permeabilität im Zielsystem.
+
+## CCFSM v1.0 — dreidimensionales PDE-Mehrfeldmodell (14.11.2026)
+
+- `CCFSM_v1.0_3D_PDE_SYSTEM_DE.md` spezifiziert die 3D-Feldarchitektur: Feststoff-/Fluidmassenbilanzen, Darcy-Transport, quasistatische poro-viskoelastische Mechanik, Netzwerkbildung, Morphologie, Kontraktionsinventar, Speziestransport sowie natürliche Drainage- und Traktionsrandbedingungen.
+- `CCFSM_v1.0_MATHEMATICAL_PROGRAMME_DE.md` definiert die P0–P5-Beweisroute von linearer Biot-Darcy-Poroelastizität bis zur vollständigen 3D-Kopplung, einschließlich schwacher Formulierung, Energieabschätzungsziel, Positivität, Existenz-/Eindeutigkeitsfragen und numerischer Verifikation.
+- `CCFSM_v1.0_EQUATION_REGISTER.csv` ist das maschinenlesbare Gleichungs- und Schließungsregister.
+- `test_ccfsm_v10_specification.py` prüft Vollständigkeit und Konsistenz der Spezifikationsartefakte. Der Test beweist keine physikalische Gültigkeit und keinen PDE-Satz.
+- Der CI-Workflow entdeckt den neuen Test automatisch über unittest discovery.
+
+**Wichtige Statusgrenze:** v1.0 ist eine vollständige Gleichungsarchitektur, aber noch keine vollständig thermodynamisch hergeleitete oder empirisch geschlossene Theorie. Die freie Energie, Onsager-Mobilitäten, konkrete Koeffizientenfunktionen und 3D-Randgeometrien müssen noch geschlossen werden. Es wird kein Existenz-/Eindeutigkeitsbeweis für das volle System und kein globaler Regularitätsbeweis behauptet. Unidentifizierte Permeabilitäts-, Modul- und Morphologieschließungen bleiben offen; natürliche Synärese bleibt vom Druckzell-/Oedometerzweig getrennt.
