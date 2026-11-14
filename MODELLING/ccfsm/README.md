@@ -321,3 +321,12 @@ Die 22 Sensitivitäts- und 44 Figure/Table-Konfliktpunkte bleiben getrennte Evid
 - `ccfsm_p14_upwind_entropy_audit.py` leitet die exakte semidiskrete Entropiebilanz des Upwind-Advektionsterms zusammen mit `theta_dot = -div(q)` für variable Fluidkapazität her.
 - `test_ccfsm_p14_upwind_entropy_audit.py` prüft Rand-Entropieleistung, nichtnegative innere numerische Entropieproduktion, Flussumkehr und Identitätsresiduum.
 - `CCFSM_v2.9_P14_UPWIND_ENTROPY_DE.md` dokumentiert Herleitung und Geltungsgrenzen. Die Teilidentität ist kein vollständiger CCFSM-Energiebeweis.
+
+
+## CCFSM P15 — gemeinsame mobile Randbilanz
+
+- `CCFSM_v3.0_P15_MOBILE_BOUNDARY_BALANCE_DE.md` — gemeinsame semidiskrete Bilanz für mobile Upwind-Advektion und P13-Onsager-Diffusion mit getrennten advektiven und diffusive Reservoirleistungen sowie nichtnegativen inneren und Halbzellen-Dissipationen.
+- `ccfsm_p15_mobile_boundary_balance.py` — Audit der tatsächlichen P13-Flüsse für M/O; Reaktions-, Darcy-Arbeits- und Mechanikanteile bleiben bewusst außerhalb.
+- `test_ccfsm_p15_mobile_boundary_balance.py` — Regressionstests für die gemeinsame Identität und Grenzfälle.
+
+Die Identität ist eine mobile Transport-Teilbilanz bei konstanten Aktivitätskoeffizienten, kein globaler CCFSM-Energiesatz und keine physikalische Kalibrierung.
