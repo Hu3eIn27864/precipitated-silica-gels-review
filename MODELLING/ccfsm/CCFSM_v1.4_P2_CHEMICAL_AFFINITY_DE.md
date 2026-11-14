@@ -62,7 +62,7 @@ Das Vorzeichen von (r_j) stimmt mit dem von \(\mathcal A_j\) überein. Insbesond
 [
 r_j\mathcal A_j\ge0,
 ]
-weil ((x-y)\ln(x/y)\ge0) für (x,y>0). Die lokale chemische Entropieproduktion ist somit nichtnegativ.
+weil ((x-y)\ln(x/y)\ge0) für (x,y>0). Die chemische Dissipation \(\mathcal D=\sum_j r_j\mathcal A_j\) ist somit nichtnegativ (Einheit W m⁻³); die Entropieproduktionsrate ist \(\mathcal D/T\) (W m⁻³ K⁻¹).
 
 Die gewählte lineare Aktivitätsdifferenz ist eine Onsager-nahe, detailliert-bilanzierte Referenzschließung. Sie ist keine universelle Elementarreaktionskinetik. Für konzentrierte Natriumsilikat-/Sulfatbrühen können nichtideale Aktivitäten, Ionenpaare, Oligomerverteilungen, Wasseraktivität und Oberflächenzustände wesentlich sein.
 
