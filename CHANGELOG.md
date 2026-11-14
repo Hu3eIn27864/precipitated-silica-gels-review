@@ -988,3 +988,11 @@
 - Ergänzt 3D-isotrope Kleinverzerrungsenergie, symmetrischen Spannungstensor, Porendruck und Eigenstrain-Konjugierte aus einem gemeinsamen Variationsprinzip.
 - Implementiert getrennte plane-strain- und uniaxial-stress-Reduktionen; P17 wird als seitlich festgehaltener Spezialfall reproduziert.
 - Ergänzt Finite-Differenzen-, Schub-, Reduktions- und Randspannungs-Regressionstests. Keine räumliche Gleichgewichts-PDE, Randarbeitsbilanz oder empirische Validierung behauptet.
+
+
+## 2026-11-14 — CCFSM P19 räumliches 3D-Biot-Eigenstrain-Randwertproblem
+
+- Ergänzt einen linearen quasistatischen FE-Assembler aus der P18-Energie mit räumlicher schwacher Gleichgewichtsform, Dirichlet-Elimination und Neumann-Traktionslasten.
+- Gibt Verschiebungen, Dehnungen, Spannungen, Porendruck, gespeicherte Energie, Traktionsarbeit und Reaktionsresiduen aus.
+- Ergänzt Regressionstests für axialen Patchfall, Eigenstrain-/Fluidantrieb, Gleichgewichtsresiduen, Reaktionen und singuläre Systeme.
+- Keine Netzkonvergenz, reale Probenrandbedingungen, gekoppelte Transportdynamik oder empirische Validierung behauptet.
