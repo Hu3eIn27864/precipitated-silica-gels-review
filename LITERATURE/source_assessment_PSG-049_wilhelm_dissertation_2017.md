@@ -52,3 +52,16 @@ See `wilhelm_kind_figure10b_source_triangulation_2026-11-14.csv` and the separat
 ## Source
 
 Wilhelm, S. (2017). *Über die Synärese kolloidaler Strukturen am Beispiel von Siliciumdioxid*. KIT Scientific Publishing. DOI: 10.5445/KSP/1000073100.
+
+
+## Quantitative fixed-parameter comparison against Figure 10b
+
+Using the curated approximate chart points, we evaluated both source tables *without refitting* their published A and tau parameters. The RMSE values are:
+
+| Temperature | 2015 Table 2 parameters | 2017 Table 5.3 parameters |
+|---:|---:|---:|
+| 20 °C | 0.0960 | 0.0354 |
+| 40 °C | 0.1954 | 0.0262 |
+| 60 °C | 0.1944 | 0.0489 |
+
+The dissertation parameters reduce chart-point RMSE by factors of approximately 2.7, 7.4 and 4.0, respectively. Their errors are close to the freely fitted RMSE values (0.0333, 0.0248 and 0.0480). This strengthens the conclusion that the 2017 dissertation parameter set is consistent with the plotted basic-droplet curves. Because the chart points remain approximate and uncalibrated, these RMSE values are diagnostic comparisons only, not formal measurement-error statistics.
