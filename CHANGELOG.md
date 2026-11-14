@@ -913,3 +913,12 @@
 - Added a strictly positive exponential bridge-fraction/strain-dependent intrinsic-permeability hypothesis, explicitly uncalibrated.
 - Added fieldwise evaluation and regression tests for exact local Biot identity, traction equilibrium, reference state, positivity and selected monotonicity.
 - Scope remains a local constitutive closure: no spatial Darcy/transport integration, global nonlinear PDE theorem, full P9 energy-dissipation proof or empirical silica calibration is claimed. Natural syneresis remains distinct from forced pressure-cell/oedometer consolidation.
+
+
+## 2026-11-14 — CCFSM P10 spatial chemo-poroelastic coupling
+
+- Added a semidiscrete 1D finite-volume operator with P9 cellwise pressure, strain, bridge fraction and structure-dependent permeability.
+- A single Darcy face-flux field now drives both fluid-capacity continuity and mobile M/O advection; harmonic internal-face permeability and reservoir half-cell pressure conditions are explicit.
+- Added mobile diffusion, reservoir concentration conditions and local reversible M/O/N/B reactions driven by P9 total chemical potentials.
+- Added closed/open-boundary silicon and fluid balance tests plus nonnegative reaction, Darcy and ideal-diffusion diagnostics.
+- Explicitly bounded the result: no time integrator, global coupled energy theorem, PDE existence result, 3D mechanics or empirical calibration is claimed; natural syneresis remains distinct from forced consolidation data.
