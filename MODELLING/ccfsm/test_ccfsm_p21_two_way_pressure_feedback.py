@@ -41,10 +41,11 @@ class TestP21(unittest.TestCase):
             expected = -(tr["mobile_species_face_fluxes_mol_m2_s"][s][-1]
                          - tr["mobile_species_face_fluxes_mol_m2_s"][s][0])
             actual = self.grid.spacing_m * sum(tr["inventory_dot"][s])
-            # Reactions are zero for zero affinities only in a special state;
-            # compare transport correction against its exact face divergence.
-            old = r["transport_rhs"]
-            self.assertTrue(abs(actual - expected) < 1e9 or len(old["inventory_dot"][s]) == 2)
+            rates = tr["reaction_rates_mol_m3_s"]
+            reaction = ([-rates[0][j] for j in range(2)] if s == 0
+                        else [rates[0][j] - rates[1][j] for j in range(2)])
+            expected += self.grid.spacing_m * sum(reaction)
+            self.assertAlmostEqual(actual, expected, places=10)
 
     def test_closed_boundary_fluid_balance(self):
         r = self.run_model()
