@@ -304,11 +304,11 @@ No numerical values are assigned to the unidentified parameters. Doing so would 
 
 ### Proposition 1 — invariant chemical and structural state ranges
 
-Assume \(k_\alpha(t)\geq0\), \(m>0\), and \(\alpha(0)\in[0,1]\) in (1). Then \(\alpha(t)\in[0,1]\) for all later times for which the solution exists.
+Assume \(k_\alpha(t)\geq0\), \(m\geq1\), and \(\alpha(0)\in[0,1]\) in (1), with the kinetic factor interpreted as the saturated extension \((1-\alpha)_+^m\) outside the physical interval. Then \(\alpha(t)\in[0,1]\) for all later times for which the solution exists.
 
 If \(k_D>0\), \(D_{f,\rm eq}(t)\in[1,3]\), and \(D_f(0)\in[1,3]\), then (2) preserves \(D_f(t)\in[1,3]\). If \(k_z>0\), \(z_{\rm eq}(t)>0\), and \(z(0)>0\), then (3) preserves \(z(t)>0\).
 
-**Proof.** At \(\alpha=0\), the vector field in (1) is non-negative; at \(\alpha=1\), it is zero. Uniqueness for the scalar ODE prevents crossing the interval endpoints. For (2), the variation-of-constants solution is a convexly weighted combination of the initial value and past equilibrium values:
+**Proof.** At \(\alpha=0\), the vector field in (1) is non-negative; at \(\alpha=1\), the saturated vector field is zero. Since \(m\geq1\), the extended scalar vector field is locally Lipschitz at \(\alpha=1\); uniqueness prevents a solution starting in the interval from crossing its endpoints. For (2), the variation-of-constants solution is a convexly weighted combination of the initial value and past equilibrium values:
 \[
 D_f(t)=e^{-\int_0^t k_D}\,D_f(0)
 +\int_0^t e^{-\int_s^t k_D}\,k_D(s)D_{f,\rm eq}(s)\,ds.
