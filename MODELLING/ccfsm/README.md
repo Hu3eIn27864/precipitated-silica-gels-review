@@ -208,3 +208,13 @@ Die 22 Sensitivitäts- und 44 Figure/Table-Konfliktpunkte bleiben getrennte Evid
 - ccfsm_p4_variable_porosity.py implementiert einen semidiskreten Finite-Volumen-Operator mit Upwind-Advektion, symmetrischer Zwei-Punkt-Diffusion, variabler Fluidkapazität und gemeinsamer diskreter Fluidbilanz.
 - test_ccfsm_p4_variable_porosity.py prüft Fluidbilanz, globale Si-Inventarerhaltung, Spezieserhaltung ohne Reaktion, Mitführung homogener Konzentrationen, Diffusionsgrenzfall und Eingabevalidierung.
 - **Statusgrenze:** P4 ist noch kein bidirektional gekoppelter Mechanik-Darcy-Chemie-Solver. Deformation, Porosität und Flüsse müssen miteinander kompatibel sein. Es gibt noch keinen gemeinsamen Energiebeweis, keine Gitter-/Zeitschritt-Konvergenzstudie und keine empirische Kalibrierung. Natürliche Synärese bleibt der Geltungsbereich; Druckzell-/Oedometerdaten werden nicht zur natürlichen Kalibrierung verwendet.
+
+
+## CCFSM v1.7 — P5 bidirektionale chemo-poroelastische Kopplung
+
+- CCFSM_v1.7_P5_BIDIRECTIONAL_CHEMO_POROELASTIC_DE.md führt eine gemeinsame freie Energie für Kleinverformungsmechanik, Biot-Speicherung, mobile gelöste Si-Pools und immobilisierte Netzwerk-Pools ein.
+- Die Brückenfraktion erzeugt eine explizite, vorläufige Netzwerk-Eigenverformung. Deren Ableitungen gehen in die totalen chemischen Potentiale von N/B ein; die Reaktionskinetik verwendet eine logarithmische Mittelwert-Mobilität und dissipiert damit die Gesamtreaktionsaffinität nichtnegativ.
+- ccfsm_p5_thermodynamic_coupling.py ist ein lokaler konstitutiver Kernel für Energie, Spannung, Porendruck, chemische Potentiale und Reaktionsdissipation. Er ist kein räumlicher PDE-Solver.
+- test_ccfsm_p5_thermodynamic_coupling.py prüft u. a. Energieableitungen gegen finite Differenzen, Rückgewinnung der P2-Rate ohne mechanische Rückkopplung, Si-Stöchiometrie und Nichtnegativität der Reaktionsdissipation.
+- P5 trennt die mobilen Pools M/O von immobilisierten Netzwerk-Pools N/B. Daher wird der P4-Transportoperator nicht unverändert auf alle vier Pools angewandt.
+- **Statusgrenze:** Kleinverformungs-/Biot-Näherung, isotherm, glatte positive Zustände; formale Energieidentität unter den dokumentierten Rand- und Regularitätsannahmen. Kein globaler PDE-Existenzbeweis, kein räumlicher Gesamtsolver, keine empirische Kalibrierung. Natürliche Synärese bleibt der Zielprozess.
