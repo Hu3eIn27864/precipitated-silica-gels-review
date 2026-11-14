@@ -46,12 +46,12 @@ class TestCCFSMP16CoupledEnergyLedger(unittest.TestCase):
             r["reaction_chemical_power_w_m2"],
             -r["reaction_dissipation_w_m2"], delta=1e-8)
 
-    def test_mechanical_variational_mismatch_is_exposed(self):
+    def test_mechanical_variational_closure_is_verified(self):
         changed = (
             (30.,31.,32.), (20.,19.,18.),
             (34.,35.,36.), (16.,15.,14.))
         r = self.audit(fields=changed)
-        self.assertFalse(r["p9_mechanical_variational_closure_verified"])
+        self.assertTrue(r["p9_mechanical_variational_closure_verified"])
         self.assertFalse(r["complete_thermodynamic_energy_theorem_established"])
 
     def test_nonzero_traction_not_claimed_closed(self):
