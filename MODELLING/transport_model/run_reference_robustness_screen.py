@@ -25,6 +25,9 @@ def main():
     full_rank = [row for row in result["scenarios"] if row["rank"] == 2]
     worst = max(full_rank, key=lambda row: row["condition_number"])
     result["worst_full_rank_scenario"] = worst
+    for row in result["scenarios"]:
+        if row["condition_number"] == float("inf"):
+            row["condition_number"] = "infinity (rank deficient)"
     result["input"] = {
         "design": design,
         "interface_fraction": 0.4,
