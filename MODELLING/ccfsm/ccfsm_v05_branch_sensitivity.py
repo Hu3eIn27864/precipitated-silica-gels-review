@@ -42,7 +42,7 @@ def aicc(sse, n, k):
 def fit_curve(points):
     points = sorted(points)
     times = [t for t, _ in points if t > 0]
-    bounds = (max(1e-5, min(times)/1000), max(times)*1000)
+    bounds = (0.005, 20000.0)
     ae, te, se = fit_shape(points, 1.0, bounds)
     best = None
     for j in range(109):
