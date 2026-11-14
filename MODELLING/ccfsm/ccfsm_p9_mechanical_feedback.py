@@ -80,8 +80,9 @@ def p9_cell_closure(fluid_capacity, mobile_inventories, network_inventories,
     """Solve local Biot/eigenstrain equilibrium under prescribed axial traction.
 
     Geometry: 1D bar with axial strain eps, zero lateral total strain, isotropic
-    chemical eigenstrain eps_ch*I. Total axial stress equals applied traction.
-    Fluid content zeta=theta-theta_ref and p=M*(zeta-alpha*eps).
+    chemical eigenstrain eps_ch*I. The axial stress follows by differentiating
+    the full 3D isotropic elastic plus Biot storage energy at zero lateral
+    total strain. Fluid content zeta=theta-theta_ref and p=M*(zeta-alpha*eps).
     """
     parameters.validate()
     theta = _positive(fluid_capacity, "fluid capacity")
@@ -99,11 +100,16 @@ def p9_cell_closure(fluid_capacity, mobile_inventories, network_inventories,
     h = p.lame_lambda_pa + 2.0*p.shear_modulus_pa
     alpha, modulus = p.biot_coefficient, p.biot_modulus_pa
     zeta = theta-p.reference_fluid_capacity
-    # Solve p=M*(zeta-alpha*(eigen+(traction+alpha*p)/H)).
+    # Variationally consistent plane-strain reduction of 3D isotropic
+    # eigenstrain elasticity. sigma_xx = H*eps-(3*lambda+2G)*eigen-alpha*p.
+    eigen_coefficient = 3.0*p.lame_lambda_pa+2.0*p.shear_modulus_pa
     denom = 1.0 + modulus*alpha*alpha/h
-    pressure = modulus*(zeta-alpha*eigen-alpha*p.applied_axial_traction_pa/h)/denom
-    axial_strain = eigen+(p.applied_axial_traction_pa+alpha*pressure)/h
-    effective_stress = h*(axial_strain-eigen)
+    pressure = modulus*(zeta-alpha*eigen_coefficient*eigen/h
+                        -alpha*p.applied_axial_traction_pa/h)/denom
+    axial_strain = (p.applied_axial_traction_pa+alpha*pressure
+                    +eigen_coefficient*eigen)/h
+    effective_stress = (p.lame_lambda_pa*(axial_strain-3.0*eigen)
+                        +2.0*p.shear_modulus_pa*(axial_strain-eigen))
     total_stress = effective_stress-alpha*pressure
     fluid_content_residual = zeta-(pressure/modulus+alpha*axial_strain)
 
