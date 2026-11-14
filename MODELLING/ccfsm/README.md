@@ -266,3 +266,11 @@ Die 22 Sensitivitäts- und 44 Figure/Table-Konfliktpunkte bleiben getrennte Evid
 - `ccfsm_p8b_open_drainage.py` koppelt Druck-Speicher-Darcy-Flüsse an Fluidkapazität und M/O/N/B-Reaktion/Transport. Bei Einströmung wird die vorgegebene Außenkonzentration, bei Ausströmung die Gelkonzentration verwendet; N/B bleiben immobilisiert.
 - `test_ccfsm_p8b_open_drainage.py` prüft Aus-/Einströmung, Fluidvolumenbilanz, Si-Austragsbilanz, Rand-Upwinding, Nullfluss und Druckdissipation.
 - Begrenzung: fester 1D-Rand, vorgegebener Außenreservoir-Druck und Außenkonzentrationen; kein Kapillargesetz, keine bewegliche Grenzfläche, keine Verdunstung, keine Kalibrierung und kein globaler nichtlinearer Existenzsatz.
+
+
+## CCFSM v2.3 — P8c thermodynamische Schließung
+
+- CCFSM_v2.3_P8C_THERMODYNAMIC_CLOSURE_DE.md leitet die variable-Fluidkapazitäts-Energie ab und unterscheidet den mechanischen Darcy-Druck p vom Energie-Konjugierten p − Pi_osm.
+- ccfsm_p8c_thermodynamic_closure.py implementiert Energie, chemische Potentiale, osmotischen Druck, logarithmische Mittelwert-Reaktionen und den gekoppelten P8b-Randtransport.
+- test_ccfsm_p8c_thermodynamic_closure.py prüft Energieableitungen, Speicherclosure, Reaktionsdissipation, lokale Si-Erhaltung und offene Randbilanz.
+- Die Gesamtenergiedissipation ist formal für glatte positive Lösungen mit geschlossenen Rändern hergeleitet; offene Reservoirränder benötigen zusätzliche Leistungs-/Energieterme. Keine empirische Kalibrierung und kein globaler PDE-Existenzsatz.
