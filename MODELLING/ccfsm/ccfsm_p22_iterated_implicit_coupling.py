@@ -24,12 +24,19 @@ def _relative_change(a, b, floor=1e-30):
         floor, *(abs(x) for x in a), *(abs(x) for x in b))
 
 
-def _admissible_relaxation(current, target, lower=0.0):
+def _admissible_relaxation(current, target, lower=0.0, upper=None):
+    """Largest relaxation in [0, 1] preserving optional scalar bounds.
+
+    A 5% safety margin keeps strictly positive variables away from zero and
+    bounded variables away from their upper boundary when moving outward.
+    """
     omega = 1.0
-    for i, (x, y) in enumerate(zip(current, target)):
-        d = y-x
+    for x, y in zip(current, target):
+        d = y - x
         if d < 0:
-            omega = min(omega, 0.95*(x-lower)/(-d))
+            omega = min(omega, 0.95 * (x - lower) / (-d))
+        elif d > 0 and upper is not None:
+            omega = min(omega, 0.95 * (upper - x) / d)
     return max(0.0, min(1.0, omega))
 
 
@@ -43,9 +50,10 @@ def p22_iterated_implicit_step(
 ):
     """Perform one implicit-Euler step by damped Picard iteration.
 
-    The returned state is accepted only when both normalized state and
-    projected-P19-pressure changes meet tolerances. Nonconvergence is
-    reported explicitly and never silently accepted.
+    The returned current iterate is accepted only when the unrelaxed
+    fixed-point defect and projected-P19-pressure change meet tolerances.
+    The pressure snapshot is evaluated at that same accepted iterate.
+    Nonconvergence is reported explicitly and never silently accepted.
     """
     theta0, fields0 = _validate_state(state, grid.cells)
     dt = _finite(dt_s, "dt_s")
@@ -67,6 +75,7 @@ def p22_iterated_implicit_step(
     state_residual = pressure_residual = math.inf
 
     for iteration in range(1, max_iterations+1):
+        # The snapshot and its pressure belong to the current iterate.
         last_snapshot = p21_two_way_pressure_feedback(
             theta, fields, grid, mechanical_parameters, chemistry,
             diffusivities_m2_s, external_pressure_pa, fe_quadrature,
@@ -84,12 +93,31 @@ def p22_iterated_implicit_step(
 
         current_flat = list(theta) + [v for row in fields for v in row]
         target_flat = list(target_theta) + [v for row in target_fields for v in row]
-        omega = min(omega0, _admissible_relaxation(
-            current_flat, target_flat, 0.0))
+
+        # Measure the actual, unrelaxed fixed-point defect. Using the
+        # relaxed update here would let tiny omega fake convergence.
+        state_residual = _relative_change(target_flat, current_flat)
+        history.append({
+            "iteration": iteration, "relaxation_used": 0.0,
+            "state_relative_residual": state_residual,
+            "pressure_relative_residual": pressure_residual,
+        })
+        if (previous_pressure is not None and state_residual <= st_tol
+                and pressure_residual <= p_tol):
+            converged = True
+            break
+
+        theta_omega = _admissible_relaxation(
+            theta, target_theta, lower=0.0, upper=1.0)
+        field_omega = _admissible_relaxation(
+            [v for row in fields for v in row],
+            [v for row in target_fields for v in row], lower=0.0)
+        omega = min(omega0, theta_omega, field_omega)
+        history[-1]["relaxation_used"] = omega
         if omega < min_omega:
             return {
                 "converged": False, "iterations": iteration,
-                "failure": "positivity_limiter_reached_minimum_relaxation",
+                "failure": "admissibility_limiter_reached_minimum_relaxation",
                 "state": None, "last_iterate_fluid_capacity": theta,
                 "last_iterate_inventories": fields,
                 "state_relative_residual": state_residual,
@@ -97,27 +125,19 @@ def p22_iterated_implicit_step(
                 "iteration_history": tuple(history),
                 "last_snapshot": last_snapshot,
             }
-        updated = [x + omega*(y-x) for x, y in zip(current_flat, target_flat)]
-        n = grid.cells
-        theta_new = tuple(updated[:n])
-        flat = updated[n:]
-        fields_new = tuple(tuple(flat[s*n:(s+1)*n]) for s in range(4))
-        if any(not math.isfinite(x) or not 0 < x <= 1 for x in theta_new):
-            raise ArithmeticError("internal positivity limiter failed for fluid capacity")
-        if any(not math.isfinite(x) or x <= 0 for row in fields_new for x in row):
-            raise ArithmeticError("internal positivity limiter failed for inventories")
 
-        state_residual = _relative_change(updated, current_flat)
-        history.append({
-            "iteration": iteration, "relaxation_used": omega,
-            "state_relative_residual": state_residual,
-            "pressure_relative_residual": pressure_residual,
-        })
+        theta_new = tuple(x + omega*(y-x)
+                          for x, y in zip(theta, target_theta))
+        fields_new = tuple(tuple(
+            x + omega*(y-x)
+            for x, y in zip(fields[s], target_fields[s]))
+            for s in range(4))
+        if any(not math.isfinite(x) or not 0 < x <= 1 for x in theta_new):
+            raise ArithmeticError("internal admissibility limiter failed for fluid capacity")
+        if any(not math.isfinite(x) or x <= 0 for row in fields_new for x in row):
+            raise ArithmeticError("internal admissibility limiter failed for inventories")
+
         theta, fields = theta_new, fields_new
-        if (previous_pressure is not None and state_residual <= st_tol
-                and pressure_residual <= p_tol):
-            converged = True
-            break
         previous_pressure = pressure
 
     if not converged:
@@ -142,5 +162,7 @@ def p22_iterated_implicit_step(
         "last_snapshot": last_snapshot,
         "positivity_verified": True,
         "implicit_step_equation": "x_new = x_old + dt * F_P21(x_new)",
+        "state_residual_definition": "unrelaxed fixed-point defect",
+        "pressure_snapshot_matches_accepted_state": True,
         "energy_monotonicity_claimed": False,
     }
