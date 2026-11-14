@@ -460,3 +460,35 @@ The contact resistance is an optional phenomenological parameter, not a measured
 When any contact resistance is positive, the solver augments the one-dimensional FV graph with a pair of co-located `minus` and `plus` pressure unknowns at each such interface. The two adjacent control volumes are split at the physical interface, so their storage is integrated on the correct material side. The link between the traces has conductance `1/R_c`; bulk links on either side use the exact integrated resistance. This works both for off-grid interfaces and when the interface exactly coincides with an original cell centre. The solver returns the augmented `node_profiles_pa`, `node_coordinates_m`, and `node_sides`; the legacy `profiles_pa` remains an original-cell-centre projection and averages the two traces if the interface coincides with a centre.
 
 The new test checks the coincident-centre case explicitly, including the finite jump and exact contact conductance. The three-layer eigenmode test continues to compare the transient FV solution with the independent transfer-matrix spectrum. The current scheme remains mass-lumped and first-order in time (backward Euler); no higher-order spatial claim is made. Contact resistance remains phenomenological and uncalibrated for silica gels.
+
+## Local identifiability sensitivity utility
+
+`identifiability.py` builds an uncertainty-weighted finite-difference Jacobian
+of log modal decay rates against two log parameters: a common multiplier on
+all layer mobilities and a common multiplier on all strictly-positive contact
+resistances. It calls the independent `multilayer_eigenvalues` transfer-matrix
+reference. The returned diagnostics include the Jacobian, two singular values,
+numerical rank and condition number. The optional `sigma_log_rates` field
+weights each log-rate observation by its stated standard uncertainty.
+
+Example design (dimensionless verification values only):
+
+    design = {
+        "storage": [1.0, 1.0],
+        "mobility": [1.0, 1.0],
+        "widths": [0.4, 0.6],
+        "contact_resistances": [0.08],
+    }
+    result = log_rate_sensitivity([design], n_modes=3)
+
+Run its tests with:
+
+    python3 -m unittest discover -s MODELLING/transport_model -p 'test_identifiability.py' -v
+
+One modal rate produces at most rank one for these two unknown scales. A
+rank-two local Jacobian is necessary but not sufficient for practical
+identifiability; inspect the condition number, uncertainty weights, parameter
+profiles and model discrepancy. This utility uses common multipliers only,
+requires strictly-positive contact resistances for log differentiation, and
+does not estimate layer-specific parameters. Its synthetic verification is
+not a measurement or calibration of precipitated-silica gel.
