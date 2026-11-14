@@ -23,7 +23,7 @@ Omega_b,bridge-to-contraction coefficient,network contraction,parameter,m3 mol-1
 D_f,fractal dimension,structure,state,dimensionless,measured time series,network morphology,scattering/imaging with scale declaration,scale and method dependent
 z,mean coordination/contact number,structure,state,dimensionless,measured/derived,contact topology and mechanics,tomography or validated structural proxy,mean alone misses distribution
 phi,porosity,structure,state,dimensionless,measured time series,pore space and transport,porosimetry or imaging,method and scale dependent
-r_throat,pore throat distribution,structure,state,m,m measured distribution,permeability and capillary pressure,3D imaging/porosimetry,distribution not one mean
+r_throat,pore throat distribution,structure,state,m,measured distribution,permeability and capillary pressure,3D imaging/porosimetry,distribution not one mean
 C_conn,pore connectivity,structure,state,dimensionless,measured/derived,percolating flow pathways,3D imaging/network extraction,not determined by D_f alone
 tau_p,tortuosity,structure,state,dimensionless,measured/derived,hydraulic resistance,3D imaging or transport measurement,definition must be fixed
 sigma,unrelaxed contraction inventory,mechanics,state,dimensionless,unidentified,internal potential and relaxation,rheology plus contraction proxy,not Pa stress in v0.3
