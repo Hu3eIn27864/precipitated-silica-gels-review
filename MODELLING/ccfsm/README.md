@@ -60,6 +60,13 @@ The bridge-to-morphology relations are explicit testable hypotheses, not establi
 
 ## CCFSM v0.4 — vollständige Einflussparameter-Architektur
 
+- CCFSM_v0.4_CHEMICAL_SUBMODEL_DE.md — chemische Teilbilanz mit Monomer-/Oligomer-/Netzwerk-Si, pH-/Ionenstärke-/Temperaturmodifikatoren, Brückenfraktion und Transfergrenzen.
+- ccfsm_chemical_v04.py — SI-Sekunden-basierter chemischer ODE-Block; liefert effektive Brückendichte und deren Änderungsrate als Eingang für v0.3.
+- test_ccfsm_chemical_v04.py — Regressionstests für Si-Erhaltung, Brückenschranken, pH-Kanäle, Arrhenius-Richtung und Integrator.
+- CCFSM_v0.4_CHEMICAL_PARAMETER_REGISTER.csv — spezifisches Register der chemischen Zustände und kinetischen Parameter.
+
+Das chemische Teilmodell ist mechanistisch modular, aber noch nicht an industriell gefällte Silica-Gele kalibriert. Die pH-/Ionenstärke-/Arrhenius-Funktionen sind identifizierbare Hypothesen; keine Literaturkoeffizienten werden ungeprüft als Zielsystemparameter eingesetzt.
+
 - CCFSM_v0.4_PARAMETER_ARCHITECTURE_DE.md — kausale Parametergruppen von Rezeptur/Fällchemie über Temperatur, Mischung, Netzwerk, Porenraum und Mechanik bis Transport, Grenzfläche, Geometrie und Messunsicherheit; Freigabekriterien für vollständig grüne Gleichungen.
 - CCFSM_v0.4_INFLUENCE_PARAMETER_REGISTER.csv — maschinenlesbares Register mit Symbol, Gruppe, Rolle, Einheit, Wirkpfad, Messbedarf und Identifizierbarkeitswarnung.
 - CCFSM_v0.4_EQUATION_VERIFICATION_MATRIX_DE.md — 13 equation blocks with separate mathematical, physical and empirical readiness gates; explicit rejection rules for double counting and unsupported structure–permeability laws.
