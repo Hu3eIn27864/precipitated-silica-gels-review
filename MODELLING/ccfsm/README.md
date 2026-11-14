@@ -314,3 +314,10 @@ Die 22 Sensitivitäts- und 44 Figure/Table-Konfliktpunkte bleiben getrennte Evid
 - `ccfsm_p13_onsager_transport.py` ersetzt den diffusionsgetriebenen Anteil von P10 durch einen logarithmischen Onsager-Fluss auf Basis diskreter chemischer Potentiale; Upwind-Advektion und Darcy-Kopplung bleiben explizit getrennt.
 - `test_ccfsm_p13_onsager_transport.py` prüft nichtnegative Diffusionsdissipation, homogene Grenzfälle, Null-Diffusivität und das mechanische Dead-load-Potential.
 - `CCFSM_v2.8_P13_ONSAGER_TRANSPORT_DE.md` dokumentiert Herleitung und Grenzen. P13 beweist noch keinen vollständigen offenen Energie-/Entropiesatz; insbesondere bleibt die Entropiebilanz der Upwind-Advektion offen.
+
+
+## CCFSM P14 — Upwind-Entropiebilanz
+
+- `ccfsm_p14_upwind_entropy_audit.py` leitet die exakte semidiskrete Entropiebilanz des Upwind-Advektionsterms zusammen mit `theta_dot = -div(q)` für variable Fluidkapazität her.
+- `test_ccfsm_p14_upwind_entropy_audit.py` prüft Rand-Entropieleistung, nichtnegative innere numerische Entropieproduktion, Flussumkehr und Identitätsresiduum.
+- `CCFSM_v2.9_P14_UPWIND_ENTROPY_DE.md` dokumentiert Herleitung und Geltungsgrenzen. Die Teilidentität ist kein vollständiger CCFSM-Energiebeweis.
