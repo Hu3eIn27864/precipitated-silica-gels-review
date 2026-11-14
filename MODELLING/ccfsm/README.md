@@ -148,3 +148,12 @@ Die 22 Sensitivitäts- und 44 Figure/Table-Konfliktpunkte bleiben getrennte Evid
 - Der CI-Workflow entdeckt den neuen Test automatisch über unittest discovery.
 
 **Wichtige Statusgrenze:** v1.0 ist eine vollständige Gleichungsarchitektur, aber noch keine vollständig thermodynamisch hergeleitete oder empirisch geschlossene Theorie. Die freie Energie, Onsager-Mobilitäten, konkrete Koeffizientenfunktionen und 3D-Randgeometrien müssen noch geschlossen werden. Es wird kein Existenz-/Eindeutigkeitsbeweis für das volle System und kein globaler Regularitätsbeweis behauptet. Unidentifizierte Permeabilitäts-, Modul- und Morphologieschließungen bleiben offen; natürliche Synärese bleibt vom Druckzell-/Oedometerzweig getrennt.
+
+## CCFSM v1.1 — thermodynamischer P0-Kern (14.11.2026)
+
+- `CCFSM_v1.1_THERMODYNAMIC_CORE_DE.md` führt die Biot-Energie über den Fluidgehaltszuwachs `zeta` ein. Spannung und Porendruck folgen als konjugierte Ableitungen derselben freien Energie; Darcy-Transport liefert eine nichtnegative Dissipation.
+- `CCFSM_v1.1_P0_ENERGY_ESTIMATE_DE.md` formuliert die schwache P0-Referenzgleichung und leitet die formale Energieidentität her. Die Biot-Kopplungsterme heben sich in der Energieabschätzung exakt auf.
+- `test_ccfsm_v11_thermodynamics.py` prüft die Spezifikationsstruktur, nicht die mathematische Gültigkeit eines Existenzsatzes.
+- Interne Variablen, chemische Spezies und viskoelastische Beiträge sind als Onsager-/Gradientenfluss-Erweiterungen strukturiert, aber silica-spezifische Energien und kinetische Koeffizienten bleiben offen.
+
+**Statusgrenze:** Die P0-Energieabschätzung ist hergeleitet für das lineare, isotherme, gesättigte Referenzsystem unter den dokumentierten Annahmen. Die vollständige Galerkin-Existenzkonstruktion ist noch nicht ausgeführt. Daraus folgt kein Beweis für P1–P5.
