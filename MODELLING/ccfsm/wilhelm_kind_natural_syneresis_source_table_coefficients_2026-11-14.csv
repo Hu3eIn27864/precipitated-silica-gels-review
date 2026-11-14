@@ -1,0 +1,13 @@
+geometry,catalyst,temperature_C,A_source_table,tau_source_table_h,apparent_rate_h_inv,initial_rate_h_inv,source_table,source_status
+"cylinder","acidic",20,0.20,21.3,0.046948,0.009390,"Wilhelm & Kind 2015 Table 1","source-reported natural syneresis coefficient"
+"cylinder","acidic",40,0.20,11.7,0.085470,0.017094,"Wilhelm & Kind 2015 Table 1","source-reported natural syneresis coefficient"
+"cylinder","acidic",60,0.20,5.0,0.200000,0.040000,"Wilhelm & Kind 2015 Table 1","source-reported natural syneresis coefficient"
+"cylinder","basic",20,0.30,50.1,0.019960,0.005988,"Wilhelm & Kind 2015 Table 1","source-reported natural syneresis coefficient"
+"cylinder","basic",40,0.39,32.0,0.031250,0.012188,"Wilhelm & Kind 2015 Table 1","source-reported natural syneresis coefficient"
+"cylinder","basic",60,0.51,27.5,0.036364,0.018545,"Wilhelm & Kind 2015 Table 1","source-reported natural syneresis coefficient"
+"droplet","acidic",20,0.37,0.40,2.500000,0.925000,"Wilhelm & Kind 2015 Table 2","source-reported natural syneresis coefficient"
+"droplet","acidic",40,0.41,0.64,1.562500,0.640625,"Wilhelm & Kind 2015 Table 2","source-reported natural syneresis coefficient"
+"droplet","acidic",60,0.48,0.77,1.298701,0.623377,"Wilhelm & Kind 2015 Table 2","source-reported natural syneresis coefficient"
+"droplet","basic",20,0.30,0.67,1.492537,0.447761,"Wilhelm & Kind 2015 Table 2","source-reported; conflict with 2017 dissertation branch"
+"droplet","basic",40,0.39,0.57,1.754386,0.684211,"Wilhelm & Kind 2015 Table 2","source-reported; conflict with 2017 dissertation branch"
+"droplet","basic",60,0.51,0.95,1.052632,0.536842,"Wilhelm & Kind 2015 Table 2","source-reported; conflict with 2017 dissertation branch"
