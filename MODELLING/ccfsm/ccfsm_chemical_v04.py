@@ -218,8 +218,8 @@ def evaluate_chemical_rates(state, environment, parameters):
         environment.temperature_k)
 
     r_olig = (k_olig*c_ref*(omega**parameters.supersaturation_order)
-              *(cm/c_ref)**(parameters.oligomerization_order-1.0)
-              * (cm/c_ref) * f_ph*f_ionic)
+              *(cm/c_ref)**parameters.oligomerization_order
+              * f_ph*f_ionic)
     r_net = k_net * co * f_ph * f_ionic
     f_diss = (1.0
         + parameters.dissolution_base_weight*f_base
