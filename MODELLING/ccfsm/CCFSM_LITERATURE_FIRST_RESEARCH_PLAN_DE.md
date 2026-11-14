@@ -46,7 +46,7 @@ Volltext: https://www.mdpi.com/2073-4360/7/12/2504
 
 ### 3.2 Dissertation und KIT-Repositorium
 
-**Wilhelm, S. (2017).** *Über die Synärese kolloidaler Strukturen am Beispiel von Siliciumdioxid*. KIT Scientific Publishing. DOI: [10.5445/KSP/1000073100](https://publikationen.bibliothek.kit.edu/1000017100/1376042).  
+**Wilhelm, S. (2017).** *Über die Synärese kolloidaler Strukturen am Beispiel von Siliciumdioxid*. KIT Scientific Publishing. DOI: [10.5445/KSP/1000073100](https://doi.org/10.5445/KSP/1000073100).  
 Institutioneller Volltext/Datensatz: https://publikationen.bibliothek.kit.edu/1000052536/3796774
 
 - Dient zum Gegenprüfen der 2015er Artikelwerte, Methoden und Figuren.
@@ -115,9 +115,11 @@ Volltext-PDF: https://belinra.inrae.fr/doc_num.php?explnum_id=3120
 - Dissertation; ergänzende Prozess-, Gelierungs- und Strukturinformationen.
 - Qualitative Synäresehinweise nicht als quantitative Zeitkurven behandeln, sofern keine expliziten Messwerte gefunden werden.
 
-**Schlomach, J.; Kind, M. (2004).** *Investigations on the semi-batch precipitation of silica*.
-- Potenziell relevant für Primärpartikel, Aggregatstruktur und Fällbedingungen.
-- Exakte bibliographische Angaben und konkrete Zahlen müssen aus dem Original geprüft werden, bevor ein quantitativer Modellanker eingetragen wird.
+**Schlomach, J.; Kind, M. (2004).** *Investigations on the semi-batch precipitation of silica*. Journal of Colloid and Interface Science 277(2), 316–326. DOI: [10.1016/j.jcis.2004.04.051](https://doi.org/10.1016/j.jcis.2004.04.051).
+- Zielsystemnah: Fällung aus Natriumsilikat und Schwefelsäure im 5-L-Rührkessel bei 83 °C; Photonenkorrelationsspektroskopie für Aggregationsentwicklung.
+- Der Abstract berichtet einen reaktionslimitierten Aggregationskernel mit A = 1 und B′(t) = 3,4×10⁻²⁰ bis 2,6×10⁻²⁰ L/min, eine Fraktaldimension der Gelcluster von zunächst etwa 1,8, rasch ansteigend auf etwa 2,4, eine spezifische Oberfläche von 480 auf 300 m²/g sowie Primärpartikel mit 22,7 nm.
+- Diese Werte sind wertvolle Struktur-/Fällungsanker für die chemisch-morphologische Vorgeschichte des CCFSM. Sie sind **keine** Messungen der zeitabhängigen natürlichen Synärese nach Gelpunkt und identifizieren weder Porenpermeabilität noch tragende Brückendichte.
+- Abstractdaten sind Evidenzklasse E, bis die Originaltabellen/Figuren und Messdefinitionen aus dem Volltext geprüft sind.
 
 ### 3.8 Ausschluss-/Vergleichsquelle: erzwungene Konsolidierung
 
@@ -164,10 +166,11 @@ Volltext-PDF: https://belinra.inrae.fr/doc_num.php?explnum_id=3120
 1. **Supplementary Materials Wilhelm & Kind (2015):** Tabellen S1–S7 und Figuren S1–S6 sichern, lokal/maschinenlesbar erfassen und nur die natürlich-synereserelevanten Inhalte markieren.
 2. **Scherer (1989) Part II:** Volltext sichern, Geometrie/Rezeptur/Alterung/Drainagebedingungen rekonstruieren, natürliche Syneresekurven mit Pixelkalibrierung extrahieren.
 3. **Scherer & Swiatek (1989):** Volltextzahlen und Einheiten für Permeabilität prüfen; Materialzustand und Messprotokoll erfassen.
-4. **Scherer (1989) Modulpaper:** Figuren 1–7 reproduzierbar digitalisieren, aber in separater TEOS-Datenklasse.
-5. **Quarch/KITopen und Schlomach & Kind:** konkrete struktur- und gelbildungsbezogene Messgrößen und Quellenstellen ergänzen.
-6. **Datenbank erweitern:** jeden extrahierten Zahlenwert mit Quelle, Seite/Figur/Tabelle, Originaleinheit, Umrechnung, Evidenzklasse, Prozessklasse und Freigabestatus dokumentieren.
-7. **Modellvergleich:** zunächst ein reduziertes, identifizierbares Modell an Wilhelm & Kind; Scherer-Daten als externe Mechanismenprüfung, nicht als gepoolte Kalibrierung.
+4. **Schlomach & Kind (2004):** Strukturanker (D_f, Primärpartikelgröße, spezifische Oberfläche und Aggregationskinetik) aus Originalfiguren/-tabellen mit Messdefinitionen absichern; strikt als Fällungs-/Gelpunkt-Vorgeschichte behandeln.
+5. **Scherer (1989) Modulpaper:** Figuren 1–7 reproduzierbar digitalisieren, aber in separater TEOS-Datenklasse.
+6. **Quarch/KITopen:** konkrete struktur- und gelbildungsbezogene Messgrößen und Quellenstellen ergänzen.
+7. **Datenbank erweitern:** jeden extrahierten Zahlenwert mit Quelle, Seite/Figur/Tabelle, Originaleinheit, Umrechnung, Evidenzklasse, Prozessklasse und Freigabestatus dokumentieren.
+8. **Modellvergleich:** zunächst ein reduziertes, identifizierbares Modell an Wilhelm & Kind; Scherer-Daten als externe Mechanismenprüfung, nicht als gepoolte Kalibrierung.
 
 ## 7. Publikationsethik und Claim-Grenzen
 
