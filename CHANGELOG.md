@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-11-14 — Dedicated CCFSM continuous integration
+
+- Added .github/workflows/ccfsm-ci.yml. Changes to the natural-syneresis CCFSM package now trigger a light Python 3.12 unit-test workflow independently of the computationally heavier MC3D pipeline.
+
+
 ## 2026-11-14 — CCFSM v0.2 two-timescale natural-syneresis closure
 
 - Added MODELLING/ccfsm/CCFSM_v0.2_TWO_TIMESCALE.md with the two-state model q (intrinsic network contraction potential) and S (observed bulk shrinkage), exact solutions including the equal-rate limit, and explicit assumptions.
