@@ -117,7 +117,7 @@ Volltext-PDF: https://belinra.inrae.fr/doc_num.php?explnum_id=3120
 
 **Schlomach, J.; Kind, M. (2004).** *Investigations on the semi-batch precipitation of silica*. Journal of Colloid and Interface Science 277(2), 316–326. DOI: [10.1016/j.jcis.2004.04.051](https://doi.org/10.1016/j.jcis.2004.04.051).
 - Zielsystemnah: Fällung aus Natriumsilikat und Schwefelsäure im 5-L-Rührkessel bei 83 °C; Photonenkorrelationsspektroskopie für Aggregationsentwicklung.
-- Der Abstract berichtet einen reaktionslimitierten Aggregationskernel mit A = 1 und B′(t) = 3,4×10⁻²⁰ bis 2,6×10⁻²⁰ L/min, eine Fraktaldimension der Gelcluster von zunächst etwa 1,8, rasch ansteigend auf etwa 2,4, eine spezifische Oberfläche von 480 auf 300 m²/g sowie Primärpartikel mit 22,7 nm.
+- Der Abstract berichtet einen reaktionslimitierten Aggregationskernel mit A = 1 und B′(t) = 3,4×10⁻²⁰ bis 2,6×10⁻²⁰ min⁻¹, eine Fraktaldimension der Gelcluster von zunächst etwa 1,8, rasch ansteigend auf etwa 2,4, eine spezifische Oberfläche von 480 auf 300 m²/g sowie Primärpartikel mit 22,7 nm.
 - Diese Werte sind wertvolle Struktur-/Fällungsanker für die chemisch-morphologische Vorgeschichte des CCFSM. Sie sind **keine** Messungen der zeitabhängigen natürlichen Synärese nach Gelpunkt und identifizieren weder Porenpermeabilität noch tragende Brückendichte.
 - Abstractdaten sind Evidenzklasse E, bis die Originaltabellen/Figuren und Messdefinitionen aus dem Volltext geprüft sind.
 
