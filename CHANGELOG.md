@@ -904,3 +904,12 @@
 - Added logarithmic-mean reaction mobilities with nonnegative local reaction dissipation, and coupled the thermodynamic kernel to P8b open-boundary transport.
 - Added regression tests for finite-difference energy derivatives, pressure-capacity consistency, reaction dissipation, local silicon conservation and open-boundary balance.
 - The closed-boundary energy identity is formal under smooth positive solutions. Open-boundary reservoir work, nonideal activities, capillarity, moving interfaces, empirical calibration and global nonlinear PDE existence remain unresolved.
+
+
+## 2026-11-14 — CCFSM P9 mechanische Rückkopplung und Permeabilität
+
+- Added a local traction-controlled 1D Biot/eigenstrain closure coupling fluid content, pore pressure and axial equilibrium analytically.
+- Added elastic/storage/mixing energy accounting and the envelope-derivative mechanical correction to N/B chemical potentials; no separate bridge-energy term is added.
+- Added a strictly positive exponential bridge-fraction/strain-dependent intrinsic-permeability hypothesis, explicitly uncalibrated.
+- Added fieldwise evaluation and regression tests for exact local Biot identity, traction equilibrium, reference state, positivity and selected monotonicity.
+- Scope remains a local constitutive closure: no spatial Darcy/transport integration, global nonlinear PDE theorem, full P9 energy-dissipation proof or empirical silica calibration is claimed. Natural syneresis remains distinct from forced pressure-cell/oedometer consolidation.
