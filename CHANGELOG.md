@@ -820,3 +820,11 @@
 - Added regression tests for the zero-resistance limit, slower pressure relaxation, asymmetric-boundary mass balance and invalid inputs.
 - Added `MODELLING/transport_model/external_drainage_resistance.md` and updated the transport README.
 - Kept external membrane/support resistance separate from intrinsic gel permeability; no parameters were fitted to the published curves.
+
+## 2026-11-14 — CCFSM v0.1: natural syneresis only
+
+- Added `MODELLING/ccfsm/CCFSM_NATURAL_SYNERESIS_v0.1.md` with the coupled chemistry–fractal–eigenstrain–poroelastic model, natural-only boundary conditions, parameter-identifiability limits, invariant-region proofs, global fluid balance and a linearized poroelastic energy identity.
+- Added the reduced scalar Python implementation and ten regression tests for exact response, positivity/bounds, semigroup consistency, solid-volume balance and dimensional hydraulic time-scale evaluation.
+- Added separate machine-readable datasets for the seven curated digitized primary re-fits and the twelve source-reported natural-syneresis coefficients from Wilhelm & Kind (2015) Tables 1–2.
+- Kept the Figure 10b basic-droplet source conflict explicit; kept the oedometer/enforced-syneresis data and parameters outside the natural-syneresis calibration.
+- The reduced model tests pass in an isolated run. No hosted CI result is claimed. Chemical/fractal constitutive coefficients and independent matched-state permeability/modulus remain unidentified; finite-strain extension and physical validation remain open.
