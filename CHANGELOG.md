@@ -895,3 +895,12 @@
 - Added consistent mobile M/O boundary transport with upwind reservoir concentrations on inflow and gel concentrations on outflow; immobilized N/B pools are not advected out.
 - Added exact semidiscrete global fluid and silicon boundary-balance checks and a nonnegative pressure dissipation functional.
 - Added regression tests for inflow/outflow signs, fluid-volume balance, silicon export, boundary upwinding and validation. No capillary law, moving interface, evaporation or empirical calibration is claimed.
+
+
+## 2026-11-14 — CCFSM P8c thermodynamic variable-capacity closure
+
+- Added the variable-capacity free-energy closure with dPsi/dtheta = p - Pi_osm and retained the mechanical/storage pressure p as the Darcy driving potential.
+- Derived the ideal-mixture Gibbs-Duhem cancellation that combines the fluid-capacity and mobile-advection contributions into Darcy dissipation.
+- Added logarithmic-mean reaction mobilities with nonnegative local reaction dissipation, and coupled the thermodynamic kernel to P8b open-boundary transport.
+- Added regression tests for finite-difference energy derivatives, pressure-capacity consistency, reaction dissipation, local silicon conservation and open-boundary balance.
+- The closed-boundary energy identity is formal under smooth positive solutions. Open-boundary reservoir work, nonideal activities, capillarity, moving interfaces, empirical calibration and global nonlinear PDE existence remain unresolved.
