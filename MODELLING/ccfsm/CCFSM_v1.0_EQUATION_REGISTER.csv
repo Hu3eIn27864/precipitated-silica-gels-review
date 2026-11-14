@@ -1,0 +1,10 @@
+block,equation_or_relation,unknowns,required_closure,status,verification_target,notes
+phase_mass,"∂t(1−φ)+div((1−φ)vs)=0; ∂t(φρf)+div(φρf vs+ρf q)=0","φ,vs,q","phase densities and kinematics","formulated; assumptions explicit","solid and fluid mass conservation","current configuration; no solid loss"
+darcy,"q=−K(φ,M)/μ(c,T) (grad p−ρf g)","q,p","symmetric positive-definite K; viscosity law","constitutive closure open","positive dissipation and Darcy limit","K not inferred from Df alone"
+mechanics,"div(σeff−αB p I)+ρbulk g=0","u,p","C(B,Df,z,φ,T), V, eigenstrain","constitutive closure open","coercivity; traction balance","unloaded means zero external traction except capillarity"
+bridges,"Dt B=kb(c,T,I)(B∞−B)−k−b B","B","rates, B∞","hypothesis","0≤B≤B∞","irreversibility requires k−b=0 justification"
+morphology,"Dt Df=km(Df,eq−Df)+div(Af grad Df); Dt z=kz(zeq−z)+div(Az grad z)","Df,z","equilibria and optional gradient mobilities","hypothesis","bounds and nonnegative dissipation","gradient terms optional"
+contraction,"Dt ξu=Ωb Dt B−kr ξu; Dt ξr=kr ξu","ξu,ξr","Ωb, kr and eigenstrain map","hypothesis","inventory balance","ξ is not stress"
+species,"∂t(φci)+div(ci q+φci vs)=div(φDi grad ci)+Ri","ci","stoichiometric matrix, kinetics, activities","architecture; kinetics open","element balance and positivity","spatial chemistry not implemented"
+energy,"dF/dt + D ≤ Pboundary + Pgravity","all","free energy ψ and Onsager operators","design criterion; not derived","D≥0 and energy inequality","not a proven theorem in v1.0"
+boundary,"q·n=0 or p=p_ext / Robin; σtot n=tcap","p,u,ci","geometry, wetting, interface conductance","case-specific","boundary mass/work balance","natural syneresis is not boundary-free"
