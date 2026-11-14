@@ -39,6 +39,9 @@ def p8c_cell_thermodynamics(theta, pressure_pa, mobile_inventories,
     p=float(pressure_pa); pref=float(reference_pressure_pa)
     if not math.isfinite(p) or not math.isfinite(pref):
         raise ValueError("pressures must be finite")
+    pressure_from_storage = pref + (theta-tref)/storage
+    if abs(p-pressure_from_storage) > 1e-8*max(1.0,abs(pressure_from_storage)):
+        raise ValueError("pressure and fluid capacity violate the P8a storage closure")
     if len(mobile_inventories)!=2 or len(network_inventories)!=2:
         raise ValueError("two mobile and two network inventories required")
     inv=tuple(_positive(v,"inventory") for v in
