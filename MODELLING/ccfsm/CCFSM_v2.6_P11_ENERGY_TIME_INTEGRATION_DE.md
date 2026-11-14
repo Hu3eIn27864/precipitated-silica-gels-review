@@ -49,6 +49,8 @@ erfüllt ist. Die Toleranz \(\varepsilon_E\) ist eine numerische Rundungstoleran
 
 Die Energiekontrolle wird in P11 nur für geschlossene Randbedingungen freigegeben: beide hydraulischen Randflüsse und beide mobilen Silicium-Randflüsse müssen numerisch null sein. Bei Reservoir-Ein-/Ausströmung ist die gespeicherte Energie des Gels allein nicht die vollständige Bilanz; Reservoir-Chemiepotentiale, hydraulische Leistung und gegebenenfalls mechanische Randarbeit müssen ergänzt werden. Solche offenen Schritte werden daher zurückgewiesen und nicht fälschlich als dissipativ klassifiziert.
 
+Zusätzlich wird eine von null verschiedene angelegte axiale Traktion zurückgewiesen: P11 enthält derzeit kein äußeres mechanisches Arbeitsfunktional. Die Energiekontrolle gilt daher nur für den lastfreien mechanischen Referenzfall.
+
 Die Zeitintegration ist erster Ordnung und explizit. Die Positivitäts-Schranke verhindert, dass ein akzeptierter Euler-Schritt die Inventare oder Fluidkapazität aus dem zulässigen Bereich bewegt. Die Energierückwärtssuche stellt zusätzlich die diskrete Nichtzunahme für jeden tatsächlich akzeptierten Schritt sicher, sofern ein solcher Schritt innerhalb der Backtracking-Grenze gefunden wird.
 
 ## 5. Was damit gezeigt ist — und was nicht
