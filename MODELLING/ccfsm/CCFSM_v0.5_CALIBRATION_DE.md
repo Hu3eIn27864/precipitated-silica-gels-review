@@ -1,53 +1,52 @@
-# CCFSM v0.5 — Kalibrierungs- und Modellvergleichspipeline
+# CCFSM v0.5 — explorative Auswertung natürlicher Synäresekurven
 
-## Ziel und Geltungsbereich
+## Korrigierte Datenprovenienz
 
-v0.5 wertet die vorhandene Datei DATA/Raw/kurvendigitalisierung.csv aus. Berücksichtigt werden ausschließlich die sieben sauren und sieben basischen natürlichen, mechanisch unbelasteten Synäresekurven. Die sieben Reihen des Panels enforced_syneresis_20C werden vollständig ausgeschlossen.
+Die erste v0.5-CI-Fassung verwendete fälschlich die 14 sauren/basischen Reihen aus DATA/Raw/kurvendigitalisierung.csv als natürliche Synärese. Diese Reihen tragen jedoch Bedingungen Δp=... bar und gehören zur Druckzellenmessung der erzwungenen Synärese (Wilhelm & Kind 2015, Figure 12/Table 3; KIT-Dissertation, Abschnitt 5.2). Die erste Ergebniszusammenfassung ist deshalb als natürliche Kalibrierung zurückgezogen. Sie darf nicht für CCFSM-Aussagen über natürliche Synärese zitiert werden.
 
-Die digitalisierten Kurven sind sichtbare Figurenspuren; Mess- und Modelllinien können teilweise untrennbar überlagert sein. Sie sind weder Autor-Rohdaten noch unabhängige experimentelle Replikate. Die Zahl der Kurvenpunkte darf nicht als Stichprobengröße unabhängiger Experimente interpretiert werden.
+Die korrigierte Pipeline verwendet ausschließlich die kuratierten primären Reihen aus LITERATURE/wilhelm_kind_approximate_measurement_points_curated.csv. Das sind sieben natürliche Reihen aus Figures 8 und 10:
+- Figure 8a: sauer, 20 °C (Zylinder)
+- Figure 8b: basisch, 20/40/60 °C (Zylinder)
+- Figure 10a: sauer, 20/40/60 °C (Tröpfchen)
+
+Die Daten sind KI-gestützte ungeprüfte Näherungsablesungen, nicht pixelkalibrierte Originalmarker und nicht Autor-Rohdaten. 22 sensitivity_only-Punkte und 44 figure_table_conflict_branch-Punkte bleiben ausgeschlossen. Lokale Reversals im freigegebenen primären Zweig werden nicht geglättet oder gelöscht.
+
+Die Datei DATA/Raw/kurvendigitalisierung.csv wird nur als Provenienz-Audit eingelesen. Die 21 Reihen werden als Druckzell-/erzwungene Synärese klassifiziert und vollständig aus natürlichen Fits ausgeschlossen.
 
 ## Modellfamilien
 
-1. Exponentiell: S(t)=A[1-exp(-t/tau)] (zwei Parameter).
-2. Gestreckt exponentiell: S(t)=A[1-exp(-(t/tau)^n)] (drei Parameter).
+1. Exponentiell: S(t)=A[1-exp(-t/tau)].
+2. Gestreckt exponentiell: S(t)=A[1-exp(-(t/tau)^n)].
 3. Zweistufige CCFSM-Antwort:
 
 S(t)=A_eff[1-(k_f exp(-k_s t)-k_s exp(-k_f t))/(k_f-k_s)].
 
-Für k_s=k_f=k gilt der stetige Grenzfall S(t)=A_eff[1-(1+kt)exp(-kt)].
+Für k_s=k_f=k gilt S(t)=A_eff[1-(1+kt)exp(-kt)].
 
-Im zweistufigen Output ist A_eff=eta_a*q_inf. Aus einer einzelnen Schrumpfungskurve lassen sich eta_a und q_inf nicht separat bestimmen. Auch die beiden Raten sind nur als ungeordnetes Paar identifizierbar; die Sortierung in langsam/schnell weist ihnen keine chemische oder hydraulische Bedeutung zu.
+A_eff=eta_a*q_inf. Aus einer einzelnen Schrumpfungskurve sind eta_a und q_inf nicht getrennt identifizierbar. Das Ratenpaar ist ungeordnet; die Sortierung langsam/schnell begründet keine chemische oder hydraulische Zuordnung.
 
-## Schätz- und Vergleichsverfahren
+## Schätzung und Vergleich
 
-- Die Amplitude wird für jedes Parameterset analytisch durch beschränkte kleinste Quadrate auf [0,1] profiliert.
-- Positive Zeitparameter werden logarithmisch gesucht; zweidimensionale Fits verwenden ein deterministisches Gitter mit anschließender Koordinatensuche.
-- Berichtet werden RMSE und AICc als deskriptive Anpassungsmaße.
-- Chronologische Prüfung: erste 80 % der Zeitpunkte zum Fit, letzte 20 % als Holdout. Das prüft zeitliche Extrapolation innerhalb derselben Kurve, ist aber keine unabhängige Validierung an neuen Rezepturen oder Chargen.
-- Parameter an Suchgrenzen werden mit boundary_hit markiert und sind nicht als belastbare Schätzungen zu verwenden.
-
-## Unsicherheit und Identifizierbarkeit
-
-Es werden bewusst keine gewöhnlichen punktweisen Konfidenzintervalle und kein i.i.d.-Bootstrap aus den Kurvenpunkten berechnet. Das wäre angesichts korrelierter Digitalisierungspunkte und der Mess-/Modellüberlagerung nicht gerechtfertigt. AICc und Holdout-RMSE sind Vergleichsdiagnostik, aber ihre üblichen probabilistischen Interpretationen sind eingeschränkt.
-
-Die Seriennamen und Bedingungstexte werden unverändert übernommen. Aus diesen Kurven allein wird weder eine Arrhenius-Aktivierungsenergie noch ein kausales pH-/Konzentrationsgesetz abgeleitet. Dafür sind standardisierte Versuchsmetadaten und unabhängige Messgrößen nötig.
+- Die Amplitude wird je Parameterset analytisch durch beschränkte kleinste Quadrate auf [0,1] profiliert.
+- Positive Zeitparameter werden logarithmisch gesucht; zweidimensionale Fits verwenden ein deterministisches Gitter und anschließende Koordinatensuche.
+- Berichtet werden RMSE, AICc und ein chronologischer Holdout (erste 80 % der Zeitpunkte Fit, letzte 20 % Test).
+- Parameter an Suchgrenzen werden mit boundary_hit markiert.
+- AICc und Holdout-RMSE sind wegen kleiner Kurvenzahl und ungeprüfter Näherungsablesungen rein deskriptiv. Es werden keine i.i.d.-Konfidenzintervalle oder statistischen Signifikanzbehauptungen abgeleitet.
 
 ## Ausführung
 
 Vom Repository-Root:
 
-    python MODELLING/ccfsm/ccfsm_v05_calibration.py --input DATA/Raw/kurvendigitalisierung.csv --output-dir MODELLING/ccfsm/results_v0.5
+    python MODELLING/ccfsm/ccfsm_v05_calibration.py --input LITERATURE/wilhelm_kind_approximate_measurement_points_curated.csv --pressure-audit DATA/Raw/kurvendigitalisierung.csv --output-dir MODELLING/ccfsm/results_v0.5
     python -m unittest discover -s MODELLING/ccfsm -p 'test_*.py' -v
 
-Erzeugte Dateien:
-- ccfsm_v05_curve_fits.csv — Parameterschätzungen pro Kurve und Modell.
-- ccfsm_v05_model_comparison.csv — AICc-, RMSE- und zeitliche Holdout-Vergleiche.
-- ccfsm_v05_predictions_residuals.csv — Kurvenvorhersagen und Residuen.
-- ccfsm_v05_curve_winners.csv — AICc-bester Modelltyp je Kurve.
-- CCFSM_v0.5_CALIBRATION_REPORT_DE.md — automatisch erzeugter Kurzbericht.
-
-GitHub Actions führt die Auswertung auf der Repository-Datendatei aus und stellt die Ergebnisdateien als CI-Artefakt bereit. Generierte Resultate bleiben damit von den Quelldaten getrennt.
+Ausgaben:
+- ccfsm_v05_curve_fits.csv
+- ccfsm_v05_model_comparison.csv
+- ccfsm_v05_predictions_residuals.csv
+- ccfsm_v05_curve_winners.csv
+- CCFSM_v0.5_CALIBRATION_REPORT_DE.md
 
 ## Aussagegrenze
 
-v0.5 ist eine reproduzierbare Kurvenvergleichs- und Identifizierbarkeitspipeline. Ein guter Fit belegt weder die vollständige chemische Kinetik noch die hydraulische Konstitutivgleichung des CCFSM. Die physikalische Zuordnung der Raten verlangt unabhängige Struktur-, Permeabilitäts-, Temperatur- und/oder Flüssigkeitsabflussmessungen.
+Dies ist eine explorative Modellvergleichspipeline für sieben approximativ abgelesene natürliche Kurven. Sie ist keine belastbare empirische Kalibrierung, keine unabhängige Validierung und kein Nachweis der vollständigen chemisch-hydraulischen CCFSM-Gleichungen. Für belastbare Kalibrierung sind verifizierte markerbasierte Daten, Fehlerbalken/Replikatstreuung und unabhängige Struktur-/Transportmessungen erforderlich.
