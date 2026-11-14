@@ -10,7 +10,7 @@ class CCFSMv11ThermodynamicsTests(unittest.TestCase):
         text = (ROOT / "CCFSM_v1.1_THERMODYNAMIC_CORE_DE.md").read_text(encoding="utf-8")
         for token in ("\\psi_0", "\\boldsymbol\\sigma=\\partial_\\varepsilon\\psi_0",
                       "p=\\partial_\\zeta\\psi_0", "\\mathbf q=-\\mathbb L_p\\nabla p",
-                      "\\frac{d}{dt}\\mathcal F_0", "**Noch offen**"):
+                      "\\frac{d}{dt}\\mathcal F_0", "**Noch offen:**"):
             self.assertIn(token, text)
 
     def test_p0_proof_cancels_biot_coupling(self):
