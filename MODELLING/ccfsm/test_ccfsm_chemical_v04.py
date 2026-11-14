@@ -11,7 +11,6 @@ from ccfsm_chemical_v04 import (
 def parameters(**overrides):
     values = dict(
         reference_silica_concentration_mol_m3=100.0,
-        pKa_monomer=9.5,
         oligomerization_rate_ref_s=1e-4,
         network_growth_rate_ref_s=2e-4,
         dissolution_rate_ref_s=1e-6,
@@ -30,7 +29,7 @@ def parameters(**overrides):
 def environment(**overrides):
     values = dict(pH=8.0, temperature_k=298.15,
                   ionic_strength_mol_kg=0.1,
-                  silica_solubility_mol_m3=10.0, pKw=14.0)
+                  silica_solubility_mol_m3=10.0, pKw=14.0, pKa_monomer=9.5)
     values.update(overrides)
     return ChemicalEnvironment(**values)
 
@@ -61,6 +60,17 @@ class TestCCFSMChemicalV04(unittest.TestCase):
         low = acid_base_activity_factors(environment(pH=8.0), p)[2]
         high = acid_base_activity_factors(environment(pH=10.0), p)[2]
         self.assertGreater(high, low)
+
+    def test_ionic_strength_modifier_increases_for_positive_exponent(self):
+        p = parameters(ionic_strength_exponent=0.65)
+        low = evaluate_chemical_rates(
+            ChemicalState(0.0, 100.0, 10.0, 5.0, 0.2),
+            environment(ionic_strength_mol_kg=0.0), p)
+        high = evaluate_chemical_rates(
+            ChemicalState(0.0, 100.0, 10.0, 5.0, 0.2),
+            environment(ionic_strength_mol_kg=0.5), p)
+        self.assertGreater(high.oligomerization_mol_m3_s,
+                           low.oligomerization_mol_m3_s)
 
     def test_silanolate_pair_proxy_peaks_at_pka(self):
         p = parameters(acid_catalysis_weight=0.0, base_catalysis_weight=0.0,
