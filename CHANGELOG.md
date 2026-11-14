@@ -965,3 +965,11 @@
 - Führt die advektive Randpotentialleistung mit tatsächlichen Upwind-Donoren und die diffusive Reservoir-Chemieleistung mit den Reservoir-Chemiepotentialen getrennt und vorzeichenkonsistent.
 - Weist innere Upwind-Produktion, innere Onsager-Dissipation und Halbzellen-Reservoir-Dissipation separat als nichtnegative Beiträge aus.
 - Die Teilidentität schließt weder Reaktionsenergie noch Darcy-/Druckarbeit, Mechanik, nichtideale Aktivitäten oder die globale nichtlineare PDE-Energiebilanz. Keine empirische Kalibrierung oder physikalische Validierung behauptet.
+
+
+## 2026-11-14 — CCFSM P16 gekoppelte Energiebilanz und mechanischer Variationsaudit
+
+- Verbindet die P15-mobile Transportteilbilanz, die P10-Detailbilanzreaktionen und die P9-Fluid-/Chemie-Konjugierten entlang des P13-semidiskreten Operators.
+- Leitet die hydraulische Reservoirleistung mit korrekter Vorzeichenkonvention sowie Darcy-Dissipation einschließlich beider Reservoir-Halbzellen her.
+- Prüft explizit, ob die P9-Spannung die Ableitung der gespeicherten elastischen plus Biot-Energie ist. Der allgemeine Restterm −2 lambda epsilon_ch wird offengelegt; keine vollständige mechanische Energiekonsistenz wird behauptet.
+- Kein globaler PDE-Energiesatz, keine mechanische Randarbeitsbilanz und keine empirische Validierung.
