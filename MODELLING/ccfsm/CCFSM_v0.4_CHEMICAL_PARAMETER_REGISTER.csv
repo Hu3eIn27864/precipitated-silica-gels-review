@@ -14,3 +14,7 @@ k_bhyd,bridge hydrolysis rate,chemistry parameter,parameter,s-1,unidentified,bet
 m_I,ionic-strength exponent,chemistry parameter,parameter,dimensionless,unidentified,ionic strength modifier,controlled electrolyte series,ion-specific effects not captured by I
 E_a_j,mechanism activation energy,chemistry parameter,parameter,J mol-1,unidentified,temperature dependence of each rate,multi-temperature gel-core time series,one Ea per pathway
 f_load,load-bearing network fraction,network closure,parameter,dimensionless,unidentified,network Si to bridge density,contact topology and rheology,not equal to chemical bond fraction
+pKa_surface,oligomer/particle surface apparent dissociation constant,chemical environment,input,dimensionless,condition dependent,network-growth speciation,independent surface acid-base/speciation measurement,not equal to monomer pKa
+network_acid_weight,acid channel weight for network growth,chemistry parameter,parameter,dimensionless,unidentified,oligomer/particle surface condensation,network growth kinetics by pH,distinct from monomer condensation channel
+network_pair_weight,silanolate-pair channel weight for network growth,chemistry parameter,parameter,dimensionless,unidentified,network surface speciation,network growth kinetics by pH,surface pKa and mechanism differ from monomer
+network_base_weight,base channel weight for network growth,chemistry parameter,parameter,dimensionless,unidentified,oligomer/particle surface condensation,network growth kinetics by pH,distinct from monomer condensation channel
