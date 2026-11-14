@@ -223,7 +223,8 @@ With \(q(t)\) independently measured, equation (2) constrains \(k_n\). With \(\k
 
 - The Python implementation provides the exact two-stage response, stable equal-rate limit, hydraulic-rate scaling, isotropic finite-strain stretch and unordered rate-pair recovery.
 - The 12 regression tests cover the zero-state lag, pre-aged initial state, equal/near-equal rates, invariant region, monotonicity, endpoint, rate-swap symmetry, rate recovery, \(L_d^{-2}\) scaling, finite kinematics and invalid inputs.
-- Local run on 14 November 2026: **12/12 tests passed** using **python -m unittest -v**.
+- Local run on 14 November 2026: **12/12 v0.2 tests passed** using **python -m unittest -v**.
+- Hosted GitHub Actions run [43569636089](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43569636089) passed **22/22 tests** in total: 10 v0.1 regression tests plus 12 v0.2 tests.
 
 This is software/analytical verification, not physical validation. The two-timescale model is a reduced hypothesis and a falsifiable bridge to a future finite-strain poro-viscoelastic field model, not a completed universal constitutive law.
 
