@@ -11,7 +11,7 @@ pH,pH,chemical state,state,dimensionless,measured time series,speciation and rea
 c_Si_diss,dissolved silicon concentration,chemical state,state,mol m-3,measured time series,supersaturation and bridge formation,ICP/OES or validated assay,requires dissolved/colloidal separation
 Omega_sup,silica supersaturation,chemical state,derived,dimensionless,model-derived,speciation to nucleation/condensation,speciation and solubility model,depends on activity model
 T_g,gel core temperature,thermal history,input field,K,measured time series,all kinetic and transport rates,embedded temperature probe,bath temperature is not equivalent
-E_a,j,activation energy of mechanism j,kinetics,parameter,J mol-1,unidentified,temperature dependence of rate j,multi-temperature kinetic data,one value per mechanism may be inadequate
+E_a_j,activation energy of mechanism j,kinetics,parameter,J mol-1,unidentified,temperature dependence of rate j,multi-temperature kinetic data,one value per mechanism may be inadequate
 n_mix,mixer rotational speed,process,input,s-1,measured input,micromixing and aggregate structure,tachometer,not transferable without geometry
 P_mix,volumetric mixing power,process,input,W m-3,measured/derived,micromixing and shear history,power/torque and volume,prefer over rpm across scales
 t_age,pre-syneresis ageing time,process,input,s,measured input,post-gel condensation and restructuring,protocol timestamps,define gel point and t0
