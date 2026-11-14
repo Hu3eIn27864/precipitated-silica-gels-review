@@ -68,7 +68,7 @@ Für jeden Test-pH werden Aktivitätskoeffizienten und Ionenstärke iteriert, da
 
 ## 5. Übergabe an CCFSM
 
-Der Solver liefert pH, I und monomere Silicium-Spezies. Für das bestehende kinetische Modul werden zusätzlich Löslichkeit c_eq(pH,T,I,Festphase), Gelkerntemperatur und Oligomer-/Oberflächenspeziation benötigt. Diese Größen werden nicht aus einer einzelnen Monomer-Gleichgewichtsrechnung erfunden. Die Löslichkeit amorpher frisch gefällter Silica ist nicht identisch mit der Quarzlöslichkeit.
+Der Solver liefert pH, I und monomere Silicium-Spezies. Der Adapter to_ccfsm_chemical_environment übergibt diese Größen an den bestehenden kinetischen CCFSM-Block. Dafür sind Lösungsmittelmasse pro Liter Endlösung und eine unabhängig bestimmte Silica-Löslichkeit erforderlich; die molare Ionenstärke wird nicht ungeprüft als Molalität behandelt. Für das bestehende kinetische Modul werden zusätzlich Löslichkeit c_eq(pH,T,I,Festphase), Gelkerntemperatur und Oligomer-/Oberflächenspeziation benötigt. Diese Größen werden nicht aus einer einzelnen Monomer-Gleichgewichtsrechnung erfunden. Die Löslichkeit amorpher frisch gefällter Silica ist nicht identisch mit der Quarzlöslichkeit.
 
 I wird zunächst in mol/L ausgegeben. Es darf nicht ungeprüft als mol/kg an ChemicalEnvironment übergeben werden; die Umrechnung benötigt Lösungsmittelmasse bzw. Dichte und Zusammensetzung.
 
