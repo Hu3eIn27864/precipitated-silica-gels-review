@@ -391,3 +391,12 @@ P22 ist kein monolithischer Newton-Löser und liefert bei Nichtkonvergenz keinen
 ## Aktueller Status und priorisierte Roadmap (14.11.2026)
 
 Der geprüfte Stand P0–P22, der P22-Fixpunktresiduum-Audit und die Freigabegates P22.1–P29 sind in [CCFSM_ROADMAP_STATUS_2026-11-14_DE.md](CCFSM_ROADMAP_STATUS_2026-11-14_DE.md) dokumentiert. Nächster Schritt: P22.1 vor P23.
+
+
+### CCFSM P22.1 — Korrektur der Fixpunkt-Konvergenzkontrolle
+
+- Das Zustandsresiduum misst jetzt den unrelaxierten Fixpunktdefekt; kleine Unterrelaxation kann keine Scheinkonvergenz mehr erzeugen.
+- Der akzeptierte Zustand und der zuletzt ausgewertete räumliche Druck-Snapshot gehören zum selben Iteranden.
+- Der Positivitäts-Limiter beachtet zusätzlich die obere Fluidkapazitätsgrenze `theta <= 1`.
+- Regressionstests decken Scheinkonvergenz bei kleiner Relaxation und die obere Schranke ab.
+- Details: [P22-Dokumentation](CCFSM_v3.7_P22_ITERATED_IMPLICIT_COUPLING_DE.md).
