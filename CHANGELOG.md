@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-11-14 — CCFSM v0.2a: temperature-history extension
+
+- Added a protocol-aware exact piecewise-constant rate propagator for the natural-only two-state CCFSM.
+- Added a source audit of Wilhelm & Kind (2015): the natural 3-mm droplet preparation is held at 20 °C for 20 min before transfer; the results discuss similar initial curves for roughly 30 min and subsequent droplet heating. This preparation/result timing difference remains explicit.
+- Added ccfsm_thermal_history.py, user-parameterized Arrhenius rate helper, and seven regression tests. Local test run: 7/7 passed.
+- The model uses actual gel temperature as input, not nominal bath temperature, and does not invent activation energy or thermal lag. It fixes q_infinity and eta_a within one protocol; the article's protocol-dependent endpoints are not pooled.
+- No oedometer or externally forced syneresis data are used for natural-syneresis calibration.
+
+
 ## 2026-11-14 — Hosted CCFSM verification
 
 - Verified GitHub Actions run [43569636089](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43569636089): dedicated CCFSM workflow completed successfully; 22/22 tests passed (10 v0.1 plus 12 v0.2).
