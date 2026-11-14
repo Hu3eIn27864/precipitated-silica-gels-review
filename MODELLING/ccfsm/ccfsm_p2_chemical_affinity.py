@@ -90,8 +90,8 @@ def evaluate_p2_rates(state: ChemicalStateP2, parameters: ChemicalParametersP2) 
     For reaction i -> i+1:
       r_i = k_i*c_ref*(a_i - a_(i+1)/K_i)
       A_i = R*T*ln(K_i*a_i/a_(i+1)).
-    The zero-concentration boundary is handled by the continuous limiting
-    product r*A = 0 when both directional activities vanish.
+    At a one-sided zero-activity boundary the ideal-mixing affinity is
+    logarithmically singular; the extended dissipation is +infinity.
     """
     if not isinstance(state, ChemicalStateP2):
         raise TypeError("state must be ChemicalStateP2")
@@ -114,8 +114,8 @@ def evaluate_p2_rates(state: ChemicalStateP2, parameters: ChemicalParametersP2) 
         elif left == right:
             affinity, product = 0.0, 0.0
         else:
-            # Affinity diverges logarithmically at a pure boundary while
-            # the product has a finite zero limit for the vanishing side.
+            # At a one-sided zero-activity boundary the logarithmic
+            # affinity is singular and the extended dissipation is +infinity.
             affinity = (math.inf if left > right else -math.inf)
             product = math.inf
         rates.append(rate)
@@ -133,21 +133,25 @@ def p2_rhs(state: ChemicalStateP2, parameters: ChemicalParametersP2) -> tuple[fl
 
 def chemical_free_energy_density(state: ChemicalStateP2,
                                  parameters: ChemicalParametersP2) -> float:
-    """Ideal-mixture free energy density up to standard-state constants.
+    """Ideal-mixture free energy density including standard potentials.
 
-    Returns RT*sum(c_i*(ln(a_i)-1)); zero pools use their continuous 0 ln 0 limit.
-    Standard chemical potentials are encoded by the supplied equilibrium
-    constants and omitted here because their linear terms are state-dependent
-    but fixed by the selected reference convention.
+    The convention mu_0,0 = 0 and
+    mu_0,i+1 = mu_0,i - R*T*ln(K_i) makes the supplied K_i exactly
+    consistent with the equilibrium condition mu_i = mu_(i+1).
+    Zero pools use the continuous c*ln(c) -> 0 limit.
     """
     concentrations = (state.monomer, state.oligomer, state.network, state.bridge)
     activities = tuple(g*c/parameters.reference_concentration
                        for g, c in zip(parameters.activity_coefficients, concentrations))
+    rt = R_GAS * parameters.temperature_k
+    standard = [0.0]
+    for equilibrium in parameters.equilibrium_constants:
+        standard.append(standard[-1] - rt * math.log(equilibrium))
     total = 0.0
-    for c, activity in zip(concentrations, activities):
+    for c, activity, mu0 in zip(concentrations, activities, standard):
         if c > 0.0:
-            total += c * (math.log(activity) - 1.0)
-    return R_GAS * parameters.temperature_k * total
+            total += c * (mu0 + rt * (math.log(activity) - 1.0))
+    return total
 
 
 def verify_p2_state(state: ChemicalStateP2, initial_total_silicon: float,
