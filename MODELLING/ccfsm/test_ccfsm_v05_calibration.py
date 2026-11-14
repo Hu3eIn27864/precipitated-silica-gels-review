@@ -32,12 +32,12 @@ class V05CalibrationTests(unittest.TestCase):
                 w=csv.writer(f); w.writerow(["figure","panel","condition","series","source_type","time_h","relative_shrinkage","reanalysis_use","digitization_note"])
                 for j in range(7):
                     for i in range(8):
-                        w.writerow(["Figure 8","a","acidic, pH < pHiso","20 °C", "ai_assisted_approximation",i,.3*(1-math.exp(-i/2)),"primary_exploratory","unverified approximate reading"])
+                        w.writerow(["Figure 8","a","acidic, pH < pHiso",f"{20+j} °C", "ai_assisted_approximation",i,.3*(1-math.exp(-i/2)),"primary_exploratory","unverified approximate reading"])
                 for use in ["sensitivity_only","figure_table_conflict_branch"]:
                     for i in range(8):
                         w.writerow(["Figure 8","a","acidic, pH < pHiso","40 °C","ai_assisted_approximation",i,.3*(1-math.exp(-i/2)),use,"excluded branch"])
             curves=c.read_natural_curves(path)
-            self.assertEqual(len(curves),1)
+            self.assertEqual(len(curves),7)
             self.assertEqual(next(iter(curves.values()))["source_type"],"ai_assisted_approximation")
 
     def test_pressure_cell_file_is_audited_but_not_admitted_as_natural(self):
