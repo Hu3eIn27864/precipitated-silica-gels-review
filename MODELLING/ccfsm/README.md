@@ -274,3 +274,11 @@ Die 22 Sensitivitäts- und 44 Figure/Table-Konfliktpunkte bleiben getrennte Evid
 - ccfsm_p8c_thermodynamic_closure.py implementiert Energie, chemische Potentiale, osmotischen Druck, logarithmische Mittelwert-Reaktionen und den gekoppelten P8b-Randtransport.
 - test_ccfsm_p8c_thermodynamic_closure.py prüft Energieableitungen, Speicherclosure, Reaktionsdissipation, lokale Si-Erhaltung und offene Randbilanz.
 - Die Gesamtenergiedissipation ist formal für glatte positive Lösungen mit geschlossenen Rändern hergeleitet; offene Reservoirränder benötigen zusätzliche Leistungs-/Energieterme. Keine empirische Kalibrierung und kein globaler PDE-Existenzsatz.
+
+
+## CCFSM P9 — mechanische Rückkopplung und Permeabilitätsgesetz
+
+- `CCFSM_v2.4_P9_MECHANICAL_FEEDBACK_DE.md` dokumentiert die lokale 1D-Biot-/Eigenverzerrungs-Schließung, Energieableitungen, Permeabilitätshypothese und Beweisgrenzen.
+- `ccfsm_p9_mechanical_feedback.py` löst quasistatisches axiales Gleichgewicht und Biot-Fluidinhalt algebraisch, berechnet mechanische Beiträge zu den Netzwerkpotentialen und eine positive struktur-/dehnungsabhängige Permeabilität.
+- `test_ccfsm_p9_mechanical_feedback.py` prüft Referenzzustand, Fluidinhaltsidentität, Traktionsgleichgewicht, Permeabilitätspositivität/-Monotonie und Eingabevalidierung.
+- P9 ist ein lokaler konstitutiver Baustein, noch kein räumlicher PDE-Löser. Das exponentielle (K(b,e))-Gesetz ist eine unkalibrierte, falsifizierbare Hypothese; keine globale PDE-Existenz oder vollständige Energieungleichung wird beansprucht.
