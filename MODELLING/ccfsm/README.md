@@ -106,3 +106,13 @@ Der Rezeptur-Speziationsblock wurde mit dem bestehenden CCFSM-Kinetikmodul über
 Die sieben natürlichen Kurven beruhen auf KI-gestützten ungeprüften Näherungsablesungen, nicht auf pixelkalibrierten Marker-Rohdaten. Die Ergebnisse bleiben explorativ; sie sind keine belastbare empirische Kalibrierung und keine physikalische Validierung.
 
 - CCFSM_v0.5_CORRECTED_CI_RESULTS_2026-11-14_DE.md dokumentiert den korrigierten Lauf: 73/73 Tests, 7 natürliche Näherungskurven, 21 getrennt auditierte Druckzellkurven und die Identifizierbarkeitsgrenze des zweistufigen Fits.
+
+
+## CCFSM v0.5 — zweiggetrennte Robustheitsanalyse (14.11.2026)
+
+- `ccfsm_v05_branch_sensitivity.py` wertet alle 164 vorhandenen natürlichen Näherungsablesungen aus, getrennt nach primary, sensitivity-only und Figure-10b-Figure/Table-Konfliktzweig.
+- `results_v0.5/wilhelm_kind_branch_sensitivity_2026-11-14.csv` enthält die getrennten Fits von Einzelexponential und gestrecktem Exponential samt AICc und Suchgrenzen.
+- `CCFSM_v0.5_BRANCH_SENSITIVITY_2026-11-14_DE.md` ordnet die Ergebnisse den CCFSM-Aussagen und Identifizierbarkeitsgrenzen zu.
+- Der CI-Workflow führt die Sensitivitätsanalyse jetzt zusätzlich aus und legt die CSV im Ergebnisartefakt ab.
+
+Die 22 Sensitivitäts- und 44 Figure/Table-Konfliktpunkte bleiben getrennte Evidenzzweige; sie werden nicht in die primäre natürliche Kalibrierung eingemischt. Alle Kurvenwerte bleiben KI-gestützte, ungeprüfte Diagramm-Näherungsablesungen.
