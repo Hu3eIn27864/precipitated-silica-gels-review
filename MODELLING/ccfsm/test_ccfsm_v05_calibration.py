@@ -1,10 +1,7 @@
-import csv
-import math
-import tempfile
-import unittest
+import csv, math, tempfile, unittest
 from pathlib import Path
 import sys
-sys.path.insert(0, str(Path(__file__).parent))
+sys.path.insert(0,str(Path(__file__).parent))
 import ccfsm_v05_calibration as c
 
 class V05CalibrationTests(unittest.TestCase):
@@ -28,27 +25,35 @@ class V05CalibrationTests(unittest.TestCase):
         rmse=math.sqrt(sum((y-p)**2 for (_,y),p in zip(pts,pred))/len(pts))
         self.assertLess(rmse,2e-3)
 
-    def test_reader_excludes_forced_panel_and_checks_14_natural_curves(self):
+    def test_natural_reader_filters_to_seven_curated_primary_series(self):
         with tempfile.TemporaryDirectory() as td:
-            path=Path(td)/"input.csv"
-            with path.open("w",newline="",encoding="utf-8-sig") as f:
-                w=csv.writer(f,delimiter=";")
-                w.writerow(["panel","series","condition","time_h","relative_volume_decrease_or_shrinkage","trace_type"])
-                for panel,prefix in [("acidic_pH_below_pH_iso","acid"),("basic_pH_above_pH_iso","basic")]:
-                    for j in range(7):
-                        for i in range(8):
-                            w.writerow([panel,f"{prefix}_{j}","condition",str(i).replace(".",","),str(.3*(1-math.exp(-i/2))).replace(".",","),"combined visible trace"])
+            path=Path(td)/"natural.csv"
+            with path.open("w",newline="",encoding="utf-8") as f:
+                w=csv.writer(f); w.writerow(["figure","panel","condition","series","source_type","time_h","relative_shrinkage","reanalysis_use","digitization_note"])
                 for j in range(7):
                     for i in range(8):
-                        w.writerow(["enforced_syneresis_20C",f"top_{j}","forced",i,.2,"forced"])
+                        w.writerow(["Figure 8","a","acidic, pH < pHiso","20 °C", "ai_assisted_approximation",i,.3*(1-math.exp(-i/2)),"primary_exploratory","unverified approximate reading"])
+                for use in ["sensitivity_only","figure_table_conflict_branch"]:
+                    for i in range(8):
+                        w.writerow(["Figure 8","a","acidic, pH < pHiso","40 °C","ai_assisted_approximation",i,.3*(1-math.exp(-i/2)),use,"excluded branch"])
             curves=c.read_natural_curves(path)
-            self.assertEqual(len(curves),14)
-            self.assertTrue(all(k[0]!="enforced_syneresis_20C" for k in curves))
+            self.assertEqual(len(curves),1)
+            self.assertEqual(next(iter(curves.values()))["source_type"],"ai_assisted_approximation")
 
-    def test_two_stage_amplitude_is_effective_product_and_rates_sorted(self):
+    def test_pressure_cell_file_is_audited_but_not_admitted_as_natural(self):
+        with tempfile.TemporaryDirectory() as td:
+            path=Path(td)/"pressure.csv"
+            with path.open("w",newline="",encoding="utf-8") as f:
+                w=csv.writer(f,delimiter=";"); w.writerow(["panel","series","condition"])
+                for panel,prefix in [("acidic_pH_below_pH_iso","acid"),("basic_pH_above_pH_iso","basic"),("enforced_syneresis_20C","top")]:
+                    n=7
+                    for j in range(n): w.writerow([panel,f"{prefix}_{j}",f"Δp={j+1} bar"])
+            self.assertEqual(c.audit_pressure_file(path),{"pressure_cell_curves":21,"natural_calibration_curves":0})
+            with self.assertRaises(ValueError): c.read_natural_curves(path)
+
+    def test_two_stage_amplitude_product_and_sorted_rates(self):
         pts=[(t,.25*(1-(.9*math.exp(-.2*t)-.2*math.exp(-.9*t))/.7)) for t in [0,.5,1,2,4,8,12,20,30]]
-        fit=c.fit_model(pts,"ccfsm_two_stage")
-        p=fit["params"]
+        fit=c.fit_model(pts,"ccfsm_two_stage"); p=fit["params"]
         self.assertLessEqual(p["rate_slow_per_h"],p["rate_fast_per_h"])
         self.assertAlmostEqual(p["amplitude_product_eta_qinf"],.25,places=2)
 
