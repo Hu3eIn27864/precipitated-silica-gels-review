@@ -1,0 +1,16 @@
+symbol,name,group,role,unit,status,primary_path,required_observation,identifiability_caution
+c_m,monomeric dissolved silica,chemical state,state,mol Si m-3,measured or speciated,oligomer formation,validated dissolved/monomer separation,rapid speciation exchange
+c_o,soluble oligomeric silica,chemical state,state,mol Si m-3,measured or inferred,network growth,validated oligomer fraction,method-dependent separation
+c_n,condensed network silicon,chemical state,state,mol Si m-3,measured or mass-balanced,bridge inventory,total Si minus soluble pools and effluent,closed Si balance only if no effluent
+beta,load-bearing bridge fraction,network state,state,dimensionless,unidentified,network Si to effective bridges,independent connectivity/rheology proxy,not all Si-O-Si bonds bear load
+c_eq,silica solubility at current pH T I,chemical state,input, mol Si m-3,measured or thermodynamic model,supersaturation,solubility/speciation at actual electrolyte,not transferable from dilute model fluids
+pKa_monomer,monomer first dissociation constant,chemistry parameter,parameter,dimensionless,condition dependent,silanolate fraction,speciation vs pH and T,oligomer surface pKa differs
+pKw,water ion product,chemical environment,input,dimensionless,condition dependent,hydroxide activity,temperature/electrolyte thermodynamics,not fixed at 14 outside reference conditions
+k_o,oligomerization rate,chemistry parameter,parameter,s-1,unidentified,c_m to c_o,time-resolved monomer and oligomer series,concentration order and saturation law
+k_n,network growth rate,chemistry parameter,parameter,s-1,unidentified,c_o to c_n,oligomer and network Si time series,not gel-point time alone
+k_d,dissolution rate,chemistry parameter,parameter,s-1,unidentified,c_n to c_m,dissolved Si release time series,acid/base-specific
+k_form,bridge formation rate,chemistry parameter,parameter,s-1,unidentified,beta evolution,network connectivity proxy,distinct from total condensation
+k_hyd,bridge hydrolysis rate,chemistry parameter,parameter,s-1,unidentified,beta loss,relaxation/chemical ageing series,may covary with dissolution
+m_I,ionic-strength exponent,chemistry parameter,parameter,dimensionless,unidentified,ionic strength modifier,controlled electrolyte series,ion-specific effects not captured by I
+E_a_j,mechanism activation energy,chemistry parameter,parameter,J mol-1,unidentified,temperature dependence of each rate,multi-temperature gel-core time series,one Ea per pathway
+f_load,load-bearing network fraction,network closure,parameter,dimensionless,unidentified,network Si to bridge density,contact topology and rheology,not equal to chemical bond fraction
