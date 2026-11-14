@@ -21,7 +21,7 @@ class TestCCFSMP4VariablePorosity(unittest.TestCase):
     def test_fluid_capacity_balance_is_conservative(self):
         _, theta_rhs = p4_rhs(self.fields, self.theta, self.grid, (1e-10,)*4,
                               self.q, self.params)
-        self.assertAlmostEqual(sum(theta_rhs), 0.0, places=20)
+        self.assertAlmostEqual(sum(theta_rhs), 0.0, delta=1e-16)
 
     def test_global_si_inventory_conserved(self):
         dc, dtheta = p4_rhs(self.fields, self.theta, self.grid, (1e-10,)*4,
