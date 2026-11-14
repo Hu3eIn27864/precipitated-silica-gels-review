@@ -339,3 +339,10 @@ Die Identität ist eine mobile Transport-Teilbilanz bei konstanten Aktivitätsko
 - `test_ccfsm_p16_coupled_energy_ledger.py` — prüft Reaktionsdissipation, Darcy-Randbilanz, Kettenregelzerlegung und das bewusste Erkennen mechanischer Inkonsistenz.
 
 P16 ist kein vollständiger Energiebeweis: Die P9-Spannungs-/Energiekonsistenz ist im Allgemeinen nicht erfüllt und äußere mechanische Arbeit bleibt offen.
+
+
+## CCFSM P17 — variational konsistente P9-Mechanik
+
+- `CCFSM_v3.2_P17_VARIATIONAL_MECHANICS_DE.md` — Ableitung der axialen Spannung und geschlossenen Biot-/Eigenstrain-Lösung aus derselben 3D-isotropen Energie bei verschwindender lateraler Gesamtdehnung.
+- Aktualisiert `ccfsm_p9_mechanical_feedback.py` und die P9/P16-Tests: Die fehlende laterale Eigenstrain-Komponente ist korrigiert; P16 prüft nun die korrigierte mechanische Stationarität.
+- Der Schritt schließt keine räumliche Mechanik, äußere mechanische Randarbeit oder globale PDE-Energiebilanz.
