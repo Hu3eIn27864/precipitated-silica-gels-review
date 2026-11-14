@@ -53,10 +53,10 @@ Erst nach Gate 5 ist eine vollständig grüne empirische Modellgleichung vertret
 
 | ID | Beziehung | Parameter | M | P | E | Freigabebedingung |
 |---|---|---|---|---|---|---|
-| EQ-14 | `dc_m/dt=-r_o+r_d; dc_o/dt=r_o-r_n; dc_n/dt=r_n-r_d` | (k_o,k_n,k_d,c_m,c_o,c_n) | M-GRÜN: exakte Si-Erhaltung | P-GELB: geschlossene Bilanz, Spezieszuordnung vereinfacht | E-ROT | zeitaufgelöste Si-Spezies plus Si-Ausflussbilanz |
-| EQ-15 | (r_o=k_oc_{ref}(c_m/c_{ref})^{n_o}\Omega^{m_o}F_{pH}F_I) | pH-Kanalgewichte/-ordnungen, (I,m_I,c_{eq}) | M-GRÜN als definierte Rate | P-GELB: Modellsysteme nicht gleich Industriefällung | E-ROT | pH-/I-/Konzentrationsmatrix im Zielsystem |
-| EQ-16 | (r_n=k_nc_oF_{pH}F_I), (r_d=k_dc_nF_d) | Netzwerk- und Auflösungsraten | M-GRÜN | P-GELB | E-ROT | gelöste/oligomere/netzwerkgebundene Si-Zeitreihen |
-| EQ-17 | (dot\beta=k_{form}F_{pH}F_I(1-\beta)-k_{hyd}F_{hyd}\beta) | (k_{form},k_{hyd},f_{load}) | M-GRÜN: Intervall ([0,1]) invariant | P-GELB: mesoskopische Brückendefinition | E-ROT | unabhängiger Tragfähigkeits-/Konnektivitätsproxy |
-| EQ-18 | (B=f_{load}c_n\beta) | (f_{load},c_n,\beta) | M-GRÜN: (0\le B\le f_{load}c_n) | P-GELB | E-ROT | gleichzeitige Netzwerk-Si- und Kontaktmessung |
+| EQ-14 | \(\dot c_m=-r_o+r_d;\ \dot c_o=r_o-r_n;\ \dot c_n=r_n-r_d\) | \(k_o,k_n,k_d,c_m,c_o,c_n\) | M-GRÜN: exakte Si-Erhaltung | P-GELB: geschlossene Bilanz, Spezieszuordnung vereinfacht | E-ROT | zeitaufgelöste Si-Spezies plus Si-Ausflussbilanz |
+| EQ-15 | \(r_o=k_oc_{ref}(c_m/c_{ref})^{n_o}\Omega^{m_o}F_{pH}F_I\) | pH-Kanalgewichte/-ordnungen, \(I,m_I,c_{eq}\) | M-GRÜN als definierte Rate | P-GELB: Modellsysteme nicht gleich Industriefällung | E-ROT | pH-/I-/Konzentrationsmatrix im Zielsystem |
+| EQ-16 | \(r_n=k_nc_oF_{pH}F_I;\ r_d=k_dc_nF_d\) | Netzwerk- und Auflösungsraten | M-GRÜN | P-GELB | E-ROT | gelöste/oligomere/netzwerkgebundene Si-Zeitreihen |
+| EQ-17 | \(\dot\beta=k_{form}F_{pH}F_I(1-\beta)-k_{hyd}F_{hyd}\beta\) | \(k_{form},k_{hyd},f_{load}\) | M-GRÜN: Intervall \([0,1]\) invariant | P-GELB: mesoskopische Brückendefinition | E-ROT | unabhängiger Tragfähigkeits-/Konnektivitätsproxy |
+| EQ-18 | \(B=f_{load}c_n\beta\) | \(f_{load},c_n,\beta\) | M-GRÜN: \(0\le B\le f_{load}c_n\) | P-GELB | E-ROT | gleichzeitige Netzwerk-Si- und Kontaktmessung |
 
 Die drei Si-Pools sind eine konservative Transferbilanz. Bei relevantem Siliciumaustrag im Syneresat muss ein gemessener Randfluss ergänzt werden. Die pH-/Ionenstärke-/Arrheniusfaktoren sind flexible Hypothesen und keine universellen Naturgesetze.
