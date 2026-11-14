@@ -140,7 +140,7 @@ left(rac{1}{T_g}-rac{1}{T_{ref}}ight)ight].
 
 [
 doteta=k_{form}(T)F_{pH}F_I(1-eta)
--k_{hyd}(T)F_{hyd}eta,
+-k_{b hyd}(T)F_{hyd}eta,
 ]
 
 [
@@ -168,7 +168,7 @@ Unter nichtnegativen Raten und positiven Referenzkonzentrationen gilt für das k
 
 1. **Si-Erhaltung:** (dot c_m+dot c_o+dot c_n=0).
 2. **Nichtnegative Si-Pools:** Die Transferflüsse sind an den jeweiligen Quellpool gekoppelt. Die kontinuierlichen Gleichungen sind auf dem nichtnegativen Orthanten vorwärtsinvariant.
-3. **Brückenanteil:** Für (k_{form}F_{pH}F_Ige0) und (k_{hyd}F_{hyd}ge0) ist ([0,1]) für (eta) invariant.
+3. **Brückenanteil:** Für (k_{form}F_{pH}F_Ige0) und (k_{b hyd}F_{hyd}ge0) ist ([0,1]) für (eta) invariant.
 4. **Brückendichte:** (0le Ble f_{load}c_n).
 
 Der RK4-Code prüft Zustandsadmissibilität und bricht bei zu großem Zeitschritt ab, statt negative Konzentrationen still zu beschneiden. Die Bilanzprüfung in Tests ist eine numerische Regression, kein Ersatz für den obigen analytischen Beweis.
@@ -204,7 +204,7 @@ Je Säure-/Basenroute getrennt:
 5. ein unabhängiger Proxy für tragende Brücken bzw. Netzwerk-Konnektivität;
 6. Replikate und Unsicherheiten.
 
-Ein bloßer Schrumpfungsverlauf (S(t)) reicht nicht, um (k_o,k_n,k_d,k_{form},k_{hyd},f_{load}) getrennt zu identifizieren.
+Ein bloßer Schrumpfungsverlauf (S(t)) reicht nicht, um (k_o,k_n,k_d,k_{form},k_{b hyd},f_{load}) getrennt zu identifizieren.
 
 ## 10. Literatur- und Transfergrenzen
 
