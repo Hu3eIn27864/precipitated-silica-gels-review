@@ -981,3 +981,10 @@
 - Die analytische Druck-/Dehnungslösung enthält nun den Faktor `(3 lambda + 2 G) * epsilon_ch`; Fluidinhaltsidentität und Traktionsgleichgewicht bleiben exakt.
 - Ergänzt einen zentralen Finite-Differenzen-Test der Energiederivative gegen die Spannung; P16 testet die korrigierte mechanische Stationarität.
 - Keine räumliche 3D-Mechanik, mechanische Randarbeitsbilanz, globale PDE-Energieabschätzung oder empirische Validierung behauptet.
+
+
+## 2026-11-14 — CCFSM P18 3D-Biot-/Eigenstrain-Kern
+
+- Ergänzt 3D-isotrope Kleinverzerrungsenergie, symmetrischen Spannungstensor, Porendruck und Eigenstrain-Konjugierte aus einem gemeinsamen Variationsprinzip.
+- Implementiert getrennte plane-strain- und uniaxial-stress-Reduktionen; P17 wird als seitlich festgehaltener Spezialfall reproduziert.
+- Ergänzt Finite-Differenzen-, Schub-, Reduktions- und Randspannungs-Regressionstests. Keine räumliche Gleichgewichts-PDE, Randarbeitsbilanz oder empirische Validierung behauptet.
