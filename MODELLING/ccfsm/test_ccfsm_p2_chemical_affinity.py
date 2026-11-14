@@ -30,7 +30,7 @@ class TestCCFSMP2ChemicalAffinity(unittest.TestCase):
         result = evaluate_p2_rates(self.y, self.p)
         self.assertGreaterEqual(result.chemical_dissipation_w_m3, 0.0)
         self.assertAlmostEqual(result.free_energy_rate_w_m3,
-                               -result.entropy_production_w_m3)
+                               -result.chemical_dissipation_w_m3)
 
     def test_equilibrium_reaction_has_zero_rate(self):
         # a_right = K*a_left for the first reaction
