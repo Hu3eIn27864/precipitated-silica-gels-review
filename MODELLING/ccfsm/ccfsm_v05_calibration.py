@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""CCFSM v0.5 natural-syneresis curve comparison and identifiability audit."""
+"""CCFSM v0.5 exploratory fits to natural-syneresis chart readings.
+
+The natural input is the curated 164-point literature file, not DATA/Raw/
+kurvendigitalisierung.csv. That latter file contains pressure-cell/enforced
+syneresis series and is audited separately, never used for natural calibration.
+"""
 from __future__ import annotations
 import argparse, csv, math
 from collections import defaultdict
@@ -7,30 +12,48 @@ from pathlib import Path
 
 EPS=1e-15
 MODELS=("exponential","stretched_exponential","ccfsm_two_stage")
+PRIMARY={"primary_exploratory","primary_with_local_reversals"}
 
 def number(value):
     return float(value.strip().replace(",", "."))
 
-def read_natural_curves(path):
-    groups=defaultdict(list); traces=defaultdict(set)
-    with open(path,newline="",encoding="utf-8-sig") as stream:
-        reader=csv.DictReader(stream,delimiter=";")
-        required={"panel","series","condition","time_h","relative_volume_decrease_or_shrinkage","trace_type"}
+def audit_pressure_file(path):
+    groups=defaultdict(set)
+    with open(path,newline="",encoding="utf-8-sig") as f:
+        reader=csv.DictReader(f,delimiter=";")
+        required={"panel","series","condition"}
         if not required.issubset(reader.fieldnames or []):
-            raise ValueError(f"Missing columns: {sorted(required-set(reader.fieldnames or []))}")
-        for row in reader:
-            panel=row["panel"].strip()
-            if panel not in {"acidic_pH_below_pH_iso","basic_pH_above_pH_iso"}: continue
-            key=(panel,row["series"].strip(),row["condition"].strip())
-            t=number(row["time_h"]); y=number(row["relative_volume_decrease_or_shrinkage"])
-            if t<0 or not 0<=y<1: raise ValueError(f"Out-of-domain point {key}: {t}, {y}")
-            groups[key].append((t,y)); traces[key].add(row["trace_type"].strip())
+            raise ValueError("Pressure audit input has an unexpected schema")
+        for r in reader:
+            groups[(r["panel"].strip(),r["series"].strip())].add(r["condition"].strip())
+    if len(groups)!=21:
+        raise ValueError(f"Expected 21 pressure-cell/enforced series in the audit file, found {len(groups)}")
+    if any(not any("Δp" in c for c in conditions) for conditions in groups.values()):
+        raise ValueError("A series lacks the expected applied-pressure metadata; review provenance")
+    return {"pressure_cell_curves":len(groups),"natural_calibration_curves":0}
+
+def read_natural_curves(path):
+    groups=defaultdict(list); meta={}
+    with open(path,newline="",encoding="utf-8-sig") as f:
+        reader=csv.DictReader(f)
+        required={"figure","panel","condition","series","source_type","time_h","relative_shrinkage","reanalysis_use","digitization_note"}
+        if not required.issubset(reader.fieldnames or []):
+            raise ValueError("Natural calibration requires the curated literature point schema; the pressure-cell CSV is not admissible")
+        for r in reader:
+            if r["source_type"].strip()!="ai_assisted_approximation" or r["reanalysis_use"].strip() not in PRIMARY:
+                continue
+            key=(r["figure"].strip(),r["panel"].strip(),r["condition"].strip(),r["series"].strip(),r["reanalysis_use"].strip())
+            t=number(r["time_h"]); y=number(r["relative_shrinkage"])
+            if t<0 or not 0<=y<1: raise ValueError(f"Out-of-domain natural chart point {key}: {t}, {y}")
+            groups[key].append((t,y))
+            meta[key]={"source_type":r["source_type"].strip(),"digitization_note":r["digitization_note"].strip()}
     curves={}
     for key,pts in groups.items():
         pts.sort()
-        if len(pts)<7: raise ValueError(f"Too few points for holdout: {key}")
-        curves[key]={"points":pts,"trace_type":" | ".join(sorted(traces[key]))}
-    if len(curves)!=14: raise ValueError(f"Expected 14 natural curves, found {len(curves)}")
+        if len(pts)<7: raise ValueError(f"Too few primary chart readings for comparison: {key}")
+        curves[key]={"points":pts,**meta[key]}
+    if len(curves)!=7:
+        raise ValueError(f"Expected 7 primary natural chart series (curated primary branches); found {len(curves)}")
     return curves
 
 def amplitude_sse(points,shape):
@@ -57,7 +80,7 @@ def shape_ccfsm(points,lk1,lk2):
 
 def fit_1d(points,lo,hi,fn):
     ratio=(math.sqrt(5)-1)/2; x1,x2=hi-ratio*(hi-lo),lo+ratio*(hi-lo)
-    ev=lambda x: amplitude_sse(points,fn(x))
+    ev=lambda x:amplitude_sse(points,fn(x))
     f1,f2=ev(x1)[1],ev(x2)[1]
     for _ in range(100):
         if f1<=f2:
@@ -120,58 +143,68 @@ def write_csv(path,rows,fields):
     with open(path,"w",newline="",encoding="utf-8") as f:
         w=csv.DictWriter(f,fieldnames=fields); w.writeheader(); w.writerows(rows)
 
-def run(input_csv,output_dir):
-    out=Path(output_dir); out.mkdir(parents=True,exist_ok=True); curves=read_natural_curves(input_csv)
+def run(input_csv,output_dir,pressure_audit=None):
+    out=Path(output_dir); out.mkdir(parents=True,exist_ok=True)
+    curves=read_natural_curves(input_csv)
+    pressure_info=audit_pressure_file(pressure_audit) if pressure_audit else {"pressure_cell_curves":"not checked"}
     fits=[]; preds=[]
-    for (panel,series,condition),meta in sorted(curves.items()):
+    for (figure,panel,condition,series,use),meta in sorted(curves.items()):
         pts=meta["points"]; cut=max(5,min(len(pts)-2,int(math.floor(.8*len(pts)))))
         train,hold=pts[:cut],pts[cut:]
         for model in MODELS:
             full=fit_model(pts,model); tf=fit_model(train,model)
             hp=predict(tf,[t for t,_ in hold])
             hrmse=math.sqrt(sum((y-p)**2 for (_,y),p in zip(hold,hp))/len(hold))
-            row={"panel":panel,"series":series,"condition":condition,"trace_type":meta["trace_type"],
-                 "model":model,"n_points":len(pts),"n_train":len(train),"n_holdout":len(hold),
-                 "train_rmse":tf["rmse"],"holdout_rmse":hrmse,"full_rmse":full["rmse"],
-                 "full_aicc":full["aicc"],"boundary_hit":full["boundary"],**full["params"]}
+            row={"figure":figure,"panel":panel,"condition":condition,"series":series,"reanalysis_use":use,
+                 "source_type":meta["source_type"],"model":model,"n_points":len(pts),"n_train":len(train),
+                 "n_holdout":len(hold),"train_rmse":tf["rmse"],"holdout_rmse":hrmse,
+                 "full_rmse":full["rmse"],"full_aicc":full["aicc"],"boundary_hit":full["boundary"],**full["params"]}
             fits.append(row)
-            for (t,y),pr in zip(pts,predict(full,[x for x,_ in pts])):
-                preds.append({"panel":panel,"series":series,"condition":condition,"model":model,
-                    "time_h":t,"digitized_shrinkage":y,"fitted_shrinkage":pr,"residual":y-pr,"trace_type":meta["trace_type"]})
+            fullpred=predict(full,[x for x,_ in pts])
+            for (t,y),pr in zip(pts,fullpred):
+                preds.append({"figure":figure,"panel":panel,"condition":condition,"series":series,
+                    "reanalysis_use":use,"model":model,"time_h":t,"approximate_digitized_shrinkage":y,
+                    "fitted_shrinkage":pr,"residual":y-pr,"source_type":meta["source_type"]})
     winners={}
     for r in fits:
-        key=(r["panel"],r["series"])
+        key=(r["figure"],r["panel"],r["condition"],r["series"])
         if key not in winners or r["full_aicc"]<winners[key]["full_aicc"]: winners[key]=r
-    winrows=[{k:r[k] for k in ("panel","series","condition","model","full_aicc","full_rmse","holdout_rmse","boundary_hit")} for _,r in sorted(winners.items())]
+    winrows=[{k:r[k] for k in ("figure","panel","condition","series","model","full_aicc","full_rmse","holdout_rmse","boundary_hit")} for _,r in sorted(winners.items())]
     fields=sorted({k for r in fits for k in r})
     write_csv(out/"ccfsm_v05_curve_fits.csv",fits,fields)
     write_csv(out/"ccfsm_v05_model_comparison.csv",fits,fields)
-    write_csv(out/"ccfsm_v05_predictions_residuals.csv",preds,["panel","series","condition","model","time_h","digitized_shrinkage","fitted_shrinkage","residual","trace_type"])
-    write_csv(out/"ccfsm_v05_curve_winners.csv",winrows,["panel","series","condition","model","full_aicc","full_rmse","holdout_rmse","boundary_hit"])
+    write_csv(out/"ccfsm_v05_predictions_residuals.csv",preds,["figure","panel","condition","series","reanalysis_use","model","time_h","approximate_digitized_shrinkage","fitted_shrinkage","residual","source_type"])
+    write_csv(out/"ccfsm_v05_curve_winners.csv",winrows,["figure","panel","condition","series","model","full_aicc","full_rmse","holdout_rmse","boundary_hit"])
     counts={m:sum(r["model"]==m for r in winrows) for m in MODELS}
     medians={m:sorted(r["holdout_rmse"] for r in fits if r["model"]==m)[len(curves)//2] for m in MODELS}
-    report=["# CCFSM v0.5 — Kalibrierungs- und Modellvergleichsbericht","",
-      f"- Natürliche Kurven: {len(curves)} (7 sauer, 7 basisch); erzwungene Synärese ausgeschlossen.",
-      "- Quelle: DATA/Raw/kurvendigitalisierung.csv. Digitisierte Figurenspuren, keine Autor-Rohdaten; Mess-/Modellüberlagerung teils untrennbar.",
-      "- Kurvenpunkte sind korreliert und keine unabhängigen Replikate. Keine i.i.d.-Konfidenzintervalle oder Bootstrap-Intervalle behauptet.","",
+    report=["# CCFSM v0.5 — explorativer Vergleich natürlicher Synäresekurven","",
+      f"- Primäre natürliche Kurven: {len(curves)}; nur die kuratierten Zweige primary_exploratory und primary_with_local_reversals.",
+      "- Datenstatus: KI-gestützte ungeprüfte Näherungsablesungen aus Wilhelm & Kind (2015), Figures 8 und 10; keine pixelkalibrierten Marker-Rohdaten.",
+      f"- Separater Provenienz-Audit der Datei DATA/Raw/kurvendigitalisierung.csv: {pressure_info}. Diese Datei enthält Druckzell-/erzwungene Synärese und wird NICHT für natürliche Fits verwendet.",
+      "- Die 22 sensitivity_only-Punkte und 44 figure_table_conflict_branch-Punkte bleiben ausgeschlossen; die lokalen Reversals im primären Zweig bleiben unverändert erhalten.",
+      "- Keine i.i.d.-Konfidenzintervalle: die Punktreihen sind ungeprüfte, korrelierte Näherungsablesungen.","",
       "## Modelle","",
       "Exponentiell: S=A(1-exp(-t/tau)); gestreckt exponentiell: S=A[1-exp(-(t/tau)^n)].",
       "Zweistufiges CCFSM: S=A_eff{1-[k_f exp(-k_s t)-k_s exp(-k_f t)]/(k_f-k_s)}; bei gleichen Raten gilt S=A_eff[1-(1+kt)exp(-kt)].",
-      "A_eff=eta_a*q_inf; die beiden Faktoren sind aus S(t) allein nicht getrennt identifizierbar. Das Ratenpaar ist ungeordnet; langsam/schnell ist keine physikalische Zuordnung.","",
+      "A_eff=eta_a*q_inf; die Faktoren sind aus S(t) allein nicht separat identifizierbar. Das Ratenpaar ist ungeordnet; langsam/schnell ist keine physikalische Zuordnung.","",
       "## Vergleich","",
-      "| Modell | AICc-Sieger (von 14) | Median Holdout-RMSE |","|---|---:|---:|"]
+      "| Modell | AICc-Sieger (von 7) | Median Holdout-RMSE |","|---|---:|---:|"]
     for m in MODELS: report.append(f"| {m} | {counts[m]} | {medians[m]:.6g} |")
-    report += ["","Je Kurve: Vollfit mit AICc/RMSE und chronologischer Holdout (erste 80 % Fit, letzte 20 % Test). Das ist eine Zeitextrapolation innerhalb derselben Figurenspur, keine unabhängige Validierung neuer Rezepturen.",
-      "Parameter an Suchgrenzen sind mit boundary_hit=True markiert. AICc ist wegen korrelierter, digitalisierter und teils überlagerter Spuren deskriptiv; übliche probabilistische Interpretation eingeschränkt.",
-      "Aus Seriennamen allein werden keine Arrhenius-Aktivierungsenergie und kein kausales pH-/Konzentrationsgesetz abgeleitet.","",
+    report += ["","Je Kurve: Vollfit mit AICc/RMSE und chronologischer Holdout (erste 80 % Fit, letzte 20 % Test). Wegen weniger Punkte pro Reihe und unsicherer Herkunft ist dies nur explorative Konsistenzprüfung, keine unabhängige Validierung.",
+      "AICc/Holdout-Werte sind angesichts ungeprüfter Näherungsablesungen und kleiner Kurvenzahl rein deskriptiv. Parameter an Suchgrenzen sind mit boundary_hit=True markiert.",
+      "Aus diesen Reihen werden keine Aktivierungsenergie, kein kausales pH-Gesetz und keine hydraulischen Materialkonstanten abgeleitet.","",
       "## Reproduktion","",
-      "python MODELLING/ccfsm/ccfsm_v05_calibration.py --input DATA/Raw/kurvendigitalisierung.csv --output-dir MODELLING/ccfsm/results_v0.5","",
-      "Ergebnisse: ccfsm_v05_curve_fits.csv, ccfsm_v05_model_comparison.csv, ccfsm_v05_predictions_residuals.csv, ccfsm_v05_curve_winners.csv. Software-/Modellvergleich, keine vollständige physikalische Validierung."]
+      "python MODELLING/ccfsm/ccfsm_v05_calibration.py --input LITERATURE/wilhelm_kind_approximate_measurement_points_curated.csv --pressure-audit DATA/Raw/kurvendigitalisierung.csv --output-dir MODELLING/ccfsm/results_v0.5","",
+      "Die Ergebnisse sind explorative Modellvergleiche der Näherungsablesungen. Sie validieren nicht das vollständige chemisch-hydraulische CCFSM."]
     (out/"CCFSM_v0.5_CALIBRATION_REPORT_DE.md").write_text("\n".join(report)+"\n",encoding="utf-8")
-    return {"curves":len(curves),"fit_rows":len(fits),"winner_counts":counts,"median_holdout_rmse":medians}
+    return {"natural_curves":len(curves),"fit_rows":len(fits),"pressure_audit":pressure_info,
+            "winner_counts":counts,"median_holdout_rmse":medians}
 
 def main():
-    p=argparse.ArgumentParser(); p.add_argument("--input",required=True); p.add_argument("--output-dir",required=True)
-    a=p.parse_args(); print(run(a.input,a.output_dir))
+    p=argparse.ArgumentParser()
+    p.add_argument("--input",required=True)
+    p.add_argument("--pressure-audit")
+    p.add_argument("--output-dir",required=True)
+    a=p.parse_args(); print(run(a.input,a.output_dir,a.pressure_audit))
 
 if __name__=="__main__": main()
