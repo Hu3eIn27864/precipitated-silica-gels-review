@@ -92,3 +92,14 @@ Der Rezeptur-Speziationsblock wurde mit dem bestehenden CCFSM-Kinetikmodul über
 - [test_ccfsm_literature_dataset.py](test_ccfsm_literature_dataset.py) — prüft CSV-Schema, eindeutige Datensatz-IDs, numerische Werte und den Ausschluss erzwungener/qualitativer Daten aus der natürlichen Kalibrierung.
 
 **Kalibrierungsregel:** Nur die zwölf zylindrischen Wilhelm-&-Kind-Kennwerte (sechs (S_{max})- und sechs \\(\\tau\\)-Werte) sind im Datensatz als primäre natürliche CCFSM-Kalibrierwerte markiert. Tröpfchen bleiben ein separater Geometrie-/Temperaturhistorien-Datensatz. Quarch liefert überwiegend kontextuelle bzw. qualitative Angaben; Schlomach Morphologieanker; Sahabi & Kind MD-Setup und erzwungene Konsolidierung. Letztere werden nicht als natürliche Synäreseparameter gefittet.
+
+
+## CCFSM v0.5 — natürliche Kurvenkalibrierung und Modellvergleich
+
+- ccfsm_v05_calibration.py liest die vorhandene DATA/Raw/kurvendigitalisierung.csv ein und wertet exakt die 14 natürlichen Kurven (7 sauer, 7 basisch) aus. Das erzwungene Panel wird ausgeschlossen.
+- Verglichen werden exponentielle, gestreckt-exponentielle und zweistufige CCFSM-Antworten; enthalten sind AICc, RMSE, chronologischer 80/20-Holdout, Residuen und Grenzparameter-Markierung.
+- CCFSM_v0.5_CALIBRATION_DE.md dokumentiert Gleichungen, Schätzverfahren, Identifizierbarkeitsgrenzen und Ausführung.
+- test_ccfsm_v05_calibration.py prüft synthetische Parameterwiedergewinnung, den gleichen-Raten-Grenzfall, die ungeordnete Ratenidentifikation und den Ausschluss erzwungener Daten.
+- GitHub Actions führt die Kurvenauswertung aus und lädt die Ergebnisse als CI-Artefakt hoch. Die Quelldaten bleiben unverändert.
+
+Die digitalisierten Spuren sind keine Rohmessungen und teils Mess-/Modellüberlagerungen. Deshalb werden keine i.i.d.-Konfidenzintervalle aus Kurvenpunkten behauptet. Die Pipeline ist Software- und Modellvergleich, keine vollständige physikalische Validierung.
