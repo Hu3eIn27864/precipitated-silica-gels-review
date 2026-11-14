@@ -160,3 +160,25 @@ reference. The solver's contact law and units are numerically verified in
 hosted CI. This note does not assign any measured value to silica gel and
 does not claim that bulk mobility and contact resistance have yet been
 separated from experimental data.
+
+## 8. Implemented local sensitivity diagnostic (14 November 2026)
+
+Added `identifiability.py` and `test_identifiability.py`. The utility
+constructs a central finite-difference Jacobian of log eigen-rates with
+respect to two log-scale parameters: a common multiplier on all layer
+mobilities and a common multiplier on all strictly-positive contact
+resistances. It supports uncertainty-weighted rows through
+`sigma_log_rates`, and returns singular values, numerical rank and condition
+number from the two-column Gram matrix.
+
+The tests are designed to check the one-rate rank-deficiency case, local
+rank with multiple modes, finite-difference step stability, uncertainty
+weighting and explicit rejection of zero contact resistance rather than
+replacing it with an arbitrary epsilon. These tests have been committed, but
+**hosted CI has not yet been inspected**; no pass result is claimed here.
+
+Scope limitation: this is a local two-parameter design diagnostic with common
+multipliers, not a general inverse solver. Full-rank sensitivity does not
+establish global uniqueness or practical precision. Profile likelihood,
+synthetic noisy recovery and tests over multiple geometries remain next
+steps. No silica parameter values are inferred.
