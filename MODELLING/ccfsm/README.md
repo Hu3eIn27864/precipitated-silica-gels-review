@@ -83,3 +83,12 @@ v0.4 ist zunächst eine vollständige Parameterarchitektur, keine unkalibrierte 
 Der Solver ist ein vorläufiges Gleichgewichtsmodul. Davies wird oberhalb 0,5 mol/L Ionenstärke nicht extrapoliert. Für konzentrierte Prozessbrühen ist ein validiertes Pitzer/SIT-Modell bzw. eine experimentelle Aktivitätsbestimmung erforderlich. Die Temperaturabhängigkeit der Gleichgewichtskonstanten und zusätzliche Silica-Oligomer-/Oberflächenspezies sind noch nicht implementiert.
 
 Der Rezeptur-Speziationsblock wurde mit dem bestehenden CCFSM-Kinetikmodul über einen Einheiten-sicheren Adapter verbunden. Der aktuelle CI-Lauf [43591288426](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43591288426) bestand 64/64 Tests. Dies ist numerische Softwareverifikation, keine Validierung an realen Prozessbrühen.
+
+
+## Literaturdaten-Integration — 14 November 2026
+
+- [CCFSM_LITERATURE_PARAMETER_EXTRACTION_2026-11-14_DE.md](CCFSM_LITERATURE_PARAMETER_EXTRACTION_2026-11-14_DE.md) — Quellenkritischer Bericht zu Wilhelm & Kind, Quarch, Schlomach & Kind sowie Sahabi & Kind.
+- [ccfsm_literature_parameter_dataset_2026-11-14.csv](ccfsm_literature_parameter_dataset_2026-11-14.csv) — maschinenlesbare Extraktion mit Quellenjahr, Einheit, Datenklasse, Prozess-/Geometrie-Tag und zulässiger CCFSM-Verwendung.
+- [test_ccfsm_literature_dataset.py](test_ccfsm_literature_dataset.py) — prüft CSV-Schema, eindeutige Datensatz-IDs, numerische Werte und den Ausschluss erzwungener/qualitativer Daten aus der natürlichen Kalibrierung.
+
+**Kalibrierungsregel:** Nur die zwölf zylindrischen Wilhelm-&-Kind-Kennwerte (sechs (S_{max})- und sechs \\(\\tau\\)-Werte) sind im Datensatz als primäre natürliche CCFSM-Kalibrierwerte markiert. Tröpfchen bleiben ein separater Geometrie-/Temperaturhistorien-Datensatz. Quarch liefert überwiegend kontextuelle bzw. qualitative Angaben; Schlomach Morphologieanker; Sahabi & Kind MD-Setup und erzwungene Konsolidierung. Letztere werden nicht als natürliche Synäreseparameter gefittet.
