@@ -57,6 +57,6 @@ k_o,oligomerization rate,chemistry parameter,parameter,s-1,unidentified,c_m to c
 k_n,network growth rate,chemistry parameter,parameter,s-1,unidentified,c_o to c_n,oligomer and network Si time series,not gel-point time alone
 k_d,dissolution rate,chemistry parameter,parameter,s-1,unidentified,c_n to c_m,dissolved Si release time series,acid/base-specific
 k_form,bridge formation rate,chemistry parameter,parameter,s-1,unidentified,beta evolution,network connectivity proxy,distinct from total condensation
-k_hyd,bridge hydrolysis rate,chemistry parameter,parameter,s-1,unidentified,beta loss,relaxation/chemical ageing series,may covary with dissolution
+k_bhyd,bridge hydrolysis rate,chemistry parameter,parameter,s-1,unidentified,beta loss,relaxation/chemical ageing series,may covary with dissolution
 m_I,ionic-strength exponent,chemistry parameter,parameter,dimensionless,unidentified,ionic strength modifier,controlled electrolyte series,ion-specific effects not captured by I
 f_load,load-bearing network fraction,network closure,parameter,dimensionless,unidentified,network Si to bridge density,contact topology and rheology,not equal to chemical bond fraction
