@@ -29,7 +29,7 @@ def parameters(**overrides):
 def environment(**overrides):
     values = dict(pH=8.0, temperature_k=298.15,
                   ionic_strength_mol_kg=0.1,
-                  silica_solubility_mol_m3=10.0, pKw=14.0, pKa_monomer=9.5)
+                  silica_solubility_mol_m3=10.0, pKw=14.0, pKa_monomer=9.5, pKa_oligomer_surface=6.8)
     values.update(overrides)
     return ChemicalEnvironment(**values)
 
@@ -79,6 +79,17 @@ class TestCCFSMChemicalV04(unittest.TestCase):
         away = acid_base_activity_factors(environment(pH=7.5), p)[1]
         self.assertAlmostEqual(at_pka, 1.0)
         self.assertGreater(at_pka, away)
+
+    def test_network_surface_pair_proxy_uses_distinct_surface_pka(self):
+        p = parameters(network_acid_catalysis_weight=0.0,
+                       network_base_catalysis_weight=0.0,
+                       network_silanolate_pair_weight=1.0)
+        at_surface_pka = acid_base_activity_factors(
+            environment(pH=6.8), p, site="network")[1]
+        away = acid_base_activity_factors(
+            environment(pH=9.5), p, site="network")[1]
+        self.assertAlmostEqual(at_surface_pka, 1.0)
+        self.assertGreater(at_surface_pka, away)
 
     def test_no_net_oligomerization_below_supplied_solubility(self):
         state = ChemicalState(0.0, 5.0, 0.0, 0.0, 0.0)
