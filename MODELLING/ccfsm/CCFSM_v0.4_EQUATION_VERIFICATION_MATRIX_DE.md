@@ -74,3 +74,8 @@ Die drei Si-Pools sind eine konservative Transferbilanz. Bei relevantem Silicium
 | EQ-24 | \(I_{molal}=I_{molar}/m_{solvent,L}\) | Lösungsmittelmasse je Liter Lösung | M-GRÜN: Einheitenumrechnung | P-GELB: Dichte/Komposition erforderlich | E-ROT | gemessene Batchmasse, Dichte und Lösungsmittelanteil |
 
 Die Massenwirkungskonstanten sind 25-°C-Referenzwerte aus PHREEQC. Temperaturkorrekturen müssen über temperaturabhängige Konstanten oder Aktivitätsdaten erfolgen; die Temperaturangabe allein ändert die Konstanten im aktuellen Solver noch nicht. Das Davies-Modell wird für endgültige Lösungen oberhalb 0,5 mol/L Ionenstärke abgelehnt. Das Modell berechnet noch keine amorphe Silica-Löslichkeit und keine oligomere oder geladene Oberflächenspeziation.
+
+
+## Ergänzung — literaturbasierte Datenfreigabe (14.11.2026)
+
+Die maschinenlesbare Extraktion liegt in `ccfsm_literature_parameter_dataset_2026-11-14.csv`. Die Zuordnung folgt vier Klassen: D (direkt berichtet), A (autorenangepasster Kennwert), Q (qualitativ/kontextuell) und X (anderer Prozess, insbesondere gerührte Fragmentierung oder erzwungene Oedometer-Konsolidierung). Nur die zwölf zylindrischen Wilhelm-&-Kind-Kennwerte sind für die primäre natürliche Synäresekalibrierung freigegeben. Tröpfchenkurven bleiben aufgrund der anderen Geometrie und der initialen Temperaturhistorie getrennt. Morphologieanker aus Schlomach & Kind und Alterungs-/Salzbeobachtungen aus Quarch dürfen nur als unabhängige Struktur- bzw. Mechanismusinformationen verwendet werden. Sahabi-&-Kind-Oedometerdaten bleiben aus dem Natural-Syneresis-Fit ausgeschlossen.
