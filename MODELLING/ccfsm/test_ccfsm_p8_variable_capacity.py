@@ -61,7 +61,11 @@ class TestCCFSMP8VariableCapacity(unittest.TestCase):
                 self.assertAlmostEqual(dm[species][j], c0 * dt[j], places=12)
 
     def test_zero_flow_zero_diffusion_has_no_transport_rhs(self):
-        dm, dt = self.rhs(d=(0., 0.))
+        chemistry = ChemicalParametersP2(
+            100., 298.15, (0., 0., 0.), (2., 0.5, 1.5), (1., 1., 1., 1.)
+        )
+        dm, dt = p8_rhs(self.state, self.theta, self.grid,
+                        (0.,)*5, (0., 0.), chemistry)
         self.assertTrue(all(abs(x) < 1e-14 for field in dm for x in field))
         self.assertTrue(all(x == 0. for x in dt))
 
