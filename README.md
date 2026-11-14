@@ -31,6 +31,10 @@ The review will distinguish industrially precipitated silica from related but no
 - `FIGURES/` — figure concepts and evidence mapping.
 - `MODELLING/` — hypothesis-driven model strategy, candidate validation datasets, and starter transport/LAMMPS prototypes.
 - `MODELLING/ROADMAP_STATUS_2026-11-13.md` — current AP/work-package status, gates, and immediate execution order.
+- `MODELLING/transport_model/interface_aware_1d.py` — conservative piecewise-constant finite-volume solver with exact layer-integrated storage/resistance and two-sided interface pressure DOFs for finite contact resistance.
+- `MODELLING/transport_model/multilayer_reference.py` and `test_multilayer_reference.py` — independent transfer-matrix eigenvalue reference, including the contact pressure-jump law.
+- `MODELLING/transport_model/test_interface_aware_1d.py` — tests for zero/finite contact resistance, cell-centred and off-grid interfaces, three-layer eigenmodes, convergence, positivity and global conservation.
+- `MODELLING/transport_model/verification_update_2026-11-13.md` — numerical verification record and explicit boundary between code verification and physical silica validation.
 - `MODELLING/transport_model/layered_reference.py` and `test_layered_reference.py` — fixed-interface two-layer eigenfunction reference and independent transport verification tests.
 - `MODELLING/transport_model/test_manufactured_solution.py` — manufactured-solution verification for spatially varying storage and hydraulic mobility.
 - `CHANGELOG.md` — substantive project decisions.
@@ -45,7 +49,7 @@ The review will distinguish industrially precipitated silica from related but no
 A/B/C/D are provisional until the source has been checked at the appropriate depth. **V is a workflow status, not a quality grade.** Scientific quality and relevance to this review are assessed separately.
 
 ## Current status
-The literature database and claim–evidence synthesis are under active development, with source-family overlap and access status tracked explicitly. The optional modelling workstream has been defined; first executable 1-D transport and coarse-grained LAMMPS prototypes are available as non-predictive baselines. No production simulation has been calibrated or run, and no model parameter is yet claimed to represent measured silica properties.
+The literature database and claim–evidence synthesis are under active development, with source-family overlap and access status tracked explicitly. The optional modelling workstream includes a numerically verified, fixed-interface 1-D finite-volume transport solver and coarse-grained LAMMPS prototypes as non-predictive baselines. The interface solver's contact resistance remains phenomenological; numerical verification is not physical validation. No model parameter is claimed to represent measured precipitated-silica properties.
 
 
 ## Current parallel research plan
