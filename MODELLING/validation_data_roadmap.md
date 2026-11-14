@@ -180,3 +180,8 @@ A panel-specific pixel calibration and uncertainty-propagation utility has been 
 The KITopen full text is now available for inspection. It confirms Figure 8 on printed page 2511 and Figure 10 on page 2513. Figure 8 plotted points are averages of three samples. For Figure 10, the Methods section specifies a 20 min hold at 20 °C before transfer into the thermostated cell; the discussion's reference to the first 30 min concerns similarity of the curves and is not the hold duration.
 
 No pixel-level observations have yet been extracted. The repository PDF (13 MB) exceeds the screenshot retrieval limit in this environment and direct PNG retrieval is failing. See `LITERATURE/wilhelm_kind_figure_digitisation_status.md`. Digitisation must wait for the original figure images to be available in the working session.
+
+
+## 2026-11-14 — first-pass existing-data reanalysis
+
+A descriptive evidence audit has been committed to `LITERATURE/existing_data_reanalysis_2026-11-14.md`. It compares published natural-syneresis fit time constants across cylinder/droplet geometries and acid/base gels, and keeps pressure-cell and centrifugal loading separate. The audit explicitly excludes the 164 AI-assisted, unverified chart readings from quantitative conclusions. Main result: published temperature trends and acid/base ordering differ across geometries/protocols, so the tabulated empirical time constant cannot be treated as an intrinsic transport coefficient. Verified marker-level figure digitisation and boundary-condition verification remain prerequisites for a quantitative target-model fit.
