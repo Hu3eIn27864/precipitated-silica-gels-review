@@ -20,3 +20,10 @@ network_pair_weight,silanolate-pair channel weight for network growth,chemistry 
 network_base_weight,base channel weight for network growth,chemistry parameter,parameter,dimensionless,unidentified,oligomer/particle surface condensation,network growth kinetics by pH,distinct from monomer condensation channel
 network_acid_order,acid-channel order for network surface growth,chemistry parameter,parameter,dimensionless,unidentified,network surface pH response,pH-series oligomer/network Si kinetics,do not force equal to monomer order
 network_base_order,base-channel order for network surface growth,chemistry parameter,parameter,dimensionless,unidentified,network surface pH response,pH-series oligomer/network Si kinetics,do not force equal to monomer order
+pKa_silicic_1,first dissociation pKa of monomeric silicic acid,chemical equilibrium,input,dimensionless,PHREEQC reference at 25 C,monomer speciation,temperature/pH-dependent speciation data,not universal for concentrated silica liquor
+pKa_silicic_overall_2,overall two-proton dissociation pKa,chemical equilibrium,input,dimensionless,PHREEQC reference at 25 C,monomer speciation,validated silica speciation,overall constant not sequential pKa2
+logK_hso4_association,HSO4 association log10 K,chemical equilibrium,input,dimensionless,PHREEQC reference at 25 C,sulfate partitioning,sulfate speciation,temperature and electrolyte dependent
+logK_naso4_pair,NaSO4 ion-pair log10 K,chemical equilibrium,input,dimensionless,PHREEQC reference at 25 C,free-ion partitioning,Na/sulfate activity data,not enough for high ionic strength
+pKw,water ion product pKw,chemical environment,input,dimensionless,reference input,hydrogen/hydroxide activities,temperature-dependent water equilibrium,temperature correction not yet implemented
+activity_model,activity coefficient model,chemical environment,model choice,categorical,ideal or Davies,nonideality,measured activities or Pitzer/SIT validation,Davies not used above 0.5 mol/L
+max_davies_ionic_strength_mol_l,Davies maximum ionic strength,model guard,input,mol L-1,0.5 default,validity guard,high ionic strength validation,not an accuracy guarantee
