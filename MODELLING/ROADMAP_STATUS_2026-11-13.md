@@ -145,3 +145,11 @@ checkout.
 - If storage compliance is not independently constrained, pressure relaxation primarily identifies diffusivity-like combinations `lambda/S`, not `lambda` alone. Multiple layer mobilities and multiple interface resistances require a correspondingly richer set of independent observations.
 - **Numerical sensitivity calculations, singular values, inverse recovery and synthetic-noise tests have not yet been run.** The data-analysis capability was unavailable during this session. The note is a mathematical/design framework only, not a computed identifiability result and not a silica-specific parameter estimate.
 - Next gate: implement and test the log-sensitivity utility against `multilayer_eigenvalues`; demonstrate rank deficiency for an underdetermined observation set and assess rank/conditioning for stacked modes and geometries. Do not fit experimental parameters until matched-state storage and transport observations are available.
+
+## AP D update — local sensitivity diagnostic (14 November 2026)
+
+- Added `MODELLING/transport_model/identifiability.py`: uncertainty-weighted central finite-difference sensitivities of log multilayer eigen-rates to a common bulk-mobility scale and a common strictly-positive contact-resistance scale.
+- Added `test_identifiability.py` for the one-observation rank-deficiency case, multi-mode local rank, finite-difference step stability, uncertainty weighting and explicit zero-contact handling.
+- Added usage and scope limitations to the transport README and the identifiability note.
+- **The new test suite has not yet been confirmed by hosted CI.** Do not report numerical rank, condition number or parameter recovery as established until the workflow passes and its test logs are inspected.
+- This first diagnostic does not fit layer-specific mobilities or individual interface resistances. Next: inspect CI; then extend the design matrix across specimen thicknesses and interface positions, followed by synthetic noisy inverse recovery and profile-likelihood checks. Experimental silica identifiability remains unestablished.
