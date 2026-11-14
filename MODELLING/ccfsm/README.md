@@ -69,7 +69,7 @@ Das chemische Teilmodell ist mechanistisch modular, aber noch nicht an industrie
 
 - CCFSM_v0.4_PARAMETER_ARCHITECTURE_DE.md — kausale Parametergruppen von Rezeptur/Fällchemie über Temperatur, Mischung, Netzwerk, Porenraum und Mechanik bis Transport, Grenzfläche, Geometrie und Messunsicherheit; Freigabekriterien für vollständig grüne Gleichungen.
 - CCFSM_v0.4_INFLUENCE_PARAMETER_REGISTER.csv — maschinenlesbares Register mit Symbol, Gruppe, Rolle, Einheit, Wirkpfad, Messbedarf und Identifizierbarkeitswarnung.
-- CCFSM_v0.4_EQUATION_VERIFICATION_MATRIX_DE.md — 13 equation blocks with separate mathematical, physical and empirical readiness gates; explicit rejection rules for double counting and unsupported structure–permeability laws.
+- CCFSM_v0.4_EQUATION_VERIFICATION_MATRIX_DE.md — 24 equation blocks with separate mathematical, physical and empirical readiness gates; explicit rejection rules for double counting and unsupported structure–permeability laws.
 - test_ccfsm_v04_parameter_register.py — schema, unique-symbol and required-influence checks for the machine-readable parameter register.
 
 v0.4 ist zunächst eine vollständige Parameterarchitektur, keine unkalibrierte Erweiterung aller ODEs. Insbesondere werden pH und Rezeptur nicht doppelt als unabhängige Ursachen gezählt; Gelkerntemperatur wird von Badtemperatur getrennt; D_f/z werden nicht ohne Porenhals- und Konnektivitätsdaten als Permeabilitätsersatz verwendet. Die natürliche, mechanisch unbelastete Synärese bleibt der einzige Geltungsbereich.
@@ -77,7 +77,9 @@ v0.4 ist zunächst eine vollständige Parameterarchitektur, keine unkalibrierte 
 ## CCFSM v0.4a — Rezeptur-zu-Speziation
 
 - CCFSM_v0.4a_RECIPE_SPECIATION_DE.md — Rezeptur-Stoffbilanz, Speziationsgleichgewichte, Aktivitätsmodell und Gültigkeitsgrenzen.
-- ccfsm_recipe_speciation_v04a.py — pH-Solver aus Natriumsilikatmodul, Gesamtsilicium, Schwefelsäure, NaOH/NaCl, Sulfat- und Natrium-Bilanz.
+- ccfsm_recipe_speciation_v04a.py — pH-Solver aus Natriumsilikatmodul, Gesamtsilicium, Schwefelsäure, NaOH/NaCl, Sulfat- und Natrium-Bilanz; Adapter zu ChemicalEnvironment mit expliziter Lösungsmittelmassen-Umrechnung.
 - test_ccfsm_recipe_speciation_v04a.py — Regressionstests für Elektroneutralität, Stoffbilanzen, Säurewirkung, Ionenpaarbildung und Davies-Abbruch.
 
 Der Solver ist ein vorläufiges Gleichgewichtsmodul. Davies wird oberhalb 0,5 mol/L Ionenstärke nicht extrapoliert. Für konzentrierte Prozessbrühen ist ein validiertes Pitzer/SIT-Modell bzw. eine experimentelle Aktivitätsbestimmung erforderlich. Die Temperaturabhängigkeit der Gleichgewichtskonstanten und zusätzliche Silica-Oligomer-/Oberflächenspezies sind noch nicht implementiert.
+
+Der Rezeptur-Speziationsblock wurde mit dem bestehenden CCFSM-Kinetikmodul über einen Einheiten-sicheren Adapter verbunden. Der aktuelle CI-Lauf [43591288426](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43591288426) bestand 64/64 Tests. Dies ist numerische Softwareverifikation, keine Validierung an realen Prozessbrühen.
