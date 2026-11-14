@@ -957,3 +957,11 @@
 - Ergänzt eine algebraische Entropiebilanz für mobile ideale Mischungsentropie und variable Fluidkapazität unter konservativer Upwind-Advektion.
 - Weist Reservoir-Entropietransport über den tatsächlichen Upwind-Donor und eine nichtnegative innere numerische Entropieproduktion explizit aus.
 - Dokumentiert ausdrücklich, dass Diffusion, Reaktion, Darcy-/Druckarbeit und Mechanik noch nicht zu einem globalen Energie-/Entropiesatz gekoppelt sind.
+
+
+## 2026-11-14 — CCFSM P15 gemeinsame mobile Stoff- und Randenergiebilanz
+
+- Verbindet die P13-Onsager-Diffusion mit der P14-Upwind-Advektion in einer gemeinsamen semidiskreten Bilanz für die mobilen Spezies M/O.
+- Führt die advektive Randpotentialleistung mit tatsächlichen Upwind-Donoren und die diffusive Reservoir-Chemieleistung mit den Reservoir-Chemiepotentialen getrennt und vorzeichenkonsistent.
+- Weist innere Upwind-Produktion, innere Onsager-Dissipation und Halbzellen-Reservoir-Dissipation separat als nichtnegative Beiträge aus.
+- Die Teilidentität schließt weder Reaktionsenergie noch Darcy-/Druckarbeit, Mechanik, nichtideale Aktivitäten oder die globale nichtlineare PDE-Energiebilanz. Keine empirische Kalibrierung oder physikalische Validierung behauptet.
