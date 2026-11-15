@@ -96,3 +96,6 @@ CCFSM P27.30 adds event-aware time support: sampled sign-changing boundary fluxe
 ## Acknowledgements
 
 The authors acknowledge the use of **ChatGPT, an AI assistant developed by OpenAI**, for assistance with research planning, technical discussion, code drafting, test design, and documentation. All scientific claims, calculations, source interpretations, code changes, and final conclusions require human review and remain the responsibility of the project authors. ChatGPT/OpenAI is not represented as a human author, and this acknowledgement does not imply endorsement by OpenAI.
+
+
+CCFSM P27.31 adds bounded adaptive midpoint sampling to expose potential pairs of boundary-flux zero crossings hidden between same-sign coarse endpoints. It refines intervals on sign changes or midpoint curvature defects, then delegates root interpolation to P27.30. The method is explicitly heuristic and depth-limited, not certified root isolation. See [P27.31 specification](MODELLING/ccfsm/CCFSM_v4.2.51_P27_31_ADAPTIVE_EVENT_DETECTION_DE.md).
