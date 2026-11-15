@@ -707,3 +707,14 @@ Keine Aussage über CCFSM-Zustandspositivität, globale Kanten-/Knotenmannigfalt
 - Spezifikation: `CCFSM_v4.2.28_P27_8_TETRA_GEOMETRY_AUDIT_DE.md`.
 
 Der Indikator ist kein vollständiges FE-Konditionierungszertifikat und beweist keine globale Knoten-/Kantenmannigfaltigkeit oder CCFSM-Positivität.
+
+
+## P27.9 — globaler Tetraedernetz-Inzidenz-Audit
+
+- `ccfsm_p27_9_global_incidence_audit.py` ruft zuerst P27.8 zur exakten Orientierungsnormalisierung und Entartungsprüfung auf.
+- Danach werden globale Flächeninzidenzen (Randfläche/ein Element, Innenfläche/zwei Elemente, Überinzidenz), induzierte Innenflächenorientierungen, Kanten-/Knotenverwendung, isolierte Knoten und face-zusammenhängende Komponenten ausgewiesen.
+- Doppelte Tetraeder werden unabhängig von ihrer lokalen Knotenanordnung zurückgewiesen.
+- `test_ccfsm_p27_9_global_incidence_audit.py` prüft Einzelelement, gemeinsame Fläche, Überinzidenz, doppelte Elemente, isolierte Knoten, getrennte Komponenten, Degeneration und Orientierungsnormalisierung.
+- Spezifikation: `CCFSM_v4.2.29_P27_9_GLOBAL_INCIDENCE_AUDIT_DE.md`.
+
+**Grenze:** Der Audit ist kein vollständiger topologischer Mannigfaltigkeitsbeweis: Knoten- und Kanten-Link-Komplexe werden nicht geprüft. Inzidenzzahlen allein zertifizieren weder globale FE-Gültigkeit noch CCFSM-Positivität oder physikalische Validität.
