@@ -12,7 +12,8 @@ class TestP2620RefinementPositivity(unittest.TestCase):
     def _certify_children(self, profile):
         certs = []
         for m, a, b in zip(profile["averages"], profile["linear"], profile["quadratic"]):
-            cert = certify_cell_nonnegative(m, a, b)
+            # P26.13 accepts exact Fraction inputs; P26.19 exports rational strings.
+            cert = certify_cell_nonnegative(*(Fraction(str(v)) for v in (m, a, b)))
             self.assertIsNotNone(cert)
             self.assertTrue(verify_cell_certificate(m, a, b, cert)["verified"])
             certs.append(cert)
