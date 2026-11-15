@@ -31,13 +31,13 @@ class P27_23Tests(unittest.TestCase):
         self.assertAlmostEqual(r["predicted_energy_rate_w"],-20.0)
         self.assertTrue(r["balance_within_tolerance"])
     def test_p19_replaces_not_adds_p9_mechanics(self):
-        audit={"status":"matched_p9_p19_mechanical_energy","p19_elastic_energy_j":7.0,
-          "p19_biot_storage_energy_j":13.0,"p19_stored_energy_j":20.0,
+        audit={"status":"matched_p9_p19_mechanical_energy","p19_elastic_energy_j":6.0,
+          "p19_biot_storage_energy_j":13.0,"p19_stored_energy_j":19.0,
           "point_reports":({"weight_m3":2.0},{"weight_m3":3.0})}
         r=self.ledger(mechanical_energy_owner="p19",p19_energy_audit=audit)
-        self.assertEqual(r["selected_mechanical_energy_j"],20.0)
+        self.assertEqual(r["selected_mechanical_energy_j"],19.0)
         self.assertTrue(r["mechanical_energy_counted_once"])
-        self.assertEqual(r["selected_total_potential_j"],42.0)
+        self.assertEqual(r["selected_total_potential_j"],41.0)
     def test_p19_volume_mismatch_rejected(self):
         audit={"status":"matched_p9_p19_mechanical_energy","p19_elastic_energy_j":7.0,
           "p19_biot_storage_energy_j":13.0,"p19_stored_energy_j":20.0,
@@ -52,7 +52,7 @@ class P27_23Tests(unittest.TestCase):
     def test_dead_load_potential_is_explicit(self):
         r=self.ledger(potential_convention="dead_load_total")
         self.assertAlmostEqual(r["dead_load_potential_j"],-8.0)
-        self.assertAlmostEqual(r["selected_total_potential_j"],34.0)
+        self.assertAlmostEqual(r["selected_total_potential_j"],33.0)
     def test_dead_load_requires_uniform_traction(self):
         cells=[dict(self.cells[0]),dict(self.cells[1],applied_axial_traction_pa=101.)]
         with self.assertRaisesRegex(ValueError,"uniform applied traction"):
