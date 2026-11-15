@@ -99,9 +99,16 @@ def certify_tetra_p2_by_subdivision(
                 leaf_count += 1
                 unresolved_leaves.append(path)
                 return None
-            for child_index, child_vertices in enumerate(_child_tetrahedra(bary_vertices)):
-                child_coefficients = _restricted_coefficients(coefficients, child_vertices)
-                result = visit(child_coefficients, child_vertices, depth + 1,
+            for child_index, child_local_vertices in enumerate(_child_tetrahedra(_IDENTITY)):
+                child_coefficients = _restricted_coefficients(coefficients, child_local_vertices)
+                # Compose the local child-to-parent barycentric map with the
+                # accumulated parent-to-root map for a globally valid witness.
+                child_global_vertices = tuple(
+                    tuple(sum(child_local_vertices[i][k] * bary_vertices[k][q]
+                              for k in range(4)) for q in range(4))
+                    for i in range(4)
+                )
+                result = visit(child_coefficients, child_global_vertices, depth + 1,
                                path + (child_index,))
                 if result is not None:
                     return result
