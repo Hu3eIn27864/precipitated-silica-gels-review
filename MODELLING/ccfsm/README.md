@@ -512,4 +512,12 @@ P26.2 bleibt ein 1-D-Intervalloperator. Es gibt keine 2-D/3-D-Intersection-Geome
 
 
 **P26.5 CI-Referenz:** Lauf #374 erfolgreich, 324/324 Tests; fünf synthetische Fälle. Maximale absolute Massenänderung 0. Summierte absolute Änderung des ersten Moments 0.2328275 → 0.2157950 und des zweiten Moments 0.2439617 → 0.2215272 gegenüber P26.4; jeweils Verbesserung in zwei von fünf Fällen, nicht universell. [CI-Lauf #374](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43673736847) · [Artefakt](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43673736847/artifacts/14144974228).
-\n\n## P26.6 — global gekoppelte Positivitäts- und Momentenprojektion\n\n- `ccfsm_p26_6_global_positive_projection.py` — Dykstra-Projektion auf die Schnittmenge aus globalen Erst-/Zweitmomentbedingungen und zellweiser quadratischer Nichtnegativität; Zellmittelwerte und damit Gesamtmasse bleiben fest.\n- `test_ccfsm_p26_6_global_positive_projection.py` — prüft globale Momente, Positivität, unveränderte zulässige Daten und Eingabe-/Rangfehler.\n- `CCFSM_v4.2.6_P26_6_GLOBAL_POSITIVE_PROJECTION_DE.md` — Herleitung, Algorithmus und Gültigkeitsgrenzen.\n\nNichtkonvergenz wird ausdrücklich nicht als Unzulässigkeitszertifikat interpretiert. Geltungsbereich: 1-D, quadratische Rekonstruktionen; keine physikalische Validierung.\n
+
+
+## P26.6 — global gekoppelte Positivitäts- und Momentenprojektion
+
+- `ccfsm_p26_6_global_positive_projection.py` — Dykstra-Projektion auf die Schnittmenge aus globalen Erst-/Zweitmomentbedingungen und zellweiser quadratischer Nichtnegativität; Zellmittelwerte und damit Gesamtmasse bleiben fest.
+- `test_ccfsm_p26_6_global_positive_projection.py` — prüft globale Momente, Positivität, unveränderte zulässige Daten und Eingabe-/Rangfehler.
+- `CCFSM_v4.2.6_P26_6_GLOBAL_POSITIVE_PROJECTION_DE.md` — Herleitung, Algorithmus und Gültigkeitsgrenzen.
+
+Nichtkonvergenz wird ausdrücklich nicht als Unzulässigkeitszertifikat interpretiert. Geltungsbereich: 1-D, quadratische Rekonstruktionen; keine physikalische Validierung.
