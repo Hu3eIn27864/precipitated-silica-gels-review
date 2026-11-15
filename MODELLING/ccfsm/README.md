@@ -440,3 +440,12 @@ P25 erster Referenzlauf: GitHub Actions [#295](https://github.com/Hu3eIn27864/pr
 CI führt P25.1 getrennt von P25 aus und lädt eigene CSV/JSON-Ergebnisse hoch. Der Druck-/Darcy-Gradient wird auf Aktivierung geprüft; synthetische Tests sind keine physikalische Validierung.
 
 P25.1-Ergebnisse: `CCFSM_v4.1_P25_1_RESULTS_DE.md` dokumentiert den erfolgreichen Cross-Mesh-Lauf #308 (278 Tests), die L1/L2/Linf-Fehler, konservative Restriktion und den aktivierten Druck-/Darcy-Gradienten.
+
+
+## CCFSM v4.2 — P26 konservative FE/FV-Projektion
+
+- `ccfsm_p26_conservative_projection.py` überträgt Quellzellmittelwerte mittels positiver geometrischer Überlappungen auf nichtverschachtelte 1-D-Zielnetze; optional werden FE-Quadraturwerte zunächst zu Quellzellmitteln verdichtet.
+- `test_ccfsm_p26_conservative_projection.py` prüft Integralerhaltung, Konstantenerhaltung, Positivität, Identität, Gebietsabdeckung und Quadratureingaben.
+- `CCFSM_v4.2_P26_CONSERVATIVE_PROJECTION_DE.md` dokumentiert Herleitung und Grenzen.
+
+P26 ist ausdrücklich ein 1-D-Intervalloperator mit stückweise konstanter Quellrekonstruktion, keine allgemeine 3-D-FE/FV-Polyederprojektion. CI erzeugt ein separates Ergebnisartefakt; Softwaretests sind keine physikalische Validierung.
