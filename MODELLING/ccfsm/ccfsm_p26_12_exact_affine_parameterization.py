@@ -120,7 +120,9 @@ def search_rational_positive_witness(target_edges, averages, candidate_linear, c
     [-offset_radius, offset_radius]. Cartesian combinations cover coupled
     changes in all free directions. The candidate cap is a resource limit.
     """
-    e=tuple(_F(v) for v in _edges(target_edges,"target_edges"))
+    raw_edges=tuple(_F(v) for v in target_edges)
+    _edges(raw_edges,"target_edges")  # validate without converting exact rational edges to float
+    e=raw_edges
     means=tuple(_F(v) for v in averages)
     a0=tuple(candidate_linear); b0=tuple(candidate_quadratic); n=len(e)-1
     if len(means)!=n or len(a0)!=n or len(b0)!=n:
