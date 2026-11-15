@@ -1,4 +1,3 @@
-import math
 import unittest
 
 from ccfsm_p27_34_interval_flux_filter import Interval
@@ -38,8 +37,8 @@ class P2735PolynomialEnclosureAuditTests(unittest.TestCase):
 
     def test_subdivision_tightens_positive_polynomial_enclosure(self):
         whole = polynomial_interval([1.0, 2.0], Interval(-1.0, 1.0))
-        left = polynomial_interval([1.0, 0.0, 1.0], Interval(-1.0, 0.0))
-        right = polynomial_interval([1.0, 0.0, 1.0], Interval(0.0, 1.0))
+        left = polynomial_interval([1.0, 2.0], Interval(-1.0, 0.0))
+        right = polynomial_interval([1.0, 2.0], Interval(0.0, 1.0))
         self.assertGreater(whole.hi-whole.lo, left.hi-left.lo)
         self.assertGreater(whole.hi-whole.lo, right.hi-right.lo)
         self.assertGreater(left.lo, 0.0)
