@@ -270,3 +270,8 @@ Added a three-way feasibility classification: converged numerical feasible witne
 ## P26.7 — dualer Machbarkeitstest
 
 P26.7 ergänzt eine Supportfunktionsdiagnose: erreichbare globale Modenmomente bilden eine Minkowski-Summe zellweiser konvexer Positivitätsmengen. Ein gefundener positiver Trennungsabstand wird als numerischer dualer Zeuge ausgegeben. Gleitkommaarithmetik und endliche Winkel-/Randoptimierung bedeuten, dass noch kein formal intervallverifiziertes Unzulässigkeitszertifikat vorliegt. Kein Separator ist kein Machbarkeitsbeweis.
+
+
+## P26.8 — verifizierte duale Unzulässigkeitszertifikate
+
+P26.8 ersetzt die numerische Supportfunktionsdiagnose durch eine geschlossene Zell-Supportfunktion und rationale obere Schranken für Quadratwurzeln. Ein strikt positiver rationaler Abstand liefert ein unabhängig nachprüfbares Unzulässigkeitszertifikat für die exakt aus den Dezimalstrings gebildeten Eingabedaten. Ein endliches Richtungsraster kann bestehende Separatoren übersehen; fehlendes Zertifikat ist daher kein Machbarkeitsbeweis. Geltungsbereich: 1-D, feste Zellmittelwerte, quadratische Rekonstruktion.
