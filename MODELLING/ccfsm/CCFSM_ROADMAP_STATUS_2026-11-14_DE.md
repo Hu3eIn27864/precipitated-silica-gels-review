@@ -103,7 +103,7 @@ P22.1 is implemented and its hosted CI is green.
 
 ### Gate C — P24: unabhängiger Newton-Referenzlöser für kleine gekoppelte Probleme
 
-**Status: implementiert; hosted CI grün.** Workflow [#280](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43669701004) führt die vollständige Suite erfolgreich aus; der Testlog des P24-Code-/Teststands meldet **270 Tests bestanden**.
+**Status: implementiert; hosted CI grün.** Workflows [#280](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43669701004) und [#283](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43669754294) sind erfolgreich; der aktuelle vollständige Testlog meldet **270 Tests bestanden**.
 
 - `ccfsm_p24_newton_reference.py` löst (R(x)=x-x^n-\Delta t F_{P21}(x)=0) mit vorwärts-differenziertem Jacobian und gedämpftem Newton-Backtracking.
 - Jede Residuumsauswertung löst P21 samt P19-Mechanik erneut; die FE-Freiheitsgrade werden durch den P19-Unterlöser statisch kondensiert.
