@@ -550,3 +550,13 @@ Ein positives Zertifikat beweist Unzulässigkeit für die exakten rationalen Dez
 - CCFSM_v4.2.9_P26_9_PRIMAL_DUAL_FEASIBILITY_DE.md dokumentiert Statussemantik und Geltungsgrenzen.
 
 Drei Ausgänge: rational dual zertifiziert unzulässig; primaler Zeuge mit exakt geprüfter Zellpositivität und rational begrenzten Momentenresiduen; oder unresolved. Ein endliches duales Suchraster und eine fehlgeschlagene primale Iteration liefern für sich allein keinen Machbarkeitsbeweis. Nur 1-D/quadratisch; keine physikalische Validierung.
+
+
+## P26.10 — exakte rationale Momentenkorrektur
+
+- ccfsm_p26_10_exact_moment_witness.py rationalisiert einen P26.6-Kandidaten und löst zwei Pivot-Koeffizienten exakt, sodass Masse sowie erstes und zweites globales Moment exakt stimmen.
+- Die Zellpositivität wird mit rationaler Arithmetik über das vollständige Zellintervall geprüft.
+- test_ccfsm_p26_10_exact_moment_witness.py enthält Tests für exakte Korrektur, Positivitätsablehnung und duale Unzulässigkeitspriorität.
+- CCFSM_v4.2.10_P26_10_EXACT_MOMENT_WITNESS_DE.md beschreibt Verfahren und Grenzen.
+
+Status: exakter primaler Zeuge, rational dual zertifizierte Unzulässigkeit oder unresolved. Die endliche Pivot-/Rundungssuche ist kein vollständiger exakter Machbarkeitslöser; unresolved ist kein Unzulässigkeitsbeweis. Nur 1-D/quadratisch, keine physikalische Validierung.
