@@ -438,3 +438,5 @@ P25 erster Referenzlauf: GitHub Actions [#295](https://github.com/Hu3eIn27864/pr
 - `CCFSM_v4.1_P25_1_CROSSMESH_DE.md` — Methodik, Fehlernormen und Freigabegrenzen.
 
 CI führt P25.1 getrennt von P25 aus und lädt eigene CSV/JSON-Ergebnisse hoch. Der Druck-/Darcy-Gradient wird auf Aktivierung geprüft; synthetische Tests sind keine physikalische Validierung.
+
+P25.1-Ergebnisse: `CCFSM_v4.1_P25_1_RESULTS_DE.md` dokumentiert den erfolgreichen Cross-Mesh-Lauf #306 (278 Tests), die L1/L2/Linf-Fehler, konservative Restriktion und den aktivierten Druck-/Darcy-Gradienten.
