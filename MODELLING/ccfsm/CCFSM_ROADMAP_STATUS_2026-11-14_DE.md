@@ -615,3 +615,12 @@ Sechs Regressionen prüfen Nullflussgrenzen, chemische und hydraulische Arbeitsr
 **Aussagegrenze:** Der Test quantifiziert den erwarteten Quadraturfehler der Endpunkt-Trapezregel bei zeitabhängigen synthetischen Daten. Er rekonstruiert nicht den tatsächlichen P24-Newton-Pfad und beweist keine vollständige Upwind-Entropieschließung, keinen solverinternen Energieabschluss und keine physikalische Validität.
 
 **Nächster Schritt P27.29:** die zeitabhängigen Referenzfälle um Vorzeichenwechsel/Upwind-Zweigwechsel und getrennte linke/rechte Randbeiträge erweitern; anschließend prüfen, welche Fehleranteile durch zusätzliche Zeitstützstellen kontrolliert werden können.
+
+
+## P27.29 — Upwind-Zweigwechsel und Zeitstützstellenverfeinerung (15.11.2026)
+
+**Status: implementiert; Hosted-CI-Prüfung ausstehend.** P27.29 untersucht zwei lineare, vorzeichenwechselnde M-Advektionsrandflüsse mit getrennten Wechselzeiten links (1.0 s) und rechts (1.5 s). Dadurch springt die Auswahl des Upwind-Chemiepotentials zwischen Reservoir- und Zellwert. Die stückweise analytischen Referenzen für A=1.5 m² betragen −2.25 J am linken Rand, +3.75 J am rechten Rand, insgesamt +1.50 J chemische Randarbeit und +1.50 mol Netto-M-Transfer. Die P27.25-Adapterrekonstruktion wird auf Zeitgittern mit 1, 2, 3, 4 und 8 Teilintervallen ausgewertet. Linke/rechte chemische Beiträge sowie Material- und Energiefehler werden getrennt berichtet; explizite Zeitstützstellen an den beiden Nullstellen trennen die Upwind-Zweige und vermeiden die Interpolation über den Knick.
+
+**Aussagegrenze:** synthetischer Adapter-/Quadraturtest. Keine vollständige Upwind-Entropie-Kettenregel, keine Integration des tatsächlichen P24-Newton-Pfads und keine physikalische Validierung.
+
+**Nächster Schritt P27.30:** branch-aware adaptive Zeitstützstellenregel mit Ereigniserkennung für Flussnullstellen untersuchen und gegen uniforme Verfeinerung vergleichen.
