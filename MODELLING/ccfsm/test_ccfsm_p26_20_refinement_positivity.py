@@ -47,6 +47,14 @@ class TestP2620RefinementPositivity(unittest.TestCase):
         self.assertFalse(verify_cell_certificate(2, Fraction(1, 5),
                                                 Fraction(1, 10), bad)["verified"])
 
+    def test_independent_verifier_rejects_nonsymmetric_gram_matrix(self):
+        cert = certify_cell_nonnegative(2, Fraction(1, 5), Fraction(1, 10))
+        bad = dict(cert)
+        bad["Q"] = ((cert["Q"][0][0], Fraction(0)),
+                    (Fraction(1, 3), cert["Q"][1][1]))
+        self.assertFalse(verify_cell_certificate(2, Fraction(1, 5),
+                                                Fraction(1, 10), bad)["verified"])
+
     def test_independent_verifier_rejects_identity_mismatch(self):
         cert = certify_cell_nonnegative(2, Fraction(1, 5), Fraction(1, 10))
         self.assertFalse(verify_cell_certificate(3, Fraction(1, 5),
