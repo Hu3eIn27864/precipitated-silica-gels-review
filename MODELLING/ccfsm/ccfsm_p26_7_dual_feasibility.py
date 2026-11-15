@@ -57,6 +57,13 @@ def dual_feasibility_diagnostic(target_edges,averages,linear,quadratic,
     if angular_samples<32 or boundary_samples<32: raise ValueError("sampling counts must be >= 32")
     old=moments(e,u,a,b); base=moments(e,u,(0.,)*n,(0.,)*n)
     target=(old[1]-base[1],old[2]-base[2]); scale=max(1.,abs(target[0]),abs(target[1]),sum(u))
+    input_minimum=min(u[j]+__import__("ccfsm_p26_2_quadratic_projection").quadratic_minimum(a[j],b[j]) for j in range(n))
+    if input_minimum >= -tolerance*scale:
+        return {"status":"feasible","explanation":"The supplied coefficients themselves provide a nonnegative feasible witness.",
+          "target_modal_moments":target,"direction":(0.0,0.0),"target_dot_direction":0.0,
+          "support_value":0.0,"separation_gap":0.0,"relative_gap":0.0,"cell_support_points":[],
+          "certificate_level":"direct numerical primal witness; positivity checked by analytic quadratic minimum",
+          "minimum_input_value":input_minimum,"moment_targets":{"mass":old[0],"first":old[1],"second":old[2]}}
     def gap(angle):
         y=(math.cos(angle),math.sin(angle)); support,_=_support(e,u,y,boundary_samples)
         return y[0]*target[0]+y[1]*target[1]-support
