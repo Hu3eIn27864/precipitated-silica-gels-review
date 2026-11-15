@@ -513,3 +513,10 @@ P27.11 ergänzt die lokalen PL-Link-Prüfungen um eine exakte geometrische Prüf
 Der P21-Adapter rekonstruiert den diffusen M/O-Fluss als Gesamtfluss minus Advektionsfluss. Dies ist eine Prüfung der diskreten gelieferten Felder, keine unabhängige Neuberechnung des Onsager-Gesetzes. Quellenvollständigkeit, physikalische Korrektheit, Energieabschluss, 3-D-Erhaltung und experimentelle Validierung bleiben offen.
 
 **CI-Hinweis:** Der letzte geprüfte Workflow #635 war fehlgeschlagen (527 Tests, 2 ältere Regressionen: P27.10 unbenutzter Mesh-Knoten und P27.13 erwarteter Fehlerstatus bei ungültigem Mesh). Diese Fehler liegen außerhalb von P27.16/P27.17; der neue P27.17-Lauf ist noch ausstehend.
+
+
+## P27.18 — unabhängiger Onsager-Fluss- und Dissipationsaudit (15.11.2026)
+
+**Status: implementiert; Hosted-CI-Prüfung ausstehend.** P27.18 baut den Onsager-Diffusionsfluss für M/O unabhängig aus den Zellkonzentrationen, chemischen Potentialen, logarithmischen Mittelwerten, \(\theta_f\), \(D\), \(RT\) und Zellabständen neu auf. Reservoir-Randflächen werden mit halben Zellabständen berücksichtigt. Die unabhängig berechneten Flüsse werden mit P13/P21 \(J_{total}-J_{adv}\) verglichen; die Diffusionsdissipation wird separat neu berechnet und mit P13 verglichen. P13 exportiert dafür die nötigen Diagnosegrößen; ein Snapshot-Adapter führt den Audit direkt aus.
+
+**Aussagegrenze:** Die Rekonstruktion ist unabhängig vom gespeicherten Gesamtfluss, nutzt aber die bereitgestellten chemischen Potentiale/Konzentrationen und Parameter. Keine unabhängige chemische Herleitung, Parametervalidierung, Advektions-Entropiegarantie, 3-D-Erhaltung oder experimentelle Validierung.
