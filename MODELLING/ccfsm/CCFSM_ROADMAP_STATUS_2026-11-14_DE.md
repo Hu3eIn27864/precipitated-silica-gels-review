@@ -19,7 +19,7 @@ Der aktuelle Engpass ist nicht das Hinzufügen weiterer physikalischer Terme, so
 - P22: gedämpfte Picard-Iteration für einen impliziten-Euler-Schritt.
 - P23: diskreter Audit des akzeptierten P22-Schritts; globale FV-Siliciumbilanz plus getrennte P9-/P19-Energiediagnostik.
 - P24: unabhängiger finite-difference Newton-Referenzlöser; P19 wird in jeder Residuumsauswertung neu gelöst.
-- P25: reproduzierbarer Zeit-/Raumverfeinerungs- und Solverrobustheits-Harness angelegt; CI-Auswertung steht aus.
+- P25: Zeit-/Raumverfeinerungs- und Solverrobustheits-Harness implementiert; erster quantitativer Referenzlauf CI-grün (273 Tests), siehe CCFSM_v4.0_P25_RESULTS_DE.md.
 
 GitHub Actions Lauf [#263](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43634688142) wurde geprüft: Job `ccfsm-tests` erfolgreich, 259 Unit-Tests bestanden. Im selben Lauf wurde die v0.5-Kalibrierung ausgeführt: 7 natürliche Kurven, 21 Fits; Exponentialmodell gewann 3/7, gestrecktes Exponentialmodell 4/7, zweistufiges CCFSM 0/7 und traf bei allen sieben Kurven eine Parametergrenze. Medianer Holdout-RMSE: 0.04207, 0.01755 bzw. 0.04207. Das ist ein begrenzter Vergleich auf approximierten/kuratierten Ablesepunkten, keine unabhängige physikalische Validierung. Der Druckzellen-Audit enthält 21 Druckzellkurven und 0 natürliche Kalibrierkurven; er dient der Trennung, nicht der Übernahme dieser Daten.
 
@@ -120,9 +120,15 @@ P22.1 is implemented and its hosted CI is green.
 - Solver-Abbruch, Relaxationshistorie und Rechenkosten dokumentieren.
 - Erst danach adaptive Zeitschrittsteuerung und ggf. adaptive Relaxation ergänzen.
 
-**Implementierung:** `ccfsm_p25_refinement_study.py`, Regressionen `test_ccfsm_p25_refinement_study.py`, Spezifikation `CCFSM_v4.0_P25_REFINEMENT_STUDY_DE.md`. Die CI-Ausführung veröffentlicht CSV/JSON-Artefakte für Zeit-, Raum- und Solverparameterfolgen. Der P25-Code ist angelegt; quantitative Freigabe bleibt bis zur Prüfung des Workflow-Laufs und der Artefakte offen.
+**Implementierung und erster Lauf:** `ccfsm_p25_refinement_study.py`, Regressionen `test_ccfsm_p25_refinement_study.py`, Spezifikation `CCFSM_v4.0_P25_REFINEMENT_STUDY_DE.md`, Auswertung `CCFSM_v4.0_P25_RESULTS_DE.md`. CI [#295](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43670098385) erfolgreich; 273 Tests bestanden; Zeit-/Raum-/Robustheits-CSV und JSON-Artefakt hochgeladen.
 
-**Freigabe:** beobachtete Konvergenzordnung bzw. deren Grenzen sind reproduzierbar; keine scheinbare Konvergenz allein durch Relaxation oder grobe Diskretisierung.
+- Zeitfolge T=10^-2 s, 1/2/4 Schritte: P22-Fehler gegen 4-Schritt-Referenz 1.547e-8, 5.150e-9, 0; P24 1.549e-8, 5.164e-9, 0. Trend ist mit Euler erster Ordnung vereinbar, formale Ordnungsfreigabe bleibt wegen nur zwei nichttrivialen Fehlerstufen offen.
+- Raumfolge 1/2/4 Zellen: P22/P24 Zustandsabweichung höchstens 6.744e-12, Druckabweichung höchstens 6.664e-12; P23 relative Siliciumbilanzresiduen 8.85e-17 bis 3.28e-16.
+- FD-Schritte 1e-4, 1e-6, 1e-8 konvergieren jeweils in 2 Newton-Iterationen; Residuum steigt von 2.84e-15 auf 4.72e-12 bei kleinerem FD-Schritt.
+- Picard-Relaxation 0.2/0.5/1.0 benötigt 74/25/4 Iterationen; omega=1 ist in diesem Referenzfall am schnellsten, nicht allgemein als stabiler bewiesen.
+- Der Raumvergleich ist Solverkonsistenz auf denselben Netzen, noch kein räumlicher Fehler gegen eine exakte/netzunabhängige Referenz. Alle Fälle synthetisch; keine physikalische Validierung.
+
+**Freigabe:** Teilfreigabe für Softwareverifikation, Bilanzprüfung und Robustheit im Referenzfall. Beobachtete Konvergenzordnung und echte räumliche Konvergenz bleiben offen; keine scheinbare Konvergenz allein durch Relaxation oder grobe Diskretisierung.
 
 ### Gate E — P26: FE/FV-Abbildung und Geometrie
 
