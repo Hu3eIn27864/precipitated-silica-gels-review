@@ -595,3 +595,14 @@ Advective und gesamte mobile M/O-Randflüsse werden getrennt ausgewertet. Daraus
 **Aussagegrenze:** Diese Tests prüfen die Quadraturregel selbst. Sie beweisen nicht, dass P21 alle physikalisch relevanten Leistungs- und Randterme liefert; sie validieren weder chemische Randpotentiale noch Upwind-Entropieschließung, solverinternen Energieabschluss oder das physikalische Modell.
 
 **Nächster Schritt P27.27:** geschlossene und offene, analytisch vorgegebene Randflussfälle direkt durch den P27.25-Adapter führen und Stofftransfer, chemische Randarbeit sowie hydraulische Arbeit mit unabhängigen Vorzeichen- und Integralreferenzen prüfen.
+
+
+## P27.27 — analytische geschlossene/offene Randfluss-Referenzfälle (15.11.2026)
+
+**Status: implementiert; Hosted-CI-Prüfung ausstehend.** P27.27 führt zwei synthetische, zeitkonstante Randfälle direkt durch den P27.25-Adapter. Im geschlossenen Fall sind alle Randflüsse und die hydraulische Reservoirleistung null; entsprechend müssen chemische Randarbeit, hydraulische Arbeit und M/O-Nettoübertrag null sein. Im offenen M-Referenzfall werden advective und diffusive Randflüsse mit unterschiedlichen Vorzeichen sowie Zell-/Reservoirpotentiale vorgegeben. Die unabhängig analytisch berechneten Referenzwerte betragen 49.5 J chemische Randarbeit, 24 J hydraulische Reservoirarbeit und 10.5 mol Netto-M-Eintrag für A=2 m² und dt=3 s; O bleibt ohne Transfer.
+
+Sechs Regressionen prüfen Nullflussgrenzen, chemische und hydraulische Arbeitsreferenzen, Stofftransfer, getrennte absolute Fehler und Toleranzvalidierung.
+
+**Aussagegrenze:** Dies ist eine Adapter-/Vorzeichen-/Einheitenprüfung für synthetische konstante Randdaten. Sie ist keine physikalische Reservoirmodellierung und prüft weder zeitvariable P24-Verläufe noch vollständige Upwind-Entropieschließung, Feststoff-/Brückenreservoirarbeit oder mechanische Randarbeit. Kein vollständiger Energieabschluss und keine physikalische Validierung.
+
+**Nächster Schritt P27.28:** Randfluss-Referenzfälle mit zeitabhängigen linearen/quadratischen Daten erweitern und die P27.25-Zweipunkt-Trapezrekonstruktion gegen exakte Zeitintegrale quantifizieren; danach getrennte Material- und Energiefehlerbudgets ausweisen.
