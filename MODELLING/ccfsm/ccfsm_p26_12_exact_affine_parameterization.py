@@ -49,7 +49,9 @@ def _independent_pivot_pair(columns, requested=None):
 def build_exact_affine_parameterization(target_edges, averages, target_moments,
                                          pivot_coordinates=None):
     """Return an exact affine chart z_pivots = c + B*z_free."""
-    e=tuple(_F(v) for v in _edges(target_edges,"target_edges"))
+    raw_edges=tuple(_F(v) for v in target_edges)
+    _edges(raw_edges,"target_edges")  # validate monotonicity without losing rational input precision
+    e=raw_edges
     means=tuple(_F(v) for v in averages)
     n=len(e)-1
     if len(means)!=n or any(m<0 for m in means):
