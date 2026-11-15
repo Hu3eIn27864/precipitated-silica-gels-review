@@ -639,3 +639,6 @@ P26.20 prüft die Positivitätserhaltung bei exakter Restriktion eines nichtnega
 - test_ccfsm_p27_1_tetra_p1_positivity.py — Tests zu Orientierung, degenerierter Geometrie, rationalen Koordinaten, negativen Werten und Mesh-Zellprüfung.
 
 P27.1 beweist lokale Nichtnegativität eines affinen P1-Skalarfeldes auf jedem nichtentarteten Tetraeder genau dann, wenn alle vier Eckwerte nichtnegativ sind. Das ist noch keine Positivitätsgarantie für quadratische/höhere Felder, keinen gekoppelten 3-D-Zeitschritt und keine vollständige CCFSM-Invariantenregion. Der GitHub-Actions-Testlauf muss nach dem Commit geprüft werden.
+
+- CCFSM_v4.2.22_P27_2_TETRA_P2_BERNSTEIN_DE.md — hinreichende Positivitätszertifikate für quadratische P2-Felder auf Tetraedern.
+- ccfsm_p27_2_tetra_p2_bernstein.py und test_ccfsm_p27_2_tetra_p2_bernstein.py — exakte rationale Umrechnung der vier Eck- und sechs Kantenmittelpunktwerte in zehn Bernstein-Koeffizienten; nur alle nichtnegativen Koeffizienten zertifizieren Positivität. Fehlende Zertifizierung bleibt unentschieden.
