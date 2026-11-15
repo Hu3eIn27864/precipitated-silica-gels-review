@@ -11,19 +11,11 @@ Verwendet werden quadratische diffusive M-Randflüsse, lineare Reservoir-Chemiep
 
 ## Referenzgleichungen
 
-Für ein Polynom (q(t)=sum_k q_k t^k) wird das exakte Integral als
-[
-int_0^T q(t),dt=sum_k rac{q_k T^{k+1}}{k+1}
-]
-berechnet. Für das chemische Randarbeitsintegral werden Potential und Fluss zunächst polynomial multipliziert und anschließend exakt integriert:
-[
-W_{m chem}=Aint_0^T[mu_L(t)j_L(t)-mu_R(t)j_R(t)],dt.
-]
-Der Netto-M-Transfer lautet
-[
-N_M=Aint_0^T[j_L(t)-j_R(t)],dt.
-]
-Die hydraulische Arbeit ist (W_{m hyd}=Aint_0^T p_{m hyd}(t),dt).
+Für ein Polynom q(t) = Summe(q_k t^k) wird das exakte Integral als Summe(q_k T^(k+1)/(k+1)) berechnet. Für das chemische Randarbeitsintegral werden Potential und Fluss zunächst polynomial multipliziert und anschließend exakt integriert:
+
+- Chemische Arbeit: A Integral[mu_L(t) j_L(t) - mu_R(t) j_R(t)] dt
+- Netto-M-Transfer: A Integral[j_L(t) - j_R(t)] dt
+- Hydraulische Arbeit: A Integral[p_hyd(t)] dt
 
 Der Adapter verwendet dagegen die Endpunkt-Trapezregel. Sie ist für lineare Leistungs-/Flussraten exakt, nicht jedoch allgemein für quadratische Materialflussraten oder kubische chemische Leistungsprodukte.
 
@@ -33,12 +25,12 @@ Der Adapter verwendet dagegen die Endpunkt-Trapezregel. Sie ist für lineare Lei
 - `test_ccfsm_p27_28_time_dependent_boundary.py`: vier Regressionen für Referenzwerte, getrennte Fehlerbudgets, Linearitätsidentität und ungültige Eingaben.
 - Stoff- und Energiefehler werden getrennt und sowohl vorzeichenbehaftet als auch absolut ausgegeben.
 
-Für den Standardfall (T=2,mathrm{s}), (A=1.5,mathrm{m^2}) ergeben die analytischen Integrale:
-- Netto-M-Transfer: (2.25,mathrm{mol})
-- chemische Randarbeit: (17.67,mathrm{J})
-- hydraulische Randarbeit: (8.1,mathrm{J})
+Für den Standardfall T=2 s und A=1.5 m² ergeben die analytischen Integrale:
+- Netto-M-Transfer: 2.9 mol
+- chemische Randarbeit: 18.21 J
+- hydraulische Randarbeit: 8.3 J
 
-Die nichtverschwindenden Abweichungen der Zweipunkt-Trapezregel werden vom Test explizit erwartet und nicht als Testfehler kaschiert.
+Die Zweipunkt-Trapezrekonstruktion liefert in diesem Fall 3.6 mol, 19.26 J und 8.7 J. Die absoluten Abweichungen betragen somit 0.7 mol, 1.05 J und 0.4 J. Diese Fehler werden getrennt ausgewiesen und von den Regressionen ausdrücklich erwartet; sie werden nicht als Testfehler kaschiert.
 
 ## Aussagegrenzen
 
