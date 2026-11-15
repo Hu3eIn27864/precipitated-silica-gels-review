@@ -215,6 +215,17 @@ Dieser Strang kann parallel zu Gates A–E laufen, ohne unkalibrierte Materialge
 - CI-Erfolg ist Softwareverifikation, nicht physikalische Validierung.
 - Fehlende Daten werden als Datenlücke dokumentiert, nicht durch plausible Zahlen ersetzt.
 
-## 7. Nächster konkreter Arbeitsschritt
+## 7. P26.2 — quadratische Momentenprojektion
 
-**P26.2 als Nächstes:** die lineare Rekonstruktion auf weitere unabhängige Verfeinerungsfolgen und Extremwert-/Positivitätstests prüfen; danach höhere Polynomgrade und 2-D/3-D-Intersection-Geometrie entwickeln. Den offenen vollständigen P23-Energieabschluss als separates Audit beibehalten.
+**Implementiert; CI-/Artefaktprüfung ausstehend.**
+
+- ccfsm_p26_2_quadratic_projection.py überträgt stückweise quadratische Quellfelder auf nichtverschachtelte 1-D-Zielnetze.
+- Pro Zielzelle werden die Momente nullter, erster und zweiter Ordnung projiziert; damit bleiben bei identischer Gebietsabdeckung die globalen rohen Momente ∫u dx, ∫xu dx und ∫x²u dx erhalten.
+- Drei-Punkt-Gaußquadratur ist für die Polynomprodukte bis Grad vier exakt.
+- Der optionale Positivitätsbegrenzer skaliert beide Moden gemeinsam und erhält den Mittelwert, kann aber lokale Ordnung/Form reduzieren.
+- Regressionen prüfen quadratische Exaktheit, Momentenerhaltung, lokale Krümmung/Extrema, Positivität, Identität und Konstanten.
+- Die Koeffizienten werden vorgegeben; eine automatische robuste quadratische FE/FV-Rekonstruktion ist nicht Teil dieses Pakets.
+
+**Geltungsgrenze:** 1-D-Intervalle, synthetische Verifikation; keine 2-D/3-D-Intersection-Geometrie, keine Druck-/Energieerhaltung und keine physikalische Validierung. P19-Druck muss nach Netztransfer mechanisch neu gelöst werden.
+
+**Nächster Schritt P26.3:** unabhängige Verfeinerungsfolgen, Momentenfehler, Konditionierung und Positivitätsverluste quantitativ untersuchen. Den vollständigen P23-Energieabschluss separat weiterführen.
