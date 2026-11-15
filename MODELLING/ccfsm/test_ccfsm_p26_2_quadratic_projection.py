@@ -25,8 +25,10 @@ class TestP262QuadraticProjection(unittest.TestCase):
         self.assertTrue(all(abs(x-4)<1e-13 for x in out[0]))
         self.assertTrue(all(abs(x)<1e-13 for row in out[1:] for x in row))
     def test_local_maximum_and_minimum_curvature(self):
-        self.assertAlmostEqual(quadratic_minimum(0.,-.6),-.05)
+        self.assertAlmostEqual(quadratic_minimum(0.,-.6),-.1)
+        self.assertAlmostEqual(-quadratic_minimum(0.,.6),.05)
         self.assertAlmostEqual(quadratic_minimum(0.,.6),-.05)
+        self.assertAlmostEqual(-quadratic_minimum(0.,-.6),.1)
     def test_positivity_limiter_preserves_average_and_bounds_polynomial(self):
         m,a,b=.1,.7,1.2; aa,bb=limit_quadratic(m,a,b,True)
         self.assertGreaterEqual(m+quadratic_minimum(aa,bb),-1e-14)
