@@ -29,7 +29,7 @@ def _golden_minimum(fun,left,right):
     return x,fun(x)
 
 def closest_positive_coefficients(average,linear,quadratic,weights=(1.0,1.0),
-                                  safety=1e-12,arc_samples=arc_samples):
+                                  safety=1e-12,arc_samples=1024):
     """Weighted closest point on the exact boundary of the nonnegative-quadratic set.
 
     The feasible boundary consists of two endpoint half-lines and the
