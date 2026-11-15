@@ -55,7 +55,7 @@ def run_study(output_dir,cells=(16,32,64,128)):
             src=source_projection(se,profile); src_m=moments(se,*src); gain=_perturbation_gain(se,src,te)
             for limited in (False,True):
                 effective_src=tuple(
-                    tuple((limit_quadratic(m,a,b,True)[k] if k>0 else m)
+                    tuple((limit_quadratic(m,a,b,True)[k-1] if k>0 else m)
                           for m,a,b in zip(*src))
                     for k in range(3)
                 ) if limited else src
