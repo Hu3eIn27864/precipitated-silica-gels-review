@@ -119,3 +119,33 @@ def audit_onsager_diffusion(concentrations, chemical_potentials, fluid_capacity,
             "scope":"independent algebraic reconstruction from supplied concentrations, chemical potentials and coefficients"}
     except (TypeError,ValueError,OverflowError,ZeroDivisionError,AttributeError):
         return {"status":"invalid_or_malformed_input","overall_pass":False}
+
+
+def audit_p13_onsager_snapshot(snapshot, *, atol=1e-12, rtol=1e-10):
+    """Run P27.18 directly on the diagnostic payload emitted by P13."""
+    if not isinstance(snapshot,dict):
+        return {"status":"invalid_or_malformed_input","overall_pass":False}
+    keys=("mobile_species_concentration_mol_m3","mobile_species_chemical_potential_j_mol",
+          "onsager_fluid_capacity","onsager_diffusivities_m2_s","onsager_rt_j_mol",
+          "onsager_grid_spacing_m","onsager_reservoir_concentration_left_mol_m3",
+          "onsager_reservoir_concentration_right_mol_m3",
+          "onsager_reservoir_chemical_potential_left_j_mol",
+          "onsager_reservoir_chemical_potential_right_j_mol",
+          "mobile_species_face_fluxes_mol_m2_s",
+          "mobile_species_advective_face_fluxes_mol_m2_s",
+          "mobile_species_onsager_diffusive_dissipation_w_m2")
+    if any(k not in snapshot for k in keys):
+        return {"status":"incomplete_p13_onsager_diagnostics","overall_pass":False}
+    return audit_onsager_diffusion(
+        snapshot["mobile_species_concentration_mol_m3"],
+        snapshot["mobile_species_chemical_potential_j_mol"],
+        snapshot["onsager_fluid_capacity"],snapshot["onsager_diffusivities_m2_s"],
+        snapshot["onsager_rt_j_mol"],snapshot["onsager_grid_spacing_m"],
+        snapshot["onsager_reservoir_concentration_left_mol_m3"],
+        snapshot["onsager_reservoir_concentration_right_mol_m3"],
+        snapshot["onsager_reservoir_chemical_potential_left_j_mol"],
+        snapshot["onsager_reservoir_chemical_potential_right_j_mol"],
+        snapshot["mobile_species_face_fluxes_mol_m2_s"],
+        snapshot["mobile_species_advective_face_fluxes_mol_m2_s"],
+        snapshot["mobile_species_onsager_diffusive_dissipation_w_m2"],
+        atol=atol,rtol=rtol)
