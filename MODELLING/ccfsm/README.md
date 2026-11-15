@@ -620,3 +620,8 @@ Status: exakter primaler Zeuge, rational dual zertifizierte Unzulässigkeit oder
 ## CCFSM P26.18 — cross-partition certificate equivalence
 
 P26.18 compares independently verified P26.17 reports by exact rational global moment signatures (mass, first moment, second moment). Decimal and fraction aliases canonicalize to the same rational representation. A one-cell constant-profile certificate is compared with a two-cell representation of the same profile. The comparator rejects invalid reports, different targets and mismatched statuses; unresolved remains unresolved. **Moment equivalence is not equality of local piecewise-polynomial feasible spaces or reconstructed profiles.** The reproducible study uses constructed exact reference witnesses to test verification/comparison, not a new global solver. Run `ccfsm_p26_18_mesh_equivalence_study.py` and `test_ccfsm_p26_18_mesh_equivalence.py`.
+
+
+## CCFSM P26.19 — exact local profile restriction and coarsening
+
+P26.19 exactly restricts normalized piecewise-quadratic cell profiles to nested 1-D meshes and recovers parent coefficients from child moments. A round-trip succeeds only when all child means and local linear/quadratic coefficients match the exact restriction. Global mass, first and second moments are preserved. Non-nested meshes are rejected; arbitrary fine profiles need not be restrictions of a coarser quadratic. Run `ccfsm_p26_19_profile_restriction_study.py` and `test_ccfsm_p26_19_exact_profile_restriction.py`. No 2-D/3-D or physical validation.
