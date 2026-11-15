@@ -14,7 +14,7 @@ class TestP2614GlobalConvexFeasibility(unittest.TestCase):
 
     def test_negative_single_cell_is_not_mislabelled_infeasible(self):
         r=solve_global_convex_feasibility((0,1),(Fraction(1,10),),(1,),(0,),
-                                          denominators=(1,),offset_radius=0)
+                                          denominators=(1,),offset_radius=0,max_iterations=25)
         self.assertEqual(r["status"],"unresolved")
         self.assertFalse(r["verified"])
 
