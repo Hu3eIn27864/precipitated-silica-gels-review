@@ -41,6 +41,9 @@ def audit_coupled_fv_invariant_domain(fluid_capacity, inventories,
         for s,name in enumerate(names):
             for j,(x,r) in enumerate(zip(fields[s],ir[s])): restrict("%s[%d]"%(name,j),x,dt*r,il)
         alpha=min(1.0,max(0.0,alpha))
+        if alpha <= 0.0:
+            return {"status":"no_positive_admissible_step","overall_pass":False,
+                    "limiting_factor":0.0,"active_constraints":tuple(active)}
         tn=tuple(x+alpha*dt*r for x,r in zip(theta,tr))
         fn=tuple(tuple(x+alpha*dt*r for x,r in zip(fields[s],ir[s])) for s in range(4))
         ok=all(math.isfinite(x) and tl<x<=1 for x in tn) and all(math.isfinite(x) and x>il for row in fn for x in row)
