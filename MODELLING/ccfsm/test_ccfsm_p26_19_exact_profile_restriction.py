@@ -35,9 +35,13 @@ class TestP2619ExactProfileRestriction(unittest.TestCase):
         parent=(0,1); fine=(0,Fraction(1,3),1)
         restricted=restrict_quadratic_profile(parent,(2,),(Fraction(1,5),),
                                                (Fraction(1,10),),fine)
-        from ccfsm_p26_17_independent_certificate import _moments
-        coarse=_moments(parent,(Fraction(2),),(Fraction(1,5),),(Fraction(1,10),))
-        refined=_moments(fine,restricted["averages"],restricted["linear"],restricted["quadratic"])
+        from ccfsm_p26_19_exact_profile_restriction import _raw_moments
+        coarse=_raw_moments(tuple(map(Fraction,parent)),(Fraction(2),),
+                            (Fraction(1,5),),(Fraction(1,10),))
+        refined=_raw_moments(tuple(map(Fraction,fine)),
+            tuple(map(Fraction,restricted["averages"])),
+            tuple(map(Fraction,restricted["linear"])),
+            tuple(map(Fraction,restricted["quadratic"])))
         self.assertEqual(coarse,refined)
 
 if __name__=="__main__": unittest.main()
