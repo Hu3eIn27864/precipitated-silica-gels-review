@@ -434,3 +434,12 @@ Ein exakter rationaler Audit-Prüfer rekonstruiert die auf gemeinsamen groben Te
 ## P27.6 — konservativer Verfeinerungstiefen-Abschluss (15.11.2026)
 
 **Status: implementiert; CI-Prüfung ausstehend.** Der neue Tiefenabschluss baut die Face-Nachbarschaft der groben Tetraeder auf und hebt alle Elemente einer face-zusammenhängenden Komponente auf deren maximale angeforderte P27.3-Verfeinerungstiefe. Damit werden unterschiedliche Tiefen auf gemeinsamen groben Flächen konservativ vermieden. Die Regel kann eine ganze Komponente uniform verfeinern und ist ausdrücklich nicht minimal. Ressourcenlimits liefern unresolved ohne partielle Meshänderung. P27.6 erzeugt selbst keine Kind-Tetraeder; nach realer Subdivision bleibt der exakte P27.5-Audit verpflichtend. Keine Aussage über globale Knoten-/Kantenkonformität, Elementqualität oder physikalische CCFSM-Positivität.
+
+
+## P27.7 — tatsächliche konforme rote Tetraederverfeinerung (15.11.2026)
+
+**Status: implementiert; CI-Prüfung ausstehend.** P27.7 wendet P27.6-Tiefenabschluss an, erzeugt die Achtfach-Unterteilung rekursiv mit exakten rationalen Koordinaten und dedupliziert globale Knoten. Der P27.5-Audit prüft die induzierten Dreieckszerlegungen auf jeder gemeinsamen groben Fläche; nur bei `conforming` wird ein erfolgreiches Netzobjekt zurückgegeben. Ressourcenabbruch und fehlgeschlagene Prüfungen liefern keinen Erfolg. Keine Garantie für globale Kanten-/Knotenmannigfaltigkeit, Elementqualität, Orientierungsnormalisierung oder CCFSM-Positivität.
+
+## Figure 9 — zweite visuelle Ableserunde (15.11.2026)
+
+Die Original-PNG wurde über die Artikelabbildung erneut geöffnet. Eine zweite visuelle CSV enthält Zeitablesung und grobe visuelle Fehlerbalken-Unter-/Obergrenzen für alle 39 Marker. Ein früher saurer 60-°C-Marker wurde dabei zeitlich auf ungefähr 22 h statt 7 h eingeordnet; der hohe Konzentrationswert bleibt erhalten. Es ist ausdrücklich keine maschinelle Pixelkalibrierung. Die zweite CSV ist ein visueller Prüfdatensatz; beide CSV-Dateien bleiben für Fits gesperrt. Die Assay-Observable wird wegen fehlender Reaktionszeit-/Selektivitätsangaben nicht ungeprüft mit monomerem (c_M) gleichgesetzt.
