@@ -29,7 +29,7 @@ def _golden_minimum(fun,left,right):
     return x,fun(x)
 
 def closest_positive_coefficients(average,linear,quadratic,weights=(1.0,1.0),
-                                  safety=1e-12,max_cuts=128):
+                                  safety=1e-12,arc_samples=arc_samples):
     """Weighted closest point on the exact boundary of the nonnegative-quadratic set.
 
     The feasible boundary consists of two endpoint half-lines and the
@@ -42,7 +42,7 @@ def closest_positive_coefficients(average,linear,quadratic,weights=(1.0,1.0),
     if m<0: raise ValueError("nonnegative average required for nonnegative reconstruction")
     if len(w)!=2 or any(v<=0 for v in w): raise ValueError("two strictly positive objective weights required")
     if safety<0 or safety>=1e-3: raise ValueError("safety must be in [0,1e-3)")
-    if not isinstance(max_cuts,int) or max_cuts<1: raise ValueError("max_cuts must be a positive integer")
+    if not isinstance(arc_samples,int) or arc_samples<32: raise ValueError("arc_samples must be an integer >= 32")
     z0=(a0,b0); scale=max(1.0,m,abs(a0),abs(b0)); margin=safety*scale
     minimum_before=m+quadratic_minimum(a0,b0)
     if minimum_before>=margin:
