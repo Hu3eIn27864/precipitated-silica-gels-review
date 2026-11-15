@@ -2,7 +2,7 @@
 
 **Auditdatum:** 14.11.2026  
 **Repository-Stand:** `main`, letzter geprüfter Commit `a5e8f066cb6a4e4ab700a3ace85763fa1f64dfb4`  
-**Geltungsbereich:** CCFSM P0–P25, natürliche Synärese gefällter Silicagel-Systeme. Diese Roadmap ist ein Prüf- und Arbeitsplan, keine Behauptung physikalischer Validierung.
+**Geltungsbereich:** CCFSM P0–P25.1, natürliche Synärese gefällter Silicagel-Systeme. Diese Roadmap ist ein Prüf- und Arbeitsplan, keine Behauptung physikalischer Validierung.
 
 ## 1. Kurzurteil
 
@@ -20,6 +20,7 @@ Der aktuelle Engpass ist nicht das Hinzufügen weiterer physikalischer Terme, so
 - P23: diskreter Audit des akzeptierten P22-Schritts; globale FV-Siliciumbilanz plus getrennte P9-/P19-Energiediagnostik.
 - P24: unabhängiger finite-difference Newton-Referenzlöser; P19 wird in jeder Residuumsauswertung neu gelöst.
 - P25: Zeit-/Raumverfeinerungs- und Solverrobustheits-Harness implementiert; erster quantitativer Referenzlauf CI-grün (273 Tests), siehe CCFSM_v4.0_P25_RESULTS_DE.md.
+- P25.1: konservative Cross-Mesh-Restriktion, netzunabhängige Anfangsprofile, L1/L2/Linf-Fehlernormen und erhöhter Druck-/Darcy-Gradient als neuer Verifikationslauf implementiert; CI-Auswertung steht aus.
 
 GitHub Actions Lauf [#263](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43634688142) wurde geprüft: Job `ccfsm-tests` erfolgreich, 259 Unit-Tests bestanden. Im selben Lauf wurde die v0.5-Kalibrierung ausgeführt: 7 natürliche Kurven, 21 Fits; Exponentialmodell gewann 3/7, gestrecktes Exponentialmodell 4/7, zweistufiges CCFSM 0/7 und traf bei allen sieben Kurven eine Parametergrenze. Medianer Holdout-RMSE: 0.04207, 0.01755 bzw. 0.04207. Das ist ein begrenzter Vergleich auf approximierten/kuratierten Ablesepunkten, keine unabhängige physikalische Validierung. Der Druckzellen-Audit enthält 21 Druckzellkurven und 0 natürliche Kalibrierkurven; er dient der Trennung, nicht der Übernahme dieser Daten.
 
@@ -130,6 +131,15 @@ P22.1 is implemented and its hosted CI is green.
 
 **Freigabe:** Teilfreigabe für Softwareverifikation, Bilanzprüfung und Robustheit im Referenzfall. Beobachtete Konvergenzordnung und echte räumliche Konvergenz bleiben offen; keine scheinbare Konvergenz allein durch Relaxation oder grobe Diskretisierung.
 
+### Gate D.1 — P25.1: konservative Cross-Mesh-Verfeinerung
+
+- P25.1 vergleicht FV-Zellmittelwerte auf verschachtelten Netzen nach volumen-erhaltender Restriktion der Feinlösung auf das grobe Netz.
+- Das Anfangsprofil ist als mesh-unabhängige kontinuierliche Referenz definiert; die Druckprojektion wird separat als nicht-konservierte Feldgröße verglichen.
+- Zeitfolge 1/2/4/8/16 und Raumfolge 1/2/4/8; P23-Bilanz, P22/P24-Gleichnetzvergleich und Druck-/Darcy-Gradient werden separat ausgewiesen.
+- Empirische Raten gegen die feinste numerische Referenz bleiben Diagnostik, kein mathematischer Konvergenzbeweis.
+
+**Status:** implementiert; quantitative Freigabe nach CI- und Artefaktprüfung.
+
 ### Gate E — P26: FE/FV-Abbildung und Geometrie
 
 - Die derzeitige quadraturgewichtete Zellmittelung ist nur für die explizit zugeordneten Quadraturpunkte abgesichert.
@@ -201,4 +211,4 @@ Dieser Strang kann parallel zu Gates A–E laufen, ohne unkalibrierte Materialge
 
 ## 7. Nächster konkreter Arbeitsschritt
 
-**P25 als Nächstes:** Zeit- und Raumverfeinerung getrennt durchführen, zuerst am kleinen P22/P24-Referenzfall. Newton-FD-Schrittweite, Solverfehler, Positivität und Stoffbilanz über die Verfeinerungsfolge protokollieren. Den offenen vollständigen P23-Energieabschluss als Teil des Folgeaudits beibehalten.
+**P25.1 als Nächstes:** Cross-Mesh-Fehlernormen mit konservativer Restriktion, mesh-unabhängige Anfangsdaten und einen anspruchsvolleren Druck-/Darcy-Gradienten prüfen. Danach folgt P26 mit allgemeiner konservativer FE/FV-Projektion und physikalischer Geometrie. Den offenen vollständigen P23-Energieabschluss als separates Audit beibehalten.
