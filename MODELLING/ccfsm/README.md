@@ -819,3 +819,13 @@ Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständig
 - `test_ccfsm_p27_19_thermodynamic_ledger.py` enthält neun Regressionen; `CCFSM_v4.2.39_P27_19_THERMODYNAMIC_LEDGER_DE.md` dokumentiert Einheiten- und Aussagegrenzen.
 
 **Grenze:** Ein Ledger aus übergebenen Zahlen ist kein automatischer vollständiger Energieadapter. P19-FE-Energie, P10-Reaktionsdissipation und P13/P21-Dissipationen benötigen zunächst eine konsistente Geometrie-/Einheitenabbildung; gemeinsame freie Energie, vollständiger diskreter Energieabschluss und physikalische Validierung sind nicht bewiesen.
+
+
+## CCFSM P27.20 — Zwei-Zustands-Energie-Snapshot-Adapter
+
+- `ccfsm_p27_20_two_state_energy.py` integriert eine explizit gelieferte FV-Freie-Energiedichte über identische (auch nichtuniforme) 1-D-Zellbreiten und bildet die Differenz zweier P19-gespeicherter Energien auf mittlere Raten in W/m² ab.
+- Ein konservativ remapptes, identisches FV-Gitter wird vorausgesetzt; bei Netzwechsel wird abgebrochen. P19-Energien sind bereits Gesamtenergien in Joule.
+- P19-Endpunkt-Traktionsarbeit wird nur auf ausdrückliche Option als Differenz ausgegeben; sie ist nur unter kompatibler Lastpfadannahme als Pfadarbeit interpretierbar.
+- `test_ccfsm_p27_20_two_state_energy.py` enthält sieben Regressionen; `CCFSM_v4.2.40_P27_20_TWO_STATE_ENERGY_DE.md` dokumentiert Kopplung und Grenzen.
+
+**Grenze:** Die FV-Freie-Energiedichte ist caller-supplied und nicht aus P10/P13 hergeleitet. Keine gemeinsame freie Energie, Doppelzählungsfreiheit, vollständige Rand-/Dirichlet-Arbeit oder thermodynamische Stabilität ist damit bewiesen.
