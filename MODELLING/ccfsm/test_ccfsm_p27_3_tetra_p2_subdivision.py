@@ -17,8 +17,8 @@ class TestP273AdaptiveSubdivision(unittest.TestCase):
         # u=(lambda0-lambda1)^2 + 1/16 is strictly positive.
         # Its original b01=-15/16, but midpoint subdivision resolves it.
         vertex = (F(17, 16), F(17, 16), F(1, 16), F(1, 16))
-        edge = (F(1, 16), F(9, 16), F(9, 16),
-                F(9, 16), F(9, 16), F(17, 16))
+        edge = (F(1, 16), F(5, 16), F(5, 16),
+                F(5, 16), F(5, 16), F(1, 16))
         r = certify_tetra_p2_by_subdivision(self.tet, vertex, edge, 4)
         self.assertEqual(r["status"], "certified_nonnegative")
         self.assertGreater(r["visited_cells"], 1)
