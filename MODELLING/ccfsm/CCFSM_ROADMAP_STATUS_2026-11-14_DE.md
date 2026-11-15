@@ -490,3 +490,10 @@ P27.11 ergänzt die lokalen PL-Link-Prüfungen um eine exakte geometrische Prüf
 **Status: implementiert; CI-Prüfung ausstehend.** P27.14 schaltet den P27.13-Netzaudit vor eine zellweise P1/P2-Skalarfeldprüfung. P1-Nichtnegativität wird exakt über die vier Eckwerte geprüft; P2 nutzt adaptive Bernstein-Unterteilung (P27.3) mit unabhängiger Zertifikatsprüfung (P27.4). Zertifizierte konservative Untergrenzen und eine optionale Mindestmarge werden getrennt ausgewiesen. Unresolved und exakte Negativitätszeugen bleiben unterscheidbar.
 
 **Aussagegrenze:** Das ist ein exakter diskreter Skalarfeld-Baustein, keine Garantie für alle gekoppelten CCFSM-Zustände, Reaktions-/Transport-Invarianz, 3D-Zeitschrittstabilität, FE-Koerzivität, Energieabschluss oder physikalische Validität. Als Nächstes sind die tatsächlich verwendeten FV-Zustände, FE-Interpolationen, Quellen/Flüsse und der Zeitintegrator gemeinsam zu koppeln und zu analysieren.
+
+
+## P27.15 — gekoppelter FV-Invariantenbereichs-Limiter (15.11.2026)
+
+**Status: implementiert; CI-Prüfung ausstehend.** Ein gemeinsamer fraction-to-boundary-Faktor begrenzt die explizite RHS-Aktualisierung des FV-Zustands (theta, M/O/N/B) so, dass die angegebenen komponentenweisen Schranken erhalten bleiben. Ein P21-Snapshot-Adapter ist enthalten. Der Bericht unterscheidet vollen von limitiertem Schritt und benennt aktive Schranken.
+
+**Aussagegrenze:** Algebraische Zulässigkeit des expliziten Kandidaten für die übergebene RHS, kein Nachweis eines impliziten P22/P24-Residuals, der Flusskonservativität, Energieabnahme, Zeitschrittstabilität oder physikalischen Positivität. Nächster Schritt: konsistente Integration in den impliziten Residual-/Line-Search-Pfad und separater Konservativitätsaudit.
