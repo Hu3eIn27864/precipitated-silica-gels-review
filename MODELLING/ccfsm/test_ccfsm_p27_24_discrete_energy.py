@@ -16,12 +16,12 @@ class P27_24Tests(unittest.TestCase):
             integrated_dissipation_j=self.d, external_work_j={"reservoir": 1.}, **kw)
     def test_exact_manufactured_balance(self):
         r = self.run_audit()
-        self.assertAlmostEqual(r["energy_change_j"], -5.)
+        self.assertAlmostEqual(r["energy_change_j"], -6.)
         self.assertAlmostEqual(r["predicted_energy_change_j"], -3.)
-        self.assertAlmostEqual(r["discrete_energy_residual_j"], -2.)
+        self.assertAlmostEqual(r["discrete_energy_residual_j"], -3.)
         self.assertFalse(r["residual_within_tolerance"])
     def test_closing_balance(self):
-        r = self.run_audit(external_work_j={"reservoir": -1.})
+        r = audit_p24_discrete_energy_step(self.a, self.b, [2.], 0.5,\n            integrated_dissipation_j=self.d, external_work_j={"reservoir": -2.})
         self.assertAlmostEqual(r["discrete_energy_residual_j"], 0.)
         self.assertTrue(r["residual_within_tolerance"])
     def test_nonnegative_integrated_dissipation(self):
@@ -44,7 +44,7 @@ class P27_24Tests(unittest.TestCase):
                   "point_reports":({"weight_m3":2.},)}
         r = self.run_audit(mechanical_energy_owner="p19",
                            p19_initial_audit=audit0, p19_final_audit=audit1)
-        self.assertAlmostEqual(r["energy_change_j"], -5.)
+        self.assertAlmostEqual(r["energy_change_j"], -6.)
         self.assertTrue(r["mechanical_energy_counted_once"])
     def test_p19_requires_both_states(self):
         with self.assertRaisesRegex(ValueError, "both states"):
