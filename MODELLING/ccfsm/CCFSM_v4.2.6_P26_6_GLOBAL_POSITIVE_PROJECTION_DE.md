@@ -44,3 +44,8 @@ Dykstras Projektionsalgorithmus wird auf die Schnittmenge zweier abgeschlossener
 - Nichtkonvergenz ist **kein** Unzulässigkeitsbeweis; sie lässt Machbarkeit offen.
 - Rangdefiziente Momentenbedingungen werden abgewiesen.
 - Nur 1-D-Intervalle und quadratische Rekonstruktionen; keine 2-D/3-D-Geometrie, keine physikalische Validierung.
+
+
+## P26.6.1 — Machbarkeitsklassifikation
+
+P26.6.1 ergänzt eine dreistufige Machbarkeitsdiagnose. Für genau eine Zelle bestimmen die beiden globalen Momentengleichungen die beiden Moden eindeutig; ein negatives analytisches Polynomminimum ist damit ein expliziter Unzulässigkeitsnachweis. Für mehrere Zellen gilt: eine konvergierte Dykstra-Lösung liefert einen numerischen zulässigen Zeugen; Nichtkonvergenz bleibt ausdrücklich „unresolved“ und ist kein Unzulässigkeitsbeweis. Die Diagnose ist keine allgemeine Farkas-/Dualzertifizierung für Mehrzellen-Netze.
