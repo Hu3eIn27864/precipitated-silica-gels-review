@@ -667,3 +667,17 @@ Sechs Regressionen decken verborgene Nullstellenpaare, lineare Randereignisse, G
 
 - P27.32: Im Hosted-Lauf [#742](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43743966718) bestanden alle sechs P27.32-Regressionen nach Korrektur des Bisektions-Abbruchkriteriums. Die Zeitklammerbreite ist das Einschluss-/Abbruchkriterium; das Flussresiduum bleibt eine separate Diagnosegröße. Der vollständige Lauf blieb wegen sechs älterer Fehler und einer Exception in P27.10, P27.13, P27.17 (zwei), P27.18, P27.23 und P27.28 rot.
 - P27.33: Im Hosted-Lauf [#744](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43744011153) bestanden alle sechs P27.33-Regressionen. Der vollständige Lauf mit 633 Tests blieb mit denselben sechs Fehlern und einer Exception in den genannten älteren Modulen rot. P27.33 ist damit gezielt getestet, aber die Gesamtintegration ist nicht grün.
+
+## P27.34 — Intervall-Enclosure-Filter für Flussnullstellen (15.11.2026)
+
+**Status: implementiert; gezielte Hosted-CI-Prüfung ausstehend.** P27.34 ergänzt P27.33 um einen konservativen Intervallfilter. Eine vom Aufrufer bereitgestellte Intervallfortsetzung des Originalflusses wird auf einem Kandidatenzeitintervall ausgewertet. Schließt die resultierende Intervall-Einschließung Null aus, ist eine Nullstelle im gesamten Intervall ausgeschlossen. Enthält sie Null, wird der Fall als ungelöst ausgegeben. Die elementaren Intervalloperationen runden mit `math.nextafter` nach außen.
+
+Sieben Regressionen prüfen Null-Ausschluss für positive/negative Flüsse, ungelöste Null-Inklusion am tangentialen Kandidaten, Einschließung, Division durch null, ungültige Intervalle und nichtendliche Grenzen.
+
+**Aussagegrenze:** Die Ausschlussaussage ist nur so zuverlässig wie die vom Aufrufer gelieferte mathematisch gültige Intervallfortsetzung. Null-Inklusion beweist keine Nullstelle und insbesondere keine tangentiale Nullstelle. Keine automatische Ableitungsschranke, keine vollständige Root-Isolation oder Vollständigkeitsgarantie für P27.31/P27.33; keine vollständige diskrete Upwind-Entropie-Kettenregel, keine P24-Trajektorienintegration und keine physikalische Validierung.
+
+## Publikationsprüfung — Sahabi/Kind und DFG (15.11.2026)
+
+Die KIT/TVT-Publikationsliste führt zwei gemeinsame Sahabi-&-Kind-Arbeiten von 2011: *Consolidation of Inorganic Precipitated Silica Gel* (Polymers 3, 1423–1432; DOI 10.3390/polym3031423) und *Experimentally Justified Model-Like Description of Consolidation of Precipitated Silica* (Polymers 3, 2156–2171; DOI 10.3390/polym3042156). Der DFG-Dank in beiden Artikeln nennt SPP 1273 „Kolloidverfahrenstechnik“. Das Kennzeichen KI 709/22-3 erscheint in einer späteren Wilhelm-&-Kind-Arbeit und wird nicht ohne Förderunterlagen auf die Sahabi-&-Kind-Arbeiten oder die heutige CCFSM übertragen.
+
+Hussein Sahabis Angabe einer TVT-Beschäftigung 2009–2011 ist als Selbstauskunft aufgenommen und vor Manuskripteinreichung zu belegen. Die aktualisierte Publikations-/Rechteprüfung steht in [PUBLICATION_TODO_DE.md](../../PUBLICATION_TODO_DE.md). Historische Förderung und frühere Affiliation begründen weder eine heutige KIT-Affiliation noch automatisch neue Autorenschaft oder DFG-Förderung der aktuellen CCFSM-Arbeit.
