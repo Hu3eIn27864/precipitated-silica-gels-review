@@ -353,3 +353,28 @@ P26.20 verbindet die exakte Profilrestriktion aus P26.19 mit den lokalen Markov-
 **Korrektur aus dem P26.19-CI-Lauf:** Ein Regressionstest übergab zuvor die von P26.19 ausgegebenen rationalen Zeichenketten direkt an den P26.17-Momentenprüfer. Die Profilroutine war nicht betroffen; der Test wurde auf exakte Fraction-Konvertierung vor dem Momentenvergleich umgestellt und nutzt nun den P26.19-Momentenintegrator.
 
 **Aussagegrenze:** Die Positivitätsaussage gilt für exakte geschachtelte 1-D-Restriktion desselben quadratischen Polynoms. Sie garantiert keine Positivität nach beliebiger nichtkonformer Projektion. Keine 2-D/3-D-Verallgemeinerung, keine physikalische oder experimentelle Validierung; kein globaler SOCP-Optimierer.
+
+
+## P27 — Parallelpfad: Literaturvalidierung und 3-D-Positivität (15.11.2026)
+
+### P27-V — Literaturbasierte physikalische Validierung
+
+**Status: Prüfprotokoll angelegt; externe Zielsystemvalidierung weiterhin offen.**
+
+- Neue Spezifikation: CCFSM_P27_PHYSICAL_VALIDATION_PROTOCOL_DE.md.
+- L0–L4 trennen Quellenreproduktion, internen Cross-Protocol-Test, unabhängigen Mechanismenvergleich, unabhängige Zielsystemvalidierung und gekoppelte Mehr-Observablen-Validierung.
+- Wilhelm-&-Kind-Zylinderwerte bleiben der primäre Quellenzweig; Tröpfchenwerte sind ein gesperrter Geometrie-/Temperatur-Holdout. Die Dissertation-Abweichung bleibt eigener Sensitivitätszweig.
+- Scherer 1989 II ist als externer Mechanismenast priorisiert, aber wegen TEOS-/Alkoxid-System nicht mit gefällter Silica zu poolen. Volltext-/Kurvenextraktion steht aus.
+- Der aktuelle v0.5-Befund (Exponential 3/7, gestreckt-exponentiell 4/7, zweistufiges CCFSM 0/7; alle zweistufigen Fits an Suchgrenzen) wird als Gegenbefund beibehalten.
+- Status: L0 teilweise, L1 nicht ausgeführt, L2 qualitativ/bibliographisch vorbereitet, L3/L4 nicht erreicht.
+
+### P27.1 — Exakte 3-D-Tetraedergeometrie und P1-Positivität
+
+**Status: implementiert; CI-Prüfung ausstehend.**
+
+- Exakte rationale Berechnung von sechsfacher Tetraedervolumina und Entartungstest.
+- Für affine P1-Skalarfelder ist die Positivität auf einem Tetraeder äquivalent zu vier nichtnegativen Eckwerten, da die baryzentrischen Koordinaten nichtnegative konvexe Gewichte sind.
+- Mesh-Prüfer akzeptiert nur dann, wenn jedes gelistete Element die lokale Prüfung besteht.
+- Testfälle umfassen positive und randberührende Profile, negative nodale Werte, umgekehrte Orientierung, degenerierte Elemente, fehlerhafte Konnektivität und rationale Geometrie.
+
+**Grenze:** Das ist eine exakte lokale 3-D-Aussage für P1-Skalarfelder. Keine P2-/höhergradige Positivität, keine Erhaltung im gekoppelten CCFSM-Zeitschritt, keine globale Netzkonformitätsgarantie und keine physikalische Validierung. P27.2 muss die Elementordnung und das für P19/P20 tatsächlich verwendete FE-Interpolationsschema adressieren; danach erst Transport-/Reaktions-Invariantenbereich und 3-D-Zeitschrittkopplung.
