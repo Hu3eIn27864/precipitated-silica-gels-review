@@ -139,9 +139,19 @@ def audit_p21_process_balance(snapshot, cell_widths, *, atol=1e-12, rtol=1e-10):
             tol=atol+rtol*max(1.0,abs(rep["integrated_rhs"]),abs(rep["integrated_reaction_source"]))
             rep["global_tolerance"]=tol
             rep["global_pass"]=abs(rep["global_defect"])<=tol
+        stoich_defects = tuple(sum(reaction[k][j] for k in range(4)) for j in range(n))
+        stoich_max = max(abs(v) for v in stoich_defects)
+        stoich_tol = atol + rtol * max(1.0, *(abs(v) for row in reaction for v in row))
+        stoich_pass = stoich_max <= stoich_tol
+        total_inventory_rate = sum(widths[j] * sum(inv[k][j] for k in range(4))
+                                   for j in range(n))
+        total_boundary_rate = (total[0][0]-total[0][-1]) + (total[1][0]-total[1][-1])
+        silicon_defect = total_inventory_rate-total_boundary_rate
+        silicon_tol = atol + rtol * max(1.0,abs(total_inventory_rate),abs(total_boundary_rate))
+        silicon_pass = abs(silicon_defect) <= silicon_tol
         process_pass = all(v.get("local_pass",True) and v.get("global_pass",True)
                            for v in reports.values())
-        overall = closure_pass and process_pass
+        overall = closure_pass and process_pass and stoich_pass and silicon_pass
         return {
             "status":"p21_process_balance_audited" if overall else "p21_process_balance_failed",
             "overall_pass":overall,
@@ -149,6 +159,10 @@ def audit_p21_process_balance(snapshot, cell_widths, *, atol=1e-12, rtol=1e-10):
             "rhs_reconstruction":{"max_abs_defect":closure_max,"tolerance":closure_tol,
                                   "pass":closure_pass,"field_order":"M,O,N,B"},
             "reaction_sources_mol_m3_s":reaction,
+            "reaction_stoichiometry":{"max_abs_sum":stoich_max,"tolerance":stoich_tol,"pass":stoich_pass},
+            "global_silicon_balance":{"integrated_inventory_rate":total_inventory_rate,
+                "mobile_boundary_flux_in_minus_out":total_boundary_rate,
+                "defect":silicon_defect,"tolerance":silicon_tol,"pass":silicon_pass},
             "onsager_diffusive_flux_recovered_as_total_minus_advective":True,
             "global_silicon_balance_scope":"M+O+N+B reaction stoichiometry cancels internally; M/O boundary fluxes remain explicit",
             "physical_process_completeness_certified":False,
