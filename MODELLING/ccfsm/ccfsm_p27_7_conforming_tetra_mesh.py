@@ -87,7 +87,7 @@ def generate_conforming_red_refined_mesh(
             child_ids = []
             for bary_tet in bary_leaves:
                 physical_tet = tuple(
-                    tuple(sum(bary_tet[k][j] * parent_physical[k][d] for k in range(4)) for d in range(3))
+                    tuple(sum(bary_tet[j][k] * parent_physical[k][d] for k in range(4)) for d in range(3))
                     for j in range(4)
                 )
                 ids = tuple(add_point(p) for p in physical_tet)
