@@ -701,3 +701,11 @@ Acht Regressionen prüfen steigende/fallende lineare Referenzen, positive/negati
 
 
 **CI-Nachtrag P27.36:** Hosted-Lauf [#763](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43748370567): alle acht P27.36-Regressionen bestanden. Der Gesamtlauf mit 655 Tests blieb wegen sechs Fehlern und einer Exception in P27.10, P27.13, P27.17 (zwei), P27.18, P27.23 und P27.28 rot. Die neue Funktion ist damit gezielt getestet; die Gesamtintegration bleibt gesperrt.
+
+## P27.37 — adaptive Polynom-Nullstellenisolation (15.11.2026)
+
+**Status: implementiert; Hosted-CI-Prüfung ausstehend.** P27.37 unterteilt ungelöste Polynomintervalle rekursiv und wendet auf jedes Teilintervall das P27.36-Kriterium an. Teilintervalle mit strengem Ableitungsvorzeichen und entgegengesetzten strikt eingeschlossenen Endpunktvorzeichen enthalten genau eine innere Nullstelle. Bei gleichem striktem Endpunktvorzeichen sind sie nullstellenfrei. Nicht entscheidbare Teilintervalle werden bis zur vorgegebenen Tiefe oder Mindestbreite weiter unterteilt und danach als ungelöst ausgewiesen.
+
+Acht Regressionen prüfen eine und zwei einfache Nullstellen, Nullstellenfreiheit, tangentiale Nullstelle, Nullstelle auf einer Teilungsgrenze, Tiefenlimit, lückenlose Partition und Eingabevalidierung.
+
+**Aussagegrenze:** Aussagen gelten nur für Polynome und unter dem Intervall-Einschließungsvertrag P27.34–P27.36. Tangentiale/mehrfache Nullstellen und Nullstellen auf rekursiven Teilungsgrenzen können ungelöst bleiben; sie werden nicht doppelt gezählt. Keine Vollständigkeitsgarantie für P27.31/P27.33, keine beliebige Flussintervallfortsetzung und keine physikalische Validierung.
