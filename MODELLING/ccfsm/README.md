@@ -587,3 +587,8 @@ Status: exakter primaler Zeuge, rational dual zertifizierte Unzulässigkeit oder
 - The implementation does **not** yet include a global SOCP solver over all free coordinates. A supplied candidate can be certified; automatic global feasibility search remains future work.
 - P26.12 was corrected after CI exposed precision loss: the validation helper converted rational mesh edges to binary floats before they entered the exact affine system. The implementation now retains rational edges and uses the float helper only for monotonicity validation.
 - Scope: 1-D, fixed cell means, piecewise quadratics; no 2-D/3-D extension or physical validation.
+
+
+- ccfsm_p26_14_global_convex_feasibility.py — globally coupled Dykstra candidate projection with exact P26.12 rational reconstruction and P26.13 Markov-Lukács verification; unsuccessful finite search remains unresolved.
+- test_ccfsm_p26_14_global_convex_feasibility.py — exact feasible-witness, unresolved-status and input-validation regressions.
+- CCFSM_v4.2.14_P26_14_GLOBAL_CONVEX_FEASIBILITY_DE.md — method, status semantics and limitations.
