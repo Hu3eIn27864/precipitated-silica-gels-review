@@ -577,3 +577,12 @@ Die Zellvolumina müssen an beiden Zuständen identisch sein. P19 kann P9-Mechan
 **Aussagegrenze:** P27.24 integriert Dissipationen und Rand-/Reservoirarbeit noch nicht selbst aus den P24-Snapshots. Die Upwind-Advektionsentropie bleibt standardmäßig offen; deshalb darf ein kleiner Ledger-Rest nicht als solver-interner Energie-Monotonienachweis oder vollständiger P21/P24-Energiesatz interpretiert werden. Physikalische Validierung ist nicht erfolgt.
 
 **Nächster Schritt P27.25:** Schrittintegrale direkt aus den akzeptierten P24-Anfangs-/End-Snapshots und den tatsächlichen FV-Flüssen herleiten; insbesondere Randarbeit, Reaktionsenergie und Advektionsentropie unabhängig schließen.
+
+
+## P27.25 — Rekonstruktion von P24-Schrittintegralen aus P21-Snapshots (15.11.2026)
+
+**Status: implementiert; Hosted-CI-Prüfung ausstehend.** P27.25 verwendet den initialen P21-Snapshot und den finalen, zum akzeptierten Zustand passenden Snapshot des konvergierten P24-Newton-Schritts. Reaktionsdissipation wird über Zellvolumen (A\Delta x), Darcy- und Onsager-Dissipation über die Referenzfläche (A) integriert; die Zeitintegration erfolgt mit der Trapezregel. Die hydraulische Reservoirleistung aus P21 wird mit derselben Zeitquadratur als äußere Arbeit erfasst.
+
+Advective und gesamte mobile M/O-Randflüsse werden getrennt ausgewertet. Daraus folgen diffusive Randflüsse, zeitintegrierter Netto-Stofftransfer und eine potentialgewichtete chemische Randflussleistung unter Nutzung der P13-Reservoir- und Zellpotentiale. Fünf Regressionen decken Quadratur, Konvergenz-/Snapshot-Gates, positive Geometrie und Stoffrandtransfer ab.
+
+**Aussagegrenze:** Die Trapezregel ist eine Snapshot-Quadratur, keine exakte Integration entlang des P24-Newton-Pfads. Die potentialgewichtete Upwind-Randflussleistung beweist keine vollständige diskrete Entropieungleichung. Mechanische Dirichlet-Reaktionsarbeit und Feststoff-/Brückenreservoirarbeit werden nicht rekonstruiert. Kein solver-interner Energie-Monotonienachweis und keine physikalische Validierung.
