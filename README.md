@@ -108,3 +108,7 @@ CCFSM P27.32 adds safeguarded bisection refinement for sign-changing event brack
 Non-blocking publication, authorship-consent, rights-review and Diamond-Open-Access TODOs are tracked in [PUBLICATION_TODO_DE.md](PUBLICATION_TODO_DE.md). This note does not imply any agreed coauthorship, institutional endorsement or journal selection.
 
 CCFSM P27.33 adds a local quadratic candidate search for tangential flux roots that do not change sign. Candidate times are evaluated in the original flux and reported separately from sign-change roots; this is a diagnostic heuristic, not certified root isolation. See [P27.33 specification](MODELLING/ccfsm/CCFSM_v4.2.53_P27_33_TANGENTIAL_EVENT_DETECTION_DE.md).
+
+CCFSM P27.34 adds an outward-rounded interval-enclosure filter for candidate flux-root intervals. A valid interval extension that excludes zero certifies no root in that interval; inclusion of zero remains unresolved and does not prove a tangential root. See [P27.34 specification](MODELLING/ccfsm/CCFSM_v4.2.54_P27_34_INTERVAL_FLUX_FILTER_DE.md).
+
+Publication provenance note: the KIT/TVT publication list records two 2011 papers by Hussein Sahabi and Matthias Kind, and both papers acknowledge DFG support through SPP 1273 “Kolloidverfahrenstechnik”. The later identifier KI 709/22-3 is not automatically attributed to those papers or to current CCFSM work. The reviewed distinction between historical employment/funding, present affiliation, authorship and rights is documented in [PUBLICATION_TODO_DE.md](PUBLICATION_TODO_DE.md).
