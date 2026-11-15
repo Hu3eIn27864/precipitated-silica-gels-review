@@ -443,3 +443,10 @@ Ein exakter rationaler Audit-Prüfer rekonstruiert die auf gemeinsamen groben Te
 ## Figure 9 — zweite visuelle Ableserunde (15.11.2026)
 
 Die Original-PNG wurde über die Artikelabbildung erneut geöffnet. Eine zweite visuelle CSV enthält Zeitablesung und grobe visuelle Fehlerbalken-Unter-/Obergrenzen für alle 39 Marker. Ein früher saurer 60-°C-Marker wurde dabei zeitlich auf ungefähr 22 h statt 7 h eingeordnet; der hohe Konzentrationswert bleibt erhalten. Es ist ausdrücklich keine maschinelle Pixelkalibrierung. Die zweite CSV ist ein visueller Prüfdatensatz; beide CSV-Dateien bleiben für Fits gesperrt. Die Assay-Observable wird wegen fehlender Reaktionszeit-/Selektivitätsangaben nicht ungeprüft mit monomerem (c_M) gleichgesetzt.
+
+
+## P27.8 — exakte Orientierung und Elementformqualität (15.11.2026)
+
+**Status: implementiert; CI-Prüfung ausstehend.** Der Geometrie-Audit berechnet das signierte sechsfache Volumen jedes Tetraeders exakt rational. Negative Orientierung wird durch Vertauschung zweier lokaler Knoten normalisiert; degenerierte Elemente werden abgewiesen. Als dimensionsloser skaleninvarianter Formindikator wird Q=432 D²/S³ verwendet, wobei D das orientierte Determinantenvolumen und S die Summe der sechs quadrierten Kantenlängen ist. Ein optionaler rationaler Mindestwert wirkt als harte Netzfreigabeschwelle; bei Unterschreitung wird kein Mesh ausgegeben.
+
+**Grenze:** Der Indikator misst Formverzerrung, ist aber kein vollständiges FE-Konditionierungszertifikat. P27.8 beweist weder globale Knoten-/Kantenmannigfaltigkeit noch CCFSM-Zustandspositivität oder physikalische Validität.
