@@ -740,3 +740,14 @@ Der Indikator ist kein vollständiges FE-Konditionierungszertifikat und beweist 
 - Spezifikation: `CCFSM_v4.2.31_P27_11_GEOMETRIC_EMBEDDING_AUDIT_DE.md`.
 
 **Grenze:** Keine vollständige Klassifikation niederdimensionaler Schnittmengen nicht inzidenter Simplizes und keine vollständige Rand-Selbstüberschneidungsprüfung. Paarweiser SAT ist derzeit quadratisch; keine Aussage über FE-Konditionierung, CCFSM-Positivität oder physikalische Validität.
+
+
+## CCFSM v4.2.32 — P27.12: orientierter Randflächen-Audit
+
+- `ccfsm_p27_12_oriented_boundary_audit.py` baut auf P27.11 auf und prüft die durch positiv orientierte Tetraeder induzierte Randorientierung.
+- Exakte Randkanteninzidenz: jede Kante einer geschlossenen Randfläche muss genau zweimal und in entgegengesetzter Richtung auftreten.
+- Randdreiecke werden in kantenverbundene Komponenten zerlegt; V/E/F, Euler-Charakteristik und der daraus abgeleitete Genus geschlossener orientierbarer Komponenten werden berichtet.
+- Das orientierte Randvolumen wird exakt mit der Summe der Tetraedervolumina verglichen.
+- Regressionen: einzelnes Tetraeder, gemeinsame Fläche, getrennte Komponenten, exakte Volumenbilanz und Basisfehler-Weitergabe.
+
+Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständiger Selbstüberschneidungsbeweis und keine physikalische CCFSM-Positivitäts- oder Validitätsgarantie. Hosted CI ist nach Abschluss gesondert zu prüfen.
