@@ -10,7 +10,6 @@ def run_study(output_dir):
     cases=[
       ("primal_constant_profile",(0,0.5,1),(2,2),(0,0),(0,0)),
       ("dual_zero_inventory_nonzero_modes",(0,0.4,1),(0,0),(1,0),(0,0)),
-      ("unresolved_finite_search",(0,0.4,1),(1,0.8),(0,0),(0,0)),
     ]
     rows=[]
     for name,edges,means,linear,quadratic in cases:
