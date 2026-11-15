@@ -180,30 +180,28 @@ M_i=J\phi c_i,\qquad M_N=JN,\qquad
 \]
 lauten die Gleichungen auf \(\Omega_0\):
 \[
-\partial_t(J\phi c_m)+
-\operatorname{Div}_X(J\phi c_m\mathbf v_s^{\,\mathrm{ref}}+\mathcal J_m)
+\partial_t(J\phi c_m)+\operatorname{Div}_X\mathcal J_m
 =J(-r_o+r_d),
 \]
 \[
-\partial_t(J\phi c_o)+
-\operatorname{Div}_X(J\phi c_o\mathbf v_s^{\,\mathrm{ref}}+\mathcal J_o)
+\partial_t(J\phi c_o)+\operatorname{Div}_X\mathcal J_o
 =J(r_o-r_n),
 \]
 \[
-\partial_t(JN)+
-\operatorname{Div}_X(JN\mathbf v_s^{\,\mathrm{ref}})
-=J(r_n-r_d).
+\partial_t(JN)=J(r_n-r_d).
 \]
 Dabei ist \(\mathbf v_s^{\,\mathrm{ref}}\) die auf dem Referenzgebiet dargestellte Skelettgeschwindigkeit. Alternativ kann die Materialableitung verwendet werden; beide Schreibweisen dürfen nicht doppelt konvektive Terme enthalten.
 
-Die Referenz-Gesamtbilanz ist:
+Die Referenz-Gesamtbilanz ist damit:
 \[
+\boxed{
 \partial_t\{J[\phi(c_m+c_o)+N]\}
 +\operatorname{Div}_X\left\{
 J\mathbf F^{-1}[(c_m+c_o)\mathbf q+\mathbf j_m+\mathbf j_o]
-\right\}=0
+\right\}=0.
+}
 \]
-wenn die Referenzbeschreibung bereits mit dem Skelett mitgeführt wird. In einer vollständig ausgeschriebenen konservativen Euler-zu-Lagrange-Transformation ist die Skelettbewegung in der zeitlichen Transformation des Inventars enthalten. Die Implementierung muss eine der beiden äquivalenten Darstellungen wählen und darf den Skeletttransport nicht doppelt erfassen.
+Die Skelettadvektion ist in der Zeitableitung des Referenzinventars enthalten und erscheint deshalb nicht nochmals als separater Referenzfluss.
 
 ## 5. Randfluss und kumulierter Austrag
 
