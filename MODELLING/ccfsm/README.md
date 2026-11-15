@@ -481,3 +481,6 @@ P26.2 bleibt ein 1-D-Intervalloperator. Es gibt keine 2-D/3-D-Intersection-Geome
 - Die Störungsverstärkung ist keine Matrix-Konditionszahl; L-infinity ist dicht abgetastet. Alle Profile sind synthetisch, 1-D und keine physikalische Validierung.
 - CI-Ausgaben: p26_3_refinement_metrics.csv und summary.json.
 - test_ccfsm_p26_3_refinement_study.py ergänzt Regressionen für Profile, Quellprojektion, Momentenerhaltung und Studienartefakte.
+
+
+**P26.3 CI-Referenz:** Lauf #345 erfolgreich, 306/306 Tests; 32 Verfeinerungsfälle über vier Profile und N=16/32/64/128. Maximales relatives Momentenresiduum 6.45e-16. Die Studie zeigt zugleich, dass ein Quell-Positivitätslimiter die Zielrekonstruktion nicht strikt positiv garantiert (Minimum -9.43e-11 im feinsten Referenzsatz). Details und Limiter-Momentverschiebungen stehen in CCFSM_v4.2.3_P26_3_REFINEMENT_STUDY_DE.md.
