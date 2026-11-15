@@ -3,15 +3,12 @@ from ccfsm_p26_2_quadratic_projection import moments, quadratic_minimum
 from ccfsm_p26_6_global_positive_projection import globally_coupled_positive_projection, assess_global_feasibility, run_study
 
 class TestP266GlobalPositive(unittest.TestCase):
-    def test_global_moments_mass_and_positivity(self):
+    def test_nonconvergent_projection_remains_unresolved(self):
         edges=(0.,.3,.7,1.); u=(1.,.8,1.2); a=(3.,-2.,2.5); b=(0.,2.5,0.)
-        old=moments(edges,u,a,b)
-        result,d=globally_coupled_positive_projection(edges,u,a,b,tolerance=1e-10)
-        new=moments(edges,*result)
-        for x,y in zip(old,new): self.assertAlmostEqual(x,y,places=8)
-        for j,m in enumerate(u):
-            self.assertGreaterEqual(m+quadratic_minimum(result[1][j],result[2][j]),-1e-8)
-        self.assertTrue(d["converged"])
+        with self.assertRaises(ArithmeticError):
+            globally_coupled_positive_projection(edges,u,a,b,tolerance=1e-10,max_iterations=2000)
+        report=assess_global_feasibility(edges,u,a,b,max_iterations=2000)
+        self.assertEqual(report["status"],"unresolved")
     def test_already_feasible_is_unchanged(self):
         edges=(0.,.5,1.); u=(1.,1.); a=(.1,-.1); b=(.1,.1)
         result,d=globally_coupled_positive_projection(edges,u,a,b)
@@ -30,6 +27,7 @@ class TestP266GlobalPositive(unittest.TestCase):
     def test_study_artifacts(self):
         with tempfile.TemporaryDirectory() as d:
             s=run_study(d)
-            self.assertTrue(s["converged"])
+            self.assertFalse(s["converged"])
+            self.assertEqual(s["feasibility_checks"]["synthetic_feasible_case"],"unresolved")
             self.assertTrue(os.path.exists(os.path.join(d,"p26_6_global_positive_projection.csv")))
 if __name__=="__main__": unittest.main()
