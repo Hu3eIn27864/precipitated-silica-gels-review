@@ -52,7 +52,7 @@ def verify_primal_witness(target_edges, averages, linear, quadratic,
 def assess_primal_dual_feasibility(target_edges, averages, linear, quadratic,
                                    weights=(1.0,1.0), max_iterations=20000,
                                    tolerance=2e-11, max_direction=12, dual_sqrt_digits=30):
-    e=_edges(target_edges,"target_edges"); n=len(e)-1
+    e=tuple(_F(v) for v in _edges(target_edges,"target_edges")); n=len(e)-1
     u=tuple(_F(v) for v in averages); a=tuple(_F(v) for v in linear); b=tuple(_F(v) for v in quadratic)
     if len(u)!=n or len(a)!=n or len(b)!=n: raise ValueError("one coefficient triple per cell required")
     if any(m<0 for m in u): raise ValueError("cell averages must be nonnegative")
