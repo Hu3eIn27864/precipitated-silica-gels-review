@@ -424,5 +424,8 @@ Der geprüfte Stand P0–P22, der P22-Fixpunktresiduum-Audit und die Freigabegat
 - `ccfsm_p25_refinement_study.py` — getrennte Zeitfolge (1/2/4 Schritte), Raumfolge (1/2/4 FV-Zellen mit axialer P19-FE-Abbildung), P24-FD-Schrittweiten- und P22-Relaxationssensitivität; CSV/JSON-Ausgabe.
 - `test_ccfsm_p25_refinement_study.py` — Konfigurations-, Admissibilitäts- und Fehlernormtests.
 - `CCFSM_v4.0_P25_REFINEMENT_STUDY_DE.md` — Studiendesign, Kennzahlen, Freigabegrenzen.
+- `CCFSM_v4.0_P25_RESULTS_DE.md` — quantitative Auswertung des ersten erfolgreichen CI-Referenzlaufs (#295).
 
 Die P25-Studie läuft in CI und veröffentlicht ihre numerischen Tabellen als separates Artefakt. Ein grüner Testlauf allein bedeutet noch keine Konvergenzfreigabe; maßgeblich sind die ausgegebenen Fehlerfolgen, Solverresiduen, Admissibilität und P23-Siliciumbilanz. Synthetische Referenzfälle sind keine physikalische Validierung.
+
+P25 erster Referenzlauf: GitHub Actions [#295](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43670098385) erfolgreich, 273 Tests; Verfeinerungsergebnisse und offene Konvergenzgrenzen siehe P25-Ergebnisbericht.
