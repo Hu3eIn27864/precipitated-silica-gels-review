@@ -82,14 +82,21 @@ def reconstruct_p27_25_p24_step(
             raise ValueError(name + " shapes differ")
         return tuple(0.5*(_f(x, name)+_f(y, name)) for x, y in zip(a, b))
     r0, r1 = t0["reaction_dissipation_w_m3_reference"], t1["reaction_dissipation_w_m3_reference"]
-    reaction_rate = sum(avg(r0, r1, "reaction dissipation"))*dx*area
-    if reaction_rate < -1e-10:
+    reaction_avg = avg(r0, r1, "reaction dissipation")
+    if any(v < -1e-10 for v in reaction_avg):
         raise ValueError("negative reconstructed reaction dissipation")
-    darcy_rate = 0.5*(_f(t0["darcy_internal_dissipation_w_m2"], "initial Darcy")
-                      + _f(t1["darcy_internal_dissipation_w_m2"], "final Darcy"))*area
-    onsager_rate = sum(avg(t0["mobile_species_onsager_diffusive_dissipation_w_m2"],
-                           t1["mobile_species_onsager_diffusive_dissipation_w_m2"],
-                           "Onsager dissipation"))*area
+    reaction_rate = sum(max(0.0, v) for v in reaction_avg)*dx*area
+    darcy0 = _f(t0["darcy_internal_dissipation_w_m2"], "initial Darcy")
+    darcy1 = _f(t1["darcy_internal_dissipation_w_m2"], "final Darcy")
+    if min(darcy0, darcy1) < -1e-10:
+        raise ValueError("negative Darcy dissipation in P21 snapshot")
+    darcy_rate = 0.5*(max(0.0, darcy0)+max(0.0, darcy1))*area
+    onsager_avg = avg(t0["mobile_species_onsager_diffusive_dissipation_w_m2"],
+                      t1["mobile_species_onsager_diffusive_dissipation_w_m2"],
+                      "Onsager dissipation")
+    if any(v < -1e-10 for v in onsager_avg):
+        raise ValueError("negative Onsager dissipation in P21 snapshot")
+    onsager_rate = sum(max(0.0, v) for v in onsager_avg)*area
     hydraulic_rate = 0.5*(_f(t0["reservoir_hydraulic_power_w_m2"], "initial hydraulic power")
                            + _f(t1["reservoir_hydraulic_power_w_m2"], "final hydraulic power"))*area
     chem0, mat0 = _boundary_chemical_power(t0)
@@ -98,8 +105,6 @@ def reconstruct_p27_25_p24_step(
     diss = {"reaction_j": max(0.0, reaction_rate)*dt,
             "darcy_j": max(0.0, darcy_rate)*dt,
             "onsager_diffusion_j": max(0.0, onsager_rate)*dt}
-    if min(reaction_rate, darcy_rate, onsager_rate) < -1e-10:
-        raise ValueError("negative dissipation reconstructed from P21 snapshots")
     work = {"reservoir_hydraulic_j": hydraulic_rate*dt,
             "mobile_species_chemical_boundary_j": chemical_rate*dt}
     return {
