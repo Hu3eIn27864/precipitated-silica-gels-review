@@ -729,3 +729,14 @@ Der Indikator ist kein vollständiges FE-Konditionierungszertifikat und beweist 
 - Spezifikation: `CCFSM_v4.2.30_P27_10_VERTEX_EDGE_LINK_AUDIT_DE.md`.
 
 **Grenze:** lokale PL-Link-Kriterien sind keine geometrische Selbstüberschneidungsprüfung und beweisen keine globale Gebiets-Topologie, FE-Konditionierung oder CCFSM-Positivität.
+
+
+## P27.11 — geometrischer Einbettungs-Audit
+
+- `ccfsm_p27_11_geometric_embedding_audit.py` baut auf P27.10 auf und prüft alle Tetraederpaare mit exakten rationalen Separating-Axis-Tests.
+- Verwendete Knoten-IDs mit identischen Koordinaten werden als geometrische Aliase gemeldet; positive Volumenüberlappungen zwischen Tetraederinterieurs werden erkannt.
+- Gemeinsame Flächen-/Kanten-/Knotenberührungen ohne Volumenüberlappung sind zulässig.
+- Tests: Einzeltetraeder, gemeinsame Fläche, getrennte Tetraeder, verschachtelte Überlappung, Koordinatenalias und Fehlerweitergabe.
+- Spezifikation: `CCFSM_v4.2.31_P27_11_GEOMETRIC_EMBEDDING_AUDIT_DE.md`.
+
+**Grenze:** Keine vollständige Klassifikation niederdimensionaler Schnittmengen nicht inzidenter Simplizes und keine vollständige Rand-Selbstüberschneidungsprüfung. Paarweiser SAT ist derzeit quadratisch; keine Aussage über FE-Konditionierung, CCFSM-Positivität oder physikalische Validität.
