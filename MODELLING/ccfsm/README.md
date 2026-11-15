@@ -417,3 +417,12 @@ Der geprüfte Stand P0–P22, der P22-Fixpunktresiduum-Audit und die Freigabegat
 - `p24_compare_with_p22` vergleicht Zustand und projizierten Druck zweier konvergierter Lösungen derselben diskreten Gleichung.
 - `test_ccfsm_p24_newton_reference.py` prüft Newton-Konvergenz, Admissibilität, P22-Vergleich und Nichtannahme bei Iterationslimit.
 - `CCFSM_v3.9_P24_NEWTON_REFERENCE_DE.md` dokumentiert Algorithmus und Reichweite. Der FD-Newton-Löser ist eine kleine Referenzimplementierung, kein Produktionssolver oder physikalischer Validierungsnachweis.
+
+
+## CCFSM v4.0 — P25 Zeit-/Raumverfeinerung
+
+- `ccfsm_p25_refinement_study.py` — getrennte Zeitfolge (1/2/4 Schritte), Raumfolge (1/2/4 FV-Zellen mit axialer P19-FE-Abbildung), P24-FD-Schrittweiten- und P22-Relaxationssensitivität; CSV/JSON-Ausgabe.
+- `test_ccfsm_p25_refinement_study.py` — Konfigurations-, Admissibilitäts- und Fehlernormtests.
+- `CCFSM_v4.0_P25_REFINEMENT_STUDY_DE.md` — Studiendesign, Kennzahlen, Freigabegrenzen.
+
+Die P25-Studie läuft in CI und veröffentlicht ihre numerischen Tabellen als separates Artefakt. Ein grüner Testlauf allein bedeutet noch keine Konvergenzfreigabe; maßgeblich sind die ausgegebenen Fehlerfolgen, Solverresiduen, Admissibilität und P23-Siliciumbilanz. Synthetische Referenzfälle sind keine physikalische Validierung.
