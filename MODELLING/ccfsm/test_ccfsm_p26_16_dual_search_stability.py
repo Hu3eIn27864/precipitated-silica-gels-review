@@ -12,7 +12,7 @@ class TestP2616DualSearchStability(unittest.TestCase):
         self.assertTrue(all(a >= b for a,b in zip(values,values[1:])))
         for d, value in zip((2,4,8,16), values):
             self.assertGreaterEqual(value*value, Fraction(7,12))
-            self.assertLess(value - Fraction(7,12)**Fraction(1,2), Fraction(1,10**d))
+            self.assertLess((value - Fraction(1,10**d))**2, Fraction(7,12))
 
     def test_fixed_direction_gap_is_monotone(self):
         r = audit_fixed_direction((0,Fraction(2,5),1),(0,0),(1,0),(0,0),(1,0),(2,4,8,16))
