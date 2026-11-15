@@ -761,3 +761,13 @@ Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständig
 - `test_ccfsm_p27_13_integrated_mesh_audit.py` prüft Einzelelement, gemeinsame Fläche, getrennte Komponenten, Qualitäts-Gate und ungültige Duplikate.
 
 `integrated_mesh_audited` bestätigt ausschließlich die implementierten P27.8–P27.12-Checks. Kein vollständiger Selbstüberschneidungsbeweis, kein FE-Konditionierungszertifikat und keine CCFSM-Positivitäts-, Energieabschluss- oder physikalische Validitätsgarantie. Hosted CI nach Abschluss prüfen.
+
+
+## P27.14 — integrierter 3D-Feldpositivitäts- und Margen-Audit
+
+- `ccfsm_p27_14_3d_field_positivity.py` verlangt zuerst den P27.13-Netz-Audit und prüft danach zellweise P1- oder P2-Skalarfelder mit exakter rationaler Arithmetik.
+- P2-Zertifikate aus P27.3 werden unabhängig mit P27.4 verifiziert. Unresolved und echte Negativitätszeugen werden nicht verwechselt.
+- Konservative untere Positivitätsmargen und eine optionale Mindestmarge werden getrennt ausgewiesen.
+- `test_ccfsm_p27_14_3d_field_positivity.py` deckt P1/P2, unabhängige Verifikation, unresolved, Netz-Gate und Margenschwelle ab.
+
+**Grenze:** Diskrete skalare Feldpositivität auf geprüften Tetraedern ist keine gekoppelte CCFSM-Zustandsinvarianz, Zeitschrittstabilität, FE-Koerzivität oder physikalische Validierung.
