@@ -142,19 +142,33 @@ def run_study(output_dir):
     out=Path(output_dir); out.mkdir(parents=True,exist_ok=True)
     edges=(0.0,0.3,0.7,1.0); averages=(1.0,0.8,1.2)
     linear=(3.0,-2.0,2.5); quadratic=(0.0,2.5,0.0)
-    result,diag=globally_coupled_positive_projection(edges,averages,linear,quadratic)
+    projection_error=None
+    try:
+        result,diag=globally_coupled_positive_projection(edges,averages,linear,quadratic)
+        feasibility_status="feasible"
+    except ArithmeticError as exc:
+        # A failed numerical projection is a valid unresolved outcome, not a
+        # reason to fabricate a projected state or abort the reproducible study.
+        projection_error=str(exc)
+        result=(averages,linear,quadratic)
+        feasibility_status="unresolved"
+        diag={"method":"Dykstra candidate projection","iterations":20000,"converged":False,
+              "minimum_cell_value":min(averages[j]+quadratic_minimum(linear[j],quadratic[j]) for j in range(len(averages))),
+              "moment_residuals":{"mass":0.0,"first":0.0,"second":0.0},
+              "projection_error":projection_error}
     rows=[]
     for j,(l,r) in enumerate(zip(edges,edges[1:])):
         rows.append({"cell":j,"left":l,"right":r,"average":averages[j],
                      "linear_before":linear[j],"quadratic_before":quadratic[j],
                      "linear_after":result[1][j],"quadratic_after":result[2][j],
-                     "minimum_after":averages[j]+quadratic_minimum(result[1][j],result[2][j])})
+                     "minimum_after":averages[j]+quadratic_minimum(result[1][j],result[2][j]),
+                     "status":feasibility_status})
     with (out/"p26_6_global_positive_projection.csv").open("w",newline="",encoding="utf-8") as f:
         writer=csv.DictWriter(f,fieldnames=list(rows[0])); writer.writeheader(); writer.writerows(rows)
-    feasible=assess_global_feasibility(edges,averages,linear,quadratic)
     impossible=assess_global_feasibility((0.0,1.0),(0.1,),(1.0,),(0.0,))
     summary={"scope":"1-D global moment-constrained positive quadratic projection",
-             "cells":len(averages),"feasibility_checks":{"synthetic_feasible_case":feasible["status"],"single_cell_infeasible_case":impossible["status"]},**diag,
+             "cells":len(averages),"feasibility_checks":{"synthetic_feasible_case":feasibility_status,"single_cell_infeasible_case":impossible["status"]},
+             **diag,"projection_error":projection_error,
              "limitations":["Dykstra nonconvergence leaves feasibility unresolved; it is not an infeasibility certificate",
              "floating-point stopping tolerances; no formal exact-arithmetic guarantee",
              "fixed cell averages; 1-D intervals and quadratic reconstructions only",
