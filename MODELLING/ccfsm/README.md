@@ -718,3 +718,14 @@ Der Indikator ist kein vollständiges FE-Konditionierungszertifikat und beweist 
 - Spezifikation: `CCFSM_v4.2.29_P27_9_GLOBAL_INCIDENCE_AUDIT_DE.md`.
 
 **Grenze:** Der Audit ist kein vollständiger topologischer Mannigfaltigkeitsbeweis: Knoten- und Kanten-Link-Komplexe werden nicht geprüft. Inzidenzzahlen allein zertifizieren weder globale FE-Gültigkeit noch CCFSM-Positivität oder physikalische Validität.
+
+
+## P27.10 — Knoten- und Kanten-Link-Audit
+
+- `ccfsm_p27_10_vertex_edge_link_audit.py` ergänzt P27.9 um lokale Link-Prüfungen für alle verwendeten Knoten und Kanten.
+- Kanten-Links müssen für innere Kanten zusammenhängende Kreise und für Randkanten zusammenhängende Wege sein.
+- Knoten-Links müssen für innere Knoten zusammenhängende triangulierte 2-Sphären (Euler-Charakteristik 2) und für Randknoten 2-Scheiben (Euler-Charakteristik 1 mit genau einem Randzyklus) sein.
+- Tests: Einzel-Tetraeder, gemeinsame Fläche, zyklischer innerer Kanten-Link, getrennter Link und Fehlerweitergabe aus P27.9.
+- Spezifikation: `CCFSM_v4.2.30_P27_10_VERTEX_EDGE_LINK_AUDIT_DE.md`.
+
+**Grenze:** lokale PL-Link-Kriterien sind keine geometrische Selbstüberschneidungsprüfung und beweisen keine globale Gebiets-Topologie, FE-Konditionierung oder CCFSM-Positivität.
