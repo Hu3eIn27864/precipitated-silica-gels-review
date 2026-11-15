@@ -704,7 +704,7 @@ Acht Regressionen prüfen steigende/fallende lineare Referenzen, positive/negati
 
 ## P27.37 — adaptive Polynom-Nullstellenisolation (15.11.2026)
 
-**Status: implementiert; Hosted-CI-Prüfung ausstehend.** P27.37 unterteilt ungelöste Polynomintervalle rekursiv und wendet auf jedes Teilintervall das P27.36-Kriterium an. Teilintervalle mit strengem Ableitungsvorzeichen und entgegengesetzten strikt eingeschlossenen Endpunktvorzeichen enthalten genau eine innere Nullstelle. Bei gleichem striktem Endpunktvorzeichen sind sie nullstellenfrei. Nicht entscheidbare Teilintervalle werden bis zur vorgegebenen Tiefe oder Mindestbreite weiter unterteilt und danach als ungelöst ausgewiesen.
+**Status: implementiert; Hosted-CI-Prüfung ausstehend.** P27.37 unterteilt ungelöste Polynomintervalle rekursiv. Zuerst schließt die P27.35-Horner-Einschließung Nullstellen aus; verbleibende Intervalle werden mit dem P27.36-Kriterium geprüft. Teilintervalle mit strengem Ableitungsvorzeichen und entgegengesetzten strikt eingeschlossenen Endpunktvorzeichen enthalten genau eine innere Nullstelle. Bei gleichem striktem Endpunktvorzeichen sind sie nullstellenfrei. Nicht entscheidbare Teilintervalle werden bis zur vorgegebenen Tiefe oder Mindestbreite weiter unterteilt und danach als ungelöst ausgewiesen.
 
 Acht Regressionen prüfen eine und zwei einfache Nullstellen, Nullstellenfreiheit, tangentiale Nullstelle, Nullstelle auf einer Teilungsgrenze, Tiefenlimit, lückenlose Partition und Eingabevalidierung.
 
