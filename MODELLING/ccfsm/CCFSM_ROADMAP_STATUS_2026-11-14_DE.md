@@ -606,3 +606,12 @@ Sechs Regressionen prüfen Nullflussgrenzen, chemische und hydraulische Arbeitsr
 **Aussagegrenze:** Dies ist eine Adapter-/Vorzeichen-/Einheitenprüfung für synthetische konstante Randdaten. Sie ist keine physikalische Reservoirmodellierung und prüft weder zeitvariable P24-Verläufe noch vollständige Upwind-Entropieschließung, Feststoff-/Brückenreservoirarbeit oder mechanische Randarbeit. Kein vollständiger Energieabschluss und keine physikalische Validierung.
 
 **Nächster Schritt P27.28:** Randfluss-Referenzfälle mit zeitabhängigen linearen/quadratischen Daten erweitern und die P27.25-Zweipunkt-Trapezrekonstruktion gegen exakte Zeitintegrale quantifizieren; danach getrennte Material- und Energiefehlerbudgets ausweisen.
+
+
+## P27.28 — zeitabhängige Randfluss-Quadraturreferenz (15.11.2026)
+
+**Status: implementiert; Hosted-CI-Prüfung ausstehend.** P27.28 führt quadratische diffusive M-Randflüsse, lineare Reservoir-Chemiepotentiale und eine quadratische hydraulische Reservoirleistung als synthetische Zeitfunktionen durch den P27.25-Zweipunkt-Adapter. Unabhängige exakte Polynom-Integrale liefern für T=2 s und A=1.5 m² 2.9 mol Netto-M-Transfer, 18.21 J chemische Randarbeit und 8.3 J hydraulische Arbeit. Die Trapezrekonstruktion ergibt 3.6 mol, 19.26 J und 8.7 J; die absoluten Fehler (0.7 mol, 1.05 J, 0.4 J) werden als getrennte Material- und Energiebudgets ausgewiesen. Vier Regressionen prüfen Referenzwerte, Fehlertrennung, exakte Linearitätsidentität und Eingabevalidierung.
+
+**Aussagegrenze:** Der Test quantifiziert den erwarteten Quadraturfehler der Endpunkt-Trapezregel bei zeitabhängigen synthetischen Daten. Er rekonstruiert nicht den tatsächlichen P24-Newton-Pfad und beweist keine vollständige Upwind-Entropieschließung, keinen solverinternen Energieabschluss und keine physikalische Validität.
+
+**Nächster Schritt P27.29:** die zeitabhängigen Referenzfälle um Vorzeichenwechsel/Upwind-Zweigwechsel und getrennte linke/rechte Randbeiträge erweitern; anschließend prüfen, welche Fehleranteile durch zusätzliche Zeitstützstellen kontrolliert werden können.
