@@ -74,7 +74,7 @@ def _run_step(solver, state, dt, args, **kwargs):
               0.0, quad, dbc)
     if solver == "P22":
         return p22_iterated_implicit_step(
-            *common, state_tolerance=1e-8, pressure_tolerance=1e-8,
+            *common, state_tolerance=1e-11, pressure_tolerance=1e-11,
             max_iterations=150, **kwargs)
     return p24_newton_reference_step(
         *common, tolerance=1e-9, max_iterations=30, **kwargs)
