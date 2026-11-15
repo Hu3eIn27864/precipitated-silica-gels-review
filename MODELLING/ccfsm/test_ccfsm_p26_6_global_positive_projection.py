@@ -1,6 +1,6 @@
 import unittest, tempfile, os
 from ccfsm_p26_2_quadratic_projection import moments, quadratic_minimum
-from ccfsm_p26_6_global_positive_projection import globally_coupled_positive_projection, run_study
+from ccfsm_p26_6_global_positive_projection import globally_coupled_positive_projection, assess_global_feasibility, run_study
 
 class TestP266GlobalPositive(unittest.TestCase):
     def test_global_moments_mass_and_positivity(self):
@@ -20,9 +20,13 @@ class TestP266GlobalPositive(unittest.TestCase):
     def test_negative_average_rejected(self):
         with self.assertRaises(ValueError):
             globally_coupled_positive_projection((0.,1.),(-.1,),(0.,),(0.,))
-    def test_rank_deficient_mesh_rejected(self):
-        with self.assertRaises(ValueError):
-            globally_coupled_positive_projection((0.,1.),(1.,),(2.,),(0.,))
+    def test_single_cell_infeasibility_is_certified(self):
+        report=assess_global_feasibility((0.,1.),(.1,),(1.,),(0.,))
+        self.assertEqual(report["status"],"certified_infeasible")
+        self.assertLess(report["minimum_cell_value"],0.)
+    def test_single_cell_feasible_case_is_certified(self):
+        report=assess_global_feasibility((0.,1.),(1.,),(.2,),(.1,))
+        self.assertEqual(report["status"],"feasible")
     def test_study_artifacts(self):
         with tempfile.TemporaryDirectory() as d:
             s=run_study(d)
