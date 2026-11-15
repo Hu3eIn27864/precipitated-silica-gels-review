@@ -15,7 +15,7 @@ class TestP2613MarkovLukacs(unittest.TestCase):
 
     def test_nonnegative_endpoint_touch(self):
         # q(x)=(x+1/2)^2 on [-1/2,1/2]
-        m, a, b = Fraction(1,4), Fraction(1), Fraction(1)
+        m, a, b = Fraction(1,3), Fraction(1), Fraction(1)
         c = certify_cell_nonnegative(m, a, b)
         self.assertIsNotNone(c)
         self.assertEqual(c["minimum_exact"], 0)
