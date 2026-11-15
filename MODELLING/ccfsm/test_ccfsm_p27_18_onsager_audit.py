@@ -1,6 +1,6 @@
 import math
 import unittest
-from ccfsm_p27_18_onsager_audit import reconstruct_onsager_species_flux,audit_onsager_diffusion
+from ccfsm_p27_18_onsager_audit import reconstruct_onsager_species_flux,audit_onsager_diffusion,audit_p13_onsager_snapshot
 
 def fixture():
     theta=(.8,.7); c=((1.,2.),(2.,3.)); mu=((0.,1.),(1.,2.))
@@ -43,6 +43,20 @@ class TestP2718(unittest.TestCase):
         self.assertIn(r.get("status"),("invalid_or_malformed_input",None))
         self.assertFalse(audit_onsager_diffusion(((0.,),)*2,((0.,),)*2,(.8,),(.5,.5),2.,1.,
             (.5,.5),(.5,.5),(0.,0.),(0.,0.),((0.,0.),)*2,((0.,0.),)*2,(0.,0.))["overall_pass"])
+    def test_p13_snapshot_adapter(self):
+        a=fixture()
+        c,mu,theta,d,rt,dx,cl,cr,mul,mur,total,adv,diss=a
+        snap={"mobile_species_concentration_mol_m3":c,
+            "mobile_species_chemical_potential_j_mol":mu,"onsager_fluid_capacity":theta,
+            "onsager_diffusivities_m2_s":d,"onsager_rt_j_mol":rt,"onsager_grid_spacing_m":dx,
+            "onsager_reservoir_concentration_left_mol_m3":cl,
+            "onsager_reservoir_concentration_right_mol_m3":cr,
+            "onsager_reservoir_chemical_potential_left_j_mol":mul,
+            "onsager_reservoir_chemical_potential_right_j_mol":mur,
+            "mobile_species_face_fluxes_mol_m2_s":total,
+            "mobile_species_advective_face_fluxes_mol_m2_s":adv,
+            "mobile_species_onsager_diffusive_dissipation_w_m2":diss}
+        self.assertTrue(audit_p13_onsager_snapshot(snap)["overall_pass"])
     def test_no_physical_law_claim(self):
         r=audit_onsager_diffusion(*fixture())
         self.assertFalse(r["physical_onsager_law_certified"])
