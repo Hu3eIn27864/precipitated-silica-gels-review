@@ -5,13 +5,13 @@
 
 ## Ziel und Verfahren
 
-P27.37 ergänzt P27.36 um eine begrenzte rekursive Intervallunterteilung. Jedes Teilintervall wird mit dem P27.36-Ableitungsvorzeichen-/Endpunktkriterium geprüft:
+P27.37 ergänzt P27.36 um eine begrenzte rekursive Intervallunterteilung. Jedes Teilintervall wird zuerst mit dem P27.35-Null-Ausschluss geprüft. Falls dessen Horner-Einschließung Null ausschließt, ist das Teilintervall nullstellenfrei. Andernfalls folgt das P27.36-Ableitungsvorzeichen-/Endpunktkriterium:
 
 - `certified_unique_root`: genau eine innere Nullstelle im Teilintervall.
 - `certified_no_root`: keine Nullstelle im Teilintervall.
 - ungelöste Teilintervalle werden bis zur maximalen Rekursionstiefe oder minimalen Intervallbreite unterteilt; danach bleiben sie explizit ungelöst.
 
-Die Ausgabe enthält die Blätter der Intervallpartition, die Zahl zertifizierter einfacher Nullstellen, die Zahl nullstellenfreier Blätter, ungelöste Blätter und eine konservative Schranke für die Gesamtzahl. Eine endliche obere Schranke wird nur ausgegeben, wenn kein ungelöstes Blatt verbleibt.
+Die Kombination aus P27.35-Null-Ausschluss und P27.36-Monotoniekriterium vermeidet, dass Teilintervalle um kritische Punkte allein wegen einer nicht strikt vorzeichenbestimmten Ableitung unnötig ungelöst bleiben. Die Ausgabe enthält die Blätter der Intervallpartition, die Zahl zertifizierter einfacher Nullstellen, die Zahl nullstellenfreier Blätter, ungelöste Blätter und eine konservative Schranke für die Gesamtzahl. Eine endliche obere Schranke wird nur ausgegeben, wenn kein ungelöstes Blatt verbleibt.
 
 ## Tests
 
