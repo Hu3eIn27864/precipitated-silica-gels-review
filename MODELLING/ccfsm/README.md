@@ -449,3 +449,13 @@ P25.1-Ergebnisse: `CCFSM_v4.1_P25_1_RESULTS_DE.md` dokumentiert den erfolgreiche
 - `CCFSM_v4.2_P26_CONSERVATIVE_PROJECTION_DE.md` dokumentiert Herleitung und Grenzen.
 
 P26 ist ausdrücklich ein 1-D-Intervalloperator mit stückweise konstanter Quellrekonstruktion, keine allgemeine 3-D-FE/FV-Polyederprojektion. CI erzeugt ein separates Ergebnisartefakt; Softwaretests sind keine physikalische Validierung.
+
+
+### CCFSM v4.2.1 — P26.1 lineare Momentenprojektion
+
+- `ccfsm_p26_1_moment_projection.py` rekonstruiert stückweise lineare Quellfelder mit Minmod-Steigungen und projiziert auf nichtverschachtelte 1-D-Zielnetze.
+- Neben Zellintegralen bleibt auch das erste räumliche Moment je Zielzelle erhalten; ein Positivitätsbegrenzer kontrolliert nichtnegative Quellinventare.
+- `test_ccfsm_p26_1_moment_projection.py` prüft lineare Exaktheit, Massen- und Erstmonenterhaltung, Konstanten, Identität und Positivität.
+- `CCFSM_v4.2.1_P26_1_MOMENT_PROJECTION_DE.md` beschreibt Herleitung und Grenzen.
+
+P26.1 bleibt auf 1-D-Intervalle und stückweise lineare Rekonstruktionen beschränkt. Minmod kann nahe Extrema lokal Ordnung verlieren; 2-D/3-D-Intersection-Geometrie und physikalische Validierung bleiben offen.
