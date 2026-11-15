@@ -142,12 +142,16 @@ P22.1 is implemented and its hosted CI is green.
 
 ### Gate E — P26: FE/FV-Abbildung und Geometrie
 
-- Die derzeitige quadraturgewichtete Zellmittelung ist nur für die explizit zugeordneten Quadraturpunkte abgesichert.
-- Für nicht deckungsgleiche Netze eine konservative Projektion mit Erhaltungsnachweis implementieren.
-- Zylindergeometrie, radiale/axiale Randbedingungen und physikalische Abmessungen erst mit nachvollziehbaren Geometriedaten spezifizieren.
-- Netzabhängigkeit der Projektion und Randreaktionen untersuchen.
+**Teilimplementierung abgeschlossen:**
 
-**Freigabe:** Projektion erhält die relevanten Integrale und ist unter Netzverfeinerung konsistent. Bis dahin keine allgemeine FE→FV-Konservativität behaupten.
+- `ccfsm_p26_conservative_projection.py` projiziert Quellzellmittelwerte über exakte 1-D-Intervallüberlappungen auf nichtverschachtelte Zielnetze.
+- FE-Quadraturwerte können mit positiven Gewichten zunächst zu Quellzellmitteln verdichtet werden.
+- Konstanten- und Positivitätserhaltung sowie globale Integralerhaltung folgen aus nichtnegativen Überlappungslängen und identischer Gebietsabdeckung.
+- Regressionen: `test_ccfsm_p26_conservative_projection.py`; CI führt zusätzlich einen reproduzierbaren CSV/JSON-Referenzlauf aus.
+
+**Strikte Grenze:** Der Operator arbeitet mit stückweise konstanter Quellrekonstruktion in 1-D. Er ist keine allgemeine FE-Polynomprojektion und keine 2-D/3-D-Polyederintersection. Druck bleibt eine nicht-konservierte Feldgröße; ein Zielnetz-Druck für gekoppelte Mechanik erfordert eine erneute P19-Lösung. Zylindergeometrie und reale Abmessungen bleiben bis zu belastbaren Geometriedaten offen.
+
+**Freigabe:** Teilfreigabe für den 1-D-Intervalloperator nach grünem CI und bestandenen Integralerhaltungstests. Allgemeine 3-D-FE/FV-Konservativität und Netzkonvergenz bleiben offen.
 
 ### Gate F — P27: Parameteridentifizierbarkeit und Datenmodell
 
@@ -211,4 +215,4 @@ Dieser Strang kann parallel zu Gates A–E laufen, ohne unkalibrierte Materialge
 
 ## 7. Nächster konkreter Arbeitsschritt
 
-**P25.1 als Nächstes:** Cross-Mesh-Fehlernormen mit konservativer Restriktion, mesh-unabhängige Anfangsdaten und einen anspruchsvolleren Druck-/Darcy-Gradienten prüfen. Danach folgt P26 mit allgemeiner konservativer FE/FV-Projektion und physikalischer Geometrie. Den offenen vollständigen P23-Energieabschluss als separates Audit beibehalten.
+**P26 als Nächstes:** den 1-D-Überlappungsoperator gegen unabhängige analytische/momentenerhaltende Referenzen prüfen und danach höhergradige Rekonstruktion sowie 2-D/3-D-Intersection-Geometrie entwickeln. Den offenen vollständigen P23-Energieabschluss als separates Audit beibehalten.
