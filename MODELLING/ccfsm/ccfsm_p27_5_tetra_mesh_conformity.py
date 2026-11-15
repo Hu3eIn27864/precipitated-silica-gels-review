@@ -52,9 +52,10 @@ def audit_tetra_mesh_face_conformity(vertices,tetrahedra,certificates):
                     bary=rec.get("barycentric_vertices")
                     if not isinstance(bary,(tuple,list)) or len(bary)!=4:
                         return {"status":"invalid","reason":"malformed_leaf_geometry","element":ei}
-                    if all(_f(v[opposite])==0 for v in bary):
-                        p=tuple(_point(physical,v) for v in bary)
-                        tris.extend(_triangle_key(tuple(p[i] for i in f)) for f in combinations(range(4),3))
+                    p=tuple(_point(physical,v) for v in bary)
+                    for leaf_face in combinations(range(4),3):
+                        if all(_f(bary[i][opposite])==0 for i in leaf_face):
+                            tris.append(_triangle_key(tuple(p[i] for i in leaf_face)))
                 if not tris: return {"status":"invalid","reason":"no_induced_face_triangles","element":ei,"face":gf}
                 induced[(ei,gf)]=tuple(sorted(tris))
         mismatches=[]; checked=0
