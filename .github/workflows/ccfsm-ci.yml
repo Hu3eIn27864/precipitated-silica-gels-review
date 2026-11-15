@@ -60,6 +60,15 @@ jobs:
           retention-days: 30
       - name: Run P26 conservative nonmatching-mesh projection
         run: python MODELLING/ccfsm/ccfsm_p26_conservative_projection.py --output-dir ccfsm-p26-results
+      - name: Run P26.1 moment-preserving projection
+        run: python MODELLING/ccfsm/ccfsm_p26_1_moment_projection.py --output-dir ccfsm-p26-1-results
+      - name: Upload P26.1 moment-projection results
+        uses: actions/upload-artifact@v4
+        with:
+          name: ccfsm-p26-1-moment-projection-results
+          path: ccfsm-p26-1-results/
+          if-no-files-found: error
+          retention-days: 30
       - name: Upload P26 projection results
         uses: actions/upload-artifact@v4
         with:
