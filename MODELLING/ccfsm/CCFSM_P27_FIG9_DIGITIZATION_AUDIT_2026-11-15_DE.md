@@ -29,3 +29,14 @@ Die CSV ist eine **Ablese-Arbeitsdatei**, keine freigegebene Messdatentabelle. K
 ## Reproduzierbare nächste Stufe
 
 Eine pixelgenaue Zweitablesung sollte die Plot-Rahmenkoordinaten und Achsen-Ticks aus der Original-PNG erfassen, Markerfarben/-formen segmentieren, überlagerte Fehlerbalken separat maskieren und eine manuelle Korrekturtabelle mit Screenshot-Koordinaten bereitstellen. Die derzeitige Webansicht lieferte die Grafik, aber kein lokal verfügbares Original-PNG für eine reproduzierbare Pixelanalyse; deshalb wird kein Pixelpräzisionsanspruch erhoben.
+
+
+## Quellenabgleich und quantitative Sperre (15.11.2026)
+
+Der Volltext des Artikels wurde erneut gegen die Figure-9-Beschreibung geprüft. Er bestätigt ausdrücklich: saurer Zweig 0.2–0.4 mmol/L als Textzusammenfassung; basischer Zweig 100–200 mmol/L; die Proben wurden auch bei 40/60-°C-Geltemperatur bei ungefähr 20 °C spektroskopisch analysiert, sodass Nachpolymerisation möglich ist. Die Messung beruht auf gelbem Silicomolybdat bei 400 nm nach Alexander. Die Autoren weisen außerdem darauf hin, dass einzelne Messwerte über der aus Gleichung (1) berechneten Löslichkeit liegen und dass sich das Porenfluid bei Lagerung eintrüben kann.
+
+**Wichtige Präzisierung:** Die vorhandenen 39 CSV-Punkte bleiben eine manuelle Näherungsablesung. Ein erneuter Abruf der 1024-px-Abbildung über die verfügbare Laufzeitumgebung war nicht erfolgreich; deshalb konnte in diesem Durchgang keine reproduzierbare Pixelkoordinaten-Zweitablesung und keine separate Fehlerbalkendigitalisierung erstellt werden. Es werden keine künstlich präzisen Pixelwerte ergänzt. fit_eligibility=hold_for_pixel_validation bleibt für alle Punkte bestehen.
+
+**Interpretation:** Die Diskrepanz der sauren 60-°C-Marker zur Textspanne wird nicht durch Entfernen der Marker „gelöst“. Sie bleibt ein dokumentierter Quellenkonflikt, der anhand der Originalpixel und der Messunsicherheit zu klären ist. Die Observable wird bis zur Klärung des Reaktionszeit-/pH-Protokolls weiterhin nicht als streng monomerspezifische Konzentration in die CCFSM-Kinetik eingespeist.
+
+Quelle: Wilhelm & Kind (2015), Polymers 7(12), 2504–2521, DOI: 10.3390/polym7121528, Abschnitt 4.1 und Fig. 9. https://www.mdpi.com/2073-4360/7/12/2504
