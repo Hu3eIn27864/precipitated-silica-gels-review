@@ -50,10 +50,16 @@ def adaptive_flux_samples(
             cache[t] = vals
         return cache[t]
 
+    accepted_times = set()
+
     def refine(a, b, va, vb, depth):
+        # Do not evaluate beyond the requested recursion depth. In particular,
+        # max_depth=0 would leave only the supplied base grid.
+        if depth >= depth_limit:
+            return
         mid = 0.5 * (a + b)
         vm = evaluate(mid)
-        split = depth < depth_limit and any(
+        split = any(
             ((fa < -ztol and fm > ztol) or (fa > ztol and fm < -ztol)
              or (fm < -ztol and fb > ztol) or (fm > ztol and fb < -ztol)
              or abs(fm - 0.5 * (fa + fb)) >
@@ -61,15 +67,19 @@ def adaptive_flux_samples(
             for fa, fm, fb in zip(va, vm, vb)
         )
         if split:
+            accepted_times.add(mid)
             refine(a, mid, va, vm, depth + 1)
             refine(mid, b, vm, vb, depth + 1)
 
     base = tuple(start + (end - start) * i / n for i in range(n + 1))
+    accepted_times.update(base)
     for t in base:
         evaluate(t)
     for a, b in zip(base[:-1], base[1:]):
         refine(a, b, cache[a], cache[b], 0)
-    times = tuple(sorted(cache))
+    # Midpoints inspected but not needed for refinement remain in the
+    # evaluation cache only; they are not reported as accepted grid nodes.
+    times = tuple(sorted(accepted_times))
     histories = tuple(tuple(cache[t][k] for t in times)
                       for k in range(len(functions)))
     return {
