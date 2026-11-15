@@ -105,7 +105,7 @@ jobs:
           path: ccfsm-p26-5-results/
           if-no-files-found: error
           retention-days: 30
-      - name: Upload P26 projection results
+      - name: Run P26.6 globally coupled positive projection\n        run: python MODELLING/ccfsm/ccfsm_p26_6_global_positive_projection.py --output-dir ccfsm-p26-6-results\n      - name: Upload P26.6 global positive projection results\n        uses: actions/upload-artifact@v4\n        with:\n          name: ccfsm-p26-6-global-positive-projection-results\n          path: ccfsm-p26-6-results/\n          if-no-files-found: error\n          retention-days: 30\n      - name: Upload P26 projection results
         uses: actions/upload-artifact@v4
         with:
           name: ccfsm-p26-conservative-projection-results
