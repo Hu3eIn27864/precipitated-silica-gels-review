@@ -504,7 +504,7 @@ P26.2 bleibt ein 1-D-Intervalloperator. Es gibt keine 2-D/3-D-Intersection-Geome
 
 - ccfsm_p26_5_optimal_positive_projection.py löst je Zielzelle eine gewichtete Nächstpunktprojektion der linearen/quadratischen Moden auf den konvexen Kegel nichtnegativer quadratischer Felder.
 - Der Zellmittelwert bleibt fest; damit sind Zellmasse und globale Masse erhalten. Nichtnegativität wird kontinuierlich auf dem gesamten Intervall über exaktes quadratisches Minimum geprüft.
-- Der 2-D-Cutting-Plane-/Active-Set-Solver benötigt keine externe Optimierungsbibliothek; positive Koeffizientengewichte sind einstellbar.
+- Der 2-D-Solver zerlegt die zulässige Randkurve in Endpunkt-Halbräume und einen elliptischen Innenminimum-Bogen; dessen Zielfunktion wird mit geklammerter 1-D-Suche minimiert. Keine externe Optimierungsbibliothek; positive Koeffizientengewichte und Bogenauflösung einstellbar.
 - Erstes und zweites räumliches Moment sind keine Nebenbedingungen und werden gegen P26.4 verglichen; ein geringerer globaler Momentenfehler ist nicht garantiert.
 - Tests prüfen Rand-/Innenminimum, bereits positive Felder, Nullmittelwert, Gewichtung, Massenerhaltung, Übertragungswrapper und Studienartefakte.
 - CI-Ausgaben: p26_5_optimal_positive_projection.csv und summary.json.
