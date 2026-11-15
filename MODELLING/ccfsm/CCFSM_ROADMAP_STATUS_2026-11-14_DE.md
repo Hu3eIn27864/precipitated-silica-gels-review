@@ -562,3 +562,18 @@ Eine explizite Ownership-Regel bucht mechanische Energie genau einmal: entweder 
 Sieben Regressionen prüfen Energie-/Leistungseinheiten, Energieratenresiduum, P19-Ersatz statt Addition, Volumenabgleich, Dissipationsvorzeichen sowie Dead-load-Potential. Externe Reservoirleistungen müssen als explizite, vorzeichenbehaftete Eingaben geliefert werden.
 
 **Aussagegrenze:** P13-Fick-Diffusionsdiagnostik wird nicht zusätzlich zur Onsager-Dissipation gezählt. Die Upwind-Advektions-Entropiebilanz ist nicht geschlossen; ebenso fehlen vollständige Randarbeitsbilanz, Gradientenergien und ein geschlossener diskreter P21/P24-Energieabschluss. Das Ledger ist ein Auditwerkzeug, kein globaler Stabilitätsbeweis oder experimenteller Validierungsnachweis.
+
+
+## P27.24 — diskrete Zweizustands-Energiebilanz für P24 (15.11.2026)
+
+**Status: implementiert; Hosted-CI-Prüfung ausstehend.** P27.24 verlagert die Bilanz von P27.23s Energierate in Watt auf die tatsächliche Zustandsenergiedifferenz eines akzeptierten P24-Zeitschritts. Die Bilanz lautet
+\[
+E^{n+1}-E^n = W_{\mathrm{ext},[n,n+1]}-D_{[n,n+1]}+R_E.
+\]
+Alle Terme sind Schrittintegrale in Joule. Reaktions-, Darcy- und Onsager-Dissipation sowie äußere Arbeit werden explizit als Eingaben übergeben; der Rest wird unabhängig aus den Anfangs-/Endenergien berechnet.
+
+Die Zellvolumina müssen an beiden Zuständen identisch sein. P19 kann P9-Mechanikenergie nur ersetzen, wenn an Anfang **und** Ende ein erfolgreicher P27.22-Audit mit passendem Gesamtvolumen vorliegt. Eine optionale Advektionsdissipation wird nur gezählt, wenn sie ausdrücklich geliefert wird. Acht Regressionen decken Bilanzrest, exakten Abschluss, Nichtnegativität, dt, Geometrie, P19-Ownership und offene Advektionsschließung ab.
+
+**Aussagegrenze:** P27.24 integriert Dissipationen und Rand-/Reservoirarbeit noch nicht selbst aus den P24-Snapshots. Die Upwind-Advektionsentropie bleibt standardmäßig offen; deshalb darf ein kleiner Ledger-Rest nicht als solver-interner Energie-Monotonienachweis oder vollständiger P21/P24-Energiesatz interpretiert werden. Physikalische Validierung ist nicht erfolgt.
+
+**Nächster Schritt P27.25:** Schrittintegrale direkt aus den akzeptierten P24-Anfangs-/End-Snapshots und den tatsächlichen FV-Flüssen herleiten; insbesondere Randarbeit, Reaktionsenergie und Advektionsentropie unabhängig schließen.
