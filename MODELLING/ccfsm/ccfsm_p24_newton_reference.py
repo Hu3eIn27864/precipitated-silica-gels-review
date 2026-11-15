@@ -12,6 +12,7 @@ import math
 
 from ccfsm_p11_energy_time_integration import P11State, _validate_state
 from ccfsm_p21_two_way_pressure_feedback import p21_two_way_pressure_feedback
+from ccfsm_p27_16_newton_flux_audit import limit_newton_direction
 
 
 def _finite(value, name):
@@ -146,7 +147,18 @@ def p24_newton_reference_step(
                 jac[row][col] = (rtrial[row]-residual[row])/actual_h
 
         delta = _solve_dense(jac, [-v for v in residual])
-        factor = 1.0
+        delta_theta, delta_fields = _unpack(delta, cells)
+        current_theta, current_fields = _unpack(x, cells)
+        direction_limit = limit_newton_direction(current_theta, current_fields, delta_theta, delta_fields)
+        if not direction_limit.get("overall_pass"):
+            return {"converged": False, "state": None,
+                "failure": "newton_direction_invariant_limiter_failed",
+                "iterations": iteration, "scaled_residual_inf": residual_norm,
+                "iteration_history": tuple(history), "newton_direction_limiter": direction_limit,
+                "method": "finite-difference damped Newton with P19 statically condensed"}
+        factor = direction_limit["limiting_factor"]
+        history[-1]["shared_invariant_limiter_factor"] = factor
+        history[-1]["shared_invariant_active_constraints"] = direction_limit.get("active_constraints", ())
         accepted_line_search = False
         while factor >= min_ls:
             trial = [x[j] + factor*delta[j] for j in range(nvar)]
@@ -187,6 +199,8 @@ def p24_newton_reference_step(
         "iteration_history": tuple(history),
         "last_snapshot": snapshot,
         "positivity_verified": _admissible(x, cells),
+        "shared_invariant_limiter_used": True,
+        "newton_direction_limiter": direction_limit,
         "pressure_snapshot_matches_accepted_state": True,
         "method": "finite-difference damped Newton with P19 statically condensed",
         "jacobian_method": "forward finite differences",
