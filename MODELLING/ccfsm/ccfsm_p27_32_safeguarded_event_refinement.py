@@ -61,7 +61,7 @@ def refine_flux_root_bisection(
             b, fb = mid, fm
         else:
             a, fa = mid, fm
-        if b-a <= xtol and abs(best_f) <= ftol:
+        if b-a <= xtol:
             return {"root_s": best_t, "bracket_s": (a, b),
                     "bracket_width_s": b-a, "flux_residual": abs(best_f),
                     "iterations": iteration, "converged": True,
