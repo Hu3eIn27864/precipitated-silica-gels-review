@@ -429,3 +429,12 @@ Der geprüfte Stand P0–P22, der P22-Fixpunktresiduum-Audit und die Freigabegat
 Die P25-Studie läuft in CI und veröffentlicht ihre numerischen Tabellen als separates Artefakt. Ein grüner Testlauf allein bedeutet noch keine Konvergenzfreigabe; maßgeblich sind die ausgegebenen Fehlerfolgen, Solverresiduen, Admissibilität und P23-Siliciumbilanz. Synthetische Referenzfälle sind keine physikalische Validierung.
 
 P25 erster Referenzlauf: GitHub Actions [#295](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43670098385) erfolgreich, 273 Tests; Verfeinerungsergebnisse und offene Konvergenzgrenzen siehe P25-Ergebnisbericht.
+
+
+## CCFSM v4.1 — P25.1 konservative Netzverfeinerung
+
+- `ccfsm_p25_1_refinement_study.py` — mesh-unabhängiges Zellmittelwertprofil, konservative Restriktion verschachtelter FV-Netze, echte Cross-Mesh-Fehlernormen L1/L2/Linf, Zeitfolge 1/2/4/8/16 und Druck-/Darcy-Gradient-Stresstest.
+- `test_ccfsm_p25_1_refinement_study.py` — Tests für Integral-Erhaltung der Restriktion, verschachtelte Netze und netzunabhängige Anfangsdaten.
+- `CCFSM_v4.1_P25_1_CROSSMESH_DE.md` — Methodik, Fehlernormen und Freigabegrenzen.
+
+CI führt P25.1 getrennt von P25 aus und lädt eigene CSV/JSON-Ergebnisse hoch. Der Druck-/Darcy-Gradient wird auf Aktivierung geprüft; synthetische Tests sind keine physikalische Validierung.
