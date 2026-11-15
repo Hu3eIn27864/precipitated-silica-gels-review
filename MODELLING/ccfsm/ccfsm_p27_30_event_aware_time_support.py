@@ -66,7 +66,7 @@ def _piecewise_reference(duration, area):
     # Exact piecewise integrals for jL=t-1 and jR=t-1.5 with
     # the P27.29 upwind potentials and right-face sign convention.
     left = 5.0 * (-0.5) + 2.0 * (0.5 * (duration - 1.0) ** 2)
-    right = 3.0 * (-0.5 * 1.5 ** 2) - 7.0 * (
+    right = 3.0 * (0.5 * 1.5 ** 2) - 7.0 * (
         0.5 * (duration - 1.5) ** 2)
     material = (0.5 * (duration - 1.0) ** 2 - 0.5
                 - (0.5 * (duration - 1.5) ** 2 - 0.5 * 1.5 ** 2))
