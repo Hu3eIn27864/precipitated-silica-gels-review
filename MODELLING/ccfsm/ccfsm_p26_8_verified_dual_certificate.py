@@ -44,7 +44,7 @@ def cell_support_upper(mean, p, q, sqrt_digits: int=30):
     bottom=-6*m*q
     # Ellipse-arc maximum. The unconstrained maximizer lies on the arc
     # exactly when |P| >= sqrt(3)|Q|, equivalent to |p| >= 3|q|.
-    if abs(p) >= 3*abs(q):
+    if q >= 0 or abs(p) >= 3*abs(q):
         radicand=q*q+p*p/3
         arc=6*m*(q+_sqrt_upper(radicand,sqrt_digits))
     else:
