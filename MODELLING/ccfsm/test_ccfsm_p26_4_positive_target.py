@@ -23,7 +23,7 @@ class TestP264PositiveTarget(unittest.TestCase):
         self.assertAlmostEqual(before[0],after[0],places=14); self.assertEqual(result[0],avg)
         self.assertGreaterEqual(diag["minimum_target_value"],0); self.assertGreater(diag["absolute_moment_changes"]["second"],0)
     def test_transfer_wrapper_preserves_mass_and_target_positivity(self):
-        se=(0,1); te=(0,.3,.7,1); avg=(1.,); lin=(4.,); quad=(0.,)
+        se=(0,1); te=(0,.5,1); avg=(.1,); lin=(0.,); quad=(2.,)
         out,diag=project_positive_quadratic(se,avg,lin,quad,te)
         self.assertAlmostEqual(moments(se,avg,lin,quad)[0],moments(te,*out)[0],places=13)
         for m,a,b in zip(*out): self.assertGreaterEqual(m+quadratic_minimum(a,b),0)
