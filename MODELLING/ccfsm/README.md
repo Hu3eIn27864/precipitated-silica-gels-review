@@ -896,3 +896,13 @@ Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständig
 - Sechs Regressionen prüfen Nullflussgrenzen, offene Referenzwerte und getrennte Fehlerbudgets. Bericht: `CCFSM_v4.2.47_P27_27_BOUNDARY_REFERENCE_DE.md`.
 
 **Grenze:** Adapter-/Vorzeichenprüfung für synthetische konstante Randdaten; keine physikalische Reservoirmodellierung, keine zeitvariable P24-Quadratur, keine vollständige Upwind-Entropieschließung und kein vollständiger Energieabschluss.
+
+
+## CCFSM P27.30 — ereignisbewusste Zeitstützstellen für Upwind-Zweigwechsel
+
+- `ccfsm_p27_30_event_aware_time_support.py` erkennt Vorzeichenwechsel aus abgetasteten Randflussverläufen durch stückweise lineare Nullstelleninterpolation und fügt die erkannten Ereigniszeiten in ein uniformes Basisgitter ein.
+- Die P27.25-Schrittrekonstruktion vergleicht uniformes und ereignisbewusstes Zeitgitter; chemische Randarbeits- und Materialtransferfehler werden getrennt gegen stückweise analytische Referenzen ausgewiesen.
+- `test_ccfsm_p27_30_event_aware_time_support.py` enthält sechs Regressionen für Nullstellen, fehlende Vorzeichenwechsel, mehrere Ereignisse, Ereigniseinfügung, Fehlervergleich und Eingabevalidierung.
+- Bericht: `CCFSM_v4.2.50_P27_30_EVENT_AWARE_TIME_SUPPORT_DE.md`.
+
+**Grenze:** Die Ereigniserkennung kann mehrere Nullstellen zwischen zwei Detektionspunkten übersehen. P27.30 ist eine synthetische Adapter-/Quadraturprüfung, kein vollständiger diskreter Upwind-Entropiebeweis, keine Integration der tatsächlichen P24-Newton-Trajektorie und keine physikalische Validierung.
