@@ -151,7 +151,9 @@ P22.1 is implemented and its hosted CI is green.
 
 **Strikte Grenze:** Der Operator arbeitet mit stückweise konstanter Quellrekonstruktion in 1-D. Er ist keine allgemeine FE-Polynomprojektion und keine 2-D/3-D-Polyederintersection. Druck bleibt eine nicht-konservierte Feldgröße; ein Zielnetz-Druck für gekoppelte Mechanik erfordert eine erneute P19-Lösung. Zylindergeometrie und reale Abmessungen bleiben bis zu belastbaren Geometriedaten offen.
 
-**Freigabe:** Teilfreigabe für den 1-D-Intervalloperator nach grünem CI und bestandenen Integralerhaltungstests. Allgemeine 3-D-FE/FV-Konservativität und Netzkonvergenz bleiben offen.
+**P26.1-Erweiterung:** `ccfsm_p26_1_moment_projection.py` ergänzt eine stückweise lineare Minmod-Rekonstruktion und überträgt pro Zielzelle sowohl das nullte als auch das erste zentrierte Moment. Damit bleiben globale Masse und erstes räumliches Moment bei identischem Gebiet erhalten. Ein Positivitätsbegrenzer hält lineare Rekonstruktionen nichtnegativer Zellmittelwerte innerhalb der Zellränder nichtnegativ. Tests und separater CI-Referenzlauf sind ergänzt. Minmod kann nahe Extrema lokal Ordnung verlieren.
+
+**Freigabe:** Teilfreigabe für den 1-D-Intervalloperator mit stückweise konstanter (P26) und linearer, momentenerhaltender (P26.1) Rekonstruktion nach grünem CI. Allgemeine 3-D-FE/FV-Konservativität, gekrümmte Geometrie und physikalische Validierung bleiben offen.
 
 ### Gate F — P27: Parameteridentifizierbarkeit und Datenmodell
 
@@ -215,4 +217,4 @@ Dieser Strang kann parallel zu Gates A–E laufen, ohne unkalibrierte Materialge
 
 ## 7. Nächster konkreter Arbeitsschritt
 
-**P26 als Nächstes:** den 1-D-Überlappungsoperator gegen unabhängige analytische/momentenerhaltende Referenzen prüfen und danach höhergradige Rekonstruktion sowie 2-D/3-D-Intersection-Geometrie entwickeln. Den offenen vollständigen P23-Energieabschluss als separates Audit beibehalten.
+**P26.2 als Nächstes:** die lineare Rekonstruktion auf weitere unabhängige Verfeinerungsfolgen und Extremwert-/Positivitätstests prüfen; danach höhere Polynomgrade und 2-D/3-D-Intersection-Geometrie entwickeln. Den offenen vollständigen P23-Energieabschluss als separates Audit beibehalten.
