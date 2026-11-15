@@ -324,3 +324,10 @@ P26.16 prüft P26.15 über verschachtelte L-infinity-Richtungsradien und mehrere
 Mathematisch ist die unendliche Enumeration primitiver ganzzahliger Richtungen vollständig für strikte Unzulässigkeit: Außerhalb der kompakten konvexen erreichbaren Momentenmenge existiert ein strikter Separator; wegen Stetigkeit bleibt er in einer offenen Richtungsumgebung gültig, die eine rationale und damit nach Skalierung eine primitive ganzzahlige Richtung enthält. Kein endlicher Radius garantiert jedoch, diese Richtung bereits zu erfassen. Kein Treffer bleibt daher ohne Machbarkeitsaussage.
 
 Geltungsbereich: 1-D, feste nichtnegative Zellmittelwerte, quadratische Profile; rationale Zertifikate beziehen sich auf exakt rationalisierte Eingabedaten. Keine physikalische oder experimentelle Validierung.
+
+
+## P26.17 — reproduzierbarer Zertifikatsbericht und unabhängige Prüfung (15. November 2026)
+
+P26.17 ergänzt ein portables JSON-Format für exakte Primär- und Dualbelege. Der eigenständige Verifikator nutzt ausschließlich die Python-Standardbibliothek und Fraction-Arithmetik; er importiert keine P26.8/P26.13/P26.14/P26.15-Solver. Primärberichte werden anhand der drei globalen Momente und der Markov-Lukács-SOS-Identität einschließlich PSD-Bedingungen pro Zelle geprüft. Dualberichte werden durch erneute Supportfunktionsauswertung und strikt positive rationale Gap-Schranke geprüft. Ein SHA-256-Fingerabdruck schützt gegen unbeabsichtigte Berichtsmutationen, ist aber keine Signatur. Berichte ohne Beleg bleiben unresolved.
+
+Geltungsbereich bleibt 1-D, feste nichtnegative Zellmittelwerte und quadratische Profile; Softwareverifikation ist keine physikalische Validierung.
