@@ -11,6 +11,10 @@ Die erste Literaturprüfung ist in [MANUSCRIPT_01_NOVELTY_AND_PHYSICAL_MODEL_AUD
 
 Daher ist die Zwei-Zustands-ODE derzeit als **phänomenologische, testbare reduzierte Schließung** zu bezeichnen, nicht als erstmalige physikalische Trennung der Prozesse oder als aus Biot-Darcy hergeleitetes Silica-Gesetz. Die ODE ist mathematisch konsistent unter ihren Annahmen; ihre physikalische Gültigkeit, Erhaltungsbilanz und Reduktion aus einem etablierten Feldmodell sind noch zu prüfen. EJDE wird bis dahin nicht als realistisches Ziel für die ODE allein behandelt.
 
+## 15. Prior-Art-Korrektur: Wilhelm & Kind 2015
+
+Die 2015er Arbeit von Wilhelm & Kind verwendet für natürliche Synärese ebenfalls eine empirische Einratenform \\(S(t)=S_{max}[1-\\exp(-t/\\tau)]\\), untersucht aber pH, Temperatur und Probengröße. Sie erklärt diese Gleichung als empirischen Ansatz und hält ein physikalisch basiertes Modell für noch ausstehend. Dies ist eine mögliche Anwendungslücke, aber kein Beleg dafür, dass es keine frühere physikalische Syneresetheorie gibt: Scherer (1989) hat bereits eine poro-viskoelastische Theorie samt experimenteller Anwendung auf Silica-Gele publiziert. Die zentrale Aufgabe ist nun der Gleichungs-/Grenzfallvergleich zwischen Scherer und v0.2, nicht die bloße Gegenüberstellung mit der empirischen Einratenkurve.
+
 ## 1. Arbeitstitel
 
 **A two-timescale dynamical model for natural syneresis of precipitated silica gels: exact response, invariant-region analysis, and structural identifiability**
