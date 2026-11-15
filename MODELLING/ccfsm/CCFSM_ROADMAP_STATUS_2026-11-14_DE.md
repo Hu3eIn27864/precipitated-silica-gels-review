@@ -661,3 +661,9 @@ Sechs Regressionen decken verborgene Nullstellenpaare, lineare Randereignisse, G
 **Aussagegrenze:** Die Methode ist eine lokale Kandidatensuche, kein zertifizierter Nullstellenbeweis und keine Vollständigkeitsgarantie. Ohne Ableitungs- oder Intervallgrenzen können tangentiale Ereignisse verfehlt oder Kandidaten fehlklassifiziert werden. Keine vollständige diskrete Upwind-Entropie-Kettenregel, keine P24-Trajektorienintegration und keine physikalische Validierung.
 
 **Publikations-Randnotiz:** Unverbindliche, nicht blockierende TODOs zu einer möglichen Kontaktaufnahme mit Prof. Dr.-Ing. em. Matthias Kind (KIT/TVT), Autorenschaft nur nach Zustimmung und Erfüllung üblicher Kriterien, unabhängiger Publikations-/Rechteprüfung sowie späterer Suche nach Diamond-Open-Access-Journalen stehen in [PUBLICATION_TODO_DE.md](../../PUBLICATION_TODO_DE.md). Dies ist keine Autorenschaftsvereinbarung und keine institutionelle Billigung.
+
+
+## CI-Nachtrag P27.32/P27.33 (15.11.2026)
+
+- P27.32: Im Hosted-Lauf [#742](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43743966718) bestanden alle sechs P27.32-Regressionen nach Korrektur des Bisektions-Abbruchkriteriums. Die Zeitklammerbreite ist das Einschluss-/Abbruchkriterium; das Flussresiduum bleibt eine separate Diagnosegröße. Der vollständige Lauf blieb wegen sechs älterer Fehler und einer Exception in P27.10, P27.13, P27.17 (zwei), P27.18, P27.23 und P27.28 rot.
+- P27.33: Im Hosted-Lauf [#744](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43744011153) bestanden alle sechs P27.33-Regressionen. Der vollständige Lauf mit 633 Tests blieb mit denselben sechs Fehlern und einer Exception in den genannten älteren Modulen rot. P27.33 ist damit gezielt getestet, aber die Gesamtintegration ist nicht grün.
