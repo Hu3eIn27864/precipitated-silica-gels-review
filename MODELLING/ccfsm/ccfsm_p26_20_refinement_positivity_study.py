@@ -12,7 +12,8 @@ def _run_case(name, parent_edges, means, linear, quadratic, fine_edges):
     profile = restrict_quadratic_profile(parent_edges, means, linear, quadratic, fine_edges)
     certs = []
     for m, a, b in zip(profile["averages"], profile["linear"], profile["quadratic"]):
-        cert = certify_cell_nonnegative(m, a, b)
+        # Restriction exports exact rational strings; normalize before P26.13.
+        cert = certify_cell_nonnegative(*(Fraction(str(v)) for v in (m, a, b)))
         if cert is None:
             raise ArithmeticError("%s: a restricted child lost nonnegativity" % name)
         certs.append(cert)
