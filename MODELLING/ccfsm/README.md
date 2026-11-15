@@ -625,3 +625,7 @@ P26.18 compares independently verified P26.17 reports by exact rational global m
 ## CCFSM P26.19 — exact local profile restriction and coarsening
 
 P26.19 exactly restricts normalized piecewise-quadratic cell profiles to nested 1-D meshes and recovers parent coefficients from child moments. A round-trip succeeds only when all child means and local linear/quadratic coefficients match the exact restriction. Global mass, first and second moments are preserved. Non-nested meshes are rejected; arbitrary fine profiles need not be restrictions of a coarser quadratic. Run `ccfsm_p26_19_profile_restriction_study.py` and `test_ccfsm_p26_19_exact_profile_restriction.py`. No 2-D/3-D or physical validation.
+
+## CCFSM P26.20 — Positivitätserhalt und unabhängige Zertifikatsprüfung
+
+P26.20 prüft die Positivitätserhaltung bei exakter Restriktion eines nichtnegativen quadratischen Zellprofils auf ein geschachteltes 1-D-Feinmesh. Für jede Kindzelle werden Markov-Lukács-Zertifikate erzeugt und durch einen separaten Fraction-basierten Verifikator unabhängig anhand der Polynomidentität und der PSD-Bedingungen der 2×2-Gram-Matrix geprüft. Die Tests enthalten strikt positive, randberührende und Nullprofile sowie manipulierte Zertifikate. Die Aussage gilt für exakte Restriktion desselben Polynoms, nicht für beliebige Zielprojektionen. Keine 2-D/3-D- oder physikalische Validierung.
