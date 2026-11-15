@@ -291,3 +291,8 @@ P26.10 ergänzt P26.9 um eine exakte rationale Nachkorrektur. Für einen numeris
 ## P26.11 — allgemeine exakte Zwei-Koordinaten-Momentkorrektur
 
 P26.11 verallgemeinert die P26.10-Pivotkorrektur von einer Pivotzelle auf beliebige zwei Koordinaten unter allen 2N linearen/quadratischen Zellmoden. Für jede ausgewählte Dezimalpräzision werden alle nichtsingulären Paare enumeriert; die beiden Pivotkoeffizienten werden durch rationale 2x2-Elimination exakt aus den globalen Erst-/Zweitmomentbedingungen bestimmt. Ein Kandidat wird nur akzeptiert, wenn Masse, erstes und zweites Moment exakt übereinstimmen und jedes quadratische Zellpolynom auf dem vollständigen Intervall exakt nichtnegativ ist. Die endliche Präzisionsliste ist kein vollständiger rationaler oder reeller Machbarkeitsalgorithmus; kein gefundener Zeuge bedeutet unresolved, nicht certified_infeasible. Geltungsbereich: 1-D, feste Zellmittelwerte, quadratische Rekonstruktionen; keine physikalische Validierung.
+
+
+## P26.12 — exakte affine Parametrisierung des Momentenraums
+
+P26.12 stellt den vollständigen affinen Lösungsraum der globalen Erst-/Zweitmomentbedingungen dar. Für N Zellen sind 2N Modenkoordinaten vorhanden; bei Rang zwei der Momentenmatrix werden zwei unabhängige Pivotkoordinaten exakt aus den verbleibenden 2N−2 freien Koordinaten rekonstruiert. Die affine Parametrisierung ist bijektiv und rational. Eine rationale Gittersuche im freien Raum liefert bei Erfolg exakte positive Primärzeugen, ist aber endlich und kein vollständiger Positivitäts-Machbarkeitsalgorithmus. Kein Treffer bleibt unresolved; Unzulässigkeit darf nur durch ein gültiges Dualzertifikat behauptet werden. Geltungsbereich: 1-D, feste Zellmittelwerte, quadratische Rekonstruktionen; keine physikalische Validierung.
