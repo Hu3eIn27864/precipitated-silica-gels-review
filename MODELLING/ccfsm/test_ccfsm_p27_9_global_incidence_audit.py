@@ -28,7 +28,7 @@ class TestP279(unittest.TestCase):
         r=audit_global_tetra_mesh(self.v,((0,1,2,3),))
         self.assertEqual(r["isolated_vertex_indices"],(4,5))
     def test_disconnected_components(self):
-        v=self.v[:4]+((3,0,0),(3,1,0),(3,0,1),(3,0,2))
+        v=self.v[:4]+((3,0,0),(4,0,0),(3,1,0),(3,0,1))
         r=audit_global_tetra_mesh(v,((0,1,2,3),(4,5,6,7)))
         self.assertEqual(r["component_count"],2)
     def test_bad_connectivity_and_degenerate(self):
