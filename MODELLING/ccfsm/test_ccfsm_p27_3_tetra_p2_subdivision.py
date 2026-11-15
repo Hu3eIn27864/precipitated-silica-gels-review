@@ -38,8 +38,8 @@ class TestP273AdaptiveSubdivision(unittest.TestCase):
 
     def test_max_depth_zero_keeps_inconclusive_result(self):
         vertex = (F(17, 16), F(17, 16), F(1, 16), F(1, 16))
-        edge = (F(1, 16), F(9, 16), F(9, 16),
-                F(9, 16), F(9, 16), F(17, 16))
+        edge = (F(1, 16), F(5, 16), F(5, 16),
+                F(5, 16), F(5, 16), F(1, 16))
         r = certify_tetra_p2_by_subdivision(self.tet, vertex, edge, 0)
         self.assertEqual(r["status"], "unresolved")
 
