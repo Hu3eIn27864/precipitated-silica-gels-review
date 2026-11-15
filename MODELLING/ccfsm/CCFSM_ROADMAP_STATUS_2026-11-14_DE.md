@@ -378,3 +378,15 @@ P26.20 verbindet die exakte Profilrestriktion aus P26.19 mit den lokalen Markov-
 - Testfälle umfassen positive und randberührende Profile, negative nodale Werte, umgekehrte Orientierung, degenerierte Elemente, fehlerhafte Konnektivität und rationale Geometrie.
 
 **Grenze:** Das ist eine exakte lokale 3-D-Aussage für P1-Skalarfelder. Keine P2-/höhergradige Positivität, keine Erhaltung im gekoppelten CCFSM-Zeitschritt, keine globale Netzkonformitätsgarantie und keine physikalische Validierung. P27.2 muss die Elementordnung und das für P19/P20 tatsächlich verwendete FE-Interpolationsschema adressieren; danach erst Transport-/Reaktions-Invariantenbereich und 3-D-Zeitschrittkopplung.
+
+
+### P27.2 — Hinreichende P2-Bernstein-Positivität auf Tetraedern
+
+**Status: implementiert; CI-Prüfung ausstehend.**
+
+- Aus vier Eck- und sechs Kantenmittelpunktwerten werden zehn quadratische Simplex-Bernstein-Koeffizienten exakt rational rekonstruiert.
+- Weil die Bernstein-Basisfunktionen nichtnegativ sind und eine Partition der Eins bilden, zertifizieren zehn nichtnegative Koeffizienten die punktweise Nichtnegativität.
+- Ein bewusstes Gegenbeispiel \((\lambda_0-\lambda_1)^2\) zeigt: Ein nichtpositiver Bernstein-Koeffizient kann trotz nichtnegativem Polynom auftreten. Der Prüfer meldet dann „nicht zertifiziert“, niemals „negativ“.
+- P27.2 ist ein hinreichender lokaler Zertifikatsbaustein, kein vollständiger P2-Positivitätstest.
+
+**Nächster mathematischer Schritt:** adaptive Tetraeder-Subdivision und erneute Bernstein-Zertifizierung; danach Abgleich mit dem tatsächlichen Interpolationsschema und den Quadraturdaten des P19-Mechanikblocks. Erst danach kann ein diskreter Positivitätslimiter für die gekoppelten Transport-/Reaktionszustände entworfen werden.
