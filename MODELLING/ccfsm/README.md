@@ -858,3 +858,13 @@ Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständig
 - Sieben Regressionen prüfen Einheiten, Bilanzresiduum, Ownership, Volumenabgleich, Dissipationsvorzeichen und Traktionspotential. Bericht: `CCFSM_v4.2.43_P27_23_THERMODYNAMIC_LEDGER_DE.md`.
 
 **Grenze:** Externe Reservoirleistungen müssen explizit übergeben werden. Die Upwind-Advektionsbilanz, vollständige Randarbeit, Gradientenergien und ein geschlossener P21/P24-Energieabschluss sind weiterhin offen; keine physikalische Validierung.
+
+
+## CCFSM P27.24 — diskrete Zweizustands-Energiebilanz für P24
+
+- `ccfsm_p27_24_discrete_energy.py` bilanziert die tatsächliche Energieänderung zwischen Anfangs- und Endzustand eines akzeptierten P24-Schritts: `ΔE = W_ext - D + R_E`, vollständig in Joule.
+- Reaktions-, Darcy- und Onsager-Dissipation müssen als nichtnegative, über den Schritt integrierte Energien übergeben werden; äußere Arbeit wird explizit und vorzeichenbehaftet übergeben.
+- P9/P19-Mechanikenergie wird exklusiv gebucht. P19-Ownership verlangt gültige P27.22-Audits an beiden Zuständen und identische Gesamtvolumina.
+- Acht Regressionen prüfen Bilanzschluss/-rest, Vorzeichen, Zeitschritt, Rasterkonsistenz, P19-Ownership und die explizite Behandlung der Advektionsschließung. Bericht: `CCFSM_v4.2.44_P27_24_DISCRETE_ENERGY_DE.md`.
+
+**Grenze:** Die integrierten Dissipationen und äußeren Arbeiten sind caller-supplied; P27.24 rekonstruiert sie noch nicht aus P24-Snapshots. Upwind-Advektionsentropie bleibt standardmäßig offen. Daher ist dies ein diskreter Ledger-Audit, kein solver-interner Energie-Monotonienachweis oder vollständiger thermodynamischer Beweis.
