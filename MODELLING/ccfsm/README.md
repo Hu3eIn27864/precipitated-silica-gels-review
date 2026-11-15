@@ -560,3 +560,12 @@ Drei Ausgänge: rational dual zertifiziert unzulässig; primaler Zeuge mit exakt
 - CCFSM_v4.2.10_P26_10_EXACT_MOMENT_WITNESS_DE.md beschreibt Verfahren und Grenzen.
 
 Status: exakter primaler Zeuge, rational dual zertifizierte Unzulässigkeit oder unresolved. Die endliche Pivot-/Rundungssuche ist kein vollständiger exakter Machbarkeitslöser; unresolved ist kein Unzulässigkeitsbeweis. Nur 1-D/quadratisch, keine physikalische Validierung.
+
+
+## P26.11 — allgemeine exakte Zwei-Koordinaten-Momentkorrektur
+
+- `ccfsm_p26_11_all_pair_exact_witness.py` untersucht für jede gewählte Dezimalpräzision alle nichtsingulären Paare aus den 2N linearen/quadratischen Zellmoden und löst die beiden Pivotkoeffizienten exakt rational.
+- `test_ccfsm_p26_11_all_pair_exact_witness.py` prüft beliebige Pivotpaare, singuläre Paare, exakte Momentengleichheit und offene Fälle.
+- `CCFSM_v4.2.11_P26_11_ALL_PAIR_EXACT_WITNESS_DE.md` dokumentiert Herleitung und Grenzen.
+- Akzeptierte Zeugen erfüllen Masse, erstes und zweites globales Moment exakt und sind auf jedem vollständigen Zellintervall rational geprüft nichtnegativ.
+- Die Suche ist nur über die endliche Präzisionsliste vollständig; fehlender Zeuge ist kein Unzulässigkeitsbeweis. Nur 1-D/quadratisch; keine physikalische Validierung.
