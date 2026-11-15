@@ -21,7 +21,7 @@ q(0)=0,\qquad S(0)=0
 
 vorausgesetzt. Beobachtet wird ausschließlich die skalare Ausgangsgröße \(S(t)\). Die Größen \(\eta_a\) und \(q_\infty\) werden zunächst nicht separat als bekannt vorausgesetzt.
 
-Die Aussage gilt für ideale kontinuierliche, rauschfreie Beobachtung auf einem Zeitintervall mit nichtleerem Inneren und für exakte Kenntnis der Modellklasse. Sie ist keine Aussage über endliche, diskrete oder verrauschte Messreihen.
+Die Aussage gilt für die vollständige ideale, kontinuierliche und rauschfreie Ausgangskurve für alle $t\\ge0$ sowie für exakte Kenntnis der Modellklasse. Der Endwert wird dabei als Langzeitgrenze der Kurve bestimmt. Sie ist keine Aussage über endliche, diskrete oder verrauschte Messreihen.
 
 ## 2. Exakte Ausgangsantwort
 
