@@ -40,3 +40,16 @@ Der Volltext des Artikels wurde erneut gegen die Figure-9-Beschreibung geprüft.
 **Interpretation:** Die Diskrepanz der sauren 60-°C-Marker zur Textspanne wird nicht durch Entfernen der Marker „gelöst“. Sie bleibt ein dokumentierter Quellenkonflikt, der anhand der Originalpixel und der Messunsicherheit zu klären ist. Die Observable wird bis zur Klärung des Reaktionszeit-/pH-Protokolls weiterhin nicht als streng monomerspezifische Konzentration in die CCFSM-Kinetik eingespeist.
 
 Quelle: Wilhelm & Kind (2015), Polymers 7(12), 2504–2521, DOI: 10.3390/polym7121528, Abschnitt 4.1 und Fig. 9. https://www.mdpi.com/2073-4360/7/12/2504
+
+
+## Zweite visuelle Ableserunde (15.11.2026)
+
+Die originale Abbildungsdatei wurde erneut über den Artikel-Link geöffnet: https://mdpi-res.com/polymers/polymers-07-01528/article_deploy/html/images/polymers-07-01528-g009-1024.png. Daraus wurde eine zweite, getrennte visuelle Ablesetabelle erstellt: `LITERATURE/wilhelm_kind_fig9_second_read_visual_2026-11-15.csv`. Sie enthält zu allen 39 Punkten eine zweite Zeitablesung und grob visuell abgelesene Fehlerbalken-Unter-/Obergrenzen. Das sind **keine maschinell extrahierten Pixelkoordinaten** und keine digitalisierten Rohdaten; Fehlerbalkenwerte sind nur visuelle Näherungen. Die Datei ist deshalb ausdrücklich ein Prüfdatensatz und nicht fit-freigegeben.
+
+Bei der sauren 60-°C-Serie wurde die frühe hohe Dreiecksmarke in der zweiten Sichtung zeitlich von ca. 7 h auf ca. 22 h verschoben; die erste CSV bleibt unverändert als historischer Erstablesestand. Der hohe Konzentrationswert wird nicht entfernt. Die zweite Sichtung bewahrt alle Serien und markiert die Ableseunsicherheit über die getrennten unteren/oberen Fehlerbalken-Schätzungen.
+
+### Messmodell-Präzisierung
+
+Der Artikel bezeichnet die Observable ausdrücklich als monomere Kieselsäure und nennt die Alexander-Farbreaktion mit Ammoniummolybdat/Schwefelsäure sowie Extinktion bei 400 nm. Er spezifiziert im Methodenabschnitt jedoch weder die genaue Reaktionszeit noch eine experimentelle Selektivitätsprüfung gegenüber Oligomeren. Daher ist die CCFSM-seitige Messgleichung weiterhin als assayabhängiger Beobachtungsoperator zu behandeln, nicht als ungeprüfte direkte Messung von (c_M). Zusätzlich erklären die Autoren selbst, dass bei Analyse bei Raumtemperatur (~20 °C) monomere Kieselsäure weiter polymerisieren kann und dass abgetrenntes Porenfluid bei Lagerung trüb wird. Quellenstellen: Abschnitt 3.3 und Abschnitt 4.1, insbesondere https://www.mdpi.com/2073-4360/7/12/2504.
+
+**Freigabe:** Erst nach maschineller Pixelkalibrierung gegen die Original-PNG, separater Fehlerbalkenvalidierung und einer dokumentierten zweiten unabhängigen Person-Ablesung kann der Datensatz für Fits erwogen werden. Beide CSV-Dateien bleiben bis dahin gesperrt.
