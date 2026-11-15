@@ -429,3 +429,8 @@ P26.20 verbindet die exakte Profilrestriktion aus P26.19 mit den lokalen Markov-
 ## P27.5 — Mesh-Konformität (15.11.2026)
 
 Ein exakter rationaler Audit-Prüfer rekonstruiert die auf gemeinsamen groben Tetraederflächen induzierten Dreieckszerlegungen aus den P27.3-Blattpartitionen. Übereinstimmung beider Seiten wird als konform ausgewiesen; abweichende Triangulierungen werden als nichtkonform erkannt. Tests decken unverfeinerte, beidseitig gleich verfeinerte und einseitig verfeinerte Flächen sowie nicht-manifold und fehlerhafte Eingaben ab. Der Prüfer erzeugt noch keine konforme Verfeinerung und prüft nicht die vollständige globale Knoten-/Kantenstruktur.
+
+
+## P27.6 — konservativer Verfeinerungstiefen-Abschluss (15.11.2026)
+
+**Status: implementiert; CI-Prüfung ausstehend.** Der neue Tiefenabschluss baut die Face-Nachbarschaft der groben Tetraeder auf und hebt alle Elemente einer face-zusammenhängenden Komponente auf deren maximale angeforderte P27.3-Verfeinerungstiefe. Damit werden unterschiedliche Tiefen auf gemeinsamen groben Flächen konservativ vermieden. Die Regel kann eine ganze Komponente uniform verfeinern und ist ausdrücklich nicht minimal. Ressourcenlimits liefern unresolved ohne partielle Meshänderung. P27.6 erzeugt selbst keine Kind-Tetraeder; nach realer Subdivision bleibt der exakte P27.5-Audit verpflichtend. Keine Aussage über globale Knoten-/Kantenkonformität, Elementqualität oder physikalische CCFSM-Positivität.
