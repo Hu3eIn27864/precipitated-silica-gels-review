@@ -172,6 +172,10 @@ jobs:
         run: python MODELLING/ccfsm/ccfsm_p26_13_markov_lukacs_socp.py
       - name: Run P26.13 Markov-Lukacs unit tests
         run: python -m unittest discover -s MODELLING/ccfsm -p 'test_ccfsm_p26_13_markov_lukacs_socp.py' -v
+      - name: Run P26.14 global convex feasibility study
+        run: python MODELLING/ccfsm/ccfsm_p26_14_global_convex_feasibility.py
+      - name: Run P26.14 global convex feasibility unit tests
+        run: python -m unittest discover -s MODELLING/ccfsm -p 'test_ccfsm_p26_14_global_convex_feasibility.py' -v
       - name: Upload P26 projection results
         uses: actions/upload-artifact@v4
         with:
