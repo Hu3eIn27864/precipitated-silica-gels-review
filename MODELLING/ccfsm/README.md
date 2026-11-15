@@ -484,3 +484,14 @@ P26.2 bleibt ein 1-D-Intervalloperator. Es gibt keine 2-D/3-D-Intersection-Geome
 
 
 **P26.3 CI-Referenz:** Lauf #345 erfolgreich, 306/306 Tests; 32 Verfeinerungsfälle über vier Profile und N=16/32/64/128. Maximales relatives Momentenresiduum 6.45e-16. Die Studie zeigt zugleich, dass ein Quell-Positivitätslimiter die Zielrekonstruktion nicht strikt positiv garantiert (Minimum -9.43e-11 im feinsten Referenzsatz). Details und Limiter-Momentverschiebungen stehen in CCFSM_v4.2.3_P26_3_REFINEMENT_STUDY_DE.md.
+
+
+### CCFSM v4.2.4 — P26.4 positivitätserhaltende Zielrekonstruktion
+
+- ccfsm_p26_4_positive_target.py begrenzt nach P26.2 die quadratischen Zielzellmoden durch größtmögliche gemeinsame radiale Skalierung, so dass jedes Zielpolynom nichtnegativ bleibt.
+- Der Zielzellmittelwert und damit jede Zielzellmasse bleiben exakt erhalten; erstes und zweites räumliches Moment können sich ändern und werden quantitativ ausgewiesen.
+- Der Limiter prüft das quadratische Minimum analytisch über Randpunkte und ggf. Scheitelpunkt; Nullmittelwerte erzwingen Nullmoden, negative Mittelwerte werden abgewiesen.
+- Die Methode ist kein globaler nächster Punkt im Koeffizientenraum, sondern die größte zulässige Skalierung entlang des vorhandenen Modenvektors.
+- Regressionen prüfen Rand-/Innenunterschwinger, bereits positive Felder, Nullmittelwert, Eingabevalidierung, Massenerhaltung und Momentenänderungen.
+- CI-Ausgaben: p26_4_positive_target_cases.csv und summary.json.
+- 1-D/quadratisch; keine 2-D/3-D-Geometrie, keine Druck-/Energieerhaltung und keine physikalische Validierung.
