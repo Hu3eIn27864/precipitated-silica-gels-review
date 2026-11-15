@@ -86,3 +86,6 @@ The new [CCFSM v0.2 two-timescale specification](MODELLING/ccfsm/CCFSM_v0.2_TWO_
 
 
 CCFSM P27.25–P27.28 extend the accepted-step boundary-work audit from snapshot trapezoids to analytic closed/open and time-dependent synthetic references. P27.28 reports separate material-transfer and energy quadrature errors; these are adapter-level numerical checks, not a complete energy proof or physical validation. See [P27.28 specification](MODELLING/ccfsm/CCFSM_v4.2.48_P27_28_TIME_DEPENDENT_BOUNDARY_DE.md) and the [CCFSM roadmap/status audit](MODELLING/ccfsm/CCFSM_ROADMAP_STATUS_2026-11-14_DE.md).
+
+
+CCFSM P27.29 adds synthetic sign-changing advective boundary fluxes to exercise left/right upwind-potential switching and reports separate boundary-work and material quadrature errors under time-support refinement. This is an adapter-level verification, not a full entropy-chain-rule proof or physical validation. See [P27.29 specification](MODELLING/ccfsm/CCFSM_v4.2.49_P27_29_UPWIND_BRANCH_REFINEMENT_DE.md).
