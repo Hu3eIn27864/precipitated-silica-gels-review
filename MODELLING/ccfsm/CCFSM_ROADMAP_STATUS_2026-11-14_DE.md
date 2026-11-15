@@ -2,7 +2,7 @@
 
 **Auditdatum:** 14.11.2026  
 **Repository-Stand:** `main`, letzter geprüfter Commit `a5e8f066cb6a4e4ab700a3ace85763fa1f64dfb4`  
-**Geltungsbereich:** CCFSM P0–P22, natürliche Synärese gefällter Silicagel-Systeme. Diese Roadmap ist ein Prüf- und Arbeitsplan, keine Behauptung physikalischer Validierung.
+**Geltungsbereich:** CCFSM P0–P23, natürliche Synärese gefällter Silicagel-Systeme. Diese Roadmap ist ein Prüf- und Arbeitsplan, keine Behauptung physikalischer Validierung.
 
 ## 1. Kurzurteil
 
@@ -17,6 +17,7 @@ Der aktuelle Engpass ist nicht das Hinzufügen weiterer physikalischer Terme, so
 - P20: gestaffelte FV/FE-Kopplung.
 - P21: FE-Druckprojektion zurück auf FV-Zellen und gemeinsamer Darcy-Fluss für Fluidbilanz und mobile M/O-Advektion.
 - P22: gedämpfte Picard-Iteration für einen impliziten-Euler-Schritt.
+- P23: diskreter Audit des akzeptierten P22-Schritts; globale FV-Siliciumbilanz plus getrennte P9-/P19-Energiediagnostik.
 
 GitHub Actions Lauf [#263](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43634688142) wurde geprüft: Job `ccfsm-tests` erfolgreich, 259 Unit-Tests bestanden. Im selben Lauf wurde die v0.5-Kalibrierung ausgeführt: 7 natürliche Kurven, 21 Fits; Exponentialmodell gewann 3/7, gestrecktes Exponentialmodell 4/7, zweistufiges CCFSM 0/7 und traf bei allen sieben Kurven eine Parametergrenze. Medianer Holdout-RMSE: 0.04207, 0.01755 bzw. 0.04207. Das ist ein begrenzter Vergleich auf approximierten/kuratierten Ablesepunkten, keine unabhängige physikalische Validierung. Der Druckzellen-Audit enthält 21 Druckzellkurven und 0 natürliche Kalibrierkurven; er dient der Trennung, nicht der Übernahme dieser Daten.
 
@@ -56,7 +57,7 @@ P22.1 is implemented and its hosted CI is green.
 - Hosted workflow [#269](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43635230416) passed; the test log reports **262 tests in 0.708 s, OK**.
 - This is a numerical acceptance-criterion correction, not a proof of Picard convergence, global energy stability, or physical validity.
 
-**Gate A is complete for this correction. Next: P23, discrete energy and silicon balance of the accepted P22 step.** P24–P29 remain as planned below.
+**Gate A is complete. P23 is now implemented:** the accepted-step FV silicon balance is independently audited, while P9 local energy change and P19 mechanical energy/work are reported separately. A complete global discrete energy closure remains open for the dimensional and boundary-work reasons documented in the P23 note. P24–P29 remain as planned below.
 
 ## 3. Priorisierte Roadmap und Freigabegates
 
@@ -84,6 +85,19 @@ P22.1 is implemented and its hosted CI is green.
 - Geschlossene und offene Testfälle mit analytischen/konservativen Grenzfällen.
 
 **Freigabe:** globale diskrete Stoffbilanz schließt bis zur Rundung; Energierest ist unabhängig berechnet, erklärbar und konvergiert mit Verfeinerung. Keine pauschale Energie-Monotonie behaupten, solange die Randarbeit/thermodynamische Struktur dies nicht trägt.
+
+### Gate B — P23: diskrete Stoff-/Energiebilanz des akzeptierten P22-Schritts
+
+**Status: implementiert als partieller Audit; vollständiger Energieabschluss noch offen.**
+
+- P23 prüft die Änderung des gesamten FV-Siliciuminventars gegen den integrierten offenen M/O-Randfluss; Reaktionsstöchiometrie und interne Flüsse heben sich in der globalen Summe auf.
+- P9-lokale FV-Energiedifferenz wird aus Anfangs- und akzeptiertem Zustand berechnet.
+- P19-FE-Energie, Neumann-Traktionsarbeit und Dirichlet-Reaktionsresiduum werden am akzeptierten Zustand separat ausgegeben. Eine mechanische Energiedifferenz ist mangels P19-Anfangssnapshot noch nicht verfügbar.
+- FE-Energie (J) und FV-Energie (J/m²) werden ohne dimensionsrichtige Geometrie-/Querschnittsabbildung nicht addiert.
+- P16-semidiskrete Rate wird nicht als diskrete Energieänderung ausgegeben; kein globales Energieresiduum und keine Energie-Monotonie behauptet.
+- Implementierung: `ccfsm_p23_discrete_balance.py`; Regressionen in `test_ccfsm_p23_discrete_balance.py`; Spezifikation: `CCFSM_v3.8_P23_DISCRETE_BALANCE_DE.md`.
+
+**Freigabegrenze:** Die FV-Siliciumbilanz ist separat prüfbar. Der vollständige diskrete Energieabschluss bleibt ein offener Teil von Gate B.
 
 ### Gate C — P24: unabhängiger Referenzlöser für kleine gekoppelte Probleme
 
@@ -155,7 +169,7 @@ Dieser Strang kann parallel zu Gates A–E laufen, ohne unkalibrierte Materialge
 | Reihenfolge | Paket | Abhängigkeit | Ergebnis |
 |---|---|---|---|
 | 1 | P22.1 Fixpunktresiduum korrigieren | keine | verlässliches Akzeptanzkriterium |
-| 2 | P23 diskretes Stoff-/Energiebudget | P22.1 | Bilanz des akzeptierten Schritts |
+| 2 | P23 diskretes Stoff-/Energiebudget | P22.1 | FV-Siliciumbilanz geschlossen prüfbar; Energiebilanz partiell |
 | 3 | P24 unabhängiger Newton-Referenzfall | P22.1 | Solververgleich |
 | 4 | P25 Raum-/Zeitverfeinerung | P23, P24 | numerische Robustheit |
 | 5 | P26 konservative FE/FV-Projektion | P24, P25 | Netzübertragbarkeit |
@@ -174,4 +188,4 @@ Dieser Strang kann parallel zu Gates A–E laufen, ohne unkalibrierte Materialge
 
 ## 7. Nächster konkreter Arbeitsschritt
 
-**P22.1 zuerst:** Fixpunktdefekt korrekt normieren, finalen Druck-Snapshot konsistent machen und gezielte Regressionstests hinzufügen. Erst nach grüner CI P23 implementieren.
+**P24 als Nächstes:** unabhängigen Newton-/Block-Newton-Referenzlöser auf kleinem gekoppeltem Netz aufbauen und P22 dagegen vergleichen. Den offenen vollständigen P23-Energieabschluss als Teil des Folgeaudits beibehalten.
