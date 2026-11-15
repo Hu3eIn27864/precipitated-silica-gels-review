@@ -281,3 +281,8 @@ P26.8 ersetzt die numerische Supportfunktionsdiagnose durch eine geschlossene Ze
 ## P26.9 — primal-duale Machbarkeitsentscheidung
 
 P26.9 kombiniert P26.8 und P26.6 in einer dreistufigen Entscheidung. Ein strikt positiver rationaler dualer Abstand liefert certified_infeasible. Andernfalls wird eine primale Dykstra-Projektion versucht; der resultierende Dezimalzeuge wird unabhängig mit rationaler Arithmetik auf kontinuierliche Zellpositivität und explizit begrenzte globale Momentenresiduen geprüft. Nur dann gilt feasible_verified_primal_witness. Fehlschlag oder Nichtkonvergenz bleibt unresolved. Die primale Momentenerhaltung ist daher toleranzbehaftet und nicht pauschal ein exakter Gleichheitsbeweis. Geltungsbereich bleibt 1-D mit festen Zellmitteln und quadratischen Rekonstruktionen; keine physikalische Validierung.
+
+
+## P26.10 — exakte rationale Momentenkorrektur
+
+P26.10 ergänzt P26.9 um eine exakte rationale Nachkorrektur. Für einen numerischen Projektionskandidaten werden die Nicht-Pivot-Koeffizienten rationalisiert; zwei Koeffizienten einer Pivotzelle werden so bestimmt, dass globale Masse, erstes und zweites Moment exakt erfüllt sind. Kontinuierliche Zellpositivität wird danach exakt geprüft. Erfolgreiche Zeugen erfüllen somit alle drei Momente als rationale Gleichheiten. Eine endliche Suche über Rundungsgenauigkeiten und Pivotzellen kann jedoch vorhandene Zeugen übersehen; Fehlschlag bleibt unresolved und beweist keine Unzulässigkeit. Geltungsbereich: 1-D, feste Zellmittelwerte, quadratische Rekonstruktion; keine physikalische Validierung.
