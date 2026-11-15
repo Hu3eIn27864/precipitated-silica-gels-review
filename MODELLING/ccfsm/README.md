@@ -829,3 +829,13 @@ Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständig
 - `test_ccfsm_p27_20_two_state_energy.py` enthält sieben Regressionen; `CCFSM_v4.2.40_P27_20_TWO_STATE_ENERGY_DE.md` dokumentiert Kopplung und Grenzen.
 
 **Grenze:** Die FV-Freie-Energiedichte ist caller-supplied und nicht aus P10/P13 hergeleitet. Keine gemeinsame freie Energie, Doppelzählungsfreiheit, vollständige Rand-/Dirichlet-Arbeit oder thermodynamische Stabilität ist damit bewiesen.
+
+
+## CCFSM P27.21 — Variationsaudit der P9-Energiedichte
+
+- `ccfsm_p27_21_variational_audit.py` zerlegt die bestehende P9-Energiedichte explizit in elastischen, Biot-Speicher- und chemischen Anteil und vergleicht finite Differenzen nach Fluidkapazität und M/O/N/B-Inventaren mit den P9-Konjugierten.
+- Einheitenprüfung der Konjugierten: `dpsi/dtheta` in Pa, `dpsi/dn_i` in J/mol; Energiedichte in J/m³.
+- Bei nichtverschwindender äußerer Axialtraktion wird gewarnt: P9 meldet gespeicherte innere Energie ohne äußeres Traktionspotential; gespeicherte Energie und kraftgesteuertes Gesamtpotential haben nicht automatisch dieselben Ableitungen.
+- `test_ccfsm_p27_21_variational_audit.py` enthält fünf Regressionen; Bericht: `CCFSM_v4.2.41_P27_21_VARIATIONAL_AUDIT_DE.md`.
+
+**Grenze:** Der lokale P9-Variationsaudit beweist keine gemeinsame P10/P13/P19/P21-Energie. P19 kann dieselben elastischen/Biot-Anteile bereits enthalten; vor Addition ist Doppelzählung auszuschließen.
