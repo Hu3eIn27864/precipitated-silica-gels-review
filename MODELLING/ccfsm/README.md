@@ -928,3 +928,12 @@ Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständig
 - Bericht: `CCFSM_v4.2.52_P27_32_SAFEGUARDED_EVENT_REFINEMENT_DE.md`.
 
 **Grenze:** Die Bisektion schließt eine Nullstelle nur innerhalb einer bereits gefundenen Vorzeichenwechselklammer und unter Stetigkeitsannahme ein. Sie garantiert nicht, dass P27.31 alle Nullstellen findet; tangentiale Nullstellen und nicht abgetastete Oszillationen bleiben möglich. Keine Intervallarithmetik, keine vollständige Upwind-Entropie-Kettenregel, keine P24-Trajektorienintegration und keine physikalische Validierung.
+
+## CCFSM P27.33 — Kandidatensuche für tangentiale Ereignisse
+
+- `ccfsm_p27_33_tangential_event_detection.py` ergänzt die P27.31-Abtastung um lokale quadratische Scheitelkandidaten auf drei aufeinanderfolgenden, auch nichtäquidistanten Samples.
+- Der ursprüngliche Flux wird am Kandidaten direkt ausgewertet; tangentiale Kandidaten werden getrennt von Vorzeichenwechselklammern berichtet.
+- `test_ccfsm_p27_33_tangential_event_detection.py` enthält sechs Regressionen einschließlich einer Nullstelle gerader Vielfachheit ohne Vorzeichenwechsel.
+- Bericht: `CCFSM_v4.2.53_P27_33_TANGENTIAL_EVENT_DETECTION_DE.md`.
+
+**Grenze:** lokale quadratische Heuristik, keine Vollständigkeits- oder Nullstellenzertifizierung; keine Ableitungs-/Intervallgrenzen, keine vollständige Upwind-Entropie-Kettenregel, keine P24-Trajektorienintegration und keine physikalische Validierung.
