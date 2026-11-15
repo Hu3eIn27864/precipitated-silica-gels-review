@@ -331,3 +331,10 @@ Geltungsbereich: 1-D, feste nichtnegative Zellmittelwerte, quadratische Profile;
 P26.17 ergänzt ein portables JSON-Format für exakte Primär- und Dualbelege. Der eigenständige Verifikator nutzt ausschließlich die Python-Standardbibliothek und Fraction-Arithmetik; er importiert keine P26.8/P26.13/P26.14/P26.15-Solver. Primärberichte werden anhand der drei globalen Momente und der Markov-Lukács-SOS-Identität einschließlich PSD-Bedingungen pro Zelle geprüft. Dualberichte werden durch erneute Supportfunktionsauswertung und strikt positive rationale Gap-Schranke geprüft. Ein SHA-256-Fingerabdruck schützt gegen unbeabsichtigte Berichtsmutationen, ist aber keine Signatur. Berichte ohne Beleg bleiben unresolved.
 
 Geltungsbereich bleibt 1-D, feste nichtnegative Zellmittelwerte und quadratische Profile; Softwareverifikation ist keine physikalische Validierung.
+
+
+## P26.18 — exakte Zertifikatsäquivalenz über rationale Darstellungen und Partitionen (15. November 2026)
+
+P26.18 ergänzt P26.17 um einen unabhängigen Vergleich zweier Zertifikatsberichte anhand ihrer exakt rational berechneten globalen Momente (Masse, erstes und zweites Moment). Dezimal- und Bruchschreibweisen desselben rationalen Werts werden kanonisiert. Eine Einzellen- und eine Zweizellenpartition mit demselben konstanten positiven Profil werden verglichen; beide Primärzertifikate werden separat durch P26.17 geprüft. Ungültige Hashes/Belege, unterschiedliche Zielmomente und Statuskonflikte werden zurückgewiesen. Zwei unresolved-Berichte bleiben unresolved.
+
+**Aussagegrenze:** Identische globale Momente beweisen weder identische lokale Profile noch identische stückweise-polynomiale zulässige Mengen auf unterschiedlichen Partitionen. Die Referenzstudie prüft die Vergleichslogik mit konstruierten exakten Zeugen, nicht einen neuen globalen Solver. Geltungsbereich: 1-D, feste nichtnegative Zellmittelwerte, quadratische Profile, globale Masse/erste/zweite Momente. Keine physikalische oder experimentelle Validierung.
