@@ -44,7 +44,7 @@ def _perturbation_gain(source_edges,source_coeffs,target_edges):
     perturbed=tuple(tuple(v+eps*scale*s for v,s in zip(seq,sgn)) for seq,sgn in zip(source_coeffs,signs))
     base=project_quadratic_moments(source_edges,*source_coeffs,target_edges)
     changed=project_quadratic_moments(source_edges,*perturbed,target_edges)
-    numerator=max(abs(x-y) for old,new in zip(base,changed) for xs,ys in zip(old,new) for x,y in zip(xs,ys))
+    numerator=max(abs(x-y) for old,new in zip(base,changed) for x,y in zip(old,new))
     return numerator/(eps*scale)
 def run_study(output_dir,cells=(16,32,64,128)):
     out=Path(output_dir); out.mkdir(parents=True,exist_ok=True)
