@@ -1036,3 +1036,11 @@
 - Überwacht getrennte normierte Zustands- und Druckresiduen; Positivitätsbegrenzung für Fluidkapazität und Inventare.
 - Nichtkonvergenz oder zu starke Positivitätsbegrenzung führt ausdrücklich zu keinem akzeptierten Zeitschritt.
 - Keine Behauptung eines monolithischen Newton-Verfahrens, einer Energie-Monotonie oder physikalischen Validierung.
+
+
+## 2026-11-15 — CCFSM P23 diskreter Stoff- und Energiebilanz-Audit
+
+- Ergänzt einen Audit des tatsächlich akzeptierten P22-Schritts: Änderung des gesamten FV-Siliciuminventars gegen integrierte offene M/O-Randflüsse; interne Flüsse und Reaktionsstöchiometrie werden global separat nachvollziehbar.
+- Berechnet die P9-lokale FV-Energiedifferenz aus Anfangs- und Endzustand und berichtet P19-FE-Energie, Traktionsarbeit sowie Dirichlet-Reaktionsresiduum separat.
+- Vermeidet einen dimensionswidrigen FE/FV-Energie-Summenwert und behauptet keinen vollständigen globalen diskreten Energieabschluss oder Energie-Monotonie.
+- Ergänzt Regressionstests für geschlossene/offene Siliciumbilanz und die expliziten Statusgrenzen. Softwaretests sind keine physikalische Validierung.
