@@ -689,3 +689,12 @@ Hussein Sahabis Angabe einer TVT-Beschäftigung 2009–2011 ist als Selbstauskun
 **Aussagegrenze:** Dichte Punktabtastung ist kein mathematischer Einschließungsbeweis, sondern ein Regressionstest. Null-Inklusion beweist keine Nullstelle. Die Aussage bleibt auf Polynome und die mathematische Gültigkeit der P27.34-Intervallarithmetik beschränkt; keine automatische Intervallfortsetzung realer Flüsse, keine vollständige Root-Isolation, keine P24-Trajektorienintegration und keine physikalische Validierung.
 
 **Publikationshinweis:** Die Formulierung „eigeninitiierte, unentgeltliche Forschungsarbeit“ ist sachlicher als „ehrenamtlich“, sofern tatsächlich keine Vergütung für dieses Vorhaben erfolgt. Die USA-/„Land der unbegrenzten Möglichkeiten“-Rhetorik wird für ein wissenschaftliches Manuskript nicht empfohlen; eine belegbare internationale Perspektive ist neutraler. Details und Formulierungsvorschläge: [PUBLICATION_TODO_DE.md](../../PUBLICATION_TODO_DE.md).
+
+
+## P27.36 — Ableitungsvorzeichen und eindeutige Polynom-Nullstellen (15.11.2026)
+
+**Status: implementiert; Hosted-CI-Prüfung ausstehend.** P27.36 ergänzt die P27.34/P27.35-Kette um eine Intervall-Einschließung der Polynomableitung. Ist diese Einschließung auf dem vollständigen Intervall strikt positiv oder negativ und haben die nach außen eingeschlossenen Funktionswerte an den Endpunkten entgegengesetzte strikte Vorzeichen, folgt aus Zwischenwertsatz und strenger Monotonie genau eine innere Nullstelle. Bei gleichen strikten Endpunktvorzeichen folgt Nullstellenfreiheit. Unklare Ableitungs- oder Endpunktvorzeichen bleiben ausdrücklich ungelöst.
+
+Acht Regressionen prüfen steigende/fallende lineare Referenzen, positive/negative nullstellenfreie Referenzen, einen tangentialen Fall, eine Randnullstelle, Ableitungskoeffizienten und Eingabevalidierung.
+
+**Aussagegrenze:** Die Klassifikation gilt nur unter dem Einschließungsvertrag der P27.34-Intervallarithmetik und für Polynome. Tangentiale bzw. mehrfache Nullstellen bleiben typischerweise ungelöst, weil die Ableitungseinschließung Null enthält. Keine Vollständigkeitsgarantie für P27.31/P27.33, keine beliebige Flussintervallfortsetzung, keine P24-Trajektorienintegration und keine physikalische Validierung.
