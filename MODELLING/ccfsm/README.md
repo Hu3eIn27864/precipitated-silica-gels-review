@@ -982,4 +982,5 @@ Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständig
 
 Die erste Manuskriptarbeit behandelt ausschließlich das reduzierte Zwei-Zeitskalen-Modell der natürlichen Synärese; sie behauptet keinen Beweis des vollständigen 3D-CCFSM.
 
+- [MANUSCRIPT_01_STRUCTURAL_IDENTIFIABILITY_AND_PRACTICAL_LIMITS_2026-11-15_DE.md](MANUSCRIPT_01_STRUCTURAL_IDENTIFIABILITY_AND_PRACTICAL_LIMITS_2026-11-15_DE.md) — formaler Satz zur Rekonstruktion des ungeordneten Ratenpaars, Voraussetzungen, Degenerationsfälle und praktische Identifizierbarkeitsgrenzen.
 - [MANUSCRIPT_01_MATHEMATICAL_AUDIT_2026-11-15_DE.md](MANUSCRIPT_01_MATHEMATICAL_AUDIT_2026-11-15_DE.md) — erster interner Algebra-/Code-Audit der v0.2-Kerngleichungen; noch keine externe Begutachtung.
