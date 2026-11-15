@@ -55,7 +55,7 @@ def _raw_moments(edges, means, linear, quadratic):
 
 def coarsen_quadratic_profile(parent_edges, fine_edges, fine_means, fine_linear, fine_quadratic):
     """Recover parent coefficients from child moments and test exact local restriction."""
-    p,f,m,a,b=_validate_profile(fine_edges,fine_means,fine_linear,fine_quadratic)
+    f,m,a,b=_validate_profile(fine_edges,fine_means,fine_linear,fine_quadratic)
     p,f,parent_of_fine=_nested_parent_map(parent_edges,f)
     n=len(p)-1; pm=[]; pa=[]; pb=[]
     for j in range(n):
