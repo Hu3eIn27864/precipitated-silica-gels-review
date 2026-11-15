@@ -48,4 +48,4 @@ Beide Löser müssen dieselbe Anfangsbedingung, Zeitschrittweite, Geometrie-/FE-
 
 P24 ist ein Referenzlöser für kleine FV/FE-Probleme. Er löst nicht gleichzeitig die FE-Verschiebungen in einem voll monolithischen Blocksystem, sondern eliminiert sie durch den direkten P19-Gleichgewichtslöser innerhalb jeder Residuumsauswertung. Das ist eine mathematisch definierte reduzierte/Schur-komplementartige Formulierung derselben gekoppelten Gleichung, sofern P19 für jeden Zustand eindeutig lösbar ist.
 
-**Status:** Implementierung und Regressionstests eingecheckt. CI muss separat grün verifiziert werden. Nächster Schritt nach erfolgreichem Vergleich: P25 Zeit-/Raumverfeinerung und Konditions-/Robustheitsanalyse.
+**Status:** Implementierung und Regressionstests eingecheckt. Hosted workflow [#283](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43669754294) ist grün; der vollständige Testlauf meldet 270 Tests bestanden. Das ist Softwareverifikation, keine physikalische Validierung. Nächster Schritt nach erfolgreichem Vergleich: P25 Zeit-/Raumverfeinerung und Konditions-/Robustheitsanalyse.
