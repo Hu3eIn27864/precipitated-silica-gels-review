@@ -698,3 +698,6 @@ Hussein Sahabis Angabe einer TVT-Beschäftigung 2009–2011 ist als Selbstauskun
 Acht Regressionen prüfen steigende/fallende lineare Referenzen, positive/negative nullstellenfreie Referenzen, einen tangentialen Fall, eine Randnullstelle, Ableitungskoeffizienten und Eingabevalidierung.
 
 **Aussagegrenze:** Die Klassifikation gilt nur unter dem Einschließungsvertrag der P27.34-Intervallarithmetik und für Polynome. Tangentiale bzw. mehrfache Nullstellen bleiben typischerweise ungelöst, weil die Ableitungseinschließung Null enthält. Keine Vollständigkeitsgarantie für P27.31/P27.33, keine beliebige Flussintervallfortsetzung, keine P24-Trajektorienintegration und keine physikalische Validierung.
+
+
+**CI-Nachtrag P27.36:** Hosted-Lauf [#763](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43748370567): alle acht P27.36-Regressionen bestanden. Der Gesamtlauf mit 655 Tests blieb wegen sechs Fehlern und einer Exception in P27.10, P27.13, P27.17 (zwei), P27.18, P27.23 und P27.28 rot. Die neue Funktion ist damit gezielt getestet; die Gesamtintegration bleibt gesperrt.
