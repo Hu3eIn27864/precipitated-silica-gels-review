@@ -63,8 +63,17 @@ def audit_tetra_scalar_field_3d(
                                     "minimum_nodal_value": margin})
                     margins.append(margin)
                 else:
-                    results.append({"cell": cell_id, "degree": 1, "status": "unresolved",
-                                    "reason": check.get("reason", "p1_check_failed")})
+                    values = tuple(Fraction(str(x)) for x in data.get("vertex_values", ()))
+                    if len(values) == 4 and min(values) < 0:
+                        witness = min(range(4), key=lambda i: values[i])
+                        results.append({"cell": cell_id, "degree": 1,
+                                        "status": "certified_negative_point",
+                                        "reason": "negative_p1_vertex_witness",
+                                        "local_vertex": witness,
+                                        "negative_value": values[witness]})
+                    else:
+                        results.append({"cell": cell_id, "degree": 1, "status": "unresolved",
+                                        "reason": check.get("reason", "p1_check_failed")})
             elif degree == 2:
                 vv = data.get("vertex_values", ())
                 ev = data.get("edge_midpoint_values", ())
