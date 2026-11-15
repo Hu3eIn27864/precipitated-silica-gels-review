@@ -459,3 +459,14 @@ P26 ist ausdrücklich ein 1-D-Intervalloperator mit stückweise konstanter Quell
 - `CCFSM_v4.2.1_P26_1_MOMENT_PROJECTION_DE.md` beschreibt Herleitung und Grenzen.
 
 P26.1 bleibt auf 1-D-Intervalle und stückweise lineare Rekonstruktionen beschränkt. Minmod kann nahe Extrema lokal Ordnung verlieren; 2-D/3-D-Intersection-Geometrie und physikalische Validierung bleiben offen.
+
+
+### CCFSM v4.2.2 — P26.2 quadratische Momentenprojektion
+
+- ccfsm_p26_2_quadratic_projection.py überträgt stückweise quadratische 1-D-Felder zwischen nichtverschachtelten Intervallnetzen und erhält pro Zielzelle die Momente nullter, erster und zweiter Ordnung.
+- Die Quellmoden werden explizit übergeben; es wird kein automatischer Hochordnungsrekonstruktor behauptet. Drei-Punkt-Gaußquadratur integriert die Polynom-Momentprodukte exakt.
+- Der optionale Positivitätsbegrenzer skaliert beide nullmittelwertigen Moden gemeinsam und erhält den Zellmittelwert; lokale Form und Ordnung können dadurch reduziert werden.
+- test_ccfsm_p26_2_quadratic_projection.py deckt quadratische Exaktheit, globale Momentenerhaltung, Identität, Konstanten, konkave/konvexe Krümmung, Positivität und Eingabegrenzen ab.
+- CCFSM_v4.2.2_P26_2_QUADRATIC_PROJECTION_DE.md dokumentiert Herleitung und Geltungsgrenzen.
+
+P26.2 bleibt ein 1-D-Intervalloperator. Es gibt keine 2-D/3-D-Intersection-Geometrie, keine automatische FE-Polynomrekonstruktion und keine physikalische Validierung. Der CI-Workflow erzeugt ein separates CSV/JSON-Artefakt.
