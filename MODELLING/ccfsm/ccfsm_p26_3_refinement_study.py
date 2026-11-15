@@ -54,17 +54,28 @@ def run_study(output_dir,cells=(16,32,64,128)):
             se=tuple(i/n for i in range(n+1)); nt=n+3; te=tuple((i/nt)**1.12 for i in range(nt+1))
             src=source_projection(se,profile); src_m=moments(se,*src); gain=_perturbation_gain(se,src,te)
             for limited in (False,True):
+                effective_src=tuple(
+                    tuple((limit_quadratic(m,a,b,True)[k] if k>0 else m)
+                          for m,a,b in zip(*src))
+                    for k in range(3)
+                ) if limited else src
                 dst=project_quadratic_moments(se,*src,te,positivity=limited); dst_m=moments(te,*dst)
-                residual=[abs(y-x)/max(1e-30,abs(x)) for x,y in zip(src_m,dst_m)]
+                effective_m=moments(se,*effective_src)
+                residual=[abs(y-x)/max(1e-30,abs(x)) for x,y in zip(effective_m,dst_m)]
+                limiter_m=moments(se,*src)
+                limiter_shift=[(y-x)/max(1e-30,abs(x)) for x,y in zip(limiter_m,effective_m)]
                 met=_field_metrics(te,dst,profile)
                 src_min=min(m+quadratic_minimum(a,b) for m,a,b in zip(*src))
-                lim_min=min(m+quadratic_minimum(*limit_quadratic(m,a,b,True)) for m,a,b in zip(*src))
+                lim_min=min(m+quadratic_minimum(a,b) for m,a,b in zip(*effective_src))
                 rows.append({"profile":profile,"source_cells":n,"target_cells":nt,"positivity_limiter":limited,
                     "relative_l1":met["relative_l1"],"relative_l2":met["relative_l2"],"linf":met["linf"],
                     "minimum_target_reconstruction":met["minimum_reconstructed"],
                     "minimum_source_reconstruction_unlimited":src_min,"minimum_source_reconstruction_limited":lim_min,
                     "relative_mass_residual":residual[0],"relative_first_moment_residual":residual[1],
                     "relative_second_moment_residual":residual[2],"max_relative_moment_residual":max(residual),
+                    "limiter_relative_mass_change":limiter_shift[0],
+                    "limiter_relative_first_moment_change":limiter_shift[1],
+                    "limiter_relative_second_moment_change":limiter_shift[2],
                     "empirical_perturbation_gain":gain})
     with (out/"p26_3_refinement_metrics.csv").open("w",newline="",encoding="utf-8") as f:
         w=csv.DictWriter(f,fieldnames=list(rows[0])); w.writeheader(); w.writerows(rows)
@@ -75,6 +86,8 @@ def run_study(output_dir,cells=(16,32,64,128)):
             "max_perturbation_gain":max(r["empirical_perturbation_gain"] for r in g),
             "minimum_target_reconstruction_unlimited":min(r["minimum_target_reconstruction"] for r in g if not r["positivity_limiter"]),
             "minimum_target_reconstruction_limited":min(r["minimum_target_reconstruction"] for r in g if r["positivity_limiter"]),
+            "max_abs_limiter_first_moment_change":max(abs(r["limiter_relative_first_moment_change"]) for r in g),
+            "max_abs_limiter_second_moment_change":max(abs(r["limiter_relative_second_moment_change"]) for r in g),
             "finest_mesh_relative_l2_unlimited":next(r["relative_l2"] for r in g if r["source_cells"]==max(cells) and not r["positivity_limiter"]),
             "finest_mesh_relative_l2_limited":next(r["relative_l2"] for r in g if r["source_cells"]==max(cells) and r["positivity_limiter"])}
     summary={"scope":"1-D P26.2 quadratic moment projection under nonmatching mesh refinement",
