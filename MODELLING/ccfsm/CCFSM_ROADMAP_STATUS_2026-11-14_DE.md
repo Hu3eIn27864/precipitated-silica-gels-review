@@ -635,3 +635,12 @@ Sechs Regressionen prüfen interpolierte Nullstellen, fehlende Vorzeichenwechsel
 **Aussagegrenze:** Die lineare Detektion kann mehrere Nullstellen zwischen zwei Abtastpunkten übersehen, wenn die Endwerte dasselbe Vorzeichen besitzen. Für reale Solvertrajektorien sind deshalb engere Abtastung oder robuste ereignisgesteuerte Nullstellensuche nötig. Keine vollständige Upwind-Entropie-Kettenregel, keine Integration des tatsächlichen P24-Newton-Pfads und keine physikalische Validierung.
 
 **CI-Nachtrag:** Workflow [#726](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43741957699): alle sechs P27.30-Tests bestanden. Der vollständige Lauf mit 615 Tests ist wegen sieben Fehlern/Exceptions in P27.10, P27.13, P27.17 (zwei Tests), P27.18, P27.23 und P27.28 fehlgeschlagen. Gesamt-CI somit nicht grün; P27.30 gezielt erfolgreich, Integration weiterhin offen.
+
+
+## P27.31 — adaptive Ereignisabtastung für Randfluss-Nullstellen (15.11.2026)
+
+**Status: implementiert; Hosted-CI-Prüfung ausstehend.** P27.31 ergänzt P27.30 um begrenzte rekursive Mittelpunktabtastung. Eine Intervallhalbierung erfolgt bei erkennbaren Vorzeichenwechseln in den Halbintervallen oder bei einer Mittelpunktabweichung von der linearen Endpunktinterpolation oberhalb einer absoluten/relativen Toleranz. Die adaptiven Stichproben werden an den P27.30-Nullstelleninterpolator übergeben. Ein manufactured Fall (f(t)=(t-0.35)(t-0.75)) prüft zwei Nullstellen, obwohl die groben Intervallenden dasselbe Vorzeichen besitzen.
+
+Sechs Regressionen decken verborgene Nullstellenpaare, lineare Randereignisse, Gitterverfeinerung, flache Flüsse, ungültige Eingaben und die Rekursionstiefengrenze ab.
+
+**Aussagegrenze:** Dies ist eine heuristische, tiefenbegrenzte Detektion, keine zertifizierte Root-Isolation. Ohne Regularitätsannahmen oder Intervall-/Ableitungsschranken besteht keine Garantie, alle Ereignisse eines beliebig oszillatorischen Flusses zu erkennen. Keine vollständige diskrete Upwind-Entropie-Kettenregel, keine tatsächliche P24-Trajektorienintegration und keine physikalische Validierung.
