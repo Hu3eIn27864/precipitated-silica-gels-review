@@ -173,3 +173,7 @@ Einreichungsreif erst, wenn:
 - das Journal den Beitrag fachlich passend einordnen kann.
 
 Es wird kein Zeitplan mit fingierter Sicherheit angegeben. Der Fortschritt wird über abgeschlossene Gates statt Kalenderprognosen gemessen.
+
+## 11. Erster mathematischer Audit
+
+Der erste interne Rechenaudit ist in [MANUSCRIPT_01_MATHEMATICAL_AUDIT_2026-11-15_DE.md](MANUSCRIPT_01_MATHEMATICAL_AUDIT_2026-11-15_DE.md) dokumentiert. Die zentrale geschlossene Lösung, das Gleichratenlimit, die Invarianzargumentation und die Raten-Label-Symmetrie wurden algebraisch nachgerechnet und mit dem Code abgeglichen. Kein algebraischer Widerspruch wurde gefunden. Der inverse Satz zur Rückgewinnung des ungeordneten Ratenpaars sowie die praktische Identifizierbarkeit sind als nächste Arbeit markiert.
