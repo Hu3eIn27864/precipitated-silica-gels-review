@@ -34,12 +34,15 @@ def audit_tetra_mesh_3d(vertices, tetrahedra, *, min_quality_ratio=0):
         min_quality_ratio=min_quality_ratio)
     if boundary.get("status") != "oriented_boundary_audited":
         status = boundary.get("status", "failed")
-        base = boundary.get("base_audit", {})
-        link = base.get("base_link_audit", {}) if isinstance(base, dict) else {}
-        incidence = link.get("base_incidence_audit", {}) if isinstance(link, dict) else {}
-        p9_status = incidence.get("status", "not_passed")
-        p10_status = link.get("status", "not_passed")
-        p11_status = base.get("status", "not_passed") if isinstance(base, dict) else "not_passed"
+        # On a boundary-stage failure P27.12 returns the successful P27.11
+        # report directly; on an earlier failure it wraps it as base_audit.
+        embedding_failed_or_passed = boundary.get(
+            "geometric_embedding_audit", boundary.get("base_audit", {}))
+        links = embedding_failed_or_passed.get("base_link_audit", {})
+        incidence = links.get("base_incidence_audit", {})
+        p9_status = incidence.get("status", "not_run")
+        p10_status = links.get("status", "not_run")
+        p11_status = embedding_failed_or_passed.get("status", "not_run")
         return {
             "status": "integrated_mesh_audit_failed",
             "overall_pass": False,
