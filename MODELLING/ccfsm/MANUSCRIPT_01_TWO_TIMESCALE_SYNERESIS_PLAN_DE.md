@@ -174,6 +174,12 @@ Einreichungsreif erst, wenn:
 
 Es wird kein Zeitplan mit fingierter Sicherheit angegeben. Der Fortschritt wird über abgeschlossene Gates statt Kalenderprognosen gemessen.
 
+## 12. Strukturelle Identifizierbarkeit — zweiter Audit
+
+Die formale Nullstart-Aussage und ihre Voraussetzungen sind in [MANUSCRIPT_01_STRUCTURAL_IDENTIFIABILITY_AND_PRACTICAL_LIMITS_2026-11-15_DE.md](MANUSCRIPT_01_STRUCTURAL_IDENTIFIABILITY_AND_PRACTICAL_LIMITS_2026-11-15_DE.md) ausgearbeitet. Unter \(k_n,k_h,C>0\), Nullstart und idealer kontinuierlicher Beobachtung bestimmt die Kurve das ungeordnete Ratenpaar über Summe und Produkt der Raten. Eine physikalische Zuordnung der beiden Ratenlabels bleibt unmöglich; ebenso ist \(\eta_a\) von \(q_\infty\) nur über das Produkt \(C=\eta_aq_\infty\) beobachtbar.
+
+Der Satz ist ausdrücklich nicht auf unbekannte Anfangszustände oder reale verrauschte endliche Messreihen übertragen. Nahezu gleiche Raten, unzureichende frühe Abtastung und ein zu kurzes Beobachtungsfenster können die praktische Schätzung stark destabilisieren. Der nächste quantitative Schritt ist ein synthetischer Benchmark mit Rauschen, Messzeitplänen und Unsicherheitsanalyse.
+
 ## 11. Erster mathematischer Audit
 
 Der erste interne Rechenaudit ist in [MANUSCRIPT_01_MATHEMATICAL_AUDIT_2026-11-15_DE.md](MANUSCRIPT_01_MATHEMATICAL_AUDIT_2026-11-15_DE.md) dokumentiert. Die zentrale geschlossene Lösung, das Gleichratenlimit, die Invarianzargumentation und die Raten-Label-Symmetrie wurden algebraisch nachgerechnet und mit dem Code abgeglichen. Kein algebraischer Widerspruch wurde gefunden. Der inverse Satz zur Rückgewinnung des ungeordneten Ratenpaars sowie die praktische Identifizierbarkeit sind als nächste Arbeit markiert.
