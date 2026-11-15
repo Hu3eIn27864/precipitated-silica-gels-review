@@ -33,7 +33,7 @@ python ccfsm_p25_refinement_study.py --output-dir ccfsm-p25-results
 python -m unittest -v
 ```
 
-Die drei CSV-Dateien und `summary.json` werden als CI-Artefakt veröffentlicht. Die Tests der Studienkonfiguration allein belegen noch keine Konvergenz.
+Die drei CSV-Dateien und `summary.json` werden als CI-Artefakt veröffentlicht. Der erste Lauf ist in `CCFSM_v4.0_P25_RESULTS_DE.md` ausgewertet. Die Referenzendzeit beträgt T=10^-2 s; P22 wird mit Zustands- und Drucktoleranz 10^-11 betrieben. Die Tests der Studienkonfiguration allein belegen noch keine Konvergenz.
 
 ## Vorläufige Grenzen und Freigabekriterien
 
@@ -44,3 +44,8 @@ Die drei CSV-Dateien und `summary.json` werden als CI-Artefakt veröffentlicht. 
 - Ein grüner Softwaretest ist numerische Implementierungsverifikation, keine physikalische Validierung.
 
 **Freigabe P25:** Zeit- und Raumfolgen müssen mit vollständigen Status-/Residuenangaben vorliegen; Admissibilität und Siliciumbilanz müssen auf jedem erfolgreichen Raumfall geprüft sein. Abbrüche und nichtmonotone Fehlerfolgen bleiben sichtbar und dürfen nicht aus der Auswertung entfernt werden.
+
+
+## Erster CI-Lauf
+
+Run #295 ist erfolgreich (273 Tests). Die P25-Ergebnisse und ihre Grenzen sind separat in `CCFSM_v4.0_P25_RESULTS_DE.md` dokumentiert. Die Zeitfehler sind mit Euler erster Ordnung vereinbar; die räumliche Fehlerordnung bleibt mangels exakter/netzübergreifender Referenz offen.
