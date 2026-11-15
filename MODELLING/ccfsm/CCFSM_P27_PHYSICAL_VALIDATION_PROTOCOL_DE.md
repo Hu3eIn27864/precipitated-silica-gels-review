@@ -95,3 +95,10 @@ Gleiche Datenaufteilung, Zielfunktion und Nebenbedingungen verwenden. Komplexere
 - **L4 — gekoppelte Modellvalidierung:** mehrere unabhängige Observablen (Schrumpfung, Porendruck/Fluss, Struktur/Permeabilität/Mechanik) werden simultan und ohne freie Nachkalibrierung vorhergesagt.
 
 **Aktueller Status:** L0 teilweise erreicht; L1 noch nicht ausgeführt; L2 bibliographisch/qualitativ vorbereitet, quantitative Extraktion offen; L3 und L4 nicht erreicht. Die wissenschaftlich korrekte Aussage lautet daher: CCFSM ist mathematisch und numerisch in Teilbereichen verifiziert und literaturbasiert plausibilisiert, aber noch nicht unabhängig physikalisch validiert.
+
+
+## 7. Quellenkritischer Negativtest: erzwungene Synärese nicht als Ersatzvalidierung
+
+Der Volltext von Wilhelm & Kind (2015) enthält einen besonders wichtigen Gegenbefund für jede naive Übertragung: Das aus erzwungener Synärese durch Extrapolation auf \(\Delta p=0\) abgeleitete korrelative Modell überschätzt bei basischer natürlicher Synärese die maximale Schrumpfung deutlich. Die extrapolierten Werte liegen bei etwa 0.52–0.75, während die natürlichen Zylinderwerte 0.30, 0.39 und 0.51 betragen; der Artikel beschreibt die Überschätzung als ungefähr Faktor zwei. Auch die Zuordnung der vorhergesagten Zeitkonstanten zu den Temperaturen ist teilweise falsch. Für saure Gele liegt die extrapolierte Amplitude dagegen bei etwa 0.19–0.30 und passt teilweise/in der Größenordnung zu den Messwerten.
+
+Konsequenz für CCFSM: Druckzell-/Oedometerdaten dürfen nicht als einfacher Ersatz für natürliche Synerese oder als unabhängiger Bestätigungsdatensatz verwendet werden. Der Unterschied ist nicht bloß ein Datenformatproblem, sondern zeigt, dass die Randbedingung und der Prozesspfad den Transfer verändern können. Der Holdout muss daher Prozessklasse und Randbedingung strikt sperren.
