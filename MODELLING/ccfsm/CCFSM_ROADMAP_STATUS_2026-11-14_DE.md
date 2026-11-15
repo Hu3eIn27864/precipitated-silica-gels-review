@@ -101,14 +101,17 @@ P22.1 is implemented and its hosted CI is green.
 
 **Freigabegrenze:** Die FV-Siliciumbilanz ist separat prüfbar. Der vollständige diskrete Energieabschluss bleibt ein offener Teil von Gate B.
 
-### Gate C — P24: unabhängiger Referenzlöser für kleine gekoppelte Probleme
+### Gate C — P24: unabhängiger Newton-Referenzlöser für kleine gekoppelte Probleme
 
-- Auf 1–2 FV-Zellen und einem minimalen FE-Netz einen monolithischen Newton- oder robusten Block-Newton-Referenzlöser erstellen.
-- P22 gegen diese Referenz auf identischen Daten vergleichen: Zustand, Druck, Darcy-Flüsse, mechanische Reaktionen und Bilanzreste.
-- Jacobian-/Finite-Difference-Konsistenz prüfen; Newton-Konvergenzbereich und Singularitätsfälle dokumentieren.
-- Picard-Fehler und Newton-Referenzfehler über \(\Delta t\) und Kopplungsstärke untersuchen.
+**Status: implementiert; hosted CI grün.** Workflow [#280](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43669701004) führt die vollständige Suite erfolgreich aus; der Testlog des P24-Code-/Teststands meldet **270 Tests bestanden**.
 
-**Freigabe:** P22 konvergiert im Referenzbereich auf dieselbe diskrete Lösung; Abweichungen und Konvergenzgrenzen sind quantifiziert.
+- `ccfsm_p24_newton_reference.py` löst (R(x)=x-x^n-\Delta t F_{P21}(x)=0) mit vorwärts-differenziertem Jacobian und gedämpftem Newton-Backtracking.
+- Jede Residuumsauswertung löst P21 samt P19-Mechanik erneut; die FE-Freiheitsgrade werden durch den P19-Unterlöser statisch kondensiert.
+- `p24_compare_with_p22` vergleicht FV-Zustand und projizierten Druck bei identischer Endzeit.
+- Regressionen: Newton-Konvergenz/Admissibilität, P22-Vergleich, Nichtannahme bei Iterationslimit und Eingabeprüfung.
+- Begrenzung: FD-Referenzsolver für kleine Netze, keine analytische Jacobimatrix, kein effizienter Produktionssolver und kein voll monolithischer FE-DOF-Newton.
+
+**Freigabe:** Für den getesteten kleinen Referenzfall konvergieren P22 und P24 auf dieselbe diskrete Lösung innerhalb der Testtoleranzen. Zeit-/Raumverfeinerung und FD-Schrittweitenrobustheit bleiben Gate D/P25.
 
 ### Gate D — P25: Zeit- und Raumkonvergenz, Robustheit
 
