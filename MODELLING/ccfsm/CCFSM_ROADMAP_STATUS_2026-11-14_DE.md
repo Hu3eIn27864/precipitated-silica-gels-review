@@ -315,3 +315,12 @@ P26.14 verbindet die Dykstra-Projektion aus P26.6 mit der vollständigen affinen
 ## P26.15 — globaler rationaler Primär-/Dualentscheid (15. November 2026)
 
 P26.15 verbindet eine systematische Dualsuche mit P26.14. Primitive ganzzahlige Richtungen werden in wachsenden L-infinity-Schalen enumeriert; jeder Kandidat wird mit P26.8 und dessen rationalen Support-Obergrenzen unabhängig exakt geprüft. Ein strikt positiver rationaler Abstand ergibt `certified_infeasible`. Ohne Separator wird P26.14 ausgeführt; nur dessen exakt rationaler Primärzeuge mit globalen Momentengleichheiten und kontinuierlichen Markov-Lukács-Zellzertifikaten ergibt `feasible_exact_primal_witness`. Endliche erfolglose Dual-/Primärsuche bleibt `unresolved`. Die endliche Richtungsmenge ist kein vollständiger Unzulässigkeitsentscheid. Geltungsbereich: 1-D, feste nichtnegative Zellmittelwerte, quadratische Profile; keine physikalische Validierung.
+
+
+## P26.16 — Stabilität und Vollständigkeit der dualen Suche (15. November 2026)
+
+P26.16 prüft P26.15 über verschachtelte L-infinity-Richtungsradien und mehrere Genauigkeiten der rationalen Quadratwurzel-Obergrenze. Die Support-Obergrenze konvergiert monoton von oben; für eine feste Richtung nimmt die zertifizierte untere Trennungslücke daher monoton nicht ab. Der zusätzliche Support-Überhang ist durch (6\,10^{-d}\sum_jm_j) beschränkt.
+
+Mathematisch ist die unendliche Enumeration primitiver ganzzahliger Richtungen vollständig für strikte Unzulässigkeit: Außerhalb der kompakten konvexen erreichbaren Momentenmenge existiert ein strikter Separator; wegen Stetigkeit bleibt er in einer offenen Richtungsumgebung gültig, die eine rationale und damit nach Skalierung eine primitive ganzzahlige Richtung enthält. Kein endlicher Radius garantiert jedoch, diese Richtung bereits zu erfassen. Kein Treffer bleibt daher ohne Machbarkeitsaussage.
+
+Geltungsbereich: 1-D, feste nichtnegative Zellmittelwerte, quadratische Profile; rationale Zertifikate beziehen sich auf exakt rationalisierte Eingabedaten. Keine physikalische oder experimentelle Validierung.
