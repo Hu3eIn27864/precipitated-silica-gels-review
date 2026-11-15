@@ -918,3 +918,13 @@ Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständig
 - Bericht: `CCFSM_v4.2.51_P27_31_ADAPTIVE_EVENT_DETECTION_DE.md`.
 
 **Grenze:** Heuristik mit begrenzter Rekursionstiefe, kein zertifizierter Nullstellenisolator; keine Garantie für beliebig oszillatorische Flüsse, keine vollständige Upwind-Entropie-Kettenregel, keine P24-Trajektorienintegration und keine physikalische Validierung.
+
+
+## CCFSM P27.32 — abgesicherte Bisektionsverfeinerung erkannter Ereignisklammern
+
+- `ccfsm_p27_32_safeguarded_event_refinement.py` übernimmt von P27.31 adaptiv gefundene Vorzeichenwechselklammern und verfeinert sie durch Bisektion.
+- Berichtet werden Nullstellenschätzer, finale Zeitklammer und -breite, Flussresiduum, Iterationszahl sowie Abbruchstatus.
+- `test_ccfsm_p27_32_safeguarded_event_refinement.py` enthält sechs Regressionen für versteckte Nullstellenpaare, lineare und Randnullstellen, ungültige Klammern, nichtendliche Flüsse und Iterationslimit.
+- Bericht: `CCFSM_v4.2.52_P27_32_SAFEGUARDED_EVENT_REFINEMENT_DE.md`.
+
+**Grenze:** Die Bisektion schließt eine Nullstelle nur innerhalb einer bereits gefundenen Vorzeichenwechselklammer und unter Stetigkeitsannahme ein. Sie garantiert nicht, dass P27.31 alle Nullstellen findet; tangentiale Nullstellen und nicht abgetastete Oszillationen bleiben möglich. Keine Intervallarithmetik, keine vollständige Upwind-Entropie-Kettenregel, keine P24-Trajektorienintegration und keine physikalische Validierung.
