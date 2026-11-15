@@ -586,3 +586,12 @@ Die Zellvolumina müssen an beiden Zuständen identisch sein. P19 kann P9-Mechan
 Advective und gesamte mobile M/O-Randflüsse werden getrennt ausgewertet. Daraus folgen diffusive Randflüsse, zeitintegrierter Netto-Stofftransfer und eine potentialgewichtete chemische Randflussleistung unter Nutzung der P13-Reservoir- und Zellpotentiale. Fünf Regressionen decken Quadratur, Konvergenz-/Snapshot-Gates, positive Geometrie und Stoffrandtransfer ab.
 
 **Aussagegrenze:** Die Trapezregel ist eine Snapshot-Quadratur, keine exakte Integration entlang des P24-Newton-Pfads. Die potentialgewichtete Upwind-Randflussleistung beweist keine vollständige diskrete Entropieungleichung. Mechanische Dirichlet-Reaktionsarbeit und Feststoff-/Brückenreservoirarbeit werden nicht rekonstruiert. Kein solver-interner Energie-Monotonienachweis und keine physikalische Validierung.
+
+
+## P27.26 — unabhängige Referenzprüfung der Schrittquadratur (15.11.2026)
+
+**Status: implementiert; Hosted-CI-Prüfung ausstehend.** P27.26 ergänzt P27.25 um eine unabhängige, nichtzirkuläre Referenz für die zeitliche Trapezquadratur. Für synthetische Polynom-Zeitverläufe wird das exakte Integral analytisch berechnet und mit einer separat implementierten zusammengesetzten Trapezregel verglichen. Konstante und lineare Verläufe werden exakt integriert; für quadratische Verläufe wird die Fehlerreduktion um den Faktor vier bei Halbierung der Zeitschrittweite geprüft. Fünf Regressionen prüfen zusätzlich nichtäquidistante Zeitpunkte, kubische Referenzdaten und ungültige Zeitgitter.
+
+**Aussagegrenze:** Diese Tests prüfen die Quadraturregel selbst. Sie beweisen nicht, dass P21 alle physikalisch relevanten Leistungs- und Randterme liefert; sie validieren weder chemische Randpotentiale noch Upwind-Entropieschließung, solverinternen Energieabschluss oder das physikalische Modell.
+
+**Nächster Schritt P27.27:** geschlossene und offene, analytisch vorgegebene Randflussfälle direkt durch den P27.25-Adapter führen und Stofftransfer, chemische Randarbeit sowie hydraulische Arbeit mit unabhängigen Vorzeichen- und Integralreferenzen prüfen.
