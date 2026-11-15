@@ -498,3 +498,14 @@ P26.2 bleibt ein 1-D-Intervalloperator. Es gibt keine 2-D/3-D-Intersection-Geome
 
 
 **P26.4 CI-Referenz:** Lauf #357 erfolgreich, 315/315 Tests; fünf gezielte Zielzellfälle, davon zwei begrenzt. Zielpolynom-Minimum nach Begrenzung 0; maximale absolute Massenänderung 0. In den bewusst belastenden Fällen konnten erstes und zweites Moment jeweils um bis zu ca. 1/6 verändert werden. CI-/Artefaktlink: https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43673207806.
+
+
+### CCFSM v4.2.5 — P26.5 momentenschonende Positivitätsprojektion
+
+- ccfsm_p26_5_optimal_positive_projection.py löst je Zielzelle eine gewichtete Nächstpunktprojektion der linearen/quadratischen Moden auf den konvexen Kegel nichtnegativer quadratischer Felder.
+- Der Zellmittelwert bleibt fest; damit sind Zellmasse und globale Masse erhalten. Nichtnegativität wird kontinuierlich auf dem gesamten Intervall über exaktes quadratisches Minimum geprüft.
+- Der 2-D-Cutting-Plane-/Active-Set-Solver benötigt keine externe Optimierungsbibliothek; positive Koeffizientengewichte sind einstellbar.
+- Erstes und zweites räumliches Moment sind keine Nebenbedingungen und werden gegen P26.4 verglichen; ein geringerer globaler Momentenfehler ist nicht garantiert.
+- Tests prüfen Rand-/Innenminimum, bereits positive Felder, Nullmittelwert, Gewichtung, Massenerhaltung, Übertragungswrapper und Studienartefakte.
+- CI-Ausgaben: p26_5_optimal_positive_projection.csv und summary.json.
+- 1-D/quadratisch, lokale Optimierung; keine globalen Momentenrestriktionen, 2-D/3-D-Geometrie, Druck-/Energieerhaltung oder physikalische Validierung.
