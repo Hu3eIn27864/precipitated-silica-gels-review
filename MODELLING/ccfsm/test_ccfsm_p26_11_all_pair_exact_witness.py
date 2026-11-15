@@ -15,7 +15,7 @@ class TestP2611AllPairExactWitness(unittest.TestCase):
         self.assertEqual(r["pivot_coordinates"],[0,2])
 
     def test_singular_pair_reported(self):
-        r=exact_two_coordinate_correction((0,1),(1,),(0,),(0,),pivot_coordinates=(0,0))
+        r=exact_two_coordinate_correction((0,1),(1,),(0,),(0,),pivot_coordinates=(1,3))
         self.assertEqual(r["status"],"singular_pivot_pair")
 
     def test_invalid_pivots_rejected(self):
