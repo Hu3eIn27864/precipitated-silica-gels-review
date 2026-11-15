@@ -538,3 +538,12 @@ Der P21-Adapter rekonstruiert den diffusen M/O-Fluss als Gesamtfluss minus Advek
 **Aussagegrenze:** Die FV-Freie-Energiedichte wird nicht aus P10/P13 hergeleitet; die gemeinsame thermodynamische Herkunft und Doppelzählungsfreiheit sind nicht belegt. Bei Netzänderung ist vorab konservativ umzurechnen. Endpunkt-Traktionsarbeitsdifferenzen sind nur unter kompatibler Lastpfadannahme Pfadarbeit; Dirichlet-Reaktionsarbeit und vollständige Rand-/Advektionsleistungen fehlen. Kein vollständiger diskreter Energieabschluss oder physikalischer Validierungsnachweis.
 
 **Nächster Schritt P27.21:** eine explizite gemeinsame diskrete freie Energie aus den vorhandenen P10/P13 chemischen Zuständen und P19 mechanisch-poroelastischen Zuständen herleiten; zunächst Term-für-Term-Einheiten, Variationsableitungen und Doppelzählungsprüfung durchführen, bevor Dissipations-/Leistungsbilanz automatisiert gekoppelt wird.
+
+
+## P27.21 — Variationsaudit der P9-Energiedichte (15.11.2026)
+
+**Status: implementiert; Hosted-CI-Prüfung ausstehend.** P27.21 zerlegt die von P9 gemeldete gespeicherte Energiedichte in elastischen, Biot-Speicher- und chemischen Anteil. Ein unabhängiger Finite-Differenzen-Audit vergleicht die Ableitungen nach Fluidkapazität und den vier Inventaren M/O/N/B mit den P9-Konjugierten. Die Ableitungen werden mit den korrekten Einheiten Pa bzw. J/mol ausgegeben.
+
+**Wichtige Einschränkung:** P9s gemeldete gespeicherte Energie enthält nicht das äußere Traktionspotential. Bei nichtverschwindender kraftgesteuerter axialer Traktion ist daher eine Warnung aktiv; vor einer Variationsaussage muss das passende Gesamtpotential samt Lastpfad berücksichtigt werden. P19 kann dieselben elastischen/Biot-Energieanteile bereits enthalten. Eine Addition ohne Exklusivitäts-/Doppelzählungsprüfung ist unzulässig. Kein gemeinsamer P10/P13/P19/P21-Energiebeweis.
+
+**Nächster Schritt P27.22:** P19-Energie funktional mit P9 vergleichen (gleiche isotrope Elastizität, Biot-Speicherung, Eigenstrain und Quadratur) und Exklusivitätsregeln gegen Doppelzählung formulieren.
