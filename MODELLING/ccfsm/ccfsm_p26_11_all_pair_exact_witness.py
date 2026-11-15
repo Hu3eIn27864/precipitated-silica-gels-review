@@ -42,8 +42,11 @@ def exact_two_coordinate_correction(target_edges,averages,candidate_linear,candi
     flat=[]
     for j in range(n): flat.extend((_rationalize(a0[j],significant_digits),_rationalize(b0[j],significant_digits)))
     cols=_modal_columns(e)
-    rhs=(target_moments[1]-sum(cols[k][0]*v for k,v in enumerate(flat) if k not in (p,q)),
-         target_moments[2]-sum(cols[k][1]*v for k,v in enumerate(flat) if k not in (p,q)))
+    base_first=sum((m*(r-l)*(l+r)/2 for l,r,m in zip(e,e[1:],means)),Fraction(0))
+    base_second=sum((m*(r-l)*(((l+r)/2)**2+(r-l)**2/12) for l,r,m in zip(e,e[1:],means)),Fraction(0))
+    modal_target=(target_moments[1]-base_first,target_moments[2]-base_second)
+    rhs=(modal_target[0]-sum(cols[k][0]*v for k,v in enumerate(flat) if k not in (p,q)),
+         modal_target[1]-sum(cols[k][1]*v for k,v in enumerate(flat) if k not in (p,q)))
     solved=_solve_pair_exact(cols[p],cols[q],rhs)
     if solved is None: return {"verified":False,"status":"singular_pivot_pair","pivot_coordinates":[p,q]}
     flat[p],flat[q]=solved
@@ -79,7 +82,7 @@ def find_exact_positive_witness_all_pairs(target_edges,averages,linear,quadratic
             if trial["verified"]:
                 margin=min(Fraction(v) for v in trial["minimum_cell_values_exact"])
                 flat=trial["linear"]+trial["quadratic"]
-                original=tuple(a0)+tuple(b0)
+                original=tuple(x for pair in zip(a0,b0) for x in pair)
                 distance=sum((Fraction(v)-_F(x))**2 for v,x in zip(flat,original))
                 key=(margin,-distance)
                 if best is None or key>best[0]: best=(key,trial)
