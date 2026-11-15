@@ -79,7 +79,6 @@ def globally_coupled_positive_projection(target_edges, averages, linear, quadrat
         zn=_positive_project(cin,u,w)
         pc=[x-zz for x,zz in zip(cin,zn)]
         z=zn
-        state_change=max(abs(x-y) for x,y in zip(z,zn)) if False else max(abs(x-y) for x,y in zip(z,cin))
         vals=moments(e,u,z[0::2],z[1::2])
         mr=max(abs(vals[1]-target[0]),abs(vals[2]-target[1]))/scale
         minval=min(u[j]+quadratic_minimum(z[2*j],z[2*j+1]) for j in range(n))
@@ -101,6 +100,33 @@ def globally_coupled_positive_projection(target_edges, averages, linear, quadrat
     return (u,outa,outb),diag
 
 
+
+def assess_global_feasibility(target_edges, averages, linear, quadratic,
+                              weights=(1.0,1.0), max_iterations=20000,
+                              tolerance=2e-11):
+    """Classify feasibility without turning generic solver failure into a proof.
+
+    For one cell, the two global moment equalities uniquely determine both
+    modal coefficients; positivity can therefore be certified directly.
+    For multiple cells, Dykstra success is a numerical feasible witness,
+    while nonconvergence is reported as unresolved.
+    """
+    e=_edges(target_edges,"target_edges"); n=len(e)-1
+    u=tuple(float(v) for v in averages); a=tuple(float(v) for v in linear); b=tuple(float(v) for v in quadratic)
+    if len(u)!=n or len(a)!=n or len(b)!=n:
+        raise ValueError("one finite coefficient triple per cell required")
+    if n==1:
+        minimum=u[0]+quadratic_minimum(a[0],b[0])
+        if minimum >= -tolerance*max(1.0,u[0],abs(a[0]),abs(b[0])):
+            return {"status":"feasible","certificate":"single-cell moment map uniquely fixes the supplied coefficients","minimum_cell_value":minimum}
+        return {"status":"certified_infeasible","certificate":"single-cell first and second global moments uniquely determine the supplied modal coefficients, whose polynomial has a negative minimum","minimum_cell_value":minimum}
+    try:
+        result,diag=globally_coupled_positive_projection(e,u,a,b,weights,max_iterations,tolerance)
+        return {"status":"feasible","certificate":"numerical feasible witness from converged Dykstra projection","minimum_cell_value":diag["minimum_cell_value"],"moment_residuals":diag["moment_residuals"],"iterations":diag["iterations"],"result":result}
+    except ArithmeticError as exc:
+        return {"status":"unresolved","certificate":"iteration did not converge; no infeasibility conclusion is justified","detail":str(exc)}
+
+
 def run_study(output_dir):
     out=Path(output_dir); out.mkdir(parents=True,exist_ok=True)
     edges=(0.0,0.3,0.7,1.0); averages=(1.0,0.8,1.2)
@@ -114,8 +140,10 @@ def run_study(output_dir):
                      "minimum_after":averages[j]+quadratic_minimum(result[1][j],result[2][j])})
     with (out/"p26_6_global_positive_projection.csv").open("w",newline="",encoding="utf-8") as f:
         writer=csv.DictWriter(f,fieldnames=list(rows[0])); writer.writeheader(); writer.writerows(rows)
+    feasible=assess_global_feasibility(edges,averages,linear,quadratic)
+    impossible=assess_global_feasibility((0.0,1.0),(0.1,),(1.0,),(0.0,))
     summary={"scope":"1-D global moment-constrained positive quadratic projection",
-             "cells":len(averages),**diag,
+             "cells":len(averages),"feasibility_checks":{"synthetic_feasible_case":feasible["status"],"single_cell_infeasible_case":impossible["status"]},**diag,
              "limitations":["Dykstra nonconvergence leaves feasibility unresolved; it is not an infeasibility certificate",
              "floating-point stopping tolerances; no formal exact-arithmetic guarantee",
              "fixed cell averages; 1-D intervals and quadratic reconstructions only",
