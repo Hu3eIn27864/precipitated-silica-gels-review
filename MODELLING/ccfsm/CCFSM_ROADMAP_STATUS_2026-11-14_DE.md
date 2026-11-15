@@ -457,3 +457,10 @@ Die Original-PNG wurde über die Artikelabbildung erneut geöffnet. Eine zweite 
 P27.9 baut auf P27.7/P27.8 auf und prüft das tatsächlich erzeugte Netz global: kanonische Dreiecksflächen werden nach Inzidenz 1 (Rand) und 2 (innen) klassifiziert; Flächen mit mehr als zwei inzidenten Tetraedern werden als nichtmanifoldale Flächenkandidaten markiert. Für innere Flächen wird zusätzlich geprüft, ob die beiden positiv orientierten Nachbarelemente entgegengesetzte induzierte Flächenorientierungen besitzen. Kanten-/Knotenverwendungen, isolierte Knoten und face-zusammenhängende Komponenten werden berichtet; doppelte Tetraeder werden abgewiesen.
 
 **Aussagegrenze:** Keine Knoten-/Kanten-Link-Prüfung, daher kein vollständiger Mannigfaltigkeitsbeweis. Ebenso keine Aussage über FE-Konditionierung, gekoppelte CCFSM-Zustandspositivität, Energieabschluss oder physikalische Validierung.
+
+
+## P27.10 — Knoten- und Kanten-Link-Audit (15.11.2026)
+
+P27.10 ergänzt P27.9 um lokale Link-Komplexe. Jeder Kanten-Link wird als Graph geprüft: Kreis für innere Kanten, Weg für Randkanten. Jeder Knoten-Link wird als triangulierte Fläche geprüft: zusammenhängende 2-Sphäre mit Euler-Charakteristik 2 im Inneren beziehungsweise 2-Scheibe mit einem einzigen Randzyklus und Euler-Charakteristik 1 am Rand. Die Knoten-Link-Kanteninzidenzen werden auf höchstens zwei Dreiecke begrenzt; die Kanten-Link-Prüfung kontrolliert die lokalen Link-Knoten zusätzlich.
+
+Status `locally_manifold_audited` bedeutet, dass alle implementierten lokalen Kriterien erfüllt sind; es ist kein geometrischer Einbettungsbeweis und kein Nachweis globaler Gebietstopologie, FE-Konditionierung, CCFSM-Positivität oder physikalischer Validität.
