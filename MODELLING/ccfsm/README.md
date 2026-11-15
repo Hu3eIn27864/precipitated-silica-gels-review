@@ -788,3 +788,14 @@ Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständig
 - `CCFSM_v4.2.36_P27_16_NEWTON_FLUX_AUDIT_DE.md` dokumentiert Verfahren und Grenzen.
 
 **Grenze:** Der Bilanzaudit prüft gelieferte RHS/Flüsse/Quellen, nicht deren physikalische Vollständigkeit. Keine Newton-Konvergenzgarantie, Energieabnahme, 3-D-Erhaltung oder physikalische Validierung.
+
+
+## CCFSM P27.17 — prozessgetrennte P21-Konservativitätsprüfung
+
+- `ccfsm_p27_17_process_balance.py` zerlegt die P21-RHS in Darcy-Fluidbilanz, M/O-Advektion, Onsager-Diffusion und P10-Reaktionsquellen.
+- Prüft lokale Komponentenrekonstruktion, globale Randflussidentitäten, Reaktionsstöchiometrie und die Gesamt-Siliciumbilanz unabhängig.
+- Der Onsager-Fluss wird aus dem gelieferten Gesamtfluss minus dem gelieferten Advektionsfluss rekonstruiert; es erfolgt keine unabhängige Neu-Auswertung der chemischen Potentiale.
+- `test_ccfsm_p27_17_process_balance.py` deckt Bilanzschluss, Fehlererkennung, nichtuniforme Zellbreiten und fehlende Prozessdaten ab.
+- `CCFSM_v4.2.37_P27_17_PROCESS_BALANCE_DE.md` dokumentiert Verfahren und Aussagegrenzen.
+
+**Grenze:** Algebraische Konsistenz der gelieferten P21-Daten ist keine Prüfung der physikalischen Vollständigkeit aller Quellen oder eine 3-D-/Energie-/Experimentvalidierung.
