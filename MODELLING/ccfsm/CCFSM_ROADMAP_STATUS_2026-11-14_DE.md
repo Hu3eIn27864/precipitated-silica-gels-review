@@ -483,3 +483,10 @@ P27.11 ergänzt die lokalen PL-Link-Prüfungen um eine exakte geometrische Prüf
 **Implementiert; CI-Freigabe ausstehend.** P27.13 fasst P27.8–P27.12 in einer Prüfkette zusammen. Der Bericht weist Orientierung/Formqualität, globale Inzidenz, lokale Links, geometrische Paarprüfung und Randorientierung/Volumenbilanz als getrennte Gates aus. Ein Gate-Fehler stoppt die Kette kontrolliert; die Diagnose bleibt erhalten. Regressionen decken Einzelelement, gemeinsame Fläche, getrennte Komponenten, Qualitätsgrenze und Duplikate ab.
 
 **Freigabegrenze:** Ein positives Gesamtergebnis ist ein Software-Audit der konkret implementierten Prüfungen. Wegen der bekannten Grenzen des paarweisen SAT-/Randtests ist es kein vollständiger globaler Einbettungsbeweis und keine Garantie für FE-Konditionierung, CCFSM-Positivität, Energieabschluss oder physikalische Validität.
+
+
+## P27.14 — integrierter 3D-Feldpositivitäts- und Margen-Audit (15.11.2026)
+
+**Status: implementiert; CI-Prüfung ausstehend.** P27.14 schaltet den P27.13-Netzaudit vor eine zellweise P1/P2-Skalarfeldprüfung. P1-Nichtnegativität wird exakt über die vier Eckwerte geprüft; P2 nutzt adaptive Bernstein-Unterteilung (P27.3) mit unabhängiger Zertifikatsprüfung (P27.4). Zertifizierte konservative Untergrenzen und eine optionale Mindestmarge werden getrennt ausgewiesen. Unresolved und exakte Negativitätszeugen bleiben unterscheidbar.
+
+**Aussagegrenze:** Das ist ein exakter diskreter Skalarfeld-Baustein, keine Garantie für alle gekoppelten CCFSM-Zustände, Reaktions-/Transport-Invarianz, 3D-Zeitschrittstabilität, FE-Koerzivität, Energieabschluss oder physikalische Validität. Als Nächstes sind die tatsächlich verwendeten FV-Zustände, FE-Interpolationen, Quellen/Flüsse und der Zeitintegrator gemeinsam zu koppeln und zu analysieren.
