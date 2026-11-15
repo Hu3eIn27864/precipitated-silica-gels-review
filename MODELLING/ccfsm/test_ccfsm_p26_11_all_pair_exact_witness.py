@@ -5,10 +5,12 @@ from ccfsm_p26_11_all_pair_exact_witness import exact_two_coordinate_correction,
 
 class TestP2611AllPairExactWitness(unittest.TestCase):
     def test_general_pair_solves_exact_global_moments(self):
-        target=(Fraction(2),Fraction(1),Fraction(4,3))
-        r=exact_two_coordinate_correction((0,Fraction(1,2),1),(2,2),(.2,-.2),(.2,.2),
+        target=(Fraction(2),Fraction(1),Fraction(2393,3600))
+        r=exact_two_coordinate_correction((0,Fraction(1,2),1),(2,2),(.1,-.1),(.1,.1),
             target,pivot_coordinates=(0,2),significant_digits=10)
+        self.assertTrue(r["verified"])
         self.assertTrue(r["global_moments_exact"])
+        self.assertTrue(r["cellwise_nonnegative_exact"])
         self.assertEqual(r["moment_residuals_exact"],["0","0","0"])
         self.assertEqual(r["pivot_coordinates"],[0,2])
 
