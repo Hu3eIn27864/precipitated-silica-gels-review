@@ -633,3 +633,5 @@ Sechs Regressionen prüfen Nullflussgrenzen, chemische und hydraulische Arbeitsr
 Sechs Regressionen prüfen interpolierte Nullstellen, fehlende Vorzeichenwechsel, mehrere Nullstellen, Ereigniseinfügung, Fehlerreduktion und Eingabevalidierung.
 
 **Aussagegrenze:** Die lineare Detektion kann mehrere Nullstellen zwischen zwei Abtastpunkten übersehen, wenn die Endwerte dasselbe Vorzeichen besitzen. Für reale Solvertrajektorien sind deshalb engere Abtastung oder robuste ereignisgesteuerte Nullstellensuche nötig. Keine vollständige Upwind-Entropie-Kettenregel, keine Integration des tatsächlichen P24-Newton-Pfads und keine physikalische Validierung.
+
+**CI-Nachtrag:** Workflow [#726](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43741957699): alle sechs P27.30-Tests bestanden. Der vollständige Lauf mit 615 Tests ist wegen sieben Fehlern/Exceptions in P27.10, P27.13, P27.17 (zwei Tests), P27.18, P27.23 und P27.28 fehlgeschlagen. Gesamt-CI somit nicht grün; P27.30 gezielt erfolgreich, Integration weiterhin offen.
