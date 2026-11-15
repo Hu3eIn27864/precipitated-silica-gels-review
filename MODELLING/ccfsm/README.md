@@ -652,3 +652,16 @@ P27.1 beweist lokale Nichtnegativität eines affinen P1-Skalarfeldes auf jedem n
 - `LITERATURE/wilhelm_kind_fig9_pore_liquid_audit.csv` — Quellen-Audit zu Figur 9; ausdrücklich noch kein digitalisierter Messpunktdatensatz.
 
 P27.3 macht den Bernstein-Test stärker, aber nicht vollständig: Endliche Tiefe ohne Zertifikat bleibt `unresolved`. Die Figur-9-Daten bleiben bis zur pixelgenauen Digitalisierung und Klärung der Messverzögerung für quantitative Kalibrierung gesperrt.
+
+
+## P27.4 — unabhängige Zertifikatsverifikation
+
+- `ccfsm_p27_4_tetra_p2_certificate_verifier.py` rekonstruiert die exakte Achtfach-Unterteilung unabhängig vom P27.3-Konstruktor, prüft Blattkoeffizienten, Baumvollständigkeit und Negativpunktzeugen.
+- `test_ccfsm_p27_4_tetra_p2_certificate_verifier.py` enthält Mutationstests gegen geänderte/fehlende/doppelte Blätter und manipulierte Wurzel-/Negativdaten.
+- Spezifikation: `CCFSM_v4.2.24_P27_4_CERTIFICATE_VERIFIER_DE.md`.
+- Positivzertifikate bleiben hinreichend, nicht notwendig; keine globale 3D-Invarianzgarantie.
+
+## Figure 9 — manuelle Ablese-Arbeitsdatei (15.11.2026)
+
+- `../..` siehe `LITERATURE/wilhelm_kind_fig9_digitized_approx_2026-11-15.csv` (im Repository unter `LITERATURE/`) enthält 39 grob abgelesene Markerzentren mit expliziter Ableseunsicherheit; Fehlerbalken sind nicht rekonstruiert und alle Punkte bleiben für Fits gesperrt.
+- Messmodell-/Quellen-Audit: `CCFSM_P27_FIG9_DIGITIZATION_AUDIT_2026-11-15_DE.md`.
