@@ -62,6 +62,16 @@ def assess_primal_dual_feasibility(target_edges, averages, linear, quadratic,
         return {"status":"certified_infeasible","proof_level":"rigorous rational dual separation",
           "dual_certificate":dual["certificate"],"primal_attempted":False,
           "meaning":"No cellwise nonnegative quadratic reconstruction with these fixed means can match both target higher moments."}
+    # An already nonnegative input is itself an exact primal witness. Avoid
+    # asking the floating-point projection to rediscover an unchanged point.
+    direct=verify_primal_witness(e,u,a,b,original,Fraction(0))
+    if direct["verified"]:
+        return {"status":"feasible_verified_primal_witness",
+          "proof_level":"exact rational positivity and exact rational global moments",
+          "primal_witness":{"averages":[str(v) for v in u],"linear":[str(v) for v in a],
+            "quadratic":[str(v) for v in b],"verification":direct},
+          "dual_search":dual,"projection_attempted":False,
+          "meaning":"The original rational-decimal reconstruction is already an exact positive witness."}
     try:
         result,diag=globally_coupled_positive_projection(e,u,a,b,weights,max_iterations,tolerance)
     except (ArithmeticError,ValueError) as exc:
