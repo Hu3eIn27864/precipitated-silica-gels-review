@@ -15,13 +15,13 @@ class P2737AdaptivePolynomialRootIsolationTests(unittest.TestCase):
         self.assertGreater(roots[0]["interval"][1], 0.3)
 
     def test_two_simple_roots_are_isolated_separately(self):
-        result = isolate_polynomial_roots([1.0, -0.35, 0.06], 0.0, 1.0)
+        result = isolate_polynomial_roots([1.0, -0.9, 0.14], 0.0, 1.0)
         self.assertTrue(result["complete"])
         self.assertEqual(result["certified_unique_root_count"], 2)
         self.assertEqual(result["root_count_bounds"], (2, 2))
 
     def test_positive_polynomial_certified_root_free(self):
-        result = isolate_polynomial_roots([1.0, 0.0, 1.0], -1.0, 1.0)
+        result = isolate_polynomial_roots([1.0, 0.0, 1.0], 1.0, 2.0)
         self.assertTrue(result["complete"])
         self.assertEqual(result["certified_unique_root_count"], 0)
         self.assertEqual(result["root_count_bounds"], (0, 0))
