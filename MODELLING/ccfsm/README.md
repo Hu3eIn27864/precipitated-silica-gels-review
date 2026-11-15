@@ -973,3 +973,11 @@ Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständig
 - Bericht: `CCFSM_v4.2.57_P27_37_ADAPTIVE_POLYNOMIAL_ROOT_ISOLATION_DE.md`.
 
 **Grenze:** Bedingte Polynom-Intervallzertifizierung; tangentiale/mehrfache Nullstellen oder Randfälle können ungelöst bleiben. Keine allgemeine Fluss-Root-Isolation, keine Vollständigkeit vorgelagerter Ereignisabtastung und keine physikalische Validierung.
+
+## Konsolidierte Beweis- und Publikationsroadmap (15.11.2026)
+
+- [CCFSM_PROOF_PUBLICATION_ROADMAP_2026-11-15_DE.md](CCFSM_PROOF_PUBLICATION_ROADMAP_2026-11-15_DE.md) — konsolidierte Gate-Struktur, Statusaudit und Publikationsstrategie.
+- [CCFSM_CLAIM_EVIDENCE_MATRIX_2026-11-15_DE.md](CCFSM_CLAIM_EVIDENCE_MATRIX_2026-11-15_DE.md) — trennt Theorem/Beweis, exaktes Zertifikat, numerische Verifikation, empirische Evidenz und Hypothese.
+- [MANUSCRIPT_01_TWO_TIMESCALE_SYNERESIS_PLAN_DE.md](MANUSCRIPT_01_TWO_TIMESCALE_SYNERESIS_PLAN_DE.md) — Arbeitsplan für die erste, eng abgegrenzte Veröffentlichung auf Basis von v0.2.
+
+Die erste Manuskriptarbeit behandelt ausschließlich das reduzierte Zwei-Zeitskalen-Modell der natürlichen Synärese; sie behauptet keinen Beweis des vollständigen 3D-CCFSM.
