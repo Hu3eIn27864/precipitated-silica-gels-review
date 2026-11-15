@@ -174,6 +174,12 @@ Einreichungsreif erst, wenn:
 
 Es wird kein Zeitplan mit fingierter Sicherheit angegeben. Der Fortschritt wird über abgeschlossene Gates statt Kalenderprognosen gemessen.
 
+## 13. Praktische Identifizierbarkeit — erster synthetischer Benchmark
+
+Ein reproduzierbarer synthetischer Benchmark wurde ergänzt: [Bericht](MANUSCRIPT_01_PRACTICAL_IDENTIFIABILITY_BENCHMARK_2026-11-15_DE.md) und [Python-Skript](MANUSCRIPT_01_PRACTICAL_IDENTIFIABILITY_BENCHMARK.py). In vier Szenarien werden nahe bzw. getrennte Raten mit dicht/langem und grob/kurzem Messplan verglichen. Die Simulation verwendet 100 Wiederholungen je Szenario und additives gaußsches Messrauschen.
+
+Der Benchmark illustriert erwartungsgemäß: nahe Raten und kurze/grobe Messfenster verschlechtern die Schätzung deutlich. Er ist ausdrücklich synthetisch, nutzt dieselbe Modellklasse zur Simulation und Anpassung und stellt keine experimentelle Validierung dar. Nächste methodische Ergänzungen: Profil-Likelihood/Bootstrap, Messoffsets und Modellfehlanpassung.
+
 ## 12. Strukturelle Identifizierbarkeit — zweiter Audit
 
 Die formale Nullstart-Aussage und ihre Voraussetzungen sind in [MANUSCRIPT_01_STRUCTURAL_IDENTIFIABILITY_AND_PRACTICAL_LIMITS_2026-11-15_DE.md](MANUSCRIPT_01_STRUCTURAL_IDENTIFIABILITY_AND_PRACTICAL_LIMITS_2026-11-15_DE.md) ausgearbeitet. Unter \(k_n,k_h,C>0\), Nullstart und idealer kontinuierlicher Beobachtung bestimmt die Kurve das ungeordnete Ratenpaar über Summe und Produkt der Raten. Eine physikalische Zuordnung der beiden Ratenlabels bleibt unmöglich; ebenso ist \(\eta_a\) von \(q_\infty\) nur über das Produkt \(C=\eta_aq_\infty\) beobachtbar.
