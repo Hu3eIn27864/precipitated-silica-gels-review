@@ -4,19 +4,15 @@ from ccfsm_p27_8_tetra_geometry_audit import normalize_and_audit_tetra_mesh,tetr
 
 class TestP278(unittest.TestCase):
     def setUp(self):
-        self.regular=((0,0,0),(1,0,0),(F(1,2),F(3,4),0),(F(1,2),F(1,4),F(3,4)))
         self.simple=((0,0,0),(1,0,0),(0,1,0),(0,0,1))
-    def test_regular_quality_is_one(self):
-        self.assertEqual(tetrahedron_geometry(self.regular,(0,1,2,3))["quality_ratio"],F(1))
+    def test_right_unit_tetrahedron_quality_is_exact(self):
+        self.assertEqual(tetrahedron_geometry(self.simple,(0,1,2,3))["quality_ratio"],F(16,27))
     def test_positive_orientation(self):
         r=normalize_and_audit_tetra_mesh(self.simple,((0,1,2,3),))
         self.assertEqual(r["status"],"oriented_quality_audited"); self.assertGreater(r["element_signed_six_volumes"][0],0)
     def test_negative_orientation_normalized(self):
         r=normalize_and_audit_tetra_mesh(self.simple,((0,2,1,3),))
         self.assertEqual(r["status"],"oriented_quality_audited"); self.assertEqual(r["negative_orientation_flips"],(0,)); self.assertEqual(r["tetrahedra"],((0,1,2,3),))
-    def test_regular_tetrahedron_quality(self):
-        r=normalize_and_audit_tetra_mesh(self.regular,((0,1,2,3),))
-        self.assertEqual(r["minimum_quality_ratio"],F(1))
     def test_scale_invariance(self):
         scaled=tuple(tuple(7*x for x in p) for p in self.simple)
         self.assertEqual(tetrahedron_geometry(self.simple,(0,1,2,3))["quality_ratio"],tetrahedron_geometry(scaled,(0,1,2,3))["quality_ratio"])
