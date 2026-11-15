@@ -470,3 +470,14 @@ P26.1 bleibt auf 1-D-Intervalle und stückweise lineare Rekonstruktionen beschr�
 - CCFSM_v4.2.2_P26_2_QUADRATIC_PROJECTION_DE.md dokumentiert Herleitung und Geltungsgrenzen.
 
 P26.2 bleibt ein 1-D-Intervalloperator. Es gibt keine 2-D/3-D-Intersection-Geometrie, keine automatische FE-Polynomrekonstruktion und keine physikalische Validierung. Der CI-Workflow erzeugt ein separates CSV/JSON-Artefakt.
+
+
+### CCFSM v4.2.3 — P26.3 Verfeinerungs- und Sensitivitätsstudie
+
+- ccfsm_p26_3_refinement_study.py untersucht P26.2 auf vier synthetischen Profilen: glatte Gaußverteilung, steile logistische Front, lokale Extrema und nahezu verschwindendes Inventar.
+- Quellzellzahlen 16/32/64/128; Zielnetze nichtpassend und graduiert mit N_target=N_source+3.
+- Erfasst relative L1/L2-Fehler, abgetasteten L-infinity-Fehler, Zielpolynom-Minima, drei globale Momentenresiduen und eine empirische Störungsverstärkung.
+- Positivitätsbegrenzung wird separat ausgewertet. Sie garantiert keine Nichtnegativität der projizierten Zielpolynome.
+- Die Störungsverstärkung ist keine Matrix-Konditionszahl; L-infinity ist dicht abgetastet. Alle Profile sind synthetisch, 1-D und keine physikalische Validierung.
+- CI-Ausgaben: p26_3_refinement_metrics.csv und summary.json.
+- test_ccfsm_p26_3_refinement_study.py ergänzt Regressionen für Profile, Quellprojektion, Momentenerhaltung und Studienartefakte.
