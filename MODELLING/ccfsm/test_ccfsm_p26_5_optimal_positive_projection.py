@@ -36,7 +36,7 @@ class TestP265OptimalPositive(unittest.TestCase):
         self.assertEqual(result[0],avg)
         self.assertGreaterEqual(diag["minimum_target_value"],-1e-10)
     def test_transfer_wrapper(self):
-        result,diag=project_optimal_positive_quadratic((0.,1.),(.1,),(0.,),(3.,),(0.,.5,1.))
+        result,diag=project_optimal_positive_quadratic((0.,1.),(1.,),(4.,),(0.,),(0.,.5,1.))
         self.assertGreaterEqual(diag["minimum_target_value"],-1e-10)
         self.assertAlmostEqual(diag["absolute_moment_changes"]["mass"],0.,places=13)
     def test_study_artifacts(self):
