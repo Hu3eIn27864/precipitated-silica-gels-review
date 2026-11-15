@@ -946,3 +946,11 @@ Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständig
 - Bericht: `CCFSM_v4.2.54_P27_34_INTERVAL_FLUX_FILTER_DE.md`.
 
 **Grenze:** Die Zertifizierung ist bedingt durch die mathematische Gültigkeit der übergebenen Intervallfortsetzung. Kein automatischer Tangential-Nullstellen-Existenzbeweis, keine Vollständigkeitsgarantie für P27.31/P27.33, keine vollständige Upwind-Entropie-Kettenregel, keine P24-Trajektorienintegration und keine physikalische Validierung.
+
+## CCFSM P27.35 — unabhängige Polynom-Intervallprüfung
+
+- `ccfsm_p27_35_polynomial_enclosure_audit.py` implementiert eine Horner-Intervallfortsetzung für Polynome auf Basis der P27.34-Intervalloperationen.
+- Sieben Regressionen prüfen bekannte Nullstellenfälle, Null-Ausschluss, Intervall-Einschließung und die Verengung einer positiven linearen Referenz durch Unterteilung.
+- Bericht: `CCFSM_v4.2.55_P27_35_POLYNOMIAL_ENCLOSURE_AUDIT_DE.md`.
+
+**Grenze:** Dichte Punktabtastungen sind nur Regressionen, kein Einschließungsbeweis. Null-Inklusion beweist keine Nullstelle; keine allgemeine Intervallfortsetzung realer Flüsse, keine vollständige Root-Isolation und keine physikalische Validierung.
