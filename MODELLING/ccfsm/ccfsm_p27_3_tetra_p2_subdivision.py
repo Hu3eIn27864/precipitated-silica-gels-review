@@ -73,6 +73,7 @@ def certify_tetra_p2_by_subdivision(
         leaf_count = 0
         deepest = 0
         unresolved_leaves = []
+        leaf_records = []
 
         def visit(coefficients, bary_vertices, depth, path):
             nonlocal visited, leaf_count, deepest
@@ -94,10 +95,12 @@ def certify_tetra_p2_by_subdivision(
                 }
             if min(coefficients) >= 0:
                 leaf_count += 1
+                leaf_records.append({"path": path, "bernstein_coefficients": coefficients, "barycentric_vertices": bary_vertices, "status": "nonnegative"})
                 return None
             if depth >= max_depth:
                 leaf_count += 1
                 unresolved_leaves.append(path)
+                leaf_records.append({"path": path, "bernstein_coefficients": coefficients, "barycentric_vertices": bary_vertices, "status": "unresolved"})
                 return None
             for child_index, child_local_vertices in enumerate(_child_tetrahedra(_IDENTITY)):
                 child_coefficients = _restricted_coefficients(coefficients, child_local_vertices)
@@ -121,6 +124,8 @@ def certify_tetra_p2_by_subdivision(
                 "visited_cells": visited,
                 "maximum_depth_reached": deepest,
                 "reason": "exact_negative_point_found",
+                "root_vertex_values": tuple(_F(v) for v in vertex_values),
+                "root_edge_midpoint_values": tuple(_F(v) for v in edge_midpoint_values),
             }
         if not unresolved_leaves:
             return {
@@ -130,6 +135,7 @@ def certify_tetra_p2_by_subdivision(
                 "leaf_count": leaf_count,
                 "maximum_depth_reached": deepest,
                 "max_depth": max_depth,
+                "leaf_records": tuple(leaf_records),
             }
         return {
             "status": "unresolved",
@@ -139,6 +145,7 @@ def certify_tetra_p2_by_subdivision(
             "maximum_depth_reached": deepest,
             "max_depth": max_depth,
             "unresolved_leaf_paths": tuple(unresolved_leaves),
+            "leaf_records": tuple(leaf_records),
         }
     except (TypeError, ValueError, ZeroDivisionError, KeyError):
         return {"status": "unresolved", "reason": "malformed_tetrahedron_or_polynomial_data"}
