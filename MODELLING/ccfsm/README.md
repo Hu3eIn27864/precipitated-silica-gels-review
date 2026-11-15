@@ -615,3 +615,8 @@ Status: exakter primaler Zeuge, rational dual zertifizierte Unzulässigkeit oder
 - `unresolved` bleibt ausdrücklich ohne Machbarkeitsaussage. Der Hash ist Integritätskontrolle, keine digitale Signatur.
 - `ccfsm_p26_17_certificate_study.py` exportiert und unabhängig prüft die Referenzfälle; Tests in `test_ccfsm_p26_17_independent_certificate.py`.
 - Geltungsbereich: 1-D, feste nichtnegative Zellmittelwerte, quadratische Profile; keine physikalische Validierung.
+
+
+## CCFSM P26.18 — cross-partition certificate equivalence
+
+P26.18 compares independently verified P26.17 reports by exact rational global moment signatures (mass, first moment, second moment). Decimal and fraction aliases canonicalize to the same rational representation. A one-cell constant-profile certificate is compared with a two-cell representation of the same profile. The comparator rejects invalid reports, different targets and mismatched statuses; unresolved remains unresolved. **Moment equivalence is not equality of local piecewise-polynomial feasible spaces or reconstructed profiles.** The reproducible study uses constructed exact reference witnesses to test verification/comparison, not a new global solver. Run `ccfsm_p26_18_mesh_equivalence_study.py` and `test_ccfsm_p26_18_mesh_equivalence.py`.
