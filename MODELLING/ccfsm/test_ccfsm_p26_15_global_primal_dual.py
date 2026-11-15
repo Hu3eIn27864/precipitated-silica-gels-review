@@ -26,7 +26,7 @@ class TestP2615GlobalPrimalDual(unittest.TestCase):
 
     def test_finite_search_failure_is_not_feasibility(self):
         r=assess_global_primal_dual_feasibility((0,Fraction(2,5),1),(0,0),(1,0),(0,0),
-            max_direction=1,max_iterations=1,denominators=(),offset_radius=0)
+            max_direction=1,max_iterations=1,denominators=(1,),offset_radius=0)
         self.assertIn(r["status"],("certified_infeasible","unresolved"))
         if r["status"]=="unresolved":
             self.assertFalse(r["verified"])
