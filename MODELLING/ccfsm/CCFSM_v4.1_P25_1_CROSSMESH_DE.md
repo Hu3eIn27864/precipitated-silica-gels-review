@@ -1,6 +1,6 @@
 # CCFSM P25.1 — konservative Netzübertragung und Gradient-Stresstest
 
-**Status:** Implementierung angelegt; quantitative Freigabe erst nach CI-Lauf und Artefaktprüfung.  
+**Status:** Erster Referenzlauf CI-grün (278 Tests); quantitative Auswertung siehe `CCFSM_v4.1_P25_1_RESULTS_DE.md`. Ein Laufzeit-Guard bricht ab, falls für mindestens ein Netz ab N=2 weder interner Druckgradient noch Darcy-Fluss aktiviert sind.  
 **Ziel:** die offene P25-Lücke schließen, dass bisherige Raumvergleiche nur P22 gegen P24 auf demselben Netz verglichen und die Anfangsprofile netzabhängig parametrisiert waren.
 
 ## Methodik
