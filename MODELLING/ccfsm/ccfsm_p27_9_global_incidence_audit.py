@@ -52,10 +52,9 @@ def audit_global_tetra_mesh(vertices, tetrahedra, *, min_quality_ratio=0):
         edge_face_counts=defaultdict(int)
         for f in faces:
             for e in combinations(f,2): edge_face_counts[tuple(sorted(e))]+=1
-        bad_edge_face=tuple(sorted(e for e,n in edge_face_counts.items() if n>2))
         isolated=tuple(i for i in range(len(geom["vertices"])) if i not in used)
         status="incidence_audited"
-        if overfull or orientation_conflicts or bad_edge_face:
+        if overfull or orientation_conflicts:
             status="incidence_inconsistent"
         return {
             "status":status,"vertices":geom["vertices"],"tetrahedra":tets,
@@ -65,7 +64,6 @@ def audit_global_tetra_mesh(vertices, tetrahedra, *, min_quality_ratio=0):
             "interior_face_orientation_conflicts":orientation_conflicts,
             "edge_tetrahedron_incidence_counts":tuple(sorted((e,len(inc)) for e,inc in edges.items())),
             "edge_face_incidence_counts":tuple(sorted(edge_face_counts.items())),
-            "edge_incidence_over_two":bad_edge_face,
             "vertex_tetrahedron_incidence_counts":tuple(sorted((v,sum(v in t for t in tets)) for v in used)),
             "isolated_vertex_indices":isolated,
             "face_connected_components":tuple(components),
