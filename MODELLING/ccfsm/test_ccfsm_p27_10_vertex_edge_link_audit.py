@@ -39,7 +39,7 @@ class TestP2710(unittest.TestCase):
         r=audit_tetra_mesh_links(v,((0,1,2,3),(1,0,2,4),(0,1,2,5)))
         self.assertEqual(r["status"],"base_audit_failed")
 
-    def test_isolated_vertex_base_audit_still_reported_but_not_linked(self):
+    def test_isolated_vertex_is_rejected_as_empty_link(self):
         v=((0,0,0),(1,0,0),(0,1,0),(0,0,1),(2,2,2))
         r=audit_tetra_mesh_links(v,((0,1,2,3),))
         self.assertEqual(r["status"],"locally_manifold_audited")
