@@ -252,6 +252,6 @@ Dieser Strang kann parallel zu Gates A–E laufen, ohne unkalibrierte Materialge
 
 **Geltungsgrenze:** 1-D-Intervalle und quadratische Felder; keine 2-D/3-D-Geometrie, keine Druck-/Energieerhaltung und keine physikalische Validierung.
 
-**P26.5 implementiert; CI-/Artefaktprüfung ausstehend.** Lokale gewichtete Nächstpunktprojektion der zwei höheren Moden unter kontinuierlicher Nichtnegativitätsbedingung bei festem Zellmittelwert. Der Cutting-Plane-/Active-Set-Solver löst das zweidimensionale konvexe QP ohne externe Optimierungsbibliothek. Erstes und zweites Moment werden gemessen, aber nicht global erzwungen. Details: CCFSM_v4.2.5_P26_5_OPTIMAL_POSITIVE_PROJECTION_DE.md.
+**P26.5 implementiert; CI-/Artefaktprüfung ausstehend.** Lokale gewichtete Nächstpunktprojektion der zwei höheren Moden unter kontinuierlicher Nichtnegativitätsbedingung bei festem Zellmittelwert. Der Solver projiziert auf die beiden Endpunkt-Halbräume und den elliptischen Innenminimum-Bogen; die Bogen-Zielfunktion wird eindimensional geklammert minimiert. Keine externe Optimierungsbibliothek. Erstes und zweites Moment werden gemessen, aber nicht global erzwungen. Details: CCFSM_v4.2.5_P26_5_OPTIMAL_POSITIVE_PROJECTION_DE.md.
 
 **Nächster Schritt:** Ergebnisse gegen P26.4 prüfen. Bei Bedarf P26.6 als global gekoppeltes Optimierungsproblem mit expliziten Nebenbedingungen für erstes/zweites Moment formulieren. Den vollständigen P23-Energieabschluss separat weiterführen.
