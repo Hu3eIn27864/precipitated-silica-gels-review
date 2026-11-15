@@ -606,3 +606,12 @@ Status: exakter primaler Zeuge, rational dual zertifizierte Unzulässigkeit oder
 - Die Quadratwurzel-Obergrenze erfüllt (0\le s_d-\sqrt{x}<10^{-d}); der Support-Überhang ist höchstens (6\,10^{-d}\sum_jm_j).
 - `test_ccfsm_p26_16_dual_search_stability.py` prüft die Monotonie und Schranken mit rationaler Arithmetik.
 - Geltungsbereich: 1-D, feste nichtnegative Zellmittelwerte, quadratische Zellprofile. Keine physikalische Validierung.
+
+
+## P26.17 — unabhängiger Primal-Dual-Zertifikatsbericht
+
+- `ccfsm_p26_17_independent_certificate.py` erstellt portable JSON-Zertifikate mit kanonischen rationalen Eingaben, Schema-Version und SHA-256-Integritätsfingerabdruck.
+- Der Verifikator importiert keine P26-Solver: primal werden globale Masse/erste/zweite Momente sowie Markov-Lukács-Identität und PSD-Gram-Matrix je Zelle neu und exakt geprüft; dual wird die Support-Obergrenze samt rationaler Quadratwurzel-Einschließung neu berechnet.
+- `unresolved` bleibt ausdrücklich ohne Machbarkeitsaussage. Der Hash ist Integritätskontrolle, keine digitale Signatur.
+- `ccfsm_p26_17_certificate_study.py` exportiert und unabhängig prüft die Referenzfälle; Tests in `test_ccfsm_p26_17_independent_certificate.py`.
+- Geltungsbereich: 1-D, feste nichtnegative Zellmittelwerte, quadratische Profile; keine physikalische Validierung.
