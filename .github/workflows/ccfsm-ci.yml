@@ -247,3 +247,15 @@ jobs:
           retention-days: 30
       - name: Run P26.19 exact profile restriction unit tests
         run: python -m unittest discover -s MODELLING/ccfsm -p 'test_ccfsm_p26_19_exact_profile_restriction.py' -v
+
+      - name: Run P26.20 positivity-under-refinement study
+        run: python MODELLING/ccfsm/ccfsm_p26_20_refinement_positivity_study.py --output-dir ccfsm-p26-20-results
+      - name: Upload P26.20 positivity certificates
+        uses: actions/upload-artifact@v4
+        with:
+          name: ccfsm-p26-20-refinement-positivity-results
+          path: ccfsm-p26-20-results/
+          if-no-files-found: error
+          retention-days: 30
+      - name: Run P26.20 independent certificate unit tests
+        run: python -m unittest discover -s MODELLING/ccfsm -p 'test_ccfsm_p26_20_refinement_positivity.py' -v
