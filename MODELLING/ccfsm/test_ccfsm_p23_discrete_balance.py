@@ -37,6 +37,7 @@ class TestP23DiscreteBalance(unittest.TestCase):
 
     @patch("ccfsm_p23_discrete_balance.p11_total_free_energy")
     def test_closed_boundary_silicon_conservation(self, energy):
+        self.result["state"] = self.initial
         self.result["last_snapshot"]["transport_rhs"][
             "mobile_species_face_fluxes_mol_m2_s"] = (
                 (0.0, 9.0, 0.0), (0.0, -3.0, 0.0))
