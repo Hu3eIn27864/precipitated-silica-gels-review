@@ -91,7 +91,7 @@ def isolate_polynomial_roots(
         "leaves": leaves,
         "certified_unique_root_count": unique_count,
         "certified_no_root_leaf_count": no_root_count,
-        "unresolved_leaf_count": sum(has_unresolved for _ in [0]) if has_unresolved else 0,
+        "unresolved_leaf_count": sum(leaf["root_count"] is None for leaf in leaves),
         "root_count_bounds": (unique_count, None if has_unresolved else unique_count),
         "complete": not has_unresolved,
         "assumption": "P27.36 interval-enclosure contract holds for polynomial and derivative",
