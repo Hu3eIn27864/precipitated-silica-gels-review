@@ -8,6 +8,20 @@ class TestP273AdaptiveSubdivision(unittest.TestCase):
     def setUp(self):
         self.tet = ((0, 0, 0), (1, 0, 0), (0, 1, 0), (0, 0, 1))
 
+
+    def test_eight_children_have_exact_equal_volumes(self):
+        from ccfsm_p27_1_tetra_p1_positivity import tetrahedron_signed_six_volume
+        from ccfsm_p27_3_tetra_p2_subdivision import _IDENTITY, _child_tetrahedra
+        children = _child_tetrahedra(_IDENTITY)
+        self.assertEqual(len(children), 8)
+        volumes = []
+        for child in children:
+            physical = tuple(tuple(sum(child[i][k] * self.tet[k][axis] for k in range(4))
+                                   for axis in range(3)) for i in range(4))
+            volumes.append(abs(tetrahedron_signed_six_volume(physical)) / 6)
+        self.assertEqual(set(volumes), {F(1, 48)})
+        self.assertEqual(sum(volumes), F(1, 6))
+
     def test_positive_constant_certified_without_refinement(self):
         r = certify_tetra_p2_by_subdivision(self.tet, (2, 2, 2, 2), (2, 2, 2, 2, 2, 2), 0)
         self.assertEqual(r["status"], "certified_nonnegative")
