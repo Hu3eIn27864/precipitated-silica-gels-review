@@ -80,7 +80,7 @@ def _run_step(solver, state, dt, args, **kwargs):
         *common, tolerance=1e-9, max_iterations=30, **kwargs)
 
 
-def temporal_refinement(cells=2, final_time_s=1e-12):
+def temporal_refinement(cells=2, final_time_s=1e-2):
     base = reference_inputs(cells)
     grid, chemistry, mechanics, state, quad, dbc = base
     args = (grid, chemistry, mechanics, quad, dbc)
@@ -128,7 +128,7 @@ def temporal_refinement(cells=2, final_time_s=1e-12):
     return rows
 
 
-def spatial_refinement(final_time_s=1e-12):
+def spatial_refinement(final_time_s=1e-2):
     rows = []
     for cells in (1, 2, 4):
         grid, chemistry, mechanics, state, quad, dbc = reference_inputs(cells)
@@ -161,7 +161,7 @@ def spatial_refinement(final_time_s=1e-12):
     return rows
 
 
-def nonlinear_robustness(cells=2, dt_s=1e-12):
+def nonlinear_robustness(cells=2, dt_s=1e-2):
     grid, chemistry, mechanics, state, quad, dbc = reference_inputs(cells)
     args = (grid, chemistry, mechanics, quad, dbc)
     rows = []
