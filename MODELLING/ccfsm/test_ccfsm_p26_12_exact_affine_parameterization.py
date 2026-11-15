@@ -53,6 +53,15 @@ class TestP2612ExactAffineParameterization(unittest.TestCase):
         self.assertEqual(r["status"],"feasible_exact_primal_witness")
         self.assertTrue(r["verified"])
 
+    def test_rational_grid_preserves_thirds_in_mesh_edges(self):
+        edges=(0,Fraction(1,3),1); means=(2,2); a=(0,0); b=(0,0)
+        from ccfsm_p26_10_exact_moment_witness import _targets
+        target,_=_targets(edges,means,a,b)
+        r=search_rational_positive_witness(edges,means,a,b,target,
+            denominators=(1,),offset_radius=0)
+        self.assertEqual(r["status"],"feasible_exact_primal_witness")
+        self.assertTrue(r["verification"]["global_moments_exact"])
+
     def test_zero_inventory_failure_is_unresolved(self):
         r=search_rational_positive_witness((0,Fraction(1,2),1),(0,0),(1,0),(0,0),
             denominators=(1,2),offset_radius=1,max_candidates=100)
