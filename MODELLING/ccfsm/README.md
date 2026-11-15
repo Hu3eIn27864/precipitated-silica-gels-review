@@ -868,3 +868,12 @@ Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständig
 - Acht Regressionen prüfen Bilanzschluss/-rest, Vorzeichen, Zeitschritt, Rasterkonsistenz, P19-Ownership und die explizite Behandlung der Advektionsschließung. Bericht: `CCFSM_v4.2.44_P27_24_DISCRETE_ENERGY_DE.md`.
 
 **Grenze:** Die integrierten Dissipationen und äußeren Arbeiten sind caller-supplied; P27.24 rekonstruiert sie noch nicht aus P24-Snapshots. Upwind-Advektionsentropie bleibt standardmäßig offen. Daher ist dies ein diskreter Ledger-Audit, kein solver-interner Energie-Monotonienachweis oder vollständiger thermodynamischer Beweis.
+
+
+## CCFSM P27.25 — Rekonstruktion von P24-Schrittintegralen aus P21-Snapshots
+
+- `ccfsm_p27_25_snapshot_integrals.py` rekonstruiert Reaktions-, Darcy- und Onsager-Dissipation sowie hydraulische Reservoirarbeit mit Trapezquadratur zwischen initialem P21- und akzeptiertem P24-Snapshot.
+- Advective und gesamte M/O-Randflüsse werden getrennt ausgewertet; daraus werden diffusive Randflüsse, Netto-Stofftransfer und eine potentialgewichtete chemische Randflussleistung berichtet.
+- Fünf Regressionen prüfen Quadratur, P24-Konvergenz-/Snapshot-Gates, Geometrie und Stoffrandtransfer. Bericht: `CCFSM_v4.2.45_P27_25_SNAPSHOT_INTEGRALS_DE.md`.
+
+**Grenze:** Die Trapezregel ist keine exakte Integration entlang des Newton-Pfads. Potentialgewichtete Upwind-Randflüsse sind kein vollständiger diskreter Entropiebeweis. Mechanische Dirichlet-Reaktionsarbeit und Feststoff-/Brückenreservoirarbeit bleiben offen; keine solver-interne Energie-Monotonie oder physikalische Validierung.
