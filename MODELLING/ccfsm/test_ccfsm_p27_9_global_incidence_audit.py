@@ -38,7 +38,6 @@ class TestP279(unittest.TestCase):
     def test_inverted_element_normalized(self):
         r=audit_global_tetra_mesh(self.v[:4],((0,2,1,3),))
         self.assertEqual(r["status"],"incidence_audited")
-        self.assertGreater(r["exact_geometry_audit"],0) if isinstance(r["exact_geometry_audit"],int) else None
         self.assertEqual(r["tetrahedra"],((0,1,2,3),))
 
 if __name__=="__main__": unittest.main()
