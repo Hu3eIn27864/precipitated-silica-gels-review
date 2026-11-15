@@ -41,10 +41,10 @@ class TestP2717(unittest.TestCase):
         # Rebuild a two-cell exact field with q=(0,1,2), constant divergence -1.
         t=s["transport_rhs"]
         t["fluid_capacity_dot_s"]=(-1.,-1.)
-        t["darcy_flux_faces_m_s"]=(0.,1.,2.)
+        t["darcy_flux_faces_m_s"]=(0.,.5,2.)
         t["inventory_dot"]=((-7.,-7.),(-2.,-2.),(.5,.5),(.5,.5))
-        t["mobile_species_advective_face_fluxes_mol_m2_s"]=((0.,2.,4.),(0.,3.,6.))
-        t["mobile_species_face_fluxes_mol_m2_s"]=((0.,3.,6.),(0.,5.,10.))
+        t["mobile_species_advective_face_fluxes_mol_m2_s"]=((0.,1.,4.),(0.,1.5,6.))
+        t["mobile_species_face_fluxes_mol_m2_s"]=((0.,1.5,6.),(0.,2.5,10.))
         t["reaction_rates_mol_m3_s"]=((4.,4.),(1.,1.),(.5,.5))
         r=audit_p21_process_balance(s,(.5,1.5))
         self.assertTrue(r["overall_pass"],r)
