@@ -69,6 +69,15 @@ jobs:
           path: ccfsm-p26-1-results/
           if-no-files-found: error
           retention-days: 30
+      - name: Run P26.2 quadratic moment projection
+        run: python MODELLING/ccfsm/ccfsm_p26_2_quadratic_projection.py --output-dir ccfsm-p26-2-results
+      - name: Upload P26.2 quadratic projection results
+        uses: actions/upload-artifact@v4
+        with:
+          name: ccfsm-p26-2-quadratic-projection-results
+          path: ccfsm-p26-2-results/
+          if-no-files-found: error
+          retention-days: 30
       - name: Upload P26 projection results
         uses: actions/upload-artifact@v4
         with:
