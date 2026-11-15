@@ -46,6 +46,20 @@ class TestP273AdaptiveSubdivision(unittest.TestCase):
         self.assertEqual(r["status"], "certified_negative_point")
         self.assertLess(r["value"], 0)
 
+
+    def test_nested_negative_point_witness_uses_root_barycentric_coordinates(self):
+        # u=(lambda0-2/5)^2-1/100 is negative for 3/10<lambda0<1/2.
+        # No root vertex or first-level midpoint is negative; depth 2 finds
+        # an exact negative point with lambda0=3/8.
+        vertex = (F(7, 20), F(3, 20), F(3, 20), F(3, 20))
+        edge = (F(0), F(0), F(0), F(3, 20), F(3, 20), F(3, 20))
+        r = certify_tetra_p2_by_subdivision(self.tet, vertex, edge, 3)
+        self.assertEqual(r["status"], "certified_negative_point")
+        point = r["barycentric_point"]
+        self.assertEqual(sum(point), F(1))
+        self.assertEqual(point[0], F(3, 8))
+        self.assertEqual(r["value"], F(-3, 320))
+
     def test_zero_polynomial_is_certified(self):
         r = certify_tetra_p2_by_subdivision(self.tet, (0, 0, 0, 0), (0, 0, 0, 0, 0, 0), 3)
         self.assertEqual(r["status"], "certified_nonnegative")
