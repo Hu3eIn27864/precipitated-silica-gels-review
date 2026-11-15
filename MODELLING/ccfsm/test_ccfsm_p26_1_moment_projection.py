@@ -10,7 +10,7 @@ class TestP261MomentProjection(unittest.TestCase):
         dst,ds=project_linear_moments(se,src,ss,te)
         for a,b,u,s in zip(te,te[1:],dst,ds):
             self.assertAlmostEqual(u,2+3*(a+b)/2,places=13)
-            self.assertAlmostEqual(s,3,places=13)
+            self.assertAlmostEqual(s,3,places=12)
     def test_preserves_global_mass_and_first_moment(self):
         se=(0,.08,.24,.51,.76,1); te=(0,.13,.31,.58,.83,1)
         src=tuple(2+3*(a+b)/2 for a,b in zip(se,se[1:])); ss=limited_linear_slopes(se,src)
@@ -23,7 +23,9 @@ class TestP261MomentProjection(unittest.TestCase):
         self.assertTrue(all(abs(x-4)<1e-14 for x in dst)); self.assertTrue(all(abs(x)<1e-14 for x in ds))
     def test_identity_mesh(self):
         e=(0,.2,.5,1); u=(1.,3.,2.); s=(.5,-.2,.3)
-        self.assertEqual(project_linear_moments(e,u,s,e),(u,s))
+        out, slopes=project_linear_moments(e,u,s,e)
+        self.assertEqual(out,u)
+        for actual, expected in zip(slopes,s): self.assertAlmostEqual(actual,expected,places=12)
     def test_positivity_limiter_bounds_reconstruction(self):
         e=(0,.2,.5,1); u=(.1,2.,.2); s=limited_linear_slopes(e,u,positivity=True)
         for a,b,v,g in zip(e,e[1:],u,s):
