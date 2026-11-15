@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import math
 
+from ccfsm_p27_35_polynomial_enclosure_audit import classify_polynomial_interval
 from ccfsm_p27_36_monotone_polynomial_root import (
     classify_monotone_polynomial_root,
 )
@@ -38,6 +39,17 @@ def isolate_polynomial_roots(
     leaves = []
 
     def visit(a, b, depth):
+        enclosure_result = classify_polynomial_interval(coeffs, a, b)
+        if enclosure_result["status"] == "certified_zero_excluded":
+            leaves.append({
+                "interval": (a, b),
+                "status": "certified_no_root",
+                "root_count": 0,
+                "depth": depth,
+                "method": "P27.35_zero_exclusion",
+            })
+            return
+
         result = classify_monotone_polynomial_root(coeffs, a, b)
         status = result["status"]
         width = b - a
