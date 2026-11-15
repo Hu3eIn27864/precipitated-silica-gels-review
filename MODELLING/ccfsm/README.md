@@ -525,3 +525,11 @@ Nichtkonvergenz wird ausdrücklich nicht als Unzulässigkeitszertifikat interpre
 ### P26.6.1 — Machbarkeitsdiagnose
 
 `assess_global_feasibility` unterscheidet zulässigen numerischen Zeugen, zertifizierten Ein-Zellen-Widerspruch und offene Mehrzellen-Nichtkonvergenz. Keine allgemeine Dualzertifizierung für Mehrzellenfälle.
+
+## P26.7 — dualer Machbarkeitstest
+
+- `ccfsm_p26_7_dual_feasibility.py` — numerische Supportfunktions-/Trennungsdiagnose für globale erste und zweite Momente bei zellweiser quadratischer Positivität.
+- `test_ccfsm_p26_7_dual_feasibility.py` — Tests für Supportfunktion, Mehrzellen-Trennungszeuge und offene Fälle.
+- `CCFSM_v4.2.7_P26_7_DUAL_FEASIBILITY_DE.md` — mathematische Geometrie und Grenzen.
+
+Positive Trennung ist derzeit ein numerischer Zeuge, kein intervallverifiziertes Zertifikat. Kein gefundener Separator beweist keine Machbarkeit.
