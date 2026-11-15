@@ -22,7 +22,7 @@ class TestP2714(unittest.TestCase):
         r = audit_tetra_scalar_field_3d(
             self.vertices, self.tetrahedra,
             ({"degree":1,"vertex_values":(1,-1,3,4)},))
-        self.assertEqual(r["status"], "field_positivity_unresolved")
+        self.assertEqual(r["status"], "field_negative_witness_found")
         self.assertFalse(r["overall_pass"])
 
     def test_p2_subdivision_and_independent_verification(self):
