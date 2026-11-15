@@ -39,11 +39,19 @@ class TestP2710(unittest.TestCase):
         r=audit_tetra_mesh_links(v,((0,1,2,3),(1,0,2,4),(0,1,2,5)))
         self.assertEqual(r["status"],"base_audit_failed")
 
-    def test_isolated_vertex_is_rejected_as_empty_link(self):
+    def test_unused_coordinate_vertex_is_reported_outside_mesh_complex(self):
         v=((0,0,0),(1,0,0),(0,1,0),(0,0,1),(2,2,2))
         r=audit_tetra_mesh_links(v,((0,1,2,3),))
         self.assertEqual(r["status"],"locally_manifold_audited")
         self.assertEqual(r["vertex_count_checked"],4)
         self.assertEqual(r["base_incidence_audit"]["isolated_vertex_indices"],(4,))
+
+
+    def test_vertex_with_disconnected_link_is_rejected(self):
+        v=((0,0,0),(1,0,0),(0,1,0),(0,0,1),(-1,0,0),(0,-1,0),(0,0,-1))
+        r=audit_tetra_mesh_links(v,((0,1,2,3),(0,4,5,6)))
+        self.assertEqual(r["status"],"link_inconsistent")
+        self.assertIn(0,r["invalid_vertex_links"])
+        self.assertFalse(r["vertex_link_reports"][0]["triangle_edge_connected"])
 
 if __name__=="__main__": unittest.main()
