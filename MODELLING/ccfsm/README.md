@@ -877,3 +877,13 @@ Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständig
 - Fünf Regressionen prüfen Quadratur, P24-Konvergenz-/Snapshot-Gates, Geometrie und Stoffrandtransfer. Bericht: `CCFSM_v4.2.45_P27_25_SNAPSHOT_INTEGRALS_DE.md`.
 
 **Grenze:** Die Trapezregel ist keine exakte Integration entlang des Newton-Pfads. Potentialgewichtete Upwind-Randflüsse sind kein vollständiger diskreter Entropiebeweis. Mechanische Dirichlet-Reaktionsarbeit und Feststoff-/Brückenreservoirarbeit bleiben offen; keine solver-interne Energie-Monotonie oder physikalische Validierung.
+
+
+## CCFSM P27.26 — unabhängige Referenzprüfung der Schrittquadratur
+
+- `ccfsm_p27_26_reference_verification.py` stellt exakte Polynom-Integrale und eine unabhängige zusammengesetzte Trapezregel für synthetische Zeitverläufe bereit.
+- `manufactured_quadrature_report` vergleicht numerisches und analytisches Integral und quantifiziert den absoluten Quadraturfehler.
+- Fünf Regressionen prüfen konstante/lineare Referenzen, nichtäquidistante Zeitpunkte, quadratische Fehlerreduktion bei Schrittweitenhalbierung, kubische Referenz und ungültige Zeitgitter.
+- Bericht: `CCFSM_v4.2.46_P27_26_REFERENCE_VERIFICATION_DE.md`.
+
+**Grenze:** P27.26 validiert unabhängig die Quadraturmathematik, nicht die Vollständigkeit der P21-Leistungsfelder oder die physikalische Korrektheit der Randpotentiale. Keine Upwind-Entropieschließung, kein solverinterner Energieabschluss und keine physikalische Validierung.
