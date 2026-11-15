@@ -99,3 +99,6 @@ The authors acknowledge the use of **ChatGPT, an AI assistant developed by OpenA
 
 
 CCFSM P27.31 adds bounded adaptive midpoint sampling to expose potential pairs of boundary-flux zero crossings hidden between same-sign coarse endpoints. It refines intervals on sign changes or midpoint curvature defects, then delegates root interpolation to P27.30. The method is explicitly heuristic and depth-limited, not certified root isolation. See [P27.31 specification](MODELLING/ccfsm/CCFSM_v4.2.51_P27_31_ADAPTIVE_EVENT_DETECTION_DE.md).
+
+
+CCFSM P27.32 adds safeguarded bisection refinement for sign-changing event brackets exposed by P27.31. It reports final time enclosures, flux residuals and convergence status; the guarantee is conditional on continuity and an already detected bracket. It does not certify completeness of adaptive event detection. See [P27.32 specification](MODELLING/ccfsm/CCFSM_v4.2.52_P27_32_SAFEGUARDED_EVENT_REFINEMENT_DE.md).
