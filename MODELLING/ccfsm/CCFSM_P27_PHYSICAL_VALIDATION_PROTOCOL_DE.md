@@ -128,3 +128,14 @@ Die Autoren berichten, dass die spektroskopische Analyse nicht bei den Gelbadtem
 Die neue Datei \`LITERATURE/wilhelm_kind_fig9_pore_liquid_audit.csv\` ist ausdrücklich ein Quellen-Audit und **kein** digitalisierter Rohdatensatz. Sie trennt Textzusammenfassung, visuelle Auffälligkeit, Prozess-/Temperaturkontext und Fit-Freigabe. Alle Figure-9-Punkte bleiben bis zur pixelgenauen Digitalisierung, Fehlerbalkenklärung und Klärung der Probenahme-/Analyseverzögerung für eine quantitative CCFSM-Kalibrierung gesperrt.
 
 **Validierungswert:** Figure 9 ist eine zusätzliche chemische Observable aus demselben Zielsystem und derselben Publikation, also ein unabhängiger Observable-Test, aber keine unabhängige Laborreplikation.
+
+
+## 10. Assay-Spezifität: Molybdatreaktivität ist nicht automatisch Monomer-Spezifität
+
+Ein zusätzlicher Quellencheck verändert die Interpretation von Figure 9 wesentlich. Wilhelm & Kind verwenden eine gelbe Silicomolybdat-Farbreaktion bei 400 nm und verweisen auf Alexander (1953). Alexander zeigte jedoch, dass die Reaktionsgeschwindigkeit mit Molybdänsäure vom Polymerisationsgrad abhängt: Monokieselsäure reagiert bei 20 °C in etwa 75 s vollständig, Disikieselsäure erst in ungefähr 10 min; höher polymerisierte Spezies reagieren noch langsamer. Die Methode misst daher abhängig von Reaktions-/Ablesezeit und Reagenzbedingungen eine operational definierte molybdatreaktive Siliciumfraktion, nicht ohne Weiteres ausschließlich Monomer.
+
+Eine spätere methodische Übersicht zur Silica-Colorimetrie bestätigt, dass die molybdatreaktive Fraktion Monosilicic-, Disilicic- und niedrigmolekulare Polysilicic-Spezies umfassen kann. Deshalb ist die publizierte Bezeichnung „monomeric silicic acid“ als Autoreninterpretation zu kennzeichnen; ohne dokumentierte Reaktionszeit, pH-/Reagenzbedingungen und Matrixvalidierung dürfen die Figure-9-Werte nicht als eindeutige Monomerkonzentration in die CCFSM-Monomerbilanz übernommen werden.
+
+**Konsequenz für das Messmodell:** zunächst eine Beobachtungsfunktion \(y_{Mo}(t)=\mathcal{A}_{Mo}[c_{M},c_{D},c_{P},pH,T_{assay},t_{reaction},\ldots]\) vorsehen. Erst wenn die Alexander-Kinetik und die konkrete Laborprozedur reproduzierbar spezifiziert sind, kann entschieden werden, ob ein vereinfachter Grenzfall \(y_{Mo}\approx c_M\) gerechtfertigt ist. Andernfalls bleibt Figure 9 ein Holdout für „molybdatreaktives niedrigmolekulares Silica“, nicht für reines Monomer.
+
+Quellen: Alexander, G.B. (1953), *J. Am. Chem. Soc.* 75, 5655–5657, DOI 10.1021/ja01118a054; Berro et al. (2014), *Mineralogical Magazine* 78(6), 1417 ff., DOI 10.1180/minmag.2014.078.6.08.
