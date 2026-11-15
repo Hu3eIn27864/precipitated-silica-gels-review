@@ -275,3 +275,9 @@ P26.7 ergänzt eine Supportfunktionsdiagnose: erreichbare globale Modenmomente b
 ## P26.8 — verifizierte duale Unzulässigkeitszertifikate
 
 P26.8 ersetzt die numerische Supportfunktionsdiagnose durch eine geschlossene Zell-Supportfunktion und rationale obere Schranken für Quadratwurzeln. Ein strikt positiver rationaler Abstand liefert ein unabhängig nachprüfbares Unzulässigkeitszertifikat für die exakt aus den Dezimalstrings gebildeten Eingabedaten. Ein endliches Richtungsraster kann bestehende Separatoren übersehen; fehlendes Zertifikat ist daher kein Machbarkeitsbeweis. Geltungsbereich: 1-D, feste Zellmittelwerte, quadratische Rekonstruktion.
+
+
+
+## P26.9 — primal-duale Machbarkeitsentscheidung
+
+P26.9 kombiniert P26.8 und P26.6 in einer dreistufigen Entscheidung. Ein strikt positiver rationaler dualer Abstand liefert certified_infeasible. Andernfalls wird eine primale Dykstra-Projektion versucht; der resultierende Dezimalzeuge wird unabhängig mit rationaler Arithmetik auf kontinuierliche Zellpositivität und explizit begrenzte globale Momentenresiduen geprüft. Nur dann gilt feasible_verified_primal_witness. Fehlschlag oder Nichtkonvergenz bleibt unresolved. Die primale Momentenerhaltung ist daher toleranzbehaftet und nicht pauschal ein exakter Gleichheitsbeweis. Geltungsbereich bleibt 1-D mit festen Zellmitteln und quadratischen Rekonstruktionen; keine physikalische Validierung.
