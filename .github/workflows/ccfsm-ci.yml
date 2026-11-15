@@ -176,6 +176,17 @@ jobs:
         run: python MODELLING/ccfsm/ccfsm_p26_14_global_convex_feasibility.py
       - name: Run P26.14 global convex feasibility unit tests
         run: python -m unittest discover -s MODELLING/ccfsm -p 'test_ccfsm_p26_14_global_convex_feasibility.py' -v
+      - name: Run P26.15 global primal-dual study
+        run: python MODELLING/ccfsm/ccfsm_p26_15_global_primal_dual.py --output-dir ccfsm-p26-15-results
+      - name: Upload P26.15 global primal-dual results
+        uses: actions/upload-artifact@v4
+        with:
+          name: ccfsm-p26-15-global-primal-dual-results
+          path: ccfsm-p26-15-results/
+          if-no-files-found: error
+          retention-days: 30
+      - name: Run P26.15 global primal-dual unit tests
+        run: python -m unittest discover -s MODELLING/ccfsm -p 'test_ccfsm_p26_15_global_primal_dual.py' -v
       - name: Upload P26 projection results
         uses: actions/upload-artifact@v4
         with:
