@@ -217,7 +217,7 @@ Dieser Strang kann parallel zu Gates A–E laufen, ohne unkalibrierte Materialge
 
 ## 7. P26.2 — quadratische Momentenprojektion
 
-**Implementiert; CI-/Artefaktprüfung ausstehend.**
+**Implementiert; CI-Lauf #357 erfolgreich (315/315 Tests).**
 
 - ccfsm_p26_2_quadratic_projection.py überträgt stückweise quadratische Quellfelder auf nichtverschachtelte 1-D-Zielnetze.
 - Pro Zielzelle werden die Momente nullter, erster und zweiter Ordnung projiziert; damit bleiben bei identischer Gebietsabdeckung die globalen rohen Momente ∫u dx, ∫xu dx und ∫x²u dx erhalten.
@@ -248,7 +248,7 @@ Dieser Strang kann parallel zu Gates A–E laufen, ohne unkalibrierte Materialge
 - Der Zielzellmittelwert bleibt exakt erhalten; dadurch bleiben jede Zellmasse und die globale Masse erhalten.
 - Erstes und zweites räumliches Moment dürfen sich ändern; absolute und relative Abweichungen werden berichtet.
 - Der Limiter ist eine radiale Modenkontraktion, kein globaler konvexer Projektionsoptimierer. Negative Zielmittelwerte werden abgewiesen.
-- Regressionen umfassen Rand- und Scheitelpunkt-Unterschwinger, Nullmittelwerte, unveränderte positive Felder, Massenerhaltung und Momentenänderungen.
+- Regressionen umfassen Rand- und Scheitelpunkt-Unterschwinger, Nullmittelwerte, unveränderte positive Felder, Massenerhaltung und Momentenänderungen. Fünf synthetische Referenzfälle: zwei begrenzt, Zielminimum nach Begrenzung 0, maximale absolute Massenänderung 0; erste und zweite Momente änderten sich in den Stressfällen um bis zu ca. 1/6. Ergebnisartefakt: [P26.4 CI #357](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43673207806/artifacts/14145520449).
 
 **Geltungsgrenze:** 1-D-Intervalle und quadratische Felder; keine 2-D/3-D-Geometrie, keine Druck-/Energieerhaltung und keine physikalische Validierung.
 
