@@ -577,3 +577,13 @@ Status: exakter primaler Zeuge, rational dual zertifizierte Unzulässigkeit oder
 - `test_ccfsm_p26_12_exact_affine_parameterization.py` prüft Rang, Dimensionszahl, exakte Momentenerfüllung, Null-Dimensionalität, Pivotfehler und rationale Positivitätszeugen.
 - `CCFSM_v4.2.12_P26_12_EXACT_AFFINE_PARAMETERIZATION_DE.md` dokumentiert Herleitung und Grenzen.
 - Die affine Parametrisierung ist vollständig; die endliche rationale Gittersuche ist es nicht. Ein Suchfehlschlag bleibt `unresolved`, nicht `certified_infeasible`.
+
+
+## CCFSM v4.2.13 — P26.13 Markov-Lukács / SOCP positivity certificates
+
+- `ccfsm_p26_13_markov_lukacs_socp.py` constructs exact rational Markov-Lukács certificates for continuous nonnegativity of each quadratic cell polynomial on its full interval, and audits global moments after P26.12 affine reconstruction.
+- The local positivity condition is represented by a 2x2 positive-semidefinite Gram matrix plus a nonnegative interval multiplier; this is a finite-dimensional conic formulation.
+- Exact certificate construction uses rational arithmetic and an analytically maximized concave quadratic in the multiplier.
+- The implementation does **not** yet include a global SOCP solver over all free coordinates. A supplied candidate can be certified; automatic global feasibility search remains future work.
+- P26.12 CI regression data corrected to use exact `Fraction` moments rather than float literals. The previous CI failure was caused by the test's approximate mass literal.
+- Scope: 1-D, fixed cell means, piecewise quadratics; no 2-D/3-D extension or physical validation.
