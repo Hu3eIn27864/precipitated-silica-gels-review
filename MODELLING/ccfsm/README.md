@@ -592,3 +592,8 @@ Status: exakter primaler Zeuge, rational dual zertifizierte Unzulässigkeit oder
 - ccfsm_p26_14_global_convex_feasibility.py — globally coupled Dykstra candidate projection with exact P26.12 rational reconstruction and P26.13 Markov-Lukács verification; unsuccessful finite search remains unresolved.
 - test_ccfsm_p26_14_global_convex_feasibility.py — exact feasible-witness, unresolved-status and input-validation regressions.
 - CCFSM_v4.2.14_P26_14_GLOBAL_CONVEX_FEASIBILITY_DE.md — method, status semantics and limitations.
+
+
+- ccfsm_p26_15_global_primal_dual.py — expanding exact-rational dual separator search coupled to P26.14 exact primal witness verification; unresolved remains undecided.
+- test_ccfsm_p26_15_global_primal_dual.py — regression tests for strict dual separation, exact primal witness, finite-search semantics and validation.
+- CCFSM_v4.2.15_P26_15_GLOBAL_PRIMAL_DUAL_DE.md — duality method, proof status semantics and scope limits.
