@@ -408,3 +408,12 @@ Der geprüfte Stand P0–P22, der P22-Fixpunktresiduum-Audit und die Freigabegat
 - `test_ccfsm_p23_discrete_balance.py` prüft geschlossene/offene Stoffbilanz, Zurückweisung nicht akzeptierter Schritte und die bewusste Begrenzung des Energieanspruchs.
 - `CCFSM_v3.8_P23_DISCRETE_BALANCE_DE.md` dokumentiert Gleichungen, Vorzeichen, Einheiten und offene Punkte.
 - P9-lokale FV-Energiedifferenz wird berechnet; P19-FE-Energie und Traktionsarbeit werden am akzeptierten Zustand separat berichtet. Kein globaler diskreter Energieabschluss und keine Energie-Monotonie werden behauptet, da FE/FV-Referenzmaß, mechanischer Anfangssnapshot und vollständige Randarbeitskopplung noch fehlen.
+
+
+## CCFSM P24 — unabhängiger Newton-Referenzlöser
+
+- `ccfsm_p24_newton_reference.py` löst den impliziten P21-Schritt mit einem vorwärts-differenzierten Jacobian und gedämpftem Newton-Backtracking.
+- P19-Mechanik wird in jeder Residuumsauswertung neu gelöst; der FE-Druck wirkt dadurch innerhalb des nichtlinearen FV-Residuumoperators.
+- `p24_compare_with_p22` vergleicht Zustand und projizierten Druck zweier konvergierter Lösungen derselben diskreten Gleichung.
+- `test_ccfsm_p24_newton_reference.py` prüft Newton-Konvergenz, Admissibilität, P22-Vergleich und Nichtannahme bei Iterationslimit.
+- `CCFSM_v3.9_P24_NEWTON_REFERENCE_DE.md` dokumentiert Algorithmus und Reichweite. Der FD-Newton-Löser ist eine kleine Referenzimplementierung, kein Produktionssolver oder physikalischer Validierungsnachweis.
