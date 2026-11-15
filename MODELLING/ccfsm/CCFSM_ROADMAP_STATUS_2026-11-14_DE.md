@@ -2,7 +2,7 @@
 
 **Auditdatum:** 14.11.2026  
 **Repository-Stand:** `main`, letzter geprüfter Commit `a5e8f066cb6a4e4ab700a3ace85763fa1f64dfb4`  
-**Geltungsbereich:** CCFSM P0–P23, natürliche Synärese gefällter Silicagel-Systeme. Diese Roadmap ist ein Prüf- und Arbeitsplan, keine Behauptung physikalischer Validierung.
+**Geltungsbereich:** CCFSM P0–P24, natürliche Synärese gefällter Silicagel-Systeme. Diese Roadmap ist ein Prüf- und Arbeitsplan, keine Behauptung physikalischer Validierung.
 
 ## 1. Kurzurteil
 
@@ -18,10 +18,11 @@ Der aktuelle Engpass ist nicht das Hinzufügen weiterer physikalischer Terme, so
 - P21: FE-Druckprojektion zurück auf FV-Zellen und gemeinsamer Darcy-Fluss für Fluidbilanz und mobile M/O-Advektion.
 - P22: gedämpfte Picard-Iteration für einen impliziten-Euler-Schritt.
 - P23: diskreter Audit des akzeptierten P22-Schritts; globale FV-Siliciumbilanz plus getrennte P9-/P19-Energiediagnostik.
+- P24: unabhängiger finite-difference Newton-Referenzlöser; P19 wird in jeder Residuumsauswertung neu gelöst.
 
 GitHub Actions Lauf [#263](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43634688142) wurde geprüft: Job `ccfsm-tests` erfolgreich, 259 Unit-Tests bestanden. Im selben Lauf wurde die v0.5-Kalibrierung ausgeführt: 7 natürliche Kurven, 21 Fits; Exponentialmodell gewann 3/7, gestrecktes Exponentialmodell 4/7, zweistufiges CCFSM 0/7 und traf bei allen sieben Kurven eine Parametergrenze. Medianer Holdout-RMSE: 0.04207, 0.01755 bzw. 0.04207. Das ist ein begrenzter Vergleich auf approximierten/kuratierten Ablesepunkten, keine unabhängige physikalische Validierung. Der Druckzellen-Audit enthält 21 Druckzellkurven und 0 natürliche Kalibrierkurven; er dient der Trennung, nicht der Übernahme dieser Daten.
 
-## 2. Kritischer Auditbefund zu P22
+## 2. Historischer Auditbefund zu P22 (durch P22.1 behoben)
 
 In `ccfsm_p22_iterated_implicit_coupling.py` wird das Zustandsresiduum aktuell aus dem **relaxierten Schritt** gebildet:
 
@@ -57,7 +58,7 @@ P22.1 is implemented and its hosted CI is green.
 - Hosted workflow [#269](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43635230416) passed; the test log reports **262 tests in 0.708 s, OK**.
 - This is a numerical acceptance-criterion correction, not a proof of Picard convergence, global energy stability, or physical validity.
 
-**Gate A is complete. P23 is now implemented:** the accepted-step FV silicon balance is independently audited, while P9 local energy change and P19 mechanical energy/work are reported separately. A complete global discrete energy closure remains open for the dimensional and boundary-work reasons documented in the P23 note. P24–P29 remain as planned below.
+**Gate A (P22.1) is complete. P23 is implemented as a partial accepted-step balance audit. P24 is now implemented:** an independent finite-difference Newton solver re-evaluates P19/P21 in every nonlinear residual and can be compared against P22 on identical data. Hosted CI status for P24 is pending verification. P25–P29 remain planned.
 
 ## 3. Priorisierte Roadmap und Freigabegates
 
@@ -170,7 +171,7 @@ Dieser Strang kann parallel zu Gates A–E laufen, ohne unkalibrierte Materialge
 |---|---|---|---|
 | 1 | P22.1 Fixpunktresiduum korrigieren | keine | verlässliches Akzeptanzkriterium |
 | 2 | P23 diskretes Stoff-/Energiebudget | P22.1 | FV-Siliciumbilanz geschlossen prüfbar; Energiebilanz partiell |
-| 3 | P24 unabhängiger Newton-Referenzfall | P22.1 | Solververgleich |
+| 3 | P24 unabhängiger Newton-Referenzfall | P22.1 | FD-Newton-Referenz und P22-Vergleich; CI/Robustheit zu prüfen |
 | 4 | P25 Raum-/Zeitverfeinerung | P23, P24 | numerische Robustheit |
 | 5 | P26 konservative FE/FV-Projektion | P24, P25 | Netzübertragbarkeit |
 | 6 | P27 Identifizierbarkeit | belastbare Solverbasis + Datenaudit | Parameterunsicherheiten |
@@ -188,4 +189,4 @@ Dieser Strang kann parallel zu Gates A–E laufen, ohne unkalibrierte Materialge
 
 ## 7. Nächster konkreter Arbeitsschritt
 
-**P24 als Nächstes:** unabhängigen Newton-/Block-Newton-Referenzlöser auf kleinem gekoppeltem Netz aufbauen und P22 dagegen vergleichen. Den offenen vollständigen P23-Energieabschluss als Teil des Folgeaudits beibehalten.
+**P25 als Nächstes:** Zeit- und Raumverfeinerung getrennt durchführen, zuerst am kleinen P22/P24-Referenzfall. Newton-FD-Schrittweite, Solverfehler, Positivität und Stoffbilanz über die Verfeinerungsfolge protokollieren. Den offenen vollständigen P23-Energieabschluss als Teil des Folgeaudits beibehalten.
