@@ -52,16 +52,16 @@ def refine_flux_root_bisection(
         fm = _finite(flux(mid), "midpoint flux")
         if abs(fm) < abs(best_f):
             best_t, best_f = mid, fm
-        if abs(fm) <= ftol:
-            return {"root_s": mid, "bracket_s": (a, b),
-                    "bracket_width_s": b-a, "flux_residual": abs(fm),
+        if fm == 0.0:
+            return {"root_s": mid, "bracket_s": (mid, mid),
+                    "bracket_width_s": 0.0, "flux_residual": 0.0,
                     "iterations": iteration, "converged": True,
-                    "termination": "flux_tolerance"}
+                    "termination": "exact_midpoint"}
         if fa * fm < 0.0:
             b, fb = mid, fm
         else:
             a, fa = mid, fm
-        if b-a <= xtol:
+        if b-a <= xtol and abs(best_f) <= ftol:
             return {"root_s": best_t, "bracket_s": (a, b),
                     "bracket_width_s": b-a, "flux_residual": abs(best_f),
                     "iterations": iteration, "converged": True,
