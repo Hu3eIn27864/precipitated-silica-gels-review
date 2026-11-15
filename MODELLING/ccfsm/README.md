@@ -999,3 +999,13 @@ Die erste Manuskriptarbeit behandelt ausschließlich das reduzierte Zwei-Zeitska
 ## Manuskript 1 — Scherer (1989), Gleichungsvergleich
 
 - [MANUSCRIPT_01_SCHERER_1989_EQUATION_LEVEL_COMPARISON_2026-11-15_DE.md](MANUSCRIPT_01_SCHERER_1989_EQUATION_LEVEL_COMPARISON_2026-11-15_DE.md) — Abstract-basierter Strukturvergleich mit v0.2, Reduktionsanforderungen und klarer Kennzeichnung der noch fehlenden Volltext-Gleichungsprüfung.
+
+## CCFSM v2.3 — konservative Inventar- und Volumenbilanz (15.11.2026)
+
+- `CCFSM_v2.3_CONSERVATIVE_INVENTORY_FRAMEWORK_DE.md` legt eine gemeinsame Bilanzschnittstelle für Wasser, mobile Silicium-Spezies, immobilisiertes Netzwerk-Silicium, tragende Brücken und Gelvolumen fest.
+- Klärt die unterschiedlichen Bezugsgrößen von P8a-Speicher `theta`, v1.0-Porosität `phi` und v1.1-Biot-Fluidgehalt `zeta`; diese werden nicht gleichgesetzt.
+- Definiert die mobile Si-Inventardichte als `phi*c_i` und die Brückendichte als abgeleitete Teilmenge des Netzwerk-Siliciums, nicht als zusätzlichen Si-Pool.
+- Stellt die aktuelle und die Lagrange-Referenzform, offene Randflüsse, bewegte Grenzen sowie die Unterscheidung zwischen Gelvolumenverlust und Flüssigkeitsaustritt dar.
+- Markiert die noch zu klärende P8b-Schnittstelle `s_N/s_B` und die mögliche Phasen-Volumenübertragung bei Netzwerkbildung ausdrücklich als offene Definitions-/Materialfragen.
+
+Die Spezifikation ist eine Bilanzarchitektur, keine empirisch validierte Materialschließung und kein vollständiger chemo-poroelastischer Beweis. Bestehende v0.4-, P8- und v1.0-Dateien bleiben unverändert.
