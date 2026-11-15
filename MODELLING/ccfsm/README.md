@@ -533,3 +533,11 @@ Nichtkonvergenz wird ausdrücklich nicht als Unzulässigkeitszertifikat interpre
 - `CCFSM_v4.2.7_P26_7_DUAL_FEASIBILITY_DE.md` — mathematische Geometrie und Grenzen.
 
 Positive Trennung ist derzeit ein numerischer Zeuge, kein intervallverifiziertes Zertifikat. Kein gefundener Separator beweist keine Machbarkeit.
+
+## P26.8 — verifizierte duale Unzulässigkeitszertifikate
+
+- `ccfsm_p26_8_verified_dual_certificate.py` — analytische Zell-Supportfunktion, rationale Support-Oberschranken und unabhängig nachprüfbare duale Trennungszertifikate.
+- `test_ccfsm_p26_8_verified_dual_certificate.py` — Regressionstests für Supportfunktion und Zertifikatsverifikation.
+- `CCFSM_v4.2.8_P26_8_VERIFIED_DUAL_CERTIFICATES_DE.md` — mathematische Herleitung und Geltungsgrenzen.
+
+Ein positives Zertifikat beweist Unzulässigkeit für die exakten rationalen Dezimal-Eingaben. Kein Zertifikat im endlichen Richtungsraster beweist keine Machbarkeit.
