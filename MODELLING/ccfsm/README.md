@@ -937,3 +937,12 @@ Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständig
 - Bericht: `CCFSM_v4.2.53_P27_33_TANGENTIAL_EVENT_DETECTION_DE.md`.
 
 **Grenze:** lokale quadratische Heuristik, keine Vollständigkeits- oder Nullstellenzertifizierung; keine Ableitungs-/Intervallgrenzen, keine vollständige Upwind-Entropie-Kettenregel, keine P24-Trajektorienintegration und keine physikalische Validierung.
+
+## CCFSM P27.34 — Intervall-Enclosure-Filter für Flussnullstellen
+
+- `ccfsm_p27_34_interval_flux_filter.py` stellt geschlossene Intervalle mit nach außen gerundeten elementaren Operationen und einen konservativen Nullstellen-Ausschlussfilter bereit.
+- Eine gültige caller-supplied Intervallfortsetzung, deren Wertebereich Null ausschließt, zertifiziert die Abwesenheit einer Nullstelle im gesamten Zeitintervall. Enthält die Einschließung Null, bleibt der Kandidat ausdrücklich ungelöst; daraus folgt kein Existenzbeweis für eine tangentiale Nullstelle.
+- `test_ccfsm_p27_34_interval_flux_filter.py` enthält sieben Regressionen.
+- Bericht: `CCFSM_v4.2.54_P27_34_INTERVAL_FLUX_FILTER_DE.md`.
+
+**Grenze:** Die Zertifizierung ist bedingt durch die mathematische Gültigkeit der übergebenen Intervallfortsetzung. Kein automatischer Tangential-Nullstellen-Existenzbeweis, keine Vollständigkeitsgarantie für P27.31/P27.33, keine vollständige Upwind-Entropie-Kettenregel, keine P24-Trajektorienintegration und keine physikalische Validierung.
