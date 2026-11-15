@@ -597,3 +597,12 @@ Status: exakter primaler Zeuge, rational dual zertifizierte Unzulässigkeit oder
 - ccfsm_p26_15_global_primal_dual.py — expanding exact-rational dual separator search coupled to P26.14 exact primal witness verification; unresolved remains undecided.
 - test_ccfsm_p26_15_global_primal_dual.py — regression tests for strict dual separation, exact primal witness, finite-search semantics and validation.
 - CCFSM_v4.2.15_P26_15_GLOBAL_PRIMAL_DUAL_DE.md — duality method, proof status semantics and scope limits.
+
+
+## P26.16 — Stabilität und Vollständigkeit der dualen Suche
+
+- `ccfsm_p26_16_dual_search_stability.py` prüft verschachtelte Richtungsradien, rationale Quadratwurzel-Obergrenzen und monotone zertifizierte Gap-Untergrenzen.
+- Für die unendliche Menge primitiver ganzzahliger Richtungen gilt: Liegt das Ziel außerhalb der kompakten konvexen erreichbaren Momentenmenge, existiert wegen strikter Separation und Dichte rationaler Richtungen ein zertifizierender ganzzahliger Richtungsvektor. Ein endlicher Suchradius ist trotzdem nicht vollständig.
+- Die Quadratwurzel-Obergrenze erfüllt (0\le s_d-\sqrt{x}<10^{-d}); der Support-Überhang ist höchstens (6\,10^{-d}\sum_jm_j).
+- `test_ccfsm_p26_16_dual_search_stability.py` prüft die Monotonie und Schranken mit rationaler Arithmetik.
+- Geltungsbereich: 1-D, feste nichtnegative Zellmittelwerte, quadratische Zellprofile. Keine physikalische Validierung.
