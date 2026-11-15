@@ -2,7 +2,7 @@
 from __future__ import annotations
 import csv, json, math
 from pathlib import Path
-from ccfsm_p26_2_quadratic_projection import _edges, moments
+from ccfsm_p26_2_quadratic_projection import _edges, moments, quadratic_minimum
 
 def _golden_max(fun,left,right):
     ratio=(math.sqrt(5.0)-1.0)/2.0
@@ -57,7 +57,7 @@ def dual_feasibility_diagnostic(target_edges,averages,linear,quadratic,
     if angular_samples<32 or boundary_samples<32: raise ValueError("sampling counts must be >= 32")
     old=moments(e,u,a,b); base=moments(e,u,(0.,)*n,(0.,)*n)
     target=(old[1]-base[1],old[2]-base[2]); scale=max(1.,abs(target[0]),abs(target[1]),sum(u))
-    input_minimum=min(u[j]+__import__("ccfsm_p26_2_quadratic_projection").quadratic_minimum(a[j],b[j]) for j in range(n))
+    input_minimum=min(u[j]+quadratic_minimum(a[j],b[j]) for j in range(n))
     if input_minimum >= -tolerance*scale:
         return {"status":"feasible","explanation":"The supplied coefficients themselves provide a nonnegative feasible witness.",
           "target_modal_moments":target,"direction":(0.0,0.0),"target_dot_direction":0.0,
