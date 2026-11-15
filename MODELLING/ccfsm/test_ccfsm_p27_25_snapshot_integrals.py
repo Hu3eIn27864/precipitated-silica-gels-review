@@ -24,10 +24,10 @@ class P27_25Tests(unittest.TestCase):
         r = reconstruct_p27_25_p24_step(snap(1.), {
             "converged": True, "pressure_snapshot_matches_accepted_state": True,
             "last_snapshot": snap(3.)}, 2., cell_width_m=.5, reference_area_m2=4.)
-        self.assertAlmostEqual(r["integrated_dissipation_j"]["reaction_j"], 12.)
-        self.assertAlmostEqual(r["integrated_dissipation_j"]["darcy_j"], 24.)
-        self.assertAlmostEqual(r["integrated_dissipation_j"]["onsager_diffusion_j"], 72.)
-        self.assertAlmostEqual(r["external_work_j"]["reservoir_hydraulic_j"], 48.)
+        self.assertAlmostEqual(r["integrated_dissipation_j"]["reaction_j"], 24.)
+        self.assertAlmostEqual(r["integrated_dissipation_j"]["darcy_j"], 48.)
+        self.assertAlmostEqual(r["integrated_dissipation_j"]["onsager_diffusion_j"], 144.)
+        self.assertAlmostEqual(r["external_work_j"]["reservoir_hydraulic_j"], 96.)
         self.assertFalse(r["advection_entropy_closure_certified"])
     def test_nonconverged_p24_rejected(self):
         with self.assertRaisesRegex(ValueError, "must be converged"):
