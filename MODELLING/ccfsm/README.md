@@ -849,3 +849,12 @@ Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständig
 - `test_ccfsm_p27_22_energy_ownership.py` enthält fünf Regressionen; Bericht: `CCFSM_v4.2.42_P27_22_ENERGY_OWNERSHIP_DE.md`.
 
 **Grenze:** Äquivalenz nur für den abgeglichenen Spezialfall. Keine gemeinsame P10/P13/P19/P21-Energie, keine Traktions-/Dirichlet-Arbeitsbilanz, keine Gradientenergie und keine physikalische Validierung.
+
+
+## CCFSM P27.23 — gekoppeltes thermodynamisches Energie- und Dissipationsledger
+
+- `ccfsm_p27_23_thermodynamic_ledger.py` integriert P9-Chemie-, Elastizitäts- und Biot-Speicherenergie über explizite Zellvolumina und bilanziert P10-Reaktions-, Darcy- sowie P13-Onsager-Dissipation in W.
+- P19 kann nach erfolgreichem P27.22-Audit den P9-mechanischen Anteil ersetzen; beide werden nie addiert. Optional wird das Dead-load-Gesamtpotential getrennt vom gespeicherten Energieinhalt geführt.
+- Sieben Regressionen prüfen Einheiten, Bilanzresiduum, Ownership, Volumenabgleich, Dissipationsvorzeichen und Traktionspotential. Bericht: `CCFSM_v4.2.43_P27_23_THERMODYNAMIC_LEDGER_DE.md`.
+
+**Grenze:** Externe Reservoirleistungen müssen explizit übergeben werden. Die Upwind-Advektionsbilanz, vollständige Randarbeit, Gradientenergien und ein geschlossener P21/P24-Energieabschluss sind weiterhin offen; keine physikalische Validierung.
