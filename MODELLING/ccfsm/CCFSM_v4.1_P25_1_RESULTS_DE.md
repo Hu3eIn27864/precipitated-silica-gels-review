@@ -1,8 +1,8 @@
 # CCFSM P25.1 — Ergebnisse der Cross-Mesh-Verfeinerung
 
-**Workflow:** [Run #306](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43670581772)  
-**Commit:** `1bac7cd47d4d235f14367048b481a793c41223ee`  
-**Status:** CI erfolgreich; 278 Unit-Tests bestanden; P25- und P25.1-Studien sowie beide Ergebnisartefakte erfolgreich hochgeladen.  
+**Workflow:** [Run #308](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43670669824)  
+**Commit:** `b1f629f2cf2d5c9c23bd055b1de8f4981dd753e9`  
+**Status:** CI erfolgreich; 278 Unit-Tests bestanden; P25- und P25.1-Studien sowie beide Ergebnisartefakte erfolgreich hochgeladen. P25.1-Artefakt: [CSV/JSON-Ergebnisse](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43670669824/artifacts/14143648589).  
 **Fall:** synthetisch, (T=10^{-2},s), Reservoirdruck (10^5,Pa); keine experimentelle Kalibrierung oder physikalische Validierung.
 
 ## 1. Zeitverfeinerung
