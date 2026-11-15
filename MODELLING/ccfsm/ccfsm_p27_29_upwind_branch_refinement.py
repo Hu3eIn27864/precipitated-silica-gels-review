@@ -33,8 +33,6 @@ def _piecewise_linear_integral(crossing, duration, negative_branch_mu,
                                 positive_branch_mu, sign):
     """Integral of sign*mu_upwind*(t-crossing), split at its zero."""
     c, T = float(crossing), float(duration)
-    left = sign * negative_branch_mu * (0.5 * (min(c, T) - c) ** 2
-                                         - 0.5 * (0.0 - c) ** 2) if c > 0 else 0.0
     # Integrate the negative-flux branch on [0,min(c,T)] directly.
     lo, hi = 0.0, min(c, T)
     neg = sign * negative_branch_mu * (
@@ -45,6 +43,17 @@ def _piecewise_linear_integral(crossing, duration, negative_branch_mu,
         pos = sign * positive_branch_mu * (
             0.5 * (hi2 - c) ** 2 - 0.5 * (lo2 - c) ** 2)
     return neg + pos
+
+
+
+def _side_power(t, side):
+    if side == "left":
+        flux = t - 1.0
+        potential = 2.0 if flux >= 0.0 else 5.0
+        return potential * flux
+    flux = t - 1.5
+    potential = 7.0 if flux >= 0.0 else 3.0
+    return -potential * flux
 
 
 def audit_p27_29_upwind_branch_refinement(
@@ -72,6 +81,8 @@ def audit_p27_29_upwind_branch_refinement(
     for n in counts:
         times = tuple(duration * i / n for i in range(n + 1))
         chemical = 0.0
+        chemical_left = 0.0
+        chemical_right = 0.0
         material = 0.0
         for ta, tb in zip(times[:-1], times[1:]):
             result = reconstruct_p27_25_p24_step(
@@ -81,6 +92,10 @@ def audit_p27_29_upwind_branch_refinement(
                  "last_snapshot": _snapshot(tb)},
                 tb - ta, cell_width_m=1.0, reference_area_m2=area)
             chemical += result["external_work_j"]["mobile_species_chemical_boundary_j"]
+            chemical_left += 0.5 * (
+                _side_power(ta, "left") + _side_power(tb, "left")) * (tb - ta) * area
+            chemical_right += 0.5 * (
+                _side_power(ta, "right") + _side_power(tb, "right")) * (tb - ta) * area
             material += sum(result["mobile_species_boundary_transport"][
                 "time_integrated_net_inward_mol"])
         refinements.append({
@@ -88,8 +103,11 @@ def audit_p27_29_upwind_branch_refinement(
             "time_support_points": n + 1,
             "left_switch_is_support_point": any(abs(t - 1.0) <= 1e-12 for t in times),
             "right_switch_is_support_point": any(abs(t - 1.5) <= 1e-12 for t in times),
-            "chemical_left_j": None,  # separated analytic branch reference below
+            "chemical_left_j": chemical_left,
+            "chemical_right_j": chemical_right,
             "chemical_total_j": chemical,
+            "chemical_left_abs_error_j": abs(chemical_left - exact_left * area),
+            "chemical_right_abs_error_j": abs(chemical_right - exact_right * area),
             "material_total_mol": material,
             "chemical_abs_error_j": abs(chemical - exact_chemical),
             "material_abs_error_mol": abs(material - exact_material),
