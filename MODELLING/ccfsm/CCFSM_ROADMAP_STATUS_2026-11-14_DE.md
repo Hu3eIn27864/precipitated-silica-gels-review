@@ -424,3 +424,8 @@ P26.20 verbindet die exakte Profilrestriktion aus P26.19 mit den lokalen Markov-
 **Figure 9:** 39 Markerzentren wurden als manuelle, grobe Arbeitsablesung in `LITERATURE/wilhelm_kind_fig9_digitized_approx_2026-11-15.csv` erfasst. Markerableseunsicherheit ist ausgewiesen; publizierte Fehlerbalken wurden nicht separat digitalisiert. Die hoch liegenden sauren 60-°C-Marker bleiben erhalten. Alle Punkte sind weiterhin für quantitative Fits gesperrt, bis eine pixelkalibrierte Zweitablesung und das chemische Beobachtungsmodell vorliegen.
 
 **Freigabegrenze:** P27.4 ist Software-Verifikation, nicht physikalische Validierung. Figure 9 ist ein zusätzlicher Observable-Zweig innerhalb derselben Studie, keine unabhängige Replikation.
+
+
+## P27.5 — Mesh-Konformität (15.11.2026)
+
+Ein exakter rationaler Audit-Prüfer rekonstruiert die auf gemeinsamen groben Tetraederflächen induzierten Dreieckszerlegungen aus den P27.3-Blattpartitionen. Übereinstimmung beider Seiten wird als konform ausgewiesen; abweichende Triangulierungen werden als nichtkonform erkannt. Tests decken unverfeinerte, beidseitig gleich verfeinerte und einseitig verfeinerte Flächen sowie nicht-manifold und fehlerhafte Eingaben ab. Der Prüfer erzeugt noch keine konforme Verfeinerung und prüft nicht die vollständige globale Knoten-/Kantenstruktur.
