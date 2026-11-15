@@ -1,3 +1,11 @@
+## 2026-11-15 — CCFSM P25 first numerical results
+
+- Tightened P22 fixed-point and pressure tolerances to 1e-11 in the P25 harness and used a nontrivial T=1e-2 s reference interval.
+- GitHub Actions run [#295](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43670098385) passed: 273/273 unit tests; time/space/solver study completed and CSV/JSON artifacts uploaded.
+- Time-step errors vs. the 4-step reference decrease from about 1.55e-8 to 5.15e-9 for both solvers; formal order remains open. Across 1/2/4 cells, P22/P24 state and pressure differences remain below 6.75e-12; P23 silicon-balance relative residuals remain below 3.3e-16.
+- P24 converged for all three FD steps; P22 Picard iteration counts were 74/25/4 for relaxation 0.2/0.5/1.0. These are case-specific results, not general solver guarantees.
+- Added `CCFSM_v4.0_P25_RESULTS_DE.md`. Spatial convergence order and physical validation remain open.
+
 ## 2026-11-15 — CCFSM P25 refinement study
 
 - Added a reproducible synthetic reference harness for fixed-final-time temporal refinement (1/2/4 steps), separate FV/P19 axial spatial refinement (1/2/4 cells), P24 forward-difference step sensitivity, and P22 relaxation sensitivity.
