@@ -624,3 +624,12 @@ Sechs Regressionen prüfen Nullflussgrenzen, chemische und hydraulische Arbeitsr
 **Aussagegrenze:** synthetischer Adapter-/Quadraturtest. Keine vollständige Upwind-Entropie-Kettenregel, keine Integration des tatsächlichen P24-Newton-Pfads und keine physikalische Validierung.
 
 **Nächster Schritt P27.30:** branch-aware adaptive Zeitstützstellenregel mit Ereigniserkennung für Flussnullstellen untersuchen und gegen uniforme Verfeinerung vergleichen.
+
+
+## P27.30 — ereignisbewusste Zeitstützstellen für Upwind-Zweigwechsel (15.11.2026)
+
+**Status: implementiert; Hosted-CI-Prüfung ausstehend.** P27.30 ergänzt P27.29 um eine datengetriebene Ereigniserkennung: Randflusswerte werden an streng monotonen Detektionszeiten abgetastet; bei einem Vorzeichenwechsel wird die Nullstelle stückweise linear interpoliert und als zusätzliche Stützstelle in das uniforme Basisgitter eingefügt. Der P27.25-Adapter wird anschließend auf allen Teilintervallen ausgewertet. Der synthetische P27.29-Referenzfall erkennt die Ereignisse bei 1.0 s (links) und 1.5 s (rechts). Uniforme und ereignisbewusste Zeitgitter berichten getrennte Fehler für chemische Randarbeit und Netto-M-Transfer.
+
+Sechs Regressionen prüfen interpolierte Nullstellen, fehlende Vorzeichenwechsel, mehrere Nullstellen, Ereigniseinfügung, Fehlerreduktion und Eingabevalidierung.
+
+**Aussagegrenze:** Die lineare Detektion kann mehrere Nullstellen zwischen zwei Abtastpunkten übersehen, wenn die Endwerte dasselbe Vorzeichen besitzen. Für reale Solvertrajektorien sind deshalb engere Abtastung oder robuste ereignisgesteuerte Nullstellensuche nötig. Keine vollständige Upwind-Entropie-Kettenregel, keine Integration des tatsächlichen P24-Newton-Pfads und keine physikalische Validierung.
