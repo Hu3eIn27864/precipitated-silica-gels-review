@@ -585,5 +585,5 @@ Status: exakter primaler Zeuge, rational dual zertifizierte Unzulässigkeit oder
 - The local positivity condition is represented by a 2x2 positive-semidefinite Gram matrix plus a nonnegative interval multiplier; this is a finite-dimensional conic formulation.
 - Exact certificate construction uses rational arithmetic and an analytically maximized concave quadratic in the multiplier.
 - The implementation does **not** yet include a global SOCP solver over all free coordinates. A supplied candidate can be certified; automatic global feasibility search remains future work.
-- P26.12 CI regression data corrected to use exact `Fraction` moments rather than float literals. The previous CI failure was caused by the test's approximate mass literal.
+- P26.12 was corrected after CI exposed precision loss: the validation helper converted rational mesh edges to binary floats before they entered the exact affine system. The implementation now retains rational edges and uses the float helper only for monotonicity validation.
 - Scope: 1-D, fixed cell means, piecewise quadratics; no 2-D/3-D extension or physical validation.
