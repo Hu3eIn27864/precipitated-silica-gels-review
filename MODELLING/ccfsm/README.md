@@ -495,3 +495,6 @@ P26.2 bleibt ein 1-D-Intervalloperator. Es gibt keine 2-D/3-D-Intersection-Geome
 - Regressionen prüfen Rand-/Innenunterschwinger, bereits positive Felder, Nullmittelwert, Eingabevalidierung, Massenerhaltung und Momentenänderungen.
 - CI-Ausgaben: p26_4_positive_target_cases.csv und summary.json.
 - 1-D/quadratisch; keine 2-D/3-D-Geometrie, keine Druck-/Energieerhaltung und keine physikalische Validierung.
+
+
+**P26.4 CI-Referenz:** Lauf #357 erfolgreich, 315/315 Tests; fünf gezielte Zielzellfälle, davon zwei begrenzt. Zielpolynom-Minimum nach Begrenzung 0; maximale absolute Massenänderung 0. In den bewusst belastenden Fällen konnten erstes und zweites Moment jeweils um bis zu ca. 1/6 verändert werden. CI-/Artefaktlink: https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43673207806.
