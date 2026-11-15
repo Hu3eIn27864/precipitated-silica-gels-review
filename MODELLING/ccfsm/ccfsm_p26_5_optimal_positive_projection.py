@@ -163,10 +163,10 @@ def run_study(output_dir):
         "optimal_total_second_moment_change":sum(r["optimal_second_moment_change"] for r in rows),
         "cases_improved_first_moment":sum(r["optimal_first_moment_change"]<r["radial_first_moment_change"]-1e-12 for r in rows),
         "cases_improved_second_moment":sum(r["optimal_second_moment_change"]<r["radial_second_moment_change"]-1e-12 for r in rows),
-        "method":"cutting-plane solution of a 2-D convex quadratic program; fixed cell average; positive weights",
+        "method":"exact boundary candidate enumeration with weighted projection to endpoint halfspaces and golden-section minimization on the interior-vertex ellipse arc; fixed cell average",
         "limitations":["objective is coefficient-space distance, not directly a global moment-error objective",
             "local cellwise optimization does not enforce global first/second moment constraints",
-            "cutting-plane solver uses floating-point tolerances and bounded iterations",
+            "ellipse-arc minimization uses a finite bracket resolution and floating-point tolerances",
             "1-D intervals and quadratic fields only; no physical validation or 2-D/3-D geometry"]}
     (out/"summary.json").write_text(json.dumps(summary,indent=2),encoding="utf-8")
     print(json.dumps(summary,indent=2)); return summary
