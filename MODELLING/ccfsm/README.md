@@ -697,3 +697,13 @@ Keine Aussage über CCFSM-Zustandspositivität, globale Kanten-/Knotenmannigfalt
 ## Figure 9 — zweite visuelle Ablesung
 
 `LITERATURE/wilhelm_kind_fig9_second_read_visual_2026-11-15.csv` ergänzt eine zweite visuelle Zeitablesung und grobe Fehlerbalken-Unter-/Obergrenzen für alle 39 Punkte. Es handelt sich nicht um maschinelle Pixel-Digitalisierung; beide Datensätze bleiben für Fits gesperrt. Der Messoperator bleibt assayabhängig, da Reaktionszeit/Selektivität nicht vollständig dokumentiert sind.
+
+
+## P27.8 — exakte Orientierung und Tetraederqualität
+
+- `ccfsm_p27_8_tetra_geometry_audit.py` normalisiert jedes nichtdegenerierte Element auf positive Orientierung und berechnet einen exakten skaleninvarianten Formindikator Q=432 det(E)^2/(Summe der sechs quadrierten Kantenlängen)^3.
+- Ein optionaler rationaler Mindestwert verwirft das gesamte Netz ohne partielle Ausgabe, falls ein Element die Schwelle unterschreitet.
+- `test_ccfsm_p27_8_tetra_geometry_audit.py` enthält acht Tests für exakte Qualität, Orientierung, Skalierung, Schwellenwert, Degeneration und Eingabefehler.
+- Spezifikation: `CCFSM_v4.2.28_P27_8_TETRA_GEOMETRY_AUDIT_DE.md`.
+
+Der Indikator ist kein vollständiges FE-Konditionierungszertifikat und beweist keine globale Knoten-/Kantenmannigfaltigkeit oder CCFSM-Positivität.
