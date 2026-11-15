@@ -497,3 +497,10 @@ P27.11 ergänzt die lokalen PL-Link-Prüfungen um eine exakte geometrische Prüf
 **Status: implementiert; CI-Prüfung ausstehend.** Ein gemeinsamer fraction-to-boundary-Faktor begrenzt die explizite RHS-Aktualisierung des FV-Zustands (theta, M/O/N/B) so, dass die angegebenen komponentenweisen Schranken erhalten bleiben. Ein P21-Snapshot-Adapter ist enthalten. Der Bericht unterscheidet vollen von limitiertem Schritt und benennt aktive Schranken.
 
 **Aussagegrenze:** Algebraische Zulässigkeit des expliziten Kandidaten für die übergebene RHS, kein Nachweis eines impliziten P22/P24-Residuals, der Flusskonservativität, Energieabnahme, Zeitschrittstabilität oder physikalischen Positivität. Nächster Schritt: konsistente Integration in den impliziten Residual-/Line-Search-Pfad und separater Konservativitätsaudit.
+
+
+## P27.16 — Newton-Invariantenlimiter und FV-Flussbilanz-Audit (15.11.2026)
+
+**Status: implementiert; CI-Prüfung ausstehend.** P24 begrenzt jede Newton-Richtung vor dem Backtracking mit dem gemeinsamen P27.15 fraction-to-boundary-Faktor für Fluidkapazität und M/O/N/B. Die Line-Search darf danach weiter dämpfen. Ein separater FV-Audit prüft lokal \(\dot u=-\mathrm{div}F+S\) und global die Teleskopbilanz. Der P21-Adapter verwendet Darcy-Fluss für Fluidkapazität, Gesamtfluss für M/O und explizit angegebene Quellen für alle fünf Felder; N/B werden als quellengetriebene Felder ohne Transportfluss behandelt.
+
+**Aussagegrenze:** Der Audit verifiziert nur die algebraische Konsistenz der gelieferten diskreten Daten. Quellenvollständigkeit, physikalische Flusskorrektheit, Energieabnahme, Newton-Konvergenz, Zeitschrittstabilität, 3-D-Erhaltung und physikalische Validierung bleiben offen.
