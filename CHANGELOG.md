@@ -1,3 +1,11 @@
+## 2026-11-15 — CCFSM P25.1 first cross-mesh results
+
+- GitHub Actions [#306](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43670581772) passed: 278/278 unit tests; P25.1 study and cross-mesh artifact upload succeeded.
+- Against the 8-cell reference, relative state L2 errors at 1/2/4 cells were 1.56e-7, 3.56e-8 and 9.70e-9; pressure L2 errors were 1.35e-4, 2.91e-5 and 5.92e-6. First pairwise rates are approximately 1.9–2.3, diagnostic only.
+- Time errors decrease monotonically through 1/2/4/8/16 steps; rates are not yet stable enough for a formal order claim. P22/P24 same-mesh state differences remain about 6.1e-12.
+- P23 silicon balance verified on every tested mesh; pressure span reaches 1.34e5 Pa and maximum Darcy flux 1.50e-6 m/s at 8 cells. A runtime guard now requires nonzero internal pressure span and Darcy flux for meshes with at least two cells.
+- Added `CCFSM_v4.1_P25_1_RESULTS_DE.md`; exact spatial reference and physical validation remain open.
+
 ## 2026-11-15 — CCFSM P25.1 conservative cross-mesh refinement
 
 - Added nested uniform-grid FV cell-average restriction that preserves each component's domain integral and mesh-independent initial profiles.
