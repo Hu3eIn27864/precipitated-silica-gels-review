@@ -53,7 +53,7 @@ def run_study():
     ok=solve_global_convex_feasibility((0,Fraction(1,2),1),(2,2),(0,0),(0,0),
                                       denominators=(1,),offset_radius=0)
     no=solve_global_convex_feasibility((0,1),(Fraction(1,10),),(1,),(0,),
-                                      denominators=(1,),offset_radius=0)
+                                      denominators=(1,),offset_radius=0,max_iterations=25)
     return {"scope":"1-D fixed-mean globally moment-constrained piecewise quadratics",
             "cases":[{"case":"positive_constant_two_cells","status":ok["status"],"verified":ok["verified"]},
                      {"case":"fixed_negative_single_cell","status":no["status"],"verified":no["verified"]}],
