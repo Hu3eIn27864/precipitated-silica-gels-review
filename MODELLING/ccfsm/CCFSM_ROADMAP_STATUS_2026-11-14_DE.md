@@ -228,4 +228,13 @@ Dieser Strang kann parallel zu Gates A–E laufen, ohne unkalibrierte Materialge
 
 **Geltungsgrenze:** 1-D-Intervalle, synthetische Verifikation; keine 2-D/3-D-Intersection-Geometrie, keine Druck-/Energieerhaltung und keine physikalische Validierung. P19-Druck muss nach Netztransfer mechanisch neu gelöst werden.
 
-**Nächster Schritt P26.3:** unabhängige Verfeinerungsfolgen, Momentenfehler, Konditionierung und Positivitätsverluste quantitativ untersuchen. Den vollständigen P23-Energieabschluss separat weiterführen.
+## 8. P26.3 — Verfeinerungs-, Positivitäts- und Sensitivitätsstudie
+
+**Implementiert; quantitative CI-Prüfung läuft.**
+
+- Vier Profiltypen (glatt, steile Front, lokale Extrema, nahezu Nullinventar), Quellnetze N=16/32/64/128 und nichtpassende gradierte Zielnetze.
+- Relative L1/L2- und abgetastete L-infinity-Feldfehler, Minimum des Zielpolynoms, Residuen der drei globalen Momente sowie empirische Störungsverstärkung.
+- Limiter an/aus wird getrennt verglichen. Der Quelllimiter garantiert keine Positivität des Zielpolynoms.
+- Störungsverstärkung ist ein empirischer Sensitivitätsindikator, keine Matrix-Konditionszahl. Synthetische 1-D-Verifikation, keine physikalische Validierung.
+
+**Nächster Schritt:** Ergebnisse interpretieren, mögliche Positivitätsverletzungen auf Zielzellen analysieren und erst danach entscheiden, ob eine begrenzte Zielprojektion oder eine andere Positivitätsstrategie entwickelt werden soll. Den vollständigen P23-Energieabschluss separat weiterführen.
