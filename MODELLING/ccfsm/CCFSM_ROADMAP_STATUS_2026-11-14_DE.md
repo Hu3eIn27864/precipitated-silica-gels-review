@@ -553,3 +553,12 @@ Der P21-Adapter rekonstruiert den diffusen M/O-Fluss als Gesamtfluss minus Advek
 Eine explizite Ownership-Regel bucht mechanische Energie genau einmal: entweder über P9 oder P19. Die jeweils andere Darstellung dient nur als Vergleich. P9s chemische Energie bleibt separat und wird nicht P19 zugeschrieben. Fünf Regressionen prüfen Äquivalenz, alternative P9-Buchung sowie Parameter-, Zustands- und Ownership-Fehler.
 
 **Aussagegrenze:** Die Äquivalenz gilt nur für den abgeglichenen Spezialfall, nicht für beliebige 3D-Dehnungszustände. Äußeres Traktionspotential, Dirichlet-Reaktionsarbeit, Gradientenergien sowie P10/P13-Reaktions- und Transportbeiträge fehlen. Keine gemeinsame P10/P13/P19/P21-Energieherleitung, kein vollständiger diskreter Energieabschluss und keine physikalische Validierung.
+
+
+## P27.23 — gekoppeltes thermodynamisches Energie- und Dissipationsledger (15.11.2026)
+
+**Status: implementiert; Hosted-CI-Prüfung ausstehend.** P27.23 integriert P9s chemische, elastische und Biot-Speicherenergiedichten über explizite physische Zellvolumina. Bei mechanischer Ownership durch P19 ersetzt die nach P27.22 geprüfte P19-FE-Energie den P9-Elastizitäts-/Biot-Anteil; sie wird nicht zusätzlich gebucht. P9-Chemie bleibt separat. P10-Reaktionsdissipation wird mit Zellvolumina integriert, P10-Darcy-Innendissipation und P13-Onsager-Diffusion werden mit der Referenzquerschnittsfläche in Watt umgerechnet. Ein optionales Dead-load-Gesamtpotential wird getrennt von gespeicherter Energie ausgewiesen.
+
+Sieben Regressionen prüfen Energie-/Leistungseinheiten, Energieratenresiduum, P19-Ersatz statt Addition, Volumenabgleich, Dissipationsvorzeichen sowie Dead-load-Potential. Externe Reservoirleistungen müssen als explizite, vorzeichenbehaftete Eingaben geliefert werden.
+
+**Aussagegrenze:** P13-Fick-Diffusionsdiagnostik wird nicht zusätzlich zur Onsager-Dissipation gezählt. Die Upwind-Advektions-Entropiebilanz ist nicht geschlossen; ebenso fehlen vollständige Randarbeitsbilanz, Gradientenergien und ein geschlossener diskreter P21/P24-Energieabschluss. Das Ledger ist ein Auditwerkzeug, kein globaler Stabilitätsbeweis oder experimenteller Validierungsnachweis.
