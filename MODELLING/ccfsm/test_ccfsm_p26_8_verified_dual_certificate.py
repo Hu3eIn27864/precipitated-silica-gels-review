@@ -7,7 +7,7 @@ class TestP268VerifiedDual(unittest.TestCase):
   x=Fraction(2,3); u=_sqrt_upper(x,20); self.assertGreaterEqual(u*u,x)
  def test_cell_support_known_directions(self):
   self.assertEqual(cell_support_upper(0,3,2),0)
-  self.assertGreaterEqual(cell_support_upper(1,0,1),Fraction(0))
+  self.assertEqual(cell_support_upper(1,0,1),Fraction(12))
   self.assertGreaterEqual(cell_support_upper(1,1,0),Fraction(0))
  def test_zero_inventory_nonzero_mode_certificate(self):
   r=search_dual_certificate((0.,.4,1.),(0.,0.),(1.,0.),(0.,0.),max_direction=4)
