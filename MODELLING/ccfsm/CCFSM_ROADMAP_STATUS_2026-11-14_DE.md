@@ -19,6 +19,7 @@ Der aktuelle Engpass ist nicht das Hinzufügen weiterer physikalischer Terme, so
 - P22: gedämpfte Picard-Iteration für einen impliziten-Euler-Schritt.
 - P23: diskreter Audit des akzeptierten P22-Schritts; globale FV-Siliciumbilanz plus getrennte P9-/P19-Energiediagnostik.
 - P24: unabhängiger finite-difference Newton-Referenzlöser; P19 wird in jeder Residuumsauswertung neu gelöst.
+- P24: unabhängiger finite-difference Newton-Referenzlöser; P19 wird in jeder Residuumsauswertung neu gelöst.
 
 GitHub Actions Lauf [#263](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43634688142) wurde geprüft: Job `ccfsm-tests` erfolgreich, 259 Unit-Tests bestanden. Im selben Lauf wurde die v0.5-Kalibrierung ausgeführt: 7 natürliche Kurven, 21 Fits; Exponentialmodell gewann 3/7, gestrecktes Exponentialmodell 4/7, zweistufiges CCFSM 0/7 und traf bei allen sieben Kurven eine Parametergrenze. Medianer Holdout-RMSE: 0.04207, 0.01755 bzw. 0.04207. Das ist ein begrenzter Vergleich auf approximierten/kuratierten Ablesepunkten, keine unabhängige physikalische Validierung. Der Druckzellen-Audit enthält 21 Druckzellkurven und 0 natürliche Kalibrierkurven; er dient der Trennung, nicht der Übernahme dieser Daten.
 
@@ -171,7 +172,7 @@ Dieser Strang kann parallel zu Gates A–E laufen, ohne unkalibrierte Materialge
 |---|---|---|---|
 | 1 | P22.1 Fixpunktresiduum korrigieren | keine | verlässliches Akzeptanzkriterium |
 | 2 | P23 diskretes Stoff-/Energiebudget | P22.1 | FV-Siliciumbilanz geschlossen prüfbar; Energiebilanz partiell |
-| 3 | P24 unabhängiger Newton-Referenzfall | P22.1 | FD-Newton-Referenz und P22-Vergleich; CI/Robustheit zu prüfen |
+| 3 | P24 unabhängiger Newton-Referenzfall | P22.1 | FD-Newton-Referenz; P22/P24-Vergleich im kleinen Testfall, 270 Tests grün |
 | 4 | P25 Raum-/Zeitverfeinerung | P23, P24 | numerische Robustheit |
 | 5 | P26 konservative FE/FV-Projektion | P24, P25 | Netzübertragbarkeit |
 | 6 | P27 Identifizierbarkeit | belastbare Solverbasis + Datenaudit | Parameterunsicherheiten |
