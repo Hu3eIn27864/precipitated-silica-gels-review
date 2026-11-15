@@ -15,7 +15,7 @@ Profile:
 
 ## 2. Kennzahlen
 
-Je Profil, Netz und Limiterstatus werden relative L1- und L2-Feldfehler, ein abgetasteter L-infinity-Fehler, das Minimum der Zielrekonstruktion und relative Residuen der drei globalen Momente ausgegeben. Quell- und Zielmomente beziehen sich auf das rekonstruierte Feld; sie sind nicht mit Fehlern gegenüber dem unbekannten Kontinuumsfeld zu verwechseln.
+Je Profil, Netz und Limiterstatus werden relative L1- und L2-Feldfehler, ein abgetasteter L-infinity-Fehler, das Minimum der Zielrekonstruktion und relative Residuen der drei globalen Momente ausgegeben. Bei aktivem Limiter werden die Transferresiduen mit dem tatsächlich begrenzten Quellfeld verglichen. Zusätzlich werden die durch den Limiter verursachten Änderungen des ersten und zweiten globalen Moments separat ausgewiesen; die Zellmittelwerte und damit die Masse bleiben erhalten. Quell- und Zielmomente beziehen sich auf das rekonstruierte Feld und sind nicht mit Fehlern gegenüber dem unbekannten Kontinuumsfeld zu verwechseln.
 
 Zusätzlich wird eine empirische Störungsverstärkung berechnet: Eine kleine deterministische Störung der Quellkoeffizienten wird durch den linearen Transfer abgebildet und die maximale Koeffizientenänderung normiert. Diese Größe ist ein Sensitivitätsindikator, keine Matrix-Konditionszahl.
 
