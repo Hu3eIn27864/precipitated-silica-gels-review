@@ -450,3 +450,10 @@ Die Original-PNG wurde über die Artikelabbildung erneut geöffnet. Eine zweite 
 **Status: implementiert; CI-Prüfung ausstehend.** Der Geometrie-Audit berechnet das signierte sechsfache Volumen jedes Tetraeders exakt rational. Negative Orientierung wird durch Vertauschung zweier lokaler Knoten normalisiert; degenerierte Elemente werden abgewiesen. Als dimensionsloser skaleninvarianter Formindikator wird Q=432 D²/S³ verwendet, wobei D das orientierte Determinantenvolumen und S die Summe der sechs quadrierten Kantenlängen ist. Ein optionaler rationaler Mindestwert wirkt als harte Netzfreigabeschwelle; bei Unterschreitung wird kein Mesh ausgegeben.
 
 **Grenze:** Der Indikator misst Formverzerrung, ist aber kein vollständiges FE-Konditionierungszertifikat. P27.8 beweist weder globale Knoten-/Kantenmannigfaltigkeit noch CCFSM-Zustandspositivität oder physikalische Validität.
+
+
+## P27.9 — globaler Tetraedernetz-Inzidenz-Audit (15.11.2026)
+
+P27.9 baut auf P27.7/P27.8 auf und prüft das tatsächlich erzeugte Netz global: kanonische Dreiecksflächen werden nach Inzidenz 1 (Rand) und 2 (innen) klassifiziert; Flächen mit mehr als zwei inzidenten Tetraedern werden als nichtmanifoldale Flächenkandidaten markiert. Für innere Flächen wird zusätzlich geprüft, ob die beiden positiv orientierten Nachbarelemente entgegengesetzte induzierte Flächenorientierungen besitzen. Kanten-/Knotenverwendungen, isolierte Knoten und face-zusammenhängende Komponenten werden berichtet; doppelte Tetraeder werden abgewiesen.
+
+**Aussagegrenze:** Keine Knoten-/Kanten-Link-Prüfung, daher kein vollständiger Mannigfaltigkeitsbeweis. Ebenso keine Aussage über FE-Konditionierung, gekoppelte CCFSM-Zustandspositivität, Energieabschluss oder physikalische Validierung.
