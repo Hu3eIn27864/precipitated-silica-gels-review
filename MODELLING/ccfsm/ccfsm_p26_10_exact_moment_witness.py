@@ -17,6 +17,8 @@ def _targets(edges, means, linear, quadratic):
 
 
 def _rationalize(value, digits):
+    if isinstance(value, Fraction): return value
+    if isinstance(value, int): return Fraction(value)
     if not math.isfinite(float(value)): raise ValueError("candidate coefficients must be finite")
     return Fraction(format(float(value), f".{digits}g"))
 
@@ -29,7 +31,8 @@ def exact_moment_correction(target_edges, averages, candidate_linear, candidate_
     if any(m<0 for m in u): raise ValueError("cell averages must be nonnegative")
     if not isinstance(significant_digits,int) or not 1<=significant_digits<=17: raise ValueError("significant_digits must be in [1,17]")
     if not isinstance(pivot_cell,int) or not 0<=pivot_cell<n: raise ValueError("pivot_cell outside target mesh")
-    if target_moments is None: target_moments,modal=_targets(e,u,ca,cb)
+    if target_moments is None:
+        target_moments,modal=_targets(e,u,tuple(_F(v) for v in ca),tuple(_F(v) for v in cb))
     else:
         if len(target_moments)!=3: raise ValueError("target_moments must contain mass, first and second moments")
         target_moments=tuple(_F(v) for v in target_moments)
