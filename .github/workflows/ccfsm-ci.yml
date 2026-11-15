@@ -168,6 +168,10 @@ jobs:
           path: ccfsm-p26-12-results/
           if-no-files-found: error
           retention-days: 30
+      - name: Run P26.13 exact Markov-Lukacs conic certificates
+        run: python MODELLING/ccfsm/ccfsm_p26_13_markov_lukacs_socp.py
+      - name: Run P26.13 Markov-Lukacs unit tests
+        run: python -m unittest MODELLING/ccfsm/test_ccfsm_p26_13_markov_lukacs_socp.py -v
       - name: Upload P26 projection results
         uses: actions/upload-artifact@v4
         with:
