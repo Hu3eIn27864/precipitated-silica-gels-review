@@ -771,3 +771,10 @@ Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständig
 - `test_ccfsm_p27_14_3d_field_positivity.py` deckt P1/P2, unabhängige Verifikation, unresolved, Netz-Gate und Margenschwelle ab.
 
 **Grenze:** Diskrete skalare Feldpositivität auf geprüften Tetraedern ist keine gekoppelte CCFSM-Zustandsinvarianz, Zeitschrittstabilität, FE-Koerzivität oder physikalische Validierung.
+
+
+## P27.15 — gekoppelter FV-Invariantenbereichs-Limiter
+
+- ccfsm_p27_15_coupled_invariant_domain.py bestimmt einen gemeinsamen fraction-to-boundary-Faktor für Fluidkapazität und M/O/N/B-Inventare; optionaler Adapter für P21-Snapshots.
+- test_ccfsm_p27_15_coupled_invariant_domain.py prüft Vollschritt, Inventar- und theta-Grenzen, Eingabefehler und P21-Adapter.
+- Grenze: algebraische Zulässigkeit des expliziten Kandidaten für die übergebene RHS, kein Nachweis der P22/P24-Residualkonvergenz, Konservativität, Energieabnahme, Stabilität oder physikalischen Validität.
