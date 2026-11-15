@@ -28,13 +28,13 @@ Scherers Modell ist allerdings ein räumlich-mechanistischer poro-viskoelastisch
 
 ### 2.2 Wilhelm & Kind (2014/2015), natürliche und erzwungene Synärese gefällter Silica
 
-Die öffentlich zugängliche Arbeit von Wilhelm & Kind (2014) beschreibt die Fortsetzung der Polymerisation/Netzwerkrestrukturierung nach Gelbildung, natürliche Synärese und Flüssigkeitsexpulsion. Die natürliche Schrumpfung wird empirisch mit
+Die öffentlich zugängliche Arbeit von Wilhelm & Kind (2014) beschreibt die Fortsetzung der Polymerisation/Netzwerkrestrukturierung nach Gelbildung, natürliche Synärese und Flüssigkeitsexpulsion. Für die natürlichen Kurven wird eine empirische gestreckte Exponentialfunktion mit
 
 \[
 S_{emp}(t)=S_{max}\left[1-\exp\left(-(t/\tau)^n\right)\right]
 \]
 
-beschrieben; für die untersuchten natürlichen Proben wird ein Exponent um 1.23 berichtet. Die Arbeit entwickelt außerdem eine Korrelation, um natürliche Synärese aus erzwungener Synärese zu prognostizieren. Diese erzwungenen Daten sind nicht mit unbelasteter natürlicher Synärese gleichzusetzen.
+beschrieben; für die untersuchten natürlichen Proben wird ein Exponent um 1.23 berichtet. Die Arbeit von 2014 entwickelt außerdem eine Korrelation, um natürliche Synärese aus erzwungener Synärese zu prognostizieren. Die eigenständige Arbeit von Wilhelm & Kind (2015) verwendet für ihre natürlichen Kurven auch eine einfache Einratenform \\(S(t)=S_{max}[1-\\exp(-t/\\tau)]\\), untersucht pH, Temperatur und Probengröße und bezeichnet dieses empirische Modell ausdrücklich nicht als physikalisch basiertes Modell. Diese Beobachtung eröffnet eine mögliche Lücke für eine bessere physikalische Reduktion speziell für gefällte Silica, hebt aber Scherers frühere mechanistische Theorie nicht auf. Erzwungene Daten sind nicht mit unbelasteter natürlicher Synärese gleichzusetzen.
 
 **Konsequenz:** Nicht beanspruchen:
 - erstmalige quantitative Beschreibung natürlicher Synärese von gefällter Silica;
@@ -42,7 +42,7 @@ beschrieben; für die untersuchten natürlichen Proben wird ein Exponent um 1.23
 - erstmalige Untersuchung von Temperatur-/pH-/Prozessabhängigkeit;
 - direkte Übernahme von Parametern aus erzwungener Synärese als Naturparameter.
 
-Eine mögliche Differenz des v0.2-Ansatzes ist die Interpretation einer beobachteten Kurve durch zwei interne Zustände statt durch eine empirische gestreckte Exponentialfunktion. Das ist zunächst eine alternative reduzierte Parametrisierung, kein nachgewiesener physikalischer Fortschritt.
+Eine mögliche Differenz des v0.2-Ansatzes ist die Interpretation einer beobachteten Kurve durch zwei interne Zustände statt durch eine empirische Einraten-/gestreckte Exponentialfunktion. Das ist zunächst eine alternative reduzierte Parametrisierung. Ein physikalischer Fortschritt wäre erst gezeigt, wenn die ODE aus einem etablierten poro-viskoelastischen Modell unter klaren Annahmen reduziert wird und gegenüber dessen Vorhersagen bzw. der empirischen Einratenform einen reproduzierbaren Mehrwert liefert.
 
 ### 2.3 Klassische Identifizierbarkeit linearer Kompartimentmodelle
 
