@@ -981,3 +981,5 @@ Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständig
 - [MANUSCRIPT_01_TWO_TIMESCALE_SYNERESIS_PLAN_DE.md](MANUSCRIPT_01_TWO_TIMESCALE_SYNERESIS_PLAN_DE.md) — Arbeitsplan für die erste, eng abgegrenzte Veröffentlichung auf Basis von v0.2.
 
 Die erste Manuskriptarbeit behandelt ausschließlich das reduzierte Zwei-Zeitskalen-Modell der natürlichen Synärese; sie behauptet keinen Beweis des vollständigen 3D-CCFSM.
+
+- [MANUSCRIPT_01_MATHEMATICAL_AUDIT_2026-11-15_DE.md](MANUSCRIPT_01_MATHEMATICAL_AUDIT_2026-11-15_DE.md) — erster interner Algebra-/Code-Audit der v0.2-Kerngleichungen; noch keine externe Begutachtung.
