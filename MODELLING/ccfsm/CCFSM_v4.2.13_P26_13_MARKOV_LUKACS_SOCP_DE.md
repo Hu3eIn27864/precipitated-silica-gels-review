@@ -62,7 +62,7 @@ Die Implementierung konstruiert und prüft exakte Zellzertifikate für vorgegebe
 
 - `ccfsm_p26_13_markov_lukacs_socp.py`: exakte rationale Zellzertifikate und globaler P26.12-Kandidatenaudit.
 - `test_ccfsm_p26_13_markov_lukacs_socp.py`: Randberührung, Nullpolynom, negative Fälle, unabhängiger exakter Minimumvergleich auf rationalem Testgitter und globaler Momenten-Audit.
-- P26.12-Regression korrigiert: rationale Zielmomente werden im Test als `Fraction` statt als binäre Python-Floats notiert. Der CI-Fehler deckte einen Präzisionsverlust auf: P26.12 validierte das Netz über eine Hilfsroutine, die rationale Kanten zunächst in Floats umwandelte, und rationalisierte erst danach. Die Kanten werden nun vor der Validierung exakt übernommen.
+- P26.12 wurde nach einem CI-Fehler korrigiert. Der CI-Fehler deckte einen Präzisionsverlust auf: P26.12 validierte das Netz über eine Hilfsroutine, die rationale Kanten zunächst in Floats umwandelte, und rationalisierte erst danach. Die Kanten werden nun vor der Validierung exakt übernommen.
 
 ## Grenzen
 
