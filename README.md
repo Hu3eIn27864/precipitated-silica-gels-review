@@ -116,3 +116,13 @@ Publication provenance note: the KIT/TVT publication list records two 2011 paper
 CCFSM P27.35 adds an independent Horner-form polynomial interval extension to audit the P27.34 zero-exclusion filter on manufactured cases. Dense point checks are regression tests, not mathematical enclosure proofs; zero inclusion remains unresolved. See [P27.35 specification](MODELLING/ccfsm/CCFSM_v4.2.55_P27_35_POLYNOMIAL_ENCLOSURE_AUDIT_DE.md).
 
 The publication TODO now includes reviewed wording for unpaid, self-initiated research and a cautious description of AI-assisted research workflows. It recommends avoiding promotional “land of unlimited possibilities” phrasing and naming the United States only where a concrete, documented scientific connection exists. See [publication planning](PUBLICATION_TODO_DE.md).
+
+## CCFSM proof roadmap and first manuscript
+
+The consolidated proof/publication status, claim–evidence matrix, and stepwise first-manuscript plan (two-timescale natural syneresis model) are maintained here:
+
+- [CCFSM proof and publication roadmap](MODELLING/ccfsm/CCFSM_PROOF_PUBLICATION_ROADMAP_2026-11-15_DE.md)
+- [CCFSM claim–evidence matrix](MODELLING/ccfsm/CCFSM_CLAIM_EVIDENCE_MATRIX_2026-11-15_DE.md)
+- [First manuscript plan and journal strategy](MODELLING/ccfsm/MANUSCRIPT_01_TWO_TIMESCALE_SYNERESIS_PLAN_DE.md)
+
+The first paper is deliberately scoped to the reduced v0.2 model; it is not a claim that the full coupled CCFSM has been proved or experimentally validated.
