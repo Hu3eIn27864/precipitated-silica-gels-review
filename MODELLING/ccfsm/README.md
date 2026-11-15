@@ -906,3 +906,5 @@ Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständig
 - Bericht: `CCFSM_v4.2.50_P27_30_EVENT_AWARE_TIME_SUPPORT_DE.md`.
 
 **Grenze:** Die Ereigniserkennung kann mehrere Nullstellen zwischen zwei Detektionspunkten übersehen. P27.30 ist eine synthetische Adapter-/Quadraturprüfung, kein vollständiger diskreter Upwind-Entropiebeweis, keine Integration der tatsächlichen P24-Newton-Trajektorie und keine physikalische Validierung.
+
+**CI-Hinweis:** Im Hosted-Workflow [#726](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43741957699) bestanden alle sechs P27.30-Regressionen. Der vollständige CCFSM-Testlauf ist wegen sieben Fehlern/Exceptions in anderen Testbereichen (P27.10, P27.13, P27.17, P27.18, P27.23, P27.28) nicht grün; daher keine Freigabe der Gesamtintegration.
