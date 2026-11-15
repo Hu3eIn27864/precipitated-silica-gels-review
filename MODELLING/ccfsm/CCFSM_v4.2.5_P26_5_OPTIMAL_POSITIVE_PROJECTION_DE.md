@@ -51,11 +51,9 @@ Die Studie vergleicht P26.5 gegen P26.4 für fünf synthetische Fälle: Randunte
 
 ## 6. CI-Referenz und Ergebnisse
 
-GitHub Actions Lauf **#373** erfolgreich; **324/324 Unit-Tests** bestanden. Der P26.5-Studienlauf und der Upload des separaten Ergebnisartefakts waren erfolgreich.
+GitHub Actions Lauf **#374** erfolgreich; **324/324 Unit-Tests** bestanden. Der P26.5-Studienlauf und der Upload des separaten Ergebnisartefakts waren erfolgreich.
 
 Fünf synthetische Fälle wurden gegen P26.4 verglichen. Das Minimum nach P26.5 betrug 0; die maximale absolute Massenänderung betrug 0. Die Summe der absoluten Änderungen des ersten Moments über die fünf Fälle sank von 0.2328275 (P26.4) auf 0.2157950 (P26.5); für das zweite Moment von 0.2439617 auf 0.2215272. In jeweils zwei von fünf Fällen war die betreffende Momentenänderung kleiner. Das ist eine Verbesserung der aggregierten Testmetrik, keine Garantie für jeden Fall oder für beliebige Daten.
 
-- CI-Lauf: https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43673679478
-- Ergebnisartefakt: https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43673679478/artifacts/14145283276
-
-**Hinweis:** Diese CI-Zahlen stammen aus dem P26.5-Lauf vor der reinen Korrektur der Studien-Metadaten. Der Algorithmus und die Tests waren bereits erfolgreich; ein erneuter Lauf nach der Metadatenkorrektur wird separat geprüft.
+- CI-Lauf: https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43673736847
+- Ergebnisartefakt: https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43673736847/artifacts/14144974228
