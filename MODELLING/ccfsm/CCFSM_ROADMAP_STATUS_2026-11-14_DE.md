@@ -471,3 +471,8 @@ Status `locally_manifold_audited` bedeutet, dass alle implementierten lokalen Kr
 P27.11 ergänzt die lokalen PL-Link-Prüfungen um eine exakte geometrische Prüfung der Tetraederinterieurs. Für jedes Elementpaar werden die Normalen der Dreiecksflächen beider Tetraeder sowie Kreuzprodukte der Kantenrichtungs-Paare als Separationsachsen verwendet. Die Projektionsintervalle werden rational und ohne Gleitkomma-Toleranz ausgewertet. Strikt positive Überlappung auf allen nichtverschwindenden SAT-Achsen kennzeichnet eine positive Volumenüberlappung; gemeinsame Flächen-, Kanten- und Knotenberührungen bleiben zulässig. Verschiedene verwendete Knoten-IDs mit identischen Koordinaten werden gesondert gemeldet.
 
 **Aussagegrenze:** Niederdimensionale Schnittmengen nicht inzidenter Simplizes und vollständige Rand-Selbstüberschneidungen werden nicht abschließend klassifiziert. Der paarweise Test ist O(N²). Kein Nachweis für FE-Konditionierung, CCFSM-Zustandspositivität, Energieabschluss oder physikalische Validität.
+
+
+### Gate P27.12 — exakter orientierter Randflächen-Audit
+
+**Implementiert; CI-Freigabe ausstehend.** P27.12 ergänzt P27.11 um gerichtete Randkanteninzidenzen, Randkomponenten, Euler-/Genus-Diagnostik und exakte Volumenbilanz zwischen orientierter Randfläche und Tetraederkomplex. Geschlossene Randkanten müssen zweimal mit entgegengesetzter Richtung auftreten. Die Randvolumensumme wird rational exakt ausgewertet. Dies stärkt die Prüfung der Randketten-Konsistenz, beweist aber weder vollständige Rand-Selbstüberschneidungsfreiheit noch physikalische CCFSM-Positivität oder Energieabschluss.
