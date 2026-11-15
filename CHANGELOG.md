@@ -1044,3 +1044,12 @@
 - Berechnet die P9-lokale FV-Energiedifferenz aus Anfangs- und Endzustand und berichtet P19-FE-Energie, Traktionsarbeit sowie Dirichlet-Reaktionsresiduum separat.
 - Vermeidet einen dimensionswidrigen FE/FV-Energie-Summenwert und behauptet keinen vollständigen globalen diskreten Energieabschluss oder Energie-Monotonie.
 - Ergänzt Regressionstests für geschlossene/offene Siliciumbilanz und die expliziten Statusgrenzen. Softwaretests sind keine physikalische Validierung.
+
+
+## 2026-11-15 — CCFSM P24 unabhängiger Newton-Referenzlöser
+
+- Ergänzt einen gedämpften finite-difference Newton-Löser für dieselbe implizite P21-Gleichung wie P22: (R(x)=x-x^n-\Delta t F_{P21}(x)=0).
+- P19-Mechanik wird in jeder Residuumsauswertung neu gelöst; FE-Druckfeedback ist damit Teil des reduzierten nichtlinearen FV-Operators.
+- Ergänzt Backtracking mit Positivitäts-/Kapazitätsgrenzen und expliziter Nichtannahme bei Singularität, Liniensuchversagen oder Iterationslimit.
+- Ergänzt P22/P24-Vergleich für FV-Zustand und projizierten Druck sowie Regressionstests.
+- Der FD-Jacobian ist eine kleine Referenzmethode; keine Produktionssolver-Effizienz, allgemeine Newton-Konvergenz oder physikalische Validierung wird behauptet. Hosted CI wird separat geprüft.
