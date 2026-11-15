@@ -14,8 +14,7 @@ class TestP2612ExactAffineParameterization(unittest.TestCase):
         target,_=_targets(edges,means,a,b)
         chart=build_exact_affine_parameterization(edges,means,target)
         self.assertEqual(chart["dimension"],2)
-        free=tuple((a+bv) for a,bv in zip(
-            (a[0],b[0]), (b[0],a[1])))
+        free=(Fraction(1,7),Fraction(-1,11))
         linear,quadratic=evaluate_exact_affine_parameterization(chart,free)
         self.assertTrue(verify_affine_candidate(chart,linear,quadratic)["global_moments_exact"])
 
@@ -30,7 +29,7 @@ class TestP2612ExactAffineParameterization(unittest.TestCase):
 
     def test_one_cell_has_zero_dimensional_affine_space(self):
         edges=(0,1); means=(2,)
-        target=(Fraction(2),Fraction(1),Fraction(1,3))
+        target=(Fraction(2),Fraction(1),Fraction(2,3))
         chart=build_exact_affine_parameterization(edges,means,target)
         self.assertEqual(chart["dimension"],0)
         a,b=evaluate_exact_affine_parameterization(chart,())
@@ -41,7 +40,7 @@ class TestP2612ExactAffineParameterization(unittest.TestCase):
             build_exact_affine_parameterization((0,1),(1,),(Fraction(2),Fraction(0),Fraction(0)))
 
     def test_dependent_pivots_rejected(self):
-        target=(Fraction(2),Fraction(1),Fraction(1,3))
+        target=(Fraction(2),Fraction(1),Fraction(2,3))
         with self.assertRaises(ValueError):
             build_exact_affine_parameterization((0,Fraction(1,2),1),(2,2),target,(1,3))
 
