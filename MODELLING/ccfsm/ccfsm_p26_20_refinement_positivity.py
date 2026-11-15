@@ -16,7 +16,9 @@ def verify_cell_certificate(mean, linear, quadratic, certificate):
         m, a, b = map(_F, (mean, linear, quadratic))
         lam = _F(certificate["lambda"])
         Q = certificate["Q"]
-        q00, q01, q11 = _F(Q[0][0]), _F(Q[0][1]), _F(Q[1][1])
+        q00, q01, q10, q11 = _F(Q[0][0]), _F(Q[0][1]), _F(Q[1][0]), _F(Q[1][1])
+        if q01 != q10:
+            return {"verified": False, "reason": "gram_matrix_not_symmetric"}
         determinant = q00 * q11 - q01 * q01
         if lam < 0 or q00 < 0 or q11 < 0 or determinant < 0:
             return {"verified": False, "reason": "non_psd_gram_or_negative_multiplier"}
