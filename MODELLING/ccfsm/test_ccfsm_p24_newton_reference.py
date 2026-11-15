@@ -47,6 +47,7 @@ class TestP24NewtonReference(unittest.TestCase):
         self.assertLessEqual(result["scaled_residual_inf"], 1e-10)
         self.assertTrue(result["positivity_verified"])
         self.assertTrue(result["pressure_snapshot_matches_accepted_state"])
+        self.assertTrue(result["shared_invariant_limiter_used"])
         self.assertAlmostEqual(result["state"].time_s, 1e-12)
 
     def test_newton_and_picard_solve_same_discrete_step(self):
