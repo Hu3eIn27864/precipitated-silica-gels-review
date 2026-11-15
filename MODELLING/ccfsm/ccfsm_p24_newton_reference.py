@@ -121,6 +121,8 @@ def p24_newton_reference_step(
     converged = False
     snapshot = None
     residual_norm = math.inf
+    direction_limit = {"status": "not_needed_initial_convergence", "overall_pass": True,
+                       "limiting_factor": 1.0, "active_constraints": ()}
     for iteration in range(1, int(max_iterations)+1):
         residual, snapshot = evaluate(x)
         residual_norm = _norm_inf(residual)
