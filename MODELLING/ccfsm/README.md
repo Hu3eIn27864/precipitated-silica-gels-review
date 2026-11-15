@@ -629,3 +629,13 @@ P26.19 exactly restricts normalized piecewise-quadratic cell profiles to nested 
 ## CCFSM P26.20 — Positivitätserhalt und unabhängige Zertifikatsprüfung
 
 P26.20 prüft die Positivitätserhaltung bei exakter Restriktion eines nichtnegativen quadratischen Zellprofils auf ein geschachteltes 1-D-Feinmesh. Für jede Kindzelle werden Markov-Lukács-Zertifikate erzeugt und durch einen separaten Fraction-basierten Verifikator unabhängig anhand der Polynomidentität und der PSD-Bedingungen der 2×2-Gram-Matrix geprüft. Die Tests enthalten strikt positive, randberührende und Nullprofile sowie manipulierte Zertifikate. Die Aussage gilt für exakte Restriktion desselben Polynoms, nicht für beliebige Zielprojektionen. Keine 2-D/3-D- oder physikalische Validierung.
+
+
+## P27 — Literaturbasierte physikalische Validierung und 3-D-Positivität
+
+- CCFSM_P27_PHYSICAL_VALIDATION_PROTOCOL_DE.md — Evidenzhierarchie, Daten-Sperren, Cross-Protocol-Holdout und Freigabestufen L0–L4 für eine physikalische Prüfung ohne neue Laborproben. Der aktuelle Befund bleibt ausdrücklich: keine unabhängige Zielsystemvalidierung.
+- CCFSM_v4.2.21_P27_1_TETRA_P1_POSITIVITY_DE.md — exakte 3-D-Tetraedergeometrie und P1-Positivität.
+- ccfsm_p27_1_tetra_p1_positivity.py — rationaler Determinanten-/Volumenprüfer und exakte baryzentrische P1-Positivitätsprüfung für Tetraeder.
+- test_ccfsm_p27_1_tetra_p1_positivity.py — Tests zu Orientierung, degenerierter Geometrie, rationalen Koordinaten, negativen Werten und Mesh-Zellprüfung.
+
+P27.1 beweist lokale Nichtnegativität eines affinen P1-Skalarfeldes auf jedem nichtentarteten Tetraeder genau dann, wenn alle vier Eckwerte nichtnegativ sind. Das ist noch keine Positivitätsgarantie für quadratische/höhere Felder, keinen gekoppelten 3-D-Zeitschritt und keine vollständige CCFSM-Invariantenregion. Der GitHub-Actions-Testlauf muss nach dem Commit geprüft werden.
