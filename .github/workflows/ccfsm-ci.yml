@@ -132,6 +132,15 @@ jobs:
           path: ccfsm-p26-8-results/
           if-no-files-found: error
           retention-days: 30
+      - name: Run P26.9 primal-dual feasibility decision
+        run: python MODELLING/ccfsm/ccfsm_p26_9_primal_dual_feasibility.py --output-dir ccfsm-p26-9-results
+      - name: Upload P26.9 primal-dual feasibility results
+        uses: actions/upload-artifact@v4
+        with:
+          name: ccfsm-p26-9-primal-dual-feasibility-results
+          path: ccfsm-p26-9-results/
+          if-no-files-found: error
+          retention-days: 30
       - name: Upload P26 projection results
         uses: actions/upload-artifact@v4
         with:
