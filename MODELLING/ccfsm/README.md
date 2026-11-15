@@ -642,3 +642,13 @@ P27.1 beweist lokale Nichtnegativität eines affinen P1-Skalarfeldes auf jedem n
 
 - CCFSM_v4.2.22_P27_2_TETRA_P2_BERNSTEIN_DE.md — hinreichende Positivitätszertifikate für quadratische P2-Felder auf Tetraedern.
 - ccfsm_p27_2_tetra_p2_bernstein.py und test_ccfsm_p27_2_tetra_p2_bernstein.py — exakte rationale Umrechnung der vier Eck- und sechs Kantenmittelpunktwerte in zehn Bernstein-Koeffizienten; nur alle nichtnegativen Koeffizienten zertifizieren Positivität. Fehlende Zertifizierung bleibt unentschieden.
+
+
+## P27.3 — Adaptive P2-Positivitätszertifikate auf 3-D-Tetraedern
+
+- `CCFSM_v4.2.23_P27_3_TETRA_P2_SUBDIVISION_DE.md` — exakte Unterteilung eines Tetraeders in acht Kindtetraeder; erneute Bernstein-Zertifizierung auf allen Blättern.
+- `ccfsm_p27_3_tetra_p2_subdivision.py` — rationales Restriktions-/Unterteilungsverfahren mit drei Statuswerten: `certified_nonnegative`, `certified_negative_point` und `unresolved`.
+- `test_ccfsm_p27_3_tetra_p2_subdivision.py` — enthält einen positiven P2-Fall mit negativem Bernstein-Koeffizienten auf dem Ausgangselement, der nach Unterteilung zertifiziert wird, sowie einen exakten negativen Punktzeugen und einen Volumen-/Partitionstest.
+- `LITERATURE/wilhelm_kind_fig9_pore_liquid_audit.csv` — Quellen-Audit zu Figur 9; ausdrücklich noch kein digitalisierter Messpunktdatensatz.
+
+P27.3 macht den Bernstein-Test stärker, aber nicht vollständig: Endliche Tiefe ohne Zertifikat bleibt `unresolved`. Die Figur-9-Daten bleiben bis zur pixelgenauen Digitalisierung und Klärung der Messverzögerung für quantitative Kalibrierung gesperrt.
