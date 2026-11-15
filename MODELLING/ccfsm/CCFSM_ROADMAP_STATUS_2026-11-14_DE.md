@@ -504,3 +504,12 @@ P27.11 ergänzt die lokalen PL-Link-Prüfungen um eine exakte geometrische Prüf
 **Status: implementiert; CI-Prüfung ausstehend.** P24 begrenzt jede Newton-Richtung vor dem Backtracking mit dem gemeinsamen P27.15 fraction-to-boundary-Faktor für Fluidkapazität und M/O/N/B. Die Line-Search darf danach weiter dämpfen. Ein separater FV-Audit prüft lokal \(\dot u=-\mathrm{div}F+S\) und global die Teleskopbilanz. Der P21-Adapter verwendet Darcy-Fluss für Fluidkapazität, Gesamtfluss für M/O und explizit angegebene Quellen für alle fünf Felder; N/B werden als quellengetriebene Felder ohne Transportfluss behandelt.
 
 **Aussagegrenze:** Der Audit verifiziert nur die algebraische Konsistenz der gelieferten diskreten Daten. Quellenvollständigkeit, physikalische Flusskorrektheit, Energieabnahme, Newton-Konvergenz, Zeitschrittstabilität, 3-D-Erhaltung und physikalische Validierung bleiben offen.
+
+
+## P27.17 — prozessgetrennte P21-Konservativitätsprüfung (15.11.2026)
+
+**Status: implementiert; Hosted-CI-Prüfung ausstehend.** P27.17 zerlegt die P21-RHS in Darcy-Fluidkontinuität, M/O-Advektion, Onsager-Diffusion und lokale Reaktionen. Die drei P10-Reaktionsraten werden über die Stöchiometrie \(S_M=-r_1, S_O=r_1-r_2, S_N=r_2-r_3, S_B=r_3\) auf die vier Inventare abgebildet. Geprüft werden lokale Komponentenrekonstruktion, globale Teleskopidentitäten je Flussbeitrag, punktweise Reaktionssummenfreiheit und die Gesamt-Siliciumbilanz gegen die beiden mobilen Randflüsse.
+
+Der P21-Adapter rekonstruiert den diffusen M/O-Fluss als Gesamtfluss minus Advektionsfluss. Dies ist eine Prüfung der diskreten gelieferten Felder, keine unabhängige Neuberechnung des Onsager-Gesetzes. Quellenvollständigkeit, physikalische Korrektheit, Energieabschluss, 3-D-Erhaltung und experimentelle Validierung bleiben offen.
+
+**CI-Hinweis:** Der letzte geprüfte Workflow #635 war fehlgeschlagen (527 Tests, 2 ältere Regressionen: P27.10 unbenutzter Mesh-Knoten und P27.13 erwarteter Fehlerstatus bei ungültigem Mesh). Diese Fehler liegen außerhalb von P27.16/P27.17; der neue P27.17-Lauf ist noch ausstehend.
