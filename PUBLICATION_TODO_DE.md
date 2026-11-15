@@ -70,3 +70,16 @@ Diese Formulierung beschreibt eine Möglichkeit, nicht eine bereits bestehende U
 - [ ] KI-Werkzeuge im Manuskript transparent nach tatsächlichem Einsatz beschreiben (z. B. Rechercheunterstützung, Codeentwurf, Tests, sprachliche Überarbeitung); verwendete Werkzeuge/Versionen und menschliche Prüfung dokumentieren, soweit Journalrichtlinien dies verlangen.
 - [ ] Konkrete Beiträge und Verantwortung menschlicher Autorinnen und Autoren nach den Richtlinien des Zieljournals ausweisen. KI-Systeme nicht als Autor führen.
 - [ ] Eine USA-bezogene Aussage nur aufnehmen, wenn ein konkreter wissenschaftlicher Bezug besteht; ansonsten die allgemeinere internationale Perspektive verwenden.
+
+## PUB-05 — erste Manuskriptarbeit und Journal-Vorauswahl (15.11.2026)
+
+### Erste Arbeit
+
+Der erste Manuskriptkandidat wird bewusst auf CCFSM v0.2 begrenzt: ein reduziertes Zwei-Zeitskalen-Modell, das intrinsisches Netzwerk-Kontraktionspotential und beobachtete hydraulisch-poroelastische Schrumpfung trennt. Geplante mathematische Beiträge sind exakte Lösung (einschließlich Gleichratenlimit), Invarianz-/Monotonieaussagen, strukturelle Nichtidentifizierbarkeit der Ratenlabels und ein unabhängiges Messdesign. Es wird keine vollständige CCFSM-PDE-Existenz oder experimentelle Zweiratenvalidierung behauptet.
+
+### Vorläufige Journalkandidaten
+
+1. **Electronic Journal of Differential Equations (EJDE), primärer Diamond-OA-Kandidat unter Vorbehalt.** Die offizielle Journalinformation nennt ODE/PDE und Anwendungen im Scope, kostenlosen Open-Access-Zugang, CC BY 4.0 und keine Seiten- oder Zugangsgebühren. Die mathematische Neuheit muss jedoch klar nichttrivial sein; eine elementare lineare ODE-Anwendung allein dürfte als Einreichungsgrundlage nicht genügen. Offizielle Information: https://ejde.math.txstate.edu/indexright.html. DOAJ-Metadaten: https://doaj.org/toc/1072-6691.
+2. **Mathematics and Mechanics of Complex Systems (MEMOCS), fachlicher Fallback.** Das Journal verlangt rigorose mathematische Methoden und hat einen deutlichen Mechanikbezug. Es erhebt keine Autorengebühren und ist in MathSciNet, zbMATH, Scopus und Web of Science gelistet; es ist jedoch ein Subskriptionsjournal, dessen Artikel regulär erst sechs Jahre nach Veröffentlichung frei zugänglich werden. Es erfüllt daher nicht das Ziel sofortigen Diamond Open Access. Offizielle Informationen: https://msp.org/memocs/about/journal/about.html und https://msp.org/memocs/about/journal/submissions.html.
+
+**Status:** EJDE ist ein vorläufiger Zielkandidat, keine endgültige Journalentscheidung und keine Annahmeprognose. Nach Fertigstellung und unabhängiger mathematischer Prüfung wird der tatsächliche Beitrag gegen Scope, Neuheitsanspruch, Lizenz und Gebührenmodell geprüft. Einreichung erst nach menschlicher Freigabe.
