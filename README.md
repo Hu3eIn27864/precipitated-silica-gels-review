@@ -102,3 +102,9 @@ CCFSM P27.31 adds bounded adaptive midpoint sampling to expose potential pairs o
 
 
 CCFSM P27.32 adds safeguarded bisection refinement for sign-changing event brackets exposed by P27.31. It reports final time enclosures, flux residuals and convergence status; the guarantee is conditional on continuity and an already detected bracket. It does not certify completeness of adaptive event detection. See [P27.32 specification](MODELLING/ccfsm/CCFSM_v4.2.52_P27_32_SAFEGUARDED_EVENT_REFINEMENT_DE.md).
+
+## Publication planning
+
+Non-blocking publication, authorship-consent, rights-review and Diamond-Open-Access TODOs are tracked in [PUBLICATION_TODO_DE.md](PUBLICATION_TODO_DE.md). This note does not imply any agreed coauthorship, institutional endorsement or journal selection.
+
+CCFSM P27.33 adds a local quadratic candidate search for tangential flux roots that do not change sign. Candidate times are evaluated in the original flux and reported separately from sign-change roots; this is a diagnostic heuristic, not certified root isolation. See [P27.33 specification](MODELLING/ccfsm/CCFSM_v4.2.53_P27_33_TANGENTIAL_EVENT_DETECTION_DE.md).
