@@ -52,13 +52,19 @@ def project_linear_moments(source_edges, source_averages, source_slopes, target_
                 cs=0.5*(se[j]+se[j+1])
                 mass += u[j]*(b-a)+0.5*s[j]*((b-cs)**2-(a-cs)**2)
                 # Integral (x-center)*(u_j+s_j*(x-cs)) dx
-                centered_first += 0.5*u[j]*((b-center)**2-(a-center)**2)
-                centered_first += s[j]*((b**3-a**3)/3.0-(center+cs)*(b*b-a*a)/2.0+center*cs*(b-a))
+                ra, rb = a-center, b-center
+                centered_first += 0.5*u[j]*(rb*rb-ra*ra)
+                offset = center-cs
+                centered_first += s[j]*((rb**3-ra**3)/3.0 + 0.5*offset*(rb*rb-ra*ra))
                 covered += b-a
             if se[j+1]>=right: break
             j+=1
         if abs(covered-width)>10*tol: raise ValueError("target cell not fully covered")
         means.append(mass/width)
+        scale_moment=max(1e-300, abs(mass)*width, max(abs(v) for v in u)*width*width,
+                         max(abs(v) for v in s)*width**3)
+        if abs(centered_first) <= 64.0*math.ulp(1.0)*scale_moment:
+            centered_first=0.0
         slopes.append(12.0*centered_first/(width**3))
     return tuple(means),tuple(slopes)
 
