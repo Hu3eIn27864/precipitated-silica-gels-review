@@ -49,6 +49,15 @@ jobs:
           path: ccfsm-p25-results/
           if-no-files-found: error
           retention-days: 30
+      - name: Run P25.1 conservative cross-mesh refinement study
+        run: python MODELLING/ccfsm/ccfsm_p25_1_refinement_study.py --output-dir ccfsm-p25-1-results
+      - name: Upload P25.1 cross-mesh results
+        uses: actions/upload-artifact@v4
+        with:
+          name: ccfsm-p25-1-crossmesh-results
+          path: ccfsm-p25-1-results/
+          if-no-files-found: error
+          retention-days: 30
       - name: Upload v0.5 calibration results
         uses: actions/upload-artifact@v4
         with:
