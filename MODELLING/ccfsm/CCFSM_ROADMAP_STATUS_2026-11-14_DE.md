@@ -296,3 +296,12 @@ P26.11 verallgemeinert die P26.10-Pivotkorrektur von einer Pivotzelle auf belieb
 ## P26.12 — exakte affine Parametrisierung des Momentenraums
 
 P26.12 stellt den vollständigen affinen Lösungsraum der globalen Erst-/Zweitmomentbedingungen dar. Für N Zellen sind 2N Modenkoordinaten vorhanden; bei Rang zwei der Momentenmatrix werden zwei unabhängige Pivotkoordinaten exakt aus den verbleibenden 2N−2 freien Koordinaten rekonstruiert. Die affine Parametrisierung ist bijektiv und rational. Eine rationale Gittersuche im freien Raum liefert bei Erfolg exakte positive Primärzeugen, ist aber endlich und kein vollständiger Positivitäts-Machbarkeitsalgorithmus. Kein Treffer bleibt unresolved; Unzulässigkeit darf nur durch ein gültiges Dualzertifikat behauptet werden. Geltungsbereich: 1-D, feste Zellmittelwerte, quadratische Rekonstruktionen; keine physikalische Validierung.
+
+
+## P26.13 — exakte Markov-Lukács-Zertifikate und konvexe Kegelformulierung
+
+P26.13 stellt die kontinuierliche Nichtnegativität eines quadratischen Zellpolynoms auf \\([-1/2,1/2]\\) exakt als
+\\[
+u(x)=[1,x]Q[1,x]^T+\\lambda(1/4-x^2),\\quad Q\\succeq0,\\;\\lambda\\ge0
+\\]
+dar. Für 2x2-Matrizen wird PSD durch drei rationale Ungleichungen geprüft. Die optimale Intervallvariable \\(\\lambda\\) wird analytisch aus einer konkaven quadratischen Funktion gewählt; der resultierende Zellzeuge ist exakt rational. In Verbindung mit P26.12 entsteht eine endlichdimensionale konvexe SOCP-/2x2-PSD-Machbarkeitsformulierung. Implementiert ist die exakte Zertifikatskonstruktion und Kandidatenprüfung, **noch kein globaler SOCP-Optimierer**. Die P26.12-CI-Regression wurde korrigiert: die Testmomente 7/6 und 11/9 waren zuvor als Python-Floats statt als rationale \`Fraction\`-Werte notiert, wodurch der Massengleichheitstest scheiterte. Softwareprüfung läuft; keine physikalische Validierung.
