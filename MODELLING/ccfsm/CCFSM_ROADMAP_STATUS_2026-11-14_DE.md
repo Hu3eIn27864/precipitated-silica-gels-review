@@ -415,3 +415,12 @@ P26.20 verbindet die exakte Profilrestriktion aus P26.19 mit den lokalen Markov-
 - Figure 9 ist eine zusätzliche Observable im Zielsystem, aber keine unabhängige Laborreplikation.
 
 **Nächster Schritt:** hochauflösende Pixel-Digitalisierung mit Unsicherheitsintervallen und Prüfung der Fehlerbalken-/Probenahmedefinition; erst dann ein eigener chemischer Holdout.
+
+
+## P27.4 — unabhängige Verifikation und Figure-9-Ablese-Audit (15.11.2026)
+
+**P27.4 implementiert:** Ein separates Modul ohne Import des P27.3-Konstruktors/P27.2-Umrechners rekonstruiert die exakten lokalen Bernstein-Koeffizienten, prüft vollständige Blattpfade, Mutationsfälle und exakte Negativpunktzeugen. Die P27.3-Ausgabe enthält dazu Blattdatensätze. Die neue Prüfschicht bestätigt nur das vorgelegte Zertifikat; sie macht aus dem hinreichenden Bernstein-Kriterium keinen vollständigen Positivitätstest.
+
+**Figure 9:** 39 Markerzentren wurden als manuelle, grobe Arbeitsablesung in `LITERATURE/wilhelm_kind_fig9_digitized_approx_2026-11-15.csv` erfasst. Markerableseunsicherheit ist ausgewiesen; publizierte Fehlerbalken wurden nicht separat digitalisiert. Die hoch liegenden sauren 60-°C-Marker bleiben erhalten. Alle Punkte sind weiterhin für quantitative Fits gesperrt, bis eine pixelkalibrierte Zweitablesung und das chemische Beobachtungsmodell vorliegen.
+
+**Freigabegrenze:** P27.4 ist Software-Verifikation, nicht physikalische Validierung. Figure 9 ist ein zusätzlicher Observable-Zweig innerhalb derselben Studie, keine unabhängige Replikation.
