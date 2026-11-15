@@ -6,7 +6,7 @@ class TestP264PositiveTarget(unittest.TestCase):
         ap,bp,t,before,after=positive_target_coefficients(1.,4.,0.)
         self.assertLess(before,0); self.assertGreaterEqual(after,0); self.assertLess(t,1); self.assertAlmostEqual(ap/4,t); self.assertEqual(bp,0)
     def test_interior_vertex_undershoot_removed(self):
-        ap,bp,t,before,after=positive_target_coefficients(.2,0.,2.)
+        ap,bp,t,before,after=positive_target_coefficients(.2,0.,3.)
         self.assertLess(before,0); self.assertGreaterEqual(after,0); self.assertGreaterEqual(.2+quadratic_minimum(ap,bp),0)
     def test_positive_polynomial_unchanged(self):
         self.assertEqual(positive_target_coefficients(1.,.2,.1)[:3],(.2,.1,1.))
