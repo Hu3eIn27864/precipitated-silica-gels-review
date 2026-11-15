@@ -665,3 +665,12 @@ P27.3 macht den Bernstein-Test stärker, aber nicht vollständig: Endliche Tiefe
 
 - `../..` siehe `LITERATURE/wilhelm_kind_fig9_digitized_approx_2026-11-15.csv` (im Repository unter `LITERATURE/`) enthält 39 grob abgelesene Markerzentren mit expliziter Ableseunsicherheit; Fehlerbalken sind nicht rekonstruiert und alle Punkte bleiben für Fits gesperrt.
 - Messmodell-/Quellen-Audit: `CCFSM_P27_FIG9_DIGITIZATION_AUDIT_2026-11-15_DE.md`.
+
+
+## P27.5 — exakter Mesh-Konformitäts-Audit
+
+- `ccfsm_p27_5_tetra_mesh_conformity.py` rekonstruiert aus P27.3-Blattdaten die exakten Dreieckszerlegungen gemeinsamer grober Elementflächen und vergleicht Nachbarelemente.
+- Erkennt nicht übereinstimmende Face-Triangulierungen (Hanging Faces), nicht-manifold grobe Flächen und ungültige Partitionseingaben.
+- `test_ccfsm_p27_5_tetra_mesh_conformity.py` prüft unverfeinerte, beidseitig verfeinerte und einseitig verfeinerte Nachbarflächen sowie Fehlerfälle.
+- Spezifikation: `CCFSM_v4.2.25_P27_5_MESH_CONFORMITY_DE.md`.
+- Audit-Prüfer, kein konformer Refinement-Algorithmus und keine globale 3D-Positivitätsgarantie.
