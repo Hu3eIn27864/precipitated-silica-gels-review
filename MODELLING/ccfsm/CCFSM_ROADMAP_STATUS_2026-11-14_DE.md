@@ -520,3 +520,12 @@ Der P21-Adapter rekonstruiert den diffusen M/O-Fluss als Gesamtfluss minus Advek
 **Status: implementiert; Hosted-CI-Prüfung ausstehend.** P27.18 baut den Onsager-Diffusionsfluss für M/O unabhängig aus den Zellkonzentrationen, chemischen Potentialen, logarithmischen Mittelwerten, \(\theta_f\), \(D\), \(RT\) und Zellabständen neu auf. Reservoir-Randflächen werden mit halben Zellabständen berücksichtigt. Die unabhängig berechneten Flüsse werden mit P13/P21 \(J_{total}-J_{adv}\) verglichen; die Diffusionsdissipation wird separat neu berechnet und mit P13 verglichen. P13 exportiert dafür die nötigen Diagnosegrößen; ein Snapshot-Adapter führt den Audit direkt aus.
 
 **Aussagegrenze:** Die Rekonstruktion ist unabhängig vom gespeicherten Gesamtfluss, nutzt aber die bereitgestellten chemischen Potentiale/Konzentrationen und Parameter. Keine unabhängige chemische Herleitung, Parametervalidierung, Advektions-Entropiegarantie, 3-D-Erhaltung oder experimentelle Validierung.
+
+
+## P27.19 — integrierter thermodynamischer Konsistenz-Ledger (15.11.2026)
+
+**Status: implementiert; Hosted-CI-Prüfung ausstehend.** P27.19 ergänzt einen expliziten Ledger für die dimensionskonsistente Bilanz `E_dot = P_external - D_total`. Energieraten, nichtnegative Dissipationen und äußere Leistungen werden getrennt summiert; das unabhängige Energiebilanzresiduum wird mit Toleranz ausgewiesen. Optionale Gates prüfen den P27.18-Onsager-Auditstatus, Reaktionsprodukte (r_i A_i\geq0) und die Darcy-Konstitutivitätsbeziehung auf inneren Flächen. Neun Regressionen decken offene/geschlossene Bilanzen, Defekt- und Vorzeichenfehler ab.
+
+**Aussagegrenze:** Noch kein automatischer P10/P13/P19/P21-Snapshot-Adapter. Insbesondere dürfen P19-Energie (J), P10-Reaktionsdissipation (W/m³) und FV-Dissipationen (W/m²) nicht ohne Geometrie-/Querschnittsabbildung addiert werden. Die Ableitung aller Terme aus einer gemeinsamen freien Energie, ein vollständiger diskreter Energieabschluss, PDE-Sätze und physikalische Validierung bleiben offen.
+
+**Nächster Schritt P27.20:** dimensionskonsistenter Snapshot-Adapter auf Basis zweier zeitlich konsistenter Zustände, zunächst 1-D-FV-Energieänderung und separat bilanzierter P19-Mechanik inklusive Rand-/Dirichlet-Arbeit.
