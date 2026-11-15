@@ -89,3 +89,10 @@ CCFSM P27.25–P27.28 extend the accepted-step boundary-work audit from snapshot
 
 
 CCFSM P27.29 adds synthetic sign-changing advective boundary fluxes to exercise left/right upwind-potential switching and reports separate boundary-work and material quadrature errors under time-support refinement. This is an adapter-level verification, not a full entropy-chain-rule proof or physical validation. See [P27.29 specification](MODELLING/ccfsm/CCFSM_v4.2.49_P27_29_UPWIND_BRANCH_REFINEMENT_DE.md).
+
+
+CCFSM P27.30 adds event-aware time support: sampled sign-changing boundary fluxes are used to locate zero crossings by piecewise-linear interpolation, and detected events are inserted into the uniform time grid before P27.25 reconstruction. Uniform and event-aligned quadrature errors are reported separately for chemical boundary work and material transfer. This remains a synthetic adapter-level verification, not a full entropy proof or physical validation. See [P27.30 specification](MODELLING/ccfsm/CCFSM_v4.2.50_P27_30_EVENT_AWARE_TIME_SUPPORT_DE.md).
+
+## Acknowledgements
+
+The authors acknowledge the use of **ChatGPT, an AI assistant developed by OpenAI**, for assistance with research planning, technical discussion, code drafting, test design, and documentation. All scientific claims, calculations, source interpretations, code changes, and final conclusions require human review and remain the responsibility of the project authors. ChatGPT/OpenAI is not represented as a human author, and this acknowledgement does not imply endorsement by OpenAI.
