@@ -265,3 +265,8 @@ P26.6 implementiert die global gekoppelte Projektion mit Dykstras Algorithmus: f
 ## P26.6.1 — feasibility diagnostics
 
 Added a three-way feasibility classification: converged numerical feasible witness; exact single-cell infeasibility certificate from the unique moment-to-mode map; unresolved multi-cell nonconvergence. Generic multi-cell nonconvergence is not treated as proof of infeasibility. Regression coverage updated.
+
+
+## P26.7 — dualer Machbarkeitstest
+
+P26.7 ergänzt eine Supportfunktionsdiagnose: erreichbare globale Modenmomente bilden eine Minkowski-Summe zellweiser konvexer Positivitätsmengen. Ein gefundener positiver Trennungsabstand wird als numerischer dualer Zeuge ausgegeben. Gleitkommaarithmetik und endliche Winkel-/Randoptimierung bedeuten, dass noch kein formal intervallverifiziertes Unzulässigkeitszertifikat vorliegt. Kein Separator ist kein Machbarkeitsbeweis.
