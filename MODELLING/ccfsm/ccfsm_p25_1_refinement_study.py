@@ -86,7 +86,7 @@ def _norms(coarse, fine_restricted, dx):
 
 
 def _solve(solver, state, dt, inputs, **kwargs):
-    grid, chemistry, mechanics, quad, dbc = inputs
+    grid, chemistry, mechanics, _initial_state, quad, dbc = inputs
     common = (state, dt, grid, mechanics, chemistry, (0.0, 0.0),
               EXTERNAL_PRESSURE_PA, quad, dbc)
     if solver == "P22":
