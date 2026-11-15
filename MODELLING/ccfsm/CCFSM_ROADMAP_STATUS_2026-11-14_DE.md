@@ -138,7 +138,7 @@ P22.1 is implemented and its hosted CI is green.
 - Zeitfolge 1/2/4/8/16 und Raumfolge 1/2/4/8; P23-Bilanz, P22/P24-Gleichnetzvergleich und Druck-/Darcy-Gradient werden separat ausgewiesen.
 - Empirische Raten gegen die feinste numerische Referenz bleiben Diagnostik, kein mathematischer Konvergenzbeweis.
 
-**Status:** Teilfreigabe nach CI-/Artefaktprüfung. Run [#306](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43670581772) erfolgreich; 278 Tests. Auf N=1/2/4 gegen N=8 sinken die relativen Zustands-L2-Fehler von 1.56e-7 auf 3.56e-8 und 9.70e-9; Druck-L2-Fehler von 1.35e-4 auf 2.91e-5 und 5.92e-6. Die ersten paarweisen Raumraten liegen bei ca. 1.9–2.3. P23-Siliciumbilanz in allen Fällen verifiziert; interner Druckgradient ab N=2 und Darcy-Fluss nachgewiesen. Siehe `CCFSM_v4.1_P25_1_RESULTS_DE.md`. Die Raten sind Diagnostik gegen eine numerische Referenz, kein Konvergenzbeweis.
+**Status:** Teilfreigabe nach CI-/Artefaktprüfung. Run [#306](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43670669824) erfolgreich; 278 Tests. Auf N=1/2/4 gegen N=8 sinken die relativen Zustands-L2-Fehler von 1.56e-7 auf 3.56e-8 und 9.70e-9; Druck-L2-Fehler von 1.35e-4 auf 2.91e-5 und 5.92e-6. Die ersten paarweisen Raumraten liegen bei ca. 1.9–2.3. P23-Siliciumbilanz in allen Fällen verifiziert; interner Druckgradient ab N=2 und Darcy-Fluss nachgewiesen. Siehe `CCFSM_v4.1_P25_1_RESULTS_DE.md`. Die Raten sind Diagnostik gegen eine numerische Referenz, kein Konvergenzbeweis.
 
 ### Gate E — P26: FE/FV-Abbildung und Geometrie
 
