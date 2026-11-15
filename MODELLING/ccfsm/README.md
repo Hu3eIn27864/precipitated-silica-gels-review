@@ -954,3 +954,13 @@ Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständig
 - Bericht: `CCFSM_v4.2.55_P27_35_POLYNOMIAL_ENCLOSURE_AUDIT_DE.md`.
 
 **Grenze:** Dichte Punktabtastungen sind nur Regressionen, kein Einschließungsbeweis. Null-Inklusion beweist keine Nullstelle; keine allgemeine Intervallfortsetzung realer Flüsse, keine vollständige Root-Isolation und keine physikalische Validierung.
+
+
+## CCFSM P27.36 — Ableitungsvorzeichen und eindeutige Polynom-Nullstellen
+
+- `ccfsm_p27_36_monotone_polynomial_root.py` leitet Polynomkoeffizienten ab und klassifiziert Nullstellen über eine Intervall-Einschließung der Ableitung sowie strikt eingeschlossene Endpunktvorzeichen.
+- Bei Ableitung mit strengem Vorzeichen und entgegengesetzten Endpunktvorzeichen wird genau eine innere Nullstelle klassifiziert; bei gleichen strikten Vorzeichen keine Nullstelle.
+- Acht Regressionen decken steigende/fallende lineare Polynome, Nullstellenfreiheit, tangentiale ungelöste Fälle, Randnullstellen und ungültige Eingaben ab.
+- Bericht: `CCFSM_v4.2.56_P27_36_MONOTONE_POLYNOMIAL_ROOT_DE.md`.
+
+**Grenze:** Bedingte Intervallzertifizierung für Polynome; abhängig von gültiger nach außen gerundeter Intervallarithmetik. Keine tangentiale Nullstellenexistenz, keine Vollständigkeit der vorgelagerten Ereignisabtastung, keine allgemeine Flussfortsetzung und keine physikalische Validierung.
