@@ -109,13 +109,15 @@ def audit_tetra_mesh_links(vertices, tetrahedra, *, min_quality_ratio=0):
     used=sorted({v for tet in tets for v in tet})
     all_edges=sorted({tuple(sorted(e)) for tet in tets for e in combinations(tet,2)})
     vertex_links={v:_vertex_link_report(v,tets,v in boundary_vertices) for v in used}
+    for v in base["isolated_vertex_indices"]:
+        vertex_links[v]={"status":"invalid_link","reason":"isolated_vertex_has_empty_link"}
     edge_links={e:_edge_link_report(e,tets,boundary_edges) for e in all_edges}
     bad_vertices=tuple(v for v,r in vertex_links.items() if r["status"]!="link_ok")
     bad_edges=tuple(e for e,r in edge_links.items() if r["status"]!="link_ok")
     status="locally_manifold_audited" if not bad_vertices and not bad_edges else "link_inconsistent"
     return {"status":status,"vertex_link_reports":vertex_links,"edge_link_reports":edge_links,
             "invalid_vertex_links":bad_vertices,"invalid_edge_links":bad_edges,
-            "vertex_count_checked":len(used),"edge_count_checked":len(all_edges),
+            "vertex_count_checked":len(vertex_links),"edge_count_checked":len(all_edges),\n            "isolated_vertex_indices":base["isolated_vertex_indices"],
             "base_incidence_audit":base,
             "vertex_link_criterion":"connected triangulated 2-sphere (interior) or 2-disk (boundary), edge incidences <=2 and Euler characteristic 2 or 1",
             "edge_link_criterion":"connected cycle (interior) or path (boundary)",
