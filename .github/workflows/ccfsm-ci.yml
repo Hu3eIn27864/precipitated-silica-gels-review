@@ -78,6 +78,15 @@ jobs:
           path: ccfsm-p26-2-results/
           if-no-files-found: error
           retention-days: 30
+      - name: Run P26.3 refinement and sensitivity study
+        run: python MODELLING/ccfsm/ccfsm_p26_3_refinement_study.py --output-dir ccfsm-p26-3-results
+      - name: Upload P26.3 refinement results
+        uses: actions/upload-artifact@v4
+        with:
+          name: ccfsm-p26-3-refinement-results
+          path: ccfsm-p26-3-results/
+          if-no-files-found: error
+          retention-days: 30
       - name: Upload P26 projection results
         uses: actions/upload-artifact@v4
         with:
