@@ -21,7 +21,7 @@ def solve_global_convex_feasibility(target_edges, averages, linear, quadratic,
         raise ValueError("at least one cell and nonnegative fixed means required")
     if len(weights)!=2 or any(not float(v)>0 for v in weights):
         raise ValueError("two positive modal weights required")
-    target=_targets(edges,means,a0,b0)
+    target,_modal_rhs=_targets(edges,means,a0,b0)
     try:
         projected,projection=globally_coupled_positive_projection(
             edges,means,a0,b0,weights=weights,max_iterations=max_iterations,tolerance=tolerance)
