@@ -908,3 +908,13 @@ Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständig
 **Grenze:** Die Ereigniserkennung kann mehrere Nullstellen zwischen zwei Detektionspunkten übersehen. P27.30 ist eine synthetische Adapter-/Quadraturprüfung, kein vollständiger diskreter Upwind-Entropiebeweis, keine Integration der tatsächlichen P24-Newton-Trajektorie und keine physikalische Validierung.
 
 **CI-Hinweis:** Im Hosted-Workflow [#726](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43741957699) bestanden alle sechs P27.30-Regressionen. Der vollständige CCFSM-Testlauf ist wegen sieben Fehlern/Exceptions in anderen Testbereichen (P27.10, P27.13, P27.17, P27.18, P27.23, P27.28) nicht grün; daher keine Freigabe der Gesamtintegration.
+
+
+## CCFSM P27.31 — adaptive Ereignisabtastung für Randfluss-Nullstellen
+
+- `ccfsm_p27_31_adaptive_event_detection.py` ergänzt P27.30 um begrenzte rekursive Mittelpunktabtastung bei Vorzeichenwechseln oder signifikanter Mittelpunkt-Krümmungsabweichung.
+- Der P27.30-Nullstelleninterpolator lokalisiert Ereignisse im adaptiv erzeugten Zeitgitter; ein Testfall mit zwei Nullstellen bei gleichem Vorzeichen der groben Intervallenden prüft die zusätzliche Erkennungsfähigkeit.
+- `test_ccfsm_p27_31_adaptive_event_detection.py` enthält sechs Regressionen.
+- Bericht: `CCFSM_v4.2.51_P27_31_ADAPTIVE_EVENT_DETECTION_DE.md`.
+
+**Grenze:** Heuristik mit begrenzter Rekursionstiefe, kein zertifizierter Nullstellenisolator; keine Garantie für beliebig oszillatorische Flüsse, keine vollständige Upwind-Entropie-Kettenregel, keine P24-Trajektorienintegration und keine physikalische Validierung.
