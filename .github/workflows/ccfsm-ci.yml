@@ -123,6 +123,15 @@ jobs:
           path: ccfsm-p26-7-results/
           if-no-files-found: error
           retention-days: 30
+      - name: Run P26.8 verified dual certificates
+        run: python MODELLING/ccfsm/ccfsm_p26_8_verified_dual_certificate.py --output-dir ccfsm-p26-8-results
+      - name: Upload P26.8 verified dual certificate results
+        uses: actions/upload-artifact@v4
+        with:
+          name: ccfsm-p26-8-verified-dual-certificates
+          path: ccfsm-p26-8-results/
+          if-no-files-found: error
+          retention-days: 30
       - name: Upload P26 projection results
         uses: actions/upload-artifact@v4
         with:
