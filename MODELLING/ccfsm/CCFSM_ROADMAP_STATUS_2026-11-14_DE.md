@@ -476,3 +476,10 @@ P27.11 ergänzt die lokalen PL-Link-Prüfungen um eine exakte geometrische Prüf
 ### Gate P27.12 — exakter orientierter Randflächen-Audit
 
 **Implementiert; CI-Freigabe ausstehend.** P27.12 ergänzt P27.11 um gerichtete Randkanteninzidenzen, Randkomponenten, Euler-/Genus-Diagnostik und exakte Volumenbilanz zwischen orientierter Randfläche und Tetraederkomplex. Geschlossene Randkanten müssen zweimal mit entgegengesetzter Richtung auftreten. Die Randvolumensumme wird rational exakt ausgewertet. Dies stärkt die Prüfung der Randketten-Konsistenz, beweist aber weder vollständige Rand-Selbstüberschneidungsfreiheit noch physikalische CCFSM-Positivität oder Energieabschluss.
+
+
+### P27.13 — integrierter 3D-Netz-Gesamtaudit
+
+**Implementiert; CI-Freigabe ausstehend.** P27.13 fasst P27.8–P27.12 in einer Prüfkette zusammen. Der Bericht weist Orientierung/Formqualität, globale Inzidenz, lokale Links, geometrische Paarprüfung und Randorientierung/Volumenbilanz als getrennte Gates aus. Ein Gate-Fehler stoppt die Kette kontrolliert; die Diagnose bleibt erhalten. Regressionen decken Einzelelement, gemeinsame Fläche, getrennte Komponenten, Qualitätsgrenze und Duplikate ab.
+
+**Freigabegrenze:** Ein positives Gesamtergebnis ist ein Software-Audit der konkret implementierten Prüfungen. Wegen der bekannten Grenzen des paarweisen SAT-/Randtests ist es kein vollständiger globaler Einbettungsbeweis und keine Garantie für FE-Konditionierung, CCFSM-Positivität, Energieabschluss oder physikalische Validität.
