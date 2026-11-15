@@ -223,6 +223,9 @@ def spatial_refinement(final_time_s=FINAL_TIME_S):
                 "theta_min": min(coarse_theta), "theta_max": max(coarse_theta),
                 "inventory_min": min(v for row in coarse_fields for v in row),
             }
+            if cells >= 2 and (pressure_span <= 0.0 or
+                               max(abs(v) for v in darcy) <= 0.0):
+                raise RuntimeError("P25.1 pressure/Darcy gradient stress case was not activated")
             rows.append(row)
             errors.append((cells, state_error["relative_l2"],
                            pressure_error["relative_l2"]))
