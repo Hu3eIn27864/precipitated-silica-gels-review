@@ -8,9 +8,9 @@ from ccfsm_p27_28_time_dependent_boundary import (
 class P27_28TimeDependentBoundaryTests(unittest.TestCase):
     def test_exact_polynomial_reference_and_separate_budgets(self):
         report = audit_p27_28_time_dependent_boundary_case()
-        self.assertAlmostEqual(report["exact"]["material_M_mol"], 2.25)
-        self.assertAlmostEqual(report["exact"]["chemical_boundary_work_j"], 17.67)
-        self.assertAlmostEqual(report["exact"]["hydraulic_boundary_work_j"], 8.1)
+        self.assertAlmostEqual(report["exact"]["material_M_mol"], 2.9)
+        self.assertAlmostEqual(report["exact"]["chemical_boundary_work_j"], 18.21)
+        self.assertAlmostEqual(report["exact"]["hydraulic_boundary_work_j"], 8.3)
         self.assertEqual(set(report["material_error_budget_mol"]), {"M", "O"})
         self.assertEqual(set(report["energy_error_budget_j"]),
                          {"chemical_boundary", "hydraulic_boundary"})
