@@ -11,7 +11,7 @@ Für m>0 besteht der Rand aus zwei geraden Segmenten mit Eckpunkten (0,-6m), (-3
 a=sqrt(12)m sin(phi), b=6m(1+cos(phi)), |phi|<=2pi/3.
 
 Für eine lineare Richtung (p,q) ist die Supportfunktion das Maximum aus dem unteren Eckpunkt und dem Ellipsenbogen. Mit P=sqrt(12)m p und Q=6m q liegt der unbeschränkte Kreisbogenmaximierer im zulässigen Bogen genau dann, wenn |p| >= 3|q|. Daraus folgt:
-- wenn |p| >= 3|q|: h = max(-6mq, 6m[q + sqrt(q^2+p^2/3)]);
+- wenn q >= 0 oder |p| >= 3|q|: h = max(-6mq, 6m[q + sqrt(q^2+p^2/3)]);
 - andernfalls: h = max(-6mq, 3m[|p|+q]).
 Die Formel ist geschlossen und vermeidet Winkelsuche.
 
