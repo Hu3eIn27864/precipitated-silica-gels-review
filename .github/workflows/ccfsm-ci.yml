@@ -87,6 +87,15 @@ jobs:
           path: ccfsm-p26-3-results/
           if-no-files-found: error
           retention-days: 30
+      - name: Run P26.4 positive target reconstruction
+        run: python MODELLING/ccfsm/ccfsm_p26_4_positive_target.py --output-dir ccfsm-p26-4-results
+      - name: Upload P26.4 positive target results
+        uses: actions/upload-artifact@v4
+        with:
+          name: ccfsm-p26-4-positive-target-results
+          path: ccfsm-p26-4-results/
+          if-no-files-found: error
+          retention-days: 30
       - name: Upload P26 projection results
         uses: actions/upload-artifact@v4
         with:
