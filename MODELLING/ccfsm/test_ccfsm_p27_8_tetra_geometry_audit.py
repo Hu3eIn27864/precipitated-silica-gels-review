@@ -27,7 +27,7 @@ class TestP278(unittest.TestCase):
         self.assertEqual(normalize_and_audit_tetra_mesh(self.simple,((0,1,2,3),),min_quality_ratio=2)["status"],"invalid")
         self.assertEqual(normalize_and_audit_tetra_mesh(self.simple,((0,1,1,3),))["status"],"invalid")
     def test_mixed_orientation_batch(self):
-        r=normalize_and_audit_tetra_mesh(self.simple+((2,0,0),),((0,1,2,3),(1,0,2,4)))
+        r=normalize_and_audit_tetra_mesh(self.simple+((0,0,-1),),((0,1,2,3),(1,0,2,4)))
         self.assertEqual(r["status"],"oriented_quality_audited"); self.assertTrue(all(v>0 for v in r["element_signed_six_volumes"]))
 
 if __name__=="__main__": unittest.main()
