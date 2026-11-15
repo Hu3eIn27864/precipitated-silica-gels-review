@@ -226,8 +226,7 @@ def main():
     parser.add_argument("--output-dir", default="ccfsm-p25-results")
     args = parser.parse_args()
     summary = run_study(args.output_dir)
-    print(json.dumps({k: v for k, v in summary.items()
-                      if k != "all_reported_rows"}, indent=2))
+    print(json.dumps(summary, indent=2, allow_nan=False))
 
 
 if __name__ == "__main__":
