@@ -56,12 +56,16 @@ def p13_chemical_potential_transport(
     concentrations = tuple(tuple(fields[i][j]/theta[j] for j in range(n))
                            for i in range(2))
     new_rhs = [list(row) for row in base["inventory_dot"]]
-    face_fluxes, dissipation, advective_fluxes = [], [], []
+    face_fluxes, dissipation, advective_fluxes, chemical_potentials = [], [], [], []
+    reservoir_mu_left, reservoir_mu_right = [], []
 
     for species in range(2):
         c = concentrations[species]
         mu = tuple(mu0[species] + rt*math.log(
             gamma[species]*v/cref) for v in c)
+        chemical_potentials.append(mu)
+        reservoir_mu_left.append(mu0[species] + rt*math.log(gamma[species]*c_left[species]/cref))
+        reservoir_mu_right.append(mu0[species] + rt*math.log(gamma[species]*c_right[species]/cref))
         q = base["darcy_flux_faces_m_s"]
         adv = [0.0]*(n+1)
         adv[0] = q[0]*(c_left[species] if q[0] > 0 else c[0])
@@ -114,6 +118,16 @@ def p13_chemical_potential_transport(
         "mobile_species_face_fluxes_mol_m2_s": tuple(face_fluxes),
         "mobile_species_advective_face_fluxes_mol_m2_s": tuple(advective_fluxes),
         "mobile_species_onsager_diffusive_dissipation_w_m2": tuple(dissipation),
+        "mobile_species_concentration_mol_m3": concentrations,
+        "mobile_species_chemical_potential_j_mol": tuple(chemical_potentials),
+        "onsager_reservoir_concentration_left_mol_m3": c_left,
+        "onsager_reservoir_concentration_right_mol_m3": c_right,
+        "onsager_reservoir_chemical_potential_left_j_mol": tuple(reservoir_mu_left),
+        "onsager_reservoir_chemical_potential_right_j_mol": tuple(reservoir_mu_right),
+        "onsager_fluid_capacity": theta,
+        "onsager_diffusivities_m2_s": d,
+        "onsager_rt_j_mol": rt,
+        "onsager_grid_spacing_m": dx,
         "diffusion_flux_form": "J_diff = -theta_face*D*logmean(cL,cR)/(R*T) * grad(mu)",
         "discrete_diffusion_dissipation_nonnegative": all(v >= 0 for v in dissipation),
         "advection_entropy_closure_established": False,
