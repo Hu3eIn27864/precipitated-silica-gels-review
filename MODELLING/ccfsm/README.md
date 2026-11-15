@@ -400,3 +400,11 @@ Der geprüfte Stand P0–P22, der P22-Fixpunktresiduum-Audit und die Freigabegat
 - Der Positivitäts-Limiter beachtet zusätzlich die obere Fluidkapazitätsgrenze `theta <= 1`.
 - Regressionstests decken Scheinkonvergenz bei kleiner Relaxation und die obere Schranke ab.
 - Details: [P22-Dokumentation](CCFSM_v3.7_P22_ITERATED_IMPLICIT_COUPLING_DE.md).
+
+
+## CCFSM P23 — diskreter Stoff-/Energieaudit des akzeptierten P22-Schritts
+
+- `ccfsm_p23_discrete_balance.py` auditiert das gesamte FV-Siliciuminventar gegen den integrierten offenen M/O-Randfluss des finalen P21-Snapshots.
+- `test_ccfsm_p23_discrete_balance.py` prüft geschlossene/offene Stoffbilanz, Zurückweisung nicht akzeptierter Schritte und die bewusste Begrenzung des Energieanspruchs.
+- `CCFSM_v3.8_P23_DISCRETE_BALANCE_DE.md` dokumentiert Gleichungen, Vorzeichen, Einheiten und offene Punkte.
+- P9-lokale FV-Energiedifferenz wird berechnet; P19-FE-Energie und Traktionsarbeit werden am akzeptierten Zustand separat berichtet. Kein globaler diskreter Energieabschluss und keine Energie-Monotonie werden behauptet, da FE/FV-Referenzmaß, mechanischer Anfangssnapshot und vollständige Randarbeitskopplung noch fehlen.
