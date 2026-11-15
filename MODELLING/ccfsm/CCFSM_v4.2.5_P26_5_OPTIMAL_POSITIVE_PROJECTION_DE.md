@@ -22,15 +22,15 @@ Die zulässige Menge ist der Schnitt einer Familie von Halbräumen und damit kon
 
 ## 2. Numerische Lösung
 
-Der Solver verwendet ein Cutting-Plane-/Active-Set-Verfahren in zwei Koeffizientenvariablen:
+Die zulässige Randkurve wird in zwei Typen zerlegt: zwei lineare Randbedingungen an den Zellenden und ein elliptischer Bogen für ein inneres Minimum. Der Solver prüft die gewichteten Projektionen auf den beiden Randgeraden, deren Schnittpunkt sowie alle lokalen Minima der Zielfunktion auf dem elliptischen Bogen. Die eindimensionale Bogenminimierung erfolgt mit geklammertem Golden-Section-Verfahren:
 
 1. Starte mit den ursprünglichen Moden.
 2. Bestimme das exakte Minimum des aktuellen quadratischen Polynoms aus den beiden Randpunkten und ggf. dem inneren Scheitelpunkt.
 3. Ist die Positivitätsbedingung verletzt, füge die zugehörige lineare Halbraumbedingung hinzu.
-4. Projiziere den Ausgangspunkt im gewichteten euklidischen Abstand auf den Schnitt der bisher aktiven Halbräume. In zwei Dimensionen genügt die Prüfung des Ausgangspunkts, der Einzelrandprojektionen und paarweiser aktiver Schnittpunkte.
-5. Wiederhole bis zur Toleranz; bei Nichterreichen wird explizit abgebrochen.
+4. Wähle unter allen zulässigen Randkandidaten den mit der kleinsten gewichteten Koeffizientendistanz.
+5. Prüfe das exakte quadratische Minimum erneut auf dem vollständigen Zellintervall.
 
-Die Implementierung benötigt keine externe Optimierungsbibliothek. Die Gewichte sind positive dimensionslose Koeffizientengewichte; Standard ist (1,1). Ein kleiner numerischer Sicherheitsabstand und endliche Iterationsgrenzen sind dokumentiert.
+Die Implementierung benötigt keine externe Optimierungsbibliothek. Die elliptische Bogenauflösung ist einstellbar (Standard 1024 Unterintervalle). Die Gewichte sind positive dimensionslose Koeffizientengewichte; Standard ist (1,1). Ein kleiner numerischer Sicherheitsabstand und die abschließende Kontinuumsprüfung sind dokumentiert.
 
 ## 3. Erhaltung und Zielkonflikte
 
