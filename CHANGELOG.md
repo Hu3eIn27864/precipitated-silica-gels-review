@@ -1,3 +1,10 @@
+## 2026-11-15 — CCFSM P25 refinement study
+
+- Added a reproducible synthetic reference harness for fixed-final-time temporal refinement (1/2/4 steps), separate FV/P19 axial spatial refinement (1/2/4 cells), P24 forward-difference step sensitivity, and P22 relaxation sensitivity.
+- Reports P22/P24 state and projected-pressure differences, solver residuals/iterations, admissibility and the P23 global FV silicon-balance residual where the accepted step is available.
+- Added dedicated tests, German study specification, README and roadmap entries; CI runs the study and uploads CSV/JSON results separately from natural-syneresis calibration outputs.
+- The harness is numerical software verification on synthetic reference cases, not physical validation. Quantitative convergence claims remain gated on reviewing the hosted run and its artifacts.
+
 ## 2026-11-14 — CCFSM P22.1 fixed-point acceptance correction
 
 - Replaced the relaxed-update state residual by the unrelaxed fixed-point defect \(x^n+\Delta t F_{P21}(x^k)-x^k\), so small under-relaxation cannot by itself trigger false convergence.
