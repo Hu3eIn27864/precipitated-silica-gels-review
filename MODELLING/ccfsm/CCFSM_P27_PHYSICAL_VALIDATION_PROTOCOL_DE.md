@@ -139,3 +139,12 @@ Eine spätere methodische Übersicht zur Silica-Colorimetrie bestätigt, dass di
 **Konsequenz für das Messmodell:** zunächst eine Beobachtungsfunktion \(y_{Mo}(t)=\mathcal{A}_{Mo}[c_{M},c_{D},c_{P},pH,T_{assay},t_{reaction},\ldots]\) vorsehen. Erst wenn die Alexander-Kinetik und die konkrete Laborprozedur reproduzierbar spezifiziert sind, kann entschieden werden, ob ein vereinfachter Grenzfall \(y_{Mo}\approx c_M\) gerechtfertigt ist. Andernfalls bleibt Figure 9 ein Holdout für „molybdatreaktives niedrigmolekulares Silica“, nicht für reines Monomer.
 
 Quellen: Alexander, G.B. (1953), *J. Am. Chem. Soc.* 75, 5655–5657, DOI 10.1021/ja01118a054; Berro et al. (2014), *Mineralogical Magazine* 78(6), 1417 ff., DOI 10.1180/minmag.2014.078.6.08.
+
+
+## 11. Figure 9 — manuelle Ablese-Arbeitsdatei (15.11.2026)
+
+Die Originalabbildung wurde direkt in der MDPI-Artikelseite geöffnet und visuell abgelesen. Die 39 geschätzten Markerzentren liegen in `LITERATURE/wilhelm_kind_fig9_digitized_approx_2026-11-15.csv`; die begleitende Methodik- und Unsicherheitsdokumentation steht in `CCFSM_P27_FIG9_DIGITIZATION_AUDIT_2026-11-15_DE.md`.
+
+Diese Werte sind **keine pixelgenauen Rohdaten**. Zeit-/Konzentrationsableseunsicherheiten sind konservative visuelle Schätzungen; Fehlerbalken wurden nicht numerisch rekonstruiert. Die hohen sauren 60-°C-Marker wurden ausdrücklich beibehalten. Alle Punkte bleiben fitgesperrt. Die Abbildung enthält einen gebrochenen Konzentrationsmaßstab und einen berechneten Anfangswert (~1000 mmol/L), der kein gemessener Porenfluidpunkt ist und in der CSV fehlt.
+
+Die Artikelbeschreibung bestätigt, dass das Porenfluid bei ca. 20 °C analysiert wurde, auch wenn die Gelbäder 40/60 °C hatten; Nachpolymerisation kann den Messwert beeinflussen. Der 400-nm-Molybdatassay ist bis zur Rekonstruktion von Reaktionszeit und Matrixbedingungen als operationale molybdatreaktive niedrigmolekulare Silica-Fraktion zu behandeln, nicht als gesicherte reine Monomerkonzentration. Figure 9 ist eine zusätzliche Observable aus derselben Studie, keine unabhängige Laborreplikation.
