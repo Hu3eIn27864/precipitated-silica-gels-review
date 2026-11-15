@@ -286,3 +286,8 @@ P26.9 kombiniert P26.8 und P26.6 in einer dreistufigen Entscheidung. Ein strikt 
 ## P26.10 — exakte rationale Momentenkorrektur
 
 P26.10 ergänzt P26.9 um eine exakte rationale Nachkorrektur. Für einen numerischen Projektionskandidaten werden die Nicht-Pivot-Koeffizienten rationalisiert; zwei Koeffizienten einer Pivotzelle werden so bestimmt, dass globale Masse, erstes und zweites Moment exakt erfüllt sind. Kontinuierliche Zellpositivität wird danach exakt geprüft. Erfolgreiche Zeugen erfüllen somit alle drei Momente als rationale Gleichheiten. Eine endliche Suche über Rundungsgenauigkeiten und Pivotzellen kann jedoch vorhandene Zeugen übersehen; Fehlschlag bleibt unresolved und beweist keine Unzulässigkeit. Geltungsbereich: 1-D, feste Zellmittelwerte, quadratische Rekonstruktion; keine physikalische Validierung.
+
+
+## P26.11 — allgemeine exakte Zwei-Koordinaten-Momentkorrektur
+
+P26.11 verallgemeinert die P26.10-Pivotkorrektur von einer Pivotzelle auf beliebige zwei Koordinaten unter allen 2N linearen/quadratischen Zellmoden. Für jede ausgewählte Dezimalpräzision werden alle nichtsingulären Paare enumeriert; die beiden Pivotkoeffizienten werden durch rationale 2x2-Elimination exakt aus den globalen Erst-/Zweitmomentbedingungen bestimmt. Ein Kandidat wird nur akzeptiert, wenn Masse, erstes und zweites Moment exakt übereinstimmen und jedes quadratische Zellpolynom auf dem vollständigen Intervall exakt nichtnegativ ist. Die endliche Präzisionsliste ist kein vollständiger rationaler oder reeller Machbarkeitsalgorithmus; kein gefundener Zeuge bedeutet unresolved, nicht certified_infeasible. Geltungsbereich: 1-D, feste Zellmittelwerte, quadratische Rekonstruktionen; keine physikalische Validierung.
