@@ -521,3 +521,7 @@ P26.2 bleibt ein 1-D-Intervalloperator. Es gibt keine 2-D/3-D-Intersection-Geome
 - `CCFSM_v4.2.6_P26_6_GLOBAL_POSITIVE_PROJECTION_DE.md` — Herleitung, Algorithmus und Gültigkeitsgrenzen.
 
 Nichtkonvergenz wird ausdrücklich nicht als Unzulässigkeitszertifikat interpretiert. Geltungsbereich: 1-D, quadratische Rekonstruktionen; keine physikalische Validierung.
+
+### P26.6.1 — Machbarkeitsdiagnose
+
+`assess_global_feasibility` unterscheidet zulässigen numerischen Zeugen, zertifizierten Ein-Zellen-Widerspruch und offene Mehrzellen-Nichtkonvergenz. Keine allgemeine Dualzertifizierung für Mehrzellenfälle.
