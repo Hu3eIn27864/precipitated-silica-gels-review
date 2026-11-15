@@ -509,3 +509,6 @@ P26.2 bleibt ein 1-D-Intervalloperator. Es gibt keine 2-D/3-D-Intersection-Geome
 - Tests prüfen Rand-/Innenminimum, bereits positive Felder, Nullmittelwert, Gewichtung, Massenerhaltung, Übertragungswrapper und Studienartefakte.
 - CI-Ausgaben: p26_5_optimal_positive_projection.csv und summary.json.
 - 1-D/quadratisch, lokale Optimierung; keine globalen Momentenrestriktionen, 2-D/3-D-Geometrie, Druck-/Energieerhaltung oder physikalische Validierung.
+
+
+**P26.5 CI-Referenz:** Lauf #373 erfolgreich, 324/324 Tests; fünf synthetische Fälle. Maximale absolute Massenänderung 0. Summierte absolute Änderung des ersten Moments 0.2328275 → 0.2157950 und des zweiten Moments 0.2439617 → 0.2215272 gegenüber P26.4; jeweils Verbesserung in zwei von fünf Fällen, nicht universell. [CI-Lauf #373](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43673679478) · [Artefakt](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43673679478/artifacts/14145283276).
