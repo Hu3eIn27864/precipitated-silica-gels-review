@@ -569,3 +569,11 @@ Status: exakter primaler Zeuge, rational dual zertifizierte Unzulässigkeit oder
 - `CCFSM_v4.2.11_P26_11_ALL_PAIR_EXACT_WITNESS_DE.md` dokumentiert Herleitung und Grenzen.
 - Akzeptierte Zeugen erfüllen Masse, erstes und zweites globales Moment exakt und sind auf jedem vollständigen Zellintervall rational geprüft nichtnegativ.
 - Die Suche ist nur über die endliche Präzisionsliste vollständig; fehlender Zeuge ist kein Unzulässigkeitsbeweis. Nur 1-D/quadratisch; keine physikalische Validierung.
+
+
+## P26.12 — exakte affine Parametrisierung des Momentenraums
+
+- `ccfsm_p26_12_exact_affine_parameterization.py` parametrisiert den vollständigen affinen Lösungsraum der zwei globalen höheren Momentengleichungen mit 2N−2 freien rationalen Koordinaten.
+- `test_ccfsm_p26_12_exact_affine_parameterization.py` prüft Rang, Dimensionszahl, exakte Momentenerfüllung, Null-Dimensionalität, Pivotfehler und rationale Positivitätszeugen.
+- `CCFSM_v4.2.12_P26_12_EXACT_AFFINE_PARAMETERIZATION_DE.md` dokumentiert Herleitung und Grenzen.
+- Die affine Parametrisierung ist vollständig; die endliche rationale Gittersuche ist es nicht. Ein Suchfehlschlag bleibt `unresolved`, nicht `certified_infeasible`.
