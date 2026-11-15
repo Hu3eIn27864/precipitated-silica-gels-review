@@ -260,3 +260,8 @@ Dieser Strang kann parallel zu Gates A–E laufen, ohne unkalibrierte Materialge
 ## P26.6 completion update — 15 November 2026
 
 P26.6 implementiert die global gekoppelte Projektion mit Dykstras Algorithmus: feste Zellmittelwerte (damit Gesamtmasse), globale erste und zweite Momente sowie kontinuierliche Nichtnegativität jeder quadratischen Zielzelle. Die affine Projektion nutzt ein gewichtetes 2x2-Gram-System; die lokale Positivitätsprojektion delegiert an P26.5. Regressionen und CI-Studienlauf sind ergänzt. Nichtkonvergenz bleibt ein offenes Machbarkeitsresultat, kein Beweis der Unzulässigkeit. Nur 1-D/quadratisch; keine physikalische Validierung.
+
+
+## P26.6.1 — feasibility diagnostics
+
+Added a three-way feasibility classification: converged numerical feasible witness; exact single-cell infeasibility certificate from the unique moment-to-mode map; unresolved multi-cell nonconvergence. Generic multi-cell nonconvergence is not treated as proof of infeasibility. Regression coverage updated.
