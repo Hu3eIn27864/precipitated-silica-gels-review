@@ -989,3 +989,8 @@ Die erste Manuskriptarbeit behandelt ausschließlich das reduzierte Zwei-Zeitska
 ## Manuskript 1 — praktische Identifizierbarkeit
 
 - [MANUSCRIPT_01_PRACTICAL_IDENTIFIABILITY_BENCHMARK_2026-11-15_DE.md](MANUSCRIPT_01_PRACTICAL_IDENTIFIABILITY_BENCHMARK_2026-11-15_DE.md) und [MANUSCRIPT_01_PRACTICAL_IDENTIFIABILITY_BENCHMARK.py](MANUSCRIPT_01_PRACTICAL_IDENTIFIABILITY_BENCHMARK.py) — synthetischer, reproduzierbarer Benchmark für Ratenabstand, Beobachtungsfenster und Abtastdichte.
+
+
+## Manuskript 1 — Neuheit und physikalische Modellprüfung
+
+- [MANUSCRIPT_01_NOVELTY_AND_PHYSICAL_MODEL_AUDIT_2026-11-15_DE.md](MANUSCRIPT_01_NOVELTY_AND_PHYSICAL_MODEL_AUDIT_2026-11-15_DE.md) — konservativer Prior-Art-, Neuheits- und physikalischer Modell-Audit; trennt ODE-Konsistenz von physikalischer Herleitung.
