@@ -464,3 +464,10 @@ P27.9 baut auf P27.7/P27.8 auf und prüft das tatsächlich erzeugte Netz global:
 P27.10 ergänzt P27.9 um lokale Link-Komplexe. Jeder Kanten-Link wird als Graph geprüft: Kreis für innere Kanten, Weg für Randkanten. Jeder Knoten-Link wird als triangulierte Fläche geprüft: zusammenhängende 2-Sphäre mit Euler-Charakteristik 2 im Inneren beziehungsweise 2-Scheibe mit einem einzigen Randzyklus und Euler-Charakteristik 1 am Rand. Die Knoten-Link-Kanteninzidenzen werden auf höchstens zwei Dreiecke begrenzt; die Kanten-Link-Prüfung kontrolliert die lokalen Link-Knoten zusätzlich.
 
 Status `locally_manifold_audited` bedeutet, dass alle implementierten lokalen Kriterien erfüllt sind; es ist kein geometrischer Einbettungsbeweis und kein Nachweis globaler Gebietstopologie, FE-Konditionierung, CCFSM-Positivität oder physikalischer Validität.
+
+
+## P27.11 — geometrischer Einbettungs-Audit (15.11.2026)
+
+P27.11 ergänzt die lokalen PL-Link-Prüfungen um eine exakte geometrische Prüfung der Tetraederinterieurs. Für jedes Elementpaar werden die Normalen der Dreiecksflächen beider Tetraeder sowie Kreuzprodukte der Kantenrichtungs-Paare als Separationsachsen verwendet. Die Projektionsintervalle werden rational und ohne Gleitkomma-Toleranz ausgewertet. Strikt positive Überlappung auf allen nichtverschwindenden SAT-Achsen kennzeichnet eine positive Volumenüberlappung; gemeinsame Flächen-, Kanten- und Knotenberührungen bleiben zulässig. Verschiedene verwendete Knoten-IDs mit identischen Koordinaten werden gesondert gemeldet.
+
+**Aussagegrenze:** Niederdimensionale Schnittmengen nicht inzidenter Simplizes und vollständige Rand-Selbstüberschneidungen werden nicht abschließend klassifiziert. Der paarweise Test ist O(N²). Kein Nachweis für FE-Konditionierung, CCFSM-Zustandspositivität, Energieabschluss oder physikalische Validität.
