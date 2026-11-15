@@ -23,7 +23,8 @@ class P27_24Tests(unittest.TestCase):
         self.assertAlmostEqual(r["discrete_energy_residual_j"], -3.)
         self.assertFalse(r["residual_within_tolerance"])
     def test_closing_balance(self):
-        r = audit_p24_discrete_energy_step(self.a, self.b, [2.], 0.5,\n            integrated_dissipation_j=self.d, external_work_j={"reservoir": -2.})
+        r = audit_p24_discrete_energy_step(self.a, self.b, [2.], 0.5,
+            integrated_dissipation_j=self.d, external_work_j={"reservoir": -2.})
         self.assertAlmostEqual(r["discrete_energy_residual_j"], 0.)
         self.assertTrue(r["residual_within_tolerance"])
     def test_nonnegative_integrated_dissipation(self):
@@ -53,7 +54,8 @@ class P27_24Tests(unittest.TestCase):
             self.run_audit(mechanical_energy_owner="p19", p19_initial_audit={})
     def test_advection_closure_is_explicit(self):
         r = self.run_audit(unclosed_energy_terms=())
-        self.assertFalse(r["full_energy_closure_certified"])\n        self.assertTrue(r["caller_declared_all_energy_terms_closed"])
+        self.assertFalse(r["full_energy_closure_certified"])
+        self.assertTrue(r["caller_declared_all_energy_terms_closed"])
         self.assertNotIn("advection_j", r["integrated_dissipation_terms_j"])
         r2 = self.run_audit(integrated_dissipation_j={**self.d, "advection_j": .5})
         self.assertIn("advection_j", r2["integrated_dissipation_terms_j"])
