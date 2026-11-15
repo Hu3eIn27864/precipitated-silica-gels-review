@@ -541,3 +541,12 @@ Positive Trennung ist derzeit ein numerischer Zeuge, kein intervallverifiziertes
 - `CCFSM_v4.2.8_P26_8_VERIFIED_DUAL_CERTIFICATES_DE.md` — mathematische Herleitung und Geltungsgrenzen.
 
 Ein positives Zertifikat beweist Unzulässigkeit für die exakten rationalen Dezimal-Eingaben. Kein Zertifikat im endlichen Richtungsraster beweist keine Machbarkeit.
+
+
+## P26.9 — primal-duale Machbarkeitsentscheidung
+
+- ccfsm_p26_9_primal_dual_feasibility.py orchestriert P26.8-Dualzertifikate und P26.6-Primalprojektion.
+- test_ccfsm_p26_9_primal_dual_feasibility.py prüft rationale Zellminima, verifizierte Zeugen, duale Priorität und Eingabevalidierung.
+- CCFSM_v4.2.9_P26_9_PRIMAL_DUAL_FEASIBILITY_DE.md dokumentiert Statussemantik und Geltungsgrenzen.
+
+Drei Ausgänge: rational dual zertifiziert unzulässig; primaler Zeuge mit exakt geprüfter Zellpositivität und rational begrenzten Momentenresiduen; oder unresolved. Ein endliches duales Suchraster und eine fehlgeschlagene primale Iteration liefern für sich allein keinen Machbarkeitsbeweis. Nur 1-D/quadratisch; keine physikalische Validierung.
