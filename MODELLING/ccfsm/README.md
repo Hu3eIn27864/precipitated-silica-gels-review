@@ -674,3 +674,12 @@ P27.3 macht den Bernstein-Test stärker, aber nicht vollständig: Endliche Tiefe
 - `test_ccfsm_p27_5_tetra_mesh_conformity.py` prüft unverfeinerte, beidseitig verfeinerte und einseitig verfeinerte Nachbarflächen sowie Fehlerfälle.
 - Spezifikation: `CCFSM_v4.2.25_P27_5_MESH_CONFORMITY_DE.md`.
 - Audit-Prüfer, kein konformer Refinement-Algorithmus und keine globale 3D-Positivitätsgarantie.
+
+
+## CCFSM P27.6 — konservativer 3-D-Verfeinerungsabschluss
+
+- ccfsm_p27_6_refinement_closure.py schließt angeforderte P27.3-Verfeinerungstiefen komponentenweise über gemeinsame Tetraederflächen.
+- test_ccfsm_p27_6_refinement_closure.py prüft Nachbarschaftsausbreitung, getrennte Komponenten, Nicht-Manifold- und Ressourcenfälle.
+- CCFSM_v4.2.26_P27_6_REFINEMENT_CLOSURE_DE.md dokumentiert Algorithmus und Grenzen.
+
+Der Abschluss ist konservativ und kann eine ganze face-zusammenhängende Komponente auf dieselbe Tiefe heben. Er generiert kein Mesh; nach der tatsächlichen Subdivision ist P27.5 als unabhängiger Konformitätsaudit erforderlich. Keine physikalische Validierung.
