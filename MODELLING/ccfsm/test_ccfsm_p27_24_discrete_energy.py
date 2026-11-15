@@ -12,8 +12,10 @@ class P27_24Tests(unittest.TestCase):
                    "applied_axial_traction_pa": 100.}]
         self.d = {"reaction_j": 1., "darcy_j": 2., "onsager_diffusion_j": 1.}
     def run_audit(self, **kw):
+        diss = kw.pop("integrated_dissipation_j", self.d)
+        work = kw.pop("external_work_j", {"reservoir": 1.})
         return audit_p24_discrete_energy_step(self.a, self.b, [2.], 0.5,
-            integrated_dissipation_j=self.d, external_work_j={"reservoir": 1.}, **kw)
+            integrated_dissipation_j=diss, external_work_j=work, **kw)
     def test_exact_manufactured_balance(self):
         r = self.run_audit()
         self.assertAlmostEqual(r["energy_change_j"], -6.)
