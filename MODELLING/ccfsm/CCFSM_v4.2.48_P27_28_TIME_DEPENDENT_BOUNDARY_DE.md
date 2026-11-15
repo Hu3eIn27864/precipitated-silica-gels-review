@@ -30,7 +30,7 @@ Für den Standardfall T=2 s und A=1.5 m² ergeben die analytischen Integrale:
 - chemische Randarbeit: 18.21 J
 - hydraulische Randarbeit: 8.3 J
 
-Die Zweipunkt-Trapezrekonstruktion liefert in diesem Fall 3.6 mol, 19.26 J und 8.7 J. Die absoluten Abweichungen betragen somit 0.7 mol, 1.05 J und 0.4 J. Diese Fehler werden getrennt ausgewiesen und von den Regressionen ausdrücklich erwartet; sie werden nicht als Testfehler kaschiert.
+Die Zweipunkt-Trapezrekonstruktion liefert in diesem Fall 3.0 mol, 19.26 J und 8.7 J. Die absoluten Abweichungen betragen somit 0.1 mol, 1.05 J und 0.4 J. Diese Fehler werden getrennt ausgewiesen und von den Regressionen ausdrücklich erwartet; sie werden nicht als Testfehler kaschiert.
 
 ## Aussagegrenzen
 
