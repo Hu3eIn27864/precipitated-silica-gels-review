@@ -994,3 +994,8 @@ Die erste Manuskriptarbeit behandelt ausschließlich das reduzierte Zwei-Zeitska
 ## Manuskript 1 — Neuheit und physikalische Modellprüfung
 
 - [MANUSCRIPT_01_NOVELTY_AND_PHYSICAL_MODEL_AUDIT_2026-11-15_DE.md](MANUSCRIPT_01_NOVELTY_AND_PHYSICAL_MODEL_AUDIT_2026-11-15_DE.md) — konservativer Prior-Art-, Neuheits- und physikalischer Modell-Audit; trennt ODE-Konsistenz von physikalischer Herleitung.
+
+
+## Manuskript 1 — Scherer (1989), Gleichungsvergleich
+
+- [MANUSCRIPT_01_SCHERER_1989_EQUATION_LEVEL_COMPARISON_2026-11-15_DE.md](MANUSCRIPT_01_SCHERER_1989_EQUATION_LEVEL_COMPARISON_2026-11-15_DE.md) — Abstract-basierter Strukturvergleich mit v0.2, Reduktionsanforderungen und klarer Kennzeichnung der noch fehlenden Volltext-Gleichungsprüfung.
