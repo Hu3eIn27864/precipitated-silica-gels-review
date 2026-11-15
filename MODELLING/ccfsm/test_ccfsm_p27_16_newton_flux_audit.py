@@ -19,7 +19,7 @@ class TestP2716(unittest.TestCase):
   r=audit_fv_flux_balance(((-1.,-1.),),((0.,1.,3.),),((0.,0.),),(1.,1.))
   self.assertFalse(r["overall_pass"]); self.assertEqual(r["status"],"flux_balance_failed")
  def test_nonuniform_cells(self):
-  r=audit_fv_flux_balance(((-2.,-1.),),((0.,2.,3.),),((0.,0.),),(.5,1.))
+  r=audit_fv_flux_balance(((-4.,-1.),),((0.,2.,3.),),((0.,0.),),(.5,1.))
   self.assertTrue(r["overall_pass"])
  def test_bad_shape(self):
   r=audit_fv_flux_balance(((0.,),),((0.,1.),),((0.,),),(1.,1.))
