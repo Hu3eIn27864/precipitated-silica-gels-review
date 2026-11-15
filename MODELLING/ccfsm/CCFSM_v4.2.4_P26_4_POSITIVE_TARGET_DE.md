@@ -37,3 +37,12 @@ Regressionen decken Rand- und innere Scheitelpunkt-Unterschwinger, unveränderte
 ## 5. Geltungsgrenzen
 
 1-D-Intervalle und quadratische Rekonstruktionen; keine 2-D/3-D-Geometrie, keine automatische FE-Rekonstruktion, keine Druck- oder Energieerhaltung und keine physikalische Validierung. Positivität des übertragenen Konzentrations-/Inventarfelds ist nicht mit mechanischer Druckkonsistenz gleichzusetzen; P19 muss für das Zielnetz erneut gelöst werden.
+
+
+## 6. CI-Referenzlauf und quantitative Ergebnisse
+
+GitHub Actions Lauf #357 erfolgreich; **315/315 Unit-Tests** bestanden. Der P26.4-Studienlauf und der Upload des Artefakts waren erfolgreich.
+
+Fünf synthetische Zielzellfälle wurden geprüft; zwei benötigten eine Modenkontraktion. Das Minimum der Zielpolynome nach Begrenzung war 0. Die maximale absolute Massenänderung betrug 0. Die maximalen absoluten Änderungen der ersten und zweiten globalen Momente betrugen in diesen bewusst belastenden Fällen jeweils rund 1/6. Diese Werte illustrieren den möglichen Form-/Momentenverlust, nicht einen allgemeinen Fehlermaßstab.
+
+Ergebnisdatei: p26_4_positive_target_cases.csv; Zusammenfassung: summary.json. CI-Lauf: https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43673207806 ; Artefakt: https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43673207806/artifacts/14145520449.
