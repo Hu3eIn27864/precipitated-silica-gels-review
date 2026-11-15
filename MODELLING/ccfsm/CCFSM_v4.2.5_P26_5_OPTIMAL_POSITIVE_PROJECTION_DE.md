@@ -24,11 +24,12 @@ Die zulässige Menge ist der Schnitt einer Familie von Halbräumen und damit kon
 
 Die zulässige Randkurve wird in zwei Typen zerlegt: zwei lineare Randbedingungen an den Zellenden und ein elliptischer Bogen für ein inneres Minimum. Der Solver prüft die gewichteten Projektionen auf den beiden Randgeraden, deren Schnittpunkt sowie alle lokalen Minima der Zielfunktion auf dem elliptischen Bogen. Die eindimensionale Bogenminimierung erfolgt mit geklammertem Golden-Section-Verfahren:
 
-1. Starte mit den ursprünglichen Moden.
-2. Bestimme das exakte Minimum des aktuellen quadratischen Polynoms aus den beiden Randpunkten und ggf. dem inneren Scheitelpunkt.
-3. Ist die Positivitätsbedingung verletzt, füge die zugehörige lineare Halbraumbedingung hinzu.
-4. Wähle unter allen zulässigen Randkandidaten den mit der kleinsten gewichteten Koeffizientendistanz.
-5. Prüfe das exakte quadratische Minimum erneut auf dem vollständigen Zellintervall.
+1. Wenn das Ausgangspolynom zulässig ist, bleibt es unverändert.
+2. Berechne die gewichtete orthogonale Projektion auf jede verletzte Endpunkt-Halbraumgrenze.
+3. Berücksichtige den Schnittpunkt der beiden Endpunktgrenzen.
+4. Parametrisiere den Rand für ein inneres Minimum als elliptischen Bogen und suche alle lokalen Minima der gewichteten Zielfunktion auf diesem Bogen mit geklammerter Golden-Section-Suche.
+5. Verwerfe Kandidaten, die die vollständige Nichtnegativitätsbedingung verletzen, und wähle den zulässigen Kandidaten mit kleinstem Zielfunktionswert.
+6. Prüfe das exakte quadratische Minimum erneut auf dem vollständigen Zellintervall.
 
 Die Implementierung benötigt keine externe Optimierungsbibliothek. Die elliptische Bogenauflösung ist einstellbar (Standard 1024 Unterintervalle). Die Gewichte sind positive dimensionslose Koeffizientengewichte; Standard ist (1,1). Ein kleiner numerischer Sicherheitsabstand und die abschließende Kontinuumsprüfung sind dokumentiert.
 
@@ -46,3 +47,15 @@ Die Studie vergleicht P26.5 gegen P26.4 für fünf synthetische Fälle: Randunte
 ## 5. Grenzen
 
 1-D-Intervalle und quadratische Felder; lokale zellweise Optimierung, keine globale Momentenrestriktion, keine 2-D/3-D-Geometrie, keine Druck-/Energieerhaltung und keine physikalische Validierung. Die Koeffizientenmetrik ist eine Modellierungswahl und muss bei dimensions-/skalenverschiedenen Zustandsgrößen gegebenenfalls angepasst werden.
+
+
+## 6. CI-Referenz und Ergebnisse
+
+GitHub Actions Lauf **#373** erfolgreich; **324/324 Unit-Tests** bestanden. Der P26.5-Studienlauf und der Upload des separaten Ergebnisartefakts waren erfolgreich.
+
+Fünf synthetische Fälle wurden gegen P26.4 verglichen. Das Minimum nach P26.5 betrug 0; die maximale absolute Massenänderung betrug 0. Die Summe der absoluten Änderungen des ersten Moments über die fünf Fälle sank von 0.2328275 (P26.4) auf 0.2157950 (P26.5); für das zweite Moment von 0.2439617 auf 0.2215272. In jeweils zwei von fünf Fällen war die betreffende Momentenänderung kleiner. Das ist eine Verbesserung der aggregierten Testmetrik, keine Garantie für jeden Fall oder für beliebige Daten.
+
+- CI-Lauf: https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43673679478
+- Ergebnisartefakt: https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43673679478/artifacts/14145283276
+
+**Hinweis:** Diese CI-Zahlen stammen aus dem P26.5-Lauf vor der reinen Korrektur der Studien-Metadaten. Der Algorithmus und die Tests waren bereits erfolgreich; ein erneuter Lauf nach der Metadatenkorrektur wird separat geprüft.
