@@ -799,3 +799,14 @@ Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständig
 - `CCFSM_v4.2.37_P27_17_PROCESS_BALANCE_DE.md` dokumentiert Verfahren und Aussagegrenzen.
 
 **Grenze:** Algebraische Konsistenz der gelieferten P21-Daten ist keine Prüfung der physikalischen Vollständigkeit aller Quellen oder eine 3-D-/Energie-/Experimentvalidierung.
+
+
+## CCFSM P27.18 — unabhängiger Onsager-Fluss- und Dissipationsaudit
+
+- `ccfsm_p27_18_onsager_audit.py` rekonstruiert M/O-Diffusionsflüsse aus Konzentrationen, chemischen Potentialen, logarithmischem Mittel, Fluidkapazität, Diffusivität und (RT), einschließlich Reservoir-Halbzellen.
+- Vergleicht die rekonstruierte Flussfolge mit P13/P21 (`total - advection`) und prüft die unabhängig berechnete Diffusionsdissipation.
+- `audit_p13_onsager_snapshot` verarbeitet den Diagnose-Payload direkt; P13 exportiert dazu Konzentrationen, Potentiale, Reservoirdaten und Koeffizienten.
+- `test_ccfsm_p27_18_onsager_audit.py` prüft Fluss-/Dissipationsfehler, Null-Diffusivität, Randhalbzellen und den P13-Adapter.
+- `CCFSM_v4.2.38_P27_18_ONSAGER_AUDIT_DE.md` dokumentiert Verfahren und Grenzen.
+
+**Grenze:** Unabhängige algebraische Rekonstruktion aus gelieferten Konzentrationen/Potentialen; keine Validierung ihrer chemischen Herleitung oder der physikalischen Parameter.
