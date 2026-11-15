@@ -810,3 +810,12 @@ Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständig
 - `CCFSM_v4.2.38_P27_18_ONSAGER_AUDIT_DE.md` dokumentiert Verfahren und Grenzen.
 
 **Grenze:** Unabhängige algebraische Rekonstruktion aus gelieferten Konzentrationen/Potentialen; keine Validierung ihrer chemischen Herleitung oder der physikalischen Parameter.
+
+
+## CCFSM P27.19 — integrierter thermodynamischer Konsistenz-Ledger
+
+- `ccfsm_p27_19_thermodynamic_ledger.py` prüft die dimensionskonsistente Energieratenbilanz `E_dot = P_external - D_total`, mit getrennten Energieraten, Dissipationen und äußeren Leistungen.
+- Optionale Gates: P27.18-Onsager-Audit, Reaktionsprodukte `r_i A_i >= 0` und Darcy-Konstitutivitätsidentität auf inneren Flächen.
+- `test_ccfsm_p27_19_thermodynamic_ledger.py` enthält neun Regressionen; `CCFSM_v4.2.39_P27_19_THERMODYNAMIC_LEDGER_DE.md` dokumentiert Einheiten- und Aussagegrenzen.
+
+**Grenze:** Ein Ledger aus übergebenen Zahlen ist kein automatischer vollständiger Energieadapter. P19-FE-Energie, P10-Reaktionsdissipation und P13/P21-Dissipationen benötigen zunächst eine konsistente Geometrie-/Einheitenabbildung; gemeinsame freie Energie, vollständiger diskreter Energieabschluss und physikalische Validierung sind nicht bewiesen.
