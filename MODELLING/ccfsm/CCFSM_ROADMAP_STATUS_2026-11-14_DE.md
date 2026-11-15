@@ -546,4 +546,10 @@ Der P21-Adapter rekonstruiert den diffusen M/O-Fluss als Gesamtfluss minus Advek
 
 **Wichtige Einschränkung:** P9s gemeldete gespeicherte Energie enthält nicht das äußere Traktionspotential. Bei nichtverschwindender kraftgesteuerter axialer Traktion ist daher eine Warnung aktiv; vor einer Variationsaussage muss das passende Gesamtpotential samt Lastpfad berücksichtigt werden. P19 kann dieselben elastischen/Biot-Energieanteile bereits enthalten. Eine Addition ohne Exklusivitäts-/Doppelzählungsprüfung ist unzulässig. Kein gemeinsamer P10/P13/P19/P21-Energiebeweis.
 
-**Nächster Schritt P27.22:** P19-Energie funktional mit P9 vergleichen (gleiche isotrope Elastizität, Biot-Speicherung, Eigenstrain und Quadratur) und Exklusivitätsregeln gegen Doppelzählung formulieren.
+## P27.22 — P9/P19-Energieäquivalenz und Exklusivitäts-Audit (15.11.2026)
+
+**Status: implementiert; Hosted-CI-Prüfung ausstehend.** P27.22 rekonstruiert P19s elastische und Biot-Speicherenergiedichte unabhängig aus der FE-Quadratur (B-Matrix, Verschiebungs-DOFs, Eigenstrain, Fluidgehaltszuwachs und Volumengewicht). Die Terme werden an jedem Quadraturpunkt mit P9 verglichen und anschließend integriert. Lamé-/Biot-Parameter müssen übereinstimmen; für eine gültige P9-Referenz müssen laterale Gesamtdehnungen und Scherdehnungen verschwinden und Eigenstrain sowie Fluidgehaltszuwachs identisch sein. Die rekonstruierte Summe wird außerdem gegen P19s gespeicherte Energie geprüft.
+
+Eine explizite Ownership-Regel bucht mechanische Energie genau einmal: entweder über P9 oder P19. Die jeweils andere Darstellung dient nur als Vergleich. P9s chemische Energie bleibt separat und wird nicht P19 zugeschrieben. Fünf Regressionen prüfen Äquivalenz, alternative P9-Buchung sowie Parameter-, Zustands- und Ownership-Fehler.
+
+**Aussagegrenze:** Die Äquivalenz gilt nur für den abgeglichenen Spezialfall, nicht für beliebige 3D-Dehnungszustände. Äußeres Traktionspotential, Dirichlet-Reaktionsarbeit, Gradientenergien sowie P10/P13-Reaktions- und Transportbeiträge fehlen. Keine gemeinsame P10/P13/P19/P21-Energieherleitung, kein vollständiger diskreter Energieabschluss und keine physikalische Validierung.
