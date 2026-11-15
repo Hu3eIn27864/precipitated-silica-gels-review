@@ -32,9 +32,16 @@ def limit_target_reconstruction(target_edges,averages,linear,quadratic):
     for m,x,y in zip(u,a,b):
         xp,yp,t,lo,lp=positive_target_coefficients(m,x,y)
         oa.append(xp); ob.append(yp); factors.append(t); before.append(lo); after.append(lp)
-    return (u,tuple(oa),tuple(ob)),{"limiter_factors":tuple(factors),"minimum_before":tuple(before),
+    result=(u,tuple(oa),tuple(ob))
+    old_m=moments(e,u,a,b); new_m=moments(e,*result)
+    diag={"limiter_factors":tuple(factors),"minimum_before":tuple(before),
         "minimum_after":tuple(after),"limited_cells":sum(t<1 for t in factors),
-        "target_cells":len(u),"minimum_target_value":min(after)}
+        "target_cells":len(u),"minimum_target_value":min(after),
+        "absolute_moment_changes":{"mass":abs(new_m[0]-old_m[0]),"first":abs(new_m[1]-old_m[1]),"second":abs(new_m[2]-old_m[2])},
+        "relative_moment_changes":{"mass":abs(new_m[0]-old_m[0])/max(1e-30,abs(old_m[0])),
+            "first":abs(new_m[1]-old_m[1])/max(1e-30,abs(old_m[1])),
+            "second":abs(new_m[2]-old_m[2])/max(1e-30,abs(old_m[2]))}}
+    return result,diag
 
 def project_positive_quadratic(source_edges,source_averages,source_linear,source_quadratic,target_edges):
     raw=project_quadratic_moments(source_edges,source_averages,source_linear,source_quadratic,target_edges,positivity=False)
