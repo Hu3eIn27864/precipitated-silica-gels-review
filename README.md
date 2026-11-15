@@ -83,3 +83,6 @@ A first mathematically specified and partially empirically parameterised version
 ### CCFSM v0.2 — separation of network contraction and drainage
 
 The new [CCFSM v0.2 two-timescale specification](MODELLING/ccfsm/CCFSM_v0.2_TWO_TIMESCALE.md) separates the intrinsic network contraction potential from the observed natural-syneresis response. It includes exact solutions and mathematical results for positivity, monotonicity, convergence and structural non-identifiability of the two rate labels, plus an executable implementation and 12 regression tests. The rate constants are intentionally not fitted from the existing single-exponential tables or approximate figure digitizations. The extension remains limited to natural, mechanically unloaded syneresis; it uses no oedometer or forced-syneresis coefficients.
+
+
+CCFSM P27.25–P27.28 extend the accepted-step boundary-work audit from snapshot trapezoids to analytic closed/open and time-dependent synthetic references. P27.28 reports separate material-transfer and energy quadrature errors; these are adapter-level numerical checks, not a complete energy proof or physical validation. See [P27.28 specification](MODELLING/ccfsm/CCFSM_v4.2.48_P27_28_TIME_DEPENDENT_BOUNDARY_DE.md) and the [CCFSM roadmap/status audit](MODELLING/ccfsm/CCFSM_ROADMAP_STATUS_2026-11-14_DE.md).
