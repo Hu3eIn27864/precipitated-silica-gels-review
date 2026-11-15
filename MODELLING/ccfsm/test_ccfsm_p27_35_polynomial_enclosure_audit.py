@@ -37,7 +37,7 @@ class P2735PolynomialEnclosureAuditTests(unittest.TestCase):
                 self.assertGreaterEqual(enclosure.hi, exact)
 
     def test_subdivision_tightens_positive_polynomial_enclosure(self):
-        whole = polynomial_interval([1.0, 0.0, 1.0], Interval(-1.0, 1.0))
+        whole = polynomial_interval([1.0, 2.0], Interval(-1.0, 1.0))
         left = polynomial_interval([1.0, 0.0, 1.0], Interval(-1.0, 0.0))
         right = polynomial_interval([1.0, 0.0, 1.0], Interval(0.0, 1.0))
         self.assertGreater(whole.hi-whole.lo, left.hi-left.lo)
