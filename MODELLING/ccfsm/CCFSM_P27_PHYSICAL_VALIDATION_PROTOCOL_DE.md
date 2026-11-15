@@ -111,3 +111,20 @@ Figure 9 von Wilhelm & Kind (2015) enthält neben der Volumenschrumpfung eine zw
 **Validierungspotenzial:** Figure 9 sollte als eigener Datenzweig digitalisiert und mit Zeit, Katalyse, Temperatur und Messprotokoll erfasst werden. Diese Observable kann den chemischen Speziations-/Polymerisationsblock stärker prüfen als eine weitere Anpassung derselben Schrumpfungskurve. Sie ist aber keine direkte Messung der gesamten gelgebundenen Brückeninventare und identifiziert für sich allein keine Brückendichte.
 
 **Priorität:** vor zusätzlichem Fitten chemischer Ratenparameter zuerst Figure 9 quellenkritisch digitalisieren, Einheiten/Probenahme und Messzeitpunkt klären und die bei 20 °C erfolgte Analyse als Messmodell abbilden. Tropfen besitzen laut Artikel zu wenig ausgetretenes Porenfluid für dieselbe Analyse; dieser Observable-Holdout ist deshalb auf die Zylinder beschränkt.
+
+
+## 9. Figure 9 — Quellen- und Plot-Audit (15.11.2026)
+
+Die Originalgrafik ist direkt unter [Figure 9 (MDPI image)](https://mdpi-res.com/polymers/polymers-07-01528/article_deploy/html/images/polymers-07-01528-g009-1024.png) einsehbar. Sie zeigt zwei Panels für natürliche Synärese in Zylindern: sauer (a) und basisch (b), jeweils mit Markern für 20, 40 und 60 °C. Die Zeitachse reicht ungefähr 0–250 h. Die Konzentrationsachse ist gebrochen; der bei etwa 1000 mmol/L eingezeichnete Anfangswert ist eine aus der eingesetzten Natriumsilikatmenge berechnete Konzentration und kein gemessener Porenfluid-Zeitpunkt.
+
+### Kritischer Befund
+
+Der Fließtext fasst die saure Reihe als 0.2–0.4 mmol/L zusammen. In der Grafik sind für die 60-°C-Reihe jedoch visuell auffällige Marker um ungefähr 0.8 mmol/L früh und ungefähr 0.6 mmol/L spät erkennbar. Diese Stellen sind noch nicht pixelgenau nachdigitalisiert; sie dürfen weder als gesicherte Messwerte behandelt noch stillschweigend verworfen werden. Der Text fasst die basische Reihe als 100–200 mmol/L zusammen, während einzelne Marker/Fehlerbalken visuell breit streuen.
+
+### Messmodell und Freigabesperre
+
+Die Autoren berichten, dass die spektroskopische Analyse nicht bei den Gelbadtemperaturen 40/60 °C, sondern bei Raumtemperatur (~20 °C) durchgeführt wurde. Sie diskutieren mögliche Nachpolymerisation nach dem Auspressen/Abtrennen des Porenfluids und eine daraus folgende Konzentrationsänderung. Die Messgröße ist deshalb nicht ohne Weiteres die in-situ-Konzentration im warmen Gel.
+
+Die neue Datei \`LITERATURE/wilhelm_kind_fig9_pore_liquid_audit.csv\` ist ausdrücklich ein Quellen-Audit und **kein** digitalisierter Rohdatensatz. Sie trennt Textzusammenfassung, visuelle Auffälligkeit, Prozess-/Temperaturkontext und Fit-Freigabe. Alle Figure-9-Punkte bleiben bis zur pixelgenauen Digitalisierung, Fehlerbalkenklärung und Klärung der Probenahme-/Analyseverzögerung für eine quantitative CCFSM-Kalibrierung gesperrt.
+
+**Validierungswert:** Figure 9 ist eine zusätzliche chemische Observable aus demselben Zielsystem und derselben Publikation, also ein unabhängiger Observable-Test, aber keine unabhängige Laborreplikation.
