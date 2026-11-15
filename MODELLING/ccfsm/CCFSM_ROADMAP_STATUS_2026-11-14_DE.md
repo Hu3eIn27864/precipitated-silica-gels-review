@@ -529,3 +529,12 @@ Der P21-Adapter rekonstruiert den diffusen M/O-Fluss als Gesamtfluss minus Advek
 **Aussagegrenze:** Noch kein automatischer P10/P13/P19/P21-Snapshot-Adapter. Insbesondere dürfen P19-Energie (J), P10-Reaktionsdissipation (W/m³) und FV-Dissipationen (W/m²) nicht ohne Geometrie-/Querschnittsabbildung addiert werden. Die Ableitung aller Terme aus einer gemeinsamen freien Energie, ein vollständiger diskreter Energieabschluss, PDE-Sätze und physikalische Validierung bleiben offen.
 
 **Nächster Schritt P27.20:** dimensionskonsistenter Snapshot-Adapter auf Basis zweier zeitlich konsistenter Zustände, zunächst 1-D-FV-Energieänderung und separat bilanzierter P19-Mechanik inklusive Rand-/Dirichlet-Arbeit.
+
+
+## P27.20 — Zwei-Zustands-Energie-Snapshot-Adapter (15.11.2026)
+
+**Status: implementiert; Hosted-CI-Prüfung ausstehend.** P27.20 integriert eine explizit gelieferte FV-Freie-Energiedichte über das gemeinsame 1-D-Zellgitter und bildet die Differenz zweier P19-gespeicherter Energien auf mittlere Energieraten pro Referenzfläche (W/m²) ab. Nichtuniforme Zellbreiten sind zulässig, wenn beide Zustände dasselbe Gitter besitzen. P19-Endpunkt-Traktionsarbeit wird nur auf ausdrückliche Option als Differenz ausgegeben.
+
+**Aussagegrenze:** Die FV-Freie-Energiedichte wird nicht aus P10/P13 hergeleitet; die gemeinsame thermodynamische Herkunft und Doppelzählungsfreiheit sind nicht belegt. Bei Netzänderung ist vorab konservativ umzurechnen. Endpunkt-Traktionsarbeitsdifferenzen sind nur unter kompatibler Lastpfadannahme Pfadarbeit; Dirichlet-Reaktionsarbeit und vollständige Rand-/Advektionsleistungen fehlen. Kein vollständiger diskreter Energieabschluss oder physikalischer Validierungsnachweis.
+
+**Nächster Schritt P27.21:** eine explizite gemeinsame diskrete freie Energie aus den vorhandenen P10/P13 chemischen Zuständen und P19 mechanisch-poroelastischen Zuständen herleiten; zunächst Term-für-Term-Einheiten, Variationsableitungen und Doppelzählungsprüfung durchführen, bevor Dissipations-/Leistungsbilanz automatisiert gekoppelt wird.
