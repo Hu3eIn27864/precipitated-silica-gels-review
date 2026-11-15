@@ -839,3 +839,13 @@ Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständig
 - `test_ccfsm_p27_21_variational_audit.py` enthält fünf Regressionen; Bericht: `CCFSM_v4.2.41_P27_21_VARIATIONAL_AUDIT_DE.md`.
 
 **Grenze:** Der lokale P9-Variationsaudit beweist keine gemeinsame P10/P13/P19/P21-Energie. P19 kann dieselben elastischen/Biot-Anteile bereits enthalten; vor Addition ist Doppelzählung auszuschließen.
+
+
+## CCFSM P27.22 — P9/P19-Energieäquivalenz und Exklusivitäts-Audit
+
+- `ccfsm_p27_22_energy_ownership.py` rekonstruiert P19s elastische und Biot-Speicherenergie unabhängig aus FE-Quadraturdaten und vergleicht sie punktweise sowie integriert mit P9.
+- Der Vergleich verlangt identische isotrope/Biot-Parameter, identische Quadraturzustände und P9-kompatible axiale Kinematik (keine laterale Gesamt- oder Scherdehnung).
+- Die Ownership-Regel lässt genau eine mechanische Energiebuchung zu (P9 oder P19); die jeweils andere Darstellung bleibt Auditvergleich. P9-Chemie ist separat.
+- `test_ccfsm_p27_22_energy_ownership.py` enthält fünf Regressionen; Bericht: `CCFSM_v4.2.42_P27_22_ENERGY_OWNERSHIP_DE.md`.
+
+**Grenze:** Äquivalenz nur für den abgeglichenen Spezialfall. Keine gemeinsame P10/P13/P19/P21-Energie, keine Traktions-/Dirichlet-Arbeitsbilanz, keine Gradientenergie und keine physikalische Validierung.
