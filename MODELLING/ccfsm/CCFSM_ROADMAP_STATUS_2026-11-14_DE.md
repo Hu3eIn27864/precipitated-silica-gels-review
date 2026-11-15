@@ -390,3 +390,28 @@ P26.20 verbindet die exakte Profilrestriktion aus P26.19 mit den lokalen Markov-
 - P27.2 ist ein hinreichender lokaler Zertifikatsbaustein, kein vollständiger P2-Positivitätstest.
 
 **Nächster mathematischer Schritt:** adaptive Tetraeder-Subdivision und erneute Bernstein-Zertifizierung; danach Abgleich mit dem tatsächlichen Interpolationsschema und den Quadraturdaten des P19-Mechanikblocks. Erst danach kann ein diskreter Positivitätslimiter für die gekoppelten Transport-/Reaktionszustände entworfen werden.
+
+
+### P27.3 — Adaptive P2-Bernstein-Zertifizierung auf Tetraedern
+
+**Status: implementiert; CI-Prüfung ausstehend.**
+
+- Exakte Unterteilung des Referenztetraeders in vier Eck- und vier zentrale Tetraeder, mit zentraler Oktaederdiagonale \(m_{01}\)--\(m_{23}\).
+- Kindpolynome werden durch exakte Auswertung an Kind-Ecken und Kantenmittelpunkten rekonstruiert.
+- Positivitätszertifikat nur dann, wenn jedes Blatt ausschließlich nichtnegative Bernstein-Koeffizienten besitzt.
+- Ein exakt negativer Kindknotenwert liefert einen echten Negativitätszeugen. Negative Bernstein-Koeffizienten allein liefern niemals einen solchen Zeugen.
+- Tests umfassen den positiven Fall \((\lambda_0-\lambda_1)^2+1/16\), dessen Ausgangs-Bernstein-Koeffizient negativ ist, die exakte Achtfach-Volumenaufteilung und einen negativen Punktzeugen.
+
+**Grenze:** endliche Unterteilung ist ein hinreichendes Verfahren; nicht zertifizierte Fälle bleiben unentschieden. Keine globale Netzkonformität und keine gekoppelte 3-D-Zeitschrittgarantie.
+
+### P27-V — Figure-9-Porenfluid-Audit
+
+**Status: Quellen-Audit erstellt; quantitative Digitalisierung gesperrt.**
+
+- `LITERATURE/wilhelm_kind_fig9_pore_liquid_audit.csv` trennt Artikeltext, visuelle Auffälligkeiten und Messstatus.
+- Der Text nennt für saure Gele 0.2–0.4 mmol/L, die Grafik zeigt aber visuell auffällige 60-°C-Punkte nahe 0.8 und 0.6 mmol/L; pixelgenaue Nachprüfung erforderlich.
+- Der bei ungefähr 1000 mmol/L eingezeichnete Anfangswert ist berechnet und darf nicht als Messpunkt gefittet werden.
+- Die Spektroskopie erfolgte bei ungefähr 20 °C, auch bei warmen Gelversuchen; mögliche Nachpolymerisation nach Probenahme ist ein expliziter Messmodellfehlerpfad.
+- Figure 9 ist eine zusätzliche Observable im Zielsystem, aber keine unabhängige Laborreplikation.
+
+**Nächster Schritt:** hochauflösende Pixel-Digitalisierung mit Unsicherheitsintervallen und Prüfung der Fehlerbalken-/Probenahmedefinition; erst dann ein eigener chemischer Holdout.
