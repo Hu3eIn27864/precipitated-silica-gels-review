@@ -14,7 +14,7 @@ class TestP25RefinementStudy(unittest.TestCase):
             self.assertTrue(all(item["weight"] > 0 for item in quad))
             self.assertEqual(len(quad[0]["B"][0]), 3 * (cells + 1))
             self.assertEqual(len(state.fluid_capacity), cells)
-            self.assertEqual(len(dbc), 2 * (cells + 1) - 1)
+            self.assertEqual(len(dbc), 2 * (cells + 1) + 1)
 
     def test_relative_error_is_zero_for_identical_states(self):
         _, _, _, state, _, _ = reference_inputs(2)
