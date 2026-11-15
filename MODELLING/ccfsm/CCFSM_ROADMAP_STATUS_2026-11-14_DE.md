@@ -2,7 +2,7 @@
 
 **Auditdatum:** 14.11.2026  
 **Repository-Stand:** `main`, letzter geprüfter Commit `a5e8f066cb6a4e4ab700a3ace85763fa1f64dfb4`  
-**Geltungsbereich:** CCFSM P0–P24, natürliche Synärese gefällter Silicagel-Systeme. Diese Roadmap ist ein Prüf- und Arbeitsplan, keine Behauptung physikalischer Validierung.
+**Geltungsbereich:** CCFSM P0–P25, natürliche Synärese gefällter Silicagel-Systeme. Diese Roadmap ist ein Prüf- und Arbeitsplan, keine Behauptung physikalischer Validierung.
 
 ## 1. Kurzurteil
 
@@ -19,7 +19,7 @@ Der aktuelle Engpass ist nicht das Hinzufügen weiterer physikalischer Terme, so
 - P22: gedämpfte Picard-Iteration für einen impliziten-Euler-Schritt.
 - P23: diskreter Audit des akzeptierten P22-Schritts; globale FV-Siliciumbilanz plus getrennte P9-/P19-Energiediagnostik.
 - P24: unabhängiger finite-difference Newton-Referenzlöser; P19 wird in jeder Residuumsauswertung neu gelöst.
-- P24: unabhängiger finite-difference Newton-Referenzlöser; P19 wird in jeder Residuumsauswertung neu gelöst.
+- P25: reproduzierbarer Zeit-/Raumverfeinerungs- und Solverrobustheits-Harness angelegt; CI-Auswertung steht aus.
 
 GitHub Actions Lauf [#263](https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43634688142) wurde geprüft: Job `ccfsm-tests` erfolgreich, 259 Unit-Tests bestanden. Im selben Lauf wurde die v0.5-Kalibrierung ausgeführt: 7 natürliche Kurven, 21 Fits; Exponentialmodell gewann 3/7, gestrecktes Exponentialmodell 4/7, zweistufiges CCFSM 0/7 und traf bei allen sieben Kurven eine Parametergrenze. Medianer Holdout-RMSE: 0.04207, 0.01755 bzw. 0.04207. Das ist ein begrenzter Vergleich auf approximierten/kuratierten Ablesepunkten, keine unabhängige physikalische Validierung. Der Druckzellen-Audit enthält 21 Druckzellkurven und 0 natürliche Kalibrierkurven; er dient der Trennung, nicht der Übernahme dieser Daten.
 
@@ -119,6 +119,8 @@ P22.1 is implemented and its hosted CI is green.
 - Positivität, Stoffbilanz, Druckprojektion und Energieledger auf jeder Stufe berichten.
 - Solver-Abbruch, Relaxationshistorie und Rechenkosten dokumentieren.
 - Erst danach adaptive Zeitschrittsteuerung und ggf. adaptive Relaxation ergänzen.
+
+**Implementierung:** `ccfsm_p25_refinement_study.py`, Regressionen `test_ccfsm_p25_refinement_study.py`, Spezifikation `CCFSM_v4.0_P25_REFINEMENT_STUDY_DE.md`. Die CI-Ausführung veröffentlicht CSV/JSON-Artefakte für Zeit-, Raum- und Solverparameterfolgen. Der P25-Code ist angelegt; quantitative Freigabe bleibt bis zur Prüfung des Workflow-Laufs und der Artefakte offen.
 
 **Freigabe:** beobachtete Konvergenzordnung bzw. deren Grenzen sind reproduzierbar; keine scheinbare Konvergenz allein durch Relaxation oder grobe Diskretisierung.
 
