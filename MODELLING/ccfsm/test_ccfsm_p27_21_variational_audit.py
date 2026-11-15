@@ -1,6 +1,8 @@
 """Regression tests for the P27.21 P9 variational audit."""
 import unittest
 from types import SimpleNamespace
+from dataclasses import replace
+from ccfsm_p9_mechanical_feedback import P9Parameters
 from ccfsm_p27_21_variational_audit import audit_p9_free_energy_variations
 
 
@@ -10,7 +12,7 @@ class P2721Tests(unittest.TestCase):
             temperature_k=298.15, reference_concentration=1000.0,
             activity_coefficients=(1.0, 1.0, 1.0, 1.0),
             equilibrium_constants=(1.0, 1.0, 1.0))
-        self.params = SimpleNamespace(
+        self.params = P9Parameters(
             lame_lambda_pa=1.0e7, shear_modulus_pa=8.0e6,
             biot_modulus_pa=2.0e8, biot_coefficient=0.7,
             bridge_eigenstrain=0.01, bridge_reference=0.2,
@@ -35,9 +37,9 @@ class P2721Tests(unittest.TestCase):
                          {"elastic", "biot_storage", "chemical"})
 
     def test_nonzero_traction_warns_about_external_potential(self):
-        self.params.applied_axial_traction_pa = 1.0e5
+        loaded = replace(self.params, applied_axial_traction_pa=1.0e5)
         r = audit_p9_free_energy_variations(0.4, (120.0, 90.0, 40.0, 20.0),
-                                            self.chem, self.params)
+                                            self.chem, loaded)
         self.assertIsNotNone(r["traction_potential_warning"])
         self.assertFalse(r["external_traction_potential_included_in_reported_energy"])
 
