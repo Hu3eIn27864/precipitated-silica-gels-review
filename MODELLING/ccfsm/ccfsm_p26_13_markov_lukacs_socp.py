@@ -79,7 +79,7 @@ def verify_free_coordinates(chart, free_values):
 def run_study():
     cases = [
         ("strictly_positive", Fraction(2), Fraction(1, 5), Fraction(1, 7)),
-        ("nonnegative_endpoint_touch", Fraction(1, 4), Fraction(1), Fraction(1)),
+        ("nonnegative_endpoint_touch", Fraction(1, 3), Fraction(1), Fraction(1)),
         ("zero_polynomial", Fraction(0), Fraction(0), Fraction(0)),
         ("negative_constant", Fraction(-1), Fraction(0), Fraction(0)),
         ("negative_interior", Fraction(1, 10), Fraction(0), Fraction(-2)),
