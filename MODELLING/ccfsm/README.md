@@ -751,3 +751,13 @@ Der Indikator ist kein vollständiges FE-Konditionierungszertifikat und beweist 
 - Regressionen: einzelnes Tetraeder, gemeinsame Fläche, getrennte Komponenten, exakte Volumenbilanz und Basisfehler-Weitergabe.
 
 Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständiger Selbstüberschneidungsbeweis und keine physikalische CCFSM-Positivitäts- oder Validitätsgarantie. Hosted CI ist nach Abschluss gesondert zu prüfen.
+
+
+## CCFSM v4.2.33 — P27.13: integrierter 3D-Netz-Gesamtaudit
+
+- `ccfsm_p27_13_integrated_mesh_audit.py` bündelt P27.8–P27.12 in einem strukturierten Gate-Bericht.
+- Die Prüfkette umfasst exakte Elementorientierung/Formqualität, globale Inzidenz, Knoten-/Kanten-Links, paarweise geometrische SAT-Prüfung und orientierte Rand-/Volumenbilanz.
+- Jeder Gate-Status bleibt separat sichtbar; bei einem Fehler wird die Kette kontrolliert angehalten und die Diagnose zurückgegeben.
+- `test_ccfsm_p27_13_integrated_mesh_audit.py` prüft Einzelelement, gemeinsame Fläche, getrennte Komponenten, Qualitäts-Gate und ungültige Duplikate.
+
+`integrated_mesh_audited` bestätigt ausschließlich die implementierten P27.8–P27.12-Checks. Kein vollständiger Selbstüberschneidungsbeweis, kein FE-Konditionierungszertifikat und keine CCFSM-Positivitäts-, Energieabschluss- oder physikalische Validitätsgarantie. Hosted CI nach Abschluss prüfen.
