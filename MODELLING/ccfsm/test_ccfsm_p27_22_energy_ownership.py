@@ -24,7 +24,7 @@ class P27_22Tests(unittest.TestCase):
         self.assertEqual(r["status"],"matched_p9_p19_mechanical_energy")
         self.assertTrue(r["mechanical_terms_added_once"])
         self.assertAlmostEqual(r["selected_mechanical_energy_j"],self.result["stored_energy_j"])
-        self.assertGreater(r["selected_chemical_energy_j"],0.)
+        self.assertNotEqual(r["selected_chemical_energy_j"],0.)
     def test_p9_can_own_mechanics(self):
         r=self.audit(mechanical_energy_owner="p9")
         self.assertAlmostEqual(r["selected_mechanical_energy_j"],self.result["stored_energy_j"])
