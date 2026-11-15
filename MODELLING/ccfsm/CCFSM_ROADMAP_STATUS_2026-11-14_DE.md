@@ -230,11 +230,14 @@ Dieser Strang kann parallel zu Gates A–E laufen, ohne unkalibrierte Materialge
 
 ## 8. P26.3 — Verfeinerungs-, Positivitäts- und Sensitivitätsstudie
 
-**Implementiert; quantitative CI-Prüfung läuft.**
+**Implementiert; CI-Lauf #345 erfolgreich (306/306 Tests).**
 
 - Vier Profiltypen (glatt, steile Front, lokale Extrema, nahezu Nullinventar), Quellnetze N=16/32/64/128 und nichtpassende gradierte Zielnetze.
 - Relative L1/L2- und abgetastete L-infinity-Feldfehler, Minimum des Zielpolynoms, Residuen der drei globalen Momente sowie empirische Störungsverstärkung.
 - Limiter an/aus wird getrennt verglichen. Der Quelllimiter garantiert keine Positivität des Zielpolynoms.
-- Störungsverstärkung ist ein empirischer Sensitivitätsindikator, keine Matrix-Konditionszahl. Synthetische 1-D-Verifikation, keine physikalische Validierung.
+- Störungsverstärkung maximal 6.923 (empirischer Sensitivitätsindikator, keine Matrix-Konditionszahl); maximales relatives Momentenresiduum 6.45e-16.
+- Bei N=128 relative L2-Fehler: glatt 5.68e-7, steile Front 4.41e-6, lokale Extrema 3.09e-5, nahezu Nullinventar 3.32e-5.
+- Zielpolynom-Minimum ohne Limiter -6.81e-3, mit Quelllimiter -9.43e-11. Der Quelllimiter garantiert also keine strikt positive Zielrekonstruktion.
+- Limiterbedingte relative Verschiebung des zweiten Moments maximal 6.36e-5 (lokale Extrema); Masse bleibt erhalten.
 
-**Nächster Schritt:** Ergebnisse interpretieren, mögliche Positivitätsverletzungen auf Zielzellen analysieren und erst danach entscheiden, ob eine begrenzte Zielprojektion oder eine andere Positivitätsstrategie entwickelt werden soll. Den vollständigen P23-Energieabschluss separat weiterführen.
+**Nächster Schritt P26.4:** Zielzell-Positivitätsstrategie entwickeln und ihre Konflikte mit Momentenerhaltung/Formtreue quantifizieren. Den vollständigen P23-Energieabschluss separat weiterführen.
