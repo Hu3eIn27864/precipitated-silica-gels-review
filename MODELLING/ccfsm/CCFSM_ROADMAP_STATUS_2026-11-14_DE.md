@@ -240,4 +240,16 @@ Dieser Strang kann parallel zu Gates A–E laufen, ohne unkalibrierte Materialge
 - Zielpolynom-Minimum ohne Limiter -6.81e-3, mit Quelllimiter -9.43e-11. Der Quelllimiter garantiert also keine strikt positive Zielrekonstruktion.
 - Limiterbedingte relative Verschiebung des zweiten Moments maximal 6.36e-5 (lokale Extrema); Masse bleibt erhalten.
 
-**Nächster Schritt P26.4:** Zielzell-Positivitätsstrategie entwickeln und ihre Konflikte mit Momentenerhaltung/Formtreue quantifizieren. Den vollständigen P23-Energieabschluss separat weiterführen.
+## 9. P26.4 — positivitätserhaltende Zielrekonstruktion
+
+**Implementiert; CI-/Artefaktprüfung ausstehend.**
+
+- Nach P26.2 werden die Zielzellmoden mit dem größtmöglichen gemeinsamen Faktor theta in [0,1] kontrahiert, so dass das quadratische Zielpolynom auf dem vollständigen Intervall nichtnegativ ist.
+- Der Zielzellmittelwert bleibt exakt erhalten; dadurch bleiben jede Zellmasse und die globale Masse erhalten.
+- Erstes und zweites räumliches Moment dürfen sich ändern; absolute und relative Abweichungen werden berichtet.
+- Der Limiter ist eine radiale Modenkontraktion, kein globaler konvexer Projektionsoptimierer. Negative Zielmittelwerte werden abgewiesen.
+- Regressionen umfassen Rand- und Scheitelpunkt-Unterschwinger, Nullmittelwerte, unveränderte positive Felder, Massenerhaltung und Momentenänderungen.
+
+**Geltungsgrenze:** 1-D-Intervalle und quadratische Felder; keine 2-D/3-D-Geometrie, keine Druck-/Energieerhaltung und keine physikalische Validierung.
+
+**Nächster Schritt:** P26.5 soll untersuchen, ob die Momentenverluste durch eine lokale constrained optimization mit fester Masse und Nichtnegativitätsbedingung gegenüber der radialen Kontraktion reduziert werden können. Den vollständigen P23-Energieabschluss separat weiterführen.
