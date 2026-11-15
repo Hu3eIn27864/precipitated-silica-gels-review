@@ -887,3 +887,12 @@ Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständig
 - Bericht: `CCFSM_v4.2.46_P27_26_REFERENCE_VERIFICATION_DE.md`.
 
 **Grenze:** P27.26 validiert unabhängig die Quadraturmathematik, nicht die Vollständigkeit der P21-Leistungsfelder oder die physikalische Korrektheit der Randpotentiale. Keine Upwind-Entropieschließung, kein solverinterner Energieabschluss und keine physikalische Validierung.
+
+
+## CCFSM P27.27 — analytische geschlossene/offene Randfluss-Referenzfälle
+
+- `ccfsm_p27_27_boundary_reference.py` führt geschlossene und offene, zeitkonstante synthetische Randflussfälle direkt durch den P27.25-Adapter.
+- Unabhängige Referenzwerte prüfen M/O-Netto-Stofftransfer, potentialgewichtete chemische Randarbeit und hydraulische Reservoirarbeit einschließlich Vorzeichen und Einheiten.
+- Sechs Regressionen prüfen Nullflussgrenzen, offene Referenzwerte und getrennte Fehlerbudgets. Bericht: `CCFSM_v4.2.47_P27_27_BOUNDARY_REFERENCE_DE.md`.
+
+**Grenze:** Adapter-/Vorzeichenprüfung für synthetische konstante Randdaten; keine physikalische Reservoirmodellierung, keine zeitvariable P24-Quadratur, keine vollständige Upwind-Entropieschließung und kein vollständiger Energieabschluss.
