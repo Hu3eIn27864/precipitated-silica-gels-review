@@ -67,6 +67,17 @@ def globally_coupled_positive_projection(target_edges, averages, linear, quadrat
     if not isinstance(max_iterations,int) or max_iterations<1: raise ValueError("max_iterations must be positive")
     if not math.isfinite(tolerance) or tolerance<=0: raise ValueError("tolerance must be positive")
     old=moments(e,u,aa,bb); target=(old[1],old[2])
+    initial_min=min(u[j]+quadratic_minimum(aa[j],bb[j]) for j in range(n))
+    if initial_min >= 0.0:
+        # The input already belongs to both constraint sets; do not run an
+        # inexact alternating projection on a point that is already feasible.
+        diag={"method":"identity: input already satisfies global moments and exact cellwise positivity",
+              "iterations":0,"converged":True,"objective":0.0,
+              "minimum_cell_value":initial_min,
+              "moment_residuals":{"mass":0.0,"first":0.0,"second":0.0},
+              "moments_before":{"mass":old[0],"first":old[1],"second":old[2]},
+              "moments_after":{"mass":old[0],"first":old[1],"second":old[2]},"weights":w}
+        return (u,aa,bb),diag
     z=[v for pair in zip(aa,bb) for v in pair]
     pa=[0.0]*len(z); pc=[0.0]*len(z)
     scale=max(1.0,abs(old[1]),abs(old[2]))
