@@ -778,3 +778,13 @@ Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständig
 - ccfsm_p27_15_coupled_invariant_domain.py bestimmt einen gemeinsamen fraction-to-boundary-Faktor für Fluidkapazität und M/O/N/B-Inventare; optionaler Adapter für P21-Snapshots.
 - test_ccfsm_p27_15_coupled_invariant_domain.py prüft Vollschritt, Inventar- und theta-Grenzen, Eingabefehler und P21-Adapter.
 - Grenze: algebraische Zulässigkeit des expliziten Kandidaten für die übergebene RHS, kein Nachweis der P22/P24-Residualkonvergenz, Konservativität, Energieabnahme, Stabilität oder physikalischen Validität.
+
+
+## CCFSM P27.16 — Newton-Invariantenlimiter und FV-Flussbilanz-Audit
+
+- `ccfsm_p27_16_newton_flux_audit.py` begrenzt vollständige Newton-Richtungen mit dem gemeinsamen P27.15-Faktor und prüft lokale sowie globale 1-D-FV-Flussbilanzen.
+- `ccfsm_p24_newton_reference.py` nutzt den gemeinsamen Limiter vor dem Residuum-Backtracking; die Line-Search darf weiter dämpfen.
+- `test_ccfsm_p27_16_newton_flux_audit.py` enthält acht Regressionstests.
+- `CCFSM_v4.2.36_P27_16_NEWTON_FLUX_AUDIT_DE.md` dokumentiert Verfahren und Grenzen.
+
+**Grenze:** Der Bilanzaudit prüft gelieferte RHS/Flüsse/Quellen, nicht deren physikalische Vollständigkeit. Keine Newton-Konvergenzgarantie, Energieabnahme, 3-D-Erhaltung oder physikalische Validierung.
