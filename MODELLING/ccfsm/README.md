@@ -964,3 +964,12 @@ Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständig
 - Bericht: `CCFSM_v4.2.56_P27_36_MONOTONE_POLYNOMIAL_ROOT_DE.md`.
 
 **Grenze:** Bedingte Intervallzertifizierung für Polynome; abhängig von gültiger nach außen gerundeter Intervallarithmetik. Keine tangentiale Nullstellenexistenz, keine Vollständigkeit der vorgelagerten Ereignisabtastung, keine allgemeine Flussfortsetzung und keine physikalische Validierung.
+
+## CCFSM P27.37 — adaptive Polynom-Nullstellenisolation
+
+- `ccfsm_p27_37_adaptive_polynomial_root_isolation.py` unterteilt ungelöste Polynomintervalle rekursiv und klassifiziert Teilintervalle mit dem P27.36-Monotoniekriterium.
+- Ausgegeben werden zertifizierte einfache Nullstellenintervalle, nullstellenfreie Teilintervalle sowie ausdrücklich ungelöste Restintervalle mit Tiefen-/Breitengrenze.
+- Acht Regressionen prüfen einfache und doppelte einfache Nullstellen, Nullstellenfreiheit, tangentiale und auf Teilungsgrenzen liegende Fälle, Tiefenlimit, Partition und Eingaben.
+- Bericht: `CCFSM_v4.2.57_P27_37_ADAPTIVE_POLYNOMIAL_ROOT_ISOLATION_DE.md`.
+
+**Grenze:** Bedingte Polynom-Intervallzertifizierung; tangentiale/mehrfache Nullstellen oder Randfälle können ungelöst bleiben. Keine allgemeine Fluss-Root-Isolation, keine Vollständigkeit vorgelagerter Ereignisabtastung und keine physikalische Validierung.
