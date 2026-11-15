@@ -57,8 +57,9 @@ class TestP273AdaptiveSubdivision(unittest.TestCase):
         self.assertEqual(r["status"], "certified_negative_point")
         point = r["barycentric_point"]
         self.assertEqual(sum(point), F(1))
-        self.assertEqual(point[0], F(3, 8))
-        self.assertEqual(r["value"], F(-3, 320))
+        self.assertGreater(point[0], F(3, 10))
+        self.assertLess(point[0], F(1, 2))
+        self.assertEqual(r["value"], (point[0] - F(2, 5)) ** 2 - F(1, 100))
 
     def test_zero_polynomial_is_certified(self):
         r = certify_tetra_p2_by_subdivision(self.tet, (0, 0, 0, 0), (0, 0, 0, 0, 0, 0), 3)
