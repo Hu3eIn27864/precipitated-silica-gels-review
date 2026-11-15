@@ -5,6 +5,12 @@
 **Repository-Basis:** CCFSM v0.2 und die zugehörige Implementierung/Tests.  
 **Primärziel:** eine eng abgegrenzte mathematisch-modellierende Arbeit, nicht die Veröffentlichung des gesamten CCFSM.
 
+## 14. Neuheits- und physikalischer Modell-Audit — wichtige Einschränkung
+
+Die erste Literaturprüfung ist in [MANUSCRIPT_01_NOVELTY_AND_PHYSICAL_MODEL_AUDIT_2026-11-15_DE.md](MANUSCRIPT_01_NOVELTY_AND_PHYSICAL_MODEL_AUDIT_2026-11-15_DE.md) dokumentiert. Scherer (1989) hat die Kopplung von viskoelastischer Netzwerkmechanik und Porenflüssigkeitstransport für Silica-Synerese bereits mechanistisch behandelt; Wilhelm & Kind haben natürliche Synärese gefällter Silica empirisch modelliert; die Ratenvertauschung in linearen Zwei-Kompartiment-Systemen ist klassische Identifizierbarkeitstheorie.
+
+Daher ist die Zwei-Zustands-ODE derzeit als **phänomenologische, testbare reduzierte Schließung** zu bezeichnen, nicht als erstmalige physikalische Trennung der Prozesse oder als aus Biot-Darcy hergeleitetes Silica-Gesetz. Die ODE ist mathematisch konsistent unter ihren Annahmen; ihre physikalische Gültigkeit, Erhaltungsbilanz und Reduktion aus einem etablierten Feldmodell sind noch zu prüfen. EJDE wird bis dahin nicht als realistisches Ziel für die ODE allein behandelt.
+
 ## 1. Arbeitstitel
 
 **A two-timescale dynamical model for natural syneresis of precipitated silica gels: exact response, invariant-region analysis, and structural identifiability**
