@@ -1,3 +1,11 @@
+## 2026-11-15 — CCFSM P25.1 conservative cross-mesh refinement
+
+- Added nested uniform-grid FV cell-average restriction that preserves each component's domain integral and mesh-independent initial profiles.
+- Added cross-mesh relative/absolute L1, L2 and Linf comparisons against the 8-cell reference, a 1/2/4/8/16 time sequence, P23 silicon-balance audits and same-mesh P22/P24 agreement checks.
+- Added a stronger synthetic pressure/Darcy-gradient case and records pressure span, Darcy flux, admissibility, solver residuals and iterations.
+- Added dedicated tests, German method specification, README and roadmap updates; CI runs and uploads P25.1 results separately.
+- Empirical rates against the finest computed solution are diagnostic only; no exact spatial solution or physical validation is claimed.
+
 ## 2026-11-15 — CCFSM P25 first numerical results
 
 - Tightened P22 fixed-point and pressure tolerances to 1e-11 in the P25 harness and used a nontrivial T=1e-2 s reference interval.
