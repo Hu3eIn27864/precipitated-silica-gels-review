@@ -683,3 +683,17 @@ P27.3 macht den Bernstein-Test stärker, aber nicht vollständig: Endliche Tiefe
 - CCFSM_v4.2.26_P27_6_REFINEMENT_CLOSURE_DE.md dokumentiert Algorithmus und Grenzen.
 
 Der Abschluss ist konservativ und kann eine ganze face-zusammenhängende Komponente auf dieselbe Tiefe heben. Er generiert kein Mesh; nach der tatsächlichen Subdivision ist P27.5 als unabhängiger Konformitätsaudit erforderlich. Keine physikalische Validierung.
+
+
+## P27.7 — tatsächliche konforme Tetraederverfeinerung
+
+- `ccfsm_p27_7_conforming_tetra_mesh.py` erzeugt aus P27.6-geschlossenen Tiefen ein global dedupliziertes Netz mit exakten rationalen Koordinaten.
+- Vor erfolgreicher Rückgabe wird P27.5 auf die vollständigen Parent-Blattpartitionen angewandt; fehlgeschlagener Audit liefert keinen erfolgreichen Meshstatus.
+- `test_ccfsm_p27_7_conforming_tetra_mesh.py` deckt Tiefe 0/1/2, einseitige Markierung, getrennte Komponenten, Ressourcen- und Eingabefehler ab.
+- Spezifikation: `CCFSM_v4.2.27_P27_7_CONFORMING_TETRA_MESH_DE.md`.
+
+Keine Aussage über CCFSM-Zustandspositivität, globale Kanten-/Knotenmannigfaltigkeit, Elementqualität oder physikalische Validierung.
+
+## Figure 9 — zweite visuelle Ablesung
+
+`LITERATURE/wilhelm_kind_fig9_second_read_visual_2026-11-15.csv` ergänzt eine zweite visuelle Zeitablesung und grobe Fehlerbalken-Unter-/Obergrenzen für alle 39 Punkte. Es handelt sich nicht um maschinelle Pixel-Digitalisierung; beide Datensätze bleiben für Fits gesperrt. Der Messoperator bleibt assayabhängig, da Reaktionszeit/Selektivität nicht vollständig dokumentiert sind.
