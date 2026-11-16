@@ -43,7 +43,7 @@ This is an isolated Lean 4 project pinned to Lean **v4.35.0**. It does not chang
 ### P27.40 — signed scalar monotonicity
 
 - Proves the sign split for multiplication by a fixed scalar over an ordered interval: nonnegative factors are monotone and nonpositive factors are antitone.
-- Provides separate left- and right-factor lemmas, covering zero through the exhaustive order split.
+- Provides separate left- and right-factor lemmas. The scalar dichotomy is exhaustive, including zero; equality of endpoint products at zero additionally needs the concrete multiplication's zero-annihilation law.
 - The order-compatible multiplication laws remain explicit assumptions to be instantiated for a concrete ordered ring.
 - This is the signed-order foundation for the four-corner theorem, **not** yet the full four-corner min/max enclosure theorem.
 
