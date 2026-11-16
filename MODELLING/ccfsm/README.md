@@ -1009,3 +1009,10 @@ Die erste Manuskriptarbeit behandelt ausschließlich das reduzierte Zwei-Zeitska
 - Zehn gezielte Regressionstests decken Addition, Vorzeichenfälle, Nullüberschreitung, Subnormal-Unterlauf, Division und fehlerhafte/zu enge Zertifikate ab.
 
 **Grenze:** Der Prüfer validiert die exakte reelle Range der angegebenen binären Endpunkte. Er beweist weder die Herkunft der Eingangsintervalle noch, dass der Produzent den beabsichtigten Ausdruck berechnet hat. Er ist noch kein Lean-Beweis der IEEE-754-/nextafter-Implementierung; signed zero wird in der rationalen Interpretation mit reeller Null identifiziert. Die Zertifikats-JSON verlangt Gleitkommazahlen; ganzzahlige JSON-Tokens werden abgewiesen, damit keine stillschweigende Ganzzahl-zu-binary64-Rundung erfolgt.
+
+
+## P27.42/P27.43 — CI-Baseline-Audit
+
+- CCFSM_P27_42_P27_43_CI_BASELINE_TRIAGE_2026-11-16.md dokumentiert neun fehlgeschlagene Tests, die sowohl auf dem Basisstand von PR #13 als auch im aktuellen Arbeitszweig reproduziert wurden.
+- Alle zehn neuen P27.43-Prüfertests bestanden im PR-CI-Lauf. Die Gesamt-CI bleibt wegen der neun bereits auf dem Basisstand auftretenden Fehler rot; diese werden nicht stillschweigend P27.42/P27.43 zugerechnet.
+- Priorität für die nächste unabhängige Fehlerbehebung: P27.37-Vollständigkeitssemantik, danach P27.17-Bilanzrekonstruktion sowie P27.23/P27.28-Energiebilanzen.
