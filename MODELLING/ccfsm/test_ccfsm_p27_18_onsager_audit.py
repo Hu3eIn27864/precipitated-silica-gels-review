@@ -39,10 +39,15 @@ class TestP2718(unittest.TestCase):
         r=reconstruct_onsager_species_flux((1.,1.),(0.,0.),(.8,.8),.5,2.,1.,1.,1.,0.,0.)
         self.assertEqual(r["diffusive_face_flux"],(0.,0.,0.))
     def test_bad_positive_domain(self):
-        r=reconstruct_onsager_species_flux((0.,),(1.,),(.8,),.5,2.,1.,1.,1.,0.,0.)
-        self.assertIn(r.get("status"),("invalid_or_malformed_input",None))
-        self.assertFalse(audit_onsager_diffusion(((0.,),)*2,((0.,),)*2,(.8,),(.5,.5),2.,1.,
-            (.5,.5),(.5,.5),(0.,0.),(0.,0.),((0.,0.),)*2,((0.,0.),)*2,(0.,0.))["overall_pass"])
+        # The low-level reconstruction API raises on malformed input;
+        # the aggregate audit API converts the same invalid data to a
+        # structured fail-closed status.
+        with self.assertRaises(ValueError):
+            reconstruct_onsager_species_flux((0.,),(1.,),(.8,),.5,2.,1.,1.,1.,0.,0.)
+        result=audit_onsager_diffusion(((0.,),)*2,((0.,),)*2,(.8,),(.5,.5),2.,1.,
+            (.5,.5),(.5,.5),(0.,0.),(0.,0.),((0.,0.),)*2,((0.,0.),)*2,(0.,0.))
+        self.assertFalse(result["overall_pass"])
+        self.assertEqual(result["status"],"invalid_or_malformed_input")
     def test_p13_snapshot_adapter(self):
         a=fixture()
         c,mu,theta,d,rt,dx,cl,cr,mul,mur,total,adv,diss=a
