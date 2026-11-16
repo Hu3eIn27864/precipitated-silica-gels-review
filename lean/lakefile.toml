@@ -1,0 +1,6 @@
+name = "ccfsmP2737"
+version = "0.1.0"
+defaultTargets = ["CCFSM"]
+
+[[lean_lib]]
+name = "CCFSM"
