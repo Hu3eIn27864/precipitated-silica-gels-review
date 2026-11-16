@@ -10,7 +10,7 @@ or the physical CCFSM model. Those remain explicit external obligations.
 
 namespace CCFSM.P2737
 
-variable {α : Type} [LinearOrder α]
+variable {α : Type} [LE α] [LT α]
 
 /-- A point is an interior root of p on the open interval (lo, hi). -/
 def InteriorRoot (p : α → Prop) (lo hi x : α) : Prop :=
@@ -69,9 +69,10 @@ Closed child intervals cover their parent interval when they share a midpoint.
 The overlap at the midpoint is intentional; root certificates use open interiors.
 -/
 theorem midpoint_cover {lo mid hi x : α}
-    (hxlo : lo ≤ x) (hxhi : x ≤ hi) :
+    (hxlo : lo ≤ x) (hxhi : x ≤ hi)
+    (hle_total : ∀ a b : α, a ≤ b ∨ b ≤ a) :
     (lo ≤ x ∧ x ≤ mid) ∨ (mid ≤ x ∧ x ≤ hi) := by
-  rcases le_total x mid with hxm | hmx
+  rcases hle_total x mid with hxm | hmx
   · exact Or.inl ⟨hxlo, hxm⟩
   · exact Or.inr ⟨hmx, hxhi⟩
 
@@ -81,11 +82,12 @@ exactly at the split point, or interior to the right child.
 A split-point root is therefore an explicit boundary case.
 -/
 theorem midpoint_root_split {lo mid hi x : α}
-    (hx : lo < x ∧ x < hi) :
+    (hx : lo < x ∧ x < hi)
+    (htrichotomy : ∀ a b : α, a < b ∨ a = b ∨ b < a) :
     (lo < x ∧ x < mid) ∨
       (x = mid) ∨
       (mid < x ∧ x < hi) := by
-  rcases lt_trichotomy x mid with hleft | heq | hright
+  rcases htrichotomy x mid with hleft | heq | hright
   · exact Or.inl ⟨hx.1, hleft⟩
   · exact Or.inr (Or.inl heq)
   · exact Or.inr (Or.inr ⟨hright, hx.2⟩)
