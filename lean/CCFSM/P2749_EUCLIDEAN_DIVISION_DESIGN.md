@@ -197,3 +197,24 @@ It does **not** yet prove the convolution identity between multiplication by
 a monomial and shifted scaling, nor does it identify the final coefficient
 with the polynomial leading coefficient. Those remain the next bridge
 obligations. The new lemma is awaiting aggregate Lean CI.
+
+
+## Formal progress update — constant-factor convolution
+
+A first coefficient-level multiplication bridge is now proved in
+`P2749.lean`: for a nonempty coefficient vector `xs`, convolution with
+the singleton coefficient vector `[c]` equals coefficientwise scaling
+by `c`. The nonempty premise is intentional: the current recursive
+convolution maps an empty second vector to the empty vector, while the
+separate shifted/scaled representation can contain inserted zero slots.
+
+This establishes the degree-zero monomial case only. The general
+`X^k)-shift identity still requires a lemma controlling the recursive
+`addCoefficients` alignment and the inserted zero coefficients. It is not
+yet a polynomial-division or leading-coefficient cancellation theorem.
+
+The corrected shifted-vector length proof passed aggregate Lean CI on
+`a656f5d7d980c511581dd431d226fddf2b58f3a5` (Lean run
+`43870379199`; Python run `43870379213`). The new singleton-convolution
+lemma is on commit `2d31da40f0a56003c4701db17d88b67e7e0dcb06`;
+its Lean CI is queued and has not yet been claimed as passing.
