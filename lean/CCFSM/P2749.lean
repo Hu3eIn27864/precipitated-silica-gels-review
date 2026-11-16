@@ -618,6 +618,12 @@ theorem shiftedScaleCoefficients_length (k : Nat) (c : Rat)
   simp [shiftedScaleCoefficients, scaleCoefficients]
 
 
+/-- Adding an empty coefficient vector on the right leaves the left
+    coefficient vector unchanged. -/
+theorem addCoefficients_nil_right (xs : List Rat) :
+    addCoefficients xs [] = xs := by
+  cases xs <;> rfl
+
 /-- Multiplication by a constant polynomial scales a nonempty coefficient
     vector exactly. The nonempty premise excludes the implementation's
     empty-list edge case, where the recursive convolution returns []. -/
@@ -627,6 +633,8 @@ theorem multiplyCoefficients_singleton_left (c : Rat) (xs : List Rat)
   cases xs with
   | nil => exact False.elim (hxs rfl)
   | cons b bs =>
-      simp [multiplyCoefficients, addCoefficients, scaleCoefficients, Rat.add_zero]
+      simp only [multiplyCoefficients, scaleCoefficients, List.map_cons,
+        addCoefficients]
+      simp [addCoefficients_nil_right, Rat.add_zero]
 
 end CCFSM.P2749
