@@ -16,6 +16,10 @@ variable {α : Type} [LE α] [LT α]
 def InteriorRoot (p : α → Prop) (lo hi x : α) : Prop :=
   lo < x ∧ x < hi ∧ p x
 
+/-- Explicit core-Lean encoding of existence and uniqueness. -/
+def UniqueWitness {α : Type} (q : α → Prop) : Prop :=
+  ∃ x, q x ∧ ∀ y, q y → y = x
+
 /--
 A leaf result carries its own proof:
 * noRoot excludes roots on the entire closed interval;
@@ -37,7 +41,7 @@ inductive LeafCertificate (p : α → Prop) (lo hi : α) : Type
 def CertificateSound (p : α → Prop) (lo hi : α) :
     LeafCertificate p lo hi → Prop
   | .noRoot _ => ∀ x, lo ≤ x → x ≤ hi → ¬ p x
-  | .unique _ => ∃! x, InteriorRoot p lo hi x
+  | .unique _ => UniqueWitness (InteriorRoot p lo hi)
   | .unresolved => True
 
 /-- Every leaf certificate satisfies its declared contract. -/
@@ -51,18 +55,18 @@ theorem certificate_sound (p : α → Prop) (lo hi : α)
 
 /-- A unique-root certificate supplies an interior root. -/
 theorem unique_certificate_has_root (p : α → Prop) (lo hi : α)
-    (h : ∃! x, InteriorRoot p lo hi x) :
+    (h : UniqueWitness (InteriorRoot p lo hi)) :
     ∃ x, InteriorRoot p lo hi x := by
   rcases h with ⟨x, hx, _⟩
   exact ⟨x, hx⟩
 
 /-- The uniqueness clause rules out a second, distinct interior root. -/
 theorem unique_certificate_is_unique (p : α → Prop) (lo hi : α)
-    (h : ∃! x, InteriorRoot p lo hi x)
+    (h : UniqueWitness (InteriorRoot p lo hi))
     {x y : α} (hx : InteriorRoot p lo hi x)
     (hy : InteriorRoot p lo hi y) : x = y := by
   rcases h with ⟨w, hw, huniq⟩
-  exact huniq x hx y hy
+  exact (huniq x hx).trans (huniq y hy).symm
 
 /--
 Closed child intervals cover their parent interval when they share a midpoint.
