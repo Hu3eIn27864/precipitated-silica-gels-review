@@ -118,3 +118,18 @@ From this directory run `lake update` once if no `lake-manifest.json` is present
 - Defines an exact root-count certificate as the witness-list length plus that membership equivalence. The exact count is conditional on explicit strict-to-nonstrict order conversion and trichotomy.
 - Does not yet prove that a practical floating-point/Python producer can construct the required evidence. Endpoint roots remain excluded from the *interior* count and require separate reporting if a closed-interval count is desired.
 - Tangential/multiple roots still require a method beyond strict-derivative monotonicity, e.g. exact Sturm certificates.
+
+### P27.46 — exact interior root count from fully resolved trees
+
+- Formal module: `CCFSM/P2746.lean`.
+- Adds the converse to P27.45: every interior root in a fully resolved tree must be represented by a collected witness.
+- The exact-count proposition includes all three necessary parts: witness-list length, pairwise distinctness, and equivalence between list membership and the interior-root predicate.
+- Requires explicit strict-order trichotomy and strict-to-nonstrict conversion. The count is for the open interval; endpoint roots are intentionally separate.
+- Current Lean verification is in progress; do not treat P27.46 as accepted until the aggregate kernel build succeeds.
+
+### P27.47 — Sturm certificates for tangential and multiple roots
+
+- Design only: `CCFSM/P2747_STURM_CERTIFICATE_DESIGN.md`.
+- Specifies rational signed-remainder certificates, exact endpoint one-sided signs, and open-interval variation counts.
+- Intended to complement strict-monotonicity certificates when derivative zeros or tangential roots prevent P27.37 unique-leaf proofs.
+- No Sturm implementation or theorem is claimed yet.
