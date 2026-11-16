@@ -638,3 +638,25 @@ theorem multiplyCoefficients_singleton_left (c : Rat) (xs : List Rat)
       simp [addCoefficients_nil_right, Rat.add_zero]
 
 end CCFSM.P2749
+
+
+/-- Adding a zero-scaled coefficient vector on the left leaves the right
+    vector unchanged whenever the latter is at least as long. This captures
+    the zero-padding alignment needed by the monomial-shift convolution proof. -/
+theorem addCoefficients_zero_scaled_left_of_length_le
+    (xs ys : List Rat) (hlen : xs.length ≤ ys.length) :
+    addCoefficients (scaleCoefficients 0 xs) ys = ys := by
+  induction xs generalizing ys with
+  | nil =>
+      simp [scaleCoefficients, addCoefficients]
+  | cons a rest ih =>
+      cases ys with
+      | nil =>
+          simp at hlen
+      | cons b tail =>
+          have htail : rest.length ≤ tail.length :=
+            Nat.le_of_succ_le_succ hlen
+          simp only [scaleCoefficients, List.map_cons, Rat.zero_mul,
+            addCoefficients]
+          rw [ih tail htail]
+          simp
