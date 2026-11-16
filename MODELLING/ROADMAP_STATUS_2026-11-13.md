@@ -210,3 +210,10 @@ Added `MODELLING/SYNERESIS_OBSERVABLE_SCALE_MATRIX.md` to separate solution spec
 - Added `multiplyCoefficients_monomial_cancels_final`: if a divisor coefficient vector ends in nonzero `aB`, convolution by the monomial scalar `aR / aB` ends in exactly `aR`.
 - The proof uses the general monomial-shift identity and Lean core's `Rat.div_mul_cancel` theorem. Aggregate Lean proof-kernel CI passed on head `df9b9d846d5aa3e8b379fa1347d5bf6ead91fd55` (run 43897845062).
 - This closes the raw-list single-term leading-coefficient cancellation mechanism. Still open: canonical polynomial packaging, full subtraction normalization/strict degree decrease, quotient/remainder recursion and checker, then signed remainder sequence and Sturm root counting.
+
+
+### AP F follow-up — one-step monomial subtraction decreases normalized length (16 November 2026)
+
+- Added `normalize_subtract_monomial_step_length_strict` in `lean/CCFSM/P2749.lean`. If the dividend and monomial-shifted divisor coefficient vectors have equal lengths and their final coefficients are matched using the exact quotient scalar `aR / aB` (with `aB ≠ 0`), the normalized subtraction has strictly shorter coefficient-vector length.
+- Aggregate Lean proof-kernel CI passed on head `58395a0ff57652d34813195c1d55ef703bb185bf` (run 43898301079).
+- This supplies the raw-list well-founded measure for a single long-division step. Still open: canonical `RatPolynomial` packaging, proof that nonzero canonical degree equals length minus one in the required operation, well-founded quotient/remainder recursion, and independent quotient/remainder correctness checks.
