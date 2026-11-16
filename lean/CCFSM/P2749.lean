@@ -713,7 +713,5 @@ theorem multiplyCoefficients_monomial (k : Nat) (c : Rat)
         xs (0 :: multiplyCoefficients (monomialCoefficients k c) xs)
         (by simpa [hlen] using hle)
       rw [halign, htail]
-      simp [shiftedScaleCoefficients, Nat.add_assoc, Nat.add_comm,
-        Nat.add_left_comm]
 
 end CCFSM.P2749
