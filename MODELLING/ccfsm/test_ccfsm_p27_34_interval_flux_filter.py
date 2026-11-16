@@ -44,5 +44,43 @@ class P2734IntervalFluxFilterTests(unittest.TestCase):
             Interval(0.0, float("inf"))
 
 
+    def test_multiplication_encloses_exact_corner_products_all_signs(self):
+        from fractions import Fraction
+
+        cases = [
+            (Interval(1.0, 2.0), Interval(3.0, 4.0)),
+            (Interval(-2.0, -1.0), Interval(3.0, 4.0)),
+            (Interval(1.0, 2.0), Interval(-4.0, -3.0)),
+            (Interval(-2.0, -1.0), Interval(-4.0, -3.0)),
+            (Interval(-2.0, 3.0), Interval(4.0, 5.0)),
+            (Interval(-2.0, 3.0), Interval(-5.0, -4.0)),
+            (Interval(-2.0, 3.0), Interval(-5.0, 4.0)),
+            (Interval(0.0, 2.0), Interval(-3.0, 4.0)),
+        ]
+        for left, right in cases:
+            result = left * right
+            exact_corners = [
+                Fraction.from_float(x) * Fraction.from_float(y)
+                for x in (left.lo, left.hi)
+                for y in (right.lo, right.hi)
+            ]
+            self.assertLessEqual(Fraction.from_float(result.lo), min(exact_corners))
+            self.assertGreaterEqual(Fraction.from_float(result.hi), max(exact_corners))
+
+    def test_multiplication_subnormal_underflow_is_enclosed(self):
+        import math
+        from fractions import Fraction
+
+        tiny = math.ulp(0.0)
+        result = Interval(tiny) * Interval(0.5)
+        exact = Fraction.from_float(tiny) * Fraction.from_float(0.5)
+        self.assertLessEqual(Fraction.from_float(result.lo), exact)
+        self.assertGreaterEqual(Fraction.from_float(result.hi), exact)
+
+    def test_multiplication_overflow_fails_closed(self):
+        with self.assertRaises(ValueError):
+            _ = Interval(1.0e308, 1.0e308) * Interval(2.0, 2.0)
+
+
 if __name__ == "__main__":
     unittest.main()
