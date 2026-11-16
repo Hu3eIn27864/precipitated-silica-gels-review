@@ -384,7 +384,7 @@ theorem evalCoefficients_subtract (x : Rat) (xs ys : List Rat) :
     evalCoefficients x (subtractCoefficients xs ys) =
       evalCoefficients x xs - evalCoefficients x ys := by
   simp [subtractCoefficients, evalCoefficients_add, evalCoefficients_neg,
-    Rat.sub_eq_add_neg, Rat.add_assoc]
+    Rat.sub_eq_add_neg]
 
 /-- Polynomial negation over exact rational coefficients. -/
 def negate (p : RatPolynomial) : RatPolynomial :=
@@ -405,5 +405,36 @@ theorem eval_subtract (p q : RatPolynomial) (x : Rat) :
     eval (subtract p q) x = eval p x - eval q x := by
   simp [eval, subtract, ofCoefficients, evalCoefficients_normalize,
     evalCoefficients_subtract]
+
+
+/-- Canonical coefficient list for a monomial c * X^k. -/
+def monomialCoefficients (k : Nat) (c : Rat) : List Rat :=
+  List.replicate k 0 ++ [c]
+
+/-- Horner evaluation of a monomial is its exact rational power value. -/
+theorem evalCoefficients_monomial (x c : Rat) (k : Nat) :
+    evalCoefficients x (monomialCoefficients k c) = x ^ k * c := by
+  induction k with
+  | zero =>
+      simp [monomialCoefficients, evalCoefficients_constant]
+  | succ k ih =>
+      change evalCoefficients x
+        (0 :: monomialCoefficients k c) = x ^ (k + 1) * c
+      rw [evalCoefficients_shift, ih]
+      calc
+        x * (x ^ k * c) = (x * x ^ k) * c := by
+          rw [Rat.mul_assoc]
+        _ = (x ^ k * x) * c := by rw [Rat.mul_comm x (x ^ k)]
+        _ = x ^ (k + 1) * c := by rw [pow_succ]
+
+/-- Exact rational polynomial representing a single monomial. -/
+def monomial (k : Nat) (c : Rat) : RatPolynomial :=
+  ofCoefficients (monomialCoefficients k c)
+
+/-- Evaluation of a normalized monomial polynomial. -/
+theorem eval_monomial (x c : Rat) (k : Nat) :
+    eval (monomial k c) x = x ^ k * c := by
+  simp [eval, monomial, ofCoefficients, evalCoefficients_normalize,
+    evalCoefficients_monomial]
 
 end CCFSM.P2749
