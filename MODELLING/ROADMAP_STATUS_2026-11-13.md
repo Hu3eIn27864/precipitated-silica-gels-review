@@ -203,3 +203,10 @@ checkout.
 ### Evidence integration — observable scale separation (16 November 2026)
 
 Added `MODELLING/SYNERESIS_OBSERVABLE_SCALE_MATRIX.md` to separate solution speciation, particle/cluster evolution, network morphology, free-gel natural syneresis, loaded mechanical/transport tests, and drying/suction history. The central modelling rule is that particle-scale contraction, macroscopic specimen-volume loss, exudate flux, and loaded consolidation are different observables with different boundary conditions; they must not be collapsed into one fitted “syneresis rate” without an explicit shared-state model.
+
+
+### AP F follow-up — exact raw-list final-term cancellation verified (16 November 2026)
+
+- Added `multiplyCoefficients_monomial_cancels_final`: if a divisor coefficient vector ends in nonzero `aB`, convolution by the monomial scalar `aR / aB` ends in exactly `aR`.
+- The proof uses the general monomial-shift identity and Lean core's `Rat.div_mul_cancel` theorem. Aggregate Lean proof-kernel CI passed on head `df9b9d846d5aa3e8b379fa1347d5bf6ead91fd55` (run 43897845062).
+- This closes the raw-list single-term leading-coefficient cancellation mechanism. Still open: canonical polynomial packaging, full subtraction normalization/strict degree decrease, quotient/remainder recursion and checker, then signed remainder sequence and Sturm root counting.
