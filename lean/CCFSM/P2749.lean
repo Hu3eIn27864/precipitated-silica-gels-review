@@ -5,7 +5,7 @@ namespace CCFSM.P2749
 /-- Remove leading zeros from a coefficient list stored in reverse order. -/
 def trimReversed : List Rat → List Rat
   | [] => []
-  | a :: rest => if h : a = 0 then trimReversed rest else a :: rest
+  | a :: rest => if a = 0 then trimReversed rest else a :: rest
 
 /-- The trimmed reversed list is empty or begins with a nonzero coefficient. -/
 theorem trimReversed_shape (xs : List Rat) :
@@ -103,3 +103,48 @@ theorem zero_coefficients_empty : zero.coefficients = [] := by
   simp [zero, ofCoefficients, normalizeCoefficients, trimReversed]
 
 end CCFSM.P2749
+
+
+/-- A reversed coefficient list beginning with a nonzero value is unchanged. -/
+theorem trimReversed_nonzero_head (a : Rat) (rest : List Rat)
+    (ha : a ≠ 0) :
+    trimReversed (a :: rest) = a :: rest := by
+  simp [trimReversed, ha]
+
+/-- Canonical coefficient lists are fixed points of normalization. -/
+theorem normalizeCoefficients_of_canonical (xs : List Rat)
+    (hxs : CanonicalCoefficients xs) :
+    normalizeCoefficients xs = xs := by
+  rcases hxs with hnil | ⟨init, last, hxs, hlast⟩
+  · simp [normalizeCoefficients, hnil, trimReversed]
+  · subst xs
+    simp [normalizeCoefficients, List.reverse_append, trimReversed, hlast]
+
+/-- Normalization is idempotent. -/
+theorem normalizeCoefficients_idempotent (xs : List Rat) :
+    normalizeCoefficients (normalizeCoefficients xs) =
+      normalizeCoefficients xs :=
+  normalizeCoefficients_of_canonical _ (normalizeCoefficients_canonical xs)
+
+/-- The leading coefficient, when present, is the last ascending coefficient. -/
+def leadingCoefficient? (p : RatPolynomial) : Option Rat :=
+  p.coefficients.reverse.head?
+
+/-- A nonzero canonical polynomial has a nonzero leading coefficient. -/
+theorem leadingCoefficient?_nonzero (p : RatPolynomial)
+    (hp : p.coefficients ≠ []) :
+    ∃ c, leadingCoefficient? p = some c ∧ c ≠ 0 := by
+  rcases p.canonical with hnil | ⟨init, last, hcoeff, hlast⟩
+  · exact False.elim (hp hnil)
+  · subst p.coefficients
+    refine ⟨last, ?_, hlast⟩
+    simp [leadingCoefficient?, List.reverse_append]
+
+/-- The degree of zero is undefined; nonzero degree is list length minus one. -/
+def degree? (p : RatPolynomial) : Option Nat :=
+  match leadingCoefficient? p with
+  | none => none
+  | some _ => some (p.coefficients.length - 1)
+
+theorem degree?_zero : degree? zero = none := by
+  simp [degree?, leadingCoefficient?, zero_coefficients_empty]
