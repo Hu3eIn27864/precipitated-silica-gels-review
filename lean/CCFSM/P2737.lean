@@ -55,8 +55,8 @@ def CertificateSound {α : Type} [LE α] [LT α]
     LeafCertificate p lo hi → Prop
   | .noRoot _ => ∀ x, lo ≤ x → x ≤ hi → ¬ p x
   | .unique evidence =>
-      ∃ x, InteriorRoot p lo hi x ∧
-        ∀ y, InteriorRoot p lo hi y → y = x
+      InteriorRoot p lo hi evidence.witness ∧
+        ∀ y, InteriorRoot p lo hi y → y = evidence.witness
   | .unresolved => True
 
 /-- Every leaf certificate satisfies its declared contract. -/
