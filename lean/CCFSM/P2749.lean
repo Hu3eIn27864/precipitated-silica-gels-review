@@ -232,8 +232,7 @@ theorem evalCoefficients_multiply (x : Rat) (xs ys : List Rat) :
       simp [multiplyCoefficients, evalCoefficients]
   | cons a rest ih =>
       rw [multiplyCoefficients, evalCoefficients_add,
-        evalCoefficients_scale, evalCoefficients_shift, ih,
-        evalCoefficients_cons]
+        evalCoefficients_scale, evalCoefficients_shift, ih]
       calc
         a * evalCoefficients x ys +
             x * (evalCoefficients x rest * evalCoefficients x ys) =
@@ -253,7 +252,7 @@ theorem evalCoefficients_multiply (x : Rat) (xs ys : List Rat) :
         _ = evalCoefficients x (a :: rest) *
               evalCoefficients x ys := by
                 exact congrArg (fun z : Rat => z * evalCoefficients x ys)
-                  (evalCoefficients_cons x a rest)
+                  (evalCoefficients_cons x a rest).symm
 
 /-- Exact evaluation of normalized polynomial multiplication is multiplicative. -/
 theorem eval_multiply (p q : RatPolynomial) (x : Rat) :
