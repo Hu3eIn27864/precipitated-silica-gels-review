@@ -560,8 +560,8 @@ theorem subtractCoefficients_append_equal_last
     subtractCoefficients (xs ++ [a]) (ys ++ [a]) =
       subtractCoefficients xs ys ++ [0] := by
   rw [subtractCoefficients_append_singleton xs ys a a hlen]
-  change a - a = 0
-  exact Rat.sub_self a
+  exact congrArg (fun z : Rat => subtractCoefficients xs ys ++ [z])
+    (Rat.sub_self a)
 
 /-- Aligned coefficient addition cannot increase the common vector length. -/
 theorem addCoefficients_length_le_of_equal
