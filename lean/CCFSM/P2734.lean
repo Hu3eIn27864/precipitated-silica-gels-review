@@ -31,7 +31,7 @@ def intervalAdd {α : Type} [Preorder α] [Add α]
   ⟨ops.downAdd I.lower J.lower, ops.upAdd I.upper J.upper⟩
 
 /-- Ordered input intervals produce an ordered output interval. -/
-theorem intervalAdd_ordered {α : Type} [LE α] [Add α]
+theorem intervalAdd_ordered {α : Type} [Preorder α] [Add α]
     (ops : OutwardAddition α) (I J : Interval α)
     (hI : I.lower ≤ I.upper) (hJ : J.lower ≤ J.upper) :
     (intervalAdd ops I J).lower ≤ (intervalAdd ops I J).upper := by
@@ -43,7 +43,7 @@ theorem intervalAdd_ordered {α : Type} [LE α] [Add α]
 Soundness of outward-rounded interval addition: every sum of points from
 the input intervals belongs to the constructed output interval.
 -/
-theorem intervalAdd_sound {α : Type} [LE α] [Add α]
+theorem intervalAdd_sound {α : Type} [Preorder α] [Add α]
     (ops : OutwardAddition α) (I J : Interval α) (x y : α)
     (hx : I.Contains x) (hy : J.Contains y) :
     (intervalAdd ops I J).Contains (x + y) := by
