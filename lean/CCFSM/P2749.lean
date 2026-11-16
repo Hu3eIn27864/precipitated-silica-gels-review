@@ -102,8 +102,6 @@ def multiply (p q : RatPolynomial) : RatPolynomial :=
 theorem zero_coefficients_empty : zero.coefficients = [] := by
   simp [zero, ofCoefficients, normalizeCoefficients, trimReversed]
 
-end CCFSM.P2749
-
 
 /-- A reversed coefficient list beginning with a nonzero value is unchanged. -/
 theorem trimReversed_nonzero_head (a : Rat) (rest : List Rat)
@@ -147,3 +145,5 @@ def degree? (p : RatPolynomial) : Option Nat :=
 
 theorem degree?_zero : degree? zero = none := by
   simp [degree?, leadingCoefficient?, zero_coefficients_empty]
+
+end CCFSM.P2749
