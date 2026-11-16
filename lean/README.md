@@ -127,11 +127,15 @@ modules do not change the Python implementation or the CCFSM version line.
 
 ### P27.48 — endpoint-root evidence and closed-interval counts
 
-- Design only: `CCFSM/P2748_ENDPOINT_ROOT_DESIGN.md`.
-- Specifies endpoint root/no-root/unresolved evidence, disjoint ownership
-  between endpoint and interior witnesses, and the decomposition
-  `N_closed = N_interior + 1[R(lo)] + 1[R(hi)]` under `lo < hi`.
-- No Lean implementation or theorem is claimed yet.
+- Formal module: `CCFSM/P2748.lean`; design and acceptance criteria:
+  `CCFSM/P2748_ENDPOINT_ROOT_DESIGN.md`.
+- Defines root/no-root/unresolved endpoint evidence and adds only certified
+  endpoint roots to the closed witness list.
+- Proves closed-witness soundness, duplicate-freedom, and completeness from
+  a fully resolved P27.46 interior tree plus resolved endpoint evidence.
+- The completeness theorem states the order assumptions explicitly and
+  requires `lo < hi`; singleton intervals are outside its scope.
+- Lean CI is pending for the first implementation commit.
 
 ## Open obligations
 
