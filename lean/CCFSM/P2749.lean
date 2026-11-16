@@ -768,7 +768,7 @@ theorem normalize_subtract_monomial_step_length_strict
     (k : Nat) (aR aB : Rat) (r d : List Rat)
     (hr : ∃ rpre, r = rpre ++ [aR])
     (hd : ∃ dpre, d = dpre ++ [aB])
-    (hd_nonempty : d ≠ []) (haB : aB ≠ 0)
+    (haB : aB ≠ 0)
     (hsize : r.length = k + d.length) :
     (normalizeCoefficients
       (subtractCoefficients r
@@ -776,7 +776,6 @@ theorem normalize_subtract_monomial_step_length_strict
       r.length := by
   rcases hr with ⟨rpre, rfl⟩
   rcases hd with ⟨dpre, rfl⟩
-  have hdne : dpre ++ [aB] ≠ [] := by simp
   obtain ⟨qpre, hq⟩ :=
     multiplyCoefficients_monomial_cancels_final k aR aB
       (dpre ++ [aB]) ⟨dpre, rfl⟩ haB
