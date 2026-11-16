@@ -144,18 +144,22 @@ modules do not change the Python implementation or the CCFSM version line.
 - Uses Lean core `Rat` (confirmed under the pinned Lean v4.35.0 toolchain,
   without Mathlib) and ascending-degree coefficient lists.
 - Implements canonical trailing-zero normalization, Horner evaluation,
-  formal derivative coefficients, coefficientwise addition, and recursive
-  convolution multiplication.
+  formal derivative coefficients, coefficientwise addition, negation and
+  subtraction, scalar multiplication, recursive convolution multiplication,
+  monomial vectors, and shifted/scaled coefficient vectors.
 - Proves normalized lists are canonical and normalization is idempotent;
-  proves a nonzero canonical polynomial has a nonzero leading coefficient
-  and that the zero polynomial has no degree.
-- Proves normalization preserves exact evaluation and that coefficientwise
-  addition and recursive convolution multiplication preserve the expected
-  polynomial evaluation laws.
-- Formal derivative coefficients are implemented, but a derivative
-  evaluation/semantics theorem remains open. Euclidean division, a Sturm
-  sequence, and a root-count theorem also remain open; this is not a Sturm
-  checker.
+  proves degree extraction and nonzero leading-coefficient decomposition
+  for every nonzero canonical polynomial.
+- Proves normalization preserves evaluation and that polynomial addition,
+  subtraction, negation, scalar multiplication, multiplication, monomial
+  evaluation, and shifted scaling obey their exact evaluation laws.
+- Formal derivative coefficients are implemented, with exact evaluation
+  examples for constant, linear and quadratic inputs, including zero leading
+  coefficients. General derivative evaluation semantics remain open.
+- Exact Euclidean polynomial division remains design-only
+  (`CCFSM/P2749_EUCLIDEAN_DIVISION_DESIGN.md`). The next implementation gate
+  is a formally decreasing top-coefficient cancellation step. No Sturm
+  sequence, root-count theorem, or Sturm checker is claimed.
 - Python/Lean bridge: design `CCFSM/P2749_PYTHON_LEAN_BRIDGE_DESIGN.md`,
   serializer `../MODELLING/ccfsm/ccfsm_p27_49_rational_certificate.py`, and
   tests `../MODELLING/ccfsm/test_ccfsm_p27_49_rational_certificate.py`.
