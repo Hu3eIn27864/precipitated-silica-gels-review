@@ -71,3 +71,33 @@ they do not replace universal proofs.
 P27.43 is complete only when the representation map, comparison correctness,
 directed-step behavior (including signed zero and subnormals), overflow policy,
 and operation-specific enclosure theorems are all explicit and machine-checked.
+
+
+## Implemented exact-rational checker prototype
+
+The alternative certificate-checking path now has a small Python prototype:
+
+- MODELLING/ccfsm/ccfsm_p27_43_rational_interval_certificate.py
+- MODELLING/ccfsm/test_ccfsm_p27_43_rational_interval_certificate.py
+
+The versioned certificate schema is ccfsm.interval-certificate.v1. It contains
+an operation (add, mul, or div), two finite endpoint intervals, and
+a claimed finite result interval. The checker normalizes each endpoint to a
+binary64 value, converts that value with Fraction.from_float, and recomputes
+the exact real operation range. For multiplication and division it evaluates
+the four exact rational corners; division is rejected when the denominator
+interval contains zero. It returns exact rational range bounds and lower/upper
+enclosure margins. A malformed certificate is rejected; a well-formed but
+too-narrow result is reported as invalid.
+
+This implementation is deliberately an independent verifier, not a producer.
+It does not establish that the producer evaluated the intended expression,
+that the supplied input intervals enclose an external physical quantity, or
+that a particular runtime's nextafter conforms to IEEE-754. Signed zero is
+identified with real zero by the rational interpretation, so bit-level signed
+zero obligations remain open.
+
+The nine focused tests cover addition, all four sign patterns and intervals
+crossing zero for multiplication, rejected lower and upper endpoints,
+subnormal underflow, positive and negative denominator intervals, division
+through zero, overflow-range rejection, and malformed/non-finite input.
