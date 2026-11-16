@@ -617,4 +617,16 @@ theorem shiftedScaleCoefficients_length (k : Nat) (c : Rat)
     (shiftedScaleCoefficients k c xs).length = k + xs.length := by
   simp [shiftedScaleCoefficients, scaleCoefficients]
 
+
+/-- Multiplication by a constant polynomial scales a nonempty coefficient
+    vector exactly. The nonempty premise excludes the implementation's
+    empty-list edge case, where the recursive convolution returns []. -/
+theorem multiplyCoefficients_singleton_left (c : Rat) (xs : List Rat)
+    (hxs : xs ≠ []) :
+    multiplyCoefficients [c] xs = scaleCoefficients c xs := by
+  cases xs with
+  | nil => exact False.elim (hxs rfl)
+  | cons b bs =>
+      simp [multiplyCoefficients, addCoefficients, scaleCoefficients]
+
 end CCFSM.P2749
