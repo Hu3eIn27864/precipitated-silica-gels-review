@@ -66,7 +66,7 @@ theorem certificate_sound {α : Type} [LE α] [LT α]
     CertificateSound p lo hi c := by
   cases c with
   | noRoot h => exact h
-  | unique h => exact ⟨h.witness, h.isRoot, h.unique⟩
+  | unique h => exact ⟨h.isRoot, h.unique⟩
   | unresolved => trivial
 
 /-- A unique-root certificate supplies an interior root. -/
