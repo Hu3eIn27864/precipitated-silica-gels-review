@@ -361,3 +361,27 @@ coefficient-vector decrease into a polynomial-degree decrease once the
 subtraction step is packaged as a `RatPolynomial`. The current theorem
 is a degree/length identity only; it does not yet assert the degree of a
 particular division remainder.
+
+
+## CI-verified polynomial-level one-step degree decrease (16 November 2026)
+
+Two further results connect the list-level termination argument to the
+`RatPolynomial` API:
+
+- `degree?_lt_of_normalized_length_lt` converts a strict decrease in
+  normalized coefficient-vector length into a strict degree decrease,
+  provided both the dividend and normalized result are nonzero.
+- `degree?_monomial_subtract_step_lt` packages the raw monomial
+  subtraction result as a canonical `RatPolynomial` and proves that
+  its degree is strictly below the dividend degree under the explicit
+  final-coefficient, nonzero-divisor and equal-shifted-length hypotheses.
+
+Aggregate Lean proof-kernel CI passed on head
+`69d0b1fb18f1894ab13a53e2bb0ec1130dfb7f99` (run 43898966855).
+This is now a polynomial-object one-step decrease theorem, not merely a
+list-length statement. It still does not define a quotient/remainder
+recursion or establish the remainder identity and quotient-degree bound.
+The next gate is to make the step computable from nonzero canonical
+polynomials (derive the shift from their degrees and the scalar from their
+leading coefficients), then define well-founded recursion and prove its
+specification independently.
