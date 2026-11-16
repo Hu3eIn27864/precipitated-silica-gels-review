@@ -190,3 +190,11 @@ checkout.
 - Aggregate Lean proof-kernel CI passed on head `f05c6c36dac64e2b358da0534c47c68ba3138eae` (run 43896907930).
 - **Still open:** shifted-vector final-coefficient / divisor-leading-coefficient bridge, exact rational cancellation scalar, polynomial-level strict degree decrease, Euclidean division, and Sturm sequence/root counting.
 - Added a separate PSG-010 assessment for Matinfar & Nychka (2023), emphasizing the dynamic speciation variables and the review's secondary-evidence limits. No numerical constitutive law or molecular-to-macroscopic parameter mapping is claimed.
+
+
+### AP F follow-up — monomial final coefficient verified (16 November 2026)
+
+- Added `multiplyCoefficients_monomial_final_coefficient`: for a nonempty canonical coefficient vector and nonzero scalar, monomial convolution ends in the nonzero coefficient `c * originalLast`.
+- Aggregate Lean proof-kernel CI passed on head `9532794979961d955878d22bc9f9294bba48b3aa` (run 43897466565).
+- The remaining division step is now sharply isolated: choose `c = aR / aB` for nonzero divisor leading coefficient `aB`, invoke exact `Rat.div_mul_cancel`, and lift the resulting raw-list cancellation to canonical polynomials. No Euclidean division or Sturm theorem is yet claimed.
+- Added PSG-050 (Birch & Geddes, 2000) as abstract-level primary evidence for nanoscale particle/cluster evolution in sodium-silicate/sulfuric-acid silica hydrogel polymerisation. Its particle-scale syneresis is kept distinct from bulk specimen shrinkage and exudate flow.
