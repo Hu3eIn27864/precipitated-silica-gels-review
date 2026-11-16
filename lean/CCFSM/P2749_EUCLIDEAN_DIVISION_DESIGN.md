@@ -133,3 +133,53 @@ the quotient to the divisor's leading coefficient.
 CI run 43868853530 passed all 17 aggregate Lean targets for the cancellation
 lemmas. The strict length-decrease lemma was added in commit
 `b4cbc26351a35b110b7b9f5b00ef734ee974cf96`; its aggregate CI is pending.
+
+## Refined implementation sequence after the list-level cancellation lemma
+
+The implementation should now avoid treating the list-length lemma as if it
+were already a polynomial-degree theorem. The bridge is split into explicit
+proof obligations:
+
+1. **Monomial multiplication identity.** Prove that multiplying a canonical
+   coefficient vector by the monomial vector `[0, …, 0, c]` is exactly the
+   `k)-place shift followed by coefficient scaling. State the identity at
+   the raw coefficient-list level first; normalization is a separate step.
+2. **Leading coefficient of the shifted divisor.** For nonempty canonical
+   `B`, prove that the final coefficient of `X^k * (c * B)` is
+   `c * leadingCoefficient(B)`, and that its vector length is
+   `k + B.coefficients.length` when `c ≠ 0`.
+3. **Exact cancellation scalar.** With `aR` and `aB ≠ 0`, set
+   `c = aR / aB`. Prove `c * aB = aR` in `Rat`; do not replace this
+   with a floating-point division or a numerical tolerance.
+4. **Polynomial one-step theorem.** Combine (1)–(3) with the existing
+   aligned-subtraction lemma. Prove the normalized remainder is zero or has
+   strictly fewer coefficients than the current nonzero remainder. Convert
+   the length statement to degree only after proving the canonical,
+   nonzero length/degree correspondence.
+5. **Well-founded recursion.** Define the recursive division over the
+   current remainder using its natural-number degree (or coefficient length
+   with zero handled as a separate terminal case). The recursive call must
+   be justified by the strict decrease from (4), not by fuel.
+6. **Independent checker.** Keep the producer and checker separate. The
+   checker verifies the exact identity `A = Q*B + R` and the remainder
+   bound; it must not trust the producer's intermediate cancellation trace.
+
+### Required boundary cases before the division theorem is advertised
+
+- Zero dividend with nonzero divisor returns `Q = 0, R = 0`.
+- A nonzero constant divisor is supported and terminates after at most one
+  cancellation per nonzero coefficient degree.
+- A divisor of greater degree than the dividend returns `Q = 0, R = A`.
+- Exact divisibility returns zero remainder.
+- Negative leading coefficients are handled by exact rational division.
+- The zero divisor is rejected at the API boundary.
+- The zero polynomial is never assigned an ordinary natural-number degree.
+
+### Status discipline
+
+The list-level equal-final-coefficient cancellation theorem is proved and
+aggregate CI has passed on the relevant code commit. The shifted-monomial
+identity, polynomial-level cancellation theorem, recursive division,
+quotient/remainder identity, degree bound, uniqueness, and independent
+checker are **not yet proved**. No Sturm sequence or root-count theorem
+follows from the list-level lemma alone.
