@@ -9,8 +9,7 @@ defines proof-carrying leaf contracts and a midpoint coverage lemma. P27.44
 must connect these pieces into a serializable, independently checkable
 certificate pipeline.
 
-This document is a design specification, not a completed theorem and not
-physical validation of CCFSM.
+This document is a design specification for the remaining P27.44 work. The first formal tree/coverage layer is now implemented in P2744.lean and compiles in Lean CI (run 43794492273). The aggregate root-count and serialization layers below remain open. Nothing here is physical validation of CCFSM.
 
 ## Certificate layers
 
@@ -144,3 +143,26 @@ P27.44 is complete only after:
 
 No CCFSM constitutive law or material parameter is part of this certificate
 pipeline. Software proof does not establish physical validity.
+
+
+## Implemented first formal layer
+
+P2744.lean now provides:
+
+- a dependent RootIsolationTree indexed by its closed interval endpoints;
+- proof-carrying leaves that reuse the P27.37 LeafCertificate;
+- a separate SplitPointCertificate with only no-root, root, or unresolved
+  claims at each midpoint;
+- CoversPoint and a Lean theorem that every point of the parent closed domain
+  is covered by a descendant leaf path;
+- TreeEvidenceSound and a recursive theorem that all attached leaf and
+  midpoint claims satisfy their logical contracts;
+- FullyResolved as a structural predicate that excludes unresolved nodes.
+
+The Lean CI build passed for this module (run 43794492273).
+
+The module does not yet count certified roots, prove pairwise-distinct root
+witnesses, certify outer endpoint roots, or compute a finite upper root-count
+bound. FullyResolved alone must not be interpreted as a mathematically exact
+root count. Those are explicit next proof obligations, together with
+serialization and expression provenance.
