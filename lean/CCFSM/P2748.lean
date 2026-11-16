@@ -80,6 +80,7 @@ theorem closedRootWitnesses_sound {α : Type} [LE α] [LT α]
     {p : α → Prop} {lo hi : α}
     (lt_transitive : ∀ {a b c : α}, a < b → b < c → a < c)
     (lt_to_le : ∀ {a b : α}, a < b → a ≤ b)
+    (le_refl : ∀ a : α, a ≤ a)
     (tree : RootIsolationTree p lo hi)
     (loEvidence : EndpointCertificate p lo)
     (hiEvidence : EndpointCertificate p hi)
@@ -91,12 +92,12 @@ theorem closedRootWitnesses_sound {α : Type} [LE α] [LT α]
   rcases List.mem_append.mp hx with hloOrInterior | hhi
   · rcases List.mem_append.mp hloOrInterior with hlo | hinterior
     · obtain ⟨rfl, hp⟩ := endpointRootWitnesses_sound loEvidence hlo
-      exact ⟨le_refl _, lt_to_le hlohi, hp⟩
+      exact ⟨le_refl lo, lt_to_le hlohi, hp⟩
     · obtain ⟨hlo, hhi, hp⟩ :=
         certifiedRootWitnesses_sound lt_transitive tree hinterior
       exact ⟨lt_to_le hlo, lt_to_le hhi, hp⟩
   · obtain ⟨rfl, hp⟩ := endpointRootWitnesses_sound hiEvidence hhi
-    exact ⟨lt_to_le hlohi, le_refl _, hp⟩
+    exact ⟨lt_to_le hlohi, le_refl hi, hp⟩
 
 /-- Distinct endpoint and interior regions cannot share a witness. -/
 theorem closedRootWitnesses_allDistinct {α : Type} [LE α] [LT α]
@@ -130,7 +131,7 @@ theorem closedRootWitnesses_allDistinct {α : Type} [LE α] [LT α]
     intro x hx y hy hxy
     obtain ⟨rfl, _⟩ := endpointRootWitnesses_sound loEvidence hx
     obtain ⟨rfl, _⟩ := endpointRootWitnesses_sound hiEvidence hy
-    subst hi
+    cases hxy
     exact (lt_irrefl _ hlohi).elim
   have hFirst :=
     allDistinct_append (endpointRootWitnesses_allDistinct loEvidence)
@@ -157,6 +158,7 @@ theorem closedRootWitnesses_complete {α : Type} [LE α] [LT α]
     (lt_transitive : ∀ {a b c : α}, a < b → b < c → a < c)
     (lt_irrefl : ∀ a : α, ¬ a < a)
     (lt_to_le : ∀ {a b : α}, a < b → a ≤ b)
+    (le_refl : ∀ a : α, a ≤ a)
     (le_lt_trans : ∀ {a b c : α}, a ≤ b → b < c → a < c)
     (trichotomy : ∀ a b : α, a < b ∨ a = b ∨ b < a)
     (tree : RootIsolationTree p lo hi)
@@ -170,7 +172,7 @@ theorem closedRootWitnesses_complete {α : Type} [LE α] [LT α]
     x ∈ closedRootWitnesses tree loEvidence hiEvidence ↔
       ClosedRoot p lo hi x := by
   constructor
-  · exact closedRootWitnesses_sound lt_transitive lt_to_le tree loEvidence hiEvidence hlohi
+  · exact closedRootWitnesses_sound lt_transitive lt_to_le le_refl tree loEvidence hiEvidence hlohi
   · rintro ⟨hlox, hxhi, hpx⟩
     rcases trichotomy x lo with hxlo | hxEqLo | hlox'
     · exact False.elim (lt_irrefl lo (le_lt_trans hlox hxlo))
