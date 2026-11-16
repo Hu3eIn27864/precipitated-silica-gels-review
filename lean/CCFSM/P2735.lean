@@ -29,10 +29,6 @@ def Interval.Contains {α : Type} [LE α] (I : Interval α) (x : α) : Prop :=
 def Interval.point {α : Type} (x : α) : Interval α :=
   ⟨x, x⟩
 
-theorem Interval.point_contains {α : Type} [LE α] (x : α) :
-    (Interval.point x).Contains x := by
-  exact ⟨le_rfl, le_rfl⟩
-
 /--
 An interval arithmetic implementation together with the two obligations
 needed by the Horner enclosure theorem. Concrete endpoint arithmetic must
@@ -41,6 +37,7 @@ prove these obligations before it can be used as a certified implementation.
 structure IntervalArithmetic (α : Type) [LE α] [Add α] [Mul α] where
   add : Interval α → Interval α → Interval α
   mul : Interval α → Interval α → Interval α
+  point_sound : ∀ x : α, (Interval.point x).Contains x
   add_sound : ∀ (I J : Interval α) (x y : α),
     I.Contains x → J.Contains y → (add I J).Contains (x + y)
   mul_sound : ∀ (I J : Interval α) (x y : α),
@@ -77,14 +74,15 @@ theorem hornerInterval_sound {α : Type}
     (hornerInterval ops coefficients X).Contains (horner coefficients x) := by
   induction coefficients with
   | nil =>
-      simp [hornerInterval, horner, Interval.Contains, Interval.point]
+      change (Interval.point (0 : α)).Contains 0
+      exact ops.point_sound 0
   | cons a rest ih =>
       change (ops.add (ops.mul X (hornerInterval ops rest X))
         (Interval.point a)).Contains (x * horner rest x + a)
       exact ops.add_sound (ops.mul X (hornerInterval ops rest X))
         (Interval.point a) (x * horner rest x) a
         (ops.mul_sound X (hornerInterval ops rest X) x (horner rest x)
-          hx (ih hx))
-        (Interval.point_contains a)
+          hx ih)
+        (ops.point_sound a)
 
 end CCFSM.P2735
