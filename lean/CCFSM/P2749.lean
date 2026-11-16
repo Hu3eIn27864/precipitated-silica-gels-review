@@ -594,4 +594,19 @@ theorem normalize_aligned_cancellation_length
     (addCoefficients_length_le_of_equal xs (negateCoefficients ys)
       (by simpa [negateCoefficients] using hlen))
 
+
+/-- Equal-leading-term cancellation strictly decreases the canonical
+    coefficient-vector length. This is the well-founded measure used by the
+    forthcoming long-division recursion (length = degree + 1 for nonzero
+    canonical polynomials). -/
+theorem normalize_aligned_cancellation_length_strict
+    (xs ys : List Rat) (a : Rat)
+    (hlen : xs.length = ys.length) :
+    (normalizeCoefficients
+      (subtractCoefficients (xs ++ [a]) (ys ++ [a]))).length <
+        (xs ++ [a]).length := by
+  have hbound :=
+    normalize_aligned_cancellation_length xs ys a hlen
+  simpa using Nat.lt_succ_of_le hbound
+
 end CCFSM.P2749
