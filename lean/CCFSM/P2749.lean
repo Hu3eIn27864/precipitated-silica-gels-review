@@ -679,11 +679,15 @@ theorem multiplyCoefficients_monomial_length (k : Nat) (c : Rat)
         (0 :: multiplyCoefficients (monomialCoefficients k c) xs)).length =
           Nat.succ k + xs.length
       have htail := ih
+      have hle : xs.length ≤ k + xs.length + 1 := by
+        simpa [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using
+          (Nat.le_add_right xs.length (k + 1))
       have halign := addCoefficients_zero_scaled_left_of_length_le
         xs (0 :: multiplyCoefficients (monomialCoefficients k c) xs)
-        (by simp [htail])
+        (by simpa [htail] using hle)
       rw [halign]
-      simp [htail, Nat.succ_eq_add_one]
+      simp [htail, Nat.succ_eq_add_one, Nat.add_assoc, Nat.add_comm,
+        Nat.add_left_comm]
 
 
 /-- Convolution by a monomial is exactly the corresponding low-degree
@@ -702,10 +706,14 @@ theorem multiplyCoefficients_monomial (k : Nat) (c : Rat)
           0 :: shiftedScaleCoefficients k c xs
       have htail := ih
       have hlen := multiplyCoefficients_monomial_length k c xs hxs
+      have hle : xs.length ≤ k + xs.length + 1 := by
+        simpa [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using
+          (Nat.le_add_right xs.length (k + 1))
       have halign := addCoefficients_zero_scaled_left_of_length_le
         xs (0 :: multiplyCoefficients (monomialCoefficients k c) xs)
-        (by simp [hlen])
+        (by simpa [hlen] using hle)
       rw [halign, htail]
-      rfl
+      simp [shiftedScaleCoefficients, Nat.add_assoc, Nat.add_comm,
+        Nat.add_left_comm]
 
 end CCFSM.P2749
