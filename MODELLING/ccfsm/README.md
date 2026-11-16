@@ -1016,3 +1016,10 @@ Die erste Manuskriptarbeit behandelt ausschließlich das reduzierte Zwei-Zeitska
 - CCFSM_P27_42_P27_43_CI_BASELINE_TRIAGE_2026-11-16.md dokumentiert neun fehlgeschlagene Tests, die sowohl auf dem Basisstand von PR #13 als auch im aktuellen Arbeitszweig reproduziert wurden.
 - Alle zehn neuen P27.43-Prüfertests bestanden im PR-CI-Lauf. Die Gesamt-CI bleibt wegen der neun bereits auf dem Basisstand auftretenden Fehler rot; diese werden nicht stillschweigend P27.42/P27.43 zugerechnet.
 - Priorität für die nächste unabhängige Fehlerbehebung: P27.37-Vollständigkeitssemantik, danach P27.17-Bilanzrekonstruktion sowie P27.23/P27.28-Energiebilanzen.
+
+
+## Integrierter P27.42–P27.44-Prüfstand
+
+- Dieser Integrationszweig verbindet die formalen Intervall- und Zertifikatsarbeiten P27.42–P27.44 mit den getrennt im CI geprüften CCFSM-Baseline-Reparaturen.
+- [CCFSM_BASELINE_CI_REPAIRS_2026-11-16.md](CCFSM_BASELINE_CI_REPAIRS_2026-11-16.md) dokumentiert Ursachen und enge Korrekturen der früheren neun Testfehler.
+- Ziel ist ein gemeinsamer Lean- und Python-CI-Nachweis; der Zweig ist vorerst ein Entwurfs-/Integrationsstand und ändert keine physikalischen Modellgleichungen. CCFSM bleibt v4.2.57.
