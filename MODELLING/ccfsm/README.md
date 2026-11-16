@@ -999,3 +999,9 @@ Die erste Manuskriptarbeit behandelt ausschließlich das reduzierte Zwei-Zeitska
 ## Manuskript 1 — Scherer (1989), Gleichungsvergleich
 
 - [MANUSCRIPT_01_SCHERER_1989_EQUATION_LEVEL_COMPARISON_2026-11-15_DE.md](MANUSCRIPT_01_SCHERER_1989_EQUATION_LEVEL_COMPARISON_2026-11-15_DE.md) — Abstract-basierter Strukturvergleich mit v0.2, Reduktionsanforderungen und klarer Kennzeichnung der noch fehlenden Volltext-Gleichungsprüfung.
+
+
+## Baseline CI repairs (2026-11-16)
+
+- [CCFSM_BASELINE_CI_REPAIRS_2026-11-16.md](CCFSM_BASELINE_CI_REPAIRS_2026-11-16.md) documents the independently reproduced P27.10/P27.13/P27.17/P27.18/P27.23/P27.28 failures, their narrow fixes, and why none changes the physical CCFSM constitutive model.
+- P27.37's two subdivision tests are corrected separately in stacked PR #14; both focused regressions pass.

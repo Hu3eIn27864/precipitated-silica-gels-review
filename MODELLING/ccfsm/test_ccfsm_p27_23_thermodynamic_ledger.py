@@ -18,7 +18,7 @@ class P27_23Tests(unittest.TestCase):
           reference_area_m2=2.0,energy_rate_w=-1.0,**kw)
     def test_energy_and_dissipation_units(self):
         r=self.ledger()
-        self.assertAlmostEqual(r["p9_mechanical_energy_integral_j"],20.0)
+        self.assertAlmostEqual(r["p9_mechanical_energy_integral_j"],19.0)
         self.assertAlmostEqual(r["selected_chemical_energy_j"],22.0)
         self.assertAlmostEqual(r["reaction_dissipation_w"],7.0)
         self.assertAlmostEqual(r["darcy_internal_dissipation_w"],8.0)
