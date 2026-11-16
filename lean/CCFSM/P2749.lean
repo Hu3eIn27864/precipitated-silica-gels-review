@@ -266,4 +266,20 @@ theorem eval_add (p q : RatPolynomial) (x : Rat) :
   simp [eval, add, ofCoefficients, evalCoefficients_normalize,
     evalCoefficients_add]
 
+
+/-- The derivative of a constant polynomial has no coefficients. -/
+theorem derivativeCoefficients_constant (a : Rat) :
+    derivativeCoefficients [a] = [] := by
+  simp [derivativeCoefficients, derivativeCoefficients.derivativeTail]
+
+/-- The derivative coefficients of a linear polynomial are its slope. -/
+theorem derivativeCoefficients_linear (a b : Rat) :
+    derivativeCoefficients [a, b] = [b] := by
+  simp [derivativeCoefficients, derivativeCoefficients.derivativeTail]
+
+/-- The derivative coefficients of a quadratic polynomial are exact. -/
+theorem derivativeCoefficients_quadratic (a b c : Rat) :
+    derivativeCoefficients [a, b, c] = [b, Rat.ofInt 2 * c] := by
+  simp [derivativeCoefficients, derivativeCoefficients.derivativeTail]
+
 end CCFSM.P2749
