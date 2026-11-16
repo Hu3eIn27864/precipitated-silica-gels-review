@@ -795,4 +795,16 @@ theorem normalize_subtract_monomial_step_length_strict
   rw [hq]
   exact normalize_aligned_cancellation_length_strict rpre qpre aR hprefix
 
+
+/-- For every nonzero canonical polynomial, its option-valued degree plus
+    one is exactly the coefficient-vector length. -/
+theorem degree?_add_one_eq_length (p : RatPolynomial)
+    (hp : p.coefficients ≠ []) :
+    ∃ d, degree? p = some d ∧ d + 1 = p.coefficients.length := by
+  have hdegree := degree?_some_of_nonempty p hp
+  refine ⟨p.coefficients.length - 1, hdegree, ?_⟩
+  cases hcoeff : p.coefficients with
+  | nil => exact False.elim (hp hcoeff)
+  | cons a rest => simp [hcoeff]
+
 end CCFSM.P2749
