@@ -87,7 +87,8 @@ This is an isolated Lean 4 project pinned to Lean **v4.35.0**. It does not chang
 ### P27.45 — explicit root witnesses and count certificates
 
 - Implementation: `CCFSM/P2745.lean`; design and proof obligations: `CCFSM/P2745_ROOT_COUNT_DESIGN.md`.
-- Current goal: prove pairwise-distinct witness collection from strict open child intervals and unique midpoint ownership. Do not interpret list length as a root count before that theorem is proved.
+- Proved: every collected witness is a genuine root in the parent open interval, and the collector is duplicate-free by strict child-interval separation plus unique midpoint ownership (Lean run 43795801299).
+- Added: `HasAtLeastDistinctInteriorRoots` and a lower-bound theorem equating the number of collected witnesses with an explicit lower bound. This extra packaging is awaiting its latest Lean CI run.
 - Finite upper bounds additionally require outer endpoint and split-point evidence and no unresolved nodes.
 
 ## Open obligations and scope
