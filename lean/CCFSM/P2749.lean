@@ -513,7 +513,6 @@ theorem addCoefficients_append_singleton
           have htail : xs.length = ys.length := Nat.succ.inj hlen
           simp only [List.cons_append, addCoefficients]
           rw [ih ys htail]
-          simp [addCoefficients]
 
 /-- Subtraction preserves the final pair when prefix lengths match. -/
 theorem subtractCoefficients_append_singleton
@@ -521,7 +520,7 @@ theorem subtractCoefficients_append_singleton
     (hlen : xs.length = ys.length) :
     subtractCoefficients (xs ++ [a]) (ys ++ [b]) =
       subtractCoefficients xs ys ++ [a - b] := by
-  unfold subtractCoefficients
+  unfold subtractCoefficients negateCoefficients
   rw [List.map_append]
   have hmap : xs.length = (ys.map (fun z => -z)).length := by
     simpa using hlen
@@ -548,7 +547,6 @@ theorem trimReversed_length_le (xs : List Rat) :
 /-- Canonical normalization never increases the number of coefficients. -/
 theorem normalizeCoefficients_length_le (xs : List Rat) :
     (normalizeCoefficients xs).length ≤ xs.length := by
-  simp only [normalizeCoefficients, List.length_reverse]
-  exact trimReversed_length_le xs.reverse
+  simpa [normalizeCoefficients] using trimReversed_length_le xs.reverse
 
 end CCFSM.P2749
