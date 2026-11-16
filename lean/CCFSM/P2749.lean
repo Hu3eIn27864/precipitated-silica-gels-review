@@ -714,4 +714,27 @@ theorem multiplyCoefficients_monomial (k : Nat) (c : Rat)
         (by simpa [hlen] using hle)
       rw [halign, htail]
 
+
+/-- For a nonzero canonical input and nonzero scalar, monomial convolution
+    ends in the expected scaled leading coefficient. -/
+theorem multiplyCoefficients_monomial_final_coefficient
+    (k : Nat) (c : Rat) (xs : List Rat)
+    (hxs : xs ≠ []) (hcanon : CanonicalCoefficients xs)
+    (hc : c ≠ 0) :
+    ∃ init last,
+      multiplyCoefficients (monomialCoefficients k c) xs = init ++ [last] ∧
+        last ≠ 0 ∧
+        ∃ prefix originalLast,
+          xs = prefix ++ [originalLast] ∧ last = c * originalLast := by
+  rcases hcanon with hnil | ⟨prefix, originalLast, hcoeff, hlast⟩
+  · exact False.elim (hxs hnil)
+  · subst xs
+    rw [multiplyCoefficients_monomial k c (prefix ++ [originalLast])
+      (by simp)]
+    refine ⟨List.replicate k 0 ++ scaleCoefficients c prefix,
+      c * originalLast, ?_, mul_ne_zero hc hlast,
+      ⟨prefix, originalLast, rfl, rfl⟩⟩
+    simp [shiftedScaleCoefficients, scaleCoefficients, List.map_append,
+      List.append_assoc]
+
 end CCFSM.P2749
