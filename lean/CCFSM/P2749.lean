@@ -856,4 +856,43 @@ theorem degree?_monomial_subtract_step_lt
   exact degree?_lt_of_normalized_length_lt p (subtractCoefficients p.coefficients
         (multiplyCoefficients (monomialCoefficients k (aR / aB)) d)) hp hresult hstep
 
+
+/-- Subtract a scalar monomial multiple of a divisor polynomial and
+    normalize the resulting coefficient vector. -/
+def subtractMonomial (p q : RatPolynomial) (k : Nat) (c : Rat) :
+    RatPolynomial :=
+  ofCoefficients
+    (subtractCoefficients p.coefficients
+      (multiplyCoefficients (monomialCoefficients k c) q.coefficients))
+
+/-- The canonical polynomial produced by an exact monomial cancellation
+    has strictly smaller degree, provided it is nonzero and the shifted
+    divisor has the same coefficient-vector length as the dividend. -/
+theorem degree?_subtractMonomial_lt
+    (p q : RatPolynomial) (k : Nat) (aR aB : Rat)
+    (hr : ∃ rpre, p.coefficients = rpre ++ [aR])
+    (hd : ∃ dpre, q.coefficients = dpre ++ [aB])
+    (haB : aB ≠ 0)
+    (hsize : p.coefficients.length = k + q.coefficients.length)
+    (hresult : (subtractMonomial p q k (aR / aB)).coefficients ≠ []) :
+    ∃ dResult dDividend,
+      degree? (subtractMonomial p q k (aR / aB)) = some dResult ∧
+        degree? p = some dDividend ∧ dResult < dDividend := by
+  have hp : p.coefficients ≠ [] := by
+    rcases hr with ⟨rpre, hcoeff⟩
+    rw [hcoeff]
+    simp
+  have hstep := normalize_subtract_monomial_step_length_strict
+    k aR aB p.coefficients q.coefficients hr hd haB hsize
+  have hresult' :
+      normalizeCoefficients
+        (subtractCoefficients p.coefficients
+          (multiplyCoefficients (monomialCoefficients k (aR / aB))
+            q.coefficients)) ≠ [] := by
+    simpa [subtractMonomial, ofCoefficients] using hresult
+  exact degree?_lt_of_normalized_length_lt p
+    (subtractCoefficients p.coefficients
+      (multiplyCoefficients (monomialCoefficients k (aR / aB))
+        q.coefficients)) hp hresult' hstep
+
 end CCFSM.P2749
