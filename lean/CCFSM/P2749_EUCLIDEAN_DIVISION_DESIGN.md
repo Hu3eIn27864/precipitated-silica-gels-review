@@ -257,3 +257,32 @@ identity itself. The remaining induction still needs a proved lower bound
 on the length of the recursive convolution result, under an explicit
 nonempty second-vector premise. Only then can the zero-padded first
 convolution layer be shown to leave the shifted recursive tail unchanged.
+
+
+## CI-verified general monomial-shift convolution (16 November 2026)
+
+The coefficient-list bridge has advanced beyond the singleton case. The Lean
+module now proves both:
+
+- `multiplyCoefficients_monomial_length`: convolution of the coefficient
+  vector for `X^k * c` with a nonempty right-hand vector has length
+  `k + xs.length`;
+- `multiplyCoefficients_monomial`: the same convolution is exactly the
+  `k`-slot low-degree shift followed by coefficientwise scaling.
+
+The explicit premise `xs ≠ []` is essential for the current recursive
+list implementation. For an empty right vector, convolution by a nonempty
+monomial vector produces a zero-filled vector rather than the empty list;
+the shifted/scaled representation has a different length in that edge case.
+The theorem is therefore intentionally stated only for nonempty input and
+must not be silently generalized to the zero polynomial representation.
+
+Aggregate Lean proof-kernel CI passed on code head
+`f05c6c36dac64e2b358da0534c47c68ba3138eae` (run 43896907930).
+This closes the general raw coefficient-list monomial bridge. It does not
+yet prove a polynomial-level leading-coefficient theorem, a one-step
+Euclidean cancellation theorem, recursive division, or any Sturm result.
+The next gate is to connect the shifted/scaled vector's final coefficient
+to the leading coefficient of a canonical nonzero divisor, then prove the
+exact rational cancellation scalar and lift the existing aligned subtraction
+measure to the polynomial division step.
