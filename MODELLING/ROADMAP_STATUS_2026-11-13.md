@@ -198,3 +198,8 @@ checkout.
 - Aggregate Lean proof-kernel CI passed on head `9532794979961d955878d22bc9f9294bba48b3aa` (run 43897466565).
 - The remaining division step is now sharply isolated: choose `c = aR / aB` for nonzero divisor leading coefficient `aB`, invoke exact `Rat.div_mul_cancel`, and lift the resulting raw-list cancellation to canonical polynomials. No Euclidean division or Sturm theorem is yet claimed.
 - Added PSG-050 (Birch & Geddes, 2000) as abstract-level primary evidence for nanoscale particle/cluster evolution in sodium-silicate/sulfuric-acid silica hydrogel polymerisation. Its particle-scale syneresis is kept distinct from bulk specimen shrinkage and exudate flow.
+
+
+### Evidence integration — observable scale separation (16 November 2026)
+
+Added `MODELLING/SYNERESIS_OBSERVABLE_SCALE_MATRIX.md` to separate solution speciation, particle/cluster evolution, network morphology, free-gel natural syneresis, loaded mechanical/transport tests, and drying/suction history. The central modelling rule is that particle-scale contraction, macroscopic specimen-volume loss, exudate flux, and loaded consolidation are different observables with different boundary conditions; they must not be collapsed into one fitted “syneresis rate” without an explicit shared-state model.
