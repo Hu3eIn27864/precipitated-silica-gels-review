@@ -66,7 +66,7 @@ This is an isolated Lean 4 project pinned to Lean **v4.35.0**. It does not chang
 - The design obligations for finite binary64 values, nextafter, signed zero, subnormals, and overflow are recorded in CCFSM/P2743_IEEE754_DESIGN.md.
 - A Python-side independent checker now verifies add, mul, and div interval certificates by recomputing the exact real range from the supplied binary64 endpoints as dyadic rationals.
 - This is an exact-rational software checker, not yet a Lean proof of Python/IEEE-754 refinement. It does not verify expression provenance, external input soundness, or signed-zero bit semantics.
-- Nine focused unit tests exercise sign combinations, zero crossings, subnormal products, division domains, malformed certificates, and rejection of unsound enclosures.\n\n## Roadmap: P27.44
+- Ten focused unit tests exercise sign combinations, zero crossings, subnormal products, division domains, malformed certificates, and rejection of unsound enclosures. An integration test runs the current P27.34 interval operations through the independent checker.\n\n## Roadmap: P27.44
 
 1. **P27.43 — IEEE-754 refinement boundary.** Specify finite binary floating-point values, directed rounding, subnormal behavior, signed zero, and overflow/fail-closed behavior. Choose between a bit-level proof of `nextafter` and a verified refinement to exact rational bounds; tests alone are not a proof.
 2. **P27.44 — certificate pipeline.** Connect polynomial and derivative enclosures to P27.36 root criteria, then define/export a certificate format and prove the checker sound. Algorithmic completeness and Python-to-Lean certificate extraction remain separate obligations.
