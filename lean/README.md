@@ -33,14 +33,22 @@ This is an isolated Lean 4 project pinned to Lean **v4.35.0**. It does not chang
 - `assemble` composes this contract with P27.34 outward addition into the `IntervalArithmetic` interface consumed by P27.35.
 - Separate the proof of the interface from the proof of any concrete endpoint algorithm. In particular, this module does **not** yet prove the familiar four-corner formula or its floating-point implementation.
 
-## Roadmap: P27.39–P27.41
+### P27.39 — exact interval product in the nonnegative quadrant
 
-1. **P27.39 — exact real multiplication enclosure.** Define an ordered-field interval product using the minimum and maximum of the four endpoint products, then prove the corner-extremum theorem. This establishes the mathematical formula independently of floating-point arithmetic.
-2. **P27.40 — IEEE-754 refinement boundary.** Specify finite binary floating-point values, rounding direction, subnormal behavior, signed zero, and overflow/fail-closed behavior. Choose deliberately between a bit-level proof of `nextafter` and a verified refinement to exact rational bounds; do not treat tests as a proof.
-3. **P27.41 — certificate pipeline.** Connect polynomial and derivative enclosures to P27.36 root criteria, then define/export a certificate format and prove the checker sound. Algorithmic completeness and Python-to-Lean certificate extraction remain separate obligations.
+- Proves the endpoint-product enclosure for intervals whose lower endpoints are nonnegative.
+- The proof uses an explicit order-compatible multiplication law (`mul_mono_nonneg`) and proves both lower and upper enclosure bounds, plus endpoint ordering.
+- This is an exact algebraic result, independent of floating-point rounding.
+- It is **not** yet the full four-sign-case theorem: intervals crossing zero and intervals with negative endpoints remain open. The current result must not be applied outside its stated quadrant.
+
+## Roadmap: P27.40–P27.42
+
+1. **P27.40 — full four-sign-case product.** Prove the general endpoint-extremum result, including negative and zero-crossing intervals, with explicit sign cases and no floating-point assumptions.
+2. **P27.41 — IEEE-754 refinement boundary.** Specify finite binary floating-point values, directed rounding, subnormal behavior, signed zero, and overflow/fail-closed behavior. Choose between a bit-level proof of `nextafter` and a verified refinement to exact rational bounds; tests alone are not a proof.
+3. **P27.42 — certificate pipeline.** Connect polynomial and derivative enclosures to P27.36 root criteria, then define/export a certificate format and prove the checker sound. Algorithmic completeness and Python-to-Lean certificate extraction remain separate obligations.
 
 ## Open obligations and scope
 
+- Extend P27.39 from the nonnegative quadrant to all sign combinations, including intervals crossing zero.
 - Instantiate multiplication with a concrete endpoint implementation and prove its enclosure contract.
 - Prove outward rounding for the actual Python `nextafter` implementation, including finite-input and overflow conditions. Underflow/subnormal and signed-zero cases need explicit treatment.
 - Connect P27.35 polynomial/derivative bounds to P27.36 and P27.37 certificate construction.
