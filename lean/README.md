@@ -125,7 +125,7 @@ From this directory run `lake update` once if no `lake-manifest.json` is present
 - Adds the converse to P27.45: every interior root in a fully resolved tree must be represented by a collected witness.
 - The exact-count proposition includes all three necessary parts: witness-list length, pairwise distinctness, and equivalence between list membership and the interior-root predicate.
 - Requires explicit strict-order trichotomy and strict-to-nonstrict conversion. The count is for the open interval; endpoint roots are intentionally separate.
-- Current Lean verification is in progress; do not treat P27.46 as accepted until the aggregate kernel build succeeds.
+- - Lean CI passed: run 43798130936; all 15 targets built, including CCFSM.P2746.
 
 ### P27.47 — Sturm certificates for tangential and multiple roots
 
