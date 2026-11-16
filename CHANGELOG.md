@@ -1084,3 +1084,12 @@
 - Ergänzt Backtracking mit Positivitäts-/Kapazitätsgrenzen und expliziter Nichtannahme bei Singularität, Liniensuchversagen oder Iterationslimit.
 - Ergänzt P22/P24-Vergleich für FV-Zustand und projizierten Druck sowie Regressionstests.
 - Der FD-Jacobian ist eine kleine Referenzmethode; keine Produktionssolver-Effizienz, allgemeine Newton-Konvergenz oder physikalische Validierung wird behauptet. Hosted CI wird separat geprüft.
+
+
+## 2026-11-16 — CCFSM P27.37 regression audit
+
+- Corrected the subdivision-boundary regression: the former linear test was already certified on the parent interval by P27.36 and therefore never reached a subdivision boundary.
+- Replaced it with a cubic manufactured polynomial whose derivative interval enclosure contains zero on the parent interval, forcing subdivision at the exact root; the root is then conservatively left unresolved at the shared child boundary.
+- Corrected the depth-limit fixture as well: a linear polynomial is classified before subdivision even when `max_depth=0`; the revised tangential-root fixture genuinely exercises the recursion stop.
+- Added a dedicated minimum-width stopping regression and updated the P27.37 specification/package README. The P27.37 algorithm itself and the CCFSM version line are unchanged.
+- Hosted CI is required to confirm the corrected tests and full-package integration; no physical validation is implied.

@@ -33,15 +33,37 @@ class P2737AdaptivePolynomialRootIsolationTests(unittest.TestCase):
         self.assertIsNone(result["root_count_bounds"][1])
 
     def test_root_at_subdivision_boundary_is_not_double_counted(self):
-        result = isolate_polynomial_roots([1.0, -0.5], 0.0, 1.0, max_depth=5)
+        # p(x)=(x-1/2)(x^2+1). The natural interval extension of p'
+        # contains zero on [0,1], so P27.37 subdivides at x=1/2.
+        # The root is then an endpoint of both children and must remain unresolved.
+        result = isolate_polynomial_roots(
+            [1.0, -0.5, 1.0, -0.5], 0.0, 1.0, max_depth=5
+        )
         self.assertFalse(result["complete"])
         self.assertEqual(result["certified_unique_root_count"], 0)
         self.assertIsNone(result["root_count_bounds"][1])
+        boundary_leaves = [
+            leaf for leaf in result["leaves"]
+            if 0.5 in leaf["interval"] and leaf["root_count"] is None
+        ]
+        self.assertGreaterEqual(len(boundary_leaves), 2)
 
     def test_depth_limit_is_reported(self):
-        result = isolate_polynomial_roots([1.0, -0.3], 0.0, 1.0, max_depth=0)
+        # A tangential root leaves the derivative enclosure unresolved, so
+        # max_depth=0 must stop before any subdivision.
+        result = isolate_polynomial_roots([1.0, -1.0, 0.25], 0.0, 1.0, max_depth=0)
         self.assertFalse(result["complete"])
         self.assertEqual(result["unresolved_leaf_count"], 1)
+        self.assertEqual(result["leaves"][0]["status"], "unresolved_subdivision_limit")
+
+    def test_minimum_width_limit_is_reported(self):
+        result = isolate_polynomial_roots(
+            [1.0, -1.0, 0.25], 0.0, 1.0, max_depth=12, min_width=0.5
+        )
+        self.assertFalse(result["complete"])
+        unresolved = [x for x in result["leaves"] if x["root_count"] is None]
+        self.assertTrue(unresolved)
+        self.assertTrue(all(x["interval"][1] - x["interval"][0] <= 0.5 for x in unresolved))
 
     def test_partition_covers_domain_without_gaps(self):
         result = isolate_polynomial_roots([1.0, -0.3], 0.0, 1.0)
