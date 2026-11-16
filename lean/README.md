@@ -137,6 +137,14 @@ modules do not change the Python implementation or the CCFSM version line.
   requires `lo < hi`; singleton intervals are outside its scope.
 - Lean CI is pending for the first implementation commit.
 
+### P27.49 — staged Lean implementation of rational Sturm certificates
+
+- Plan only: `CCFSM/P2749_STURM_LEAN_IMPLEMENTATION_PLAN.md`.
+- Splits the work into canonical rational polynomials, exact Euclidean division,
+  signed remainder sequences, one-sided endpoint signs, the Sturm theorem,
+  and an independently checking certificate format.
+- No P27.49 implementation or Sturm root-count theorem is claimed.
+
 ## Open obligations
 
 - Connect exact interval operations to concrete numeric representations and
