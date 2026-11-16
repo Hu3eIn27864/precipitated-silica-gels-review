@@ -615,6 +615,6 @@ theorem normalize_aligned_cancellation_length_strict
 theorem shiftedScaleCoefficients_length (k : Nat) (c : Rat)
     (xs : List Rat) :
     (shiftedScaleCoefficients k c xs).length = k + xs.length := by
-  simp [shiftedScaleCoefficients]
+  simp [shiftedScaleCoefficients, scaleCoefficients]
 
 end CCFSM.P2749
