@@ -51,18 +51,18 @@ theorem monotone_roots_unique {α β : Type}
     x = y := by
   rcases htrichotomy x y with hxy | heq | hyx
   · rcases hmono with hinc | hdec
-    · have hlt := hinc hx.1 hx.2 hy.1 hy.2 hxy
+    · have hlt := hinc hx.1 hx.2.1 hy.1 hy.2.1 hxy
       rw [hx.2.2, hy.2.2] at hlt
       exact (hzero_irrefl hlt).elim
-    · have hlt := hdec hx.1 hx.2 hy.1 hy.2 hxy
+    · have hlt := hdec hx.1 hx.2.1 hy.1 hy.2.1 hxy
       rw [hx.2.2, hy.2.2] at hlt
       exact (hzero_irrefl hlt).elim
   · exact heq
   · rcases hmono with hinc | hdec
-    · have hlt := hinc hy.1 hy.2 hx.1 hx.2 hyx
+    · have hlt := hinc hy.1 hy.2.1 hx.1 hx.2.1 hyx
       rw [hy.2.2, hx.2.2] at hlt
-      exact (lt_irrefl 0 hlt).elim
-    · have hlt := hdec hy.1 hy.2 hx.1 hx.2 hyx
+      exact (hzero_irrefl hlt).elim
+    · have hlt := hdec hy.1 hy.2.1 hx.1 hx.2.1 hyx
       rw [hy.2.2, hx.2.2] at hlt
       exact (lt_irrefl 0 hlt).elim
 
