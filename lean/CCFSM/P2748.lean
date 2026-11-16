@@ -78,6 +78,7 @@ def ClosedRoot {α : Type} [LE α] [LT α]
 /-- Every closed witness is a genuine root in the closed parent interval. -/
 theorem closedRootWitnesses_sound {α : Type} [LE α] [LT α]
     {p : α → Prop} {lo hi : α}
+    (lt_transitive : ∀ {a b c : α}, a < b → b < c → a < c)
     (lt_to_le : ∀ {a b : α}, a < b → a ≤ b)
     (tree : RootIsolationTree p lo hi)
     (loEvidence : EndpointCertificate p lo)
@@ -92,9 +93,7 @@ theorem closedRootWitnesses_sound {α : Type} [LE α] [LT α]
     · obtain ⟨rfl, hp⟩ := endpointRootWitnesses_sound loEvidence hlo
       exact ⟨le_refl _, lt_to_le hlohi, hp⟩
     · obtain ⟨hlo, hhi, hp⟩ :=
-        certifiedRootWitnesses_sound (by
-          intro a b c hab hbc
-          exact lt_trans hab hbc) tree hinterior
+        certifiedRootWitnesses_sound lt_transitive tree hinterior
       exact ⟨lt_to_le hlo, lt_to_le hhi, hp⟩
   · obtain ⟨rfl, hp⟩ := endpointRootWitnesses_sound hiEvidence hhi
     exact ⟨lt_to_le hlohi, le_refl _, hp⟩
@@ -131,7 +130,7 @@ theorem closedRootWitnesses_allDistinct {α : Type} [LE α] [LT α]
     intro x hx y hy hxy
     obtain ⟨rfl, _⟩ := endpointRootWitnesses_sound loEvidence hx
     obtain ⟨rfl, _⟩ := endpointRootWitnesses_sound hiEvidence hy
-    subst y
+    subst hi
     exact (lt_irrefl _ hlohi).elim
   have hFirst :=
     allDistinct_append (endpointRootWitnesses_allDistinct loEvidence)
@@ -172,10 +171,10 @@ theorem closedRootWitnesses_complete {α : Type} [LE α] [LT α]
     x ∈ closedRootWitnesses tree loEvidence hiEvidence ↔
       ClosedRoot p lo hi x := by
   constructor
-  · exact closedRootWitnesses_sound lt_to_le tree loEvidence hiEvidence hlohi
+  · exact closedRootWitnesses_sound lt_transitive lt_to_le tree loEvidence hiEvidence hlohi
   · rintro ⟨hlox, hxhi, hpx⟩
     rcases trichotomy x lo with hxlo | hxEqLo | hlox'
-    · exact False.elim (lt_irrefl x (le_lt_trans hlox hxlo))
+    · exact False.elim (lt_irrefl lo (le_lt_trans hlox hxlo))
     · subst x
       cases loEvidence with
       | root hp =>
