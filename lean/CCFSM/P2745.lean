@@ -143,33 +143,31 @@ theorem certifiedRootWitnesses_allDistinct {α : Type} [LE α] [LT α]
   | leaf evidence =>
       cases evidence <;> simp [certifiedRootWitnesses, AllDistinct]
   | @split lo m hi left_order right_order midpoint left right ihl ihr =>
-      have hLeftBelow : ∀ x, x ∈ certifiedRootWitnesses left → x < mid := by
-        intro x hx
-        exact (certifiedRootWitnesses_sound lt_transitive left hx).2.1
-      have hRightAbove : ∀ x, x ∈ certifiedRootWitnesses right → mid < x := by
-        intro x hx
-        exact (certifiedRootWitnesses_sound lt_transitive right hx).1
       have hLeftMidSeparate :
           ∀ x, x ∈ certifiedRootWitnesses left →
             ∀ y, y ∈ splitPointWitnesses midpoint → x ≠ y := by
         intro x hx y hy hxy
         obtain ⟨rfl, _⟩ := splitPointWitnesses_sound midpoint hy
         subst x
-        exact (lt_irrefl m (hLeftBelow m hx)).elim
+        have hxlt := (certifiedRootWitnesses_sound lt_transitive left hx).2.1
+        exact (lt_irrefl _ hxlt).elim
       have hLeftRightSeparate :
           ∀ x, x ∈ certifiedRootWitnesses left →
             ∀ y, y ∈ certifiedRootWitnesses right → x ≠ y := by
         intro x hx y hy hxy
-        have hxylt := lt_transitive (hLeftBelow x hx) (hRightAbove y hy)
+        have hxlt := (certifiedRootWitnesses_sound lt_transitive left hx).2.1
+        have hygt := (certifiedRootWitnesses_sound lt_transitive right hy).1
+        have hxylt := lt_transitive hxlt hygt
         subst y
-        exact (lt_irrefl x hxylt).elim
+        exact (lt_irrefl _ hxylt).elim
       have hMidRightSeparate :
           ∀ x, x ∈ splitPointWitnesses midpoint →
             ∀ y, y ∈ certifiedRootWitnesses right → x ≠ y := by
         intro x hx y hy hxy
         obtain ⟨rfl, _⟩ := splitPointWitnesses_sound midpoint hx
         subst y
-        exact (lt_irrefl m (hRightAbove m hy)).elim
+        have hygt := (certifiedRootWitnesses_sound lt_transitive right hy).1
+        exact (lt_irrefl _ hygt).elim
       have hLeftMid :=
         allDistinct_append ihl (splitPointWitnesses_allDistinct midpoint)
           hLeftMidSeparate
