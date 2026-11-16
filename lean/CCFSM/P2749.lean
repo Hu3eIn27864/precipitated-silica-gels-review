@@ -286,10 +286,10 @@ theorem derivativeCoefficients_quadratic (a b c : Rat) :
 /-- Exact Horner values for constant and linear coefficient lists. -/
 theorem evalCoefficients_constant (x a : Rat) :
     evalCoefficients x [a] = a := by
-  simp [evalCoefficients]
+  simp [evalCoefficients, Rat.zero_add]
 
 theorem evalCoefficients_linear (x a b : Rat) :
     evalCoefficients x [a, b] = a + b * x := by
-  simp [evalCoefficients, Rat.add_comm, Rat.mul_comm]
+  simp [evalCoefficients, Rat.add_comm, Rat.mul_comm, Rat.add_zero]
 
 end CCFSM.P2749
