@@ -609,4 +609,12 @@ theorem normalize_aligned_cancellation_length_strict
     normalize_aligned_cancellation_length xs ys a hlen
   simpa using Nat.lt_succ_of_le hbound
 
+
+/-- Shifting a coefficient vector by k degrees and scaling it does not
+    change its length except for the k inserted low-degree zero slots. -/
+theorem shiftedScaleCoefficients_length (k : Nat) (c : Rat)
+    (xs : List Rat) :
+    (shiftedScaleCoefficients k c xs).length = k + xs.length := by
+  simp [shiftedScaleCoefficients]
+
 end CCFSM.P2749
