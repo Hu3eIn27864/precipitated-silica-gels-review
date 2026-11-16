@@ -232,3 +232,10 @@ Added `MODELLING/SYNERESIS_OBSERVABLE_SCALE_MATRIX.md` to separate solution spec
 - Added `degree?_monomial_subtract_step_lt` to package the exact monomial subtraction as a canonical `RatPolynomial` and prove the result degree is strictly lower than the dividend degree, under explicit final-coefficient, nonzero-divisor and equal-shifted-length premises.
 - Aggregate Lean proof-kernel CI passed on head `69d0b1fb18f1894ab13a53e2bb0ec1130dfb7f99` (run 43898966855).
 - Remaining: derive shift/scalar computably from polynomial degrees and leading coefficients, implement well-founded quotient/remainder recursion, prove remainder identity and quotient-degree bound, then implement signed remainder sequence and Sturm counting.
+
+
+### AP F follow-up — canonical monomial subtraction operation verified (16 November 2026)
+
+- Added `subtractMonomial` as a canonical `RatPolynomial` operation and `degree?_subtractMonomial_lt` proving strict degree decrease under explicit final-coefficient, nonzero-divisor and equal-shifted-length hypotheses, when the result remains nonzero.
+- Aggregate Lean proof-kernel CI passed on head `a080b7debf84ab3ca96a2402f90f3a625b5134db` (run 43899165470).
+- Next gate: derive the shift and scalar automatically from nonzero canonical dividend/divisor degrees and leading coefficients, handle zero remainder, define the quotient accumulator/well-founded recursion, and prove the quotient/remainder identity and degree bound.
