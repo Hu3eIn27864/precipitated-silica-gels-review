@@ -32,45 +32,45 @@ def max4 {α : Type} [LE α] [DecidableLE α]
   max2 (max2 a b) (max2 c d)
 
 /-- A binary minimum is no greater than its left argument. -/
-theorem min2_le_left {α : Type} [LE α] [DecidableLE α]
+theorem min2_le_left {α : Type} [LE α] [Mul α] [OfNat α 0] [DecidableLE α]
     (ord : CCFSM.P2741.FourCornerOrder α) (a b : α) :
     min2 a b ≤ a := by
   unfold min2
   by_cases h : a ≤ b
-  · simp [h]
+  · exact ord.le_refl a
   · have hba : b ≤ a := (ord.scalar.le_total a b).resolve_left h
-    simp [h, hba]
+    exact hba
 
 /-- A binary minimum is no greater than its right argument. -/
-theorem min2_le_right {α : Type} [LE α] [DecidableLE α]
+theorem min2_le_right {α : Type} [LE α] [Mul α] [OfNat α 0] [DecidableLE α]
     (ord : CCFSM.P2741.FourCornerOrder α) (a b : α) :
     min2 a b ≤ b := by
   unfold min2
   by_cases h : a ≤ b
-  · simp [h]
-  · simp [h]
+  · exact ord.le_refl a
+  · exact ord.le_refl b
 
 /-- A binary maximum is no smaller than its left argument. -/
-theorem left_le_max2 {α : Type} [LE α] [DecidableLE α]
+theorem left_le_max2 {α : Type} [LE α] [Mul α] [OfNat α 0] [DecidableLE α]
     (ord : CCFSM.P2741.FourCornerOrder α) (a b : α) :
     a ≤ max2 a b := by
   unfold max2
   by_cases h : a ≤ b
-  · simp [h]
-  · simp [h]
+  · exact h
+  · exact ord.le_refl a
 
 /-- A binary maximum is no smaller than its right argument. -/
-theorem right_le_max2 {α : Type} [LE α] [DecidableLE α]
+theorem right_le_max2 {α : Type} [LE α] [Mul α] [OfNat α 0] [DecidableLE α]
     (ord : CCFSM.P2741.FourCornerOrder α) (a b : α) :
     b ≤ max2 a b := by
   unfold max2
   by_cases h : a ≤ b
-  · simp [h]
+  · exact ord.le_refl b
   · have hba : b ≤ a := (ord.scalar.le_total a b).resolve_left h
-    simp [h, hba]
+    exact hba
 
 /-- The four-value minimum is below each of its four inputs. -/
-theorem min4_le_each {α : Type} [LE α] [DecidableLE α]
+theorem min4_le_each {α : Type} [LE α] [Mul α] [OfNat α 0] [DecidableLE α]
     (ord : CCFSM.P2741.FourCornerOrder α) (a b c d : α) :
     min4 a b c d ≤ a ∧ min4 a b c d ≤ b ∧
     min4 a b c d ≤ c ∧ min4 a b c d ≤ d := by
@@ -87,7 +87,7 @@ theorem min4_le_each {α : Type} [LE α] [DecidableLE α]
     ord.le_trans hright hc, ord.le_trans hright hd⟩
 
 /-- The four-value maximum is above each of its four inputs. -/
-theorem each_le_max4 {α : Type} [LE α] [DecidableLE α]
+theorem each_le_max4 {α : Type} [LE α] [Mul α] [OfNat α 0] [DecidableLE α]
     (ord : CCFSM.P2741.FourCornerOrder α) (a b c d : α) :
     a ≤ max4 a b c d ∧ b ≤ max4 a b c d ∧
     c ≤ max4 a b c d ∧ d ≤ max4 a b c d := by
