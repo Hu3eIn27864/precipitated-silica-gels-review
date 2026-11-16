@@ -3,12 +3,13 @@ import Std
 /-!
 # CCFSM P27.35: Horner evaluation and interval enclosure
 
-Coefficients are stored in ascending order (constant term first):
-[a₀, a₁, ..., aₙ] denotes a₀ + a₁*x + ... + aₙ*xⁿ.
+Coefficients are stored in descending order (highest degree first), matching
+the Python P27.35 implementation:
+[aₙ, ..., a₁, a₀] denotes aₙ*xⁿ + ... + a₁*x + a₀.
 
-The theorem below is parametric in the interval operations.  It proves that
+The theorem below is parametric in the interval operations. It proves that
 Horner evaluation is enclosure-preserving whenever interval addition and
-multiplication satisfy their stated soundness contracts.  It does not yet
+multiplication satisfy their stated soundness contracts. It does not yet
 instantiate those contracts with concrete endpoint arithmetic, nor does it
 claim IEEE-754 outward-rounding correctness.
 -/
@@ -34,7 +35,7 @@ theorem Interval.point_contains {α : Type} [LE α] (x : α) :
 
 /--
 An interval arithmetic implementation together with the two obligations
-needed by the Horner enclosure theorem.  Concrete endpoint arithmetic must
+needed by the Horner enclosure theorem. Concrete endpoint arithmetic must
 prove these obligations before it can be used as a certified implementation.
 -/
 structure IntervalArithmetic (α : Type) [LE α] [Add α] [Mul α] where
@@ -46,14 +47,13 @@ structure IntervalArithmetic (α : Type) [LE α] [Add α] [Mul α] where
     I.Contains x → J.Contains y → (mul I J).Contains (x * y)
 
 /--
-Exact scalar Horner evaluation.  The coefficient list is in ascending
-degree order, so [a₀, a₁, ..., aₙ] evaluates to
-a₀ + x*(a₁ + x*(... + x*aₙ)).
+Exact scalar Horner evaluation. The coefficient list is in descending
+degree order, matching P27.35's Python API.
 -/
 def horner {α : Type} [Add α] [Mul α] [OfNat α 0] :
     List α → α → α
   | [], _ => 0
-  | a :: rest, x => a + x * horner rest x
+  | a :: rest, x => x * horner rest x + a
 
 /-- Interval Horner evaluation using a supplied sound interval arithmetic. -/
 def hornerInterval {α : Type} [LE α] [Add α] [Mul α] [OfNat α 0]
@@ -61,7 +61,7 @@ def hornerInterval {α : Type} [LE α] [Add α] [Mul α] [OfNat α 0]
     List α → Interval α → Interval α
   | [], _ => Interval.point 0
   | a :: rest, X =>
-      ops.add (Interval.point a) (ops.mul X (hornerInterval ops rest X))
+      ops.add (ops.mul X (hornerInterval ops rest X)) (Interval.point a)
 
 /--
 P27.35 core enclosure theorem: if x belongs to X, then the exact polynomial
@@ -79,13 +79,12 @@ theorem hornerInterval_sound {α : Type}
   | nil =>
       simp [hornerInterval, horner, Interval.Contains, Interval.point]
   | cons a rest ih =>
-      change (ops.add (Interval.point a)
-        (ops.mul X (hornerInterval ops rest X))).Contains
-        (a + x * horner rest x)
-      exact ops.add_sound (Interval.point a) (ops.mul X (hornerInterval ops rest X))
-        a (x * horner rest x)
-        (Interval.point_contains a)
+      change (ops.add (ops.mul X (hornerInterval ops rest X))
+        (Interval.point a)).Contains (x * horner rest x + a)
+      exact ops.add_sound (ops.mul X (hornerInterval ops rest X))
+        (Interval.point a) (x * horner rest x) a
         (ops.mul_sound X (hornerInterval ops rest X) x (horner rest x)
           hx (ih hx))
+        (Interval.point_contains a)
 
 end CCFSM.P2735
