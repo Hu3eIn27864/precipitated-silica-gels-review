@@ -999,3 +999,27 @@ Die erste Manuskriptarbeit behandelt ausschließlich das reduzierte Zwei-Zeitska
 ## Manuskript 1 — Scherer (1989), Gleichungsvergleich
 
 - [MANUSCRIPT_01_SCHERER_1989_EQUATION_LEVEL_COMPARISON_2026-11-15_DE.md](MANUSCRIPT_01_SCHERER_1989_EQUATION_LEVEL_COMPARISON_2026-11-15_DE.md) — Abstract-basierter Strukturvergleich mit v0.2, Reduktionsanforderungen und klarer Kennzeichnung der noch fehlenden Volltext-Gleichungsprüfung.
+
+
+## P27.43 — unabhängige rationale Intervallzertifikate
+
+- ccfsm_p27_43_rational_interval_certificate.py prüft versionierte Zertifikate für Intervalladdition, -multiplikation und -division unabhängig vom erzeugenden Intervallalgorithmus.
+- Jeder endliche Eingabe-Endpunkt wird als binary64-Zahl interpretiert und anschließend mit Fraction.from_float exakt als dyadischer Bruch ausgewertet. Die Ergebnisrange wird rational neu berechnet; der Prüfer kontrolliert beide äußeren Ergebnisgrenzen.
+- Division über ein Nennerintervall mit Null wird abgewiesen. Ein formal korrekt geformtes, aber zu enges Ergebnisintervall wird ausdrücklich als valid: false gemeldet; fehlerhafte Zertifikate werden abgewiesen.
+- Zehn gezielte Regressionstests decken Addition, Vorzeichenfälle, Nullüberschreitung, Subnormal-Unterlauf, Division und fehlerhafte/zu enge Zertifikate ab.
+
+**Grenze:** Der Prüfer validiert die exakte reelle Range der angegebenen binären Endpunkte. Er beweist weder die Herkunft der Eingangsintervalle noch, dass der Produzent den beabsichtigten Ausdruck berechnet hat. Er ist noch kein Lean-Beweis der IEEE-754-/nextafter-Implementierung; signed zero wird in der rationalen Interpretation mit reeller Null identifiziert. Die Zertifikats-JSON verlangt Gleitkommazahlen; ganzzahlige JSON-Tokens werden abgewiesen, damit keine stillschweigende Ganzzahl-zu-binary64-Rundung erfolgt.
+
+
+## P27.42/P27.43 — CI-Baseline-Audit
+
+- CCFSM_P27_42_P27_43_CI_BASELINE_TRIAGE_2026-11-16.md dokumentiert neun fehlgeschlagene Tests, die sowohl auf dem Basisstand von PR #13 als auch im aktuellen Arbeitszweig reproduziert wurden.
+- Alle zehn neuen P27.43-Prüfertests bestanden im PR-CI-Lauf. Die Gesamt-CI bleibt wegen der neun bereits auf dem Basisstand auftretenden Fehler rot; diese werden nicht stillschweigend P27.42/P27.43 zugerechnet.
+- Priorität für die nächste unabhängige Fehlerbehebung: P27.37-Vollständigkeitssemantik, danach P27.17-Bilanzrekonstruktion sowie P27.23/P27.28-Energiebilanzen.
+
+
+## Integrierter P27.42–P27.44-Prüfstand
+
+- Dieser Integrationszweig verbindet die formalen Intervall- und Zertifikatsarbeiten P27.42–P27.44 mit den getrennt im CI geprüften CCFSM-Baseline-Reparaturen.
+- [CCFSM_BASELINE_CI_REPAIRS_2026-11-16.md](CCFSM_BASELINE_CI_REPAIRS_2026-11-16.md) dokumentiert Ursachen und enge Korrekturen der früheren neun Testfehler.
+- Ziel ist ein gemeinsamer Lean- und Python-CI-Nachweis; der Zweig ist vorerst ein Entwurfs-/Integrationsstand und ändert keine physikalischen Modellgleichungen. CCFSM bleibt v4.2.57.

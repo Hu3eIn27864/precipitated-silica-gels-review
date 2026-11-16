@@ -41,7 +41,8 @@ class TestP2713(unittest.TestCase):
         v=((0,0,0),(1,0,0),(0,1,0),(0,0,1))
         r=audit_tetra_mesh_3d(v,((0,1,2,3),(0,1,2,3)))
         self.assertFalse(r["overall_pass"])
-        self.assertEqual(r["status"],"mesh_geometry_gate_failed")
+        self.assertEqual(r["status"],"integrated_mesh_audit_failed")
+        self.assertFalse(r["all_required_gates_passed"])
 
 
 if __name__=="__main__":

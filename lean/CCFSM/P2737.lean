@@ -20,6 +20,18 @@ def UniqueWitness {α : Type} (q : α → Prop) : Prop :=
   ∃ x, q x ∧ ∀ y, q y → y = x
 
 /--
+A data-carrying unique-root witness. Unlike the propositionally existential
+UniqueWitness below, this structure stores the witness coordinate explicitly
+so a certificate producer can serialize it and an independent checker can
+validate its root/uniqueness claims.
+-/
+structure UniqueRootEvidence {α : Type} [LT α]
+    (p : α → Prop) (lo hi : α) : Type where
+  witness : α
+  isRoot : InteriorRoot p lo hi witness
+  unique : ∀ y, InteriorRoot p lo hi y → y = witness
+
+/--
 A leaf result carries its own proof:
 * noRoot excludes roots on the entire closed interval;
 * unique certifies exactly one root in the open interval;
@@ -32,7 +44,7 @@ inductive LeafCertificate {α : Type} [LE α] [LT α]
       (∀ x, lo ≤ x → x ≤ hi → ¬ p x) →
       LeafCertificate p lo hi
   | unique :
-      UniqueWitness (InteriorRoot p lo hi) →
+      UniqueRootEvidence p lo hi →
       LeafCertificate p lo hi
   | unresolved :
       LeafCertificate p lo hi
@@ -42,7 +54,9 @@ def CertificateSound {α : Type} [LE α] [LT α]
     (p : α → Prop) (lo hi : α) :
     LeafCertificate p lo hi → Prop
   | .noRoot _ => ∀ x, lo ≤ x → x ≤ hi → ¬ p x
-  | .unique _ => UniqueWitness (InteriorRoot p lo hi)
+  | .unique evidence =>
+      InteriorRoot p lo hi evidence.witness ∧
+        ∀ y, InteriorRoot p lo hi y → y = evidence.witness
   | .unresolved => True
 
 /-- Every leaf certificate satisfies its declared contract. -/
@@ -52,7 +66,7 @@ theorem certificate_sound {α : Type} [LE α] [LT α]
     CertificateSound p lo hi c := by
   cases c with
   | noRoot h => exact h
-  | unique h => exact h
+  | unique h => exact ⟨h.isRoot, h.unique⟩
   | unresolved => trivial
 
 /-- A unique-root certificate supplies an interior root. -/

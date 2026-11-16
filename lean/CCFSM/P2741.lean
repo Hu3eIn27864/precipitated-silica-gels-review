@@ -21,6 +21,7 @@ a dependency on Mathlib's ordered-ring hierarchy.
 structure FourCornerOrder (α : Type)
     [LE α] [Mul α] [OfNat α 0] where
   scalar : CCFSM.P2740.SignedProductOrder α
+  le_refl : ∀ a : α, a ≤ a
   le_trans : ∀ {p q r : α}, p ≤ q → q ≤ r → p ≤ r
 
 /--
