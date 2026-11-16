@@ -731,8 +731,13 @@ theorem multiplyCoefficients_monomial_final_coefficient
   · subst xs
     rw [multiplyCoefficients_monomial k c (init ++ [originalLast])
       (by simp)]
+    have hproduct : c * originalLast ≠ 0 := by
+      intro hzero
+      rcases Rat.mul_eq_zero.mp hzero with hzero | hzero
+      · exact hc hzero
+      · exact hlast hzero
     refine ⟨List.replicate k 0 ++ scaleCoefficients c init,
-      c * originalLast, ?_, mul_ne_zero hc hlast,
+      c * originalLast, ?_, hproduct,
       ⟨init, originalLast, rfl, rfl⟩⟩
     simp [shiftedScaleCoefficients, scaleCoefficients, List.map_append,
       List.append_assoc]
