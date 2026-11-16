@@ -41,6 +41,41 @@ theorem splitPointWitnesses_sound {α : Type}
   | unresolved =>
       simp [splitPointWitnesses] at hx
 
+
+/-- A list is duplicate-free when its head differs from every later entry. -/
+def AllDistinct {α : Type} : List α → Prop
+  | [] => True
+  | a :: rest => (∀ b, b ∈ rest → a ≠ b) ∧ AllDistinct rest
+
+/-- Appending two duplicate-free lists preserves distinctness when they are disjoint. -/
+theorem allDistinct_append {α : Type} {xs ys : List α}
+    (hxs : AllDistinct xs)
+    (hys : AllDistinct ys)
+    (hseparate : ∀ x, x ∈ xs → ∀ y, y ∈ ys → x ≠ y) :
+    AllDistinct (xs ++ ys) := by
+  induction xs generalizing ys hys hseparate with
+  | nil =>
+      simpa [AllDistinct] using hys
+  | cons a rest ih =>
+      change (∀ b, b ∈ rest → a ≠ b) ∧ AllDistinct rest at hxs
+      change (∀ b, b ∈ rest ++ ys → a ≠ b) ∧
+        AllDistinct (rest ++ ys)
+      constructor
+      · intro b hb
+        rcases List.mem_append.mp hb with hRest | hYs
+        · exact hxs.1 b hRest
+        · exact hseparate a (by simp) b hYs
+      · apply ih hxs.2 hys
+        intro x hx y hy
+        exact hseparate x (by simp [hx]) y hy
+
+/-- The list contributed by one split-point certificate is always duplicate-free. -/
+theorem splitPointWitnesses_allDistinct {α : Type}
+    {p : α → Prop} {mid : α}
+    (evidence : SplitPointCertificate p mid) :
+    AllDistinct (splitPointWitnesses evidence) := by
+  cases evidence <;> simp [splitPointWitnesses, AllDistinct]
+
 /--
 Collect all explicit root witnesses from a P27.44 partition tree.
 Unresolved leaves and split points contribute no asserted roots.
@@ -91,5 +126,60 @@ theorem certifiedRootWitnesses_sound {α : Type} [LE α] [LT α]
           exact ⟨left_order, right_order, hroot⟩
       · rcases ihr hxRight with ⟨hmid, hhi, hroot⟩
         exact ⟨lt_transitive left_order hmid, hhi, hroot⟩
+
+
+/--
+The recursive witness collector contains no duplicate coordinates.
+This uses explicit transitivity and irreflexivity of the strict order, rather
+than assuming that a bare LT typeclass supplies an order law.
+-/
+theorem certifiedRootWitnesses_allDistinct {α : Type} [LE α] [LT α]
+    {p : α → Prop} {lo hi : α}
+    (lt_transitive : ∀ {a b c : α}, a < b → b < c → a < c)
+    (lt_irrefl : ∀ a : α, ¬ a < a)
+    (tree : RootIsolationTree p lo hi) :
+    AllDistinct (certifiedRootWitnesses tree) := by
+  induction tree with
+  | leaf evidence =>
+      cases evidence <;> simp [certifiedRootWitnesses, AllDistinct]
+  | @split lo mid hi left_order right_order midpoint left right ihl ihr =>
+      have hLeftBelow : ∀ x, x ∈ certifiedRootWitnesses left → x < mid := by
+        intro x hx
+        exact (certifiedRootWitnesses_sound lt_transitive left hx).2.1
+      have hRightAbove : ∀ x, x ∈ certifiedRootWitnesses right → mid < x := by
+        intro x hx
+        exact (certifiedRootWitnesses_sound lt_transitive right hx).1
+      have hLeftMidSeparate :
+          ∀ x, x ∈ certifiedRootWitnesses left →
+            ∀ y, y ∈ splitPointWitnesses midpoint → x ≠ y := by
+        intro x hx y hy hxy
+        obtain ⟨rfl, _⟩ := splitPointWitnesses_sound midpoint hy
+        subst x
+        exact (lt_irrefl mid (hLeftBelow mid hx)).elim
+      have hLeftRightSeparate :
+          ∀ x, x ∈ certifiedRootWitnesses left →
+            ∀ y, y ∈ certifiedRootWitnesses right → x ≠ y := by
+        intro x hx y hy hxy
+        have hxylt := lt_transitive (hLeftBelow x hx) (hRightAbove y hy)
+        subst y
+        exact (lt_irrefl x hxylt).elim
+      have hMidRightSeparate :
+          ∀ x, x ∈ splitPointWitnesses midpoint →
+            ∀ y, y ∈ certifiedRootWitnesses right → x ≠ y := by
+        intro x hx y hy hxy
+        obtain ⟨rfl, _⟩ := splitPointWitnesses_sound midpoint hx
+        subst y
+        exact (lt_irrefl mid (hRightAbove mid hy)).elim
+      have hLeftMid :=
+        allDistinct_append ihl (splitPointWitnesses_allDistinct midpoint)
+          hLeftMidSeparate
+      have hLeftMidRight :
+          ∀ x, x ∈ (certifiedRootWitnesses left ++ splitPointWitnesses midpoint) →
+            ∀ y, y ∈ certifiedRootWitnesses right → x ≠ y := by
+        intro x hx y hy hxy
+        rcases List.mem_append.mp hx with hxLeft | hxMid
+        · exact hLeftRightSeparate x hxLeft y hy hxy
+        · exact hMidRightSeparate x hxMid y hy hxy
+      exact allDistinct_append hLeftMid ihr hLeftMidRight
 
 end CCFSM.P2745
