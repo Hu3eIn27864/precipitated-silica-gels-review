@@ -685,4 +685,27 @@ theorem multiplyCoefficients_monomial_length (k : Nat) (c : Rat)
       rw [halign]
       simp [htail, Nat.succ_eq_add_one]
 
+
+/-- Convolution by a monomial is exactly the corresponding low-degree
+    shift followed by coefficientwise scaling, for nonempty right input. -/
+theorem multiplyCoefficients_monomial (k : Nat) (c : Rat)
+    (xs : List Rat) (hxs : xs ≠ []) :
+    multiplyCoefficients (monomialCoefficients k c) xs =
+      shiftedScaleCoefficients k c xs := by
+  induction k with
+  | zero =>
+      rw [show monomialCoefficients 0 c = [c] by rfl]
+      exact multiplyCoefficients_singleton_left c xs hxs
+  | succ k ih =>
+      change addCoefficients (scaleCoefficients 0 xs)
+        (0 :: multiplyCoefficients (monomialCoefficients k c) xs) =
+          0 :: shiftedScaleCoefficients k c xs
+      have htail := ih hxs
+      have hlen := multiplyCoefficients_monomial_length k c xs hxs
+      have halign := addCoefficients_zero_scaled_left_of_length_le
+        xs (0 :: multiplyCoefficients (monomialCoefficients k c) xs)
+        (by simp [hlen])
+      rw [halign, htail]
+      rfl
+
 end CCFSM.P2749
