@@ -56,7 +56,7 @@ theorem monotone_roots_unique {α β : Type}
       exact (hzero_irrefl hlt).elim
     · have hlt := hdec hx.1 hx.2 hy.1 hy.2 hxy
       rw [hx.2.2, hy.2.2] at hlt
-      exact (lt_irrefl 0 hlt).elim
+      exact (hzero_irrefl hlt).elim
   · exact heq
   · rcases hmono with hinc | hdec
     · have hlt := hinc hy.1 hy.2 hx.1 hx.2 hyx
@@ -85,7 +85,7 @@ structure IntermediateValueOn {α β : Type}
 
 /-- Monotonicity plus the intermediate-value property gives one interior zero. -/
 theorem unique_root_of_monotone_crossing {α β : Type}
-    [LinearOrder α] [LinearOrder β] [Zero β]
+    [LT α] [LT β] [Zero β]
     (p : α → β) (lo hi : α)
     (hmono : StrictlyMonotoneOn p lo hi)
     (htrichotomy : ∀ x y : α, x < y ∨ x = y ∨ y < x)
