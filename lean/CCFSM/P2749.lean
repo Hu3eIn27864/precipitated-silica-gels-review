@@ -552,4 +552,45 @@ theorem normalizeCoefficients_length_le (xs : List Rat) :
     (normalizeCoefficients xs).length ≤ xs.length := by
   simpa [normalizeCoefficients] using trimReversed_length_le xs.reverse
 
+
+/-- Aligned coefficient subtraction cancels equal final coefficients. -/
+theorem subtractCoefficients_append_equal_last
+    (xs ys : List Rat) (a : Rat)
+    (hlen : xs.length = ys.length) :
+    subtractCoefficients (xs ++ [a]) (ys ++ [a]) =
+      subtractCoefficients xs ys ++ [0] := by
+  rw [subtractCoefficients_append_singleton xs ys a a hlen]
+  simp
+
+/-- Aligned coefficient addition cannot increase the common vector length. -/
+theorem addCoefficients_length_le_of_equal
+    (xs ys : List Rat) (hlen : xs.length = ys.length) :
+    (addCoefficients xs ys).length ≤ xs.length := by
+  induction xs generalizing ys with
+  | nil =>
+      cases ys with
+      | nil => simp [addCoefficients]
+      | cons y ys => simp at hlen
+  | cons x xs ih =>
+      cases ys with
+      | nil => simp at hlen
+      | cons y ys =>
+          have htail : xs.length = ys.length := Nat.succ.inj hlen
+          simp only [addCoefficients, List.length_cons]
+          exact Nat.succ_le_succ (ih ys htail)
+
+/-- The coefficient vector produced by aligned subtraction has no more
+    entries than either input prefix once the equal leading term is cancelled. -/
+theorem normalize_aligned_cancellation_length
+    (xs ys : List Rat) (a : Rat)
+    (hlen : xs.length = ys.length) :
+    (normalizeCoefficients
+      (subtractCoefficients (xs ++ [a]) (ys ++ [a]))).length ≤ xs.length := by
+  rw [subtractCoefficients_append_equal_last xs ys a hlen]
+  rw [normalizeCoefficients_append_zero]
+  exact Nat.le_trans
+    (normalizeCoefficients_length_le (subtractCoefficients xs ys))
+    (addCoefficients_length_le_of_equal xs (negateCoefficients ys)
+      (by simpa [negateCoefficients] using hlen))
+
 end CCFSM.P2749
