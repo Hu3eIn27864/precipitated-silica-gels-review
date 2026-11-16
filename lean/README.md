@@ -66,11 +66,12 @@ This is an isolated Lean 4 project pinned to Lean **v4.35.0**. It does not chang
 - The design obligations for finite binary64 values, nextafter, signed zero, subnormals, and overflow are recorded in CCFSM/P2743_IEEE754_DESIGN.md.
 - A Python-side independent checker now verifies add, mul, and div interval certificates by recomputing the exact real range from the supplied binary64 endpoints as dyadic rationals.
 - This is an exact-rational software checker, not yet a Lean proof of Python/IEEE-754 refinement. It does not verify expression provenance, external input soundness, or signed-zero bit semantics.
-- Ten focused unit tests exercise sign combinations, zero crossings, subnormal products, division domains, malformed certificates, and rejection of unsound enclosures. An integration test runs the current P27.34 interval operations through the independent checker.\n\n### P27.44 — proof-carrying root-certificate design
+- Ten focused unit tests exercise sign combinations, zero crossings, subnormal products, division domains, malformed certificates, and rejection of unsound enclosures. An integration test runs the current P27.34 interval operations through the independent checker.\n\n### P27.44 — proof-carrying root-partition tree
 
-- Detailed design: CCFSM/P2744_CERTIFICATE_PIPELINE_DESIGN.md.
-- The design makes midpoint-root ownership explicit, separates boundary roots from open-interior unique roots, and requires expression provenance for interval certificates.
-- This is a design specification; a Lean tree checker and serialized producer format are not yet implemented.
+- Formal module: CCFSM/P2744.lean. It defines a dependent tree indexed by exact closed interval endpoints, with proof-carrying leaf certificates and separate midpoint evidence (no-root, root, unresolved).
+- Proves closed-domain coverage: every point in the parent interval follows a certified left or right child path. Proves recursively that all leaf and midpoint claims satisfy their declared logical contracts.
+- FullyResolved is only a structural flag excluding unresolved nodes. Aggregate root-count bounds, outer-endpoint ownership, serialized certificates and a producer-to-checker provenance link remain open.
+- Detailed design and acceptance gates: CCFSM/P2744_CERTIFICATE_PIPELINE_DESIGN.md.
 
 ## Roadmap: P27.44
 
