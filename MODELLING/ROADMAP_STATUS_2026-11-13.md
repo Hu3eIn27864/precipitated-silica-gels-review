@@ -239,3 +239,11 @@ Added `MODELLING/SYNERESIS_OBSERVABLE_SCALE_MATRIX.md` to separate solution spec
 - Added `subtractMonomial` as a canonical `RatPolynomial` operation and `degree?_subtractMonomial_lt` proving strict degree decrease under explicit final-coefficient, nonzero-divisor and equal-shifted-length hypotheses, when the result remains nonzero.
 - Aggregate Lean proof-kernel CI passed on head `a080b7debf84ab3ca96a2402f90f3a625b5134db` (run 43899165470).
 - Next gate: derive the shift and scalar automatically from nonzero canonical dividend/divisor degrees and leading coefficients, handle zero remainder, define the quotient accumulator/well-founded recursion, and prove the quotient/remainder identity and degree bound.
+
+
+### AP F follow-up — automatic leading-term step verified (16 November 2026)
+
+- Added `leadingCoefficient?_eq_last` and `subtractMonomialLeading`. The latter selects the shift from the coefficient-length difference and the scalar from the dividend/divisor leading coefficients, with a total zero fallback outside the nonzero-input domain.
+- Added `degree?_subtractMonomialLeading_lt`: for nonzero canonical inputs with divisor length no greater than dividend length, the automatic monomial subtraction strictly decreases degree whenever the normalized result is nonzero.
+- Aggregate Lean proof-kernel CI passed on head `962b98271e9f58b2e3093b38dac9b5109e1951a4` (run 43899461813).
+- The one-step operation is now computable from canonical polynomials. Remaining: zero-remainder terminal handling, quotient accumulation, well-founded recursion, and proof of the quotient/remainder identity plus remainder-degree bound.
