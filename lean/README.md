@@ -73,6 +73,12 @@ This is an isolated Lean 4 project pinned to Lean **v4.35.0**. It does not chang
 - FullyResolved is only a structural flag excluding unresolved nodes. Aggregate root-count bounds, outer-endpoint ownership, serialized certificates and a producer-to-checker provenance link remain open.
 - Detailed design and acceptance gates: CCFSM/P2744_CERTIFICATE_PIPELINE_DESIGN.md.
 
+### P27.45 — explicit root witnesses and count bounds
+
+- Design note: CCFSM/P2745_ROOT_COUNT_DESIGN.md.
+- Next formal step is to make unique-root witnesses explicit Type-level data, collect them through the P27.44 tree, prove pairwise distinctness, and derive sound lower and finite upper root-count bounds.
+- Tangencies and even-multiplicity roots remain unresolved by strict-derivative monotonicity; compare an exact rational Sturm-sequence certificate as a complementary method.
+
 ## Roadmap: P27.44
 
 1. **P27.43 — IEEE-754 refinement boundary.** Specify finite binary floating-point values, directed rounding, subnormal behavior, signed zero, and overflow/fail-closed behavior. Choose between a bit-level proof of `nextafter` and a verified refinement to exact rational bounds; tests alone are not a proof.
