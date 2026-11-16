@@ -181,9 +181,14 @@ modules do not change the Python implementation or the CCFSM version line.
   algorithm-to-certificate extraction and search-completeness obligations.
 - Implement and prove a Sturm checker for exact rational polynomials,
   including repeated roots and endpoint conventions.
-- Formalize P27.48 endpoint ownership and the closed-interval count.
+- Complete the P27.49 polynomial-division proof chain and signed-remainder/Sturm checker.
 - Establish a producer-to-checker provenance link for serialized
   certificates.
+
+P27.48 endpoint ownership and the closed-interval witness count are now
+formalized in `CCFSM/P2748.lean`; the theorem is conditional on a fully
+resolved interior partition, resolved endpoint evidence, and a nondegenerate
+interval.
 
 The Lean results are mathematical/software-verification results only. They
 do not validate the physical constitutive equations or material parameters
