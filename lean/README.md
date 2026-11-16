@@ -149,9 +149,13 @@ modules do not change the Python implementation or the CCFSM version line.
 - Proves normalized lists are canonical and normalization is idempotent;
   proves a nonzero canonical polynomial has a nonzero leading coefficient
   and that the zero polynomial has no degree.
-- The current milestone does not yet prove evaluation-preservation laws for
-  addition/multiplication, Euclidean division, a Sturm sequence, or a root
-  count. It is a polynomial data/arithmetic foundation, not a Sturm checker.
+- Proves normalization preserves exact evaluation and that coefficientwise
+  addition and recursive convolution multiplication preserve the expected
+  polynomial evaluation laws.
+- Formal derivative coefficients are implemented, but a derivative
+  evaluation/semantics theorem remains open. Euclidean division, a Sturm
+  sequence, and a root-count theorem also remain open; this is not a Sturm
+  checker.
 - Python/Lean bridge: design `CCFSM/P2749_PYTHON_LEAN_BRIDGE_DESIGN.md`,
   serializer `../MODELLING/ccfsm/ccfsm_p27_49_rational_certificate.py`, and
   tests `../MODELLING/ccfsm/test_ccfsm_p27_49_rational_certificate.py`.
