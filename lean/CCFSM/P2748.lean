@@ -158,7 +158,6 @@ theorem closedRootWitnesses_complete {α : Type} [LE α] [LT α]
     (lt_irrefl : ∀ a : α, ¬ a < a)
     (lt_to_le : ∀ {a b : α}, a < b → a ≤ b)
     (le_lt_trans : ∀ {a b c : α}, a ≤ b → b < c → a < c)
-    (le_antisymm : ∀ {a b : α}, a ≤ b → b ≤ a → a = b)
     (trichotomy : ∀ a b : α, a < b ∨ a = b ∨ b < a)
     (tree : RootIsolationTree p lo hi)
     (hresolved : FullyResolved tree)
