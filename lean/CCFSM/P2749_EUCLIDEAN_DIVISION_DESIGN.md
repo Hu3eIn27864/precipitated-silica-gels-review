@@ -237,3 +237,23 @@ level. It does not establish the general monomial-shift convolution identity,
 a leading-coefficient theorem, polynomial long division, or a Sturm root
 counter. The next proof gate remains the general monomial-shift identity,
 with explicit nonempty-input and coefficient-list alignment conditions.
+
+
+## CI-verified zero-padding alignment (16 November 2026)
+
+`addCoefficients_zero_scaled_left_of_length_le` is now proved in
+`CCFSM.P2749`: when the zero-scaled left coefficient vector is no longer
+than the right vector, coefficientwise addition returns the right vector
+unchanged. The proof explicitly rewrites the mapped zero vector back to the
+`scaleCoefficients 0` form expected by the induction hypothesis.
+
+The aggregate Lean proof-kernel workflow passed on commit
+`793db5f1ecb6ec4e4bda7974fe856b5673ec1d05` (runs 43895569725 and
+43895583835). The Python natural-syneresis workflow for that same commit was
+still running at the time of this note.
+
+This alignment lemma is a required ingredient, not the monomial-shift
+identity itself. The remaining induction still needs a proved lower bound
+on the length of the recursive convolution result, under an explicit
+nonempty second-vector premise. Only then can the zero-padded first
+convolution layer be shown to leave the shifted recursive tail unchanged.
