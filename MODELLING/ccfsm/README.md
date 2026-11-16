@@ -969,7 +969,8 @@ Der Audit ist ein kombinatorisch-geometrischer Konsistenztest, kein vollständig
 
 - `ccfsm_p27_37_adaptive_polynomial_root_isolation.py` unterteilt ungelöste Polynomintervalle rekursiv; P27.35 schließt Nullstellen aus, P27.36 zertifiziert einfache monotone Nullstellen.
 - Ausgegeben werden zertifizierte einfache Nullstellenintervalle, nullstellenfreie Teilintervalle sowie ausdrücklich ungelöste Restintervalle mit Tiefen-/Breitengrenze.
-- Acht Regressionen prüfen einfache und doppelte einfache Nullstellen, Nullstellenfreiheit, tangentiale und auf Teilungsgrenzen liegende Fälle, Tiefenlimit, Partition und Eingaben.
+- Neun Regressionen prüfen einfache und doppelte einfache Nullstellen, Nullstellenfreiheit, tangentiale und auf Teilungsgrenzen liegende Fälle, Tiefen-/Mindestbreitenlimit, Partition und Eingaben.
+- Der Teilungsgrenzentest verwendet einen Fall, dessen Ableitungseinschließung auf dem Gesamtintervall tatsächlich eine Unterteilung erzwingt; siehe Spezifikation für die Begründung.
 - Bericht: `CCFSM_v4.2.57_P27_37_ADAPTIVE_POLYNOMIAL_ROOT_ISOLATION_DE.md`.
 
 **Grenze:** Bedingte Polynom-Intervallzertifizierung; tangentiale/mehrfache Nullstellen oder Randfälle können ungelöst bleiben. Keine allgemeine Fluss-Root-Isolation, keine Vollständigkeit vorgelagerter Ereignisabtastung und keine physikalische Validierung.
