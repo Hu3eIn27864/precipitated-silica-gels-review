@@ -346,3 +346,18 @@ implementation: the next proof must package the hypotheses and result for
 canonical `RatPolynomial` values, establish the degree/length relation
 for nonzero canonical polynomials, and implement well-founded recursion with
 a separately checked quotient/remainder identity and degree bound.
+
+
+## CI-verified degree/length correspondence (16 November 2026)
+
+Added `degree?_add_one_eq_length`: every nonzero canonical
+`RatPolynomial` has an option-valued degree `d` satisfying
+`d + 1 = coefficients.length`. Aggregate Lean proof-kernel CI passed
+on head `d48061afe287a0be9f371a77e11fe1d0e18b0678` (run
+43898652903).
+
+This closes the basic measure conversion needed to turn the raw normalized
+coefficient-vector decrease into a polynomial-degree decrease once the
+subtraction step is packaged as a `RatPolynomial`. The current theorem
+is a degree/length identity only; it does not yet assert the degree of a
+particular division remainder.
