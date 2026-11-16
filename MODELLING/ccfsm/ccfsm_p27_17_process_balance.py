@@ -96,7 +96,9 @@ def audit_p21_process_balance(snapshot, cell_widths, *, atol=1e-12, rtol=1e-10):
         )
         zero_flux = tuple(0.0 for _ in range(n+1))
         zero_source = tuple(0.0 for _ in range(n))
-        darcy_rhs = _divergence_rhs(q,widths)
+        # Darcy continuity is audited against fluid_capacity_dot_s below.
+        # Mobile species advection is already included in each species flux;
+        # adding Darcy divergence again would double-count that transport.
         adv_rhs = tuple(_divergence_rhs(adv[s],widths) for s in range(2))
         diff_rhs = tuple(_divergence_rhs(diff[s],widths) for s in range(2))
         reconstructed = (
