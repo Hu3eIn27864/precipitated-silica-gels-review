@@ -792,6 +792,7 @@ theorem normalize_subtract_monomial_step_length_strict
   have hprefix : rpre.length = qpre.length := by
     apply Nat.succ.inj
     simpa using htot
+  rw [hq]
   exact normalize_aligned_cancellation_length_strict rpre qpre aR hprefix
 
 end CCFSM.P2749
