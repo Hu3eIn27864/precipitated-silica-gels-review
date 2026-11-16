@@ -15,7 +15,9 @@ Die Kombination aus P27.35-Null-Ausschluss und P27.36-Monotoniekriterium vermeid
 
 ## Tests
 
-Acht Regressionen prüfen eine einfache Nullstelle, zwei getrennte einfache Nullstellen, Nullstellenfreiheit, tangentiale Nullstelle, eine Nullstelle exakt an einer Teilungsgrenze, Tiefenlimit, lückenlose Partition und Eingabevalidierung.
+Neun Regressionen prüfen eine einfache Nullstelle, zwei getrennte einfache Nullstellen, Nullstellenfreiheit, tangentiale Nullstelle, eine Nullstelle exakt an einer tatsächlich erzwungenen Teilungsgrenze, Tiefen- und Mindestbreitenlimit, lückenlose Partition und Eingabevalidierung.
+
+**Regressionstest-Korrektur (16.11.2026):** Der ursprüngliche Testfall `p(x)=x-0,5` auf `[0,1]` erzwingt keine Unterteilung, weil P27.36 bereits auf dem Gesamtintervall eine eindeutige innere Nullstelle zertifiziert. Er wurde durch `p(x)=(x-0,5)(x²+1)` ersetzt: Die natürliche Horner-Einschließung der Ableitung enthält auf `[0,1]` die Null und löst dadurch die Unterteilung bei `x=0,5` aus. Die Nullstelle liegt anschließend auf der gemeinsamen Grenze beider Kinder und bleibt dort ausdrücklich ungelöst. Die Implementierung von P27.37 wurde hierfür nicht verändert.
 
 ## Aussagegrenzen
 
