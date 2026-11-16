@@ -54,16 +54,22 @@ This is an isolated Lean 4 project pinned to Lean **v4.35.0**. It does not chang
 - Avoids assuming a particular min/max implementation. A concrete `min4`/`max4` routine still needs separate proofs that its outputs bound all four corners.
 - Uses explicit order transitivity and signed multiplication laws; no IEEE-754 or physical-model claim is made.
 
-## Roadmap: P27.42–P27.44
+### P27.42 — concrete four-corner extrema
 
-1. **P27.42 — concrete four-corner extrema.** Define a dependency-light `min4`/`max4` (or equivalent comparison tree) and prove that its outputs are common lower/upper bounds of all four endpoint products. This connects P27.41's order-theoretic envelope theorem to an executable exact endpoint algorithm.
-2. **P27.43 — IEEE-754 refinement boundary.** Specify finite binary floating-point values, directed rounding, subnormal behavior, signed zero, and overflow/fail-closed behavior. Choose between a bit-level proof of `nextafter` and a verified refinement to exact rational bounds; tests alone are not a proof.
-3. **P27.44 — certificate pipeline.** Connect polynomial and derivative enclosures to P27.36 root criteria, then define/export a certificate format and prove the checker sound. Algorithmic completeness and Python-to-Lean certificate extraction remain separate obligations.
+- Defines a dependency-light comparison tree `min4`/`max4` for the four endpoint products.
+- Proves that the computed minimum is below all four corners and the computed maximum is above all four corners.
+- Combines those lemmas with P27.41 to prove a concrete exact-arithmetic interval-product enclosure for arbitrary sign combinations, including zero-crossing intervals.
+- Requires a decidable total order and transitive order relation. It does **not** establish IEEE-754 directed rounding.
+
+## Roadmap: P27.43–P27.44
+
+1. **P27.43 — IEEE-754 refinement boundary.** Specify finite binary floating-point values, directed rounding, subnormal behavior, signed zero, and overflow/fail-closed behavior. Choose between a bit-level proof of `nextafter` and a verified refinement to exact rational bounds; tests alone are not a proof.
+2. **P27.44 — certificate pipeline.** Connect polynomial and derivative enclosures to P27.36 root criteria, then define/export a certificate format and prove the checker sound. Algorithmic completeness and Python-to-Lean certificate extraction remain separate obligations.
 
 ## Open obligations and scope
 
-- Connect P27.41's four-corner envelope theorem to a concrete `min4`/`max4` endpoint implementation.
-- Instantiate exact multiplication with a concrete endpoint operation and prove its enclosure contract.
+- Connect the exact comparison-tree operation to a concrete numeric representation and instantiate its order and multiplication laws.
+- Prove outward rounding for the actual floating-point endpoint operations.
 - Prove outward rounding for the actual Python `nextafter` implementation, including finite-input and overflow conditions. Underflow/subnormal and signed-zero cases need explicit treatment.
 - Connect P27.35 polynomial/derivative bounds to P27.36 and P27.37 certificate construction.
 - Prove algorithm-to-certificate extraction and search completeness.
