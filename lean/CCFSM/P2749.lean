@@ -274,12 +274,12 @@ theorem derivativeCoefficients_constant (a : Rat) :
 
 /-- The derivative coefficients of a linear polynomial are its slope. -/
 theorem derivativeCoefficients_linear (a b : Rat) :
-    derivativeCoefficients [a, b] = [b] := by
+    derivativeCoefficients [a, b] = [Rat.ofInt 1 * b] := by
   simp [derivativeCoefficients, derivativeCoefficients.derivativeTail]
 
 /-- The derivative coefficients of a quadratic polynomial are exact. -/
 theorem derivativeCoefficients_quadratic (a b c : Rat) :
-    derivativeCoefficients [a, b, c] = [b, Rat.ofInt 2 * c] := by
+    derivativeCoefficients [a, b, c] = [Rat.ofInt 1 * b, Rat.ofInt 2 * c] := by
   simp [derivativeCoefficients, derivativeCoefficients.derivativeTail]
 
 end CCFSM.P2749
