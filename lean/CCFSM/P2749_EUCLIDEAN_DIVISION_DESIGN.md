@@ -306,3 +306,22 @@ scalar. It is not yet a polynomial-division theorem. The next step is to
 instantiate the scalar as `aR / aB` and use exact rational cancellation
 `(aR / aB) * aB = aR`, then combine it with the existing aligned
 subtraction measure.
+
+
+## CI-verified exact final-term cancellation (16 November 2026)
+
+The raw coefficient-list division step is now closed for a single monomial
+term. `multiplyCoefficients_monomial_cancels_final` proves that if the
+divisor coefficient vector ends in a nonzero `aB`, convolution by the
+monomial coefficient vector with scalar `aR / aB` ends in exactly
+`aR`. The proof combines the nonempty-input monomial-shift identity
+with Lean core's exact rational identity `Rat.div_mul_cancel`.
+
+Aggregate Lean proof-kernel CI passed on head
+`df9b9d846d5aa3e8b379fa1347d5bf6ead91fd55` (run 43897845062).
+This is the key raw-list cancellation mechanism for polynomial long division.
+Remaining obligations are to package the result for canonical polynomial
+objects, prove the full subtraction vector is canonically normalized with
+strict degree decrease, define quotient/remainder recursion, and verify the
+independent remainder identity and degree bound. The Sturm sequence and
+root-count theorem remain downstream and open.
