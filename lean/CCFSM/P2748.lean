@@ -92,12 +92,12 @@ theorem closedRootWitnesses_sound {α : Type} [LE α] [LT α]
   rcases List.mem_append.mp hx with hloOrInterior | hhi
   · rcases List.mem_append.mp hloOrInterior with hlo | hinterior
     · obtain ⟨rfl, hp⟩ := endpointRootWitnesses_sound loEvidence hlo
-      exact ⟨le_refl lo, lt_to_le hlohi, hp⟩
+      exact ⟨le_refl x, lt_to_le hlohi, hp⟩
     · obtain ⟨hlo, hhi, hp⟩ :=
         certifiedRootWitnesses_sound lt_transitive tree hinterior
       exact ⟨lt_to_le hlo, lt_to_le hhi, hp⟩
   · obtain ⟨rfl, hp⟩ := endpointRootWitnesses_sound hiEvidence hhi
-    exact ⟨lt_to_le hlohi, le_refl hi, hp⟩
+    exact ⟨lt_to_le hlohi, le_refl x, hp⟩
 
 /-- Distinct endpoint and interior regions cannot share a witness. -/
 theorem closedRootWitnesses_allDistinct {α : Type} [LE α] [LT α]
