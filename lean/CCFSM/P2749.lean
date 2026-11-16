@@ -1,18 +1,5 @@
 import Init
 
-#check Rat.add_assoc
-#check Rat.add_comm
-#check Rat.add_left_comm
-#check Rat.mul_assoc
-#check Rat.mul_comm
-#check Rat.mul_add
-#check Rat.add_mul
-#check Rat.add_zero
-#check Rat.zero_add
-#check Rat.zero_mul
-#check Rat.mul_zero
-#check Rat.neg_add_cancel
-
 namespace CCFSM.P2749
 
 /-- Remove leading zeros from a coefficient list stored in reverse order. -/
