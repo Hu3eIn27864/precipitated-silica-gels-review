@@ -724,16 +724,16 @@ theorem multiplyCoefficients_monomial_final_coefficient
     ∃ init last,
       multiplyCoefficients (monomialCoefficients k c) xs = init ++ [last] ∧
         last ≠ 0 ∧
-        ∃ prefix originalLast,
-          xs = prefix ++ [originalLast] ∧ last = c * originalLast := by
-  rcases hcanon with hnil | ⟨prefix, originalLast, hcoeff, hlast⟩
+        ∃ init originalLast,
+          xs = init ++ [originalLast] ∧ last = c * originalLast := by
+  rcases hcanon with hnil | ⟨init, originalLast, hcoeff, hlast⟩
   · exact False.elim (hxs hnil)
   · subst xs
-    rw [multiplyCoefficients_monomial k c (prefix ++ [originalLast])
+    rw [multiplyCoefficients_monomial k c (init ++ [originalLast])
       (by simp)]
-    refine ⟨List.replicate k 0 ++ scaleCoefficients c prefix,
+    refine ⟨List.replicate k 0 ++ scaleCoefficients c init,
       c * originalLast, ?_, mul_ne_zero hc hlast,
-      ⟨prefix, originalLast, rfl, rfl⟩⟩
+      ⟨init, originalLast, rfl, rfl⟩⟩
     simp [shiftedScaleCoefficients, scaleCoefficients, List.map_append,
       List.append_assoc]
 
