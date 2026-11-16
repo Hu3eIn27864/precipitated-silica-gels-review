@@ -24,8 +24,8 @@ inductive SplitPointCertificate {α : Type} (p : α → Prop) (mid : α) : Type
 /-- Every split-point constructor carries only the claim it actually proves. -/
 def SplitPointCertificateSound {α : Type} {p : α → Prop} {mid : α} :
     SplitPointCertificate p mid → Prop
-  | .noRoot h => ¬ p mid
-  | .root h => p mid
+  | .noRoot _h => ¬ p mid
+  | .root _h => p mid
   | .unresolved => True
 
 /-- Recursive certificate tree whose indices are its exact closed domain. -/
@@ -72,9 +72,9 @@ theorem closed_domain_covered {α : Type} [LE α] [LT α]
       trivial
   | @split lo mid hi hleft hright midpoint left right ihl ihr =>
       by_cases hxm : x ≤ mid
-      · exact Or.inl ⟨hxm, ihl x hlo hxm le_total⟩
+      · exact Or.inl ⟨hxm, ihl hlo hxm le_total⟩
       · have hmx : mid ≤ x := (le_total x mid).resolve_left hxm
-        exact Or.inr ⟨hmx, ihr x hmx hhi le_total⟩
+        exact Or.inr ⟨hmx, ihr hmx hhi le_total⟩
 
 /--
 All leaf and split-point claims carried by the tree are sound. Unresolved
@@ -95,9 +95,9 @@ theorem tree_evidence_sound {α : Type} [LE α] [LT α]
     (tree : RootIsolationTree p lo hi) :
     TreeEvidenceSound tree := by
   induction tree with
-  | leaf evidence =>
-      exact CCFSM.P2737.certificate_sound p lo hi evidence
-  | split left_order right_order midpoint left right ihl ihr =>
+  | @leaf lo' hi' evidence =>
+      exact CCFSM.P2737.certificate_sound p lo' hi' evidence
+  | @split lo' mid' hi' left_order right_order midpoint left right ihl ihr =>
       exact ⟨by cases midpoint <;> trivial, ihl, ihr⟩
 
 /--
