@@ -662,4 +662,27 @@ theorem addCoefficients_zero_scaled_left_of_length_le
           rw [hscale, ih tail htail]
           simp [Rat.zero_add]
 
+
+/-- Convolution by a monomial has the expected coefficient-vector length
+    whenever the right-hand coefficient vector is nonempty. -/
+theorem multiplyCoefficients_monomial_length (k : Nat) (c : Rat)
+    (xs : List Rat) (hxs : xs ≠ []) :
+    (multiplyCoefficients (monomialCoefficients k c) xs).length =
+      k + xs.length := by
+  induction k with
+  | zero =>
+      rw [show monomialCoefficients 0 c = [c] by rfl]
+      rw [multiplyCoefficients_singleton_left c xs hxs]
+      simp [scaleCoefficients]
+  | succ k ih =>
+      change (addCoefficients (scaleCoefficients 0 xs)
+        (0 :: multiplyCoefficients (monomialCoefficients k c) xs)).length =
+          Nat.succ k + xs.length
+      have htail := ih c xs hxs
+      have halign := addCoefficients_zero_scaled_left_of_length_le
+        xs (0 :: multiplyCoefficients (monomialCoefficients k c) xs)
+        (by simp [htail])
+      rw [halign]
+      simp [htail, Nat.succ_eq_add_one]
+
 end CCFSM.P2749
