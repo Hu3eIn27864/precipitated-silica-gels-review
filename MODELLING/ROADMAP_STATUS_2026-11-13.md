@@ -224,3 +224,11 @@ Added `MODELLING/SYNERESIS_OBSERVABLE_SCALE_MATRIX.md` to separate solution spec
 - Added `degree?_add_one_eq_length`: every nonzero canonical `RatPolynomial` has degree `d` with `d + 1 = coefficients.length`.
 - Aggregate Lean proof-kernel CI passed on head `d48061afe287a0be9f371a77e11fe1d0e18b0678` (run 43898652903).
 - This provides the measure conversion needed to lift the raw normalized coefficient-vector decrease to polynomial degree after canonical packaging. It does not yet prove that a specific division remainder has lower degree.
+
+
+### AP F follow-up — polynomial one-step degree decrease verified (16 November 2026)
+
+- Added `degree?_lt_of_normalized_length_lt` to convert strict normalized coefficient-length decrease into strict polynomial-degree decrease for nonzero canonical inputs/results.
+- Added `degree?_monomial_subtract_step_lt` to package the exact monomial subtraction as a canonical `RatPolynomial` and prove the result degree is strictly lower than the dividend degree, under explicit final-coefficient, nonzero-divisor and equal-shifted-length premises.
+- Aggregate Lean proof-kernel CI passed on head `69d0b1fb18f1894ab13a53e2bb0ec1130dfb7f99` (run 43898966855).
+- Remaining: derive shift/scalar computably from polynomial degrees and leading coefficients, implement well-founded quotient/remainder recursion, prove remainder identity and quotient-degree bound, then implement signed remainder sequence and Sturm counting.
