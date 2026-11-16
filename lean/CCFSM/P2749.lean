@@ -459,4 +459,39 @@ theorem canonical_coefficients_decompose (p : RatPolynomial)
   · exact False.elim (hp hnil)
   · exact ⟨init, last, hcoeff, hlast⟩
 
+
+/-- Prefix a coefficient vector by k zeros after scaling all coefficients. -/
+def shiftedScaleCoefficients (k : Nat) (c : Rat) (xs : List Rat) : List Rat :=
+  List.replicate k 0 ++ scaleCoefficients c xs
+
+/-- Exact evaluation of a shifted and scaled coefficient vector. -/
+theorem evalCoefficients_shiftedScale (x c : Rat) (xs : List Rat) (k : Nat) :
+    evalCoefficients x (shiftedScaleCoefficients k c xs) =
+      ratPow x k * (c * evalCoefficients x xs) := by
+  induction k with
+  | zero =>
+      simp [shiftedScaleCoefficients, evalCoefficients_scale, ratPow]
+  | succ k ih =>
+      change evalCoefficients x
+        (0 :: shiftedScaleCoefficients k c xs) =
+          ratPow x (k + 1) * (c * evalCoefficients x xs)
+      rw [evalCoefficients_shift, ih]
+      calc
+        x * (ratPow x k * (c * evalCoefficients x xs)) =
+            (x * ratPow x k) * (c * evalCoefficients x xs) := by
+              rw [Rat.mul_assoc]
+        _ = (ratPow x k * x) * (c * evalCoefficients x xs) := by
+              rw [Rat.mul_comm x (ratPow x k)]
+        _ = ratPow x (k + 1) * (c * evalCoefficients x xs) := by rfl
+
+/-- Polynomial scalar multiplication with canonical normalization. -/
+def scale (c : Rat) (p : RatPolynomial) : RatPolynomial :=
+  ofCoefficients (scaleCoefficients c p.coefficients)
+
+/-- Exact evaluation commutes with rational polynomial scaling. -/
+theorem eval_scale (c : Rat) (p : RatPolynomial) (x : Rat) :
+    eval (scale c p) x = c * eval p x := by
+  simp [eval, scale, ofCoefficients, evalCoefficients_normalize,
+    evalCoefficients_scale]
+
 end CCFSM.P2749
