@@ -136,9 +136,8 @@ theorem leadingCoefficient?_nonzero (p : RatPolynomial)
     ∃ c, leadingCoefficient? p = some c ∧ c ≠ 0 := by
   rcases p.canonical with hnil | ⟨init, last, hcoeff, hlast⟩
   · exact False.elim (hp hnil)
-  · subst p.coefficients
-    refine ⟨last, ?_, hlast⟩
-    simp [leadingCoefficient?, List.reverse_append]
+  · refine ⟨last, ?_, hlast⟩
+    simp [leadingCoefficient?, hcoeff, List.reverse_append]
 
 /-- The degree of zero is undefined; nonzero degree is list length minus one. -/
 def degree? (p : RatPolynomial) : Option Nat :=
