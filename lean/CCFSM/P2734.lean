@@ -25,6 +25,7 @@ structure OutwardAddition (α : Type) [LE α] [Add α] where
   upper_sound : ∀ (a b : α), a + b ≤ upAdd a b
   add_mono : ∀ {a b c d : α}, a ≤ b → c ≤ d → a + c ≤ b + d
   le_trans : ∀ {a b c : α}, a ≤ b → b ≤ c → a ≤ c
+  le_refl : ∀ a : α, a ≤ a
 
 /-- Endpoint-wise outward-rounded interval addition. -/
 def intervalAdd {α : Type} [LE α] [Add α]
@@ -55,5 +56,26 @@ theorem intervalAdd_sound {α : Type} [LE α] [Add α]
   · unfold intervalAdd Interval.Contains at *
     exact ops.le_trans (ops.add_mono hx.2 hy.2)
       (ops.upper_sound I.upper J.upper)
+
+
+/--
+Combine the proved outward-addition interface with a separately verified
+interval multiplication operation. This constructor lets the P27.35 Horner
+theorem consume the P27.34 addition proof without duplicating its assumptions.
+-/
+def combineWithMultiplication {α : Type}
+    [LE α] [Add α] [Mul α] [OfNat α 0]
+    (addOps : OutwardAddition α)
+    (mulOp : Interval α → Interval α → Interval α)
+    (mulSound : ∀ (I J : Interval α) (x y : α),
+      I.Contains x → J.Contains y → (mulOp I J).Contains (x * y)) :
+    IntervalArithmetic α :=
+  { add := intervalAdd addOps
+    mul := mulOp
+    point_sound := by
+      intro x
+      exact ⟨addOps.le_refl x, addOps.le_refl x⟩
+    add_sound := intervalAdd_sound addOps
+    mul_sound := mulSound }
 
 end CCFSM.P2734
