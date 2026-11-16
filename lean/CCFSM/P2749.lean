@@ -760,4 +760,39 @@ theorem multiplyCoefficients_monomial_cancels_final
     List.map_cons, List.map_nil]
   rw [List.append_assoc, hcancel]
 
+
+/-- One monomial long-division subtraction strictly shortens the
+    normalized coefficient vector, provided the dividend and shifted divisor
+    have matching lengths and the divisor's final coefficient is nonzero. -/
+theorem normalize_subtract_monomial_step_length_strict
+    (k : Nat) (aR aB : Rat) (r d : List Rat)
+    (hr : ∃ rpre, r = rpre ++ [aR])
+    (hd : ∃ dpre, d = dpre ++ [aB])
+    (hd_nonempty : d ≠ []) (haB : aB ≠ 0)
+    (hsize : r.length = k + d.length) :
+    (normalizeCoefficients
+      (subtractCoefficients r
+        (multiplyCoefficients (monomialCoefficients k (aR / aB)) d))).length <
+      r.length := by
+  rcases hr with ⟨rpre, rfl⟩
+  rcases hd with ⟨dpre, rfl⟩
+  have hdne : dpre ++ [aB] ≠ [] := by simp
+  obtain ⟨qpre, hq⟩ :=
+    multiplyCoefficients_monomial_cancels_final k aR aB
+      (dpre ++ [aB]) ⟨dpre, rfl⟩ haB
+  have hprodlen :=
+    multiplyCoefficients_monomial_length k (aR / aB)
+      (dpre ++ [aB]) (by simp)
+  have htot : (rpre ++ [aR]).length = (qpre ++ [aR]).length := by
+    calc
+      (rpre ++ [aR]).length = k + (dpre ++ [aB]).length := hsize
+      _ = (multiplyCoefficients
+            (monomialCoefficients k (aR / aB)) (dpre ++ [aB])).length :=
+              hprodlen.symm
+      _ = (qpre ++ [aR]).length := by rw [hq]
+  have hprefix : rpre.length = qpre.length := by
+    apply Nat.succ.inj
+    simpa using htot
+  exact normalize_aligned_cancellation_length_strict rpre qpre aR hprefix
+
 end CCFSM.P2749
