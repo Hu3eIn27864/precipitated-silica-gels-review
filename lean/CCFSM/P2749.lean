@@ -807,4 +807,27 @@ theorem degree?_add_one_eq_length (p : RatPolynomial)
   | nil => exact False.elim (hp hcoeff)
   | cons a rest => simp [hcoeff]
 
+
+/-- A strict decrease in normalized coefficient-vector length gives a
+    strict decrease in option-valued polynomial degree whenever both
+    canonical polynomials are nonzero. -/
+theorem degree?_lt_of_normalized_length_lt
+    (p : RatPolynomial) (xs : List Rat)
+    (hp : p.coefficients ≠ [])
+    (hxs : normalizeCoefficients xs ≠ [])
+    (hlen : (normalizeCoefficients xs).length < p.coefficients.length) :
+    ∃ dResult dDividend,
+      degree? (ofCoefficients xs) = some dResult ∧
+        degree? p = some dDividend ∧ dResult < dDividend := by
+  have hresult_nonempty : (ofCoefficients xs).coefficients ≠ [] := by
+    simpa [ofCoefficients] using hxs
+  obtain ⟨dResult, hresult_degree, hresult_length⟩ :=
+    degree?_add_one_eq_length (ofCoefficients xs) hresult_nonempty
+  obtain ⟨dDividend, hdividend_degree, hdividend_length⟩ :=
+    degree?_add_one_eq_length p hp
+  refine ⟨dResult, dDividend, hresult_degree, hdividend_degree, ?_⟩
+  have hsucc : dResult + 1 < dDividend + 1 := by
+    simpa [ofCoefficients, hresult_length, hdividend_length] using hlen
+  exact Nat.lt_of_succ_lt_succ hsucc
+
 end CCFSM.P2749
