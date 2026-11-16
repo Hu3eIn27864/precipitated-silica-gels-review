@@ -115,3 +115,21 @@ This is a formal counting and certificate-ownership task. It does not prove
 that a numerical root-isolation algorithm finds every root, that floating
 point endpoint values are exact physical boundaries, or that CCFSM's
 constitutive equations are physically validated.
+
+
+## Minimal acceptance examples
+
+For a root predicate with a fully certified interior partition:
+
+| Endpoint status | Interior count | Closed count |
+|---|---:|---:|
+| neither endpoint is a root | n | n |
+| only lo is a root | n | n + 1 |
+| only hi is a root | n | n + 1 |
+| both endpoints are roots | n | n + 2 |
+
+The four cases must be represented by endpoint proof terms, not inferred from
+the witness-list length. A repeated endpoint root still contributes exactly
+one coordinate. The case `lo = hi` is excluded from this theorem: it is a
+singleton-domain problem and needs its own specification rather than applying
+the two-endpoint formula.
