@@ -36,10 +36,10 @@ theorem min2_le_left {α : Type} [LE α] [Mul α] [OfNat α 0] [DecidableLE α]
     (ord : CCFSM.P2741.FourCornerOrder α) (a b : α) :
     min2 a b ≤ a := by
   by_cases h : a ≤ b
-  · simp only [min2, if_pos h]
+  · simp only [min2, ite_eq_left h]
     exact ord.le_refl a
   · have hba : b ≤ a := (ord.scalar.le_total a b).resolve_left h
-    simp only [min2, if_neg h]
+    simp only [min2, ite_eq_right h]
     exact hba
 
 /-- A binary minimum is no greater than its right argument. -/
@@ -47,9 +47,9 @@ theorem min2_le_right {α : Type} [LE α] [Mul α] [OfNat α 0] [DecidableLE α]
     (ord : CCFSM.P2741.FourCornerOrder α) (a b : α) :
     min2 a b ≤ b := by
   by_cases h : a ≤ b
-  · simp only [min2, if_pos h]
+  · simp only [min2, ite_eq_left h]
     exact h
-  · simp only [min2, if_neg h]
+  · simp only [min2, ite_eq_right h]
     exact ord.le_refl b
 
 /-- A binary maximum is no smaller than its left argument. -/
@@ -57,9 +57,9 @@ theorem left_le_max2 {α : Type} [LE α] [Mul α] [OfNat α 0] [DecidableLE α]
     (ord : CCFSM.P2741.FourCornerOrder α) (a b : α) :
     a ≤ max2 a b := by
   by_cases h : a ≤ b
-  · simp only [max2, if_pos h]
+  · simp only [max2, ite_eq_left h]
     exact h
-  · simp only [max2, if_neg h]
+  · simp only [max2, ite_eq_right h]
     exact ord.le_refl a
 
 /-- A binary maximum is no smaller than its right argument. -/
@@ -67,10 +67,10 @@ theorem right_le_max2 {α : Type} [LE α] [Mul α] [OfNat α 0] [DecidableLE α]
     (ord : CCFSM.P2741.FourCornerOrder α) (a b : α) :
     b ≤ max2 a b := by
   by_cases h : a ≤ b
-  · simp only [max2, if_pos h]
+  · simp only [max2, ite_eq_left h]
     exact ord.le_refl b
   · have hba : b ≤ a := (ord.scalar.le_total a b).resolve_left h
-    simp only [max2, if_neg h]
+    simp only [max2, ite_eq_right h]
     exact hba
 
 /-- The four-value minimum is below each of its four inputs. -/
@@ -136,7 +136,6 @@ floating-point rounding.
 -/
 def exactIntervalMultiply {α : Type}
     [LE α] [DecidableLE α] [Mul α] [OfNat α 0]
-    (ord : CCFSM.P2741.FourCornerOrder α)
     (I J : CCFSM.P2735.Interval α) : CCFSM.P2735.Interval α :=
   ⟨min4 (I.lower * J.lower) (I.lower * J.upper)
       (I.upper * J.lower) (I.upper * J.upper),
@@ -153,7 +152,7 @@ theorem exactIntervalMultiply_sound {α : Type}
     (ord : CCFSM.P2741.FourCornerOrder α)
     (I J : CCFSM.P2735.Interval α) (x y : α)
     (hx : I.Contains x) (hy : J.Contains y) :
-    (exactIntervalMultiply ord I J).Contains (x * y) := by
+    (exactIntervalMultiply I J).Contains (x * y) := by
   change min4 (I.lower * J.lower) (I.lower * J.upper)
       (I.upper * J.lower) (I.upper * J.upper) ≤ x * y ∧
     x * y ≤ max4 (I.lower * J.lower) (I.lower * J.upper)
@@ -173,7 +172,7 @@ def asSoundIntervalMultiplication {α : Type}
     [LE α] [DecidableLE α] [Mul α] [OfNat α 0]
     (ord : CCFSM.P2741.FourCornerOrder α) :
     CCFSM.P2738.SoundIntervalMultiplication α :=
-  { apply := exactIntervalMultiply ord
+  { apply := exactIntervalMultiply
     encloses_products := by
       intro I J x y hx hy
       exact exactIntervalMultiply_sound ord I J x y hx hy }
