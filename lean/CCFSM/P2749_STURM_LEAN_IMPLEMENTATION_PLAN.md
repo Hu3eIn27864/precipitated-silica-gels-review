@@ -133,3 +133,45 @@ P27.49 should be split into independently buildable milestones:
 A successful build of an early layer must not be described as a completed
 Sturm root counter. The full P27.49 claim is earned only after the theorem and
 checker are both proved and exercised by adversarial fixtures.
+
+
+## Progress checkpoint (2026-11-16)
+
+### Layer 1 — initial foundation implemented
+
+- Lean core `Rat` is available under the pinned v4.35.0 toolchain without
+  Mathlib; this was checked by a successful CI probe.
+- `CCFSM/P2749.lean` now defines ascending-degree rational coefficient
+  lists with a canonical trailing-zero invariant.
+- Trailing-zero normalization is proved canonical and idempotent.
+- Horner evaluation, formal derivative coefficient generation,
+  coefficientwise addition, scalar multiplication, and recursive convolution
+  multiplication are implemented.
+- Exact evaluation is proved invariant under normalization and compatible
+  with polynomial addition and multiplication.
+- Still open within Layer 1: a semantic theorem for the formal derivative,
+  explicit coefficient arithmetic test vectors, and any polynomial
+  Euclidean-division operation.
+
+### Python bridge foundation
+
+- `MODELLING/ccfsm/ccfsm_p27_49_rational_certificate.py` implements
+  canonical rational serialization and validation.
+- Binary64 values are converted through their exact `as_integer_ratio()`
+  representation; Python descending-power coefficients are reversed into
+  Lean ascending-degree order.
+- Tests cover subnormals, negative zero canonicalization, malformed rational
+  encodings, duplicate JSON keys, schema/order errors, nonfinite values, and
+  noncanonical zero/trailing-zero polynomials.
+- This is not yet a producer for P27.37's partition tree, and Lean does not
+  yet parse the payload.
+- The complete Lean polynomial build passed in CI run 43842515932
+  (17 jobs). Python serializer regression tests passed in run 43841573685;
+  the expanded trailing-zero test run remains to be checked.
+
+### Next proof gate
+
+Before starting Euclidean division, prove the derivative-evaluation
+identity over `Rat` and add explicit examples for constant, linear,
+quadratic, zero, and repeated-factor polynomials. Keep the zero polynomial
+outside the finite Sturm-count API.
