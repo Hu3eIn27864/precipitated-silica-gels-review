@@ -654,9 +654,7 @@ theorem addCoefficients_zero_scaled_left_of_length_le
       | cons b tail =>
           have htail : rest.length ≤ tail.length :=
             Nat.le_of_succ_le_succ hlen
-          simp only [scaleCoefficients, List.map_cons, Rat.zero_mul,
-            addCoefficients]
-          rw [ih tail htail]
-          simp
+          simp [scaleCoefficients, addCoefficients, ih tail htail,
+            Rat.zero_mul, Rat.zero_add]
 
 end CCFSM.P2749
