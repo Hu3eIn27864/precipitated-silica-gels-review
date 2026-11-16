@@ -121,5 +121,11 @@ producer claim to a proof.
 
 ## Current status
 
-Design only. The Python P27.37 producer is not yet a serializer for this
-schema, and Lean P27.49 does not yet parse or verify these payloads.
+- Python helper implemented: `MODELLING/ccfsm/ccfsm_p27_49_rational_certificate.py`.
+- Regression tests: `MODELLING/ccfsm/test_ccfsm_p27_49_rational_certificate.py`.
+- Python CI run 43841573685 passed the complete `ccfsm-tests` job.
+- The helper converts binary64 values to canonical rational strings and
+  validates the polynomial/domain payload, including duplicate-key rejection.
+- The current P27.37 adaptive isolation routine is **not yet** wired to this
+  serializer, and Lean P27.49 does **not yet** parse or verify serialized
+  certificates. The bridge remains an initial format and conversion layer.
