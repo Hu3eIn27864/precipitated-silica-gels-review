@@ -299,13 +299,14 @@ theorem eval_derivative_constant (x a : Rat) :
   by_cases ha : a = 0
   · subst a
     simp [eval, derivative, ofCoefficients, normalizeCoefficients,
-      trimReversed, derivativeCoefficients, evalCoefficients]
+      trimReversed, derivativeCoefficients, derivativeCoefficients.derivativeTail,
+      evalCoefficients]
   · have hcan : CanonicalCoefficients [a] :=
       Or.inr ⟨[], a, by simp, ha⟩
     have hnorm := normalizeCoefficients_of_canonical [a] hcan
     simp [eval, derivative, ofCoefficients, hnorm,
       derivativeCoefficients_constant, evalCoefficients_normalize,
-      evalCoefficients_constant]
+      evalCoefficients]
 
 /-- The derivative of a linear polynomial evaluates to its exact slope
     coefficient (including the core rational embedding of one). -/
@@ -313,15 +314,19 @@ theorem eval_derivative_linear (x a b : Rat) :
     eval (derivative (ofCoefficients [a, b])) x =
       Rat.ofInt 1 * b := by
   by_cases hb : b = 0
-  · subst b
-    simp [eval, derivative, ofCoefficients, normalizeCoefficients,
-      trimReversed, derivativeCoefficients, Rat.mul_zero]
+  · have hnorm : normalizeCoefficients [a, 0] =
+        normalizeCoefficients [a] := by
+      simp [normalizeCoefficients, trimReversed]
+    have hpoly : ofCoefficients [a, 0] = ofCoefficients [a] := by
+      simp [ofCoefficients, hnorm]
+    rw [hpoly, eval_derivative_constant]
+    simp [hb, Rat.mul_zero]
   · have hcan : CanonicalCoefficients [a, b] :=
       Or.inr ⟨[a], b, by simp, hb⟩
     have hnorm := normalizeCoefficients_of_canonical [a, b] hcan
     simp [eval, derivative, ofCoefficients, hnorm,
       derivativeCoefficients_linear, evalCoefficients_normalize,
-      evalCoefficients_constant]
+      evalCoefficients]
 
 /-- The derivative of a quadratic polynomial evaluates to its exact
     first-degree derivative polynomial. -/
@@ -329,18 +334,13 @@ theorem eval_derivative_quadratic (x a b c : Rat) :
     eval (derivative (ofCoefficients [a, b, c])) x =
       Rat.ofInt 1 * b + (Rat.ofInt 2 * c) * x := by
   by_cases hc : c = 0
-  · subst c
-    by_cases hb : b = 0
-    · subst b
-      simp [eval, derivative, ofCoefficients, normalizeCoefficients,
-        trimReversed, derivativeCoefficients, Rat.mul_zero]
-    · have hcan : CanonicalCoefficients [a, b] :=
-        Or.inr ⟨[a], b, by simp, hb⟩
-      have hnorm := normalizeCoefficients_of_canonical [a, b] hcan
-      simpa [eval, derivative, ofCoefficients, hnorm,
-        derivativeCoefficients_linear, evalCoefficients_normalize,
-        evalCoefficients_constant] using
-          (eval_derivative_linear x a b)
+  · have hnorm : normalizeCoefficients [a, b, 0] =
+        normalizeCoefficients [a, b] := by
+      simp [normalizeCoefficients, trimReversed]
+    have hpoly : ofCoefficients [a, b, 0] = ofCoefficients [a, b] := by
+      simp [ofCoefficients, hnorm]
+    rw [hpoly, eval_derivative_linear]
+    simp [hc, Rat.mul_zero]
   · have hcan : CanonicalCoefficients [a, b, c] :=
       Or.inr ⟨[a, b], c, by simp, hc⟩
     have hnorm := normalizeCoefficients_of_canonical [a, b, c] hcan
