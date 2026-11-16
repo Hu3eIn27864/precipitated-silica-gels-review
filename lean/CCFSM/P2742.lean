@@ -128,4 +128,54 @@ theorem four_corner_product_sound {α : Type}
     hmin.1 hmin.2.1 hmin.2.2.1 hmin.2.2.2
     hmax.1 hmax.2.1 hmax.2.2.1 hmax.2.2.2
 
+
+/--
+The exact interval operation induced by the four-corner extrema. This is an
+abstract exact-arithmetic operation on the endpoint type; it does not add
+floating-point rounding.
+-/
+def exactIntervalMultiply {α : Type}
+    [LE α] [DecidableLE α] [Mul α] [OfNat α 0]
+    (ord : CCFSM.P2741.FourCornerOrder α)
+    (I J : CCFSM.P2735.Interval α) : CCFSM.P2735.Interval α :=
+  ⟨min4 (I.lower * J.lower) (I.lower * J.upper)
+      (I.upper * J.lower) (I.upper * J.upper),
+    max4 (I.lower * J.lower) (I.lower * J.upper)
+      (I.upper * J.lower) (I.upper * J.upper)⟩
+
+/--
+The concrete four-corner interval operation encloses every product of members
+of two ordered input intervals. Membership itself supplies the input-order
+proofs, so the adapter can satisfy P27.38's pointwise soundness contract.
+-/
+theorem exactIntervalMultiply_sound {α : Type}
+    [LE α] [DecidableLE α] [Mul α] [OfNat α 0]
+    (ord : CCFSM.P2741.FourCornerOrder α)
+    (I J : CCFSM.P2735.Interval α) (x y : α)
+    (hx : I.Contains x) (hy : J.Contains y) :
+    (exactIntervalMultiply ord I J).Contains (x * y) := by
+  change min4 (I.lower * J.lower) (I.lower * J.upper)
+      (I.upper * J.lower) (I.upper * J.upper) ≤ x * y ∧
+    x * y ≤ max4 (I.lower * J.lower) (I.lower * J.upper)
+      (I.upper * J.lower) (I.upper * J.upper)
+  exact four_corner_product_sound ord
+    I.lower I.upper J.lower J.upper x y
+    (ord.le_trans hx.1 hx.2) (ord.le_trans hy.1 hy.2)
+    hx.1 hx.2 hy.1 hy.2
+
+/--
+Adapter from P27.42's concrete exact four-corner operation to the P27.38
+multiplication contract. An instance for a concrete numeric type must still
+supply the P27.41 signed-order laws; this theorem does not establish IEEE-754
+rounding for machine floats.
+-/
+def asSoundIntervalMultiplication {α : Type}
+    [LE α] [DecidableLE α] [Mul α] [OfNat α 0]
+    (ord : CCFSM.P2741.FourCornerOrder α) :
+    CCFSM.P2738.SoundIntervalMultiplication α :=
+  { apply := exactIntervalMultiply ord
+    encloses_products := by
+      intro I J x y hx hy
+      exact exactIntervalMultiply_sound ord I J x y hx hy }
+
 end CCFSM.P2742
