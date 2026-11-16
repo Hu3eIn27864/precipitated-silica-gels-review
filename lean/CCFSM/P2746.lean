@@ -33,7 +33,7 @@ theorem every_interior_root_is_collected {α : Type} [LE α] [LT α]
   | leaf evidence =>
       cases evidence with
       | noRoot h =>
-          exact False.elim (h x (lt_to_le hx.1) (lt_to_le hx.2) hx.2.2)
+          exact False.elim (h x (lt_to_le hx.1) (lt_to_le hx.2.1) hx.2.2)
       | unique witness =>
           have hEq := witness.unique x hx
           subst x
@@ -41,26 +41,44 @@ theorem every_interior_root_is_collected {α : Type} [LE α] [LT α]
       | unresolved =>
           cases hresolved
   | @split lo mid hi leftOrder rightOrder midpoint left right ihl ihr =>
-      rcases hresolved with ⟨hleft, hright⟩
-      rcases trichotomy x mid with hleftOfMid | hAtMid | hrightOfMid
-      · have hxLeft : InteriorRoot p lo mid x := ⟨hx.1, hleftOfMid, hx.2.2⟩
-        have hmem := ihl hleft hxLeft
-        exact List.mem_append.mpr
-          (Or.inl (List.mem_append.mpr (Or.inl hmem)))
-      · subst x
-        cases midpoint with
-        | noRoot hNo =>
+      cases midpoint with
+      | noRoot hNo =>
+          have hparts : FullyResolved left ∧ FullyResolved right := by
+            simpa [FullyResolved] using hresolved
+          rcases hparts with ⟨hleft, hright⟩
+          rcases trichotomy x mid with hleftOfMid | hAtMid | hrightOfMid
+          · have hxLeft : InteriorRoot p lo mid x :=
+              ⟨hx.1, hleftOfMid, hx.2.2⟩
+            have hmem := ihl hleft hxLeft
+            exact List.mem_append.mpr
+              (Or.inl (List.mem_append.mpr (Or.inl hmem)))
+          · subst x
             exact False.elim (hNo hx.2.2)
-        | root hRoot =>
+          · have hxRight : InteriorRoot p mid hi x :=
+              ⟨hrightOfMid, hx.2.1, hx.2.2⟩
+            have hmem := ihr hright hxRight
+            exact List.mem_append.mpr (Or.inr hmem)
+      | root hRoot =>
+          have hparts : FullyResolved left ∧ FullyResolved right := by
+            simpa [FullyResolved] using hresolved
+          rcases hparts with ⟨hleft, hright⟩
+          rcases trichotomy x mid with hleftOfMid | hAtMid | hrightOfMid
+          · have hxLeft : InteriorRoot p lo mid x :=
+              ⟨hx.1, hleftOfMid, hx.2.2⟩
+            have hmem := ihl hleft hxLeft
+            exact List.mem_append.mpr
+              (Or.inl (List.mem_append.mpr (Or.inl hmem)))
+          · subst x
             have hmem : mid ∈ splitPointWitnesses (.root hRoot) := by
               simp [splitPointWitnesses]
             exact List.mem_append.mpr
               (Or.inl (List.mem_append.mpr (Or.inr hmem)))
-        | unresolved =>
-            contradiction
-      · have hxRight : InteriorRoot p mid hi x := ⟨hrightOfMid, hx.2.1, hx.2.2⟩
-        have hmem := ihr hright hxRight
-        exact List.mem_append.mpr (Or.inr hmem)
+          · have hxRight : InteriorRoot p mid hi x :=
+              ⟨hrightOfMid, hx.2.1, hx.2.2⟩
+            have hmem := ihr hright hxRight
+            exact List.mem_append.mpr (Or.inr hmem)
+      | unresolved =>
+          simp [FullyResolved] at hresolved
 
 /--
 For a fully resolved tree, the collected witness list and the set of
@@ -71,7 +89,7 @@ count (provided the supplied strict-order laws hold).
 theorem collected_iff_interior_root {α : Type} [LE α] [LT α]
     {p : α → Prop} {lo hi : α}
     (lt_transitive : ∀ {a b c : α}, a < b → b < c → a < c)
-    (lt_irrefl : ∀ a : α, ¬ a < a)
+    (_lt_irrefl : ∀ a : α, ¬ a < a)
     (lt_to_le : ∀ {a b : α}, a < b → a ≤ b)
     (trichotomy : ∀ a b : α, a < b ∨ a = b ∨ b < a)
     (tree : RootIsolationTree p lo hi)
