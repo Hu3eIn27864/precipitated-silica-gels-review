@@ -49,9 +49,12 @@ class P2737AdaptivePolynomialRootIsolationTests(unittest.TestCase):
         self.assertGreaterEqual(len(boundary_leaves), 2)
 
     def test_depth_limit_is_reported(self):
-        result = isolate_polynomial_roots([1.0, -0.3], 0.0, 1.0, max_depth=0)
+        # A tangential root leaves the derivative enclosure unresolved, so
+        # max_depth=0 must stop before any subdivision.
+        result = isolate_polynomial_roots([1.0, -1.0, 0.25], 0.0, 1.0, max_depth=0)
         self.assertFalse(result["complete"])
         self.assertEqual(result["unresolved_leaf_count"], 1)
+        self.assertEqual(result["leaves"][0]["status"], "unresolved_subdivision_limit")
 
     def test_minimum_width_limit_is_reported(self):
         result = isolate_polynomial_roots(
