@@ -89,7 +89,6 @@ count (provided the supplied strict-order laws hold).
 theorem collected_iff_interior_root {α : Type} [LE α] [LT α]
     {p : α → Prop} {lo hi : α}
     (lt_transitive : ∀ {a b c : α}, a < b → b < c → a < c)
-    (_lt_irrefl : ∀ a : α, ¬ a < a)
     (lt_to_le : ∀ {a b : α}, a < b → a ≤ b)
     (trichotomy : ∀ a b : α, a < b ∨ a = b ∨ b < a)
     (tree : RootIsolationTree p lo hi)
@@ -107,6 +106,7 @@ def ExactInteriorRootCount {α : Type} [LE α] [LT α]
     (p : α → Prop) (lo hi : α)
     (tree : RootIsolationTree p lo hi) (n : Nat) : Prop :=
   (certifiedRootWitnesses tree).length = n ∧
+    AllDistinct (certifiedRootWitnesses tree) ∧
     ∀ x, x ∈ certifiedRootWitnesses tree ↔ InteriorRoot p lo hi x
 
 /--
@@ -123,10 +123,10 @@ theorem fullyResolved_exact_root_count {α : Type} [LE α] [LT α]
     (hresolved : FullyResolved tree) :
     ExactInteriorRootCount p lo hi tree
       (certifiedRootWitnesses tree).length := by
-  constructor
-  · rfl
+  refine ⟨rfl, ?_, ?_⟩
+  · exact certifiedRootWitnesses_allDistinct lt_transitive lt_irrefl tree
   · intro x
-    exact collected_iff_interior_root lt_transitive lt_irrefl
+    exact collected_iff_interior_root lt_transitive
       lt_to_le trichotomy tree hresolved x
 
 end CCFSM.P2746
