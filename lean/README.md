@@ -47,7 +47,14 @@ This is an isolated Lean 4 project pinned to Lean **v4.35.0**. It does not chang
 - The order-compatible multiplication laws remain explicit assumptions to be instantiated for a concrete ordered ring.
 - This is the signed-order foundation for the four-corner theorem, **not** yet the full four-corner min/max enclosure theorem.
 
-## Roadmap: P27.41–P27.43
+### P27.41 — four-corner product envelope
+
+- Proves that every common lower bound of the four endpoint products is a lower bound for every interior product, and every common upper bound is an upper bound for every interior product.
+- Derives the enclosure by applying signed scalar monotonicity successively in each interval coordinate.
+- Avoids assuming a particular min/max implementation. A concrete `min4`/`max4` routine still needs separate proofs that its outputs bound all four corners.
+- Uses explicit order transitivity and signed multiplication laws; no IEEE-754 or physical-model claim is made.
+
+## Roadmap: P27.42–P27.43
 
 1. **P27.41 — full four-corner product.** Combine signed scalar monotonicity with an explicit min/max construction to prove the global endpoint-extremum theorem, including intervals crossing zero.
 2. **P27.42 — IEEE-754 refinement boundary.** Specify finite binary floating-point values, directed rounding, subnormal behavior, signed zero, and overflow/fail-closed behavior. Choose between a bit-level proof of `nextafter` and a verified refinement to exact rational bounds; tests alone are not a proof.
