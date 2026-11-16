@@ -627,6 +627,6 @@ theorem multiplyCoefficients_singleton_left (c : Rat) (xs : List Rat)
   cases xs with
   | nil => exact False.elim (hxs rfl)
   | cons b bs =>
-      simp [multiplyCoefficients, addCoefficients, scaleCoefficients]
+      simp [multiplyCoefficients, addCoefficients, scaleCoefficients, Rat.add_zero]
 
 end CCFSM.P2749
