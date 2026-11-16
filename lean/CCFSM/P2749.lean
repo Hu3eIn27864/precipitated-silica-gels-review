@@ -407,25 +407,30 @@ theorem eval_subtract (p q : RatPolynomial) (x : Rat) :
     evalCoefficients_subtract]
 
 
+/-- Exact powers over Rat, with the exponent recursion made explicit. -/
+def ratPow (x : Rat) : Nat → Rat
+  | 0 => 1
+  | Nat.succ n => ratPow x n * x
+
 /-- Canonical coefficient list for a monomial c * X^k. -/
 def monomialCoefficients (k : Nat) (c : Rat) : List Rat :=
   List.replicate k 0 ++ [c]
 
 /-- Horner evaluation of a monomial is its exact rational power value. -/
 theorem evalCoefficients_monomial (x c : Rat) (k : Nat) :
-    evalCoefficients x (monomialCoefficients k c) = x ^ k * c := by
+    evalCoefficients x (monomialCoefficients k c) = ratPow x k * c := by
   induction k with
   | zero =>
-      simp [monomialCoefficients, evalCoefficients_constant]
+      simp [monomialCoefficients, evalCoefficients_constant, ratPow]
   | succ k ih =>
       change evalCoefficients x
-        (0 :: monomialCoefficients k c) = x ^ (k + 1) * c
+        (0 :: monomialCoefficients k c) = ratPow x (k + 1) * c
       rw [evalCoefficients_shift, ih]
       calc
-        x * (x ^ k * c) = (x * x ^ k) * c := by
+        x * (ratPow x k * c) = (x * ratPow x k) * c := by
           rw [Rat.mul_assoc]
-        _ = (x ^ k * x) * c := by rw [Rat.mul_comm x (x ^ k)]
-        _ = x ^ (k + 1) * c := by rfl
+        _ = (ratPow x k * x) * c := by rw [Rat.mul_comm x (ratPow x k)]
+        _ = ratPow x (k + 1) * c := by rfl
 
 /-- Exact rational polynomial representing a single monomial. -/
 def monomial (k : Nat) (c : Rat) : RatPolynomial :=
@@ -433,7 +438,7 @@ def monomial (k : Nat) (c : Rat) : RatPolynomial :=
 
 /-- Evaluation of a normalized monomial polynomial. -/
 theorem eval_monomial (x c : Rat) (k : Nat) :
-    eval (monomial k c) x = x ^ k * c := by
+    eval (monomial k c) x = ratPow x k * c := by
   simp [eval, monomial, ofCoefficients, evalCoefficients_normalize,
     evalCoefficients_monomial]
 
