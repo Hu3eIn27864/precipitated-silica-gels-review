@@ -637,8 +637,6 @@ theorem multiplyCoefficients_singleton_left (c : Rat) (xs : List Rat)
         addCoefficients]
       simp [addCoefficients_nil_right, Rat.add_zero]
 
-end CCFSM.P2749
-
 
 /-- Adding a zero-scaled coefficient vector on the left leaves the right
     vector unchanged whenever the latter is at least as long. This captures
@@ -660,3 +658,5 @@ theorem addCoefficients_zero_scaled_left_of_length_le
             addCoefficients]
           rw [ih tail htail]
           simp
+
+end CCFSM.P2749
