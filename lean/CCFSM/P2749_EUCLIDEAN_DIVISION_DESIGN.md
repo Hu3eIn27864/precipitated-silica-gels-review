@@ -325,3 +325,24 @@ objects, prove the full subtraction vector is canonically normalized with
 strict degree decrease, define quotient/remainder recursion, and verify the
 independent remainder identity and degree bound. The Sturm sequence and
 root-count theorem remain downstream and open.
+
+
+## CI-verified strict decrease for one monomial subtraction (16 November 2026)
+
+The theorem `normalize_subtract_monomial_step_length_strict` now
+connects the raw monomial cancellation result to the existing aligned
+subtraction measure. Under three explicit hypotheses — (i) the dividend
+coefficient vector ends in `aR`, (ii) the divisor coefficient vector
+ends in a nonzero `aB`, and (iii) the shifted divisor and dividend
+coefficient vectors have equal lengths (`r.length = k + d.length`) —
+subtracting the monomial multiple and normalizing strictly decreases the
+dividend coefficient-vector length.
+
+Aggregate Lean proof-kernel CI passed on head
+`58395a0ff57652d34813195c1d55ef703bb185bf` (run 43898301079).
+This is a genuine one-step termination measure for the raw coefficient-list
+long-division operation. It is not yet a recursive quotient/remainder
+implementation: the next proof must package the hypotheses and result for
+canonical `RatPolynomial` values, establish the degree/length relation
+for nonzero canonical polynomials, and implement well-founded recursion with
+a separately checked quotient/remainder identity and degree bound.
