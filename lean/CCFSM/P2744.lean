@@ -72,9 +72,9 @@ theorem closed_domain_covered {α : Type} [LE α] [LT α]
       trivial
   | @split lo mid hi hleft hright midpoint left right ihl ihr =>
       by_cases hxm : x ≤ mid
-      · exact Or.inl ⟨hxm, ihl hlo hxm le_total⟩
+      · exact Or.inl ⟨hxm, ihl hlo hxm⟩
       · have hmx : mid ≤ x := (le_total x mid).resolve_left hxm
-        exact Or.inr ⟨hmx, ihr hmx hhi le_total⟩
+        exact Or.inr ⟨hmx, ihr hmx hhi⟩
 
 /--
 All leaf and split-point claims carried by the tree are sound. Unresolved
