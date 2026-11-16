@@ -33,15 +33,31 @@ class P2737AdaptivePolynomialRootIsolationTests(unittest.TestCase):
         self.assertIsNone(result["root_count_bounds"][1])
 
     def test_root_at_subdivision_boundary_is_not_double_counted(self):
-        result = isolate_polynomial_roots([1.0, -0.5], 0.0, 1.0, max_depth=5)
+        # The parent is not monotone; subdivision lands exactly on the simple
+        # root x=0.5. Both closed child intervals retain an unresolved endpoint
+        # leaf, so neither child claims the shared boundary root as interior.
+        result = isolate_polynomial_roots(
+            [1.0, -3.5, 3.76, -1.13], 0.0, 1.0, max_depth=5
+        )
         self.assertFalse(result["complete"])
         self.assertEqual(result["certified_unique_root_count"], 0)
         self.assertIsNone(result["root_count_bounds"][1])
+        boundary_leaves = [
+            leaf for leaf in result["leaves"]
+            if leaf["interval"][0] == 0.5 or leaf["interval"][1] == 0.5
+        ]
+        self.assertEqual(len(boundary_leaves), 2)
+        self.assertTrue(all(leaf["root_count"] is None for leaf in boundary_leaves))
 
     def test_depth_limit_is_reported(self):
-        result = isolate_polynomial_roots([1.0, -0.3], 0.0, 1.0, max_depth=0)
+        # This polynomial is not monotone on the parent interval, so the
+        # zero-depth budget must leave a genuinely unresolved root problem.
+        result = isolate_polynomial_roots(
+            [1.0, -3.5, 3.76, -1.13], 0.0, 1.0, max_depth=0
+        )
         self.assertFalse(result["complete"])
         self.assertEqual(result["unresolved_leaf_count"], 1)
+        self.assertEqual(result["leaves"][0]["status"], "unresolved_subdivision_limit")
 
     def test_partition_covers_domain_without_gaps(self):
         result = isolate_polynomial_roots([1.0, -0.3], 0.0, 1.0)
