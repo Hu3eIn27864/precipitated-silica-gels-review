@@ -109,3 +109,20 @@ Design only. The P27.49 module currently implements canonical polynomial
 representation, evaluation, derivative coefficients, addition and
 multiplication, with exact evaluation laws. It does not yet implement
 polynomial division or prove degree behavior of the arithmetic operations.
+
+
+## Formal progress update (2026-11-16)
+
+The Lean coefficient-list foundation now verifies aligned subtraction and
+exact cancellation of equal final coefficients. If the coefficient vectors
+are `xs ++ [a]` and `ys ++ [a]` with equal prefix lengths, their
+coefficientwise difference is exactly
+`subtractCoefficients xs ys ++ [0]`. Normalization removes this final zero,
+and a proved length bound shows the normalized result has at most the common
+prefix length.
+
+This establishes the algebraic shape of the cancellation step, but does not
+yet prove the full polynomial degree-decrease theorem. In particular, the
+formal bridge from shifted/scaled divisor multiplication to the coefficient
+vector, and the exact rational leading-coefficient quotient, remain open.
+CI run 43868853530 passed all 17 aggregate Lean targets.
