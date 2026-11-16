@@ -185,7 +185,7 @@ theorem evalCoefficients_add (x : Rat) (xs ys : List Rat) :
   | cons a rest ih =>
       cases ys with
       | nil =>
-          simp [addCoefficients, evalCoefficients, evalCoefficients_cons, Rat.add_zero]
+          simp [addCoefficients, evalCoefficients, evalCoefficients_cons]
       | cons b tail =>
           rw [addCoefficients, evalCoefficients_cons,
             evalCoefficients_cons, evalCoefficients_cons]
@@ -197,6 +197,58 @@ theorem evalCoefficients_add (x : Rat) (xs ys : List Rat) :
             _ = (evalCoefficients x rest * x + a) +
                   (evalCoefficients x tail * x + b) := by
                     simp [Rat.add_assoc, Rat.add_comm, Rat.add_left_comm]
+
+/-- Scaling every coefficient scales the exact polynomial value. -/
+theorem evalCoefficients_scale (x a : Rat) (xs : List Rat) :
+    evalCoefficients x (scaleCoefficients a xs) =
+      a * evalCoefficients x xs := by
+  induction xs with
+  | nil =>
+      simp [scaleCoefficients, evalCoefficients]
+  | cons b rest ih =>
+      rw [scaleCoefficients, evalCoefficients_cons,
+        evalCoefficients_cons, ih]
+      calc
+        (a * evalCoefficients x rest) * x + a * b =
+            a * (evalCoefficients x rest * x) + a * b := by
+              rw [Rat.mul_assoc]
+        _ = a * (evalCoefficients x rest * x + b) := by
+              rw [Rat.mul_add]
+
+/-- Prefixing a zero constant coefficient multiplies the value by x. -/
+theorem evalCoefficients_shift (x : Rat) (xs : List Rat) :
+    evalCoefficients x (0 :: xs) =
+      x * evalCoefficients x xs := by
+  rw [evalCoefficients_cons]
+  simp [Rat.zero_add]
+
+/-- Horner evaluation respects recursive coefficient convolution. -/
+theorem evalCoefficients_multiply (x : Rat) (xs ys : List Rat) :
+    evalCoefficients x (multiplyCoefficients xs ys) =
+      evalCoefficients x xs * evalCoefficients x ys := by
+  induction xs generalizing ys with
+  | nil =>
+      simp [multiplyCoefficients, evalCoefficients]
+  | cons a rest ih =>
+      rw [multiplyCoefficients, evalCoefficients_add,
+        evalCoefficients_scale, evalCoefficients_shift, ih,
+        evalCoefficients_cons]
+      calc
+        a * evalCoefficients x ys +
+            x * (evalCoefficients x rest * evalCoefficients x ys) =
+            (evalCoefficients x rest * x + a) *
+              evalCoefficients x ys := by
+                rw [← Rat.mul_assoc, Rat.mul_comm x (evalCoefficients x rest),
+                  Rat.mul_assoc, ← Rat.add_mul, Rat.add_comm]
+        _ = evalCoefficients x (a :: rest) *
+              evalCoefficients x ys := by
+                rw [evalCoefficients_cons]
+
+/-- Exact evaluation of normalized polynomial multiplication is multiplicative. -/
+theorem eval_multiply (p q : RatPolynomial) (x : Rat) :
+    eval (multiply p q) x = eval p x * eval q x := by
+  simp [eval, multiply, ofCoefficients, evalCoefficients_normalize,
+    evalCoefficients_multiply]
 
 /-- Exact evaluation of normalized polynomial addition is additive. -/
 theorem eval_add (p q : RatPolynomial) (x : Rat) :
