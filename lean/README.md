@@ -156,10 +156,16 @@ modules do not change the Python implementation or the CCFSM version line.
 - Formal derivative coefficients are implemented, with exact evaluation
   examples for constant, linear and quadratic inputs, including zero leading
   coefficients. General derivative evaluation semantics remain open.
+- The first list-level long-division lemma is now proved: aligned
+  subtraction cancels equal final coefficients exactly, and normalization
+  reduces the coefficient-vector length below its original length.
+  Lean CI run 43868853530 passed all 17 aggregate targets.
 - Exact Euclidean polynomial division remains design-only
-  (`CCFSM/P2749_EUCLIDEAN_DIVISION_DESIGN.md`). The next implementation gate
-  is a formally decreasing top-coefficient cancellation step. No Sturm
-  sequence, root-count theorem, or Sturm checker is claimed.
+  (`CCFSM/P2749_EUCLIDEAN_DIVISION_DESIGN.md`). The next gate is to connect
+  monomial-shift/scalar multiplication to the divisor coefficients, then
+  derive the exact rational leading-coefficient quotient and lift the length
+  reduction to a strict polynomial-degree bound. No Sturm sequence,
+  root-count theorem, or Sturm checker is claimed.
 - Python/Lean bridge: design `CCFSM/P2749_PYTHON_LEAN_BRIDGE_DESIGN.md`,
   serializer `../MODELLING/ccfsm/ccfsm_p27_49_rational_certificate.py`, and
   tests `../MODELLING/ccfsm/test_ccfsm_p27_49_rational_certificate.py`.
