@@ -59,7 +59,7 @@ This is an isolated Lean 4 project pinned to Lean **v4.35.0**. It does not chang
 - Defines a dependency-light comparison tree `min4`/`max4` for the four endpoint products.
 - Proves that the computed minimum is below all four corners and the computed maximum is above all four corners.
 - Combines those lemmas with P27.41 to prove a concrete exact-arithmetic interval-product enclosure for arbitrary sign combinations, including zero-crossing intervals.
-- Requires a decidable total order and transitive order relation. It does **not** establish IEEE-754 directed rounding.
+- Adds an exactIntervalMultiply operation on the P27.35 interval type and an adapter that packages its enclosure proof as the P27.38 SoundIntervalMultiplication contract. Membership in both input intervals supplies the required endpoint-order proofs.\n- Requires a decidable total order and transitive order relation. This adapter is exact algebra on the abstract endpoint type; it does **not** establish IEEE-754 directed rounding.
 
 ## P27.43 — exact-rational interval certificate prototype\n\n### P27.43 — IEEE-754 boundary and rational certificate prototype
 
