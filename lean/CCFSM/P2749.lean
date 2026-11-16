@@ -830,4 +830,30 @@ theorem degree?_lt_of_normalized_length_lt
     simpa [ofCoefficients, hresult_length, hdividend_length] using hlen
   exact Nat.lt_of_succ_lt_succ hsucc
 
+
+/-- Polynomial-level degree decrease for one exact monomial subtraction.
+    The dividend and divisor coefficient lists must have the stated final
+    coefficients and matching shifted lengths; the normalized result must
+    remain nonzero for its degree to be defined. -/
+theorem degree?_monomial_subtract_step_lt
+    (p : RatPolynomial) (d : List Rat) (k : Nat) (aR aB : Rat)
+    (hr : ∃ rpre, p.coefficients = rpre ++ [aR])
+    (hd : ∃ dpre, d = dpre ++ [aB])
+    (haB : aB ≠ 0)
+    (hsize : p.coefficients.length = k + d.length)
+    (hresult : normalizeCoefficients (subtractCoefficients p.coefficients
+        (multiplyCoefficients (monomialCoefficients k (aR / aB)) d)) ≠ []) :
+    ∃ dResult dDividend,
+      degree? (ofCoefficients (subtractCoefficients p.coefficients
+        (multiplyCoefficients (monomialCoefficients k (aR / aB)) d))) = some dResult ∧
+        degree? p = some dDividend ∧ dResult < dDividend := by
+  have hp : p.coefficients ≠ [] := by
+    rcases hr with ⟨rpre, hcoeff⟩
+    rw [hcoeff]
+    simp
+  have hstep := normalize_subtract_monomial_step_length_strict
+    k aR aB p.coefficients d hr hd haB hsize
+  exact degree?_lt_of_normalized_length_lt p (subtractCoefficients p.coefficients
+        (multiplyCoefficients (monomialCoefficients k (aR / aB)) d)) hp hresult hstep
+
 end CCFSM.P2749
