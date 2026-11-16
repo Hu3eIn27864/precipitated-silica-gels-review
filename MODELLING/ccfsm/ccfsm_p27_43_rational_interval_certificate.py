@@ -29,8 +29,8 @@ class CertificateError(ValueError):
 
 def _binary64(value: Any, field: str) -> float:
     """Normalize a JSON-like numeric endpoint to one finite binary64 value."""
-    if isinstance(value, bool) or not isinstance(value, (int, float)):
-        raise CertificateError(f"{field} must be a JSON number, not bool/string")
+    if not isinstance(value, float):
+        raise CertificateError(f"{field} must be a JSON floating-point number")
     try:
         result = float(value)
     except (OverflowError, ValueError) as exc:
@@ -98,9 +98,12 @@ def verify_interval_certificate(certificate: Mapping[str, Any]) -> dict[str, Any
     """
     if not isinstance(certificate, Mapping):
         raise CertificateError("certificate must be a mapping/object")
-    if set(certificate.keys()) != _REQUIRED_KEYS:
-        missing = sorted(_REQUIRED_KEYS - set(certificate.keys()))
-        extra = sorted(set(certificate.keys()) - _REQUIRED_KEYS)
+    keys = set(certificate.keys())
+    if not all(isinstance(key, str) for key in keys):
+        raise CertificateError("certificate keys must be strings")
+    if keys != _REQUIRED_KEYS:
+        missing = sorted(_REQUIRED_KEYS - keys)
+        extra = sorted(keys - _REQUIRED_KEYS)
         raise CertificateError(
             f"certificate keys mismatch; missing={missing}, extra={extra}"
         )
