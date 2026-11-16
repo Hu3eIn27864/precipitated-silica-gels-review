@@ -121,8 +121,15 @@ coefficientwise difference is exactly
 and a proved length bound shows the normalized result has at most the common
 prefix length.
 
-This establishes the algebraic shape of the cancellation step, but does not
-yet prove the full polynomial degree-decrease theorem. In particular, the
-formal bridge from shifted/scaled divisor multiplication to the coefficient
-vector, and the exact rational leading-coefficient quotient, remain open.
-CI run 43868853530 passed all 17 aggregate Lean targets.
+This establishes the algebraic shape of the cancellation step and now also
+proves strict coefficient-vector length decrease for equal-leading-term
+cancellation. For nonzero canonical vectors, coefficient length is exactly
+degree plus one, so this is the intended well-founded measure for long
+division. The full polynomial step remains open: we still need the formal
+bridge from shifted/scaled divisor multiplication to coefficient vectors,
+the exact rational leading-coefficient quotient, and a theorem connecting
+the quotient to the divisor's leading coefficient.
+
+CI run 43868853530 passed all 17 aggregate Lean targets for the cancellation
+lemmas. The strict length-decrease lemma was added in commit
+`b4cbc26351a35b110b7b9f5b00ef734ee974cf96`; its aggregate CI is pending.
