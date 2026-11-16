@@ -137,13 +137,24 @@ modules do not change the Python implementation or the CCFSM version line.
   requires `lo < hi`; singleton intervals are outside its scope.
 - Lean CI passed on the formal implementation: run 43828394409; all 16 targets built, including `CCFSM.P2748`.
 
-### P27.49 — staged Lean implementation of rational Sturm certificates
+### P27.49 — exact rational polynomial foundation and Sturm roadmap
 
-- Plan only: `CCFSM/P2749_STURM_LEAN_IMPLEMENTATION_PLAN.md`.
-- Splits the work into canonical rational polynomials, exact Euclidean division,
-  signed remainder sequences, one-sided endpoint signs, the Sturm theorem,
-  and an independently checking certificate format.
-- No P27.49 implementation or Sturm root-count theorem is claimed.
+- Initial Lean module: `CCFSM/P2749.lean`; implementation plan:
+  `CCFSM/P2749_STURM_LEAN_IMPLEMENTATION_PLAN.md`.
+- Uses Lean core `Rat` (confirmed under the pinned Lean v4.35.0 toolchain,
+  without Mathlib) and ascending-degree coefficient lists.
+- Implements canonical trailing-zero normalization, Horner evaluation,
+  formal derivative coefficients, coefficientwise addition, and recursive
+  convolution multiplication.
+- Proves normalized lists are canonical and normalization is idempotent;
+  proves a nonzero canonical polynomial has a nonzero leading coefficient
+  and that the zero polynomial has no degree.
+- The current milestone does not yet prove evaluation-preservation laws for
+  addition/multiplication, Euclidean division, a Sturm sequence, or a root
+  count. It is a polynomial data/arithmetic foundation, not a Sturm checker.
+- Python/Lean bridge design: `CCFSM/P2749_PYTHON_LEAN_BRIDGE_DESIGN.md`.
+  It explicitly handles the Python producer's descending coefficient order,
+  exact dyadic conversion of binary64 inputs, and the checker trust boundary.
 
 ## Open obligations
 
