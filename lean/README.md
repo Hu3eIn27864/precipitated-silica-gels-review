@@ -13,12 +13,17 @@ This is an isolated Lean 4 project pinned to Lean **v4.35.0**. It does not chang
 
 ### P27.35 — Horner interval enclosure contract
 
-- Coefficient lists are explicitly stored in ascending degree order (constant term first).
-- Exact scalar Horner evaluation and interval Horner evaluation are defined.
+- Coefficient lists are explicitly stored in descending degree order (highest-degree coefficient first), matching the Python P27.35 implementation.
+- Exact scalar Horner evaluation and interval Horner evaluation are defined using `x * rest + coefficient`.
 - The theorem `CCFSM.P2735.hornerInterval_sound` proves that, for every point contained in the input interval, the exact polynomial value is contained in the interval-Horner result.
 - The theorem is conditional only on the soundness contracts of interval addition and multiplication supplied by an `IntervalArithmetic` implementation.
 
 **Important boundary:** this proves the generic enclosure theorem, not the soundness of a concrete endpoint implementation. Concrete lower/upper endpoint formulas, IEEE-754 outward rounding, and the Python one-ULP widening still require separate proofs and tests. The current theorem must not be cited as a verification of floating-point arithmetic.
+
+### P27.36 — monotone-root theorem contract
+
+- Formalize strict monotonicity on an open interval and prove that two roots in that interval must coincide.
+- The theorem is the uniqueness half of P27.36. Existence still requires a separately justified intermediate-value argument; derivative-sign-to-strict-monotonicity is also a separate obligation.
 
 ### P27.37 — proof-carrying root-isolation certificates
 
