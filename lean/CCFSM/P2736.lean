@@ -56,8 +56,13 @@ theorem monotone_roots_unique {α β : Type}
       rw [hx.2.2, hy.2.2] at hlt
       exact (lt_irrefl 0 hlt).elim
   · exact heq
-  · have hlt := monotone_roots_unique p lo hi hmono hy hx
-    exact hlt.symm
+  · rcases hmono with hinc | hdec
+    · have hlt := hinc hy.1 hy.2 hx.1 hx.2 hyx
+      rw [hy.2.2, hx.2.2] at hlt
+      exact (lt_irrefl 0 hlt).elim
+    · have hlt := hdec hy.1 hy.2 hx.1 hx.2 hyx
+      rw [hy.2.2, hx.2.2] at hlt
+      exact (lt_irrefl 0 hlt).elim
 
 /-- Strictly opposite endpoint signs, in either orientation. -/
 def CrossesZero {α β : Type} [LT β] [Zero β]
