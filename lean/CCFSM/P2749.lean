@@ -524,6 +524,9 @@ theorem subtractCoefficients_append_singleton
   rw [List.map_append]
   have hmap : xs.length = (ys.map (fun z => -z)).length := by
     simpa using hlen
+  change addCoefficients (xs ++ [a])
+      (ys.map (fun z => -z) ++ [-b]) =
+    addCoefficients xs (ys.map (fun z => -z)) ++ [a - b]
   rw [addCoefficients_append_singleton xs (ys.map (fun z => -z)) a (-b) hmap]
   simp [negateCoefficients, Rat.sub_eq_add_neg]
 
