@@ -54,7 +54,7 @@ def zero : RatPolynomial := ofCoefficients []
 
 /-- Horner evaluation of an ascending coefficient list. -/
 def evalCoefficients (x : Rat) (xs : List Rat) : Rat :=
-  xs.foldr (fun a acc => a + x * acc) 0
+  xs.reverse.foldl (fun acc a => acc * x + a) 0
 
 /-- Exact polynomial evaluation over the core rational field. -/
 def eval (p : RatPolynomial) (x : Rat) : Rat :=
@@ -145,5 +145,47 @@ def degree? (p : RatPolynomial) : Option Nat :=
 
 theorem degree?_zero : degree? zero = none := by
   simp [degree?, leadingCoefficient?, zero_coefficients_empty]
+
+
+/-- Removing leading zero coefficients in reverse order preserves Horner evaluation. -/
+theorem evalFoldl_trimReversed (x : Rat) (xs : List Rat) :
+    (trimReversed xs).foldl (fun acc a => acc * x + a) 0 =
+      xs.foldl (fun acc a => acc * x + a) 0 := by
+  induction xs with
+  | nil =>
+      rfl
+  | cons a rest ih =>
+      simp only [trimReversed]
+      split
+      · simp [ih]
+      · rfl
+
+/-- Canonical trimming preserves exact polynomial evaluation. -/
+theorem evalCoefficients_normalize (x : Rat) (xs : List Rat) :
+    evalCoefficients x (normalizeCoefficients xs) =
+      evalCoefficients x xs := by
+  simp [evalCoefficients, normalizeCoefficients, List.reverse_reverse,
+    evalFoldl_trimReversed]
+
+/-- Horner evaluation respects coefficientwise polynomial addition. -/
+theorem evalCoefficients_add (x : Rat) (xs ys : List Rat) :
+    evalCoefficients x (addCoefficients xs ys) =
+      evalCoefficients x xs + evalCoefficients x ys := by
+  induction xs generalizing ys with
+  | nil =>
+      simp [addCoefficients, evalCoefficients]
+  | cons a rest ih =>
+      cases ys with
+      | nil =>
+          simp [addCoefficients, evalCoefficients]
+      | cons b tail =>
+          simp [addCoefficients, evalCoefficients, ih, mul_add,
+            add_assoc, add_comm, add_left_comm]
+
+/-- Exact evaluation of normalized polynomial addition is additive. -/
+theorem eval_add (p q : RatPolynomial) (x : Rat) :
+    eval (add p q) x = eval p x + eval q x := by
+  simp [eval, add, ofCoefficients, evalCoefficients_normalize,
+    evalCoefficients_add]
 
 end CCFSM.P2749
