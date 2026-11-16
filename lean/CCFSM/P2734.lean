@@ -18,15 +18,15 @@ A scalar outward-addition interface. A concrete IEEE-754 implementation
 must separately establish lower_sound and upper_sound for every finite
 input pair and must handle overflow according to its fail-closed policy.
 -/
-structure OutwardAddition (α : Type) [LE α] [Add α] where
+structure OutwardAddition (α : Type) [Preorder α] [Add α] where
   downAdd : α → α → α
   upAdd : α → α → α
   lower_sound : ∀ a b, downAdd a b ≤ a + b
   upper_sound : ∀ a b, a + b ≤ upAdd a b
-  add_mono : ∀ {a b c d}, a ≤ b → c ≤ d → a + c ≤ b + d
+  add_mono : ∀ {a b c d : α}, a ≤ b → c ≤ d → a + c ≤ b + d
 
 /-- Endpoint-wise outward-rounded interval addition. -/
-def intervalAdd {α : Type} [LE α] [Add α]
+def intervalAdd {α : Type} [Preorder α] [Add α]
     (ops : OutwardAddition α) (I J : Interval α) : Interval α :=
   ⟨ops.downAdd I.lower J.lower, ops.upAdd I.upper J.upper⟩
 
