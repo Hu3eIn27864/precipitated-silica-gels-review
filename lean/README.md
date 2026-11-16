@@ -4,6 +4,13 @@ This is an isolated Lean 4 project pinned to Lean **v4.35.0**. It does not chang
 
 ## What is proved
 
+### P27.34 — outward-rounded interval addition contract
+
+- Define lower/upper scalar rounding operations and state their enclosure obligations.
+- Prove that endpoint-wise interval addition preserves endpoint ordering and encloses every sum of points from the input intervals, assuming monotonicity of exact addition.
+- The actual IEEE-754 `nextafter` functions are **not** verified by this abstract contract; proving their finite-input rounding properties and overflow policy remains open.
+
+
 ### P27.35 — Horner interval enclosure contract
 
 - Coefficient lists are explicitly stored in ascending degree order (constant term first).
