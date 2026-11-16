@@ -40,11 +40,18 @@ This is an isolated Lean 4 project pinned to Lean **v4.35.0**. It does not chang
 - This is an exact algebraic result, independent of floating-point rounding.
 - It is **not** yet the full four-sign-case theorem: intervals crossing zero and intervals with negative endpoints remain open. The current result must not be applied outside its stated quadrant.
 
-## Roadmap: P27.40–P27.42
+### P27.40 — signed scalar monotonicity
 
-1. **P27.40 — full four-sign-case product.** Prove the general endpoint-extremum result, including negative and zero-crossing intervals, with explicit sign cases and no floating-point assumptions.
-2. **P27.41 — IEEE-754 refinement boundary.** Specify finite binary floating-point values, directed rounding, subnormal behavior, signed zero, and overflow/fail-closed behavior. Choose between a bit-level proof of `nextafter` and a verified refinement to exact rational bounds; tests alone are not a proof.
-3. **P27.42 — certificate pipeline.** Connect polynomial and derivative enclosures to P27.36 root criteria, then define/export a certificate format and prove the checker sound. Algorithmic completeness and Python-to-Lean certificate extraction remain separate obligations.
+- Proves the sign split for multiplication by a fixed scalar over an ordered interval: nonnegative factors are monotone and nonpositive factors are antitone.
+- Provides separate left- and right-factor lemmas, covering zero through the exhaustive order split.
+- The order-compatible multiplication laws remain explicit assumptions to be instantiated for a concrete ordered ring.
+- This is the signed-order foundation for the four-corner theorem, **not** yet the full four-corner min/max enclosure theorem.
+
+## Roadmap: P27.41–P27.43
+
+1. **P27.41 — full four-corner product.** Combine signed scalar monotonicity with an explicit min/max construction to prove the global endpoint-extremum theorem, including intervals crossing zero.
+2. **P27.42 — IEEE-754 refinement boundary.** Specify finite binary floating-point values, directed rounding, subnormal behavior, signed zero, and overflow/fail-closed behavior. Choose between a bit-level proof of `nextafter` and a verified refinement to exact rational bounds; tests alone are not a proof.
+3. **P27.43 — certificate pipeline.** Connect polynomial and derivative enclosures to P27.36 root criteria, then define/export a certificate format and prove the checker sound. Algorithmic completeness and Python-to-Lean certificate extraction remain separate obligations.
 
 ## Open obligations and scope
 
