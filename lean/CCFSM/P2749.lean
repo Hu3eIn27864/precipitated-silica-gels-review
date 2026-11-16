@@ -425,7 +425,7 @@ theorem evalCoefficients_monomial (x c : Rat) (k : Nat) :
         x * (x ^ k * c) = (x * x ^ k) * c := by
           rw [Rat.mul_assoc]
         _ = (x ^ k * x) * c := by rw [Rat.mul_comm x (x ^ k)]
-        _ = x ^ (k + 1) * c := by rw [pow_succ]
+        _ = x ^ (k + 1) * c := by rfl
 
 /-- Exact rational polynomial representing a single monomial. -/
 def monomial (k : Nat) (c : Rat) : RatPolynomial :=
