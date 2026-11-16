@@ -183,3 +183,17 @@ identity, polynomial-level cancellation theorem, recursive division,
 quotient/remainder identity, degree bound, uniqueness, and independent
 checker are **not yet proved**. No Sturm sequence or root-count theorem
 follows from the list-level lemma alone.
+
+## Formal progress update — shifted-vector measure
+
+The Lean module now proves
+`shiftedScaleCoefficients_length`: prefixing a coefficient vector with
+`k` zero slots and scaling its entries preserves the original vector length
+apart from those `k` inserted slots. This is a small but explicit measure
+lemma for the monomial-shift representation used by the next cancellation
+proof.
+
+It does **not** yet prove the convolution identity between multiplication by
+a monomial and shifted scaling, nor does it identify the final coefficient
+with the polynomial leading coefficient. Those remain the next bridge
+obligations. The new lemma is awaiting aggregate Lean CI.
