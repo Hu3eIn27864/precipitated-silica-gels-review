@@ -28,7 +28,7 @@ inductive LeafCertificate (p : α → Prop) (lo hi : α) : Type
       (∀ x, lo ≤ x → x ≤ hi → ¬ p x) →
       LeafCertificate p lo hi
   | unique :
-      (∃! x, InteriorRoot p lo hi x) →
+      UniqueWitness (InteriorRoot p lo hi) →
       LeafCertificate p lo hi
   | unresolved :
       LeafCertificate p lo hi
