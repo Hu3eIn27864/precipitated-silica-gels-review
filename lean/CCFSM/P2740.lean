@@ -37,12 +37,13 @@ structure SignedProductOrder (α : Type)
 /--
 For a fixed multiplier, multiplication maps an ordered interval either
 monotonically or antitonically to the interval between its endpoint products.
-The disjunction is exhaustive, including the zero multiplier.
+The two membership bounds imply c ≤ y ≤ d; hcd is retained as an explicit
+well-formed-interval premise for callers.
 -/
 theorem left_scalar_between_endpoints {α : Type}
     [LE α] [Mul α] [OfNat α 0]
     (ord : SignedProductOrder α)
-    (k c y d : α) (hcd : c ≤ d) (hcy : c ≤ y) (hyd : y ≤ d) :
+    (k c y d : α) (_hcd : c ≤ d) (hcy : c ≤ y) (hyd : y ≤ d) :
     (k * c ≤ k * y ∧ k * y ≤ k * d) ∨
     (k * d ≤ k * y ∧ k * y ≤ k * c) := by
   have hsign : 0 ≤ k ∨ k ≤ 0 := ord.le_total 0 k
@@ -60,7 +61,7 @@ theorem left_scalar_between_endpoints {α : Type}
 theorem right_scalar_between_endpoints {α : Type}
     [LE α] [Mul α] [OfNat α 0]
     (ord : SignedProductOrder α)
-    (k c y d : α) (hcd : c ≤ d) (hcy : c ≤ y) (hyd : y ≤ d) :
+    (k c y d : α) (_hcd : c ≤ d) (hcy : c ≤ y) (hyd : y ≤ d) :
     (c * k ≤ y * k ∧ y * k ≤ d * k) ∨
     (d * k ≤ y * k ∧ y * k ≤ c * k) := by
   have hsign : 0 ≤ k ∨ k ≤ 0 := ord.le_total 0 k
@@ -75,12 +76,13 @@ theorem right_scalar_between_endpoints {α : Type}
          ord.mul_right_antitone_nonpos hk hcy⟩
 
 /--
-Zero is handled by the same exhaustive sign split: both monotonicity laws
-apply when k = 0, so the endpoint products coincide in an instantiated
-ordered ring.
+The sign dichotomy is exhaustive for every scalar. At k = 0 both branches
+hold; equality of the two endpoint products additionally requires the
+zero-annihilation law of the concrete multiplication.
 -/
 theorem zero_is_in_both_sign_branches {α : Type}
-    [LE α] [OfNat α 0] (ord : SignedProductOrder α) (k : α) :
+    [LE α] [Mul α] [OfNat α 0]
+    (ord : SignedProductOrder α) (k : α) :
     0 ≤ k ∨ k ≤ 0 :=
   ord.le_total 0 k
 
