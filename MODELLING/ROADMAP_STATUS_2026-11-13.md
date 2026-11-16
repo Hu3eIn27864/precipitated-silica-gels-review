@@ -173,3 +173,11 @@ checkout.
 - **Not yet proved:** the general monomial-shift/convolution identity, a polynomial-level leading-term cancellation theorem, Euclidean division with remainder, the Sturm sequence construction, endpoint sign-variation handling, and a certified rational root count. Do not describe the current work as a completed Sturm implementation.
 - Next formal gate: prove a length/alignment lemma for recursive convolution on nonempty coefficient vectors; use it to establish multiplication by (X^k c) as a (k)-slot shifted scalar multiple; then lift aligned cancellation from coefficient lists to canonical `RatPolynomial` values. Only after these bridges should Euclidean division and Sturm root counting be implemented.
 - This is a proof of exact algebraic/software statements over `Rat`, not a validation of CCFSM constitutive equations or silica-gel parameter values.
+
+
+### AP F follow-up — zero-padding alignment verified (16 November 2026)
+
+- Added `addCoefficients_zero_scaled_left_of_length_le` in `lean/CCFSM/P2749.lean`. It proves that adding a zero-scaled left vector leaves the right vector unchanged whenever the right vector is at least as long.
+- Aggregate Lean proof-kernel CI passed on code head `793db5f1ecb6ec4e4bda7974fe856b5673ec1d05` (runs 43895569725 and 43895583835).
+- This is an alignment lemma only. The general monomial-shift convolution identity, its required recursive-convolution length bound, polynomial-level cancellation, Euclidean division and Sturm counting remain open.
+- The PSG-048 assessment was also extended after re-reading the Wong et al. manuscript: its water-submerged oedometer tests are loaded consolidation tests, while the 90% RH specimen separately records evaporation-associated shrinkage, high suction and incomplete recovery after resaturation. These are separate evidence channels and neither yields a natural-syneresis rate constant.
