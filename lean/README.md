@@ -135,7 +135,7 @@ modules do not change the Python implementation or the CCFSM version line.
   a fully resolved P27.46 interior tree plus resolved endpoint evidence.
 - The completeness theorem states the order assumptions explicitly and
   requires `lo < hi`; singleton intervals are outside its scope.
-- Lean CI is pending for the first implementation commit.
+- Lean CI passed on the formal implementation: run 43828394409; all 16 targets built, including `CCFSM.P2748`.
 
 ### P27.49 — staged Lean implementation of rational Sturm certificates
 
