@@ -742,4 +742,21 @@ theorem multiplyCoefficients_monomial_final_coefficient
     simp [shiftedScaleCoefficients, scaleCoefficients, List.map_append,
       List.append_assoc]
 
+
+/-- Choosing the quotient of a target final coefficient by a nonzero
+    divisor final coefficient makes the monomial-convolution final term
+    cancel that divisor coefficient exactly. -/
+theorem multiplyCoefficients_monomial_cancels_final
+    (k : Nat) (aR aB : Rat) (xs : List Rat)
+    (hdecomp : ∃ pre, xs = pre ++ [aB]) (haB : aB ≠ 0) :
+    ∃ pre,
+      multiplyCoefficients (monomialCoefficients k (aR / aB)) xs =
+        pre ++ [aR] := by
+  rcases hdecomp with ⟨pre, rfl⟩
+  rw [multiplyCoefficients_monomial k (aR / aB) (pre ++ [aB]) (by simp)]
+  have hcancel : aR / aB * aB = aR := Rat.div_mul_cancel haB
+  refine ⟨List.replicate k 0 ++ scaleCoefficients (aR / aB) pre, ?_⟩
+  simp only [shiftedScaleCoefficients, scaleCoefficients, List.map_append]
+  rw [List.append_assoc, hcancel]
+
 end CCFSM.P2749
