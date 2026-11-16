@@ -494,4 +494,61 @@ theorem eval_scale (c : Rat) (p : RatPolynomial) (x : Rat) :
   simp [eval, scale, ofCoefficients, evalCoefficients_normalize,
     evalCoefficients_scale]
 
+
+/-- Coefficientwise addition preserves the final pair when prefix lengths match. -/
+theorem addCoefficients_append_singleton
+    (xs ys : List Rat) (a b : Rat)
+    (hlen : xs.length = ys.length) :
+    addCoefficients (xs ++ [a]) (ys ++ [b]) =
+      addCoefficients xs ys ++ [a + b] := by
+  induction xs generalizing ys with
+  | nil =>
+      cases ys with
+      | nil => simp [addCoefficients]
+      | cons y ys => simp at hlen
+  | cons x xs ih =>
+      cases ys with
+      | nil => simp at hlen
+      | cons y ys =>
+          have htail : xs.length = ys.length := Nat.succ.inj hlen
+          simp only [List.cons_append, addCoefficients]
+          rw [ih ys htail]
+          simp [addCoefficients]
+
+/-- Subtraction preserves the final pair when prefix lengths match. -/
+theorem subtractCoefficients_append_singleton
+    (xs ys : List Rat) (a b : Rat)
+    (hlen : xs.length = ys.length) :
+    subtractCoefficients (xs ++ [a]) (ys ++ [b]) =
+      subtractCoefficients xs ys ++ [a - b] := by
+  unfold subtractCoefficients
+  rw [List.map_append]
+  have hmap : xs.length = (ys.map (fun z => -z)).length := by
+    simpa using hlen
+  rw [addCoefficients_append_singleton xs (ys.map (fun z => -z)) a (-b) hmap]
+  simp [negateCoefficients, Rat.sub_eq_add_neg]
+
+/-- Removing one trailing zero does not change canonical normalization. -/
+theorem normalizeCoefficients_append_zero (xs : List Rat) :
+    normalizeCoefficients (xs ++ [0]) = normalizeCoefficients xs := by
+  simp [normalizeCoefficients, List.reverse_append, trimReversed]
+
+/-- Trimming reversed coefficients never increases the list length. -/
+theorem trimReversed_length_le (xs : List Rat) :
+    (trimReversed xs).length ≤ xs.length := by
+  induction xs with
+  | nil =>
+      simp [trimReversed]
+  | cons a rest ih =>
+      simp only [trimReversed]
+      split
+      · exact Nat.le_trans ih (Nat.le_succ _)
+      · exact Nat.le_refl _
+
+/-- Canonical normalization never increases the number of coefficients. -/
+theorem normalizeCoefficients_length_le (xs : List Rat) :
+    (normalizeCoefficients xs).length ≤ xs.length := by
+  simp only [normalizeCoefficients, List.length_reverse]
+  exact trimReversed_length_le xs.reverse
+
 end CCFSM.P2749
