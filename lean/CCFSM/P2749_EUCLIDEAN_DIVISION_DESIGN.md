@@ -218,3 +218,22 @@ The corrected shifted-vector length proof passed aggregate Lean CI on
 `43870379199`; Python run `43870379213`). The new singleton-convolution
 lemma is on commit `2d31da40f0a56003c4701db17d88b67e7e0dcb06`;
 its Lean CI is queued and has not yet been claimed as passing.
+
+
+## CI-verified follow-up — singleton convolution (2026-11-16)
+
+The singleton-convolution proof was corrected after the first Lean attempt
+left an unsolved tail goal involving addition of an empty coefficient vector.
+The module now has the explicit helper theorem
+`addCoefficients_nil_right`, and
+`multiplyCoefficients_singleton_left` uses it directly.
+
+The corrected head is `331d63aec9aae029b5dc8931ed0bbece57c6792f`.
+Aggregate Lean runs `43890786828` and `43890798326` both passed;
+the natural-syneresis Python workflow `43890798363` also passed.
+
+This closes the degree-zero singleton case at the raw coefficient-list
+level. It does not establish the general monomial-shift convolution identity,
+a leading-coefficient theorem, polynomial long division, or a Sturm root
+counter. The next proof gate remains the general monomial-shift identity,
+with explicit nonempty-input and coefficient-list alignment conditions.
