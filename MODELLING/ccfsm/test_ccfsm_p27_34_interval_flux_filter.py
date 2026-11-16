@@ -94,5 +94,27 @@ class P2734IntervalFluxFilterTests(unittest.TestCase):
         )
 
 
+    def test_subnormal_underflow_is_still_outward_enclosed(self):
+        import math
+        from fractions import Fraction
+
+        tiny = math.ulp(0.0)
+        result = Interval(tiny) * Interval(tiny)
+        exact = Fraction.from_float(tiny) ** 2
+        self.assertLessEqual(Fraction.from_float(result.lo), exact)
+        self.assertGreaterEqual(Fraction.from_float(result.hi), exact)
+
+    def test_overflow_and_unrepresentable_reciprocal_fail_closed(self):
+        import sys
+
+        largest = sys.float_info.max
+        with self.assertRaises(ValueError):
+            _ = Interval(largest) + Interval(largest)
+        with self.assertRaises(ValueError):
+            _ = Interval(largest) * Interval(largest)
+        with self.assertRaises(ValueError):
+            _ = Interval(math.ulp(0.0)).reciprocal()
+
+
 if __name__ == "__main__":
     unittest.main()
