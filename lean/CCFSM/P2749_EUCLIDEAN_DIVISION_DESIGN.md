@@ -286,3 +286,23 @@ The next gate is to connect the shifted/scaled vector's final coefficient
 to the leading coefficient of a canonical nonzero divisor, then prove the
 exact rational cancellation scalar and lift the existing aligned subtraction
 measure to the polynomial division step.
+
+
+## CI-verified final coefficient of monomial convolution (16 November 2026)
+
+The new theorem `multiplyCoefficients_monomial_final_coefficient`
+now lifts the raw monomial-shift identity to the final coefficient: for a
+nonempty canonical input coefficient vector and a nonzero scalar `c`,
+monomial convolution ends in a nonzero coefficient equal to `c` times
+the input's final coefficient. The proof uses the canonical decomposition
+`xs = init ++ [originalLast]` and the exact rational zero-product law to
+establish nonzeroness.
+
+Aggregate Lean proof-kernel CI passed on code head
+`9532794979961d955878d22bc9f9294bba48b3aa` (run 43897466565).
+This establishes the shifted-divisor leading coefficient at the raw
+coefficient-list level, conditional on canonical nonzero input and nonzero
+scalar. It is not yet a polynomial-division theorem. The next step is to
+instantiate the scalar as `aR / aB` and use exact rational cancellation
+`(aR / aB) * aB = aR`, then combine it with the existing aligned
+subtraction measure.
