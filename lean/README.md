@@ -152,9 +152,12 @@ modules do not change the Python implementation or the CCFSM version line.
 - The current milestone does not yet prove evaluation-preservation laws for
   addition/multiplication, Euclidean division, a Sturm sequence, or a root
   count. It is a polynomial data/arithmetic foundation, not a Sturm checker.
-- Python/Lean bridge design: `CCFSM/P2749_PYTHON_LEAN_BRIDGE_DESIGN.md`.
-  It explicitly handles the Python producer's descending coefficient order,
-  exact dyadic conversion of binary64 inputs, and the checker trust boundary.
+- Python/Lean bridge: design `CCFSM/P2749_PYTHON_LEAN_BRIDGE_DESIGN.md`,
+  serializer `../MODELLING/ccfsm/ccfsm_p27_49_rational_certificate.py`, and
+  tests `../MODELLING/ccfsm/test_ccfsm_p27_49_rational_certificate.py`.
+  Python CI run 43841573685 passed the full CCFSM test job. The existing
+  P27.37 search routine is not yet connected to the serializer, and Lean does
+  not yet parse/verify the payload.
 
 ## Open obligations
 
