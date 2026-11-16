@@ -908,4 +908,40 @@ theorem leadingCoefficient?_eq_last (p : RatPolynomial)
   refine ⟨pre, last, hcoeff, hlast, ?_⟩
   simp [leadingCoefficient?, hcoeff, List.reverse_append]
 
+
+/-- Select the leading-term monomial subtraction from two nonzero
+    canonical polynomials. The zero fallback keeps the definition total;
+    the degree-decrease theorem below requires both inputs to be nonzero. -/
+def subtractMonomialLeading (p q : RatPolynomial) : RatPolynomial :=
+  match leadingCoefficient? p, leadingCoefficient? q with
+  | some aR, some aB =>
+      subtractMonomial p q (p.coefficients.length - q.coefficients.length)
+        (aR / aB)
+  | _, _ => zero
+
+/-- For nonzero canonical dividend and divisor with divisor length no
+    greater than dividend length, the automatically selected leading-term
+    subtraction strictly decreases degree whenever its result is nonzero. -/
+theorem degree?_subtractMonomialLeading_lt
+    (p q : RatPolynomial)
+    (hp : p.coefficients ≠ []) (hq : q.coefficients ≠ [])
+    (hlen : q.coefficients.length ≤ p.coefficients.length)
+    (hresult : (subtractMonomialLeading p q).coefficients ≠ []) :
+    ∃ dResult dDividend,
+      degree? (subtractMonomialLeading p q) = some dResult ∧
+        degree? p = some dDividend ∧ dResult < dDividend := by
+  obtain ⟨rpre, aR, hr, haR, hleadR⟩ := leadingCoefficient?_eq_last p hp
+  obtain ⟨dpre, aB, hd, haB, hleadB⟩ := leadingCoefficient?_eq_last q hq
+  have hsize : p.coefficients.length =
+      (p.coefficients.length - q.coefficients.length) + q.coefficients.length :=
+    (Nat.sub_add_cancel hlen).symm
+  have hresult' :
+      (subtractMonomial p q (p.coefficients.length - q.coefficients.length)
+        (aR / aB)).coefficients ≠ [] := by
+    simpa [subtractMonomialLeading, hleadR, hleadB] using hresult
+  have hstep := degree?_subtractMonomial_lt p q
+    (p.coefficients.length - q.coefficients.length) aR aB
+    ⟨rpre, hr⟩ ⟨dpre, hd⟩ haB hsize hresult'
+  simpa [subtractMonomialLeading, hleadR, hleadB] using hstep
+
 end CCFSM.P2749
