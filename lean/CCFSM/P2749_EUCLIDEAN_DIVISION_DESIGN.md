@@ -385,3 +385,22 @@ The next gate is to make the step computable from nonzero canonical
 polynomials (derive the shift from their degrees and the scalar from their
 leading coefficients), then define well-founded recursion and prove its
 specification independently.
+
+
+## CI-verified canonical monomial-subtraction operation (16 November 2026)
+
+Added `subtractMonomial` as a canonical `RatPolynomial` operation:
+it subtracts a monomial multiple of a divisor polynomial from a dividend and
+normalizes the result. The theorem `degree?_subtractMonomial_lt`
+proves strict degree decrease when the dividend and divisor have the
+specified final coefficients, the divisor final coefficient is nonzero,
+the shifted divisor has the same coefficient-vector length as the dividend,
+and the normalized result is nonzero.
+
+Aggregate Lean proof-kernel CI passed on head
+`a080b7debf84ab3ca96a2402f90f3a625b5134db` (run 43899165470).
+This provides a named canonical-polynomial step suitable for a future
+well-founded recursion. The remaining work is to derive its shift and scalar
+automatically from the two polynomials, handle the zero remainder branch,
+define the quotient accumulator, and prove the quotient/remainder identity
+and remainder-degree bound.
