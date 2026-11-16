@@ -159,7 +159,7 @@ theorem evalFoldl_trimReversed (x : Rat) (xs : List Rat) :
       split
       · rename_i h
         subst a
-        simpa using ih
+        simpa [Rat.zero_add] using ih
       · rfl
 
 /-- Canonical trimming preserves exact polynomial evaluation. -/
@@ -181,11 +181,11 @@ theorem evalCoefficients_add (x : Rat) (xs ys : List Rat) :
       evalCoefficients x xs + evalCoefficients x ys := by
   induction xs generalizing ys with
   | nil =>
-      simp [addCoefficients, evalCoefficients]
+      simp [addCoefficients, evalCoefficients, Rat.zero_add]
   | cons a rest ih =>
       cases ys with
       | nil =>
-          simp [addCoefficients, evalCoefficients_cons, Rat.add_zero]
+          simp [addCoefficients, evalCoefficients, evalCoefficients_cons, Rat.add_zero]
       | cons b tail =>
           rw [addCoefficients, evalCoefficients_cons,
             evalCoefficients_cons, evalCoefficients_cons]
