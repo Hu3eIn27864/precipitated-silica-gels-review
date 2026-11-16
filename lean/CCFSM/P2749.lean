@@ -678,7 +678,7 @@ theorem multiplyCoefficients_monomial_length (k : Nat) (c : Rat)
       change (addCoefficients (scaleCoefficients 0 xs)
         (0 :: multiplyCoefficients (monomialCoefficients k c) xs)).length =
           Nat.succ k + xs.length
-      have htail := ih hxs
+      have htail := ih
       have halign := addCoefficients_zero_scaled_left_of_length_le
         xs (0 :: multiplyCoefficients (monomialCoefficients k c) xs)
         (by simp [htail])
@@ -700,7 +700,7 @@ theorem multiplyCoefficients_monomial (k : Nat) (c : Rat)
       change addCoefficients (scaleCoefficients 0 xs)
         (0 :: multiplyCoefficients (monomialCoefficients k c) xs) =
           0 :: shiftedScaleCoefficients k c xs
-      have htail := ih hxs
+      have htail := ih
       have hlen := multiplyCoefficients_monomial_length k c xs hxs
       have halign := addCoefficients_zero_scaled_left_of_length_le
         xs (0 :: multiplyCoefficients (monomialCoefficients k c) xs)
