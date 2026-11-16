@@ -756,7 +756,8 @@ theorem multiplyCoefficients_monomial_cancels_final
   rw [multiplyCoefficients_monomial k (aR / aB) (pre ++ [aB]) (by simp)]
   have hcancel : aR / aB * aB = aR := Rat.div_mul_cancel haB
   refine ⟨List.replicate k 0 ++ scaleCoefficients (aR / aB) pre, ?_⟩
-  simp only [shiftedScaleCoefficients, scaleCoefficients, List.map_append]
+  simp only [shiftedScaleCoefficients, scaleCoefficients, List.map_append,
+    List.map_cons, List.map_nil]
   rw [List.append_assoc, hcancel]
 
 end CCFSM.P2749
