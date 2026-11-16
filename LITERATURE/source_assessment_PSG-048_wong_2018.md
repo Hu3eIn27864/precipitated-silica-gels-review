@@ -35,3 +35,12 @@ Grade B comparator evidence. This is more useful than a cake-only filtration sou
 - Accepted author manuscript: https://pure.strath.ac.uk/ws/portalfiles/portal/81726721/Wong_etal_EG_2018_A_study_on_the_mechanical_interaction_between_soil_and_colloidal.pdf
 - Institutional article record: https://strathprints.strath.ac.uk/64667/
 - Dataset record and licence: https://pureportal.strath.ac.uk/en/datasets/data-for-a-study-on-the-mechanical-interaction-between-soil-and-c/
+
+
+## Dataset metadata cross-check (16 November 2026)
+
+The University of Strathclyde repository landing page was rechecked directly. It confirms the 17 MB file name `Dataset_Pure_Wong_2018.xlsx`, CC BY 4.0 licence, publication date 14 October 2019, and the dataset description: experimental tests on colloidal silica, Leighton Buzzard sand grouted with colloidal silica, and Speswhite kaolin mixed with colloidal silica; the deposited collection is described as covering oedometer consolidation and direct shear.
+
+This metadata is broader than the filename's “Pure” label. Therefore, **do not assume the workbook contains only pure-gel measurements or that every sheet belongs to the pure-gel series**. The extraction protocol must first inventory every worksheet, specimen/material code, test type, curing age, stress path and replicate, then isolate the pure colloidal-silica subset. Mixed soil–silica sheets must remain separate comparator datasets.
+
+The landing page links the workbook directly and records its CC BY 4.0 terms: https://pureportal.strath.ac.uk/en/datasets/data-for-a-study-on-the-mechanical-interaction-between-soil-and-c/. The workbook itself has not yet been inspected in this work session; no numerical rows, sheet names or paired state matches are claimed.
