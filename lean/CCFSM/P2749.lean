@@ -206,8 +206,9 @@ theorem evalCoefficients_scale (x a : Rat) (xs : List Rat) :
   | nil =>
       simp [scaleCoefficients, evalCoefficients]
   | cons b rest ih =>
-      rw [scaleCoefficients, evalCoefficients_cons,
-        evalCoefficients_cons, ih]
+      change evalCoefficients x (a * b :: scaleCoefficients a rest) =
+        a * evalCoefficients x (b :: rest)
+      rw [evalCoefficients_cons, ih, evalCoefficients_cons]
       calc
         (a * evalCoefficients x rest) * x + a * b =
             a * (evalCoefficients x rest * x) + a * b := by
@@ -220,7 +221,7 @@ theorem evalCoefficients_shift (x : Rat) (xs : List Rat) :
     evalCoefficients x (0 :: xs) =
       x * evalCoefficients x xs := by
   rw [evalCoefficients_cons]
-  simp [Rat.zero_add]
+  simp [Rat.add_zero, Rat.mul_comm]
 
 /-- Horner evaluation respects recursive coefficient convolution. -/
 theorem evalCoefficients_multiply (x : Rat) (xs ys : List Rat) :
@@ -238,8 +239,17 @@ theorem evalCoefficients_multiply (x : Rat) (xs ys : List Rat) :
             x * (evalCoefficients x rest * evalCoefficients x ys) =
             (evalCoefficients x rest * x + a) *
               evalCoefficients x ys := by
-                rw [← Rat.mul_assoc, Rat.mul_comm x (evalCoefficients x rest),
-                  Rat.mul_assoc, ← Rat.add_mul, Rat.add_comm]
+                calc
+                  a * evalCoefficients x ys +
+                      x * (evalCoefficients x rest * evalCoefficients x ys) =
+                      a * evalCoefficients x ys +
+                        (evalCoefficients x rest * x) * evalCoefficients x ys := by
+                          rw [← Rat.mul_assoc, Rat.mul_comm x (evalCoefficients x rest),
+                            Rat.mul_assoc]
+                  _ = (a + evalCoefficients x rest * x) *
+                        evalCoefficients x ys := by rw [← Rat.add_mul]
+                  _ = (evalCoefficients x rest * x + a) *
+                        evalCoefficients x ys := by rw [Rat.add_comm]
         _ = evalCoefficients x (a :: rest) *
               evalCoefficients x ys := by
                 rw [evalCoefficients_cons]
