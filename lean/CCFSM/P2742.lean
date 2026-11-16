@@ -36,34 +36,42 @@ theorem min2_le_left {α : Type} [LE α] [Mul α] [OfNat α 0] [DecidableLE α]
     (ord : CCFSM.P2741.FourCornerOrder α) (a b : α) :
     min2 a b ≤ a := by
   by_cases h : a ≤ b
-  · simp [min2, h]
+  · simp only [min2, if_pos h]
+    exact ord.le_refl a
   · have hba : b ≤ a := (ord.scalar.le_total a b).resolve_left h
-    simp [min2, h, hba]
+    simp only [min2, if_neg h]
+    exact hba
 
 /-- A binary minimum is no greater than its right argument. -/
 theorem min2_le_right {α : Type} [LE α] [Mul α] [OfNat α 0] [DecidableLE α]
     (ord : CCFSM.P2741.FourCornerOrder α) (a b : α) :
     min2 a b ≤ b := by
   by_cases h : a ≤ b
-  · simp [min2, h]
-  · simp [min2, h]
+  · simp only [min2, if_pos h]
+    exact h
+  · simp only [min2, if_neg h]
+    exact ord.le_refl b
 
 /-- A binary maximum is no smaller than its left argument. -/
 theorem left_le_max2 {α : Type} [LE α] [Mul α] [OfNat α 0] [DecidableLE α]
     (ord : CCFSM.P2741.FourCornerOrder α) (a b : α) :
     a ≤ max2 a b := by
   by_cases h : a ≤ b
-  · simp [max2, h]
-  · simp [max2, h]
+  · simp only [max2, if_pos h]
+    exact h
+  · simp only [max2, if_neg h]
+    exact ord.le_refl a
 
 /-- A binary maximum is no smaller than its right argument. -/
 theorem right_le_max2 {α : Type} [LE α] [Mul α] [OfNat α 0] [DecidableLE α]
     (ord : CCFSM.P2741.FourCornerOrder α) (a b : α) :
     b ≤ max2 a b := by
   by_cases h : a ≤ b
-  · simp [max2, h]
+  · simp only [max2, if_pos h]
+    exact ord.le_refl b
   · have hba : b ≤ a := (ord.scalar.le_total a b).resolve_left h
-    simp [max2, h, hba]
+    simp only [max2, if_neg h]
+    exact hba
 
 /-- The four-value minimum is below each of its four inputs. -/
 theorem min4_le_each {α : Type} [LE α] [Mul α] [OfNat α 0] [DecidableLE α]
