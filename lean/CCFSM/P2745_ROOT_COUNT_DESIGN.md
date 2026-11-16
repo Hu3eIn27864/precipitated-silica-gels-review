@@ -38,6 +38,6 @@ Strict-derivative monotonicity appropriately leaves intervals containing derivat
 
 ## Verification state
 
-P27.45 is under active Lean development. The first hosted build exposed a missing explicit strict-order transitivity premise; that premise has now been added to the theorem signature. The next hosted Lean run is the acceptance gate. No claim of P27.45 compilation is made until that run succeeds.
+P27.45 now contains the explicit Type-level unique-root witness, recursive midpoint/leaf witness collector, a theorem that every collected witness is a root in the open parent interval, and a custom duplicate-free list predicate with a recursive proof that the collector has no duplicate coordinates. The Lean build for this collector and distinctness theorem passed (run 43795801299). A further theorem packages the collector length as a lower bound on the number of distinct interior roots; its Lean run is pending and is not yet claimed as compiled.
 
 This module certifies mathematical polynomial roots only. It does not validate noisy measurements, physical input enclosures, or CCFSM constitutive laws.
