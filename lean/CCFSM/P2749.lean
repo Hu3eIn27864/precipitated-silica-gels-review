@@ -895,4 +895,17 @@ theorem degree?_subtractMonomial_lt
       (multiplyCoefficients (monomialCoefficients k (aR / aB))
         q.coefficients)) hp hresult' hstep
 
+
+/-- The leading-coefficient accessor returns the final ascending
+    coefficient of every nonempty canonical polynomial. -/
+theorem leadingCoefficient?_eq_last (p : RatPolynomial)
+    (hp : p.coefficients ≠ []) :
+    ∃ pre last,
+      p.coefficients = pre ++ [last] ∧ last ≠ 0 ∧
+        leadingCoefficient? p = some last := by
+  obtain ⟨pre, last, hcoeff, hlast⟩ :=
+    canonical_coefficients_decompose p hp
+  refine ⟨pre, last, hcoeff, hlast, ?_⟩
+  simp [leadingCoefficient?, hcoeff, List.reverse_append]
+
 end CCFSM.P2749
