@@ -62,6 +62,7 @@ parent interval. This theorem establishes validity, not pairwise distinctness.
 -/
 theorem certifiedRootWitnesses_sound {α : Type} [LE α] [LT α]
     {p : α → Prop} {lo hi : α}
+    (lt_transitive : ∀ {a b c : α}, a < b → b < c → a < c)
     (tree : RootIsolationTree p lo hi) :
     ∀ {x}, x ∈ certifiedRootWitnesses tree →
       InteriorRoot p lo hi x := by
@@ -85,10 +86,10 @@ theorem certifiedRootWitnesses_sound {α : Type} [LE α] [LT α]
       rcases List.mem_append.mp hx with hxLeftMiddle | hxRight
       · rcases List.mem_append.mp hxLeftMiddle with hxLeft | hxMiddle
         · rcases ihl hxLeft with ⟨hlo, hmid, hroot⟩
-          exact ⟨hlo, lt_trans hmid right_order, hroot⟩
+          exact ⟨hlo, lt_transitive hmid right_order, hroot⟩
         · obtain ⟨rfl, hroot⟩ := splitPointWitnesses_sound midpoint hxMiddle
           exact ⟨left_order, right_order, hroot⟩
       · rcases ihr hxRight with ⟨hmid, hhi, hroot⟩
-        exact ⟨lt_trans left_order hmid, hhi, hroot⟩
+        exact ⟨lt_transitive left_order hmid, hhi, hroot⟩
 
 end CCFSM.P2745
