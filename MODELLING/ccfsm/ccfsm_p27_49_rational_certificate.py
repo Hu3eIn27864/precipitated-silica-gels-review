@@ -124,6 +124,8 @@ def validate_polynomial_payload(payload: Any) -> tuple[tuple[Fraction, ...], Fra
     if not isinstance(coefficients, list) or not coefficients:
         raise ValueError("coefficients must be a nonempty list")
     exact_coefficients = tuple(parse_rational_payload(item) for item in coefficients)
+    if exact_coefficients[-1] == 0:
+        raise ValueError("ascending coefficients must be canonical; zero polynomial is unsupported")
     domain = payload["domain"]
     if not isinstance(domain, dict) or set(domain) != {"left", "right"}:
         raise ValueError("domain must contain exactly left and right")
