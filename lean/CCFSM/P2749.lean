@@ -442,4 +442,21 @@ theorem eval_monomial (x c : Rat) (k : Nat) :
   simp [eval, monomial, ofCoefficients, evalCoefficients_normalize,
     evalCoefficients_monomial]
 
+
+/-- The option-valued degree is the list length minus one for every nonzero
+    canonical polynomial. -/
+theorem degree?_some_of_nonempty (p : RatPolynomial)
+    (hp : p.coefficients ≠ []) :
+    degree? p = some (p.coefficients.length - 1) := by
+  obtain ⟨c, hc, hcn⟩ := leadingCoefficient?_nonzero p hp
+  simp [degree?, hc]
+
+/-- Every nonzero canonical polynomial has an explicit last coefficient. -/
+theorem canonical_coefficients_decompose (p : RatPolynomial)
+    (hp : p.coefficients ≠ []) :
+    ∃ init last, p.coefficients = init ++ [last] ∧ last ≠ 0 := by
+  rcases p.canonical with hnil | ⟨init, last, hcoeff, hlast⟩
+  · exact False.elim (hp hnil)
+  · exact ⟨init, last, hcoeff, hlast⟩
+
 end CCFSM.P2749
