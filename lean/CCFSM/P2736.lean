@@ -64,7 +64,7 @@ theorem monotone_roots_unique {α β : Type}
       exact (hzero_irrefl hlt).elim
     · have hlt := hdec hy.1 hy.2.1 hx.1 hx.2.1 hyx
       rw [hy.2.2, hx.2.2] at hlt
-      exact (lt_irrefl 0 hlt).elim
+      exact (hzero_irrefl hlt).elim
 
 /-- Strictly opposite endpoint signs, in either orientation. -/
 def CrossesZero {α β : Type} [LT β] [Zero β]
@@ -97,6 +97,6 @@ theorem unique_root_of_monotone_crossing {α β : Type}
   obtain ⟨x, hx⟩ := hiv.exists_between hcross
   refine ⟨x, hx, ?_⟩
   intro y hy
-  exact (monotone_roots_unique p lo hi hmono htrichotomy hzero_irrefl hy hx).symm
+  exact (monotone_roots_unique p lo hi hmono htrichotomy hzero_irrefl hy hx
 
 end CCFSM.P2736
