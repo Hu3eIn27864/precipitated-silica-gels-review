@@ -97,6 +97,6 @@ theorem unique_root_of_monotone_crossing {α β : Type}
   obtain ⟨x, hx⟩ := hiv.exists_between hcross
   refine ⟨x, hx, ?_⟩
   intro y hy
-  exact (monotone_roots_unique p lo hi hmono htrichotomy hzero_irrefl hy hx
+  exact monotone_roots_unique p lo hi hmono htrichotomy hzero_irrefl hy hx
 
 end CCFSM.P2736
