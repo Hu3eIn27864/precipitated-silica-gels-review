@@ -170,7 +170,7 @@ theorem evalFoldl_trimReversed (x : Rat) (xs : List Rat) :
   | cons a rest ih =>
       simp only [trimReversed]
       split
-      · simp [ih]
+      · simp [ih, h]
       · rfl
 
 /-- Canonical trimming preserves exact polynomial evaluation. -/
@@ -186,14 +186,14 @@ theorem evalCoefficients_add (x : Rat) (xs ys : List Rat) :
       evalCoefficients x xs + evalCoefficients x ys := by
   induction xs generalizing ys with
   | nil =>
-      simp [addCoefficients, evalCoefficients]
+      simp [addCoefficients, evalCoefficients, Rat.zero_add]
   | cons a rest ih =>
       cases ys with
       | nil =>
-          simp [addCoefficients, evalCoefficients]
+          simp [addCoefficients, evalCoefficients, Rat.add_zero]
       | cons b tail =>
-          simp [addCoefficients, evalCoefficients, ih, mul_add,
-            add_assoc, add_comm, add_left_comm]
+          simp [addCoefficients, evalCoefficients, ih, Rat.add_mul,
+            Rat.add_assoc, Rat.add_comm, Rat.add_left_comm]
 
 /-- Exact evaluation of normalized polynomial addition is additive. -/
 theorem eval_add (p q : RatPolynomial) (x : Rat) :
