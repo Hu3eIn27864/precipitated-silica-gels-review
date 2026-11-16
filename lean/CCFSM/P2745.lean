@@ -180,4 +180,33 @@ theorem certifiedRootWitnesses_allDistinct {α : Type} [LE α] [LT α]
         · exact hMidRightSeparate x hxMid y hy hxy
       exact allDistinct_append hLeftMid ihr hLeftMidRight
 
+
+/--
+There are at least n distinct interior roots when n explicit, pairwise-distinct
+root witnesses can be exhibited. This finite-witness definition avoids any
+assumption that the ambient type has a finite cardinality.
+-/
+def HasAtLeastDistinctInteriorRoots {α : Type} [LT α]
+    (p : α → Prop) (lo hi : α) (n : Nat) : Prop :=
+  ∃ witnesses : List α,
+    witnesses.length = n ∧
+    (∀ x, x ∈ witnesses → InteriorRoot p lo hi x) ∧
+    AllDistinct witnesses
+
+/--
+The number of coordinates emitted by the certified-tree collector is a sound
+lower bound on the number of distinct interior roots. Unresolved leaves
+simply contribute no witness and therefore cannot inflate this lower bound.
+-/
+theorem certifiedRootWitnesses_lower_bound {α : Type} [LE α] [LT α]
+    {p : α → Prop} {lo hi : α}
+    (lt_transitive : ∀ {a b c : α}, a < b → b < c → a < c)
+    (lt_irrefl : ∀ a : α, ¬ a < a)
+    (tree : RootIsolationTree p lo hi) :
+    HasAtLeastDistinctInteriorRoots p lo hi
+      (certifiedRootWitnesses tree).length := by
+  refine ⟨certifiedRootWitnesses tree, rfl, ?_, ?_⟩
+  · exact certifiedRootWitnesses_sound lt_transitive tree
+  · exact certifiedRootWitnesses_allDistinct lt_transitive lt_irrefl tree
+
 end CCFSM.P2745
