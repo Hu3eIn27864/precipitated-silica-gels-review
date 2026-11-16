@@ -217,3 +217,10 @@ Added `MODELLING/SYNERESIS_OBSERVABLE_SCALE_MATRIX.md` to separate solution spec
 - Added `normalize_subtract_monomial_step_length_strict` in `lean/CCFSM/P2749.lean`. If the dividend and monomial-shifted divisor coefficient vectors have equal lengths and their final coefficients are matched using the exact quotient scalar `aR / aB` (with `aB ≠ 0`), the normalized subtraction has strictly shorter coefficient-vector length.
 - Aggregate Lean proof-kernel CI passed on head `58395a0ff57652d34813195c1d55ef703bb185bf` (run 43898301079).
 - This supplies the raw-list well-founded measure for a single long-division step. Still open: canonical `RatPolynomial` packaging, proof that nonzero canonical degree equals length minus one in the required operation, well-founded quotient/remainder recursion, and independent quotient/remainder correctness checks.
+
+
+### AP F follow-up — polynomial degree/length correspondence verified (16 November 2026)
+
+- Added `degree?_add_one_eq_length`: every nonzero canonical `RatPolynomial` has degree `d` with `d + 1 = coefficients.length`.
+- Aggregate Lean proof-kernel CI passed on head `d48061afe287a0be9f371a77e11fe1d0e18b0678` (run 43898652903).
+- This provides the measure conversion needed to lift the raw normalized coefficient-vector decrease to polynomial degree after canonical packaging. It does not yet prove that a specific division remainder has lower degree.
