@@ -21,8 +21,8 @@ input pair and must handle overflow according to its fail-closed policy.
 structure OutwardAddition (α : Type) [Preorder α] [Add α] where
   downAdd : α → α → α
   upAdd : α → α → α
-  lower_sound : ∀ a b, downAdd a b ≤ a + b
-  upper_sound : ∀ a b, a + b ≤ upAdd a b
+  lower_sound : ∀ (a b : α), downAdd a b ≤ a + b
+  upper_sound : ∀ (a b : α), a + b ≤ upAdd a b
   add_mono : ∀ {a b c d : α}, a ≤ b → c ≤ d → a + c ≤ b + d
 
 /-- Endpoint-wise outward-rounded interval addition. -/
