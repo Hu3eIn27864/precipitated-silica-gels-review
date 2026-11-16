@@ -39,8 +39,8 @@ class TestP2718(unittest.TestCase):
         r=reconstruct_onsager_species_flux((1.,1.),(0.,0.),(.8,.8),.5,2.,1.,1.,1.,0.,0.)
         self.assertEqual(r["diffusive_face_flux"],(0.,0.,0.))
     def test_bad_positive_domain(self):
-        r=reconstruct_onsager_species_flux((0.,),(1.,),(.8,),.5,2.,1.,1.,1.,0.,0.)
-        self.assertIn(r.get("status"),("invalid_or_malformed_input",None))
+        with self.assertRaisesRegex(ValueError,"concentration must be positive"):
+            reconstruct_onsager_species_flux((0.,),(1.,),(.8,),.5,2.,1.,1.,1.,0.,0.)
         self.assertFalse(audit_onsager_diffusion(((0.,),)*2,((0.,),)*2,(.8,),(.5,.5),2.,1.,
             (.5,.5),(.5,.5),(0.,0.),(0.,0.),((0.,0.),)*2,((0.,0.),)*2,(0.,0.))["overall_pass"])
     def test_p13_snapshot_adapter(self):
