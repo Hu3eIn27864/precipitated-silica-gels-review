@@ -292,4 +292,27 @@ theorem evalCoefficients_linear (x a b : Rat) :
     evalCoefficients x [a, b] = a + b * x := by
   simp [evalCoefficients, Rat.add_comm, Rat.mul_comm, Rat.add_zero]
 
+
+/-- The derivative of a constant polynomial evaluates to zero. -/
+theorem eval_derivative_constant (x a : Rat) :
+    eval (derivative (ofCoefficients [a])) x = 0 := by
+  simp [eval, derivative, ofCoefficients, derivativeCoefficients_constant,
+    normalizeCoefficients, trimReversed, evalCoefficients]
+
+/-- The derivative of a linear polynomial evaluates to its exact slope
+    coefficient (including the core rational embedding of one). -/
+theorem eval_derivative_linear (x a b : Rat) :
+    eval (derivative (ofCoefficients [a, b])) x =
+      Rat.ofInt 1 * b := by
+  simp [eval, derivative, ofCoefficients, derivativeCoefficients_linear,
+    evalCoefficients_normalize, evalCoefficients_constant]
+
+/-- The derivative of a quadratic polynomial evaluates to its exact
+    first-degree derivative polynomial. -/
+theorem eval_derivative_quadratic (x a b c : Rat) :
+    eval (derivative (ofCoefficients [a, b, c])) x =
+      Rat.ofInt 1 * b + (Rat.ofInt 2 * c) * x := by
+  simp [eval, derivative, ofCoefficients, derivativeCoefficients_quadratic,
+    evalCoefficients_normalize, evalCoefficients_linear]
+
 end CCFSM.P2749
