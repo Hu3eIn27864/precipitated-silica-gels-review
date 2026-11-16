@@ -103,3 +103,18 @@ This is an isolated Lean 4 project pinned to Lean **v4.35.0**. It does not chang
 ## Build
 
 From this directory run `lake update` once if no `lake-manifest.json` is present, then `lake build`. The dedicated GitHub Actions workflow performs both commands.
+
+### P27.45 — explicit root witnesses and lower bounds
+
+- Stores a concrete coordinate in each unique-root certificate and recursively collects unique-leaf and certified midpoint witnesses.
+- Proves every collected witness is an interior root and proves the collector is duplicate-free using strict separation of child intervals.
+- Consequently, the collector length is a sound lower bound on the number of distinct interior roots.
+- Lean CI: run 43795945691, 14 targets.
+
+### P27.46 — completeness of fully resolved root partitions
+
+- Adds the converse direction: if the partition tree is fully resolved, every interior root of the parent interval must occur in the witness collector.
+- Combines completeness with P27.45 soundness to prove membership equivalence between the witness list and all interior roots.
+- Defines an exact root-count certificate as the witness-list length plus that membership equivalence. The exact count is conditional on explicit strict-to-nonstrict order conversion and trichotomy.
+- Does not yet prove that a practical floating-point/Python producer can construct the required evidence. Endpoint roots remain excluded from the *interior* count and require separate reporting if a closed-interval count is desired.
+- Tangential/multiple roots still require a method beyond strict-derivative monotonicity, e.g. exact Sturm certificates.
