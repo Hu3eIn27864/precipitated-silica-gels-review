@@ -306,7 +306,7 @@ theorem eval_derivative_constant (x a : Rat) :
       Or.inr ⟨[], a, by simp, ha⟩
     have hnorm := normalizeCoefficients_of_canonical [a] hcan
     rw [hnorm, derivativeCoefficients_constant, evalCoefficients_normalize]
-    simp [evalCoefficients]
+    simp [evalCoefficients, normalizeCoefficients, trimReversed]
 
 /-- The derivative of a linear polynomial evaluates to its exact slope
     coefficient (including the core rational embedding of one). -/
@@ -322,7 +322,9 @@ theorem eval_derivative_linear (x a b : Rat) :
         normalizeCoefficients [a] := by
       simp [normalizeCoefficients, trimReversed]
     rw [hnorm]
-    exact eval_derivative_constant x a
+    change eval (derivative (ofCoefficients [a])) x = Rat.ofInt 1 * 0
+    rw [eval_derivative_constant]
+    simp [Rat.mul_zero]
   · have hcan : CanonicalCoefficients [a, b] :=
       Or.inr ⟨[a], b, by simp, hb⟩
     have hnorm := normalizeCoefficients_of_canonical [a, b] hcan
@@ -344,7 +346,10 @@ theorem eval_derivative_quadratic (x a b c : Rat) :
         normalizeCoefficients [a, b] := by
       simp [normalizeCoefficients, trimReversed]
     rw [hnorm]
-    exact eval_derivative_linear x a b
+    change eval (derivative (ofCoefficients [a, b])) x =
+      Rat.ofInt 1 * b + (Rat.ofInt 2 * 0) * x
+    rw [eval_derivative_linear]
+    simp [Rat.mul_zero]
   · have hcan : CanonicalCoefficients [a, b, c] :=
       Or.inr ⟨[a, b], c, by simp, hc⟩
     have hnorm := normalizeCoefficients_of_canonical [a, b, c] hcan
