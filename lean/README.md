@@ -84,6 +84,12 @@ This is an isolated Lean 4 project pinned to Lean **v4.35.0**. It does not chang
 1. **P27.43 — IEEE-754 refinement boundary.** Specify finite binary floating-point values, directed rounding, subnormal behavior, signed zero, and overflow/fail-closed behavior. Choose between a bit-level proof of `nextafter` and a verified refinement to exact rational bounds; tests alone are not a proof.
 2. **P27.44 — certificate pipeline.** Connect polynomial and derivative enclosures to P27.36 root criteria, then define/export a certificate format and prove the checker sound. Algorithmic completeness and Python-to-Lean certificate extraction remain separate obligations.
 
+### P27.45 — explicit root witnesses and count certificates
+
+- Implementation: `CCFSM/P2745.lean`; design and proof obligations: `CCFSM/P2745_ROOT_COUNT_DESIGN.md`.
+- Current goal: prove pairwise-distinct witness collection from strict open child intervals and unique midpoint ownership. Do not interpret list length as a root count before that theorem is proved.
+- Finite upper bounds additionally require outer endpoint and split-point evidence and no unresolved nodes.
+
 ## Open obligations and scope
 
 - Connect the exact comparison-tree operation to a concrete numeric representation and instantiate its order and multiplication laws.
