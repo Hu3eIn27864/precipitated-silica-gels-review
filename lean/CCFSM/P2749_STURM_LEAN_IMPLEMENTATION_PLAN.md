@@ -175,3 +175,32 @@ Before starting Euclidean division, prove the derivative-evaluation
 identity over `Rat` and add explicit examples for constant, linear,
 quadratic, zero, and repeated-factor polynomials. Keep the zero polynomial
 outside the finite Sturm-count API.
+
+
+## Progress checkpoint — exact division groundwork
+
+The initial rational-polynomial layer now additionally includes:
+
+- exact coefficientwise negation and subtraction, with evaluation-preservation
+  theorems;
+- normalized polynomial negation and subtraction, again with exact
+  evaluation-preservation theorems;
+- exact monomial coefficient vectors and a recursively defined rational
+  power `ratPow`, with a proof of the monomial evaluation identity;
+- shifted-and-scaled coefficient vectors, with an exact evaluation theorem;
+- polynomial scalar multiplication and its evaluation law;
+- degree extraction for every nonzero canonical polynomial, plus an explicit
+  decomposition into an initial coefficient list and a nonzero final
+  coefficient.
+
+CI confirmations:
+- run 43845481235: P27.49 degree/decomposition lemmas and the earlier
+  monomial groundwork build in all 17 aggregate targets;
+- run 43845534915: shifted-scale coefficient vectors and exact polynomial
+  scaling build in all 17 aggregate targets.
+
+The Euclidean division module remains **design-only**. The next formal step is
+to make the top-coefficient cancellation operation explicit and prove that
+its result either is zero or has strictly smaller degree than the current
+remainder. The recursion must be justified by that decrease, not by an
+arbitrary fuel ceiling.
