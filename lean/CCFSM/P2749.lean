@@ -282,4 +282,14 @@ theorem derivativeCoefficients_quadratic (a b c : Rat) :
     derivativeCoefficients [a, b, c] = [Rat.ofInt 1 * b, Rat.ofInt 2 * c] := by
   simp [derivativeCoefficients, derivativeCoefficients.derivativeTail]
 
+
+/-- Exact Horner values for constant and linear coefficient lists. -/
+theorem evalCoefficients_constant (x a : Rat) :
+    evalCoefficients x [a] = a := by
+  simp [evalCoefficients]
+
+theorem evalCoefficients_linear (x a b : Rat) :
+    evalCoefficients x [a, b] = a + b * x := by
+  simp [evalCoefficients, Rat.add_comm, Rat.mul_comm]
+
 end CCFSM.P2749
