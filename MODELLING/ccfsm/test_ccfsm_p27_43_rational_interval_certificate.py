@@ -2,6 +2,7 @@ import math
 import unittest
 from fractions import Fraction
 
+from ccfsm_p27_34_interval_flux_filter import Interval
 from ccfsm_p27_43_rational_interval_certificate import (
     CERTIFICATE_SCHEMA,
     CertificateError,
@@ -32,6 +33,28 @@ def _certificate(operation, lhs, rhs, result):
 
 
 class P2743RationalCertificateTests(unittest.TestCase):
+    def test_existing_interval_filter_passes_independent_checker(self):
+        cases = [
+            (Interval(0.1, 0.2), Interval(0.3, 0.4), "add"),
+            (Interval(-2.0, 3.0), Interval(-5.0, 4.0), "mul"),
+            (Interval(-2.0, 1.0), Interval(-4.0, -2.0), "div"),
+        ]
+        for lhs, rhs, operation in cases:
+            with self.subTest(operation=operation):
+                if operation == "add":
+                    result = lhs + rhs
+                elif operation == "mul":
+                    result = lhs * rhs
+                else:
+                    result = lhs / rhs
+                report = verify_interval_certificate(
+                    _certificate(
+                        operation, (lhs.lo, lhs.hi), (rhs.lo, rhs.hi),
+                        (result.lo, result.hi),
+                    )
+                )
+                self.assertTrue(report["valid"])
+
     def test_addition_certificate_is_checked_exactly(self):
         lhs, rhs = (0.1, 0.2), (0.3, 0.4)
         exact_lo = _fraction(lhs[0]) + _fraction(rhs[0])
@@ -143,6 +166,10 @@ class P2743RationalCertificateTests(unittest.TestCase):
         with self.assertRaises(CertificateError):
             verify_interval_certificate(
                 _certificate("mul", (True, 2.0), (3.0, 4.0), (3.0, 8.0))
+            )
+        with self.assertRaises(CertificateError):
+            verify_interval_certificate(
+                _certificate("mul", (1, 2.0), (3.0, 4.0), (3.0, 8.0))
             )
         with self.assertRaises(CertificateError):
             verify_interval_certificate(
