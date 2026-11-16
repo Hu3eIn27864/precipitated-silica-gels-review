@@ -204,3 +204,31 @@ to make the top-coefficient cancellation operation explicit and prove that
 its result either is zero or has strictly smaller degree than the current
 remainder. The recursion must be justified by that decrease, not by an
 arbitrary fuel ceiling.
+
+
+## Progress checkpoint — leading-term cancellation (2026-11-16)
+
+The coefficient-list layer now proves the first exact cancellation facts needed
+by long division:
+
+- aligned subtraction preserves the final coefficient as the difference of
+  the two final coefficients;
+- equal final coefficients therefore cancel to an explicit trailing zero;
+- canonical normalization removes that trailing zero;
+- the resulting normalized coefficient vector has length no greater than the
+  common prefix length, strictly below the original nonzero vector length.
+
+The new lemmas are
+`subtractCoefficients_append_singleton`,
+`subtractCoefficients_append_equal_last`,
+`addCoefficients_length_le_of_equal`, and
+`normalize_aligned_cancellation_length` in `CCFSM/P2749.lean`.
+
+Lean CI run 43868853530 passed the aggregate build (17/17 targets).
+
+**Scope boundary:** this is the list-level leading-term cancellation lemma.
+The full polynomial step is not yet proved: we still need to connect the
+shifted/scaled divisor to monomial multiplication, construct the exact scalar
+quotient of leading coefficients, lift the length bound to a strict degree
+bound, and prove the quotient/remainder recursion. No Euclidean division or
+Sturm sequence is claimed yet.
