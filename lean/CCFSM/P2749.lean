@@ -356,4 +356,54 @@ theorem eval_derivative_quadratic (x a b c : Rat) :
     rw [hnorm, evalCoefficients_normalize, derivativeCoefficients_quadratic]
     exact evalCoefficients_linear x _ _
 
+
+/-- Coefficientwise additive inverse. -/
+def negateCoefficients (xs : List Rat) : List Rat :=
+  xs.map (fun a => -a)
+
+/-- Coefficientwise subtraction, with missing coefficients treated as zero. -/
+def subtractCoefficients (xs ys : List Rat) : List Rat :=
+  addCoefficients xs (negateCoefficients ys)
+
+/-- Exact Horner evaluation commutes with coefficientwise negation. -/
+theorem evalCoefficients_neg (x : Rat) (xs : List Rat) :
+    evalCoefficients x (negateCoefficients xs) =
+      -evalCoefficients x xs := by
+  induction xs with
+  | nil =>
+      simp [negateCoefficients, evalCoefficients]
+  | cons a rest ih =>
+      change evalCoefficients x
+        (-a :: negateCoefficients rest) =
+          -evalCoefficients x (a :: rest)
+      rw [evalCoefficients_cons, evalCoefficients_cons, ih]
+      simp [Rat.neg_mul, Rat.neg_add]
+
+/-- Exact evaluation of coefficientwise subtraction. -/
+theorem evalCoefficients_subtract (x : Rat) (xs ys : List Rat) :
+    evalCoefficients x (subtractCoefficients xs ys) =
+      evalCoefficients x xs - evalCoefficients x ys := by
+  simp [subtractCoefficients, evalCoefficients_add, evalCoefficients_neg,
+    Rat.sub_eq_add_neg, Rat.add_assoc]
+
+/-- Polynomial negation over exact rational coefficients. -/
+def negate (p : RatPolynomial) : RatPolynomial :=
+  ofCoefficients (negateCoefficients p.coefficients)
+
+/-- Polynomial subtraction over exact rational coefficients. -/
+def subtract (p q : RatPolynomial) : RatPolynomial :=
+  ofCoefficients (subtractCoefficients p.coefficients q.coefficients)
+
+/-- Exact polynomial negation agrees with the negative of evaluation. -/
+theorem eval_negate (p : RatPolynomial) (x : Rat) :
+    eval (negate p) x = -eval p x := by
+  simp [eval, negate, ofCoefficients, evalCoefficients_normalize,
+    evalCoefficients_neg]
+
+/-- Exact polynomial subtraction agrees with subtraction of evaluations. -/
+theorem eval_subtract (p q : RatPolynomial) (x : Rat) :
+    eval (subtract p q) x = eval p x - eval q x := by
+  simp [eval, subtract, ofCoefficients, evalCoefficients_normalize,
+    evalCoefficients_subtract]
+
 end CCFSM.P2749
