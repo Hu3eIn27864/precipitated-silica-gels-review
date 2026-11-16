@@ -181,3 +181,12 @@ checkout.
 - Aggregate Lean proof-kernel CI passed on code head `793db5f1ecb6ec4e4bda7974fe856b5673ec1d05` (runs 43895569725 and 43895583835).
 - This is an alignment lemma only. The general monomial-shift convolution identity, its required recursive-convolution length bound, polynomial-level cancellation, Euclidean division and Sturm counting remain open.
 - The PSG-048 assessment was also extended after re-reading the Wong et al. manuscript: its water-submerged oedometer tests are loaded consolidation tests, while the 90% RH specimen separately records evaporation-associated shrinkage, high suction and incomplete recovery after resaturation. These are separate evidence channels and neither yields a natural-syneresis rate constant.
+
+
+### AP F follow-up — general monomial-shift identity verified (16 November 2026)
+
+- Proved `multiplyCoefficients_monomial_length` and `multiplyCoefficients_monomial` in `lean/CCFSM/P2749.lean`. Recursive convolution by the coefficient vector of `X^k*c` has the expected `k + xs.length` coefficient count and equals a `k`-slot low-degree shift followed by coefficientwise scaling.
+- The theorem requires a nonempty right-hand coefficient vector. The current raw convolution representation behaves differently on an empty right vector; the premise is intentional and must be preserved until the zero-polynomial representation is handled at the polynomial layer.
+- Aggregate Lean proof-kernel CI passed on head `f05c6c36dac64e2b358da0534c47c68ba3138eae` (run 43896907930).
+- **Still open:** shifted-vector final-coefficient / divisor-leading-coefficient bridge, exact rational cancellation scalar, polynomial-level strict degree decrease, Euclidean division, and Sturm sequence/root counting.
+- Added a separate PSG-010 assessment for Matinfar & Nychka (2023), emphasizing the dynamic speciation variables and the review's secondary-evidence limits. No numerical constitutive law or molecular-to-macroscopic parameter mapping is claimed.
