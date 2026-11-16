@@ -44,5 +44,55 @@ class P2734IntervalFluxFilterTests(unittest.TestCase):
             Interval(0.0, float("inf"))
 
 
+    def test_arithmetic_enclosures_against_exact_binary_rationals(self):
+        """Check endpoint operations against exact values of their float inputs."""
+        from fractions import Fraction
+
+        cases = [
+            (Interval(-3.0, -1.0), Interval(-2.0, 4.0)),
+            (Interval(-3.0, 2.0), Interval(-5.0, -0.5)),
+            (Interval(0.25, 1.5), Interval(2.0, 3.0)),
+            (Interval(-0.75, 0.125), Interval(-0.5, 0.25)),
+        ]
+        for a, b in cases:
+            add = a + b
+            exact_add_lo = Fraction.from_float(a.lo) + Fraction.from_float(b.lo)
+            exact_add_hi = Fraction.from_float(a.hi) + Fraction.from_float(b.hi)
+            self.assertLessEqual(Fraction.from_float(add.lo), exact_add_lo)
+            self.assertGreaterEqual(Fraction.from_float(add.hi), exact_add_hi)
+
+            product = a * b
+            exact_products = [
+                Fraction.from_float(x) * Fraction.from_float(y)
+                for x in (a.lo, a.hi) for y in (b.lo, b.hi)
+            ]
+            self.assertLessEqual(Fraction.from_float(product.lo), min(exact_products))
+            self.assertGreaterEqual(Fraction.from_float(product.hi), max(exact_products))
+
+    def test_reciprocal_and_square_enclosures_against_exact_rationals(self):
+        from fractions import Fraction
+
+        for interval in (Interval(0.25, 2.0), Interval(-4.0, -0.5)):
+            reciprocal = interval.reciprocal()
+            exact_reciprocals = [
+                Fraction(1, 1) / Fraction.from_float(x)
+                for x in (interval.lo, interval.hi)
+            ]
+            self.assertLessEqual(Fraction.from_float(reciprocal.lo), min(exact_reciprocals))
+            self.assertGreaterEqual(Fraction.from_float(reciprocal.hi), max(exact_reciprocals))
+
+            square = interval.square()
+            exact_squares = [Fraction.from_float(x) ** 2 for x in (interval.lo, interval.hi)]
+            self.assertLessEqual(Fraction.from_float(square.lo), min(exact_squares))
+            self.assertGreaterEqual(Fraction.from_float(square.hi), max(exact_squares))
+
+        crossing = Interval(-2.0, 3.0).square()
+        self.assertLessEqual(Fraction.from_float(crossing.lo), Fraction(0))
+        self.assertGreaterEqual(
+            Fraction.from_float(crossing.hi),
+            Fraction.from_float(3.0) ** 2,
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
