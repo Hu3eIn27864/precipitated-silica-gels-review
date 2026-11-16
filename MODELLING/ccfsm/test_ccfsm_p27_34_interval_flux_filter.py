@@ -105,6 +105,7 @@ class P2734IntervalFluxFilterTests(unittest.TestCase):
         self.assertGreaterEqual(Fraction.from_float(result.hi), exact)
 
     def test_overflow_and_unrepresentable_reciprocal_fail_closed(self):
+        import math
         import sys
 
         largest = sys.float_info.max
