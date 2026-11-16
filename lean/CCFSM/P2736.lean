@@ -40,18 +40,20 @@ def InteriorZero {α β : Type} [LT α] [Zero β]
 
 /-- Strict monotonicity excludes two distinct interior zeros. -/
 theorem monotone_roots_unique {α β : Type}
-    [LinearOrder α] [LinearOrder β] [Zero β]
+    [LT α] [LT β] [Zero β]
     (p : α → β) (lo hi : α)
     (hmono : StrictlyMonotoneOn p lo hi)
+    (htrichotomy : ∀ x y : α, x < y ∨ x = y ∨ y < x)
+    (hzero_irrefl : ¬ (0 : β) < 0)
     {x y : α}
     (hx : InteriorZero p lo hi x)
     (hy : InteriorZero p lo hi y) :
     x = y := by
-  rcases lt_trichotomy x y with hxy | heq | hyx
+  rcases htrichotomy x y with hxy | heq | hyx
   · rcases hmono with hinc | hdec
     · have hlt := hinc hx.1 hx.2 hy.1 hy.2 hxy
       rw [hx.2.2, hy.2.2] at hlt
-      exact (lt_irrefl 0 hlt).elim
+      exact (hzero_irrefl hlt).elim
     · have hlt := hdec hx.1 hx.2 hy.1 hy.2 hxy
       rw [hx.2.2, hy.2.2] at hlt
       exact (lt_irrefl 0 hlt).elim
@@ -86,12 +88,15 @@ theorem unique_root_of_monotone_crossing {α β : Type}
     [LinearOrder α] [LinearOrder β] [Zero β]
     (p : α → β) (lo hi : α)
     (hmono : StrictlyMonotoneOn p lo hi)
+    (htrichotomy : ∀ x y : α, x < y ∨ x = y ∨ y < x)
+    (hzero_irrefl : ¬ (0 : β) < 0)
     (hiv : IntermediateValueOn p lo hi)
     (hcross : CrossesZero p lo hi) :
-    ∃! x, InteriorZero p lo hi x := by
+    ∃ x, InteriorZero p lo hi x ∧
+      ∀ y, InteriorZero p lo hi y → y = x := by
   obtain ⟨x, hx⟩ := hiv.exists_between hcross
   refine ⟨x, hx, ?_⟩
   intro y hy
-  exact (monotone_roots_unique p lo hi hmono hy hx).symm
+  exact (monotone_roots_unique p lo hi hmono htrichotomy hzero_irrefl hy hx).symm
 
 end CCFSM.P2736
