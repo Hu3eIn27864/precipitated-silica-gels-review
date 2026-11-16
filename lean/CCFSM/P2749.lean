@@ -185,7 +185,7 @@ theorem evalCoefficients_add (x : Rat) (xs ys : List Rat) :
   | cons a rest ih =>
       cases ys with
       | nil =>
-          simp [addCoefficients, evalCoefficients, evalCoefficients_cons]
+          simp [addCoefficients, evalCoefficients, Rat.add_zero]
       | cons b tail =>
           rw [addCoefficients, evalCoefficients_cons,
             evalCoefficients_cons, evalCoefficients_cons]
