@@ -404,3 +404,26 @@ well-founded recursion. The remaining work is to derive its shift and scalar
 automatically from the two polynomials, handle the zero remainder branch,
 define the quotient accumulator, and prove the quotient/remainder identity
 and remainder-degree bound.
+
+
+## CI-verified automatic leading-term subtraction (16 November 2026)
+
+Added `leadingCoefficient?_eq_last` to expose the final ascending
+coefficient of every nonzero canonical polynomial through the existing
+leading-coefficient accessor. On that basis, `subtractMonomialLeading`
+now selects the degree shift `p.length - q.length` and scalar
+`aR / aB` automatically from the two leading coefficients (with a
+zero fallback only to keep the definition total outside its intended
+nonzero-input domain).
+
+The theorem `degree?_subtractMonomialLeading_lt` proves that for
+nonzero canonical dividend and divisor, with divisor coefficient length no
+greater than the dividend's, the automatically selected subtraction has
+strictly smaller degree whenever its normalized result is nonzero.
+Aggregate Lean proof-kernel CI passed on head
+`962b98271e9f58b2e3093b38dac9b5109e1951a4` (run 43899461813).
+
+This removes the caller-supplied shift and leading-coefficient witnesses
+from the one-step theorem. The remaining recursion design must handle the
+zero remainder as a terminal case, accumulate quotient monomials, and prove
+the quotient/remainder identity and the remainder-degree bound.
