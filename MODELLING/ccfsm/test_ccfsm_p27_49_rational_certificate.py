@@ -83,6 +83,9 @@ class P2749RationalCertificateTests(unittest.TestCase):
             validate_polynomial_payload(bad)
         with self.assertRaises(ValueError):
             polynomial_payload([1.0], 1.0, 1.0)
+        zero = polynomial_payload([0.0], 0.0, 1.0)
+        with self.assertRaises(ValueError):
+            validate_polynomial_payload(zero)
 
     def test_payload_is_json_serializable_without_float_values(self):
         payload = polynomial_payload([1.0, -0.3], 0.0, 1.0)
