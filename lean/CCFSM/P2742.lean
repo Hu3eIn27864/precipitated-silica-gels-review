@@ -47,7 +47,7 @@ theorem min2_le_right {α : Type} [LE α] [Mul α] [OfNat α 0] [DecidableLE α]
     min2 a b ≤ b := by
   unfold min2
   by_cases h : a ≤ b
-  · exact ord.le_refl a
+  · exact h
   · exact ord.le_refl b
 
 /-- A binary maximum is no smaller than its left argument. -/
