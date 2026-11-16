@@ -206,7 +206,8 @@ theorem certifiedRootWitnesses_lower_bound {α : Type} [LE α] [LT α]
     HasAtLeastDistinctInteriorRoots p lo hi
       (certifiedRootWitnesses tree).length := by
   refine ⟨certifiedRootWitnesses tree, rfl, ?_, ?_⟩
-  · exact certifiedRootWitnesses_sound lt_transitive tree
+  · intro x hx
+    exact certifiedRootWitnesses_sound lt_transitive tree hx
   · exact certifiedRootWitnesses_allDistinct lt_transitive lt_irrefl tree
 
 end CCFSM.P2745
