@@ -53,7 +53,7 @@ theorem allDistinct_append {α : Type} {xs ys : List α}
     (hys : AllDistinct ys)
     (hseparate : ∀ x, x ∈ xs → ∀ y, y ∈ ys → x ≠ y) :
     AllDistinct (xs ++ ys) := by
-  induction xs generalizing ys hys hseparate with
+  induction xs generalizing ys hys with
   | nil =>
       simpa [AllDistinct] using hys
   | cons a rest ih =>
@@ -142,7 +142,7 @@ theorem certifiedRootWitnesses_allDistinct {α : Type} [LE α] [LT α]
   induction tree with
   | leaf evidence =>
       cases evidence <;> simp [certifiedRootWitnesses, AllDistinct]
-  | @split lo mid hi left_order right_order midpoint left right ihl ihr =>
+  | @split lo m hi left_order right_order midpoint left right ihl ihr =>
       have hLeftBelow : ∀ x, x ∈ certifiedRootWitnesses left → x < mid := by
         intro x hx
         exact (certifiedRootWitnesses_sound lt_transitive left hx).2.1
@@ -155,7 +155,7 @@ theorem certifiedRootWitnesses_allDistinct {α : Type} [LE α] [LT α]
         intro x hx y hy hxy
         obtain ⟨rfl, _⟩ := splitPointWitnesses_sound midpoint hy
         subst x
-        exact (lt_irrefl mid (hLeftBelow mid hx)).elim
+        exact (lt_irrefl m (hLeftBelow m hx)).elim
       have hLeftRightSeparate :
           ∀ x, x ∈ certifiedRootWitnesses left →
             ∀ y, y ∈ certifiedRootWitnesses right → x ≠ y := by
@@ -169,7 +169,7 @@ theorem certifiedRootWitnesses_allDistinct {α : Type} [LE α] [LT α]
         intro x hx y hy hxy
         obtain ⟨rfl, _⟩ := splitPointWitnesses_sound midpoint hx
         subst y
-        exact (lt_irrefl mid (hRightAbove mid hy)).elim
+        exact (lt_irrefl m (hRightAbove m hy)).elim
       have hLeftMid :=
         allDistinct_append ihl (splitPointWitnesses_allDistinct midpoint)
           hLeftMidSeparate
