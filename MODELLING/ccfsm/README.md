@@ -999,3 +999,13 @@ Die erste Manuskriptarbeit behandelt ausschließlich das reduzierte Zwei-Zeitska
 ## Manuskript 1 — Scherer (1989), Gleichungsvergleich
 
 - [MANUSCRIPT_01_SCHERER_1989_EQUATION_LEVEL_COMPARISON_2026-11-15_DE.md](MANUSCRIPT_01_SCHERER_1989_EQUATION_LEVEL_COMPARISON_2026-11-15_DE.md) — Abstract-basierter Strukturvergleich mit v0.2, Reduktionsanforderungen und klarer Kennzeichnung der noch fehlenden Volltext-Gleichungsprüfung.
+
+
+## P27.43 — unabhängige rationale Intervallzertifikate
+
+- ccfsm_p27_43_rational_interval_certificate.py prüft versionierte Zertifikate für Intervalladdition, -multiplikation und -division unabhängig vom erzeugenden Intervallalgorithmus.
+- Jeder endliche Eingabe-Endpunkt wird als binary64-Zahl interpretiert und anschließend mit Fraction.from_float exakt als dyadischer Bruch ausgewertet. Die Ergebnisrange wird rational neu berechnet; der Prüfer kontrolliert beide äußeren Ergebnisgrenzen.
+- Division über ein Nennerintervall mit Null wird abgewiesen. Ein formal korrekt geformtes, aber zu enges Ergebnisintervall wird ausdrücklich als valid: false gemeldet; fehlerhafte Zertifikate werden abgewiesen.
+- Neun gezielte Regressionstests decken Addition, Vorzeichenfälle, Nullüberschreitung, Subnormal-Unterlauf, Division und fehlerhafte/zu enge Zertifikate ab.
+
+**Grenze:** Der Prüfer validiert die exakte reelle Range der angegebenen binären Endpunkte. Er beweist weder die Herkunft der Eingangsintervalle noch, dass der Produzent den beabsichtigten Ausdruck berechnet hat. Er ist noch kein Lean-Beweis der IEEE-754-/nextafter-Implementierung; signed zero wird in der rationalen Interpretation mit reeller Null identifiziert.
