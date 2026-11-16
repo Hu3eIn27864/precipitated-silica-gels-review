@@ -81,12 +81,13 @@ theorem certifiedRootWitnesses_sound {α : Type} [LE α] [LT α]
           simp [certifiedRootWitnesses] at hx
   | @split lo mid hi left_order right_order midpoint left right ihl ihr =>
       intro x hx
-      simp only [certifiedRootWitnesses, List.mem_append] at hx
-      rcases hx with hxLeft | hxMiddle | hxRight
-      · rcases ihl hxLeft with ⟨hlo, hmid, hroot⟩
-        exact ⟨hlo, lt_trans hmid right_order, hroot⟩
-      · obtain ⟨rfl, hroot⟩ := splitPointWitnesses_sound midpoint hxMiddle
-        exact ⟨left_order, right_order, hroot⟩
+      simp only [certifiedRootWitnesses] at hx
+      rcases List.mem_append.mp hx with hxLeftMiddle | hxRight
+      · rcases List.mem_append.mp hxLeftMiddle with hxLeft | hxMiddle
+        · rcases ihl hxLeft with ⟨hlo, hmid, hroot⟩
+          exact ⟨hlo, lt_trans hmid right_order, hroot⟩
+        · obtain ⟨rfl, hroot⟩ := splitPointWitnesses_sound midpoint hxMiddle
+          exact ⟨left_order, right_order, hroot⟩
       · rcases ihr hxRight with ⟨hmid, hhi, hroot⟩
         exact ⟨lt_trans left_order hmid, hhi, hroot⟩
 
