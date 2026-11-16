@@ -82,7 +82,7 @@ The alternative certificate-checking path now has a small Python prototype:
 
 The versioned certificate schema is ccfsm.interval-certificate.v1. It contains
 an operation (add, mul, or div), two finite endpoint intervals, and
-a claimed finite result interval. The checker normalizes each endpoint to a
+a claimed finite result interval. The checker requires each endpoint to be a JSON floating-point number and normalizes it to a
 binary64 value, converts that value with Fraction.from_float, and recomputes
 the exact real operation range. For multiplication and division it evaluates
 the four exact rational corners; division is rejected when the denominator
@@ -97,7 +97,7 @@ that a particular runtime's nextafter conforms to IEEE-754. Signed zero is
 identified with real zero by the rational interpretation, so bit-level signed
 zero obligations remain open.
 
-The nine focused tests cover addition, all four sign patterns and intervals
+The ten focused tests cover addition, all four sign patterns and intervals
 crossing zero for multiplication, rejected lower and upper endpoints,
 subnormal underflow, positive and negative denominator intervals, division
-through zero, overflow-range rejection, and malformed/non-finite input.
+through zero, overflow-range rejection, and malformed/non-finite input. An end-to-end test also checks outputs from the existing P27.34 interval producer. Integer JSON tokens are rejected to avoid silently rounding an exact integer into a different binary64 endpoint.
