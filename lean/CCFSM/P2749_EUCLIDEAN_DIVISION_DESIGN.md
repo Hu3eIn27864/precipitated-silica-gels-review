@@ -444,3 +444,15 @@ hypothesis when setting up the recursion's measure. The new theorem is on
 commit `1193ae22d83095e091fac92e83da9d0e7c778e51`; aggregate Lean and
 Python CI are pending. It is not yet a quotient/remainder recursion and does
 not establish the quotient/remainder identity or remainder-degree bound.
+
+
+## Exact evaluation law for a division step — 17 November 2026
+
+Added `eval_subtractMonomial` in `CCFSM.P2749`. It proves that a
+single canonical subtraction step evaluates exactly as
+`eval p x - (ratPow x k * c) * eval q x`. This is the algebraic invariant
+needed to telescope the repeated subtraction steps into a quotient/remainder
+identity. The statement is about exact rational polynomial evaluation; the
+well-founded recursion and its accumulated quotient are still to be defined.
+The theorem is on code commit `a74332648eb9418c54a194946af0e2aa20389f97`;
+its aggregate Lean CI is pending.
