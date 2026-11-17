@@ -677,3 +677,28 @@ code and the existing computational regression workflow; it does not turn
 the bounded evaluator into an unbounded Euclidean algorithm. The sufficient
 fuel bound, terminal remainder-degree theorem, polynomial-object identity,
 uniqueness, and Sturm root-count theorem remain open.
+
+
+## Absorbing terminal state for bounded division — 17 November 2026
+
+The Lean module now proves two complementary fixed-point facts:
+
+- `leadingDivisionStep_eq_self_of_terminal`: if the current remainder is
+  zero, or the divisor coefficient vector is longer than the remainder
+  vector, the guarded automatic transition is exactly the identity on the
+  complete `DivisionState`.
+- `runLeadingDivisionFuel_eq_self_of_terminal`: from either such terminal
+  condition, every additional amount of fuel leaves the complete state
+  unchanged. This is proved by induction on the evaluator fuel.
+
+The aggregate Lean proof-kernel build step passed on code commit
+`263f22c9282c047ce6a76e2863bbbfe0b3931aa6` (run `44099706171`).
+The earlier attempt on `4de214b8e14ff4a6cd7531864b7157248641049f`
+failed due to proof ordering and incomplete option-case reduction; that
+attempt was corrected and is superseded by the passing build above.
+
+**Boundary:** this proves stability *after* a terminal condition holds. It
+does not prove that the evaluator reaches that condition within any
+particular fuel, nor does it yet provide a degree-derived fuel bound,
+quotient/remainder degree theorem, polynomial-object identity, uniqueness,
+or Sturm root count.
