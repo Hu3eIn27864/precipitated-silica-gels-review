@@ -355,3 +355,21 @@ The formal rational-polynomial work has a concrete downstream target: CCFSM v4.2
   division algorithm. The recursion/termination theorem, global
   quotient/remainder degree bound, uniqueness and Sturm root count remain
   open.
+
+
+### AP F — bounded automatic long-division evaluator (17 November 2026)
+
+- Added `runLeadingDivisionFuel`: a total evaluator that applies the
+  guarded automatic leading-term transition at most a caller-supplied
+  natural-number fuel.
+- Added `eval_runLeadingDivisionFuel`: for every fuel value and rational
+  evaluation point, the quotient-times-divisor plus remainder identity is
+  preserved from the initial state.
+- Aggregate Lean proof-kernel CI passed on code head
+  `31429876de78308617710a000099206483956df9` (runs `44090098824` and
+  `44090090852`).
+- This is a bounded executable evaluator, not yet the unbounded Euclidean
+  algorithm. A sufficient degree-derived fuel bound, final remainder-degree
+  condition, polynomial-object identity, uniqueness and Sturm theorem remain
+  open. The natural-syneresis workflow on that exact code head was still
+  running when this entry was written.
