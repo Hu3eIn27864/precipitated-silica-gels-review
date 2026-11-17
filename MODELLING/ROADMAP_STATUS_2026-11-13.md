@@ -498,3 +498,31 @@ being checked separately. It packages the terminal condition as the standard
 Euclidean remainder-degree property. Until that theorem passes CI, the
 formal milestone recorded here is termination at the coefficient-length
 terminal predicate, not yet the final degree statement.
+
+
+## Euclidean remainder-degree bound — 17 November 2026
+
+The terminal fuel theorem has now been lifted to the standard degree
+statement by `runLeadingDivisionFuel_remainder_degree_lt`. For any
+nonzero canonical divisor and any fuel at least as large as the initial
+remainder coefficient length, the final remainder is either the zero
+polynomial or has a defined option-valued degree strictly smaller than the
+divisor's degree.
+
+The proof uses the terminal-state characterization and the canonical
+identity degree + 1 = coefficient length for nonzero polynomials. It keeps
+the zero case separate, so the theorem does not assign degree zero or any
+other natural degree to the zero polynomial.
+
+Aggregate Lean proof-kernel CI passed on code head
+`d53953642071a1bf741e139e2fbea7e83ade79ab` (runs `44101475022` and
+`44101488036`). The natural-syneresis/Python workflow for this exact head
+(`44101488081`) remains in progress; the formal theorem is Lean-verified,
+but the full project workflow is not yet green on this head.
+
+**Remaining formal gates:** establish the global polynomial-object identity
+`A = Q * D + R` (not only its pointwise evaluation at rational arguments),
+prove quotient/remainder uniqueness, and then build and verify the signed
+remainder sequence and Sturm root-count theorem. The current evaluator's
+quotient/remainder evaluation invariant is already preserved for every
+fuel value.
