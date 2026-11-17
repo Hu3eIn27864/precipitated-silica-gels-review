@@ -163,3 +163,377 @@ checkout.
 - Tests cover R_c=0, R_c>0, the exact cell-centre case x=0.3625 for N=40, off-grid positive-contact interfaces, a heterogeneous three-layer system, transfer-matrix roots, full-profile refinement, positivity and global storage/outflow conservation.
 - Hosted integrated workflow #43564342050 passed build, C++, 21 Python ensemble tests, 112 transport tests, syneresis sensitivity and DLCA pilot/sensitivity stages: https://github.com/Hu3eIn27864/precipitated-silica-gels-review/actions/runs/43564342050.
 - Numerical verification is complete for this fixed-interface, piecewise-constant model. Physical silica validation is **not** complete: contact resistance is phenomenological and no R_c, mobility or storage value is assigned from these tests. Direct matched-state permeability/mechanical measurements remain the principal evidence gap.
+
+
+## AP F — exact-rational CCFSM polynomial foundations (16 November 2026)
+
+- The coefficient-list implementation in `lean/CCFSM/P2749.lean` now has exact rational Horner evaluation, coefficientwise addition/subtraction, recursive convolution, derivative evaluation, canonical normalization, and proofs that evaluation respects addition and multiplication.
+- P27.49 has also established the nonzero-leading-coefficient representation for canonical nonzero polynomials, aligned equal-leading-term cancellation, strict decrease of the normalized coefficient-vector length under that cancellation, shifted/scaled-vector length, and the degree-zero singleton-convolution identity.
+- The singleton-convolution correction is verified on commit `331d63aec9aae029b5dc8931ed0bbece57c6792f`: Lean runs 43890786828 and 43890798326 passed; Python natural-syneresis run 43890798363 passed. A documentation-only follow-up produced head `035141517464507bb58618b245a76463f4ef3a89`; Lean runs 43894326557 and 43894310968 passed, while Python run 43894326189 was still in progress at this update.
+- **Not yet proved:** the general monomial-shift/convolution identity, a polynomial-level leading-term cancellation theorem, Euclidean division with remainder, the Sturm sequence construction, endpoint sign-variation handling, and a certified rational root count. Do not describe the current work as a completed Sturm implementation.
+- Next formal gate: prove a length/alignment lemma for recursive convolution on nonempty coefficient vectors; use it to establish multiplication by (X^k c) as a (k)-slot shifted scalar multiple; then lift aligned cancellation from coefficient lists to canonical `RatPolynomial` values. Only after these bridges should Euclidean division and Sturm root counting be implemented.
+- This is a proof of exact algebraic/software statements over `Rat`, not a validation of CCFSM constitutive equations or silica-gel parameter values.
+
+
+### AP F follow-up — zero-padding alignment verified (16 November 2026)
+
+- Added `addCoefficients_zero_scaled_left_of_length_le` in `lean/CCFSM/P2749.lean`. It proves that adding a zero-scaled left vector leaves the right vector unchanged whenever the right vector is at least as long.
+- Aggregate Lean proof-kernel CI passed on code head `793db5f1ecb6ec4e4bda7974fe856b5673ec1d05` (runs 43895569725 and 43895583835).
+- This is an alignment lemma only. The general monomial-shift convolution identity, its required recursive-convolution length bound, polynomial-level cancellation, Euclidean division and Sturm counting remain open.
+- The PSG-048 assessment was also extended after re-reading the Wong et al. manuscript: its water-submerged oedometer tests are loaded consolidation tests, while the 90% RH specimen separately records evaporation-associated shrinkage, high suction and incomplete recovery after resaturation. These are separate evidence channels and neither yields a natural-syneresis rate constant.
+
+
+### AP F follow-up — general monomial-shift identity verified (16 November 2026)
+
+- Proved `multiplyCoefficients_monomial_length` and `multiplyCoefficients_monomial` in `lean/CCFSM/P2749.lean`. Recursive convolution by the coefficient vector of `X^k*c` has the expected `k + xs.length` coefficient count and equals a `k`-slot low-degree shift followed by coefficientwise scaling.
+- The theorem requires a nonempty right-hand coefficient vector. The current raw convolution representation behaves differently on an empty right vector; the premise is intentional and must be preserved until the zero-polynomial representation is handled at the polynomial layer.
+- Aggregate Lean proof-kernel CI passed on head `f05c6c36dac64e2b358da0534c47c68ba3138eae` (run 43896907930).
+- **Still open:** shifted-vector final-coefficient / divisor-leading-coefficient bridge, exact rational cancellation scalar, polynomial-level strict degree decrease, Euclidean division, and Sturm sequence/root counting.
+- Added a separate PSG-010 assessment for Matinfar & Nychka (2023), emphasizing the dynamic speciation variables and the review's secondary-evidence limits. No numerical constitutive law or molecular-to-macroscopic parameter mapping is claimed.
+
+
+### AP F follow-up — monomial final coefficient verified (16 November 2026)
+
+- Added `multiplyCoefficients_monomial_final_coefficient`: for a nonempty canonical coefficient vector and nonzero scalar, monomial convolution ends in the nonzero coefficient `c * originalLast`.
+- Aggregate Lean proof-kernel CI passed on head `9532794979961d955878d22bc9f9294bba48b3aa` (run 43897466565).
+- The remaining division step is now sharply isolated: choose `c = aR / aB` for nonzero divisor leading coefficient `aB`, invoke exact `Rat.div_mul_cancel`, and lift the resulting raw-list cancellation to canonical polynomials. No Euclidean division or Sturm theorem is yet claimed.
+- Added PSG-050 (Birch & Geddes, 2000) as abstract-level primary evidence for nanoscale particle/cluster evolution in sodium-silicate/sulfuric-acid silica hydrogel polymerisation. Its particle-scale syneresis is kept distinct from bulk specimen shrinkage and exudate flow.
+
+
+### Evidence integration — observable scale separation (16 November 2026)
+
+Added `MODELLING/SYNERESIS_OBSERVABLE_SCALE_MATRIX.md` to separate solution speciation, particle/cluster evolution, network morphology, free-gel natural syneresis, loaded mechanical/transport tests, and drying/suction history. The central modelling rule is that particle-scale contraction, macroscopic specimen-volume loss, exudate flux, and loaded consolidation are different observables with different boundary conditions; they must not be collapsed into one fitted “syneresis rate” without an explicit shared-state model.
+
+
+### AP F follow-up — exact raw-list final-term cancellation verified (16 November 2026)
+
+- Added `multiplyCoefficients_monomial_cancels_final`: if a divisor coefficient vector ends in nonzero `aB`, convolution by the monomial scalar `aR / aB` ends in exactly `aR`.
+- The proof uses the general monomial-shift identity and Lean core's `Rat.div_mul_cancel` theorem. Aggregate Lean proof-kernel CI passed on head `df9b9d846d5aa3e8b379fa1347d5bf6ead91fd55` (run 43897845062).
+- This closes the raw-list single-term leading-coefficient cancellation mechanism. Still open: canonical polynomial packaging, full subtraction normalization/strict degree decrease, quotient/remainder recursion and checker, then signed remainder sequence and Sturm root counting.
+
+
+### AP F follow-up — one-step monomial subtraction decreases normalized length (16 November 2026)
+
+- Added `normalize_subtract_monomial_step_length_strict` in `lean/CCFSM/P2749.lean`. If the dividend and monomial-shifted divisor coefficient vectors have equal lengths and their final coefficients are matched using the exact quotient scalar `aR / aB` (with `aB ≠ 0`), the normalized subtraction has strictly shorter coefficient-vector length.
+- Aggregate Lean proof-kernel CI passed on head `58395a0ff57652d34813195c1d55ef703bb185bf` (run 43898301079).
+- This supplies the raw-list well-founded measure for a single long-division step. Still open: canonical `RatPolynomial` packaging, proof that nonzero canonical degree equals length minus one in the required operation, well-founded quotient/remainder recursion, and independent quotient/remainder correctness checks.
+
+
+### AP F follow-up — polynomial degree/length correspondence verified (16 November 2026)
+
+- Added `degree?_add_one_eq_length`: every nonzero canonical `RatPolynomial` has degree `d` with `d + 1 = coefficients.length`.
+- Aggregate Lean proof-kernel CI passed on head `d48061afe287a0be9f371a77e11fe1d0e18b0678` (run 43898652903).
+- This provides the measure conversion needed to lift the raw normalized coefficient-vector decrease to polynomial degree after canonical packaging. It does not yet prove that a specific division remainder has lower degree.
+
+
+### AP F follow-up — polynomial one-step degree decrease verified (16 November 2026)
+
+- Added `degree?_lt_of_normalized_length_lt` to convert strict normalized coefficient-length decrease into strict polynomial-degree decrease for nonzero canonical inputs/results.
+- Added `degree?_monomial_subtract_step_lt` to package the exact monomial subtraction as a canonical `RatPolynomial` and prove the result degree is strictly lower than the dividend degree, under explicit final-coefficient, nonzero-divisor and equal-shifted-length premises.
+- Aggregate Lean proof-kernel CI passed on head `69d0b1fb18f1894ab13a53e2bb0ec1130dfb7f99` (run 43898966855).
+- Remaining: derive shift/scalar computably from polynomial degrees and leading coefficients, implement well-founded quotient/remainder recursion, prove remainder identity and quotient-degree bound, then implement signed remainder sequence and Sturm counting.
+
+
+### AP F follow-up — canonical monomial subtraction operation verified (16 November 2026)
+
+- Added `subtractMonomial` as a canonical `RatPolynomial` operation and `degree?_subtractMonomial_lt` proving strict degree decrease under explicit final-coefficient, nonzero-divisor and equal-shifted-length hypotheses, when the result remains nonzero.
+- Aggregate Lean proof-kernel CI passed on head `a080b7debf84ab3ca96a2402f90f3a625b5134db` (run 43899165470).
+- Next gate: derive the shift and scalar automatically from nonzero canonical dividend/divisor degrees and leading coefficients, handle zero remainder, define the quotient accumulator/well-founded recursion, and prove the quotient/remainder identity and degree bound.
+
+
+### AP F follow-up — automatic leading-term step verified (16 November 2026)
+
+- Added `leadingCoefficient?_eq_last` and `subtractMonomialLeading`. The latter selects the shift from the coefficient-length difference and the scalar from the dividend/divisor leading coefficients, with a total zero fallback outside the nonzero-input domain.
+- Added `degree?_subtractMonomialLeading_lt`: for nonzero canonical inputs with divisor length no greater than dividend length, the automatic monomial subtraction strictly decreases degree whenever the normalized result is nonzero.
+- Aggregate Lean proof-kernel CI passed on head `962b98271e9f58b2e3093b38dac9b5109e1951a4` (run 43899461813).
+- The one-step operation is now computable from canonical polynomials. Remaining: zero-remainder terminal handling, quotient accumulation, well-founded recursion, and proof of the quotient/remainder identity plus remainder-degree bound.
+
+
+## Formal algebra / CCFSM boundary update — 17 November 2026
+
+- Corrected the Lean proof of eval_subtractMonomial. Aggregate Lean proof-kernel CI passes on code head 8fbbe1d9298b4a9aea07fd18d0542ee6f55dab72 (runs 44010877202 and 44010883527). The natural-syneresis Python workflow for that head was still running at the time of this update.
+- The formal module now has both a zero-or-strict-degree-decrease result for the automatically selected leading-term subtraction and an exact pointwise evaluation law for one subtraction step. Quotient accumulation, recursive division, the global quotient/remainder identity, degree bound, uniqueness and Sturm root counting remain open.
+- Scope clarification: the current P2749 work is general exact rational-polynomial infrastructure. It is not itself a silica-gel equation, material parameter estimate, or physical validation. A direct CCFSM connection requires deriving and documenting a specific rational characteristic polynomial or linearized stability relation from a stated model subsystem, then showing that the polynomial tool is actually used on it. No such link is claimed yet.
+- Research priority remains the physical evidence/identifiability programme in AP D and the transport-verification programme in AP C; formal polynomial division is a supporting mathematical workstream, not a substitute for matched-state silica-gel measurements.
+
+
+## CCFSM-specific destination for P2749 — 17 November 2026
+
+The formal rational-polynomial work has a concrete downstream target: CCFSM v4.2.57 P27.37 adaptive polynomial root isolation and the P27.49 exact-rational Python/Lean certificate boundary. P27.37 currently combines interval zero exclusion with derivative/endpoint monotonicity criteria; P27.49 serializes exact rational coefficients and interval endpoints. P2749 is being developed as a possible independent exact-arithmetic backend for a Sturm-based root-counting certificate, which could strengthen cases left unresolved by interval monotonicity. This integration has not yet been implemented, and no Sturm root count is currently claimed. Even after integration, the certificate would establish a polynomial statement in the numerical certification chain, not physical validity of the silica-gel constitutive laws or interpretation of an event.
+
+
+### AP F — finite quotient/remainder trace invariant verified (17 November 2026)
+
+- Added `rational_division_update_identity` and `eval_division_update` in
+  `CCFSM.P2749`. Each exact monomial update adds the corresponding monomial
+  to the quotient accumulator and subtracts the same multiple of the divisor
+  from the remainder; the evaluated invariant
+  `eval Q(x) · eval D(x) + eval R(x)` is preserved.
+- Added `DivisionState`, `divisionStep`, `runDivisionSteps` and
+  `eval_runDivisionSteps`. The invariant is now proved for every finite
+  explicitly supplied sequence of monomial updates.
+- Aggregate Lean proof-kernel CI passed on code head
+  `1fff86cbf00b7b5b92ba2c72e41fc00b6d0fefe0` (run `44087441806`).
+  Natural-syneresis CI for that exact code head was still running at the time
+  this entry was written.
+- This is a telescoping correctness invariant, **not yet the Euclidean
+  division algorithm**: the trace is supplied rather than generated by a
+  well-founded leading-term recursion. The remainder-degree bound, zero
+  terminal branch, global polynomial identity, uniqueness and Sturm sequence
+  remain open.
+- The transport evidence audit now specifies a matched-state acquisition
+  gate for independent intrinsic permeability and volumetric/constrained
+  modulus measurements, with a separate untouched natural-syneresis arm.
+  This sharpens the evidence gap; it does not claim new measurements or
+  fitted silica parameters.
+
+
+### AP F — dividend-initialized finite trace identity verified (17 November 2026)
+
+- Added `eval_zero`, `initialDivisionState` and
+  `eval_runDivisionSteps_from_dividend`. For any explicitly supplied finite
+  monomial trace, starting from quotient zero and remainder equal to the
+  dividend, the final state satisfies the pointwise exact rational identity
+  `eval Q(x) * eval D(x) + eval R(x) = eval P(x)`.
+- Aggregate Lean proof-kernel CI passed on exact code head
+  `ddfbb1c0bac70df8d793132d5167ff6e8ce6004a` (run `44087914969`).
+  The natural-syneresis Python workflow for that exact head was still running
+  when this entry was written.
+- This is stronger than a single-step invariant but remains a finite-trace
+  correctness theorem. It does not yet generate the trace by well-founded
+  leading-term recursion or prove the final remainder-degree bound,
+  polynomial-object identity, uniqueness or Sturm root count.
+
+
+### AP F — latest clean Lean head (17 November 2026)
+
+- Removed an unused simplifier argument from the coefficient-length/degree
+  bridge; no theorem statement or proof obligation changed.
+- Aggregate Lean proof-kernel CI passes on code head
+  `03f538b1467f08e676bd839e4da5e0f3d6355bff` (runs `44088140579`
+  and `44088148474`). Natural-syneresis workflow on this exact head
+  remains in progress (`44088148169`).
+- The current verified milestone is the finite-trace evaluated identity
+  initialized with zero quotient and full dividend remainder. The automatic
+  recursive division algorithm, remainder-degree bound and Sturm theorem
+  remain future work.
+
+
+### AP F — automatic leading-term division transition verified (17 November 2026)
+
+- Added `leadingDivisionStep`: the next quotient monomial is selected from the
+  current remainder/divisor leading coefficients, with exact rational
+  coefficient ratio and degree offset.
+- Added `eval_leadingDivisionStep`: when both leading coefficients exist,
+  this automatically selected transition preserves the evaluated
+  quotient-times-divisor-plus-remainder identity.
+- Aggregate Lean proof-kernel CI passed on code head
+  `b7a7922126c47390945263fede12d4a171b1ebd4` (run `44088742824`).
+- The CCFSM v0.6 experimental protocol now specifies randomized split of
+  matched parent batches into untouched natural-syneresis, low-gradient
+  hydraulic and volumetric-mechanical arms, with preregistered state
+  matching and rejection gates.
+- Still open: prove degree-fit guard, strict decrease for the actual
+  automatic transition, recursive composition and termination, final
+  remainder-degree bound, polynomial-level identity, uniqueness and Sturm
+  root counting. No physical measurements are claimed.
+
+
+### AP F — guarded leading-term transition and strict degree decrease verified (17 November 2026)
+
+- `leadingDivisionStep` now acts only when the divisor coefficient-vector
+  length fits within the current remainder length; otherwise it leaves the
+  state unchanged. This avoids an invalid degree-offset-zero subtraction.
+- `eval_leadingDivisionStep` proves preservation of the exact evaluated
+  quotient/remainder invariant under the degree-fit premise.
+- `degree?_leadingDivisionStep_zero_or_lt` proves that every valid
+  automatic step either reaches the zero remainder or strictly lowers its
+  degree.
+- Aggregate Lean proof-kernel CI passed on code head
+  `5730a10e1ac863f3386feafa57eef172d32b9967` (run `44089056837`).
+- This is the local well-founded-decrease lemma, not yet a recursive
+  division algorithm. The recursion/termination theorem, global
+  quotient/remainder degree bound, uniqueness and Sturm root count remain
+  open.
+
+
+### AP F — bounded automatic long-division evaluator (17 November 2026)
+
+- Added `runLeadingDivisionFuel`: a total evaluator that applies the
+  guarded automatic leading-term transition at most a caller-supplied
+  natural-number fuel.
+- Added `eval_runLeadingDivisionFuel`: for every fuel value and rational
+  evaluation point, the quotient-times-divisor plus remainder identity is
+  preserved from the initial state.
+- Aggregate Lean proof-kernel CI passed on code head
+  `31429876de78308617710a000099206483956df9` (runs `44090098824` and
+  `44090090852`).
+- This is a bounded executable evaluator, not yet the unbounded Euclidean
+  algorithm. A sufficient degree-derived fuel bound, final remainder-degree
+  condition, polynomial-object identity, uniqueness and Sturm theorem remain
+  open. The natural-syneresis workflow on that exact code head was still
+  running when this entry was written.
+
+
+## Full CI confirmation — current PR head (17 November 2026)
+
+The current PR head `33f52468e9ea22436b2bd39858240e5de5275ad1` has now
+passed both project workflows:
+
+- Aggregate Lean proof-kernel workflow: run `44090248305`, conclusion
+  `success`.
+- Natural-syneresis / Python workflow: run `44090248252`, conclusion
+  `success`.
+
+This closes the pending-CI status recorded above. It verifies the formal
+code and the existing computational regression workflow; it does not turn
+the bounded evaluator into an unbounded Euclidean algorithm. The sufficient
+fuel bound, terminal remainder-degree theorem, polynomial-object identity,
+uniqueness, and Sturm root-count theorem remain open.
+
+
+## Absorbing terminal state for bounded division — 17 November 2026
+
+The Lean module now proves two complementary fixed-point facts:
+
+- `leadingDivisionStep_eq_self_of_terminal`: if the current remainder is
+  zero, or the divisor coefficient vector is longer than the remainder
+  vector, the guarded automatic transition is exactly the identity on the
+  complete `DivisionState`.
+- `runLeadingDivisionFuel_eq_self_of_terminal`: from either such terminal
+  condition, every additional amount of fuel leaves the complete state
+  unchanged. This is proved by induction on the evaluator fuel.
+
+The aggregate Lean proof-kernel build step passed on code commit
+`263f22c9282c047ce6a76e2863bbbfe0b3931aa6` (run `44099706171`).
+The earlier attempt on `4de214b8e14ff4a6cd7531864b7157248641049f`
+failed due to proof ordering and incomplete option-case reduction; that
+attempt was corrected and is superseded by the passing build above.
+
+**Boundary:** this proves stability *after* a terminal condition holds. It
+does not prove that the evaluator reaches that condition within any
+particular fuel, nor does it yet provide a degree-derived fuel bound,
+quotient/remainder degree theorem, polynomial-object identity, uniqueness,
+or Sturm root count.
+
+
+## Exact terminal-state characterization — 17 November 2026
+
+For a nonzero canonical divisor, the transition's fixed points are now
+characterized in both directions by
+`leadingDivisionStep_eq_self_iff_terminal`:
+
+`leadingDivisionStep divisor state = state`
+
+holds exactly when the current remainder is zero or the divisor coefficient
+vector is longer than the remainder coefficient vector. The nonzero-divisor
+premise is essential: a zero divisor has no leading coefficient and would
+make every state a fixed point, which is not a valid Euclidean-division
+terminal criterion.
+
+The proof combines canonical nonzero leading-coefficient existence with the
+previous zero-or-strict-degree-decrease theorem. In the degree-fit case, a
+fixed point would force the remainder to have both its original degree and a
+strictly smaller degree, a contradiction. Aggregate Lean proof-kernel CI
+passed on code head
+`8b749603c561c5a14707fb941a7a011fc259486b` (runs `44100191169` and
+`44100206759` both report success).
+
+Together with `runLeadingDivisionFuel_eq_self_of_terminal`, this proves
+that the guarded evaluator stops changing exactly at the intended terminal
+condition and remains there for all additional fuel. It still does not prove
+that any fixed degree-derived fuel is sufficient to reach that condition.
+The global quotient/remainder degree theorem, polynomial-object identity,
+uniqueness and Sturm root count remain open.
+
+
+## Coefficient-length decrease for the automatic transition — 17 November 2026
+
+Added `leadingDivisionStep_length_zero_or_lt`. Under the existing explicit
+leading-coefficient and degree-fit hypotheses, the automatic transition now
+has a direct coefficient-vector measure theorem: its remainder is either
+the empty zero representation or has strictly fewer coefficients than the
+input remainder.
+
+The proof lifts the already verified option-valued degree decrease through
+the canonical nonzero degree/length identity. It handles the zero branch
+separately, so zero is never assigned a natural-number degree. This gives
+the recursive termination argument a directly usable natural-number
+measure, without a detour through option-valued degrees at each recursive
+call.
+
+Aggregate Lean proof-kernel CI passed on code head
+`d9a437ef64ee3a360e937145d4a3d8ef576eeeac` (runs `44100750965` and
+`44100763050`). The natural-syneresis/Python workflow for this exact code
+head (`44100762940`) remains in progress and is not yet claimed as passed.
+
+**Still open:** the global induction showing that a fuel value bounded by
+the initial coefficient length reaches a terminal state; the final
+quotient/remainder degree condition; polynomial-object identity and
+uniqueness; and the Sturm root-count theorem.
+
+
+## Sufficient coefficient-length fuel bound — 17 November 2026
+
+The global induction is now implemented as
+`runLeadingDivisionFuel_terminal_of_length_le`. For a nonzero canonical
+divisor, if the initial remainder has coefficient-vector length at most
+`fuel`, then after that many bounded automatic updates the state satisfies
+the exact terminal predicate: the remainder is zero or the divisor's
+coefficient vector is longer than the remainder's.
+
+The induction uses the absorbing-terminal theorem for already terminal
+states, and the new direct coefficient-length decrease theorem for active
+steps. Each active nonzero step consumes at least one unit of the remaining
+fuel. The zero remainder is handled as a separate branch; no degree is
+assigned to zero.
+
+Aggregate Lean proof-kernel CI passed on exact code head
+`1710aecbf876e4dda39d45f7d28871a18f0e102f` (runs `44101086317` and
+`44101097363`). The natural-syneresis/Python workflow for that head
+(`44101097351`) is still in progress.
+
+The follow-on theorem `runLeadingDivisionFuel_remainder_degree_lt` is
+being checked separately. It packages the terminal condition as the standard
+Euclidean remainder-degree property. Until that theorem passes CI, the
+formal milestone recorded here is termination at the coefficient-length
+terminal predicate, not yet the final degree statement.
+
+
+## Euclidean remainder-degree bound — 17 November 2026
+
+The terminal fuel theorem has now been lifted to the standard degree
+statement by `runLeadingDivisionFuel_remainder_degree_lt`. For any
+nonzero canonical divisor and any fuel at least as large as the initial
+remainder coefficient length, the final remainder is either the zero
+polynomial or has a defined option-valued degree strictly smaller than the
+divisor's degree.
+
+The proof uses the terminal-state characterization and the canonical
+identity degree + 1 = coefficient length for nonzero polynomials. It keeps
+the zero case separate, so the theorem does not assign degree zero or any
+other natural degree to the zero polynomial.
+
+Aggregate Lean proof-kernel CI passed on code head
+`d53953642071a1bf741e139e2fbea7e83ade79ab` (runs `44101475022` and
+`44101488036`). The natural-syneresis/Python workflow for this exact head
+(`44101488081`) remains in progress; the formal theorem is Lean-verified,
+but the full project workflow is not yet green on this head.
+
+**Remaining formal gates:** establish the global polynomial-object identity
+`A = Q * D + R` (not only its pointwise evaluation at rational arguments),
+prove quotient/remainder uniqueness, and then build and verify the signed
+remainder sequence and Sturm root-count theorem. The current evaluator's
+quotient/remainder evaluation invariant is already preserved for every
+fuel value.
+
+
+### CI completion update — 17 November 2026
+
+The natural-syneresis/Python workflow for exact code head
+`d53953642071a1bf741e139e2fbea7e83ade79ab` has now completed successfully
+(run `44101488081`). Together with Lean runs `44101475022` and
+`44101488036`, this means the code commit containing
+`runLeadingDivisionFuel_remainder_degree_lt` is green in both project
+workflows. Later documentation-only heads have their own CI; their Lean
+runs are green, while the latest Python run is still in progress.

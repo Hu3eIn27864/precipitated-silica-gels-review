@@ -47,3 +47,34 @@ The difficult part is the Sturm variation theorem, not rational arithmetic itsel
 - A Sturm count is exact only for the exact polynomial supplied. It does not prove that noisy measured coefficients or floating-point input intervals represent the physical silica system.
 - For uncertain coefficient intervals, one needs a robust quantified argument (e.g. interval polynomial families), not a point-coefficient Sturm count.
 - This is an algorithm/design specification only; no Sturm theorem or Python checker is claimed implemented by this note.
+
+
+## Degenerate cases and exactness gates
+
+- The input polynomial must be nonzero. The identically-zero polynomial has
+  an interval of roots and no finite distinct-root count; it must be rejected
+  or routed to a separate degenerate-case result.
+- The zero polynomial is never included as a member of the signed remainder
+  sequence. In particular, for a nonzero constant polynomial, the derivative
+  is zero and the sequence has no nonzero derivative member; the exact root
+  count is zero.
+- Every nonzero remainder member must have strictly smaller degree than its
+  divisor. The checker verifies this degree decrease as well as the exact
+  quotient/remainder identity.
+- The final nonzero member is a gcd representative up to a nonzero rational
+  factor. Any normalization used by the producer must preserve the sign
+  sequence; only positive rescaling is harmless for variation counts.
+- Endpoint Taylor-sign witnesses are required only for nonzero sequence
+  members. A zero polynomial member is omitted, not assigned an invented
+  endpoint sign.
+- If an endpoint is itself a root of a sequence member, its ordinary
+  point-evaluation sign is zero and is not used directly. The first nonzero
+  Taylor coefficient gives the one-sided sign on the interior side of that
+  endpoint. The endpoint root of the original polynomial is still counted
+  separately by the P27.48 endpoint layer.
+- A repeated root is counted once as a distinct coordinate by the Sturm
+  variation difference. Algebraic multiplicity is a different output and
+  would require additional factor/gcd data.
+
+These cases should be explicit in the serialized format and negative tests;
+they are not optional implementation conveniences.

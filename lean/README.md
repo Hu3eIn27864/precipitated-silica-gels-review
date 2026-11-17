@@ -1,135 +1,201 @@
 # CCFSM Lean proof kernel
 
-This is an isolated Lean 4 project pinned to Lean **v4.35.0**. It does not change the Python implementation or the CCFSM version line.
+This is an isolated Lean 4 project pinned to Lean **v4.35.0**. The formal
+modules do not change the Python implementation or the CCFSM version line.
 
 ## Formal modules
 
 ### P27.34 — outward-rounded interval addition contract
 
-- Proves endpoint ordering and enclosure for interval addition from lower/upper scalar rounding contracts and monotonicity of exact addition.
-- Provides an adapter for combining the proved addition operation with separately certified multiplication.
-- The actual IEEE-754 `nextafter` functions are **not** verified by this abstract contract.
+- Proves endpoint ordering and enclosure from scalar lower/upper rounding
+  contracts and monotonicity of exact addition.
+- Provides an adapter for combining the proved addition operation with
+  separately certified multiplication.
+- The actual IEEE-754 `nextafter` functions are not verified by this
+  abstract contract.
 
 ### P27.35 — Horner interval enclosure
 
-- Coefficients are stored in descending degree order (highest degree first), matching the Python implementation.
-- Proves that exact polynomial evaluation at any point in the input interval is enclosed by interval Horner evaluation, conditional on sound addition and multiplication.
+- Coefficients are stored in descending degree order, matching the Python
+  implementation.
+- Proves enclosure of exact polynomial evaluation conditional on sound
+  interval addition and multiplication.
 
 ### P27.36 — monotone-root theorem contract
 
 - Proves uniqueness of an interior root from strict monotonicity.
-- Existence still requires a justified intermediate-value argument; derivative-sign-to-strict-monotonicity is separate.
+- Existence requires a justified intermediate-value argument; deriving
+  strict monotonicity from derivative-sign bounds is a separate obligation.
 
 ### P27.37 — proof-carrying root-isolation certificates
 
 - No-root leaves carry a closed-interval exclusion proof.
 - Unique-root leaves carry existence and uniqueness on the open interval.
 - Unresolved leaves make no root-count claim.
-- Subdivision lemmas cover the parent interval and handle split-point roots explicitly.
+- Subdivision lemmas cover the parent interval and handle split-point roots
+  explicitly.
 
 ### P27.38 — certified interval-multiplication interface
 
-- Introduces `SoundIntervalMultiplication`: a multiplication operation is admissible only together with a theorem enclosing every product of points from its input intervals.
-- `assemble` composes this contract with P27.34 outward addition into the `IntervalArithmetic` interface consumed by P27.35.
-- Separate the proof of the interface from the proof of any concrete endpoint algorithm. In particular, this module does **not** yet prove the familiar four-corner formula or its floating-point implementation.
+- Introduces `SoundIntervalMultiplication`: multiplication is admissible only
+  with a theorem enclosing every product of points from its input intervals.
+- Composes this contract with P27.34 outward addition into the
+  `IntervalArithmetic` interface consumed by P27.35.
+- It does not itself prove a concrete endpoint algorithm.
 
 ### P27.39 — exact interval product in the nonnegative quadrant
 
-- Proves the endpoint-product enclosure for intervals whose lower endpoints are nonnegative.
-- The proof uses an explicit order-compatible multiplication law (`mul_mono_nonneg`) and proves both lower and upper enclosure bounds, plus endpoint ordering.
-- This is an exact algebraic result, independent of floating-point rounding.
-- It is **not** yet the full four-sign-case theorem: intervals crossing zero and intervals with negative endpoints remain open. The current result must not be applied outside its stated quadrant.
+- Proves the endpoint-product enclosure for intervals whose lower endpoints
+  are nonnegative, under explicit order-compatible multiplication laws.
+- This is exact algebra, not a floating-point rounding proof.
+- Negative and zero-crossing intervals are outside this module's scope.
 
 ### P27.40 — signed scalar monotonicity
 
-- Proves the sign split for multiplication by a fixed scalar over an ordered interval: nonnegative factors are monotone and nonpositive factors are antitone.
-- Provides separate left- and right-factor lemmas. The scalar dichotomy is exhaustive, including zero; equality of endpoint products at zero additionally needs the concrete multiplication's zero-annihilation law.
-- The order-compatible multiplication laws remain explicit assumptions to be instantiated for a concrete ordered ring.
-- This is the signed-order foundation for the four-corner theorem, **not** yet the full four-corner min/max enclosure theorem.
+- Proves the sign split for multiplication by a fixed scalar over an ordered
+  interval: nonnegative factors are monotone and nonpositive factors are
+  antitone.
+- Supplies separate left- and right-factor lemmas.
+- Concrete ordered-ring laws remain explicit assumptions.
 
 ### P27.41 — four-corner product envelope
 
-- Proves that every common lower bound of the four endpoint products is a lower bound for every interior product, and every common upper bound is an upper bound for every interior product.
-- Derives the enclosure by applying signed scalar monotonicity successively in each interval coordinate.
-- Avoids assuming a particular min/max implementation. A concrete `min4`/`max4` routine still needs separate proofs that its outputs bound all four corners.
-- Uses explicit order transitivity and signed multiplication laws; no IEEE-754 or physical-model claim is made.
+- Proves that any common lower/upper bounds of the four endpoint products
+  bound every interior product.
+- Applies signed scalar monotonicity successively in each coordinate.
+- Does not assume a particular min/max implementation.
 
 ### P27.42 — concrete four-corner extrema
 
-- Defines a dependency-light comparison tree `min4`/`max4` for the four endpoint products.
-- Proves that the computed minimum is below all four corners and the computed maximum is above all four corners.
-- Combines those lemmas with P27.41 to prove a concrete exact-arithmetic interval-product enclosure for arbitrary sign combinations, including zero-crossing intervals.
-- Adds an exactIntervalMultiply operation on the P27.35 interval type and an adapter that packages its enclosure proof as the P27.38 SoundIntervalMultiplication contract. Membership in both input intervals supplies the required endpoint-order proofs.\n- Requires a decidable total order and transitive order relation. This adapter is exact algebra on the abstract endpoint type; it does **not** establish IEEE-754 directed rounding.
+- Defines a comparison-tree `min4`/`max4` and proves their bounds for all
+  four endpoint products.
+- Combines these results with P27.41 for exact-arithmetic interval products
+  across arbitrary sign combinations, including zero-crossing intervals.
+- Adapts the result to P27.38's certified multiplication interface.
+- This is not a proof of IEEE-754 directed rounding.
 
-## P27.43 — exact-rational interval certificate prototype\n\n### P27.43 — IEEE-754 boundary and rational certificate prototype
+### P27.43 — exact-rational interval certificate prototype
 
-- The design obligations for finite binary64 values, nextafter, signed zero, subnormals, and overflow are recorded in CCFSM/P2743_IEEE754_DESIGN.md.
-- A Python-side independent checker now verifies add, mul, and div interval certificates by recomputing the exact real range from the supplied binary64 endpoints as dyadic rationals.
-- This is an exact-rational software checker, not yet a Lean proof of Python/IEEE-754 refinement. It does not verify expression provenance, external input soundness, or signed-zero bit semantics.
-- Ten focused unit tests exercise sign combinations, zero crossings, subnormal products, division domains, malformed certificates, and rejection of unsound enclosures. An integration test runs the current P27.34 interval operations through the independent checker.\n\n### P27.44 — proof-carrying root-partition tree
+- Design obligations for finite binary64 values, `nextafter`, signed zero,
+  subnormals, and overflow are recorded in
+  `CCFSM/P2743_IEEE754_DESIGN.md`.
+- A Python-side independent checker recomputes add, multiply, and divide
+  interval ranges from binary64 endpoints as exact dyadic rationals.
+- It is not yet a Lean proof of Python/IEEE-754 refinement and does not
+  verify expression provenance, external input soundness, or signed-zero
+  bit semantics.
 
-- Formal module: CCFSM/P2744.lean. It defines a dependent tree indexed by exact closed interval endpoints, with proof-carrying leaf certificates and separate midpoint evidence (no-root, root, unresolved).
-- Proves closed-domain coverage: every point in the parent interval follows a certified left or right child path. Proves recursively that all leaf and midpoint claims satisfy their declared logical contracts.
-- FullyResolved is only a structural flag excluding unresolved nodes. Aggregate root-count bounds, outer-endpoint ownership, serialized certificates and a producer-to-checker provenance link remain open.
-- Detailed design and acceptance gates: CCFSM/P2744_CERTIFICATE_PIPELINE_DESIGN.md.
+### P27.44 — proof-carrying root-partition tree
 
-### P27.45 — explicit root witnesses and count bounds
-
-- Design note: CCFSM/P2745_ROOT_COUNT_DESIGN.md.
-- Next formal step is to make unique-root witnesses explicit Type-level data, collect them through the P27.44 tree, prove pairwise distinctness, and derive sound lower and finite upper root-count bounds.
-- Tangencies and even-multiplicity roots remain unresolved by strict-derivative monotonicity; compare an exact rational Sturm-sequence certificate as a complementary method.
-
-## Roadmap: P27.44
-
-1. **P27.43 — IEEE-754 refinement boundary.** Specify finite binary floating-point values, directed rounding, subnormal behavior, signed zero, and overflow/fail-closed behavior. Choose between a bit-level proof of `nextafter` and a verified refinement to exact rational bounds; tests alone are not a proof.
-2. **P27.44 — certificate pipeline.** Connect polynomial and derivative enclosures to P27.36 root criteria, then define/export a certificate format and prove the checker sound. Algorithmic completeness and Python-to-Lean certificate extraction remain separate obligations.
-
-### P27.45 — explicit root witnesses and count certificates
-
-- Implementation: `CCFSM/P2745.lean`; design and proof obligations: `CCFSM/P2745_ROOT_COUNT_DESIGN.md`.
-- Proved: every collected witness is a genuine root in the parent open interval, and the collector is duplicate-free by strict child-interval separation plus unique midpoint ownership (Lean run 43795801299).
-- Added: `HasAtLeastDistinctInteriorRoots` and a lower-bound theorem equating the number of collected witnesses with an explicit lower bound. This extra packaging is awaiting its latest Lean CI run.
-- Finite upper bounds additionally require outer endpoint and split-point evidence and no unresolved nodes.
-
-## Open obligations and scope
-
-- Connect the exact comparison-tree operation to a concrete numeric representation and instantiate its order and multiplication laws.
-- Prove outward rounding for the actual floating-point endpoint operations.
-- Prove outward rounding for the actual Python `nextafter` implementation, including finite-input and overflow conditions. Underflow/subnormal and signed-zero cases need explicit treatment.
-- Connect P27.35 polynomial/derivative bounds to P27.36 and P27.37 certificate construction.
-- Prove algorithm-to-certificate extraction and search completeness.
-- The Lean results are mathematical/software-verification results only. They do not validate the physical constitutive equations or material parameters of CCFSM.
-
-## Build
-
-From this directory run `lake update` once if no `lake-manifest.json` is present, then `lake build`. The dedicated GitHub Actions workflow performs both commands.
+- `CCFSM/P2744.lean` defines a dependent tree indexed by exact closed
+  interval endpoints, with proof-carrying leaf certificates and separate
+  midpoint evidence (no-root, root, unresolved).
+- Proves closed-domain coverage and recursive soundness of attached evidence.
+- `FullyResolved` is a structural flag excluding unresolved nodes; by
+  itself it is not an aggregate root-count theorem.
+- Design: `CCFSM/P2744_CERTIFICATE_PIPELINE_DESIGN.md`.
 
 ### P27.45 — explicit root witnesses and lower bounds
 
-- Stores a concrete coordinate in each unique-root certificate and recursively collects unique-leaf and certified midpoint witnesses.
-- Proves every collected witness is an interior root and proves the collector is duplicate-free using strict separation of child intervals.
-- Consequently, the collector length is a sound lower bound on the number of distinct interior roots.
+- `CCFSM/P2745.lean` collects unique-leaf witnesses and certified midpoint
+  roots.
+- Proves every collected coordinate is an interior root and proves the
+  collector duplicate-free using strict child-interval separation.
+- Consequently, the witness-list length is a sound lower bound on the
+  number of distinct interior roots.
 - Lean CI: run 43795945691, 14 targets.
 
-### P27.46 — completeness of fully resolved root partitions
+### P27.46 — exact interior root count
 
-- Adds the converse direction: if the partition tree is fully resolved, every interior root of the parent interval must occur in the witness collector.
-- Combines completeness with P27.45 soundness to prove membership equivalence between the witness list and all interior roots.
-- Defines an exact root-count certificate as the witness-list length plus that membership equivalence. The exact count is conditional on explicit strict-to-nonstrict order conversion and trichotomy.
-- Does not yet prove that a practical floating-point/Python producer can construct the required evidence. Endpoint roots remain excluded from the *interior* count and require separate reporting if a closed-interval count is desired.
-- Tangential/multiple roots still require a method beyond strict-derivative monotonicity, e.g. exact Sturm certificates.
-
-### P27.46 — exact interior root count from fully resolved trees
-
-- Formal module: `CCFSM/P2746.lean`.
-- Adds the converse to P27.45: every interior root in a fully resolved tree must be represented by a collected witness.
-- The exact-count proposition includes all three necessary parts: witness-list length, pairwise distinctness, and equivalence between list membership and the interior-root predicate.
-- Requires explicit strict-order trichotomy and strict-to-nonstrict conversion. The count is for the open interval; endpoint roots are intentionally separate.
-- - Lean CI passed: run 43798130936; all 15 targets built, including CCFSM.P2746.
+- `CCFSM/P2746.lean` proves the converse: in a fully resolved tree, every
+  interior root occurs in the witness collector.
+- Combines soundness, completeness, and duplicate-freedom into an exact
+  interior-count proposition.
+- Requires explicit strict-order transitivity, irreflexivity,
+  strict-to-nonstrict conversion, and trichotomy.
+- Counts roots in the open interval only; outer endpoint roots are separate.
+- Lean CI: runs 43798130936 and 43798184721, 15 targets built.
 
 ### P27.47 — Sturm certificates for tangential and multiple roots
 
 - Design only: `CCFSM/P2747_STURM_CERTIFICATE_DESIGN.md`.
-- Specifies rational signed-remainder certificates, exact endpoint one-sided signs, and open-interval variation counts.
-- Intended to complement strict-monotonicity certificates when derivative zeros or tangential roots prevent P27.37 unique-leaf proofs.
-- No Sturm implementation or theorem is claimed yet.
+- Specifies exact rational signed-remainder sequences, one-sided endpoint
+  signs, and open-interval variation counts.
+- Intended to complement strict-monotonicity certificates for tangential
+  and multiple roots.
+- No Sturm implementation, checker, or theorem is claimed.
+
+### P27.48 — endpoint-root evidence and closed-interval counts
+
+- Formal module: `CCFSM/P2748.lean`; design and acceptance criteria:
+  `CCFSM/P2748_ENDPOINT_ROOT_DESIGN.md`.
+- Defines root/no-root/unresolved endpoint evidence and adds only certified
+  endpoint roots to the closed witness list.
+- Proves closed-witness soundness, duplicate-freedom, and completeness from
+  a fully resolved P27.46 interior tree plus resolved endpoint evidence.
+- The completeness theorem states the order assumptions explicitly and
+  requires `lo < hi`; singleton intervals are outside its scope.
+- Lean CI passed on the formal implementation: run 43828394409; all 16 targets built, including `CCFSM.P2748`.
+
+### P27.49 — exact rational polynomial foundation and Sturm roadmap
+
+- Initial Lean module: `CCFSM/P2749.lean`; implementation plan:
+  `CCFSM/P2749_STURM_LEAN_IMPLEMENTATION_PLAN.md`.
+- Uses Lean core `Rat` (confirmed under the pinned Lean v4.35.0 toolchain,
+  without Mathlib) and ascending-degree coefficient lists.
+- Implements canonical trailing-zero normalization, Horner evaluation,
+  formal derivative coefficients, coefficientwise addition, negation and
+  subtraction, scalar multiplication, recursive convolution multiplication,
+  monomial vectors, and shifted/scaled coefficient vectors.
+- Proves normalized lists are canonical and normalization is idempotent;
+  proves degree extraction and nonzero leading-coefficient decomposition
+  for every nonzero canonical polynomial.
+- Proves normalization preserves evaluation and that polynomial addition,
+  subtraction, negation, scalar multiplication, multiplication, monomial
+  evaluation, and shifted scaling obey their exact evaluation laws.
+- Formal derivative coefficients are implemented, with exact evaluation
+  examples for constant, linear and quadratic inputs, including zero leading
+  coefficients. General derivative evaluation semantics remain open.
+- The first list-level long-division lemma is now proved: aligned
+  subtraction cancels equal final coefficients exactly, and normalization
+  reduces the coefficient-vector length below its original length.
+  Lean CI run 43868853530 passed all 17 aggregate targets.
+- Exact Euclidean polynomial division remains design-only
+  (`CCFSM/P2749_EUCLIDEAN_DIVISION_DESIGN.md`). The next gate is to connect
+  monomial-shift/scalar multiplication to the divisor coefficients, then
+  derive the exact rational leading-coefficient quotient and lift the length
+  reduction to a strict polynomial-degree bound. No Sturm sequence,
+  root-count theorem, or Sturm checker is claimed.
+- Python/Lean bridge: design `CCFSM/P2749_PYTHON_LEAN_BRIDGE_DESIGN.md`,
+  serializer `../MODELLING/ccfsm/ccfsm_p27_49_rational_certificate.py`, and
+  tests `../MODELLING/ccfsm/test_ccfsm_p27_49_rational_certificate.py`.
+  Python CI run 43841573685 passed the full CCFSM test job. The existing
+  P27.37 search routine is not yet connected to the serializer, and Lean does
+  not yet parse/verify the payload.
+
+## Open obligations
+
+- Connect exact interval operations to concrete numeric representations and
+  prove directed rounding for the actual floating-point endpoint operations.
+- Connect polynomial/derivative bounds to root certificates and prove the
+  algorithm-to-certificate extraction and search-completeness obligations.
+- Implement and prove a Sturm checker for exact rational polynomials,
+  including repeated roots and endpoint conventions.
+- Complete the P27.49 polynomial-division proof chain and signed-remainder/Sturm checker.
+- Establish a producer-to-checker provenance link for serialized
+  certificates.
+
+P27.48 endpoint ownership and the closed-interval witness count are now
+formalized in `CCFSM/P2748.lean`; the theorem is conditional on a fully
+resolved interior partition, resolved endpoint evidence, and a nondegenerate
+interval.
+
+The Lean results are mathematical/software-verification results only. They
+do not validate the physical constitutive equations or material parameters
+of CCFSM.
+
+## Build
+
+From this directory run `lake update` once if no `lake-manifest.json` is
+present, then `lake build`. The dedicated GitHub Actions workflow performs
+both commands.
