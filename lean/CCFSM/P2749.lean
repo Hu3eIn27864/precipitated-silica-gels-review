@@ -1099,7 +1099,15 @@ theorem eval_runDivisionSteps_from_dividend
       steps).quotient x * eval divisor x +
       eval (runDivisionSteps divisor (initialDivisionState dividend)
         steps).remainder x = eval dividend x := by
-  simpa [initialDivisionState, eval_zero] using
-    eval_runDivisionSteps divisor (initialDivisionState dividend) steps x
+  calc
+    eval (runDivisionSteps divisor (initialDivisionState dividend)
+        steps).quotient x * eval divisor x +
+      eval (runDivisionSteps divisor (initialDivisionState dividend)
+        steps).remainder x =
+      eval (initialDivisionState dividend).quotient x * eval divisor x +
+        eval (initialDivisionState dividend).remainder x :=
+          eval_runDivisionSteps divisor (initialDivisionState dividend) steps x
+    _ = eval dividend x := by
+          simp [initialDivisionState, eval_zero, Rat.zero_mul, Rat.zero_add]
 
 end CCFSM.P2749
