@@ -660,3 +660,20 @@ and `44090090852`). The natural-syneresis workflow for that exact code
 head (`44090098730`) was still running at this documentation update.
 The documentation-head Lean workflow is queued. This supersedes the
 pending-CI sentence in the preceding subsection.
+
+
+## Full CI confirmation — current PR head (17 November 2026)
+
+The current PR head `33f52468e9ea22436b2bd39858240e5de5275ad1` has now
+passed both project workflows:
+
+- Aggregate Lean proof-kernel workflow: run `44090248305`, conclusion
+  `success`.
+- Natural-syneresis / Python workflow: run `44090248252`, conclusion
+  `success`.
+
+This closes the pending-CI status recorded above. It verifies the formal
+code and the existing computational regression workflow; it does not turn
+the bounded evaluator into an unbounded Euclidean algorithm. The sufficient
+fuel bound, terminal remainder-degree theorem, polynomial-object identity,
+uniqueness, and Sturm root-count theorem remain open.
