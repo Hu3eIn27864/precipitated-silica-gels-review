@@ -571,3 +571,16 @@ This remains a finite-trace theorem, not a completed division algorithm.
 The algorithmic leading-term policy, well-founded recursion, final
 remainder-degree bound, polynomial-level identity and uniqueness are still
 open.
+
+
+## Warning cleanup and latest code verification — 17 November 2026
+
+Removed an unused simplifier argument in the existing degree/length lemma;
+the proof itself is unchanged. Aggregate Lean proof-kernel CI passes on
+the resulting code head `03f538b1467f08e676bd839e4da5e0f3d6355bff`
+(runs `44088140579` and `44088148474`). The natural-syneresis
+workflow for this exact head is still running (`44088148169`).
+
+The strongest currently Lean-verified division result is therefore the
+dividend-initialized finite-trace identity above. No recursive long-division
+algorithm or Sturm root-count theorem is claimed.
