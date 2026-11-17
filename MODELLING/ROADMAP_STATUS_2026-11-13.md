@@ -247,3 +247,11 @@ Added `MODELLING/SYNERESIS_OBSERVABLE_SCALE_MATRIX.md` to separate solution spec
 - Added `degree?_subtractMonomialLeading_lt`: for nonzero canonical inputs with divisor length no greater than dividend length, the automatic monomial subtraction strictly decreases degree whenever the normalized result is nonzero.
 - Aggregate Lean proof-kernel CI passed on head `962b98271e9f58b2e3093b38dac9b5109e1951a4` (run 43899461813).
 - The one-step operation is now computable from canonical polynomials. Remaining: zero-remainder terminal handling, quotient accumulation, well-founded recursion, and proof of the quotient/remainder identity plus remainder-degree bound.
+
+
+## Formal algebra / CCFSM boundary update — 17 November 2026
+
+- Corrected the Lean proof of eval_subtractMonomial. Aggregate Lean proof-kernel CI passes on code head 8fbbe1d9298b4a9aea07fd18d0542ee6f55dab72 (runs 44010877202 and 44010883527). The natural-syneresis Python workflow for that head was still running at the time of this update.
+- The formal module now has both a zero-or-strict-degree-decrease result for the automatically selected leading-term subtraction and an exact pointwise evaluation law for one subtraction step. Quotient accumulation, recursive division, the global quotient/remainder identity, degree bound, uniqueness and Sturm root counting remain open.
+- Scope clarification: the current P2749 work is general exact rational-polynomial infrastructure. It is not itself a silica-gel equation, material parameter estimate, or physical validation. A direct CCFSM connection requires deriving and documenting a specific rational characteristic polynomial or linearized stability relation from a stated model subsystem, then showing that the polynomial tool is actually used on it. No such link is claimed yet.
+- Research priority remains the physical evidence/identifiability programme in AP D and the transport-verification programme in AP C; formal polynomial division is a supporting mathematical workstream, not a substitute for matched-state silica-gel measurements.
