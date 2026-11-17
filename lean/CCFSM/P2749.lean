@@ -805,7 +805,7 @@ theorem degree?_add_one_eq_length (p : RatPolynomial)
   refine ⟨p.coefficients.length - 1, hdegree, ?_⟩
   cases hcoeff : p.coefficients with
   | nil => exact False.elim (hp hcoeff)
-  | cons a rest => simp [hcoeff]
+  | cons a rest => simp
 
 
 /-- A strict decrease in normalized coefficient-vector length gives a
