@@ -122,3 +122,27 @@ See LITERATURE/source_assessments_batch_21.md and the expanded target_system_mec
 Wilhelm & Kind (2014), *Polymers* 6, 2896–2911, DOI 10.3390/polym6122896, provides paired natural pycnometer syneresis and pressure-forced plunger syneresis for acidic precipitated silica (theoretical pH −0.97). Natural endpoint shrinkage is 0.197/0.197/0.198 and fitted τ is 21.7/11.1/5.6 h at 20/40/60 °C (n=1.23). At 20 °C, increasing forced pressure from 0.8 to 15.5 bar increases fitted endpoint shrinkage from 0.53 to 0.87 and reduces τ from 13.0 to 1.1 h. The authors extrapolate forced data to natural Δp=0 using separate endpoint and rate correlations; the extrapolated endpoint error reaches 45%, while τ error reaches 24%. The lowest forced pressure is still 0.8 bar, so the natural state is an extrapolation.
 
 This is a valuable empirical bridge between natural and enforced response, but it does not independently measure permeability or constrained modulus and is not a Darcy/poroelastic constitutive law. It also demonstrates why endpoint shrinkage and kinetic rate must be assessed separately. Detailed extraction: `LITERATURE/wilhelm_kind_2014_natural_enforced_syneresis_evidence.md`.
+
+
+## Operational closure of the matched-state transport gap — 17 November 2026
+
+The evidence gap is now stated more narrowly than “missing mechanical data”: target-chemistry rheology and forced-consolidation measurements exist, but the repository has not identified a study that independently measures **intrinsic hydraulic permeability and the relevant volumetric/constrained modulus on the same formulation, gel age, temperature, saturation state and stress history**. A fitted consolidation time such as t90, or a shear storage modulus G', cannot substitute for that matched pair.
+
+### Minimum paired-state measurement
+
+For each selected formulation and gel age t_j, prepare one parent batch and allocate parallel sacrificial specimens with a shared preparation and thermal history:
+
+1. **Hydraulic arm:** measure steady low-gradient flow at several small pressure gradients, report the linear Darcy regime, fluid viscosity, specimen dimensions, drainage geometry, saturation and uncertainty. Check before/after specimen dimensions or mass to exclude gradient-induced consolidation or syneresis during the measurement.
+2. **Volumetric-mechanics arm:** determine the small-strain volumetric/constrained response under a fully specified drained/undrained protocol. Report strain amplitude, rate/frequency, stress range, loading history and recovery. Do not convert G' or E0 into the constrained modulus without a separately justified constitutive relation.
+3. **State matching:** document recipe, Si concentration, pH/ionic composition, gel-point definition, age at measurement, actual specimen temperature, water content/saturation and any preconditioning. The two arms are a matched pair only within predeclared tolerances for these state variables.
+4. **Independent natural-response arm:** retain an untouched, mechanically unloaded specimen for S(t), specimen mass/volume and exudate collection. This prevents the permeability/mechanics protocol from changing the natural-syneresis observation.
+5. **Replication and uncertainty:** use independent parent batches as the statistical replicate. Propagate uncertainty in permeability, modulus, geometry and fluid viscosity before comparing the resulting transport timescale with observed natural shrinkage.
+
+### Interpretation gate
+
+- If permeability is linear-gradient and repeatable but the modulus is frequency- or rate-dependent, retain a time/frequency-dependent mechanical closure rather than reporting a single universal M.
+- If either property drifts during the measurement window, treat the specimen as evolving; report a time-indexed property with uncertainty, not a stationary material constant.
+- If the paired states fail the matching tolerances, do not combine the two values to infer a poroelastic diffusivity.
+- Only after both properties are independently measured should their combination be compared with a consolidation/poroelastic timescale. Agreement is a cross-check, not proof that the natural syneresis law or its chemistry is validated.
+
+This protocol does not claim that the measurements have been performed. It converts the current literature gap into a falsifiable acquisition requirement and keeps the natural-syneresis endpoint/rate separate from forced-consolidation observables.
