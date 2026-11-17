@@ -969,8 +969,10 @@ theorem subtractMonomialLeading_zero_or_degree_lt
 theorem eval_subtractMonomial (p q : RatPolynomial) (k : Nat)
     (c x : Rat) :
     eval (subtractMonomial p q k c) x =
-      eval p x - (ratPow x k * c) * eval q x := by
-  simp [subtractMonomial, eval_subtract, eval_multiply,
-    eval_monomial, Rat.mul_assoc]
+      eval p x - ratPow x k * (c * eval q x) := by
+  simp [subtractMonomial, eval, ofCoefficients,
+    evalCoefficients_normalize, evalCoefficients_subtract,
+    evalCoefficients_multiply, evalCoefficients_monomial,
+    Rat.mul_assoc]
 
 end CCFSM.P2749
