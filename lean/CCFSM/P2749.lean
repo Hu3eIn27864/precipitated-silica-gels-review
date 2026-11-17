@@ -1112,6 +1112,42 @@ theorem degree?_leadingDivisionStep_zero_or_lt
     subtractMonomialLeading] using hdrop
 
 
+/-- For a nonzero divisor, the guarded leading-term transition is a
+    fixed point exactly when the remainder is zero or the divisor no longer
+    fits by coefficient-vector length. -/
+theorem leadingDivisionStep_eq_self_iff_terminal
+    (divisor : RatPolynomial) (state : DivisionState)
+    (hdivisor : divisor.coefficients ≠ []) :
+    leadingDivisionStep divisor state = state ↔
+      state.remainder.coefficients = [] ∨
+        divisor.coefficients.length > state.remainder.coefficients.length := by
+  constructor
+  · intro hstep
+    by_cases hrem : state.remainder.coefficients = []
+    · exact Or.inl hrem
+    · obtain ⟨aR, hR, _⟩ :=
+        leadingCoefficient?_nonzero state.remainder hrem
+      obtain ⟨aB, hB, _⟩ :=
+        leadingCoefficient?_nonzero divisor hdivisor
+      by_cases hfit :
+          divisor.coefficients.length ≤ state.remainder.coefficients.length
+      · have hdrop :=
+          degree?_leadingDivisionStep_zero_or_lt
+            divisor state aR aB hR hB hfit
+        have hdegree := degree?_some_of_nonempty state.remainder hrem
+        have hsame := congrArg DivisionState.remainder hstep
+        rw [hsame] at hdrop
+        rcases hdrop with hzero | ⟨dResult, dDividend, hResult, hDividend, hlt⟩
+        · rw [hdegree] at hzero
+          cases hzero
+        · rw [hdegree] at hDividend
+          have heq : dResult = dDividend :=
+            Option.some.inj (hResult.symm.trans hDividend)
+          exact False.elim (Nat.lt_irrefl dDividend (heq ▸ hlt))
+      · exact Or.inr (Nat.lt_of_not_ge hfit)
+  · intro hterminal
+    exact leadingDivisionStep_eq_self_of_terminal divisor state hterminal
+
 /-- Execute a finite, explicitly supplied sequence of monomial updates.
     This is a trace interpreter, not yet the terminating division algorithm. -/
 def runDivisionSteps (divisor : RatPolynomial) :
