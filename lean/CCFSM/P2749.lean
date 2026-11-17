@@ -1000,4 +1000,58 @@ theorem eval_division_update
       (eval quotient x) (ratPow x k * c) (eval divisor x)
       (eval remainder x)
 
+
+/-- State of a finite exact long-division trace. -/
+structure DivisionState where
+  quotient : RatPolynomial
+  remainder : RatPolynomial
+
+/-- One trace step adds a quotient monomial and subtracts the same
+    monomial multiple of the divisor from the current remainder. -/
+def divisionStep (divisor : RatPolynomial) (state : DivisionState)
+    (k : Nat) (c : Rat) : DivisionState :=
+  { quotient := add state.quotient (monomial k c)
+    remainder := subtractMonomial state.remainder divisor k c }
+
+/-- Execute a finite, explicitly supplied sequence of monomial updates.
+    This is a trace interpreter, not yet the terminating division algorithm. -/
+def runDivisionSteps (divisor : RatPolynomial) :
+    DivisionState → List (Nat × Rat) → DivisionState
+  | state, [] => state
+  | state, (k, c) :: rest =>
+      runDivisionSteps divisor (divisionStep divisor state k c) rest
+
+/-- The quotient-times-divisor-plus-remainder evaluation invariant is
+    preserved by every finite sequence of exact monomial division steps.
+    The trace is supplied explicitly; this theorem does not yet prove that
+    the long-division algorithm generates a terminating trace. -/
+theorem eval_runDivisionSteps
+    (divisor : RatPolynomial) (initial : DivisionState)
+    (steps : List (Nat × Rat)) (x : Rat) :
+    eval (runDivisionSteps divisor initial steps).quotient x *
+        eval divisor x +
+      eval (runDivisionSteps divisor initial steps).remainder x =
+    eval initial.quotient x * eval divisor x +
+      eval initial.remainder x := by
+  induction steps generalizing initial with
+  | nil =>
+      rfl
+  | cons step rest ih =>
+      cases step with
+      | mk k c =>
+          calc
+            eval (runDivisionSteps divisor
+                (divisionStep divisor initial k c) rest).quotient x *
+                eval divisor x +
+              eval (runDivisionSteps divisor
+                (divisionStep divisor initial k c) rest).remainder x =
+                eval (divisionStep divisor initial k c).quotient x *
+                  eval divisor x +
+                eval (divisionStep divisor initial k c).remainder x := by
+                  exact ih (divisionStep divisor initial k c)
+            _ = eval initial.quotient x * eval divisor x +
+                eval initial.remainder x := by
+                  exact eval_division_update initial.quotient
+                    initial.remainder divisor k c x
+
 end CCFSM.P2749
