@@ -1148,6 +1148,48 @@ theorem leadingDivisionStep_eq_self_iff_terminal
   · intro hterminal
     exact leadingDivisionStep_eq_self_of_terminal divisor state hterminal
 
+/-- A valid guarded leading-term step strictly reduces coefficient
+    length unless it reaches the empty zero representation. -/
+theorem leadingDivisionStep_length_zero_or_lt
+    (divisor : RatPolynomial) (state : DivisionState)
+    (aR aB : Rat)
+    (hR : leadingCoefficient? state.remainder = some aR)
+    (hB : leadingCoefficient? divisor = some aB)
+    (hlen : divisor.coefficients.length ≤ state.remainder.coefficients.length) :
+    (leadingDivisionStep divisor state).remainder.coefficients = [] ∨
+      (leadingDivisionStep divisor state).remainder.coefficients.length <
+        state.remainder.coefficients.length := by
+  have hdrop :=
+    degree?_leadingDivisionStep_zero_or_lt
+      divisor state aR aB hR hB hlen
+  have hp : state.remainder.coefficients ≠ [] := by
+    intro hz
+    simp [leadingCoefficient?, hz] at hR
+  rcases hdrop with hzero | ⟨dResult, dDividend, hResult, hDividend, hlt⟩
+  · left
+    by_contra hne
+    obtain ⟨c, hc, _⟩ :=
+      leadingCoefficient?_nonzero
+        (leadingDivisionStep divisor state).remainder hne
+    simp [degree?, hc] at hzero
+  · right
+    have hnew : (leadingDivisionStep divisor state).remainder.coefficients ≠ [] := by
+      intro hz
+      simp [degree?, leadingCoefficient?, hz] at hResult
+    obtain ⟨dNew, hNewDegree, hNewLength⟩ :=
+      degree?_add_one_eq_length
+        (leadingDivisionStep divisor state).remainder hnew
+    obtain ⟨dOld, hOldDegree, hOldLength⟩ :=
+      degree?_add_one_eq_length state.remainder hp
+    have hNewEq : dNew = dResult :=
+      Option.some.inj (hNewDegree.symm.trans hResult)
+    have hOldEq : dOld = dDividend :=
+      Option.some.inj (hOldDegree.symm.trans hDividend)
+    subst dNew
+    subst dOld
+    rw [← hNewLength, ← hOldLength]
+    exact Nat.add_lt_add_right hlt 1
+
 /-- Execute a finite, explicitly supplied sequence of monomial updates.
     This is a trace interpreter, not yet the terminating division algorithm. -/
 def runDivisionSteps (divisor : RatPolynomial) :
