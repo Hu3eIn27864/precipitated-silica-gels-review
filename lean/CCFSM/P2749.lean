@@ -1038,6 +1038,37 @@ def divisionStep (divisor : RatPolynomial) (state : DivisionState)
   { quotient := add state.quotient (monomial k c)
     remainder := subtractMonomial state.remainder divisor k c }
 
+/-- Automatically select the next quotient monomial from the leading
+    coefficients of the current remainder and divisor. If either polynomial
+    is zero, leave the state unchanged. -/
+def leadingDivisionStep (divisor : RatPolynomial)
+    (state : DivisionState) : DivisionState :=
+  match leadingCoefficient? state.remainder, leadingCoefficient? divisor with
+  | some aR, some aB =>
+      divisionStep divisor state
+        (state.remainder.coefficients.length - divisor.coefficients.length)
+        (aR / aB)
+  | _, _ => state
+
+/-- One automatically selected leading-term update preserves the exact
+    evaluated quotient/remainder invariant whenever its two leading
+    coefficients are available. -/
+theorem eval_leadingDivisionStep
+    (divisor : RatPolynomial) (state : DivisionState)
+    (aR aB x : Rat)
+    (hR : leadingCoefficient? state.remainder = some aR)
+    (hB : leadingCoefficient? divisor = some aB) :
+    eval (leadingDivisionStep divisor state).quotient x *
+        eval divisor x +
+      eval (leadingDivisionStep divisor state).remainder x =
+    eval state.quotient x * eval divisor x +
+      eval state.remainder x := by
+  simp only [leadingDivisionStep, hR, hB, divisionStep]
+  exact eval_division_update state.quotient state.remainder divisor
+    (state.remainder.coefficients.length - divisor.coefficients.length)
+    (aR / aB) x
+
+
 /-- Execute a finite, explicitly supplied sequence of monomial updates.
     This is a trace interpreter, not yet the terminating division algorithm. -/
 def runDivisionSteps (divisor : RatPolynomial) :
