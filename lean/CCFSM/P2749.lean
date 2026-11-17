@@ -1170,4 +1170,71 @@ theorem eval_runDivisionSteps_from_dividend
     _ = eval dividend x := by
           simp [initialDivisionState, eval_zero, Rat.zero_mul, Rat.zero_add]
 
+
+/-- Execute at most fuel automatically selected leading-term division
+    updates. This bounded evaluator is total by structural recursion on fuel;
+    it is not yet the unbounded Euclidean-division function. -/
+def runLeadingDivisionFuel (divisor : RatPolynomial) :
+    DivisionState → Nat → DivisionState
+  | state, 0 => state
+  | state, fuel + 1 =>
+      runLeadingDivisionFuel divisor
+        (leadingDivisionStep divisor state) fuel
+
+/-- Every bounded leading-division run preserves the exact evaluated
+    quotient/remainder invariant. -/
+theorem eval_runLeadingDivisionFuel
+    (divisor : RatPolynomial) (initial : DivisionState)
+    (fuel : Nat) (x : Rat) :
+    eval (runLeadingDivisionFuel divisor initial fuel).quotient x *
+        eval divisor x +
+      eval (runLeadingDivisionFuel divisor initial fuel).remainder x =
+    eval initial.quotient x * eval divisor x +
+      eval initial.remainder x := by
+  induction fuel generalizing initial with
+  | zero =>
+      rfl
+  | succ fuel ih =>
+      change
+        eval (runLeadingDivisionFuel divisor
+          (leadingDivisionStep divisor initial) fuel).quotient x *
+            eval divisor x +
+          eval (runLeadingDivisionFuel divisor
+            (leadingDivisionStep divisor initial) fuel).remainder x =
+        eval initial.quotient x * eval divisor x +
+          eval initial.remainder x
+      calc
+        eval (runLeadingDivisionFuel divisor
+            (leadingDivisionStep divisor initial) fuel).quotient x *
+              eval divisor x +
+            eval (runLeadingDivisionFuel divisor
+              (leadingDivisionStep divisor initial) fuel).remainder x =
+          eval (leadingDivisionStep divisor initial).quotient x *
+              eval divisor x +
+            eval (leadingDivisionStep divisor initial).remainder x :=
+              ih (leadingDivisionStep divisor initial)
+        _ = eval initial.quotient x * eval divisor x +
+              eval initial.remainder x := by
+          by_cases hR : leadingCoefficient? initial.remainder = none
+          · have hstep :
+                leadingDivisionStep divisor initial = initial := by
+              simp [leadingDivisionStep, hR]
+            rw [hstep]
+          · obtain ⟨aR, hR⟩ := Option.ne_none_iff_exists'.mp hR
+            by_cases hB : leadingCoefficient? divisor = none
+            · have hstep :
+                  leadingDivisionStep divisor initial = initial := by
+                simp [leadingDivisionStep, hR, hB]
+              rw [hstep]
+            · obtain ⟨aB, hB⟩ := Option.ne_none_iff_exists'.mp hB
+              by_cases hlen :
+                  divisor.coefficients.length ≤
+                    initial.remainder.coefficients.length
+              · exact eval_leadingDivisionStep divisor initial
+                  aR aB x hR hB hlen
+              · have hstep :
+                    leadingDivisionStep divisor initial = initial := by
+                  simp [leadingDivisionStep, hR, hB, hlen]
+                rw [hstep]
+
 end CCFSM.P2749
