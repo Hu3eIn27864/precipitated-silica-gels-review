@@ -317,3 +317,23 @@ The formal rational-polynomial work has a concrete downstream target: CCFSM v4.2
   initialized with zero quotient and full dividend remainder. The automatic
   recursive division algorithm, remainder-degree bound and Sturm theorem
   remain future work.
+
+
+### AP F — automatic leading-term division transition verified (17 November 2026)
+
+- Added `leadingDivisionStep`: the next quotient monomial is selected from the
+  current remainder/divisor leading coefficients, with exact rational
+  coefficient ratio and degree offset.
+- Added `eval_leadingDivisionStep`: when both leading coefficients exist,
+  this automatically selected transition preserves the evaluated
+  quotient-times-divisor-plus-remainder identity.
+- Aggregate Lean proof-kernel CI passed on code head
+  `b7a7922126c47390945263fede12d4a171b1ebd4` (run `44088742824`).
+- The CCFSM v0.6 experimental protocol now specifies randomized split of
+  matched parent batches into untouched natural-syneresis, low-gradient
+  hydraulic and volumetric-mechanical arms, with preregistered state
+  matching and rejection gates.
+- Still open: prove degree-fit guard, strict decrease for the actual
+  automatic transition, recursive composition and termination, final
+  remainder-degree bound, polynomial-level identity, uniqueness and Sturm
+  root counting. No physical measurements are claimed.
