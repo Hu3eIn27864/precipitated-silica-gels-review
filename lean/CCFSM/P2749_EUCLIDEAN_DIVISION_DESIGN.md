@@ -626,3 +626,27 @@ This establishes the local decrease fact needed by a well-founded
 recursion, but the recursive driver and its global termination theorem are
 not yet implemented. In particular, no final quotient/remainder degree
 bound or Sturm root count is claimed.
+
+
+## Bounded automatic leading-division evaluator — 17 November 2026
+
+A total, fuel-bounded evaluator has now been added:
+
+- `runLeadingDivisionFuel divisor state fuel` applies the automatic
+  `leadingDivisionStep` at most `fuel` times.
+- Structural recursion on the natural fuel makes the evaluator total without
+  a termination argument about polynomial degrees.
+- The intended invariant is proved for every fuel value: the evaluated
+  quotient-times-divisor plus remainder equals the corresponding initial
+  value at every rational evaluation point.
+- If a leading coefficient is unavailable or the divisor's coefficient
+  length exceeds the remainder's, the guarded transition leaves the state
+  unchanged; otherwise it applies the exact monomial update.
+
+This is an executable bounded evaluator and a useful bridge to an unbounded
+algorithm, but the fuel is an external bound. It does **not** prove that a
+specific degree-derived fuel is sufficient, that the final remainder has
+degree below the divisor, or that the quotient/remainder are unique. The
+new theorem is awaiting aggregate Lean CI on commit
+`31429876de78308617710a000099206483956df9`; do not treat it as verified
+until that run completes successfully.
