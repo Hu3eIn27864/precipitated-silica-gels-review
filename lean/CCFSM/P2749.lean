@@ -1167,11 +1167,13 @@ theorem leadingDivisionStep_length_zero_or_lt
     simp [leadingCoefficient?, hz] at hR
   rcases hdrop with hzero | ⟨dResult, dDividend, hResult, hDividend, hlt⟩
   · left
-    by_contra hne
-    obtain ⟨c, hc, _⟩ :=
-      leadingCoefficient?_nonzero
+    by_cases hne :
+        (leadingDivisionStep divisor state).remainder.coefficients = []
+    · exact hne
+    · have hsome := degree?_some_of_nonempty
         (leadingDivisionStep divisor state).remainder hne
-    simp [degree?, hc] at hzero
+      rw [hsome] at hzero
+      cases hzero
   · right
     have hnew : (leadingDivisionStep divisor state).remainder.coefficients ≠ [] := by
       intro hz
