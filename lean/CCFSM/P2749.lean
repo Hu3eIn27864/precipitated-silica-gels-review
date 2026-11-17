@@ -1079,4 +1079,27 @@ theorem eval_runDivisionSteps
                   exact eval_division_update initial.quotient
                     initial.remainder divisor k c x
 
+
+/-- The canonical zero polynomial evaluates to zero at every rational point. -/
+theorem eval_zero (x : Rat) : eval zero x = 0 := by
+  simp [eval, zero, ofCoefficients, normalizeCoefficients, trimReversed,
+    evalCoefficients]
+
+/-- Start a division trace with zero quotient and the full dividend as
+    remainder. -/
+def initialDivisionState (dividend : RatPolynomial) : DivisionState :=
+  { quotient := zero, remainder := dividend }
+
+/-- Every finite monomial trace starting from (0, dividend) satisfies the
+    evaluated quotient/remainder identity for the original dividend. -/
+theorem eval_runDivisionSteps_from_dividend
+    (dividend divisor : RatPolynomial)
+    (steps : List (Nat × Rat)) (x : Rat) :
+    eval (runDivisionSteps divisor (initialDivisionState dividend)
+      steps).quotient x * eval divisor x +
+      eval (runDivisionSteps divisor (initialDivisionState dividend)
+        steps).remainder x = eval dividend x := by
+  simpa [initialDivisionState, eval_zero] using
+    eval_runDivisionSteps divisor (initialDivisionState dividend) steps x
+
 end CCFSM.P2749
