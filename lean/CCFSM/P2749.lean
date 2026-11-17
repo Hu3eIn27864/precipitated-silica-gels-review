@@ -982,8 +982,15 @@ theorem rational_division_update_identity
     (qValue + termValue) * divisorValue +
         (remainderValue - termValue * divisorValue) =
       qValue * divisorValue + remainderValue := by
-  simp [Rat.add_mul, Rat.sub_eq_add_neg, Rat.add_assoc,
-    Rat.add_comm, Rat.add_left_comm]
+  calc
+    (qValue + termValue) * divisorValue +
+        (remainderValue - termValue * divisorValue) =
+      qValue * divisorValue +
+        (termValue * divisorValue +
+          (remainderValue - termValue * divisorValue)) := by
+            rw [Rat.add_mul, Rat.add_assoc]
+    _ = qValue * divisorValue + remainderValue := by
+          rw [Rat.add_sub_cancel_left]
 
 /-- Adding one monomial to the quotient while subtracting the same
     monomial multiple of the divisor from the remainder preserves the
