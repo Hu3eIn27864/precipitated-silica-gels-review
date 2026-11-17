@@ -944,4 +944,23 @@ theorem degree?_subtractMonomialLeading_lt
     ⟨rpre, hr⟩ ⟨dpre, hd⟩ haB hsize hresult'
   simpa [subtractMonomialLeading, hleadR, hleadB] using hstep
 
+
+/-- The automatically selected leading-term subtraction either produces
+    the zero polynomial or a nonzero polynomial of strictly smaller degree.
+    This packages the terminal branch needed by a well-founded division
+    recursion without assigning a natural degree to zero. -/
+theorem subtractMonomialLeading_zero_or_degree_lt
+    (p q : RatPolynomial)
+    (hp : p.coefficients ≠ []) (hq : q.coefficients ≠ [])
+    (hlen : q.coefficients.length ≤ p.coefficients.length) :
+    degree? (subtractMonomialLeading p q) = none ∨
+      ∃ dResult dDividend,
+        degree? (subtractMonomialLeading p q) = some dResult ∧
+          degree? p = some dDividend ∧ dResult < dDividend := by
+  by_cases hresult : (subtractMonomialLeading p q).coefficients = []
+  · left
+    simp [degree?, leadingCoefficient?, hresult]
+  · right
+    exact degree?_subtractMonomialLeading_lt p q hp hq hlen hresult
+
 end CCFSM.P2749
