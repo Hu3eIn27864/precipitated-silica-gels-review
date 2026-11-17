@@ -523,3 +523,30 @@ time of this note; no pass is claimed until that run completes. This theorem
 is still only a one-step invariant: the quotient accumulator is not yet
 implemented as a recursive object, and termination, remainder degree,
 uniqueness and Sturm counting remain open.
+
+
+## Verified quotient/remainder update invariant — 17 November 2026
+
+The scalar cancellation proof was completed using Lean core's exact rational
+additive-inverse law. The module now proves:
+
+- `rational_division_update_identity`: the scalar identity behind one update;
+- `eval_division_update`: adding one quotient monomial and subtracting
+  the same monomial multiple of the divisor preserves
+  `eval Q x * eval D x + eval R x` at every rational x;
+- `DivisionState`, `divisionStep` and `runDivisionSteps`: a finite,
+  explicitly supplied sequence of quotient/remainder updates;
+- `eval_runDivisionSteps`: the evaluation invariant is preserved by
+  every such finite trace.
+
+Aggregate Lean proof-kernel CI passed on exact code head
+`1fff86cbf00b7b5b92ba2c72e41fc00b6d0fefe0` (run `44087441806`).
+The natural-syneresis workflow for this head is still running at the time of
+this note.
+
+**Important boundary:** `runDivisionSteps` is a trace interpreter, not yet
+the Euclidean-division algorithm. The trace terms are supplied explicitly;
+the code does not yet prove that a leading-term policy generates a finite
+trace, that the final remainder is zero or has degree below the divisor, or
+that the resulting quotient/remainder are unique. Those remain the next
+formal gates before a Sturm sequence can be implemented.
