@@ -286,3 +286,20 @@ The formal rational-polynomial work has a concrete downstream target: CCFSM v4.2
   modulus measurements, with a separate untouched natural-syneresis arm.
   This sharpens the evidence gap; it does not claim new measurements or
   fitted silica parameters.
+
+
+### AP F — dividend-initialized finite trace identity verified (17 November 2026)
+
+- Added `eval_zero`, `initialDivisionState` and
+  `eval_runDivisionSteps_from_dividend`. For any explicitly supplied finite
+  monomial trace, starting from quotient zero and remainder equal to the
+  dividend, the final state satisfies the pointwise exact rational identity
+  `eval Q(x) * eval D(x) + eval R(x) = eval P(x)`.
+- Aggregate Lean proof-kernel CI passed on exact code head
+  `ddfbb1c0bac70df8d793132d5167ff6e8ce6004a` (run `44087914969`).
+  The natural-syneresis Python workflow for that exact head was still running
+  when this entry was written.
+- This is stronger than a single-step invariant but remains a finite-trace
+  correctness theorem. It does not yet generate the trace by well-founded
+  leading-term recursion or prove the final remainder-degree bound,
+  polynomial-object identity, uniqueness or Sturm root count.
