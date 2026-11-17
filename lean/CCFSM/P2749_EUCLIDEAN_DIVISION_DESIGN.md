@@ -605,3 +605,24 @@ recursive algorithm. The next gate is to prove the transition is taken only
 when the divisor degree fits, prove the nonzero remainder strictly decreases
 in the chosen measure, and compose transitions with a well-founded
 termination argument. No Sturm root count is claimed.
+
+
+## Degree-fit guard and strict decrease for the automatic step — 17 November 2026
+
+The automatic transition is now guarded: it performs a leading-term
+subtraction only when the divisor coefficient-vector length is no greater
+than the current remainder length. If the divisor does not fit, the state
+is left unchanged. This prevents the invalid degree-offset-zero subtraction
+that would otherwise occur when the divisor degree exceeds the remainder.
+
+Added `degree?_leadingDivisionStep_zero_or_lt`. Under nonzero leading
+coefficients and the degree-fit premise, the guarded transition either
+produces the zero polynomial or a nonzero remainder of strictly smaller
+degree. Aggregate Lean proof-kernel CI passed on exact code head
+`5730a10e1ac863f3386feafa57eef172d32b9967` (run
+`44089056837`).
+
+This establishes the local decrease fact needed by a well-founded
+recursion, but the recursive driver and its global termination theorem are
+not yet implemented. In particular, no final quotient/remainder degree
+bound or Sturm root count is claimed.
