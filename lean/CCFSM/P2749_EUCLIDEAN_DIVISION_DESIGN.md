@@ -732,3 +732,29 @@ condition and remains there for all additional fuel. It still does not prove
 that any fixed degree-derived fuel is sufficient to reach that condition.
 The global quotient/remainder degree theorem, polynomial-object identity,
 uniqueness and Sturm root count remain open.
+
+
+## Coefficient-length decrease for the automatic transition — 17 November 2026
+
+Added `leadingDivisionStep_length_zero_or_lt`. Under the existing explicit
+leading-coefficient and degree-fit hypotheses, the automatic transition now
+has a direct coefficient-vector measure theorem: its remainder is either
+the empty zero representation or has strictly fewer coefficients than the
+input remainder.
+
+The proof lifts the already verified option-valued degree decrease through
+the canonical nonzero degree/length identity. It handles the zero branch
+separately, so zero is never assigned a natural-number degree. This gives
+the recursive termination argument a directly usable natural-number
+measure, without a detour through option-valued degrees at each recursive
+call.
+
+Aggregate Lean proof-kernel CI passed on code head
+`d9a437ef64ee3a360e937145d4a3d8ef576eeeac` (runs `44100750965` and
+`44100763050`). The natural-syneresis/Python workflow for this exact code
+head (`44100762940`) remains in progress and is not yet claimed as passed.
+
+**Still open:** the global induction showing that a fuel value bounded by
+the initial coefficient length reaches a terminal state; the final
+quotient/remainder degree condition; polynomial-object identity and
+uniqueness; and the Sturm root-count theorem.
