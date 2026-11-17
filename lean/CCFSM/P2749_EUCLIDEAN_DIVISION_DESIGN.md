@@ -724,7 +724,7 @@ fixed point would force the remainder to have both its original degree and a
 strictly smaller degree, a contradiction. Aggregate Lean proof-kernel CI
 passed on code head
 `8b749603c561c5a14707fb941a7a011fc259486b` (runs `44100191169` and
-`44100191169` both report success).
+`44100206759` both report success).
 
 Together with `runLeadingDivisionFuel_eq_self_of_terminal`, this proves
 that the guarded evaluator stops changing exactly at the intended terminal
