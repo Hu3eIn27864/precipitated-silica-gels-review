@@ -1007,7 +1007,9 @@ theorem rational_division_update_identity
                 (termValue * divisorValue +
                   -(termValue * divisorValue)) := by
                   rw [← Rat.add_assoc]
-            _ = remainderValue := by simp
+            _ = remainderValue := by
+                  rw [← Rat.sub_eq_add_neg]
+                  simp
 
 /-- Adding one monomial to the quotient while subtracting the same
     monomial multiple of the divisor from the remainder preserves the
