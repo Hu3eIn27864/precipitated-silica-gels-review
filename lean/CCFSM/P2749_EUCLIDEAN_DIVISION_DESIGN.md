@@ -702,3 +702,33 @@ does not prove that the evaluator reaches that condition within any
 particular fuel, nor does it yet provide a degree-derived fuel bound,
 quotient/remainder degree theorem, polynomial-object identity, uniqueness,
 or Sturm root count.
+
+
+## Exact terminal-state characterization — 17 November 2026
+
+For a nonzero canonical divisor, the transition's fixed points are now
+characterized in both directions by
+`leadingDivisionStep_eq_self_iff_terminal`:
+
+`leadingDivisionStep divisor state = state`
+
+holds exactly when the current remainder is zero or the divisor coefficient
+vector is longer than the remainder coefficient vector. The nonzero-divisor
+premise is essential: a zero divisor has no leading coefficient and would
+make every state a fixed point, which is not a valid Euclidean-division
+terminal criterion.
+
+The proof combines canonical nonzero leading-coefficient existence with the
+previous zero-or-strict-degree-decrease theorem. In the degree-fit case, a
+fixed point would force the remainder to have both its original degree and a
+strictly smaller degree, a contradiction. Aggregate Lean proof-kernel CI
+passed on code head
+`8b749603c561c5a14707fb941a7a011fc259486b` (runs `44100191169` and
+`44100191169` both report success).
+
+Together with `runLeadingDivisionFuel_eq_self_of_terminal`, this proves
+that the guarded evaluator stops changing exactly at the intended terminal
+condition and remains there for all additional fuel. It still does not prove
+that any fixed degree-derived fuel is sufficient to reach that condition.
+The global quotient/remainder degree theorem, polynomial-object identity,
+uniqueness and Sturm root count remain open.
