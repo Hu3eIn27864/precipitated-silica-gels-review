@@ -1429,23 +1429,21 @@ theorem runLeadingDivisionFuel_remainder_degree_lt
       divisor hdivisor state fuel hlen
   rcases hterminal with hzero | hshort
   · exact Or.inl hzero
-  · right
-    have hrem :
-        (runLeadingDivisionFuel divisor state fuel).remainder.coefficients ≠ [] := by
-      intro hz
-      rw [hz] at hshort
-      simp at hshort
-    obtain ⟨dR, hRdegree, hRlength⟩ :=
-      degree?_add_one_eq_length
-        (runLeadingDivisionFuel divisor state fuel).remainder hrem
-    obtain ⟨dD, hDdegree, hDlength⟩ :=
-      degree?_add_one_eq_length divisor hdivisor
-    refine ⟨dR, dD, hRdegree, hDdegree, ?_⟩
-    have hlength : dR + 1 < dD + 1 := by
-      rw [hRlength, hDlength]
-      exact hshort
-    have hsuccessor : Nat.succ dR < Nat.succ dD := by
-      simpa using hlength
-    exact Nat.succ_lt_succ_iff.mp hsuccessor
+  · by_cases hrem :
+        (runLeadingDivisionFuel divisor state fuel).remainder.coefficients = []
+    · exact Or.inl hrem
+    · right
+      obtain ⟨dR, hRdegree, hRlength⟩ :=
+        degree?_add_one_eq_length
+          (runLeadingDivisionFuel divisor state fuel).remainder hrem
+      obtain ⟨dD, hDdegree, hDlength⟩ :=
+        degree?_add_one_eq_length divisor hdivisor
+      refine ⟨dR, dD, hRdegree, hDdegree, ?_⟩
+      have hlength : dR + 1 < dD + 1 := by
+        rw [hRlength, hDlength]
+        exact hshort
+      have hsuccessor : Nat.succ dR < Nat.succ dD := by
+        simpa using hlength
+      exact Nat.succ_lt_succ_iff.mp hsuccessor
 
 end CCFSM.P2749
