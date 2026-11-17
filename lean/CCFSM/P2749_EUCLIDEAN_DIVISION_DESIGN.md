@@ -427,3 +427,20 @@ This removes the caller-supplied shift and leading-coefficient witnesses
 from the one-step theorem. The remaining recursion design must handle the
 zero remainder as a terminal case, accumulate quotient monomials, and prove
 the quotient/remainder identity and the remainder-degree bound.
+
+
+## Division-step terminal branch — 17 November 2026
+
+The Lean module now packages the automatic leading-term subtraction result
+as a zero-or-strict-degree-decrease statement:
+`subtractMonomialLeading_zero_or_degree_lt`. For nonzero canonical
+dividend and divisor with divisor coefficient length no greater than the
+dividend's, the subtraction result is either the zero polynomial (whose
+option-valued degree is `none`) or has strictly smaller degree than the
+dividend.
+
+This removes the need for callers to supply a separate nonzero-result
+hypothesis when setting up the recursion's measure. The new theorem is on
+commit `1193ae22d83095e091fac92e83da9d0e7c778e51`; aggregate Lean and
+Python CI are pending. It is not yet a quotient/remainder recursion and does
+not establish the quotient/remainder identity or remainder-degree bound.
