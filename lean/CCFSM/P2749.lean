@@ -1140,7 +1140,7 @@ theorem leadingDivisionStep_eq_self_iff_terminal
         rcases hdrop with hzero | ⟨dResult, dDividend, hResult, hDividend, hlt⟩
         · rw [hdegree] at hzero
           cases hzero
-        · rw [hdegree] at hDividend
+        · rw [hdegree] at hResult hDividend
           have heq : dResult = dDividend :=
             Option.some.inj (hResult.symm.trans hDividend)
           exact False.elim (Nat.lt_irrefl dDividend (heq ▸ hlt))
