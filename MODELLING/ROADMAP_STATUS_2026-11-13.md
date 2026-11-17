@@ -373,3 +373,20 @@ The formal rational-polynomial work has a concrete downstream target: CCFSM v4.2
   condition, polynomial-object identity, uniqueness and Sturm theorem remain
   open. The natural-syneresis workflow on that exact code head was still
   running when this entry was written.
+
+
+## Full CI confirmation — current PR head (17 November 2026)
+
+The current PR head `33f52468e9ea22436b2bd39858240e5de5275ad1` has now
+passed both project workflows:
+
+- Aggregate Lean proof-kernel workflow: run `44090248305`, conclusion
+  `success`.
+- Natural-syneresis / Python workflow: run `44090248252`, conclusion
+  `success`.
+
+This closes the pending-CI status recorded above. It verifies the formal
+code and the existing computational regression workflow; it does not turn
+the bounded evaluator into an unbounded Euclidean algorithm. The sufficient
+fuel bound, terminal remainder-degree theorem, polynomial-object identity,
+uniqueness, and Sturm root-count theorem remain open.
