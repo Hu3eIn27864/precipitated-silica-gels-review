@@ -1412,4 +1412,40 @@ theorem runLeadingDivisionFuel_terminal_of_length_le
                   (leadingDivisionStep divisor state) fuel).remainder.coefficients.length
           exact ih (leadingDivisionStep divisor state) hnewle
 
+/-- The coefficient-length fuel bound also gives the usual Euclidean
+    remainder condition: the final remainder is zero or has degree
+    strictly below the nonzero divisor. -/
+theorem runLeadingDivisionFuel_remainder_degree_lt
+    (divisor : RatPolynomial)
+    (hdivisor : divisor.coefficients ≠ [])
+    (state : DivisionState) (fuel : Nat)
+    (hlen : state.remainder.coefficients.length ≤ fuel) :
+    (runLeadingDivisionFuel divisor state fuel).remainder.coefficients = [] ∨
+      ∃ dR dD,
+        degree? (runLeadingDivisionFuel divisor state fuel).remainder = some dR ∧
+          degree? divisor = some dD ∧ dR < dD := by
+  have hterminal :=
+    runLeadingDivisionFuel_terminal_of_length_le
+      divisor hdivisor state fuel hlen
+  rcases hterminal with hzero | hshort
+  · exact Or.inl hzero
+  · right
+    have hrem :
+        (runLeadingDivisionFuel divisor state fuel).remainder.coefficients ≠ [] := by
+      intro hz
+      rw [hz] at hshort
+      simp at hshort
+    obtain ⟨dR, hRdegree, hRlength⟩ :=
+      degree?_add_one_eq_length
+        (runLeadingDivisionFuel divisor state fuel).remainder hrem
+    obtain ⟨dD, hDdegree, hDlength⟩ :=
+      degree?_add_one_eq_length divisor hdivisor
+    refine ⟨dR, dD, hRdegree, hDdegree, ?_⟩
+    have hlength : dR + 1 < dD + 1 := by
+      rw [hRlength, hDlength]
+      exact hshort
+    have hsuccessor : Nat.succ dR < Nat.succ dD := by
+      simpa using hlength
+    exact Nat.succ_lt_succ_iff.mp hsuccessor
+
 end CCFSM.P2749
