@@ -456,3 +456,28 @@ identity. The statement is about exact rational polynomial evaluation; the
 well-founded recursion and its accumulated quotient are still to be defined.
 The theorem is on code commit `a74332648eb9418c54a194946af0e2aa20389f97`;
 its aggregate Lean CI is pending.
+
+
+## Exact evaluation law — corrected proof and CI (17 November 2026)
+
+The proof of eval_subtractMonomial was corrected to unfold the canonical
+coefficient representation and use the exact coefficient-list evaluation
+laws directly. The Lean proof-kernel workflow now passes on commit
+8fbbe1d9298b4a9aea07fd18d0542ee6f55dab72 (runs 44010877202 and
+44010883527). The natural-syneresis Python workflow for this commit is still
+running and is not yet claimed as passed.
+
+The theorem establishes the pointwise evaluation law for one subtraction
+step. Together with the zero-or-strict-degree-decrease theorem, it supplies
+the two main ingredients for well-founded long division: a terminating
+remainder update and an exact algebraic update law. The next implementation
+should define the quotient increment as the selected monomial, update the
+quotient accumulator and remainder together, and prove preservation of the
+invariant eval p x = eval q_acc x * eval divisor x + eval remainder x.
+
+**Silica-gel scope:** this is reusable exact algebra infrastructure, not a
+silica-gel constitutive law, fitted parameter, or physical validation. Its
+potential CCFSM role is downstream: exact manipulation/checking of rational
+characteristic polynomials or linearized stability relations, once such a
+polynomial is derived from an explicitly stated CCFSM subsystem. No such
+CCFSM-specific polynomial has yet been connected to this module.
