@@ -584,3 +584,24 @@ workflow for this exact head is still running (`44088148169`).
 The strongest currently Lean-verified division result is therefore the
 dividend-initialized finite-trace identity above. No recursive long-division
 algorithm or Sturm root-count theorem is claimed.
+
+
+## Automatic leading-term update — first Lean-verified step (17 November 2026)
+
+Added `leadingDivisionStep` and `eval_leadingDivisionStep`. The new
+state transition now selects the quotient monomial directly from the current
+remainder and divisor leading coefficients, using the degree offset
+`remainder.coefficients.length - divisor.coefficients.length` and exact
+rational coefficient ratio. When both leading coefficients are present, the
+evaluated quotient/remainder invariant is proved for that automatically
+selected update.
+
+Aggregate Lean proof-kernel CI passed on code head
+`b7a7922126c47390945263fede12d4a171b1ebd4` (run
+`44088742824`).
+
+**Boundary:** this is one automatically selected transition, not yet a
+recursive algorithm. The next gate is to prove the transition is taken only
+when the divisor degree fits, prove the nonzero remainder strictly decreases
+in the chosen measure, and compose transitions with a well-founded
+termination argument. No Sturm root count is claimed.
