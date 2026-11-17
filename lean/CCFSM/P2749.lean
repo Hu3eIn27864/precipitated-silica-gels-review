@@ -975,4 +975,29 @@ theorem eval_subtractMonomial (p q : RatPolynomial) (k : Nat)
     evalCoefficients_multiply, evalCoefficients_monomial,
     Rat.mul_assoc]
 
+
+/-- Scalar conservation identity behind one quotient/remainder update. -/
+theorem rational_division_update_identity
+    (qValue termValue divisorValue remainderValue : Rat) :
+    (qValue + termValue) * divisorValue +
+        (remainderValue - termValue * divisorValue) =
+      qValue * divisorValue + remainderValue := by
+  simp [Rat.add_mul, Rat.sub_eq_add_neg, Rat.add_assoc,
+    Rat.add_comm, Rat.add_left_comm]
+
+/-- Adding one monomial to the quotient while subtracting the same
+    monomial multiple of the divisor from the remainder preserves the
+    evaluated quotient-times-divisor-plus-remainder invariant. -/
+theorem eval_division_update
+    (quotient remainder divisor : RatPolynomial)
+    (k : Nat) (c x : Rat) :
+    eval (add quotient (monomial k c)) x * eval divisor x +
+        eval (subtractMonomial remainder divisor k c) x =
+      eval quotient x * eval divisor x + eval remainder x := by
+  rw [eval_add, eval_monomial, eval_subtractMonomial]
+  simpa [Rat.mul_assoc] using
+    rational_division_update_identity
+      (eval quotient x) (ratPow x k * c) (eval divisor x)
+      (eval remainder x)
+
 end CCFSM.P2749
