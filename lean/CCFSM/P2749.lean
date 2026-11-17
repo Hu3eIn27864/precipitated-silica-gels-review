@@ -1349,4 +1349,67 @@ theorem runLeadingDivisionFuel_eq_self_of_terminal
         leadingDivisionStep_eq_self_of_terminal divisor state hterminal, ih]
 
 
+/-- Any fuel budget at least as large as the initial remainder's
+    coefficient-vector length is sufficient to reach the exact terminal
+    condition, provided the divisor is nonzero. -/
+theorem runLeadingDivisionFuel_terminal_of_length_le
+    (divisor : RatPolynomial)
+    (hdivisor : divisor.coefficients ≠ [])
+    (state : DivisionState) (fuel : Nat)
+    (hlen : state.remainder.coefficients.length ≤ fuel) :
+    (runLeadingDivisionFuel divisor state fuel).remainder.coefficients = [] ∨
+      divisor.coefficients.length >
+        (runLeadingDivisionFuel divisor state fuel).remainder.coefficients.length := by
+  induction fuel generalizing state with
+  | zero =>
+      cases hcoeff : state.remainder.coefficients with
+      | nil =>
+          exact Or.inl hcoeff
+      | cons a rest =>
+          simp [hcoeff] at hlen
+  | succ fuel ih =>
+      by_cases hterminal :
+          state.remainder.coefficients = [] ∨
+            divisor.coefficients.length > state.remainder.coefficients.length
+      · have hstable :=
+          runLeadingDivisionFuel_eq_self_of_terminal
+            divisor state (fuel + 1) hterminal
+        rw [hstable]
+        exact hterminal
+      · have hrem : state.remainder.coefficients ≠ [] := by
+          intro hz
+          exact hterminal (Or.inl hz)
+        have hfit :
+            divisor.coefficients.length ≤ state.remainder.coefficients.length :=
+          Nat.le_of_not_gt (fun hgt => hterminal (Or.inr hgt))
+        obtain ⟨aR, hR, _⟩ :=
+          leadingCoefficient?_nonzero state.remainder hrem
+        obtain ⟨aB, hB, _⟩ :=
+          leadingCoefficient?_nonzero divisor hdivisor
+        have hdecrease :=
+          leadingDivisionStep_length_zero_or_lt
+            divisor state aR aB hR hB hfit
+        rcases hdecrease with hzero | hlt
+        · have hstable :=
+            runLeadingDivisionFuel_eq_self_of_terminal
+              divisor (leadingDivisionStep divisor state) fuel (Or.inl hzero)
+          change
+            (runLeadingDivisionFuel divisor
+              (leadingDivisionStep divisor state) fuel).remainder.coefficients = [] ∨
+              divisor.coefficients.length >
+                (runLeadingDivisionFuel divisor
+                  (leadingDivisionStep divisor state) fuel).remainder.coefficients.length
+          rw [hstable]
+          exact Or.inl hzero
+        · have hnewle :
+            (leadingDivisionStep divisor state).remainder.coefficients.length ≤ fuel :=
+          Nat.le_of_lt_succ (Nat.lt_of_lt_of_le hlt hlen)
+          change
+            (runLeadingDivisionFuel divisor
+              (leadingDivisionStep divisor state) fuel).remainder.coefficients = [] ∨
+              divisor.coefficients.length >
+                (runLeadingDivisionFuel divisor
+                  (leadingDivisionStep divisor state) fuel).remainder.coefficients.length
+          exact ih (leadingDivisionStep divisor state) hnewle
+
 end CCFSM.P2749
