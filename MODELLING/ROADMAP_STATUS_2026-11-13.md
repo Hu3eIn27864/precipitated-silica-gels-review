@@ -471,3 +471,30 @@ head (`44100762940`) remains in progress and is not yet claimed as passed.
 the initial coefficient length reaches a terminal state; the final
 quotient/remainder degree condition; polynomial-object identity and
 uniqueness; and the Sturm root-count theorem.
+
+
+## Sufficient coefficient-length fuel bound — 17 November 2026
+
+The global induction is now implemented as
+`runLeadingDivisionFuel_terminal_of_length_le`. For a nonzero canonical
+divisor, if the initial remainder has coefficient-vector length at most
+`fuel`, then after that many bounded automatic updates the state satisfies
+the exact terminal predicate: the remainder is zero or the divisor's
+coefficient vector is longer than the remainder's.
+
+The induction uses the absorbing-terminal theorem for already terminal
+states, and the new direct coefficient-length decrease theorem for active
+steps. Each active nonzero step consumes at least one unit of the remaining
+fuel. The zero remainder is handled as a separate branch; no degree is
+assigned to zero.
+
+Aggregate Lean proof-kernel CI passed on exact code head
+`1710aecbf876e4dda39d45f7d28871a18f0e102f` (runs `44101086317` and
+`44101097363`). The natural-syneresis/Python workflow for that head
+(`44101097351`) is still in progress.
+
+The follow-on theorem `runLeadingDivisionFuel_remainder_degree_lt` is
+being checked separately. It packages the terminal condition as the standard
+Euclidean remainder-degree property. Until that theorem passes CI, the
+formal milestone recorded here is termination at the coefficient-length
+terminal predicate, not yet the final degree statement.
