@@ -963,4 +963,14 @@ theorem subtractMonomialLeading_zero_or_degree_lt
   · right
     exact degree?_subtractMonomialLeading_lt p q hp hq hlen hresult
 
+
+/-- Evaluation of one canonical monomial-subtraction step is exactly
+    dividend minus the selected monomial multiple of the divisor. -/
+theorem eval_subtractMonomial (p q : RatPolynomial) (k : Nat)
+    (c x : Rat) :
+    eval (subtractMonomial p q k c) x =
+      eval p x - (ratPow x k * c) * eval q x := by
+  simp [subtractMonomial, eval_subtract, eval_multiply,
+    eval_monomial, Rat.mul_assoc]
+
 end CCFSM.P2749
