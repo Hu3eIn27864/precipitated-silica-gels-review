@@ -550,3 +550,24 @@ the code does not yet prove that a leading-term policy generates a finite
 trace, that the final remainder is zero or has degree below the divisor, or
 that the resulting quotient/remainder are unique. Those remain the next
 formal gates before a Sturm sequence can be implemented.
+
+
+## Dividend-initialized trace identity — Lean CI correction (17 November 2026)
+
+Added `eval_zero`, `initialDivisionState` and
+`eval_runDivisionSteps_from_dividend`. Starting from the zero
+quotient and the full dividend as remainder, every explicitly supplied finite
+trace now has the direct evaluated identity
+`eval Q(x) * eval D(x) + eval R(x) = eval P(x)`.
+
+The first proof attempt exposed only a simplification mismatch in the final
+`0 + eval P(x)` term; it was replaced with an explicit two-line
+`calc` proof. The corrected aggregate Lean proof-kernel build passed on
+code head `ddfbb1c0bac70df8d793132d5167ff6e8ce6004a` (run
+`44087914969`). The natural-syneresis workflow for this exact code head
+is still running.
+
+This remains a finite-trace theorem, not a completed division algorithm.
+The algorithmic leading-term policy, well-founded recursion, final
+remainder-degree bound, polynomial-level identity and uniqueness are still
+open.
