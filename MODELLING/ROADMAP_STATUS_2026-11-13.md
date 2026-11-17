@@ -337,3 +337,21 @@ The formal rational-polynomial work has a concrete downstream target: CCFSM v4.2
   automatic transition, recursive composition and termination, final
   remainder-degree bound, polynomial-level identity, uniqueness and Sturm
   root counting. No physical measurements are claimed.
+
+
+### AP F — guarded leading-term transition and strict degree decrease verified (17 November 2026)
+
+- `leadingDivisionStep` now acts only when the divisor coefficient-vector
+  length fits within the current remainder length; otherwise it leaves the
+  state unchanged. This avoids an invalid degree-offset-zero subtraction.
+- `eval_leadingDivisionStep` proves preservation of the exact evaluated
+  quotient/remainder invariant under the degree-fit premise.
+- `degree?_leadingDivisionStep_zero_or_lt` proves that every valid
+  automatic step either reaches the zero remainder or strictly lowers its
+  degree.
+- Aggregate Lean proof-kernel CI passed on code head
+  `5730a10e1ac863f3386feafa57eef172d32b9967` (run `44089056837`).
+- This is the local well-founded-decrease lemma, not yet a recursive
+  division algorithm. The recursion/termination theorem, global
+  quotient/remainder degree bound, uniqueness and Sturm root count remain
+  open.
