@@ -813,3 +813,14 @@ prove quotient/remainder uniqueness, and then build and verify the signed
 remainder sequence and Sturm root-count theorem. The current evaluator's
 quotient/remainder evaluation invariant is already preserved for every
 fuel value.
+
+
+### CI completion update — 17 November 2026
+
+The natural-syneresis/Python workflow for exact code head
+`d53953642071a1bf741e139e2fbea7e83ade79ab` has now completed successfully
+(run `44101488081`). Together with Lean runs `44101475022` and
+`44101488036`, this means the code commit containing
+`runLeadingDivisionFuel_remainder_degree_lt` is green in both project
+workflows. Later documentation-only heads have their own CI; their Lean
+runs are green, while the latest Python run is still in progress.
