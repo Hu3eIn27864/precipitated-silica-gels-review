@@ -164,3 +164,19 @@ Auswertung: hierarchisches Modell mit Charge als Zufallseffekt; Unsicherheit der
 4. B_eff, q, sigma und k_r bis zur unabhängigen Operationalisierung ausdrücklich als latent/unkalibriert markieren.
 
 **Kernaussage:** Der wissenschaftliche Engpass ist nicht die Zahl der Fitparameter, sondern die fehlende unabhängige Beobachtung der inneren Zustände. Der vorgeschlagene Plan adressiert genau diese Lücke, ohne natürliche Synärese mit erzwungener Konsolidierung zu vermischen.
+
+
+## Ergänzung — vorab definierte Paarbildung für Hydraulik und Mechanik (17.11.2026)
+
+Die in Stufe 1 vorgesehenen Opferproben werden für die entscheidende Transportprüfung nach einem vorab festgelegten Paarungsschema zugeordnet:
+
+1. Eine unabhängig hergestellte Elterncharge wird nach homogenisierter Gelierung zufällig auf mindestens drei parallele Arme verteilt: (a) natürliche, mechanisch unbelastete Synärese-Hauptprobe, (b) hydraulische Opferprobe, (c) volumetrisch-mechanische Opferprobe. Aufteilung und Probenpositionen werden dokumentiert.
+2. Hydraulik- und Mechanikarm erhalten denselben Rezeptur-, Misch-, Temperatur- und Alterungsverlauf bis zum Messzeitpunkt. Ein Paar gilt nur dann als zustandsangepasst, wenn vorab definierte Toleranzen für Gelalter, Kerntemperatur, pH, Wassergehalt/Sättigung und Vorbehandlung eingehalten sind. Numerische Toleranzen werden im Pilotversuch festgelegt und vor Entblindung der Messresultate eingefroren.
+3. Die hydraulische Probe wird bei mehreren kleinen Druckgradienten vermessen. Linearität, Rückkehr zum Ausgangszustand und fehlende messbare Volumen-/Massenänderung sind Akzeptanzbedingungen. Andernfalls wird kein intrinsisches stationäres kappa_eff aus diesem Versuch berichtet.
+4. Der mechanische Arm liefert den zur gewählten Closure passenden volumetrischen bzw. constrained response. G', G'', E0 oder ein Oedometer-t90 sind keine Ersatzmessungen. Frequenz, Dehnrate, Drainagezustand und Belastungshistorie gehören zum Messwert.
+5. Die unbelastete Hauptprobe wird nicht für Hydraulik- oder Mechanikmessungen angezapft. An ihr werden S(t), Masse, Temperatur und ausgetretene Flüssigkeit separat bilanziert; Verdunstungsblank und Gefäß-/Grenzflächenverluste werden parallel geführt.
+6. Die statistische Einheit ist die unabhängig hergestellte Elterncharge. Mehrere Coupons oder Messwiederholungen aus derselben Charge quantifizieren technische Präzision, nicht zusätzliche unabhängige Replikate.
+
+**Auswertungssperre:** kappa_eff und K_eff dürfen nur dann zu einer poroelastischen Zeitskala kombiniert werden, wenn die Paarungstoleranzen erfüllt und beide Messungen unabhängig qualitätsgeprüft sind. Bei nicht passender Probe, zeitlichem Eigenschaftsdrift oder nichtlinearem Darcy-Regime bleibt die Zeitskala unbestimmt; fehlende Daten werden nicht durch Fit von S(t) ersetzt.
+
+Diese Ergänzung ist ein präregistrierbarer Mess- und Qualitätsplan. Sie dokumentiert keine bereits durchgeführten Messungen und validiert keine CCFSM-Closure.
