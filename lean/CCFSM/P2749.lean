@@ -1073,6 +1073,31 @@ theorem eval_leadingDivisionStep
     (aR / aB) x
 
 
+/-- A guarded automatic leading-term update either terminates at
+    the zero remainder or strictly lowers the remainder degree. -/
+theorem degree?_leadingDivisionStep_zero_or_lt
+    (divisor : RatPolynomial) (state : DivisionState)
+    (aR aB : Rat)
+    (hR : leadingCoefficient? state.remainder = some aR)
+    (hB : leadingCoefficient? divisor = some aB)
+    (hlen : divisor.coefficients.length ≤ state.remainder.coefficients.length) :
+    degree? (leadingDivisionStep divisor state).remainder = none ∨
+      ∃ dResult dDividend,
+        degree? (leadingDivisionStep divisor state).remainder = some dResult ∧
+          degree? state.remainder = some dDividend ∧
+            dResult < dDividend := by
+  have hp : state.remainder.coefficients ≠ [] := by
+    intro hzero
+    simp [leadingCoefficient?, hzero] at hR
+  have hq : divisor.coefficients ≠ [] := by
+    intro hzero
+    simp [leadingCoefficient?, hzero] at hB
+  have hdrop := subtractMonomialLeading_zero_or_degree_lt
+    state.remainder divisor hp hq hlen
+  simpa [leadingDivisionStep, hR, hB, if_pos hlen, divisionStep,
+    subtractMonomialLeading] using hdrop
+
+
 /-- Execute a finite, explicitly supplied sequence of monomial updates.
     This is a trace interpreter, not yet the terminating division algorithm. -/
 def runDivisionSteps (divisor : RatPolynomial) :
