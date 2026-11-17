@@ -1053,35 +1053,6 @@ def leadingDivisionStep (divisor : RatPolynomial)
         state
   | _, _ => state
 
-/-- A zero remainder, or a divisor coefficient vector longer than
-    the remainder vector, is a fixed point of the guarded transition. -/
-theorem leadingDivisionStep_eq_self_of_terminal
-    (divisor : RatPolynomial) (state : DivisionState)
-    (hterminal :
-      state.remainder.coefficients = [] ∨
-        divisor.coefficients.length > state.remainder.coefficients.length) :
-    leadingDivisionStep divisor state = state := by
-  rcases hterminal with hzero | hlength
-  · simp [leadingDivisionStep, leadingCoefficient?, hzero]
-  · simp [leadingDivisionStep, Nat.not_le_of_gt hlength]
-
-/-- Once the remainder is zero or the divisor no longer fits, every
-    additional bounded evaluator step leaves the complete division state
-    unchanged. This is an absorbing-terminal-state theorem, not a proof
-    that an arbitrary fuel value reaches such a state. -/
-theorem runLeadingDivisionFuel_eq_self_of_terminal
-    (divisor : RatPolynomial) (state : DivisionState)
-    (fuel : Nat)
-    (hterminal :
-      state.remainder.coefficients = [] ∨
-        divisor.coefficients.length > state.remainder.coefficients.length) :
-    runLeadingDivisionFuel divisor state fuel = state := by
-  induction fuel with
-  | zero => rfl
-  | succ fuel ih =>
-      simp [runLeadingDivisionFuel,
-        leadingDivisionStep_eq_self_of_terminal divisor state hterminal, ih]
-
 /-- One automatically selected leading-term update preserves the exact
     evaluated quotient/remainder invariant whenever its two leading
     coefficients are available and the divisor degree fits. -/
@@ -1199,6 +1170,23 @@ theorem eval_runDivisionSteps_from_dividend
     _ = eval dividend x := by
           simp [initialDivisionState, eval_zero, Rat.zero_mul, Rat.zero_add]
 
+
+/-- Once the remainder is zero or the divisor no longer fits, every
+    additional bounded evaluator step leaves the complete division state
+    unchanged. This is an absorbing-terminal-state theorem, not a proof
+    that an arbitrary fuel value reaches such a state. -/
+theorem runLeadingDivisionFuel_eq_self_of_terminal
+    (divisor : RatPolynomial) (state : DivisionState)
+    (fuel : Nat)
+    (hterminal :
+      state.remainder.coefficients = [] ∨
+        divisor.coefficients.length > state.remainder.coefficients.length) :
+    runLeadingDivisionFuel divisor state fuel = state := by
+  induction fuel with
+  | zero => rfl
+  | succ fuel ih =>
+      simp [runLeadingDivisionFuel,
+        leadingDivisionStep_eq_self_of_terminal divisor state hterminal, ih]
 
 /-- Execute at most fuel automatically selected leading-term division
     updates. This bounded evaluator is total by structural recursion on fuel;
