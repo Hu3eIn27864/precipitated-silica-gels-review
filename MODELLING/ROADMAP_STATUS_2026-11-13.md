@@ -303,3 +303,17 @@ The formal rational-polynomial work has a concrete downstream target: CCFSM v4.2
   correctness theorem. It does not yet generate the trace by well-founded
   leading-term recursion or prove the final remainder-degree bound,
   polynomial-object identity, uniqueness or Sturm root count.
+
+
+### AP F — latest clean Lean head (17 November 2026)
+
+- Removed an unused simplifier argument from the coefficient-length/degree
+  bridge; no theorem statement or proof obligation changed.
+- Aggregate Lean proof-kernel CI passes on code head
+  `03f538b1467f08e676bd839e4da5e0f3d6355bff` (runs `44088140579`
+  and `44088148474`). Natural-syneresis workflow on this exact head
+  remains in progress (`44088148169`).
+- The current verified milestone is the finite-trace evaluated identity
+  initialized with zero quotient and full dividend remainder. The automatic
+  recursive division algorithm, remainder-degree bound and Sturm theorem
+  remain future work.
