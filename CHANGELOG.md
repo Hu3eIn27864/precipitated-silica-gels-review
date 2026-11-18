@@ -1084,3 +1084,12 @@
 - Ergänzt Backtracking mit Positivitäts-/Kapazitätsgrenzen und expliziter Nichtannahme bei Singularität, Liniensuchversagen oder Iterationslimit.
 - Ergänzt P22/P24-Vergleich für FV-Zustand und projizierten Druck sowie Regressionstests.
 - Der FD-Jacobian ist eine kleine Referenzmethode; keine Produktionssolver-Effizienz, allgemeine Newton-Konvergenz oder physikalische Validierung wird behauptet. Hosted CI wird separat geprüft.
+
+
+## 2026-11-18 — Historical hydrosol family and open-access comparators (batch 23)
+
+- Added PSG-050–PSG-056: Frolov & Shabanova (1987, Langmuir); Shabanova et al. (1984); Shabanova & Silos (1996); Shabanova et al. (1993); Frolov et al. (1983; metadata-only retrieval lead); Seljelid et al. (2024; open-access in-situ RheoSAXS); and Maeda et al. (2021; open-access TEOS-derived xerogel ageing).
+- Corrected/qualified older Soviet bibliographic records: Ponomareva et al. (1984) now retains both English-translation pages 118–120 and Russian-original pages 140–142; the 1988 Kontorovich temperature paper has the full six-author list; the 1988 modulus paper is traceable via a university repository bibliography; Shabanova et al. (1984) volume 46 is retained over a secondary volume-51 typo.
+- Created LITERATURE/source_assessments_batch_23.md and LITERATURE/research_family_overlap_audit_frolov_shabanova.md to distinguish the Kontorovich–Ponomareva and Frolov–Shabanova research families and to prevent hydrosol comparators from being presented as direct industrial precipitated-silica evidence.
+- Added claims C27–C29 to the claim–evidence matrix: pH/electrolyte effects in colloidal hydrosols; shear-/salt-/concentration-dependent gelation in commercial colloidal silica; and TEOS hydrogel ageing effects on dried xerogel pore structure.
+- Literature database validated after update: 58 records, 18 columns, no malformed rows. Paywalled material was not purchased; abstract-only sources remain explicitly labelled. No LAMMPS model was started or recommended.
