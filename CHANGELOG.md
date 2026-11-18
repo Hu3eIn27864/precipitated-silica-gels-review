@@ -1093,3 +1093,5 @@
 - Created LITERATURE/source_assessments_batch_23.md and LITERATURE/research_family_overlap_audit_frolov_shabanova.md to distinguish the Kontorovich–Ponomareva and Frolov–Shabanova research families and to prevent hydrosol comparators from being presented as direct industrial precipitated-silica evidence.
 - Added claims C27–C29 to the claim–evidence matrix: pH/electrolyte effects in colloidal hydrosols; shear-/salt-/concentration-dependent gelation in commercial colloidal silica; and TEOS hydrogel ageing effects on dried xerogel pore structure.
 - Literature database validated after update: 58 records, 18 columns, no malformed rows. Paywalled material was not purchased; abstract-only sources remain explicitly labelled. No LAMMPS model was started or recommended.
+
+- Follow-up integrity check: normalized the claim–evidence matrix so C01–C29 form one contiguous table in numerical order; updated its status date to 18 November 2026.
